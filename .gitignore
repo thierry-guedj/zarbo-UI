@@ -88,3 +88,8 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# big images
+assets/images/bg
+assets/images/original
+assets/images/bg1280-largeur
