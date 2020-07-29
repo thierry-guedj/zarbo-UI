@@ -1,96 +1,98 @@
 <template>
-  <v-form novalidate @submit.stop.prevent="submit">
-    <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">face</i>Login</v-card-title
-    >
-    <v-alert
-      v-if="form.errors.has('emailNotVerified')"
-      dark
-      icon="announcement"
-      border="right"
-      :form="form"
-      class="alert-error mb-2"
-    >
-      {{ form.errors.get('emailNotVerified') }}
-      <p>
-        <base-link component-name="Resend" folder-name="auth"
-          >Resend verification email</base-link
+  <section>
+    <v-form novalidate @submit.stop.prevent="submit">
+      <v-card-title class="headline"
+        ><i class="material-icons md-24 mr-2">face</i>Login</v-card-title
+      >
+      <v-alert
+        v-if="form.errors.has('emailNotVerified')"
+        dark
+        icon="announcement"
+        border="right"
+        :form="form"
+        class="alert-error mb-2"
+      >
+        {{ form.errors.get('emailNotVerified') }}
+        <p>
+          <base-link component-name="Resend" folder-name="auth"
+            >Resend verification email</base-link
+          >
+        </p>
+      </v-alert>
+      <v-alert
+        v-if="form.errors.has('email')"
+        dark
+        icon="announcement"
+        border="right"
+        :form="form"
+        class="alert-error mb-2"
+      >
+        {{ form.errors.get('email') }}
+        <p class="font-14 fw-400 text-center mt-4">
+          Don't have an account yet?
+
+          <base-link component-name="RegisterForm" folder-name="auth"
+            >Create an account</base-link
+          >
+        </p>
+      </v-alert>
+      <v-alert
+        v-if="form.errors.has('message')"
+        dark
+        icon="announcement"
+        border="right"
+        :form="form"
+        class="alert-error mb-2"
+      >
+        {{ form.errors.get('message') }}
+        <p>
+          <base-link component-name="ResendForm" folder-name="auth"
+            >Resend verification email</base-link
+          >
+        </p>
+      </v-alert>
+      <v-text-field
+        v-model="$v.form.email.$model"
+        :error-messages="emailErrors"
+        label="E-mail"
+        required
+        @input="$v.form.email.$touch()"
+        @blur="$v.form.email.$touch()"
+      ></v-text-field>
+      <v-text-field
+        v-model="$v.form.password.$model"
+        :error-messages="passwordErrors"
+        :counter="8"
+        label="Password"
+        type="password"
+        required
+        @input="$v.form.password.$touch()"
+        @blur="$v.form.password.$touch()"
+      ></v-text-field>
+      <v-spacer class="mb-3" />
+      <div class="mt-4 mb-4 clearfix">
+        <base-link component-name="ResetEmail" folder-name="auth"
+          >Forgot password?</base-link
         >
-      </p>
-    </v-alert>
-    <v-alert
-      v-if="form.errors.has('email')"
-      dark
-      icon="announcement"
-      border="right"
-      :form="form"
-      class="alert-error mb-2"
-    >
-      {{ form.errors.get('email') }}
-      <p class="font-14 fw-400 text-center mt-4">
+      </div>
+      <v-btn
+        class="mr-4 float-right"
+        type="submit"
+        :loading="loadingSubmit"
+        :disabled="$v.form.$invalid"
+      >
+        submit</v-btn
+      >
+      <v-btn @click="clear">clear</v-btn>
+      <div class="font-14 fw-400 text-center mt-4 right">
         Don't have an account yet?
 
         <base-link component-name="RegisterForm" folder-name="auth"
           >Create an account</base-link
         >
-      </p>
-    </v-alert>
-    <v-alert
-      v-if="form.errors.has('message')"
-      dark
-      icon="announcement"
-      border="right"
-      :form="form"
-      class="alert-error mb-2"
-    >
-      {{ form.errors.get('message') }}
-      <p>
-        <base-link component-name="ResendForm" folder-name="auth"
-          >Resend verification email</base-link
-        >
-      </p>
-    </v-alert>
-    <v-text-field
-      v-model="$v.form.email.$model"
-      :error-messages="emailErrors"
-      label="E-mail"
-      required
-      @input="$v.form.email.$touch()"
-      @blur="$v.form.email.$touch()"
-    ></v-text-field>
-    <v-text-field
-      v-model="$v.form.password.$model"
-      :error-messages="passwordErrors"
-      :counter="8"
-      label="Password"
-      type="password"
-      required
-      @input="$v.form.password.$touch()"
-      @blur="$v.form.password.$touch()"
-    ></v-text-field>
-    <v-spacer class="mb-3" />
-    <div class="mt-4 mb-4 clearfix">
-      <base-link component-name="ResetEmail" folder-name="auth"
-        >Forgot password?</base-link
-      >
-    </div>
-    <v-btn
-      class="mr-4"
-      type="submit"
-      :loading="loadingSubmit"
-      :disabled="$v.form.$invalid"
-    >
-      submit</v-btn
-    >
-    <v-btn @click="clear">clear</v-btn>
-    <div class="font-14 fw-400 text-center mt-4 right">
-      Don't have an account yet?
-
-      <base-link component-name="RegisterForm" folder-name="auth"
-        >Create an account</base-link
-      >
-    </div>
-  </v-form>
+      </div>
+    </v-form>
+  </section>
 </template>
 
 <script>
@@ -126,6 +128,7 @@ export default {
       loader: null,
       loadingSubmit: false,
       loginMsg: "You're logged in",
+      snackbar: false,
     }
   },
   computed: {
@@ -159,7 +162,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['showModal', 'hideModal']),
+    ...mapActions(['showModal', 'hideModal', 'showSnackbar']),
     submit() {
       this.$v.form.$touch()
       this.form.busy = true
@@ -171,8 +174,8 @@ export default {
           })
           .then((res) => {
             this.hideModal()
-            this.snackbar = true
-            this.$emit('loginSuccess', this.loginMsg)
+            this.showSnackbar()
+            // this.$emit('loginSuccess', this.loginMsg)
           })
           .catch((e) => {
             this.form.errors.set(e.response.data.errors)

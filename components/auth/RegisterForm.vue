@@ -81,7 +81,7 @@
       ></v-text-field>
       <v-spacer class="mb-3" />
       <v-btn
-        class="mr-4"
+        class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
         type="submit"

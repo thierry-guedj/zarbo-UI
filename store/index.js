@@ -10,6 +10,8 @@ const createStore = () => {
       modalVisible: false,
       modalComponent: null,
       folder: null,
+      snackbarVisible: false,
+      slugDesign: null,
     }),
 
     mutations: {
@@ -17,11 +19,19 @@ const createStore = () => {
         state.modalVisible = true
         state.modalComponent = payload.componentName
         state.folder = payload.folder
+        state.slugDesign = payload.slugDesign
       },
       hideModal(state) {
         state.modalVisible = false
         state.modalComponent = null
         state.folder = null
+        state.slugDesign = null
+      },
+      showSnackbar(state) {
+        state.snackbarVisible = true
+      },
+      hideSnackbar(state) {
+        state.snackbarVisible = false
       },
     },
 
@@ -31,6 +41,12 @@ const createStore = () => {
       },
       hideModal({ commit }) {
         commit('hideModal')
+      },
+      showSnackbar({ commit }) {
+        commit('showSnackbar')
+      },
+      hideSnackbar({ commit }) {
+        commit('hideSnackbar')
       },
     },
     getters: {
@@ -43,6 +59,12 @@ const createStore = () => {
       folder(state) {
         return state.folder
       },
+      visibleSnackbar(state) {
+        return state.snackbarVisible
+      },
+      getSlugDesign(state) {
+        return state.slugDesign
+      }
     },
   })
 }

@@ -54,6 +54,16 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/designs',
+    name: 'designs.search',
+    component: page('designs/Search.vue'),
+  },
+  {
+    path: '/design/:slug',
+    name: 'designs.show',
+    component: page('designs/Show.vue'),
+  },
   /*  {
     path: '/upload',
     name: 'designs.upload',

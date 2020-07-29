@@ -1,11 +1,25 @@
 <template>
-  <v-dialog
+  <!-- <v-dialog
     :value="visible"
     :width="width"
+    persistent
     @keydown.esc="hideModal"
     @click:outside="hideModal"
-  >
+  > -->
+  <v-dialog :value="visible" :width="width" persistent @keydown.esc="hideModal">
     <v-card>
+      <v-card-actions class="float-right"
+        ><v-btn
+          class="mx-2"
+          fab
+          dark
+          small
+          color="transparent"
+          @click="hideModal()"
+        >
+          <v-icon dark>close</v-icon>
+        </v-btn></v-card-actions
+      >
       <v-card-text>
         <component
           :is="modalComponent"
@@ -26,6 +40,7 @@ import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
 import VerifyForm from '@/components/auth/VerifyForm.vue'
 import CreateForm from '@/components/user/CreateForm.vue'
+import Show from '@/components/Show.vue'
 export default {
   components: {
     LoginForm,
@@ -35,6 +50,7 @@ export default {
     ResetEmail,
     VerifyForm,
     CreateForm,
+    Show,
   },
   props: {
     value: {
@@ -52,6 +68,10 @@ export default {
       type: Number,
       default: 500,
     },
+    slug: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
@@ -59,7 +79,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder']),
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'getSlugDesign']),
 
     /* componentInstance() {
       if (!this.modalComponent) return

@@ -1,4 +1,14 @@
 <template>
+  <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      max-width="70%"
+      persistent
+      transition="dialog-bottom-transition"
+     
+      content-class="modal"
+      fullscreen
+    >
   <div>
     <section class="hero text-center bg-secondary text-white">
       <div class="container">
@@ -37,6 +47,8 @@
       </div>
     </div>
   </div>
+     </v-dialog>
+  </v-row>
 </template>
 
 <script>
@@ -44,7 +56,7 @@ import { mapActions } from 'vuex'
 import Slim from '@/components/slim/slim.vue'
 export default {
   middleware: ['auth'],
-  layout: 'default-content',
+  layout: 'page',
   components: {
     'slim-cropper': Slim,
   },
@@ -61,54 +73,23 @@ export default {
         post: 'output',
         defaultInputName: 'image',
         minSize: '800,600',
+        size: '800,600',
         label: 'Select Image...',
         maxFileSize: 2, // value is 2MB
-        didInit: this.slimInit,
-        didUpload: this.imageUpload,
-        didReceiveServerError: this.handleServerError,
-        didThroError: this.handleError,
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
 
       uploading: false,
       error: '',
+      dialog: true,
     }
   },
 
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    // called when slim has initialized
-    slimInit(data, slim) {
-      // slim instance reference
-      console.log(slim)
 
-      // current slim data object and slim reference
-      console.log(data)
-    },
-    slimService(formdata, progress, success, failure, slim) {
-      /* // "formdata" is a FormData object ready to be send to the server
-      // more on working with formdata can be found here:
-      // https://developer.mozilla.org/en-US/docs/Web/API/FormData
-
-      // "progress(current, total)" is a function you can call to update the progress indicator
-      // it expects the uploaded amount of bytes and the total bytes as parameters
-      progress(500, 1000) // will put the progress indicator at 50%
-
-      // "success(response)" should be called after the upload is done, expects a response object or string
-      success('upload done')
-
-      // "error(message)" should be called in case of upload problems, expects a string
-      failure('something went wrong')
-
-      console.log(slim)
-
-      // form data to post to server
-      // set serviceFormat to "file" to receive an array of files
-      console.log(formdata)
-
-      // call these methods to handle upload state
-      console.log(progress, success, failure) */
+    slimService(formdata, failure) {
       this.uploading = true
       this.$axios
         .post('/designs', formdata)
@@ -125,26 +106,12 @@ export default {
         })
         .finally(() => (this.uploading = false))
     },
-    imageUpload(error, data, response) {
-      console.log(error, data, response)
-    },
-    handleServerError(error, defaultError) {
-      // the error parameter is equal to string set
-      // to message property of server response object
-      // in this case 'The server is having a bad day'
-      console.log(error)
-
-      // the defaultError parameter contains the
-      // message set to data-status-unknown-response
-      console.log(defaultError)
-
-      return error
-    },
-    handleError(error) {
-      console.log(error)
-    },
   },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modal {
+  color: rgba(23, 22, 18, 0.85);
+}
+</style>

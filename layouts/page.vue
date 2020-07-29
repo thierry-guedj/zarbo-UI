@@ -41,7 +41,7 @@
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
-        <nuxt-link :to="{ name: 'designs.search' }"
+        <nuxt-link to="/"
           ><v-btn small color="transparent" class="mr-2 ml-3"
             >Zoeuvres</v-btn
           ></nuxt-link
@@ -151,7 +151,7 @@
         </v-btn>
       </v-app-bar>
       <v-main>
-        <v-container style="max-width: 100%;">
+        <v-container>
           <nuxt />
         </v-container>
       </v-main>
@@ -216,10 +216,6 @@ export default {
         {
           title: 'Update profile',
           route: 'settings.profile',
-        },
-        {
-          title: 'Your designs',
-          route: 'designs.search',
         },
       ],
 

@@ -1,114 +1,125 @@
 <template>
-  <div>
-    <section class="hero text-center bg-secondary mb-4 text-white">
+  <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="100%"
+      hide-overlay
+      transition="dialog-bottom-transition"
+      color="transparent"
+      content-class="mx-12 pt-18"
+      height="300px"
+    >
+      <section class="hero text-center bg-secondary mb-4 text-white">
+        <v-container>
+          <h1 class="font-28 fw-600 text-uppercase text-white">
+            Update Design Information
+          </h1>
+        </v-container>
+      </section>
+      <!-- End Hero -->
+
+      <!-- Upload Shot -->
       <v-container>
-        <h1 class="font-28 fw-600 text-uppercase text-white">
-          Update Design Information
-        </h1>
-      </v-container>
-    </section>
-    <!-- End Hero -->
+        <v-row>
+          <v-col class="col-md-6 edit-info mr-2">
+            <v-card>
+              <div v-if="design.images" class="card-body p-1">
+                <img :src="design.images.large" class="w-100 mb-4" />
+              </div>
+            </v-card>
+          </v-col>
+          <v-col class="col-md-5 edit-info ml-2">
+            <v-card flat>
+              <v-card-text>
+                <form class="auth-form" @submit.prevent="submit">
+                  <alert-success :form="form">
+                    Design successfully updated
+                  </alert-success>
 
-    <!-- Upload Shot -->
-    <v-container>
-      <v-row>
-        <v-col class="col-md-5 edit-info mr-2">
-          <v-card outlined>
-            <div v-if="design.images" class="card-body p-1">
-              <img :src="design.images.large" class="w-100 mb-4" />
-            </div>
-          </v-card>
-        </v-col>
-        <v-col class="col-md-6 edit-info ml-2">
-          <v-card flat>
-            <v-card-text>
-              <form class="auth-form" @submit.prevent="submit">
-                <alert-success :form="form">
-                  Design successfully updated
-                </alert-success>
-
-                <v-text-field
-                  v-model.trim="$v.form.title.$model"
-                  :error-messages="titleErrors"
-                  :counter="155"
-                  label="Title"
-                  required
-                  field="title"
-                  outlined
-                  class="mb-1"
-                  @input="$v.form.title.$touch()"
-                  @blur="$v.form.title.$touch()"
-                ></v-text-field>
-                <has-error :form="form" field="title"></has-error>
-                <v-textarea
-                  v-model.trim="$v.form.description.$model"
-                  :error-messages="descriptionErrors"
-                  :counter="155"
-                  label="Description"
-                  required
-                  outlined
-                  class="mb-1"
-                  field="description"
-                  @input="$v.form.description.$touch()"
-                  @blur="$v.form.description.$touch()"
-                ></v-textarea>
-                <has-error :form="form" field="description"></has-error>
-                <client-only>
-                  <input-tag
-                    v-model="form.tags"
-                    :tags="form.tags"
-                    field="tags"
-                    class="mb-1"
-                    placeholder="Tags separated by commas"
-                    on-paste-delimiter=","
+                  <v-text-field
+                    v-model.trim="$v.form.title.$model"
+                    :error-messages="titleErrors"
+                    :counter="155"
+                    label="Title"
+                    required
+                    field="title"
                     outlined
-                  ></input-tag>
-                </client-only>
+                    class="mb-1"
+                    @input="$v.form.title.$touch()"
+                    @blur="$v.form.title.$touch()"
+                  ></v-text-field>
+                  <has-error :form="form" field="title"></has-error>
+                  <v-textarea
+                    v-model.trim="$v.form.description.$model"
+                    :error-messages="descriptionErrors"
+                    :counter="155"
+                    label="Description"
+                    required
+                    outlined
+                    class="mb-1"
+                    field="description"
+                    @input="$v.form.description.$touch()"
+                    @blur="$v.form.description.$touch()"
+                  ></v-textarea>
+                  <has-error :form="form" field="description"></has-error>
+                  <client-only>
+                    <input-tag
+                      v-model="form.tags"
+                      :tags="form.tags"
+                      field="tags"
+                      class="mb-1"
+                      placeholder="Tags separated by commas"
+                      on-paste-delimiter=","
+                      outlined
+                    ></input-tag>
+                  </client-only>
 
-                <template v-if="teams.length">
+                  <template v-if="teams.length">
+                    <v-checkbox
+                      v-model="form.assign_to_team"
+                      label="Assign to team"
+                      field="assign_to_team"
+                      :value="form.assign_to_team"
+                    ></v-checkbox>
+
+                    <v-select
+                      v-model="form.team"
+                      :disabled="!form.assign_to_team"
+                      :items="teams"
+                      item-text="name"
+                      item-value="id"
+                      outlined
+                      label="Select a team"
+                    >
+                    </v-select>
+                    <has-error :form="form" field="team"></has-error>
+                  </template>
+
                   <v-checkbox
-                    v-model="form.assign_to_team"
-                    label="Assign to team"
-                    field="assign_to_team"
-                    :value="form.assign_to_team"
+                    id="is_live"
+                    v-model="form.is_live"
+                    field="is_live"
+                    label="Publish this design"
                   ></v-checkbox>
 
-                  <v-select
-                    v-model="form.team"
-                    :disabled="!form.assign_to_team"
-                    :items="teams"
-                    item-text="name"
-                    item-value="id"
-                    outlined
-                    label="Select a team"
+                  <v-spacer class="mb-3" />
+                  <v-btn
+                    class="mr-4"
+                    :loading="loadingSubmit"
+                    :disabled="$v.form.$invalid"
+                    type="submit"
+                    >Update design</v-btn
                   >
-                  </v-select>
-                  <has-error :form="form" field="team"></has-error>
-                </template>
-
-                <v-checkbox
-                  id="is_live"
-                  v-model="form.is_live"
-                  field="is_live"
-                  label="Publish this design"
-                ></v-checkbox>
-
-                <v-spacer class="mb-3" />
-                <v-btn
-                  class="mr-4"
-                  :loading="loadingSubmit"
-                  :disabled="$v.form.$invalid"
-                  type="submit"
-                  >Update design</v-btn
-                >
-                <v-btn @click="clear">clear</v-btn>
-              </form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+                  <v-btn @click="clear">clear</v-btn>
+                </form>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-dialog>
+  </v-row>
 </template>
 
 <script>
@@ -116,7 +127,7 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   middleware: ['auth'],
-  layout: 'default-content',
+  layout: 'page',
   components: {
     InputTag: () => import('vue-input-tag'),
   },
@@ -162,6 +173,7 @@ export default {
       }),
       loader: null,
       loadingSubmit: false,
+      dialog: true,
     }
   },
   computed: {
@@ -216,7 +228,7 @@ export default {
         .then((res) => {
           setTimeout(() => {
             this.$router.push({ name: 'settings.designs' })
-          }, 1000)
+          }, 4000)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {

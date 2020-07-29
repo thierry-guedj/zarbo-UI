@@ -88,6 +88,23 @@
       />
       <!-- </keep-alive> -->
       <!-- End Modal -->
+      <v-snackbar
+        :value="visibleSnackbar"
+        class="v-snackbar"
+        multi-line
+        timeout="2000"
+        top
+        vertical
+        @input="hideSnackbar()"
+        @close="hideSnackbar()"
+      >
+        You're logged in
+        <template v-slot:action="{ attrs }">
+          <v-btn dark text v-bind="attrs" @click="hideSnackbar()">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-flex>
   </v-layout>
 </template>
@@ -98,10 +115,10 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder']),
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
   },
   methods: {
-    ...mapActions(['showModal', 'hideModal']),
+    ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
     goTo(to, folderName) {
       this.hideModal()
       setTimeout(
@@ -137,5 +154,9 @@ export default {
 .theme--dark.v-navigation-drawer {
   background-color: rgba(23, 22, 18, 0.64);
   top: 64px;
+}
+.v-snackbar {
+  color: rgba(23, 22, 18, 0.54);
+  border-radius: 6px;
 }
 </style>
