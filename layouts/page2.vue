@@ -1,6 +1,7 @@
 <template>
   <section>
-    <v-parallax :src="backgroundUrl" height="800"></v-parallax>
+    <v-parallax :src="backgroundUrl" height="0"></v-parallax>
+    <div id="grad1" class="line"></div>
     <v-app dark>
       <v-navigation-drawer
         v-model="drawer"
@@ -29,7 +30,7 @@
       <v-app-bar
         id="nav"
         v-scroll="handleScroll"
-        class="bg-transparent"
+        class="bg-transparent line"
         :clipped-left="!clipped"
         fixed
         elevate-on-scroll
@@ -54,7 +55,7 @@
             >Zoeuvres</v-btn
           ></nuxt-link
         >
-        <nuxt-link to="/"
+        <nuxt-link :to="{ name: 'users.search' }"
           ><v-btn small color="transparent" class="mr-2">Zartistes</v-btn>
         </nuxt-link>
         <!-- <base-button
@@ -248,8 +249,10 @@ export default {
 
     // ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
+
   mounted() {
     this.$nextTick(function () {
+      this.hideModal()
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')
         const nav_classes = navbar.classList
@@ -266,6 +269,7 @@ export default {
       })
     })
   },
+
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     logout() {
@@ -294,6 +298,9 @@ export default {
   opacity: 0.95;
   background-color: #0f1219;
 } */
+.theme--dark.v-application {
+  background: #0f1219;
+}
 .v-application {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
@@ -325,5 +332,48 @@ export default {
 .theme--dark.v-main {
   opacity: 0.65;
   background-color: #0f1219;
+}
+#grad1 {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* Standard syntax (must be last) */
+}
+.line {
+  height: 6px;
+  border-radius: 4px;
 }
 </style>

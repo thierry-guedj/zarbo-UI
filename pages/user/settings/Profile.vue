@@ -46,12 +46,12 @@
                 :form="form"
                 field="tagline"
               ></v-text-field>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <base-gmap
                   :initial-value="form.formatted_address"
                   @address-response="handleAddress"
                 ></base-gmap>
-              </div>
+              </div> -->
 
               <!-- <div class="form-group">
               <base-textarea

@@ -19,33 +19,6 @@
           ></v-col>
 
           <v-col cols="auto" class="d-flex align-items-center">
-            <!-- <input
-                id="hasComments"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label class="custom-control-label" value="1" for="hasComments"
-                >Has Comments</label
-              > -->
-            <v-checkbox
-              id="has_comments"
-              v-model="filters.has_comments"
-              field="has_comments"
-              label="Has Comments"
-              class="mr-3"
-              true-value="1"
-              false-value="0"
-              @change="search"
-            ></v-checkbox>
-
-            <!-- <input
-                id="hasTeam"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label class="custom-control-label" value="1" for="hasTeam"
-                >By Team</label
-              > -->
             <v-checkbox
               id="has_team"
               v-model="filters.has_team"
@@ -112,7 +85,7 @@
         <RingLoader></RingLoader>
       </div>
       <div v-else class="pt-8 pl-6 pb-6 pr-6">
-        <template v-if="(!designs.length)" class="pb-6">
+        <template v-if="(!users.length)" class="pb-6">
           <v-alert border="left" color="#0f1219" dark>
             No results found
           </v-alert>
@@ -126,24 +99,14 @@
             no-gutters
           >
             <lazy-component
-              v-for="design in designs"
-              :key="design.id"
-              :design="design"
+              v-for="user in users"
+              :key="user.id"
+              :user="users"
             ></lazy-component>
           </v-row>
         </template>
       </div>
     </v-container>
-    <!-- Modal  -->
-    <!-- <keep-alive> -->
-    <base-modal
-      :dialog.sync="visible"
-      :fullscreen="fullscreen"
-      @showDesign="styleModal()"
-      @closeDialog="hideModal"
-    />
-    <!-- </keep-alive> -->
-    <!-- End Modal -->
   </section>
 </template>
 
@@ -155,19 +118,17 @@ export default {
   layout: 'page2',
   components: {
     RingLoader,
-    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
+    lazyComponent: () => import('@/components/user/UserCard.vue'),
   },
   data() {
     return {
-      designs: [],
+      users: [],
       searching: false,
       loader: null,
       loadingSubmit: false,
       filters: {
         has_team: 0,
-        has_comments: 0,
         q: '',
-        orderBy: 'likes',
       },
       itemsOrderBy: [
         { title: 'Latest first', value: 'latest' },
@@ -189,16 +150,15 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-
     search() {
       this.searching = true
       this.loadingSubmit = true
       this.loader = 'loadingSubmit'
       this.$axios
-        .$get(`/search/designs?${this.queryString}`)
+        .$get(`/users?${this.queryString}`)
         .then((res) => {
-          this.designs = res.data
-          this.designs = Object.freeze(this.designs)
+          this.users = res.data
+          this.users = Object.freeze(this.users)
         })
         .catch((e) => console.log(e))
         .finally(() => {

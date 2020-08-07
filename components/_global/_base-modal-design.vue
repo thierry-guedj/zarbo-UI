@@ -9,7 +9,7 @@
   <v-dialog
     :value="visible"
     :width="width"
-    :fullscreen="getStyle"
+    :fullscreen="!!fullscreen ? 'fullscreen' : false"
     persistent
     @keydown.esc="hideModal"
   >
@@ -80,7 +80,7 @@ export default {
     },
     fullscreen: {
       type: Boolean,
-      default: false,
+      default: null,
       required: false,
     },
   },
@@ -90,13 +90,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'visible',
-      'modalComponent',
-      'folder',
-      'getSlugDesign',
-      'getStyle',
-    ]),
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'getSlugDesign']),
 
     /* componentInstance() {
       if (!this.modalComponent) return

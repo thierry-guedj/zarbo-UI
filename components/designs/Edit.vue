@@ -10,7 +10,7 @@
       content-class="mx-12 pt-18"
       height="300px"
     > -->
-    <section class="hero text-center mb-4 text-white">
+    <section class="hero text-center bg-secondary mb-4 text-white">
       <v-container>
         <h1 class="font-28 fw-600 text-uppercase text-white">
           Update Design Information
@@ -24,28 +24,17 @@
       <v-row>
         <v-col class="col-md-6 edit-info">
           <div v-if="design.images" class="card-body p-0 m-0">
-            <img :src="design.images.large" class="mb-4" style="
-              max-width: 100%;
-              max-height: 100vh;
-              height: auto;
-              border: 6px solid blanchedalmond;
-            " />
+            <img :src="design.images.large" class="mb-4" />
           </div>
         </v-col>
         <v-col class="col-md-5 edit-info ml-2">
           <v-card flat>
             <v-card-text>
               <form class="auth-form" @submit.prevent="submit">
-               
-<v-alert
-      v-if="this.$v.form.$model.successful"
-      color="#388E3C"
-      dark
-      icon="mark_email_unread"
-      border="right"
-      :form="form"
-      >Design successfully updated</v-alert
-    >
+                <alert-success :form="form">
+                  Design successfully updated
+                </alert-success>
+
                 <v-text-field
                   v-model.trim="$v.form.title.$model"
                   :error-messages="titleErrors"
@@ -135,7 +124,7 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   middleware: ['auth'],
-  layout: 'page2',
+  layout: 'page',
   components: {
     InputTag: () => import('vue-input-tag'),
   },
@@ -258,7 +247,7 @@ export default {
   max-width: 900;
 }
 .edit-info {
-  background-color: transparent;
+  background-color: rgba(23, 22, 18, 0.84);
   border-radius: 8px;
 }
 .v-text-field--filled {

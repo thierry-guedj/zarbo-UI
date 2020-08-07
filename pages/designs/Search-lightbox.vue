@@ -1,5 +1,10 @@
 <template>
   <section>
+      <CoolLightBox 
+      :items="designs" 
+      :index="index"
+      @close="index = null">
+    </CoolLightBox>
     <v-container fluid class="search-control">
       <form @submit.prevent="search">
         <v-row
@@ -125,11 +130,19 @@
             justify="center"
             no-gutters
           >
-            <lazy-component
+            <!-- <lazy-component
               v-for="design in designs"
               :key="design.id"
               :design="design"
-            ></lazy-component>
+            ></lazy-component> -->
+
+         <div
+        class="image"
+        v-for="(image, imageIndex) in items"
+        :key="imageIndex"
+        @click="index = imageIndex"
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+      ></div>
           </v-row>
         </template>
       </div>
@@ -150,13 +163,33 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 export default {
   name: 'Search',
   layout: 'page2',
   components: {
     RingLoader,
+    CoolLightBox,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
   },
+  async fetch() {
+      this.searching = true
+      this.loadingSubmit = true
+      this.loader = 'loadingSubmit'
+      this.$axios
+        .$get(`/search/designs?${this.queryString}`)
+        .then((res) => {
+          this.items = res.data
+          this.items = Object.freeze(this.designs)
+        })
+        .catch((e) => console.log(e))
+        .finally(() => {
+          this.searching = false
+          this.loadingSubmit = false
+          this.loader = null
+        })
+    },
   data() {
     return {
       designs: [],
@@ -174,6 +207,8 @@ export default {
         { title: 'Most liked frst', value: 'likes' },
       ],
       fullscreen: false,
+      index: null,
+      items: [],
     }
   },
   computed: {
@@ -184,12 +219,12 @@ export default {
     },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
-  created() {
+ /*  created() {
     this.search()
-  },
+  }, */
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-
+   
     search() {
       this.searching = true
       this.loadingSubmit = true

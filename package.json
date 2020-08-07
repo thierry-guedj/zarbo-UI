@@ -12,6 +12,7 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
+    "@kevindesousa/vue-image-loader": "^2.0.1",
     "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.11.0",
@@ -19,7 +20,13 @@
     "@nuxtjs/router": "^1.5.0",
     "nuxt": "^2.13.0",
     "vform": "^1.0.1",
+    "vue-cool-lightbox": "^2.4.1",
+    "vue-goodshare": "^1.5.1",
     "vue-input-tag": "^2.0.7",
+    "vue-loading-spinner": "^1.0.11",
+    "vue-masonry": "^0.11.8",
+    "vue-social-sharing": "^3.0.0-beta.11",
+    "vue-spinner": "^1.0.4",
     "vue2-google-maps-withscopedautocomp": "^0.12.1",
     "vuelidate": "^0.7.5"
   },

@@ -78,7 +78,7 @@
             </div>
           </v-expand-transition> -->
 
-      <v-list-item>
+      <!-- <v-list-item>
         <v-list-item-content class="design-info pb-0 pt-1">
           <v-list-item-title class="headline design-info">{{
             design.title
@@ -113,14 +113,16 @@
           ><v-icon class="mr-1">mdi-comment</v-icon
           >{{ design.comments_count }}</span
         >
-      </v-card-actions>
+      </v-card-actions> -->
     </v-card>
     <!-- </v-hover> -->
+    <div class="ml-3 mb-2"><h3 class="font-weight-medium mb-0">{{ designTitle | capitalize }}</h3><h5 class="font-weight-regular">by {{ design.user.name }}</h5></div>
   </v-col>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   props: {
     design: {
@@ -133,6 +135,7 @@ export default {
       icons: ['mdi-rewind', 'mdi-play', 'mdi-fast-forward'],
     }
   },
+ 
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
     designTitle() {
@@ -240,6 +243,12 @@ export default {
 .v-application .headline {
   font-size: 1.2 rem;
 }
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
 //VARIABLES
 $accent-theme-color: #7a306c;
 $accent-theme-color2: #8d909b;
@@ -296,7 +305,6 @@ $portfolio-link-offset: 10px;
   }
 }
 
-
 /* effects styles !!!YOU NEED THEM */
 
 /* don't forget to add your own colors and parameters */
@@ -328,8 +336,8 @@ $portfolio-link-offset: 10px;
 
   // background-color: rgba(15, 150, 150, 0.7);
   // background-color: rgba(65, 102, 114, 0.9);
-  // background-color: rgba(36, 61, 61, 0.8);
-  background-color: rgba(46, 42, 35, 0.8);
+  background-color: rgba(36, 61, 61, 0.8);
+  // background-color: rgba(46, 42, 35, 0.8);
   // border-radius: 1%;
 }
 

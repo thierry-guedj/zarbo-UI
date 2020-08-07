@@ -11,7 +11,8 @@ const createStore = () => {
       modalComponent: null,
       folder: null,
       snackbarVisible: false,
-      slugDesign: null,
+      idDesign: null,
+      style: null,
     }),
 
     mutations: {
@@ -19,13 +20,15 @@ const createStore = () => {
         state.modalVisible = true
         state.modalComponent = payload.componentName
         state.folder = payload.folder
-        state.slugDesign = payload.slugDesign
+        state.idDesign = payload.idDesign
+        state.style = payload.style
       },
       hideModal(state) {
         state.modalVisible = false
         state.modalComponent = null
         state.folder = null
-        state.slugDesign = null
+        state.idDesign = null
+        state.style = null
       },
       showSnackbar(state) {
         state.snackbarVisible = true
@@ -62,9 +65,12 @@ const createStore = () => {
       visibleSnackbar(state) {
         return state.snackbarVisible
       },
-      getSlugDesign(state) {
-        return state.slugDesign
-      }
+      getIdDesign(state) {
+        return state.idDesign
+      },
+      getStyle(state) {
+        return state.style
+      },
     },
   })
 }

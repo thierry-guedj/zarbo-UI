@@ -125,11 +125,11 @@
             justify="center"
             no-gutters
           >
-            <lazy-component
+            <design-card
               v-for="design in designs"
               :key="design.id"
               :design="design"
-            ></lazy-component>
+            ></design-card>
           </v-row>
         </template>
       </div>
@@ -155,19 +155,36 @@ export default {
   layout: 'page2',
   components: {
     RingLoader,
-    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
   },
+  async asyncData({ $axios, params, error, redirect }) {
+    try {
+      const url = `/search/designs/${params.tag}/tag`
+      const response = await $axios.$get(url)
+      console.log(response.data)
+      return { designs: response.data, tagName: `${params.tag}` }
+    } catch (err) {
+      if (err.response.status === 404) {
+        error({ statusCode: 404, message: 'Design not found' })
+      } else if (err.response.status === 401) {
+        redirect('/login')
+      } else {
+        error({ statusCode: 500, message: 'Internal server error' })
+      }
+    }
+  },
+
   data() {
     return {
-      designs: [],
       searching: false,
       loader: null,
       loadingSubmit: false,
+      loaderPage: false,
       filters: {
         has_team: 0,
         has_comments: 0,
         q: '',
         orderBy: 'likes',
+        tag: this.tagName,
       },
       itemsOrderBy: [
         { title: 'Latest first', value: 'latest' },
@@ -176,8 +193,10 @@ export default {
       fullscreen: false,
     }
   },
+
   computed: {
-    queryString() {
+    queryString({ params }) {
+      this.filters.tag = this.tagName
       return Object.keys(this.filters)
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
@@ -187,19 +206,17 @@ export default {
   created() {
     this.search()
   },
+
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-
     search() {
       this.searching = true
       this.loadingSubmit = true
       this.loader = 'loadingSubmit'
+
       this.$axios
         .$get(`/search/designs?${this.queryString}`)
-        .then((res) => {
-          this.designs = res.data
-          this.designs = Object.freeze(this.designs)
-        })
+        .then((res) => (this.designs = res.data))
         .catch((e) => console.log(e))
         .finally(() => {
           this.searching = false

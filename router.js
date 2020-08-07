@@ -60,10 +60,25 @@ const routes = [
     component: page('designs/Search.vue'),
   },
   {
+    path: '/designs/:tag/tag',
+    name: 'designs.tag',
+    component: page('designs/Tag.vue'),
+  },
+  {
+    path: '/designs/:id/user',
+    name: 'designs.user',
+    component: page('designs/User.vue'),
+  },
+  {
+    path: '/users',
+    name: 'users.search',
+    component: page('user/UserIndex.vue'),
+  },
+  /* {
     path: '/design/:slug',
     name: 'designs.show',
     component: page('designs/Show.vue'),
-  },
+  }, */
   /*  {
     path: '/upload',
     name: 'designs.upload',

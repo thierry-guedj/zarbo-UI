@@ -206,4 +206,7 @@ export default {
 a.color-white {
   color: #ffffff;
 }
+.v-sheet.v-card {
+  background-color: rgba(23, 22, 18, 0.85);
+}
 </style>

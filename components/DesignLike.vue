@@ -3,21 +3,25 @@
     <div class="stats-txt d-table-cell w-50">
       <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
         <template v-if="current_user_likes">
-          <span>
-            <i class="fas fa-thumbs-down fa-2x text-danger"></i>
-          </span>
-          Unlike
+          <!--        <span class="material-icons" style="color:red">
+thumb_down
+</span> -->
+          <v-btn class="mx-2" dark small color="red darken-4">
+            <v-icon dark>thumb_down</v-icon>
+          </v-btn>
         </template>
         <template v-else>
-          <span>
-            <i class="fas fa-thumbs-up fa-2x text-success"></i>
-          </span>
-          Like
+          <!--       <span class="material-icons" style="color:blue">
+thumb_up
+</span> -->
+          <v-btn class="mx-2" dark small color="teal darken-1">
+            <v-icon dark>thumb_up</v-icon>
+          </v-btn>
         </template>
       </a>
     </div>
-    <div class="stats-num d-table-cell w-50 text-right">
-      <a href="#">{{ total_likes }} Likes</a>
+    <div class="stats-num d-table-cell w-50 text-right ml-3 align-baseline">
+      <a class="text-white">{{ likes }} Likes</a>
     </div>
   </li>
 </template>
@@ -32,20 +36,25 @@ export default {
       total_likes: 0,
     }
   },
+  computed: {
+    likes() {
+      return this.total_likes
+    },
+  },
 
   created() {},
-
   methods: {
     likeDesign() {
-      this.$axios.post(`/designs/${this.design.id}/like`).then((res) => {
+      const url = `/designs/${this.design.id}/like`
+      console.log(url)
+      this.$axios.post(url).then((res) => {
         this.current_user_likes = !this.current_user_likes
         this.total_likes = res.data.total
       })
     },
     checkIfCurrentUserLikes() {
-      this.$axios
-        .$get(`/designs/${this.design.id}/liked`)
-        .then((res) => (this.current_user_likes = response.liked))
+      const url = `/designs/${this.design.id}/liked`
+      this.$axios.$get(url).then((res) => (this.current_user_likes = res.liked))
     },
   },
 }

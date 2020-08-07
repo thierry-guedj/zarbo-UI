@@ -1,27 +1,31 @@
 <template>
-  <li class="clearfix">
-    <div class="comment-thumb float-left">
+  <v-list-item-title>
+    <div class="comment-thumb float-left mr-3">
       <a href="#">
-        <img :src="comment.user.photo_url" />
+        <img :src="comment.user.photo_url" width="30px" />
       </a>
     </div>
-    <div class="comment-meta">
-      <h3 class="font-16 fw-500 mb-2">
-        <a href="#" title="Neba">{{ comment.user.name }}</a>
-      </h3>
-      <p class="font-14 fw-300 mb-2">
+    <div class="comment-meta mb-3">
+      <h4 class="font-14 fw-500 mb-2">
+        <a>{{ comment.user.name }}</a>
+      </h4>
+      <p class="font-10 fw-100 mb-2">
         {{ comment.body }}
       </p>
-      <span class="font-14 fw-300 d-flex justify-content-between">
-        <a href="#">{{ comment.created_at_dates.created_at_human }}</a>
+      <span
+        class="fw-100 d-flex justify-content-between align-end text-grey caption"
+      >
+        {{ comment.created_at_dates.created_at_human }}
         <span v-if="$auth.loggedIn && $auth.user.id == comment.user.id">
-          <a href="#" class="text-danger" @click.prevent="destroyComment">
-            Delete
+          <a class="text-danger" @click.prevent="destroyComment">
+            <v-btn class="mx-2" dark small color="blue-grey darken-1">
+              <v-icon dark>delete_forever</v-icon>
+            </v-btn>
           </a>
         </span>
       </span>
     </div>
-  </li>
+  </v-list-item-title>
 </template>
 
 <script>
@@ -44,4 +48,15 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.v-list-item__title {
+  font-size: 0.8rem;
+}
+.v-application .caption {
+	font-size: 0.75rem !important;
+	font-weight: 109;
+	letter-spacing: 0.0333333333em !important;
+	line-height: 1.25rem;
+	font-family: "Roboto", sans-serif !important;
+}
+</style>></style>

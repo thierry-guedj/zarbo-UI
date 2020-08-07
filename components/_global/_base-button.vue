@@ -1,6 +1,11 @@
 <template>
   <nuxt-link :to="to">
-    <v-btn small :class="buttonClass" :color="color" @click.native="goTo()"
+    <v-btn
+      small
+      :class="buttonClass"
+      :color="color"
+      :size="size"
+      @click.native="goTo()"
       ><v-icon v-if="icon" right dark :class="iconClass">{{ icon }}</v-icon
       ><slot
     /></v-btn>
@@ -50,6 +55,10 @@ export default {
     iconClass: {
       type: String,
       default: 'mr-2',
+    },
+    size: {
+      type: String,
+      default: 'small',
     },
   },
   data() {

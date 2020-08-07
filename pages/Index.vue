@@ -111,6 +111,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
+  layout: "default",
   data() {
     return {}
   },

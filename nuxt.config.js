@@ -18,6 +18,11 @@ export default {
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
+    script: [
+      {
+        src: 'https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js',
+      },
+    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -58,6 +63,7 @@ export default {
     '~plugins/vform',
     '~plugins/vuelidate',
     { src: '~/plugins/gmaps', ssr: false },
+    '~plugins/filters.js',
   ],
   /*
    ** Auto import components
@@ -82,6 +88,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    'vue-social-sharing/nuxt'
   ],
   auth: {
     strategies: {
@@ -90,6 +97,12 @@ export default {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           logout: { url: '/logout', method: 'post' },
           user: { url: '/me', method: 'get', propertyName: 'data' },
+          refresh: { url: '/refresh', method: 'post' },
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
         },
         // tokenRequired: true,
         // tokenType: 'bearer',
@@ -113,7 +126,7 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: colors.grey.darken3,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,

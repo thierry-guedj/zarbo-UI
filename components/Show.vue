@@ -1,204 +1,201 @@
 <template>
-  <section class="post-details mt-4 pb-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-9">
-          <div class="row">
-            <!-- LEFT -->
-            <div class="col-md-8">
-              <!-- Single Image -->
-              <div class="post-detail">
-                <div class="single-img">
-                  <img :src="images.large" />
-                </div>
-                {{ getSlugDesign }}
-              </div>
-              <!-- End Single Image -->
-              <!-- Design Detail Text -->
-              <div class="desing-text font-16 fw-400 pb-3 pt-2">
-                <p>
-                  {{ design.description }}
-                </p>
-              </div>
-              <!-- End Design Detail Text -->
-              <!-- Design Comments -->
-              <div class="design-comments mt-3">
-                <h1 class="font-16 fw-300 mb-4">
-                  <strong class="fw-500">{{ comments.length }} comments</strong>
-                </h1>
-                <ul class="comment-list">
-                  <DesignComment
-                    v-for="comment in comments"
-                    :key="comment.id"
-                    :comment="comment"
-                    @deleted="handleDelete"
-                  ></DesignComment>
-                </ul>
-              </div>
+  <div v-if="$fetchState.pending" class="loader">
+    <RingLoader></RingLoader>
+  </div>
+  <div v-else class="pt-6 pl-6">
+    <v-row class="row-md-12">
+      <v-col class="col-md-6">
+        <!-- LEFT -->
 
-              <template v-if="$auth.loggedIn">
-                <form @submit.prevent="save">
-                  <v-textarea
-                    v-model.trim="form.body"
-                    outlined
-                    :rows="2"
-                    :form="form"
-                    field="body"
-                    placeholder="Enter a comment"
-                  ></v-textarea>
-                  <div class="mt-2 text-right">
-                    <v-btn type="submit" size="sm">
-                      Post comment
-                    </v-btn>
-                  </div>
-                </form>
-              </template>
-
-              <!--/ END COMMENTS-->
-            </div>
-
-            <!-- RIGHT -->
-            <div class="col-md-4">
-              <div class="post-detail-sidebar">
-                <!-- Designer info -->
-                <div class="modal-user-meta white-bg-color">
-                  <a class="float-left" href="#" title="Neba">
-                    <img :src="user.photo_url" alt="Neba" />
-                  </a>
-                  <div class="modal-user-detail">
-                    <h1 class="font-13 fw-500">
-                      <a href="#">
-                        {{ user.name }}
-                      </a>
-                    </h1>
-                    <p class="font-12 fw-300 mt-1">
-                      <span class="shot-by">{{ user.tagline }}</span>
-                    </p>
-                    <p class="font-12 fw-300 mt-1">
-                      {{ created_at_dates.created_at_human }}
-                    </p>
-                  </div>
-                </div>
-                <!-- End Designer info -->
-                <!-- Designer Design Info -->
-                <ul class="details-side-meta font-14 fw-400">
-                  <DesignLike :design="design"></DesignLike>
-
-                  <li class="d-table w-100">
-                    <div class="stats-txt d-table-cell w-100">
-                      <a href="#"> More from {{ user.name }} </a>
-                    </div>
-                  </li>
-                </ul>
-                <!-- End Designer Design Info -->
-                <!-- Designer More Designs -->
-                <!-- <div class="more-designs-outer pb-3">
-                  <ul class="more-designs row">
-                    <li class="col-md-6">
-                      <a href="#">
-                        <img
-                          class="w-100"
-                          src="~assets/images/among_trees_night_dribbble.png"
-                          alt="Image"
-                        />
-                      </a>
-                    </li>
-                    <li class="col-md-6">
-                      <a href="#">
-                        <img
-                          class="w-100"
-                          src="~assets/images/among_trees_night_dribbble.png"
-                          alt="Image"
-                        />
-                      </a>
-                    </li>
-                    <li class="col-md-6">
-                      <a href="#">
-                        <img
-                          class="w-100"
-                          src="~assets/images/among_trees_night_dribbble.png"
-                          alt="Image"
-                        />
-                      </a>
-                    </li>
-                    <li class="col-md-6">
-                      <a href="#">
-                        <img
-                          class="w-100"
-                          src="~assets/images/among_trees_night_dribbble.png"
-                          alt="Image"
-                        />
-                      </a>
-                    </li>
-                  </ul>
-                </div> -->
-                <!-- End Designer More Designs -->
-                <!-- Designs Tags -->
-                <div class="designs-tag-outer mt-3">
-                  <h2 class="font-16 fw-500 mb-2">
-                    Tags
-                  </h2>
-                  <div
-                    v-if="design.tag_list"
-                    class="designs-tag font-14 fw-300"
-                  >
-                    <a
-                      v-for="(tag, i) in design.tag_list.tags"
-                      :key="`tag-${i}`"
-                      :href="`/tags/${design.tag_list.normalized[i]}`"
-                    >
-                      {{ tag }}
-                    </a>
-                  </div>
-                </div>
-                <!-- End Designs Tags -->
-              </div>
-            </div>
-            <!--/ END RIGHT-->
-          </div>
+        <!-- Single Image -->
+        <div>
+          <img
+            :src="design.images.original"
+            style="
+              max-width: 100%;
+              max-height: 100vh;
+              height: auto;
+              border: 6px solid blanchedalmond;
+            "
+          />
         </div>
-      </div>
-    </div>
-  </section>
+        <!-- End Single Image -->
+        <div class="float-right mt-2">
+          <v-btn size="large" color="deep-orange accent-2" @click="hideModal()"
+            ><v-icon>flip_to_back</v-icon>Back to designs</v-btn
+          >
+        </div>
+        <!-- Design Comments -->
+        <div class="design-comments mt-3 px-4">
+          <h1 class="font-16 fw-300 mb-4">
+            <strong class="fw-500">{{ comments.length }} comments</strong>
+          </h1>
+          <v-list-item>
+            <v-list-item-content>
+              <DesignComment
+                v-for="comment in comments"
+                :key="comment.id"
+                :comment="comment"
+                @deleted="handleDelete"
+              ></DesignComment>
+            </v-list-item-content>
+          </v-list-item>
+        </div>
+
+        <template v-if="$auth.loggedIn">
+          <form @submit.prevent="save">
+            <v-textarea
+              v-model.trim="form.body"
+              outlined
+              :rows="2"
+              :form="form"
+              field="body"
+              placeholder="Enter a comment"
+              class="pl-4 pr-14"
+            ></v-textarea>
+            <div class="mt-2 text-right pr-14">
+              <v-btn type="submit" size="sm">
+                Post comment
+              </v-btn>
+            </div>
+          </form>
+        </template>
+
+        <!--/ END COMMENTS-->
+      </v-col>
+      <v-divider class="mx-0" inset vertical></v-divider>
+      <v-col class="col-md-5">
+        <!-- RIGHT -->
+        <v-card-text>
+          <!-- Design Infos -->
+          <div class="mb-6">
+            <p class="text-h3 text-left block">
+              {{ designTitle | capitalize }}
+            </p>
+            <v-divider class="mx-0" inset></v-divider>
+            <p class="text-h6 text-left block">by {{ design.user.username }}</p>
+            <p class="text-subtitle-1 text-left pb-3 pt-2">
+              {{ design.description }}
+            </p>
+          </div>
+          <div>
+            <p class="text-subtitle-2 text-left">
+              Date: {{ design.created_at_dates.created_at_human }}
+            </p>
+          </div>
+          <v-divider class="mx-0 mb-6"></v-divider>
+          <div class="post-detail-sidebar mt-3">
+            <!-- Designs Tags -->
+            <div
+              v-if="design.tag_list.tags.length > 0"
+              class="designs-tag-outer mt-3"
+            >
+              <h2 class="font-16 fw-500 mb-2">
+                Tags
+              </h2>
+              <div class="font-14 fw-300 mb-6">
+                <!-- <a
+                  v-for="(tag, i) in design.tag_list.tags"
+                  :key="`tag-${i}`"
+                  :href="`/tags/${design.tag_list.normalized[i]}`"
+                > -->
+                <v-chip
+                  v-for="(tag, i) in design.tag_list.tags"
+                  :key="`tag-${i}`"
+                  class="ma-2"
+                  color="#43A047"
+                  text-color="white"
+                  @click="goToTag(`${design.tag_list.normalized[i]}`)"
+                >
+                  {{ tag }}
+                </v-chip>
+                <!-- </a> -->
+              </div>
+              <v-divider class="mx-0 pb-3 pt-6"></v-divider>
+            </div>
+            <!-- End Designs Tags -->
+
+            <!-- Designer info -->
+            <div class="white-bg-color">
+              <a class="float-left mr-3" href="#">
+                <img :src="design.user.photo_url" width="80px" />
+              </a>
+              <div class="modal-user-detail ml-2">
+                <h1 class="font-13 fw-500">
+                  <v-btn
+                    size="large"
+                    color="transparent"
+                    @click="goToUser(`${design.user.id}`)"
+                    >{{ design.user.name }}</v-btn
+                  >
+                  <!-- <nuxt-link
+                    :to="{
+                      name: 'designs.user',
+                      params: { id: design.user.id },
+                    }"
+                    @click="hideModal()"
+                  >
+                    {{ design.user.name }}
+                  </nuxt-link> -->
+                </h1>
+                <p class="font-12 fw-300 mt-1">
+                  <span class="shot-by">{{ design.user.tagline }}</span>
+                </p>
+                <!-- <p class="font-12 fw-300 mt-1">
+                  {{ design.created_at_dates.created_at_human }}
+                </p> -->
+              </div>
+            </div>
+            <!-- End Designer info -->
+            <v-divider class="mt-12 mb-10"></v-divider>
+            <!-- Designer Design Info -->
+            <DesignLike :design="design"></DesignLike>
+            <ul class="details-side-meta font-14 fw-400 mx-0">
+              <li class="d-table w-100 mt-3">
+                <div class="stats-txt d-table-cell w-100">
+                  <a href="#"> More from {{ design.user.name }} </a>
+                </div>
+              </li>
+            </ul>
+            <!-- End Designer Design Info -->
+            <!-- Designer More Designs -->
+
+            <!-- End Designer More Designs -->
+            <!-- <vue-goodshare></vue-goodshare> -->
+          </div>
+          <!-- <VueSocialSharing></VueSocialSharing> -->
+        </v-card-text>
+
+        <!--/ END RIGHT-->
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapActions } from 'vuex'
+// const Circle8 = require('vue-loading-spinner/src/components/Circle8.vue')
+// import { Circle8 } from 'vue-loading-spinner/src/components/Circle8.vue'
+import RingLoader from 'vue-spinner/src/RingLoader.vue'
+// import VueGoodshare from 'vue-goodshare'
+// import SocialSharing from 'vue-social-sharing'
 export default {
   name: 'Show',
-  /*  components: {
-    DesignComment,
-    DesignLike,
-  }, */
-  /* props: {
-    slug: {
-      type: String,
-      default: '',
-    }
-  }, */
- /*  async asyncData({ $axios, app, store }) {
-    
-    const slugg = store.state.slugDesign
-      alert(slugg)
-    try {
-      const url = `/designs/slug/${store.state.slugDesign}`
-      const response = await $axios.$get(url)
-      return {
-        design: response.data,
-        comments: response.data.comments,
-        user: response.data.user,
-        images: response.data.images,
-      }
-    } catch (e) {
-      if (err.response.status === 404) {
-        error({ statusCode: 404, message: 'Design not found' })
-      } else if (err.response.status === 401) {
-        redirect('/login')
-      } else {
-        error({ statusCode: 500, message: 'Internal server error' })
-      }
-    }
-  }, */
+  components: {
+    RingLoader,
+    //  VueGoodshare,
+    // SocialSharing,
+    // Circle8,
+  },
+  async fetch() {
+    const url = `/designs/${this.getIdDesign}`
+    const response = await this.$axios.$get(url)
+    this.design = response.data
+    this.comments = response.data.comments
+    this.images = response.data.images
+    console.log(this.design)
+  },
+
   data() {
     return {
       form: this.$vform({
@@ -211,53 +208,23 @@ export default {
       images: {},
     }
   },
+  fetchOnServer: true,
   computed: {
-    ...mapGetters(['getSlugDesign']),
-    ...mapState(['slugDesign']),
+    ...mapGetters(['getIdDesign', 'getDesignModal']),
+    ...mapState(['idDesign']),
+    designTitle() {
+      if (!this.design.title) return 'Sans Titre'
+      else return this.design.title
+    },
   },
-  /*  beforeMount() {
-    this.showDesign()
+  /*  beforeRouteLeave() {
+    this.hideModal()
   }, */
-  mounted() {
-    alert(`${this.getSlugDesign}`)
-  },
   methods: {
+    ...mapActions(['hideModal']),
     handleDelete(id) {
       this.comments = this.comments.filter((c) => c.id !== id)
     },
-    async asyncData({ $axios}) {
-      
-      try {
-        /* const slug = this.getSlugDesign
-        console.log(slug) */
-         const url = `/designs/slug/${this.getSlugDesign}`
-        const { response } = await $axios.$get(url)
-        return { design: response.data, comments: response.data.comments, user: response.data.user, images: response.data.images }
-      } catch (e) {
-        if (err.response.status === 404) {
-          error({ statusCode: 404, message: 'Design not found' })
-        } else if (err.response.status === 401) {
-          redirect('/login')
-        } else {
-          error({ statusCode: 500, message: 'Internal server error' })
-        }
-      }
-    },
-    /* showDesign({ app, $axios, store }) {
-      try {
-        const slug = store.state.slugDesign
-        const response = $axios.$get(`/designs/slug/${slug}`)
-        return { design: response.data, comments: response.data.comments }
-      } catch (e) {
-        if (err.response.status === 404) {
-          error({ statusCode: 404, message: 'Design not found' })
-        } else if (err.response.status === 401) {
-          redirect('/login')
-        } else {
-          error({ statusCode: 500, message: 'Internal server error' })
-        }
-      }
-    }, */
 
     save() {
       this.form
@@ -268,8 +235,46 @@ export default {
         })
         .catch((e) => console.log(e))
     },
+    goToTag(tagParam) {
+      if (this.$route.path !== `/designs/${tagParam}/tag`) {
+        this.$router.push({ name: 'designs.tag', params: { tag: tagParam } })
+      }
+      this.hideModal()
+    },
+    goToUser(userId) {
+      if (this.$route.path !== `/designs/${userId}/user`) {
+        this.$router.push({ name: 'designs.user', params: { id: userId } })
+      }
+      this.hideModal()
+    },
   },
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.showDesign {
+  background-color: #0f1219;
+
+  line-height: 1.6em;
+  text-rendering: optimizelegibility;
+  top: 30px;
+}
+.v-sheet.v-card {
+  background-color: #0f1219;
+
+  line-height: 1.6em;
+  text-rendering: optimizelegibility;
+}
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+.v-application a {
+  color: #e0f2f1;
+}
+.v-application ul,
+.v-application ol .v-application a {
+  padding-left: 0;
+}
+</style>
