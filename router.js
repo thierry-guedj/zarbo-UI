@@ -7,6 +7,8 @@ const page = (path) => () =>
 
 const routes = [
   { path: '/', name: 'index', component: page('Index.vue') },
+  { path: '/', name: 'index___fr', component: page('Index.vue') },
+  { path: '/', name: 'index___en', component: page('Index.vue') },
 /*   {
     path: '/login',
     name: 'login',

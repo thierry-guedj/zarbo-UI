@@ -122,22 +122,25 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     'vue-social-sharing/nuxt',
-    ['nuxt-i18n', {}],
+    'nuxt-i18n',
   ],
   i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'fr',
-    vueI18n: {
-      fallbackLocale: 'fr',
-      messages: {
-        en: {
-          welcome: 'Welcome',
-        },
-        fr: {
-          welcome: 'Bienvenue',
-        },
+    locales: [
+      {
+        code: 'en',
+        name: 'English',
+        file: 'en-US.js',
       },
-    },
+      {
+        code: 'fr',
+        name: 'Français',
+        file: 'fr-FR.js',
+      }
+    ],
+    lazy: true,
+  langDir: 'lang/',
+    defaultLocale: 'fr',
+   
   },
   auth: {
     strategies: {

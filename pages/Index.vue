@@ -1,16 +1,27 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
-       <v-container height="50" class="gradientBody justify-start align-content-md-start pt-0"></v-container>
+      <v-container
+        height="50"
+        class="gradientBody justify-start align-content-md-start pt-0"
+      ></v-container>
+      {{ $t('hello') }}
+      <nuxt-link
+        v-for="locale in availableLocales"
+        :key="locale.code"
+        :to="switchLocalePath(locale.code)"
+        >{{ locale.name }}</nuxt-link
+      >
+
       <last-designs></last-designs>
-      <div class="text-center" style="max-width:'80%';">
+      <div class="text-center" style="max-width: '80%';">
         <!-- Modal  -->
         <!-- <keep-alive> -->
         <base-modal
           :dialog.sync="visible"
           :success="false"
           :status="''"
-         :width="width"
+          :width="width"
         />
         <!-- </keep-alive> -->
         <!-- End Modal -->
@@ -47,6 +58,9 @@ export default {
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
   },
   methods: {
     ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
@@ -74,7 +88,6 @@ export default {
   background-color: rgba(23, 22, 18, 0.64);
 }
 
-
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
@@ -87,6 +100,6 @@ export default {
   border-radius: 6px;
 }
 .v-main {
-  padding-top:0 !important;
+  padding-top: 0 !important;
 }
 </style>
