@@ -1,15 +1,5 @@
 <template>
   <v-row justify="center">
-    <!-- <v-dialog
-      v-model="dialog"
-      max-width="70%"
-      hide-overlay
-      persistent
-      transition="dialog-bottom-transition"
-      color="transparent"
-      content-class="modal"
-      fullscreen
-    > -->
     <v-card width="100%" class="card-design">
       <v-card-title>
         Designs
@@ -30,12 +20,7 @@
         class="elevation-1"
         :search="search"
       >
-        <!-- <template v-slot:item.image="{ item }">
-            <div class="p-2">
-              <v-img :src="item.images.thumbnail" :alt="item.title" width="100px"></v-img>
-            </div>
-          
-    </template> -->
+
         <template v-slot:item.image="{ item }">
           <div class="px-2 my-2 align-middle">
             <v-img
@@ -46,16 +31,20 @@
           </div>
         </template>
 
-        <template v-slot:item.is_live="{ item }" style="width: 120px;">
-          <td>
-            <v-chip :color="getColor(item.is_live)" dark>{{
-              item.is_live ? 'Published' : 'Draft'
-            }}</v-chip>
-          </td>
-          <td class="pl-8">
+        <template v-slot:item.is_live="{ item }">
+          <div class="mr-3">
+    
+            <is-live
+              :id="item.id"
+              :is_live="item.is_live"
+            ></is-live>
+          </div>
+        </template>
+        <template v-slot:item.id="{ item }">
+          <div class="ml-3 float-right">
             <nuxt-link :to="{ name: 'designs.edit', params: { id: item.id } }"
               ><v-btn
-                class="mx-2 align-middle"
+                class="my-2 align-middle"
                 fab
                 dark
                 small
@@ -64,11 +53,42 @@
                 <v-icon dark>edit</v-icon></v-btn
               >
             </nuxt-link>
-          </td>
+          </div>
+        </template>
+        <template v-slot:item.description="{ item }">
+          <div class="ml-3 float-right">
+            <v-btn
+              class="my-2 align-middle"
+              fab
+              dark
+              small
+              color="transparent"
+              @click.native="destroy(item.id)"
+            >
+              <v-icon dark>delete_forever</v-icon></v-btn
+            >
+          </div>
         </template>
       </v-data-table>
     </v-card>
-    <!--    </v-dialog> -->
+    <v-snackbar
+      :value="visibleSnackbar"
+      class="v-snackbar"
+      multi-line
+      timeout="2000"
+      color="teal darken-4"
+      top
+      vertical
+      @input="hideSnackbar()"
+      @close="hideSnackbar()"
+    >
+      Your design has been deleted
+      <template v-slot:action="{ attrs }">
+        <v-btn dark text v-bind="attrs" @click="hideSnackbar()">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -84,7 +104,7 @@ export default {
       search: '',
       dialog: true,
       headers: [
-        { text: 'Image', value: 'image', sortable: false, width: '120px' },
+        { text: 'Image', value: 'image', sortable: false, width: '15%' },
         {
           text: 'Title',
           align: 'start',
@@ -97,9 +117,13 @@ export default {
           sortable: true,
           value: 'created_at_dates.created_at_human',
         }, */
-        { text: 'Status', value: 'is_live', width: '15%' },
+        { text: 'Status', value: 'is_live', width: '20%' },
+        { text: 'Edit', value: 'id', width: '8%' },
+        { text: 'Delete', value: 'description', width: '8%' },
         // { text: 'Actions', value: '' },
       ],
+
+      loadingSubmit: false,
     }
   },
   computed: {
@@ -116,11 +140,21 @@ export default {
       )
       this.designs = data
       this.loading = false
+      this.loadingSubmit = false
     },
-    getColor(is_live) {
-      if (is_live) return 'green'
-      else return 'orange'
+    async destroy(id) {
+      this.loading = true
+      try {
+        const res = await this.$axios.$delete(`/designs/${id}`)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        await this.fetchUserDesigns()
+        this.showSnackbar()
+        this.loading = false
+      }
     },
+
     ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
     goTo(to, folderName) {
       this.hideModal()
@@ -129,6 +163,7 @@ export default {
         300
       )
     },
+   
   },
 }
 </script>
@@ -167,7 +202,7 @@ export default {
 .v-sheet.v-list:not(.v-sheet--outlined) {
   background-color: #0f1219;
 
-	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
-
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2),
+    0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
 </style>

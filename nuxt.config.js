@@ -33,7 +33,39 @@ export default {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png',
+      },
+      { rel: 'manifest', href: '/site.webmanifest' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap',
+      },
       {
         rel: 'stylesheet',
         href:
@@ -62,8 +94,9 @@ export default {
   plugins: [
     '~plugins/vform',
     '~plugins/vuelidate',
-    { src: '~/plugins/gmaps', ssr: false },
     '~plugins/filters.js',
+    { src: '~plugins/infiniteloading', mode: 'client' },
+    '~plugins/components.js',
   ],
   /*
    ** Auto import components
@@ -88,26 +121,50 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    'vue-social-sharing/nuxt'
+    'vue-social-sharing/nuxt',
+    ['nuxt-i18n', {}],
   ],
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'fr',
+    vueI18n: {
+      fallbackLocale: 'fr',
+      messages: {
+        en: {
+          welcome: 'Welcome',
+        },
+        fr: {
+          welcome: 'Bienvenue',
+        },
+      },
+    },
+  },
   auth: {
     strategies: {
-      local: {
+        local: {
+          scheme: 'refresh',
+          token: {
+            property: 'access_token',
+            maxAge: 1800,
+            // type: 'Bearer'
+          },
+          refreshToken: {
+            property: 'refresh_token',
+            data: 'refresh_token',
+            maxAge: 60 * 60 * 24 * 30
+          },
+
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           logout: { url: '/logout', method: 'post' },
           user: { url: '/me', method: 'get', propertyName: 'data' },
           refresh: { url: '/refresh', method: 'post' },
         },
-        refreshToken: {
-          property: 'refresh_token',
-          data: 'refresh_token',
-          maxAge: 60 * 60 * 24 * 30
-        },
-        // tokenRequired: true,
-        // tokenType: 'bearer',
-        // globalToken: true,
-        // autoFetchUser: true
+
+        /* tokenRequired: true,
+        tokenType: 'bearer',
+        globalToken: true,
+        autoFetchUser: true, */
       },
     },
   },
@@ -122,11 +179,13 @@ export default {
    */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
+    defaultAssets: false,
     theme: {
       dark: true,
       themes: {
         dark: {
-          primary: colors.grey.darken3,
+          primary: colors.blue.darken2,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -141,5 +200,9 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    extend(config, { isClient, isDev, loaders: { vue } }) {
+      vue.transformAssetUrls.LazyImage = ['src']
+    },
+  },
 }

@@ -1,9 +1,9 @@
 <template>
   <v-list-item-title>
     <div class="comment-thumb float-left mr-3">
-      <a href="#">
+      <v-avatar>
         <img :src="comment.user.photo_url" width="30px" />
-      </a>
+      </v-avatar>
     </div>
     <div class="comment-meta mb-3">
       <h4 class="font-14 fw-500 mb-2">
@@ -18,7 +18,7 @@
         {{ comment.created_at_dates.created_at_human }}
         <span v-if="$auth.loggedIn && $auth.user.id == comment.user.id">
           <a class="text-danger" @click.prevent="destroyComment">
-            <v-btn class="mx-2" dark small color="blue-grey darken-1">
+            <v-btn class="mx-2" icon dark small color="blue-grey darken-1">
               <v-icon dark>delete_forever</v-icon>
             </v-btn>
           </a>
@@ -53,10 +53,10 @@ export default {
   font-size: 0.8rem;
 }
 .v-application .caption {
-	font-size: 0.75rem !important;
-	font-weight: 109;
-	letter-spacing: 0.0333333333em !important;
-	line-height: 1.25rem;
-	font-family: "Roboto", sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 109;
+  letter-spacing: 0.0333333333em !important;
+  line-height: 1.25rem;
+ 
 }
-</style>></style>
+</style>

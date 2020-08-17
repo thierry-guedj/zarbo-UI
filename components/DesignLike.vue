@@ -1,34 +1,47 @@
 <template>
-  <li class="d-table w-100">
-    <div class="stats-txt d-table-cell w-50">
-      <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
-        <template v-if="current_user_likes">
-          <!--        <span class="material-icons" style="color:red">
+  <section>
+    <li class="d-table w-100">
+      <div class="stats-txt d-table-cell w-50">
+        <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
+          <template v-if="userLikes">
+            <!--        <span class="material-icons" style="color:red">
 thumb_down
 </span> -->
-          <v-btn class="mx-2" dark small color="red darken-4">
-            <v-icon dark>thumb_down</v-icon>
-          </v-btn>
-        </template>
-        <template v-else>
-          <!--       <span class="material-icons" style="color:blue">
+            <v-btn class="mx-2" icon dark small color="red darken-4">
+              <v-icon dark>not_interested</v-icon>
+            </v-btn>
+          </template>
+          <template v-else>
+            <!--       <span class="material-icons" style="color:blue">
 thumb_up
 </span> -->
-          <v-btn class="mx-2" dark small color="teal darken-1">
-            <v-icon dark>thumb_up</v-icon>
-          </v-btn>
-        </template>
-      </a>
-    </div>
-    <div class="stats-num d-table-cell w-50 text-right ml-3 align-baseline">
-      <a class="text-white">{{ likes }} Likes</a>
-    </div>
-  </li>
+            <v-btn class="mx-2" icon color="pink" dark small>
+              <v-icon dark>favorite</v-icon>
+            </v-btn>
+          </template>
+        </a>
+      </div>
+
+      <div>
+        <a class="text-white">{{ likes }} Likes</a>
+      </div>
+    </li>
+    <template v-if="userLikes && $auth.loggedIn">
+      <div class="mt-2">
+        You like this design
+      </div>
+    </template>
+  </section>
 </template>
 
 <script>
 export default {
-  props: ['design'],
+  props: {
+    design: {
+      type: Object,
+      default: null,
+    },
+  },
 
   data() {
     return {
@@ -40,21 +53,37 @@ export default {
     likes() {
       return this.total_likes
     },
+    userLikes() {
+      return this.current_user_likes
+    },
+  },
+  mounted() {
+    this.checkIfCurrentUserLikes()
+    this.totalLikes()
   },
 
   created() {},
   methods: {
-    likeDesign() {
+    async likeDesign() {
       const url = `/designs/${this.design.id}/like`
       console.log(url)
-      this.$axios.post(url).then((res) => {
+      await this.$axios.post(url).then((res) => {
         this.current_user_likes = !this.current_user_likes
         this.total_likes = res.data.total
       })
     },
-    checkIfCurrentUserLikes() {
+    async totalLikes() {
+      const url = `/designs/${this.design.id}/totalLikes`
+      console.log(url)
+      await this.$axios.$get(url).then((res) => {
+        this.total_likes = res.total
+      })
+    },
+    async checkIfCurrentUserLikes() {
       const url = `/designs/${this.design.id}/liked`
-      this.$axios.$get(url).then((res) => (this.current_user_likes = res.liked))
+      await this.$axios.$get(url).then((res) => {
+        this.current_user_likes = res.liked
+      })
     },
   },
 }

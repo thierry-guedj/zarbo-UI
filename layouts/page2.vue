@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-parallax :src="backgroundUrl" height="0"></v-parallax>
+    <!-- <v-parallax :src="backgroundUrl" height="0"></v-parallax> -->
     <div id="grad1" class="line"></div>
     <v-app dark>
       <v-navigation-drawer
@@ -25,11 +25,43 @@
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
+          <template v-if="!$auth.loggedIn">
+            <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
+              <v-list-item-action>
+                <v-icon>face</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Signin</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item
+              to=""
+              router
+              exact
+              @click="goTo('RegisterForm', 'auth')"
+            >
+              <v-list-item-action>
+                <v-icon>brush</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Signup</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <template v-else>
+            <v-list-item :to="{ name: 'settings.designs' }" router exact>
+              <v-list-item-action>
+                <v-icon>looks</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>Your designs</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
         </v-list>
       </v-navigation-drawer>
       <v-app-bar
         id="nav"
-        v-scroll="handleScroll"
         class="bg-transparent line"
         :clipped-left="!clipped"
         fixed
@@ -40,33 +72,20 @@
         <v-btn icon @click.stop="miniVariant = !miniVariant">
           <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
         </v-btn>
-        <!-- <v-btn icon @click.stop="clipped = !clipped">
-          <v-icon>mdi-application</v-icon>
-        </v-btn> -->
-        <!-- <v-btn icon @click.stop="fixed = !fixed">
-          <v-icon>mdi-minus</v-icon>
-        </v-btn> -->
+
         <nuxt-link :to="{ name: 'index' }"
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
         <nuxt-link :to="{ name: 'designs.search' }"
           ><v-btn small color="transparent" class="mr-2 ml-3"
-            >Zoeuvres</v-btn
+            >Artwork</v-btn
           ></nuxt-link
         >
         <nuxt-link :to="{ name: 'users.search' }"
-          ><v-btn small color="transparent" class="mr-2">Zartistes</v-btn>
+          ><v-btn small color="transparent" class="mr-2">Artists</v-btn>
         </nuxt-link>
-        <!-- <base-button
-          toggle-modal
-          needs-auth
-          component-name="CreateForm"
-          folder-name="user"
-          button-class="upload-button mr-2"
-          icon="mdi-cloud-upload"
-          >Upload</base-button
-        > -->
+
         <template v-if="$auth.loggedIn">
           <base-button
             to="/upload"
@@ -126,12 +145,16 @@
             ></nuxt-link
           >
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
-          <v-avatar color="teal darken-2" size="36">
-            <span class="white--text headline">JD</span>
-          </v-avatar>
+
+          <avatar
+            :username="$auth.user.name"
+            class="ml-3 mr-2"
+            :size="40"
+          ></avatar>
+
           <v-menu
             bottom
-            origin="center center"
+            origin="end center"
             transition="scale-transition"
             color="rgba(23, 22, 18, 0.64)"
           >
@@ -155,38 +178,32 @@
           </v-menu>
         </template>
         <!-- End After Login -->
-        <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
       </v-app-bar>
       <v-main>
         <v-container style="max-width: 100%;">
           <nuxt />
         </v-container>
       </v-main>
-      <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-        <v-list>
-          <v-list-item @click.native="right = !right">
-            <v-list-item-action>
-              <v-icon light>
-                mdi-repeat
-              </v-icon>
-            </v-list-item-action>
-            <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+
       <v-footer :absolute="!fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
     </v-app>
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <base-modal :dialog.sync="visible" :success="false" :status="''" />
+    <!-- </keep-alive> -->
+    <!-- End Modal -->
   </section>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
+import { mapActions, mapGetters } from 'vuex'
+import Avatar from 'vue-avatar'
 export default {
+  components: {
+    Avatar,
+  },
   data() {
     return {
       clipped: false,
@@ -200,34 +217,17 @@ export default {
         },
         {
           icon: 'mdi-looks',
-          title: 'Oeuvres',
-          to: '/inspire',
+          title: 'Artwork',
+          to: '/designs',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Artistes',
-          to: '/inspire',
-        },
-        {
-          icon: 'mdi-face',
-          title: 'Sign In',
-          to: '/inspire',
-        },
-        {
-          icon: 'mdi-brush',
-          title: 'Sign Up',
-          to: '/inspire',
+          title: 'Artists',
+          to: '/users',
         },
       ],
       menuAccount: [
-        {
-          title: 'Dashboard',
-          route: 'settings.dashboard',
-        },
-        {
-          title: 'Update profile',
-          route: 'settings.profile',
-        },
+     
         {
           title: 'Your designs',
           route: 'settings.designs',
@@ -242,12 +242,20 @@ export default {
       scrollPosition: null,
     }
   },
+  beforeRouteLeave(to, from, next) {
+    if (to.name === 'login') {
+      this.goTo('loginForm', 'auth')
+      from()
+    } else {
+      next()
+    }
+  },
   computed: {
     backgroundUrl() {
       return require(`~/assets/images/bg1280-hauteur/${this.bgImage}`)
     },
 
-    // ...mapGetters(['visible', 'modalComponent', 'folder']),
+    ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
 
   mounted() {
@@ -262,7 +270,7 @@ export default {
             nav_classes.toggle('bg-dark')
             nav_classes.toggle('bg-transparent')
           }
-        } else if (nav_classes.contains('bg-transparent') === false) {
+        } else if (navClasses.contains('bg-transparent') === false) {
           nav_classes.toggle('bg-transparent')
           nav_classes.toggle('bg-dark')
         }
@@ -275,18 +283,8 @@ export default {
     logout() {
       this.$auth.logout()
     },
-    goTo() {},
-    handleScroll() {
-      console.log(
-        'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
-      )
-    },
   },
-  updateScroll() {
-    this.scrollPosition = window.scrollY
-    if (this.scrollPosition > 1000) {
-    }
-  },
+
   toTop() {
     this.$vuetify.goTo(0)
   },
@@ -298,13 +296,29 @@ export default {
   opacity: 0.95;
   background-color: #0f1219;
 } */
+.gradientBody {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .theme--dark.v-application {
   background: #0f1219;
 }
 .v-application {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: 'Josefin Sans', sans-serif;
 
   font-size: 15px;
   transition-property: opacity;
@@ -375,5 +389,15 @@ export default {
 .line {
   height: 6px;
   border-radius: 4px;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
+  }
 }
 </style>

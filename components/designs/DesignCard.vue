@@ -1,27 +1,29 @@
 <template>
-  <v-col class="item" cols="12" md="auto">
+  <v-col class="item" cols="12" md="2">
     <!-- <v-hover v-slot:default="{ hover }"> -->
     <v-card
       class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
-      width="420"
+      width="auto"
+      height="auto"
       tile
       elevation="5"
       hover
     >
       <v-img
         :src="`${design.images.thumbnail}`"
-        style="max-height: 100%; max-widt: 100vh; width: auto;"
+        :lazy-src="`${design.images.thumbnail}`"
       >
       </v-img>
+
       <div class="portfolio-item__info">
         <h3 class="portfolio-item__header">{{ designTitle }}</h3>
         <h4 class="portfolio-item__subheader">by {{ design.user.name }}</h4>
         <div class="portfolio-item__links">
           <div class="portfolio-item__link-block">
             <a
-              class="portfolio-item__link"
+              class="portfolio-item__link image"
               :title="designTitle"
-              @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
+              @click.stop="$emit('lightbox')"
             >
               <i class="material-icons">link</i>
             </a>
@@ -53,70 +55,13 @@
           >
         </v-card-actions>
       </div>
-
-      <!-- <v-expand-transition>
-            <div
-              v-if="hover"
-              class="d-flex transition-fast-in-fast-out blue-grey darken-2 v-card--reveal display-3 white--text"
-              style="height: 100%;"
-            >
-              <v-card-text class="align-self-center text-center">
-                <div >
-                  <v-btn
-                    v-for="(icon, index) in icons"
-                    :key="index"
-                    :class="{ 'show-btns': hover }"
-                    color="transparent"
-                    icon
-                  >
-                    <v-icon :class="{ 'show-btns': hover }" color="transparent">
-                      {{ icon }}
-                    </v-icon>
-                  </v-btn>
-                </div>
-              </v-card-text>
-            </div>
-          </v-expand-transition> -->
-
-      <!-- <v-list-item>
-        <v-list-item-content class="design-info pb-0 pt-1">
-          <v-list-item-title class="headline design-info">{{
-            design.title
-          }}</v-list-item-title>
-
-          <v-list-item-subtitle class="design-info pb-0 pt-0">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <span v-bind="attrs" v-on="on">{{ design.user.name }}</span>
-              </template>
-              <span>Tooltip</span>
-            </v-tooltip>
-            <span
-              v-if="design.team"
-              class="badge badge-pill badge-secondary text-white font-10 pr-1 pl-1 fw-300"
-              >+ team</span
-            ></v-list-item-subtitle
-          >
-        </v-list-item-content>
-      </v-list-item>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <span class="mr-2 caption text-orange lighten-5"
-          >Uploaded {{ design.created_at_dates.created_at_human }}</span
-        >
-        <span class="mr-2"
-          ><v-icon class="like mr-1 text-orange lighten-1">mdi-heart</v-icon
-          >{{ design.likes_count }}</span
-        >
-
-        <span class="mr-2"
-          ><v-icon class="mr-1">mdi-comment</v-icon
-          >{{ design.comments_count }}</span
-        >
-      </v-card-actions> -->
     </v-card>
     <!-- </v-hover> -->
-    <div class="ml-3 mb-2"><h3 class="font-weight-medium mb-0">{{ designTitle | capitalize }}</h3><h5 class="font-weight-regular">by {{ design.user.name }}</h5></div>
+    <div class="ml-3 mb-2">
+      <h3 class="font-weight-medium mb-0">{{ designTitle | capitalize }}</h3>
+      <h5 class="font-weight-regular">by {{ design.user.name }}</h5>
+      <h6>{{ design.id }}</h6>
+    </div>
   </v-col>
 </template>
 
@@ -130,12 +75,13 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
-      icons: ['mdi-rewind', 'mdi-play', 'mdi-fast-forward'],
+      index: null,
     }
   },
- 
+
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
     designTitle() {
@@ -161,6 +107,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9; /* ie8 */
+}
 .v-card--reveal {
   align-items: center;
   bottom: 0;
@@ -192,7 +143,7 @@ export default {
 .theme--dark.v-card {
   background-color: rgba(23, 22, 18, 0.85);
 
-  border: 1px solid #000000;
+  border: 1px none #f8b4b4;
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -212,7 +163,7 @@ export default {
     rgba(0, 0, 0, 0.03) 91.9%,
     rgba(0, 0, 0, 0.03) 100%
   );
-  font-family: 'Ek Mukta', sans-serif;
+
   font-size: 12px;
   transition-property: opacity;
   transition-duration: 0.35s;
@@ -255,8 +206,8 @@ $accent-theme-color2: #8d909b;
 $dark-theme-color: #101010;
 $light-theme-color: #fff;
 
-$portfolio-item-width: 300px;
-$portfolio-item-height: 300px;
+$portfolio-item-width: auto;
+$portfolio-item-height: auto;
 
 $portfolio-item-info-offset: 7px;
 
@@ -348,7 +299,7 @@ $portfolio-link-offset: 10px;
   padding: 15px 0;
 
   font: {
-    size: 22px;
+    size: 20px;
   }
   text-transform: uppercase;
   letter-spacing: 2px;

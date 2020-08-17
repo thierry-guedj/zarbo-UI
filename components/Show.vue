@@ -1,6 +1,6 @@
 <template>
   <div v-if="$fetchState.pending" class="loader">
-    <RingLoader></RingLoader>
+    <GoogleSpin></GoogleSpin>
   </div>
   <div v-else class="pt-6 pl-6">
     <v-row class="row-md-12">
@@ -10,7 +10,7 @@
         <!-- Single Image -->
         <div>
           <img
-            :src="design.images.original"
+            :src="design.images.large"
             style="
               max-width: 100%;
               max-height: 100vh;
@@ -78,10 +78,11 @@
               {{ design.description }}
             </p>
           </div>
-          <div>
+          <div class="pb-2">
             <p class="text-subtitle-2 text-left">
-              Date: {{ design.created_at_dates.created_at_human }}
+              Published: {{ design.created_at_dates.created_at_human }}
             </p>
+            <DesignLike :design="design"></DesignLike>
           </div>
           <v-divider class="mx-0 mb-6"></v-divider>
           <div class="post-detail-sidebar mt-3">
@@ -94,11 +95,6 @@
                 Tags
               </h2>
               <div class="font-14 fw-300 mb-6">
-                <!-- <a
-                  v-for="(tag, i) in design.tag_list.tags"
-                  :key="`tag-${i}`"
-                  :href="`/tags/${design.tag_list.normalized[i]}`"
-                > -->
                 <v-chip
                   v-for="(tag, i) in design.tag_list.tags"
                   :key="`tag-${i}`"
@@ -117,14 +113,14 @@
 
             <!-- Designer info -->
             <div class="white-bg-color">
-              <a class="float-left mr-3" href="#">
+              <v-avatar class="float-left mr-3" href="#">
                 <img :src="design.user.photo_url" width="80px" />
-              </a>
+              </v-avatar>
               <div class="modal-user-detail ml-2">
                 <h1 class="font-13 fw-500">
-                  <v-btn
+                  <v-btn text
                     size="large"
-                    color="transparent"
+                    color="whitesmoke"
                     @click="goToUser(`${design.user.id}`)"
                     >{{ design.user.name }}</v-btn
                   >
@@ -147,21 +143,28 @@
               </div>
             </div>
             <!-- End Designer info -->
-            <v-divider class="mt-12 mb-10"></v-divider>
+            <v-divider class="mt-6 mb-6"></v-divider>
             <!-- Designer Design Info -->
-            <DesignLike :design="design"></DesignLike>
-            <ul class="details-side-meta font-14 fw-400 mx-0">
+<!-- <vue-goodshare></vue-goodshare>
+ <v-divider class="mt-6 mb-6"></v-divider> -->
+            <!-- <ul class="details-side-meta font-14 fw-400 mx-0">
               <li class="d-table w-100 mt-3">
                 <div class="stats-txt d-table-cell w-100">
                   <a href="#"> More from {{ design.user.name }} </a>
                 </div>
               </li>
-            </ul>
+            </ul> -->
             <!-- End Designer Design Info -->
             <!-- Designer More Designs -->
-
+            <v-card>
+              <tabs
+                :design-id="designIdComp"
+                :user="user"
+                :tags="design.tag_list.tags"
+              ></tabs>
+            </v-card>
             <!-- End Designer More Designs -->
-            <!-- <vue-goodshare></vue-goodshare> -->
+            
           </div>
           <!-- <VueSocialSharing></VueSocialSharing> -->
         </v-card-text>
@@ -179,25 +182,29 @@ import { mapGetters, mapState, mapActions } from 'vuex'
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
 // import VueGoodshare from 'vue-goodshare'
 // import SocialSharing from 'vue-social-sharing'
+import GoogleSpin from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
   name: 'Show',
   components: {
     RingLoader,
-    //  VueGoodshare,
+    // VueGoodshare,
     // SocialSharing,
     // Circle8,
+    GoogleSpin,
   },
   async fetch() {
-    const url = `/designs/${this.getIdDesign}`
+    const url = `/designs/${this.designId}`
     const response = await this.$axios.$get(url)
     this.design = response.data
     this.comments = response.data.comments
+    this.user = response.data.user
     this.images = response.data.images
     console.log(this.design)
   },
 
   data() {
     return {
+      ...mapState(['idDesign']),
       form: this.$vform({
         body: '',
       }),
@@ -206,20 +213,29 @@ export default {
       user: {},
       created_at_dates: {},
       images: {},
+      designId: this.$store.state.idDesign,
     }
   },
   fetchOnServer: true,
   computed: {
     ...mapGetters(['getIdDesign', 'getDesignModal']),
-    ...mapState(['idDesign']),
     designTitle() {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
+    designIdComp() {
+      return parseInt(this.getIdDesign)
+    },
   },
-  /*  beforeRouteLeave() {
-    this.hideModal()
-  }, */
+
+  watch: {
+    getIdDesign(val) {
+      this.designId = val
+      this.toTop()
+      this.fetchData()
+      
+    },
+  },
   methods: {
     ...mapActions(['hideModal']),
     handleDelete(id) {
@@ -247,6 +263,16 @@ export default {
       }
       this.hideModal()
     },
+    async fetchData() {
+      const url = `/designs/${this.designId}`
+      const response = await this.$axios.$get(url)
+      this.design = response.data
+      this.comments = response.data.comments
+      console.log(this.design)
+    },
+     toTop() {
+     window.scrollTo(0,0);
+  },
   },
 }
 </script>

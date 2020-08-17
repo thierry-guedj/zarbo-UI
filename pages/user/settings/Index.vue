@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <!-- LEFT -->
-        <div id="myScrollspy" class="col-sm-3">
+       <!--  <div id="myScrollspy" class="col-sm-3">
           <v-list class="list-settings">
             <v-list-item-group>
               <v-list-item v-for="link in links" :key="link.route">
@@ -18,10 +18,10 @@
               </v-list-item>
             </v-list-item-group>
           </v-list>
-        </div>
+        </div> -->
 
         <!-- RIGHT -->
-        <div class="col-sm-9">
+        <div class="col-sm-12">
           <router-view></router-view>
         </div>
         <!-- END RIGHT -->

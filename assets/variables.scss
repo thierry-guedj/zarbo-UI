@@ -3,6 +3,10 @@
 // The variables you want to modify
 // $font-size-root: 20px;
 /* Google Web Fonts */
+$body-font-family: 'Josefin Sans', sans-serif;
+$heading-font-family: 'Josefin Sans', sans-serif;
+$font-size-root: 18px;@import '~vuetify/src/styles/styles.sass';
+
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,300,300i,400,600,600i,700&display=swap");
 

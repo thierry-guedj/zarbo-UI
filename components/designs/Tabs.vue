@@ -1,180 +1,138 @@
 <template>
-  <v-col class="item" cols="12" md="auto">
-    <!-- <v-hover v-slot:default="{ hover }"> -->
-    <v-card
-      :color="user.color"
-      dark
-      hover
-      style="max-height: 100%; max-width: 100vh; min-width: 15%;"
-      class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
-      @click="goToUser(`${user.id}`)"
-    >
-      <div class="d-flex flex-no-wrap justify-space-between">
-        <div>
-          <v-card-title class="headline" v-text="user.name"></v-card-title>
-
-          <v-card-subtitle v-text="user.username"></v-card-subtitle>
-          <v-card-text v-text="user.tagline"></v-card-text>
-        </div>
-
-        <!--  <v-avatar class="ma-3" size="100">
-          <v-img
-            :src="`${user.photo_url}`"
-            style="max-height: 100%; max-width: 100vh; min-width: 6.6666%;"
-          >
-          
-          </v-img>
-        </v-avatar> -->
-        <avatar :username="user.name" class="mx-3 mt-3" :size="80"></avatar>
-        <div class="portfolio-item__info">
-          <h4 class="portfolio-item__header">{{ user.username }}</h4>
-          <h4 class="portfolio-item__subheader">{{ user.name }}</h4>
-          <div class="portfolio-item__links">
-            <div class="portfolio-item__link-block">
-              <a
-                class="portfolio-item__link"
-                :title="user.username"
-                @click="goToUser('Show', '', `${user.id}`, 'fullscreen')"
-              >
-                <i class="material-icons">collections</i>
-              </a>
-            </div>
-          </div>
-          <v-card-actions class="mt-4">
-            <v-spacer></v-spacer>
-            <span class="mr-2 caption text-orange lighten-5"
-              >Registered {{ user.created_dates.created_at_human }}</span
-            >
-          </v-card-actions>
-        </div>
-      </div>
-    </v-card>
-    <h6>{{ user.id }}</h6>
-    <!--   </v-hover> -->
-  </v-col>
+  <v-tabs>
+    <v-tab>More from {{ user.name }}</v-tab>
+    <v-tab>Some similar</v-tab>
+    <v-tab-item class="mx-auto">
+      <more-from-user :design-id="designIdComp" :user="user"></more-from-user>
+    </v-tab-item>
+    <v-tab-item>
+      <lazy-component
+        :design-id="designIdComp"
+        :user="user"
+        :tags="tags"
+      ></lazy-component>
+    </v-tab-item>
+  </v-tabs>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Avatar from 'vue-avatar'
+// import RingLoader from 'vue-spinner/src/RingLoader.vue'
 export default {
-  layout: 'page2',
+  name: 'Search',
+  /* components: {
+    RingLoader,
+    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
+  }, */
   components: {
-    Avatar,
+     lazyComponent: () => import('@/components/designs/MoreFromTags.vue'),
   },
   props: {
     user: {
       type: Object,
-      required: true,
+      default: null,
+    },
+    designId: {
+      type: Number,
+      default: null,
+    },
+    tags: {
+      type: Array,
+      default: null,
     },
   },
+
   data() {
     return {
-      icons: ['mdi-rewind', 'mdi-play', 'mdi-fast-forward'],
+      designs: [],
+      searching: true,
+      loader: null,
+      loadingSubmit: false,
+      loaderPage: false,
+      filters: {
+        idUser: this.user.id,
+        idDesign: this.designId,
+        page: 1,
+      },
+      fullscreen: false,
+
+      identifier: new Date(),
     }
   },
 
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
+    queryString() {
+      return Object.keys(this.filters)
+        .map((k) => `${k}=${this.filters[k]}`)
+        .join('&')
+    },
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'getIdDesign']),
+    url() {
+      return `/search/designs?${this.queryString}`
+    },
+    designIdComp() {
+      return parseInt(this.getIdDesign)
+    },
+    /*   designTitle() {
+      if (!this.design.title) return 'Sans Titre'
+      else return this.design.title
+    }, */
   },
+  mounted() {
+    this.fetchData()
+  },
+
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    goToUser(userId) {
-      if (this.$route.path !== `/designs/${userId}/user`) {
-        this.$router.push({ name: 'designs.user', params: { id: userId } })
-      }
+    async fetchData() {
+      console.log(this.tags)
+      this.identifier = new Date()
+      this.filters.page = 1
+      const response = await this.$axios.$get(this.url)
+      this.designs = response.data
+      this.searching = false
+    },
+
+    styleModal() {
+      this.fullscreen = true
+    },
+
+    infiniteHandler($state) {
+      this.$axios
+        .$get(this.url)
+        .then((response) => {
+          if (response.data.length > 1) {
+            response.data.forEach((item) => this.designs.push(item))
+
+            $state.loaded()
+          } else {
+            $state.loaded()
+            $state.complete()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.filters.page = this.filters.page + 1
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.6;
-  position: absolute;
-  width: 100%;
-  /* background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 8.1%,
-    rgba(0, 0, 0, 0.001) 15.5%,
-    rgba(0, 0, 0, 0.003) 22.5%,
-    rgba(0, 0, 0, 0.005) 29%,
-    rgba(0, 0, 0, 0.008) 35.3%,
-    rgba(0, 0, 0, 0.011) 41.2%,
-    rgba(0, 0, 0, 0.014) 47.1%,
-    rgba(0, 0, 0, 0.016) 52.9%,
-    rgba(0, 0, 0, 0.019) 58.8%,
-    rgba(0, 0, 0, 0.022) 64.7%,
-    rgba(0, 0, 0, 0.025) 71%,
-    rgba(0, 0, 0, 0.027) 77.5%,
-    rgba(0, 0, 0, 0.029) 84.5%,
-    rgba(0, 0, 0, 0.03) 91.9%,
-    rgba(0, 0, 0, 0.03) 100%
-  ); */
+.v-list-item__content {
+  max-width: max-content;
 }
-
-.theme--dark.v-card {
-  //background-color: rgba(23, 22, 18, 0.85);
-
-  border: 1px solid #000000;
-  /* background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 25.1%,
-    rgba(0, 0, 0, 0.001) 15.5%,
-    rgba(0, 0, 0, 0.003) 22.5%,
-    rgba(0, 0, 0, 0.005) 29%,
-    rgba(0, 0, 0, 0.008) 35.3%,
-    rgba(0, 0, 0, 0.011) 41.2%,
-    rgba(0, 0, 0, 0.014) 47.1%,
-    rgba(0, 0, 0, 0.016) 52.9%,
-    rgba(0, 0, 0, 0.019) 58.8%,
-    rgba(0, 0, 0, 0.022) 64.7%,
-    rgba(0, 0, 0, 0.025) 71%,
-    rgba(0, 0, 0, 0.027) 77.5%,
-    rgba(0, 0, 0, 0.029) 84.5%,
-    rgba(0, 0, 0, 0.03) 91.9%,
-    rgba(0, 0, 0, 0.03) 100%
-  ); */
-  font-family: 'Ek Mukta', sans-serif;
-  font-size: 12px;
-  transition-property: opacity;
-  transition-duration: 0.35s;
-  line-height: 1.6em;
-  text-rendering: optimizelegibility;
-  color: #fff3e0;
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9; /* ie8 */
 }
-
-.theme--dark.v-list-item .v-list-item__subtitle,
-.theme--dark.v-list-item .v-list-item__action-text {
-  color: #fff3e0;
+.v-tab--active.v-tab:not(:focus)::before {
+  color: whitesmoke !important;
 }
-.theme--dark.v-list-item.design-info {
-  color: #fff3e0 !important;
-  font-size: 0.8em !important;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.design-info {
-  color: #fff3e0;
-}
-.theme--dark.v-btn.v-btn--icon {
-  color: #fff3e0;
-}
-.show-btns {
-  color: rgba(255, 255, 255, 1) !important;
-}
-.v-application .headline {
-  font-size: 1.2 rem;
-}
-.loader {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+.v-application .primary--text {
+  color: whitesmoke;
 }
 
 //VARIABLES
@@ -184,11 +142,11 @@ $dark-theme-color: #101010;
 $light-theme-color: #fff;
 
 $portfolio-item-width: 300px;
-$portfolio-item-height: 200px;
+$portfolio-item-height: auto;
 
 $portfolio-item-info-offset: 7px;
 
-$portfolio-link-dimensions: 5px;
+$portfolio-link-dimensions: 35px;
 $portfolio-link-offset: 10px;
 
 //MIXINS
@@ -276,7 +234,7 @@ $portfolio-link-offset: 10px;
   padding: 15px 0;
 
   font: {
-    size: 22px;
+    size: 12px;
   }
   text-transform: uppercase;
   letter-spacing: 2px;

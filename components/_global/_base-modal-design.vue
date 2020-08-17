@@ -1,27 +1,23 @@
 <template>
-  <!-- <v-dialog
-    :value="visible"
-    :width="width"
-    persistent
-    @keydown.esc="hideModal"
-    @click:outside="hideModal"
-  > -->
   <v-dialog
     :value="visible"
     :width="width"
-    :fullscreen="!!fullscreen ? 'fullscreen' : false"
+    :fullscreen="getStyle"
     persistent
+    scrollable
+    eager
+    transition="fade"
     @keydown.esc="hideModal"
   >
-    <v-card>
-      <v-card-actions class="float-md-right"
+    <v-card style="max-height: 100%; max-width: 320vh; width: auto;">
+      <v-card-actions class="float-md-right justify-end"
         ><v-btn
           class="mx-2"
           fab
           dark
           small
           color="transparent"
-          @click="hideModal()"
+          @click="hideDesignModal()"
         >
           <v-icon dark>close</v-icon>
         </v-btn></v-card-actions
@@ -29,6 +25,7 @@
       <v-card-text>
         <component
           :is="modalComponent"
+          :key="unique"
           :modal-closed="modalClosed"
           :success="success"
           :status="status"
@@ -45,7 +42,6 @@ import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
 import VerifyForm from '@/components/auth/VerifyForm.vue'
-import CreateForm from '@/components/user/CreateForm.vue'
 import Show from '@/components/Show.vue'
 export default {
   components: {
@@ -55,7 +51,6 @@ export default {
     ResendForm,
     ResetEmail,
     VerifyForm,
-    CreateForm,
     Show,
   },
   props: {
@@ -71,8 +66,8 @@ export default {
       default: '',
     },
     width: {
-      type: Number,
-      default: 500,
+      type: String,
+      default: '500',
     },
     slug: {
       type: String,
@@ -80,17 +75,28 @@ export default {
     },
     fullscreen: {
       type: Boolean,
-      default: null,
+      default: false,
       required: false,
+    },
+    transition: {
+      type: String,
+      default: 'dialog-bottom-transition',
     },
   },
   data() {
     return {
       modalClosed: false,
+      unique: null,
     }
   },
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder', 'getSlugDesign']),
+    ...mapGetters([
+      'visible',
+      'modalComponent',
+      'folder',
+      'getSlugDesign',
+      'getStyle',
+    ]),
 
     /* componentInstance() {
       if (!this.modalComponent) return
@@ -104,10 +110,13 @@ export default {
       !val && this.closeDialog()
       val && this.openDialog()
     },
+    unique() {
+      return this.getIdDesign
+    },
   },
 
   methods: {
-    ...mapActions(['hideModal']),
+    ...mapActions(['hideDesignModal']),
     // Methods to catch the modal open/close event
     closeDialog() {
       this.modalClosed = true

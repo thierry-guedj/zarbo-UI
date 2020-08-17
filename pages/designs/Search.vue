@@ -1,7 +1,20 @@
 <template>
   <section>
+    <v-btn
+      v-show="fab"
+      v-scroll="onScroll"
+      fab
+      dark
+      fixed
+      bottom
+      right
+      color="primary"
+      @click="toTop"
+    >
+      <v-icon>keyboard_arrow_up</v-icon>
+    </v-btn>
     <v-container fluid class="search-control">
-      <form @submit.prevent="search">
+      <form @submit.prevent="fetchData">
         <v-row
           class="filters d-flex justify-content-between align-items-center"
         >
@@ -14,19 +27,11 @@
               label="Order by"
               outlined
               width="250px"
-              @change="search"
+              @change="fetchData"
             ></v-select
           ></v-col>
 
           <v-col cols="auto" class="d-flex align-items-center">
-            <!-- <input
-                id="hasComments"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label class="custom-control-label" value="1" for="hasComments"
-                >Has Comments</label
-              > -->
             <v-checkbox
               id="has_comments"
               v-model="filters.has_comments"
@@ -35,18 +40,10 @@
               class="mr-3"
               true-value="1"
               false-value="0"
-              @change="search"
+              @change="fetchData"
             ></v-checkbox>
 
-            <!-- <input
-                id="hasTeam"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label class="custom-control-label" value="1" for="hasTeam"
-                >By Team</label
-              > -->
-            <v-checkbox
+           <!--  <v-checkbox
               id="has_team"
               v-model="filters.has_team"
               field="has_team"
@@ -54,31 +51,8 @@
               true-value="1"
               false-value="0"
               class="mr-3"
-              @change="search"
-            ></v-checkbox>
-
-            <!-- <div class="input-group mb-0">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn rounded primary-bg-color text-white"
-                    type="submit"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div> -->
-            <!-- <v-text-field
-                label="Search"
-                prepend-inner-icon="search" style="margin-right: 15px; max-width: 460px"
-              ><template slot="append"><base-button type="submit" color="transparent"
-                >Search</base-button
-              ></template></v-text-field
-              > -->
+              @change="fetchData"
+            ></v-checkbox> -->
           </v-col>
           <v-col>
             <v-text-field
@@ -87,7 +61,7 @@
               field="q"
               class="combobox"
               outlined
-              @input="search"
+              @input="fetchData"
             >
               <template v-slot:append>
                 <v-btn
@@ -107,17 +81,23 @@
         </v-row>
       </form>
     </v-container>
-    <v-container class="p-0 m-0">
+    <v-container class="p-0 m-0 row-designs">
       <div v-if="searching" class="loader p-0">
-        <RingLoader></RingLoader>
+        <Circle8></Circle8>
       </div>
       <div v-else class="pt-8 pl-6 pb-6 pr-6">
-        <template v-if="(!designs.length)" class="pb-6">
-          <v-alert border="left" color="#0f1219" dark>
-            No results found
+        <template v-if="(!designs.length)" class="pb-6 text-center">
+          <v-alert
+            border="left"
+            color="#0f1219"
+            dark
+            width="60%"
+            class="mx-auto deep-orange darken-4"
+          >
+            No results
           </v-alert>
         </template>
-        <template v-else>
+        <template v-else id="row-designs">
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
@@ -125,12 +105,33 @@
             justify="center"
             no-gutters
           >
+            <CoolLightBox
+              :items="itemsDesigns"
+              :index="index !== null ? parseInt(`${index}`) : index"
+              :use-zoom-bar="true"
+              :effect="'fade'"
+              @close="index = null"
+            >
+            </CoolLightBox>
+            <!-- <div class="images-wrapper"> -->
             <lazy-component
-              v-for="design in designs"
-              :key="design.id"
+              v-for="(design, i) in designs"
+              :key="`${i}-${design.id}`"
               :design="design"
+              @lightbox="index = parseInt(`${i}`)"
             ></lazy-component>
+            <!-- </div> -->
           </v-row>
+
+          <infinite-loading
+            ref="infiniteLoading"
+            slot="append"
+            :identifier="identifier"
+            spinner="ring-loader"
+            force-use-infinite-wrapper="row-designs"
+            @infinite="infiniteHandler"
+          >
+          </infinite-loading>
         </template>
       </div>
     </v-container>
@@ -140,40 +141,50 @@
       :dialog.sync="visible"
       :fullscreen="fullscreen"
       @showDesign="styleModal()"
-      @closeDialog="hideModal"
+      @closeDialog="hideModal()"
     />
-    <!-- </keep-alive> -->
-    <!-- End Modal -->
   </section>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import RingLoader from 'vue-spinner/src/RingLoader.vue'
+// import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 export default {
   name: 'Search',
-  layout: 'page2',
+  layout: 'designs-listing',
+
   components: {
-    RingLoader,
+    // RingLoader,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
+    Circle8,
+    CoolLightBox,
   },
   data() {
     return {
       designs: [],
-      searching: false,
+      searching: true,
       loader: null,
       loadingSubmit: false,
+      loaderPage: false,
       filters: {
         has_team: 0,
         has_comments: 0,
         q: '',
         orderBy: 'likes',
+        page: 0,
       },
       itemsOrderBy: [
         { title: 'Latest first', value: 'latest' },
-        { title: 'Most liked frst', value: 'likes' },
+        { title: 'Most liked first', value: 'likes' },
       ],
       fullscreen: false,
+      identifier: new Date(),
+      fab: false,
+      index: null,
+      itemsDesigns: [],
     }
   },
   computed: {
@@ -182,33 +193,82 @@ export default {
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
     },
-    ...mapGetters(['visible', 'modalComponent', 'folder']),
-  },
-  created() {
-    this.search()
-  },
-  methods: {
-    ...mapActions(['showModal', 'hideModal']),
-
-    search() {
-      this.searching = true
-      this.loadingSubmit = true
-      this.loader = 'loadingSubmit'
-      this.$axios
-        .$get(`/search/designs?${this.queryString}`)
-        .then((res) => {
-          this.designs = res.data
-          this.designs = Object.freeze(this.designs)
-        })
-        .catch((e) => console.log(e))
-        .finally(() => {
-          this.searching = false
-          this.loadingSubmit = false
-          this.loader = null
-        })
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleDesign', 'modalDesignComponent']),
+    url() {
+      return `/search/designs?${this.queryString}`
     },
+    designTitle() {
+      if (!this.design.title) return 'Sans Titre'
+      else return this.design.title
+    },
+  },
+  mounted() {
+    this.fetchData()
+  },
+
+  methods: {
+    ...mapActions(['showModal', 'hideModal', 'showDesignModal', 'hideDesignModal']),
+    async fetchData() {
+      this.identifier = new Date()
+      this.filters.page = 1
+      const response = await this.$axios.$get(this.url)
+      this.designs = response.data
+
+      this.designs.forEach((design) => {
+        this.itemsDesigns.push({
+          title: design.title === '' ? design.title : 'Sans Titre',
+          description: design.description,
+          src: design.images.large,
+        })
+      })
+
+      //  this.designs = Object.freeze(this.designs)
+      this.searching = false
+      this.filters.page += 1
+    },
+
+    infiniteHandler($state) {
+      this.$axios
+        .$get(this.url)
+        .then((response) => {
+          if (response.data.length > 1) {
+            if (this.filters.page < response.meta.last_page) {
+              response.data.forEach((item) => {
+                this.designs.push(item)
+                this.itemsDesigns.push({
+                  title: item.title === '' ? item.title : 'Sans Titre',
+                  description: item.description,
+                  src: item.images.large,
+                })
+              })
+
+              $state.loaded()
+            } else {
+              $state.loaded()
+
+              $state.complete()
+            }
+          } else {
+            $state.loaded()
+            $state.complete()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.filters.page += 1
+    },
+
     styleModal() {
       this.fullscreen = true
+    },
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
     },
   },
 }
@@ -229,5 +289,23 @@ export default {
   position: fixed;
   top: 50%;
   left: 50%;
+}
+
+.image {
+  height: 300px;
+  width: 300px;
+  display: block;
+  background-color: red;
+}
+
+body,
+html {
+  height: 100%; /* REMOVING THIS FIXES THE ISSUE */
+  scroll-behavior: smooth;
+}
+.cool-lightbox
+  .cool-lightbox__wrapper.cool-lightbox__wrapper--swipe
+  .cool-lightbox__slide {
+  opacity: 1 !important;
 }
 </style>

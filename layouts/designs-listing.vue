@@ -1,12 +1,7 @@
 <template>
   <section>
-    <v-parallax :src="backgroundUrl" height="600">
-      <div id="grad1" class="line"></div>
-      <div class="mt-18 text-center text-parallax mb-0">
-        <h1 class="teal--text text-center text--lighten-2 mb-2">Zarbo,</h1>
-        <p class="text-center">le site des arts beaux</p>
-      </div>
-    </v-parallax>
+    <!-- <v-parallax :src="backgroundUrl" height="0"></v-parallax> -->
+    <div id="grad1" class="line"></div>
     <v-app dark>
       <v-navigation-drawer
         v-model="drawer"
@@ -98,16 +93,6 @@
             icon="mdi-cloud-upload"
             >Upload</base-button
           >
-          <!--  <base-button
-            toggle-modal
-            needs-auth
-            component-name="CreateForm"
-            folder-name="user"
-            button-class="upload-button mr-2"
-            icon="mdi-cloud-upload"
-          
-            >Upload</base-button
-          > -->
         </template>
         <template v-else>
           <base-button
@@ -160,11 +145,13 @@
             ></nuxt-link
           >
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
+
           <avatar
             :username="$auth.user.name"
             class="ml-3 mr-2"
             :size="40"
           ></avatar>
+
           <v-menu
             bottom
             origin="center center"
@@ -192,12 +179,8 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-     <!--  <v-container
-        height="10"
-        class="gradientBody justify-start align-content-md-start pt-0"
-      ></v-container> -->
       <v-main>
-        <v-container class="main-container">
+        <v-container style="max-width: 100%;">
           <nuxt />
         </v-container>
       </v-main>
@@ -206,6 +189,11 @@
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
     </v-app>
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <!-- <base-modal :dialog.sync="visible" :success="false" :status="''" /> -->
+    <!-- </keep-alive> -->
+    <!-- End Modal -->
   </section>
 </template>
 
@@ -239,7 +227,7 @@ export default {
         },
       ],
       menuAccount: [
-      
+     
         {
           title: 'Your designs',
           route: 'settings.designs',
@@ -269,6 +257,7 @@ export default {
 
     ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
+
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
@@ -281,34 +270,32 @@ export default {
             nav_classes.toggle('bg-dark')
             nav_classes.toggle('bg-transparent')
           }
-        } else if (navClasses.contains('bg-transparent') === false) {
+        } else if (nav_classes.contains('bg-transparent') === false) {
           nav_classes.toggle('bg-transparent')
           nav_classes.toggle('bg-dark')
         }
       })
     })
   },
+
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     logout() {
       this.$auth.logout()
     },
+  },
 
-    goTo(to, folderName) {
-      setTimeout(
-        () => this.showModal({ componentName: to, folder: folderName }),
-        300
-      )
-    },
-
-    toTop() {
-      this.$vuetify.goTo(0)
-    },
+  toTop() {
+    this.$vuetify.goTo(0)
   },
 }
 </script>
 
 <style lang="scss" scoped>
+/* .theme--dark.v-app-bar.v-toolbar.v-sheet {
+  opacity: 0.95;
+  background-color: #0f1219;
+} */
 .gradientBody {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
@@ -327,30 +314,10 @@ export default {
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
-
-.text-parallax {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 5rem;
-}
-.slide-fade-enter-active {
-  transition: all 2s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateY(30px);
-  opacity: 0;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-}
 .theme--dark.v-application {
-  background-color: #0f1219;
+  background: #0f1219;
+}
+.v-application {
   font-family: 'Josefin Sans', sans-serif;
 
   font-size: 15px;
@@ -358,10 +325,6 @@ footer {
   transition-duration: 0.35s;
   line-height: 1.6em;
   text-rendering: optimizelegibility;
-}
-.v-toolbar__content,
-.v-toolbar__extension {
-  padding-top: 40px;
 }
 
 .theme--dark.v-navigation-drawer {
@@ -383,17 +346,58 @@ footer {
 .theme--dark.v-main {
   opacity: 0.65;
   background-color: #0f1219;
-  padding-top: 0;
 }
-
-.container {
-  max-width: 100%;
+#grad1 {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* Standard syntax (must be last) */
 }
-.v-main {
-  padding-top: 0 !important;
+.line {
+  height: 6px;
+  border-radius: 4px;
 }
-.main-container {
-  max-width: 95%;
-  border-top: 3px solid whitesmoke;
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
+  }
 }
 </style>

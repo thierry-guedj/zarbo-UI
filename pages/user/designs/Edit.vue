@@ -24,28 +24,31 @@
       <v-row>
         <v-col class="col-md-6 edit-info">
           <div v-if="design.images" class="card-body p-0 m-0">
-            <img :src="design.images.large" class="mb-4" style="
-              max-width: 100%;
-              max-height: 100vh;
-              height: auto;
-              border: 6px solid blanchedalmond;
-            " />
+            <img
+              :src="design.images.large"
+              class="mb-4"
+              style="
+                max-width: 100%;
+                max-height: 100vh;
+                height: auto;
+                border: 6px solid blanchedalmond;
+              "
+            />
           </div>
         </v-col>
         <v-col class="col-md-5 edit-info ml-2">
           <v-card flat>
             <v-card-text>
               <form class="auth-form" @submit.prevent="submit">
-               
-<v-alert
-      v-if="this.$v.form.$model.successful"
-      color="#388E3C"
-      dark
-      icon="mark_email_unread"
-      border="right"
-      :form="form"
-      >Design successfully updated</v-alert
-    >
+                <v-alert
+                  v-if="this.$v.form.$model.successful"
+                  color="#388E3C"
+                  dark
+                  icon="mark_email_unread"
+                  border="right"
+                  :form="form"
+                  >Design successfully updated</v-alert
+                >
                 <v-text-field
                   v-model.trim="$v.form.title.$model"
                   :error-messages="titleErrors"

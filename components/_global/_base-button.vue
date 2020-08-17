@@ -60,6 +60,10 @@ export default {
       type: String,
       default: 'small',
     },
+    width: {
+      type: String,
+      default: '500px',
+    },
   },
   data() {
     return {

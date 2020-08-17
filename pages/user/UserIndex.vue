@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-container fluid class="search-control">
-      <form @submit.prevent="search">
+      <form @submit.prevent="fetchData">
         <v-row
           class="filters d-flex justify-content-between align-items-center"
         >
@@ -14,7 +14,7 @@
               label="Order by"
               outlined
               width="250px"
-              @change="search"
+              @change="fetchData"
             ></v-select
           ></v-col>
 
@@ -27,31 +27,9 @@
               true-value="1"
               false-value="0"
               class="mr-3"
-              @change="search"
+              @change="fetchData"
             ></v-checkbox>
 
-            <!-- <div class="input-group mb-0">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn rounded primary-bg-color text-white"
-                    type="submit"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div> -->
-            <!-- <v-text-field
-                label="Search"
-                prepend-inner-icon="search" style="margin-right: 15px; max-width: 460px"
-              ><template slot="append"><base-button type="submit" color="transparent"
-                >Search</base-button
-              ></template></v-text-field
-              > -->
           </v-col>
           <v-col>
             <v-text-field
@@ -60,7 +38,7 @@
               field="q"
               class="combobox"
               outlined
-              @input="search"
+              @input="fetchData"
             >
               <template v-slot:append>
                 <v-btn
@@ -82,7 +60,7 @@
     </v-container>
     <v-container class="p-0 m-0">
       <div v-if="searching" class="loader p-0">
-        <RingLoader></RingLoader>
+        <Circle8></Circle8>
       </div>
       <div v-else class="pt-8 pl-6 pb-6 pr-6">
         <template v-if="(!users.length)" class="pb-6">
@@ -90,7 +68,7 @@
             No results found
           </v-alert>
         </template>
-        <template v-else>
+        <template v-else id="row-designs">
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
@@ -99,42 +77,63 @@
             no-gutters
           >
             <lazy-component
-              v-for="user in users"
-              :key="user.id"
-              :user="users"
+              v-for="(user, i) in users"
+              :key="`${i}-${user.id}`"
+              :user="user"
             ></lazy-component>
           </v-row>
+          <infinite-loading
+            ref="infiniteLoading"
+            slot="append"
+            :identifier="identifier"
+            spinner="ring-loader"
+            force-use-infinite-wrapper="row-designs"
+            @infinite="infiniteHandler"
+          >
+          </infinite-loading>
         </template>
       </div>
     </v-container>
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <base-modal
+      :dialog.sync="visible"
+      :fullscreen="fullscreen"
+      @showDesign="styleModal()"
+      @closeDialog="hideModal"
+    />
   </section>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import RingLoader from 'vue-spinner/src/RingLoader.vue'
+// import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
   name: 'Search',
   layout: 'page2',
   components: {
-    RingLoader,
+    // RingLoader,
     lazyComponent: () => import('@/components/user/UserCard.vue'),
+    Circle8,
   },
   data() {
     return {
       users: [],
-      searching: false,
+      searching: true,
       loader: null,
       loadingSubmit: false,
       filters: {
         has_team: 0,
         q: '',
+        page: 0,
       },
       itemsOrderBy: [
         { title: 'Latest first', value: 'latest' },
         { title: 'Most liked frst', value: 'likes' },
       ],
       fullscreen: false,
+      identifier: new Date(),
     }
   },
   computed: {
@@ -144,13 +143,46 @@ export default {
         .join('&')
     },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
+    url() {
+      return `/users?${this.queryString}`
+    },
   },
-  created() {
-    this.search()
+  mounted() {
+    this.fetchData()
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    search() {
+    async fetchData() {
+      this.identifier = new Date()
+      this.filters.page = 1
+      const response = await this.$axios.$get(this.url)
+      this.users = response.data
+      this.searching = false
+      this.filters.page += 1
+    },
+
+    infiniteHandler($state) {
+      console.log(this.url)
+      this.$axios
+        .$get(this.url)
+        .then((response) => {
+          if (response.data.length > 1) {
+            if(this.filters.page < response.meta.last_page) {
+response.data.forEach((item) => this.users.push(item))
+            $state.loaded()
+            } else {
+               $state.loaded()
+
+            $state.complete()
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.filters.page += 1
+    },
+    /*  search() {
       this.searching = true
       this.loadingSubmit = true
       this.loader = 'loadingSubmit'
@@ -166,7 +198,7 @@ export default {
           this.loadingSubmit = false
           this.loader = null
         })
-    },
+    }, */
     styleModal() {
       this.fullscreen = true
     },

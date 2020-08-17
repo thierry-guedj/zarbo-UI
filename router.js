@@ -7,11 +7,11 @@ const page = (path) => () =>
 
 const routes = [
   { path: '/', name: 'index', component: page('Index.vue') },
-  {
+/*   {
     path: '/login',
     name: 'login',
     component: page('auth/Login.vue'),
-  },
+  }, */
   {
     path: '/verification/verify/:id',
     name: 'verify',
@@ -32,6 +32,7 @@ const routes = [
     name: 'designs.edit',
     component: page('user/designs/Edit.vue'),
   },
+
   {
     path: '/settings',
     component: page('user/settings/Index.vue'),
@@ -88,14 +89,6 @@ const routes = [
     },
   }, */
 
-  {
-    path: '/test',
-    name: 'test',
-    component: page('test.vue'),
-    meta: {
-      layout: 'default-2',
-    },
-  },
 ]
 
 export function createRouter() {
