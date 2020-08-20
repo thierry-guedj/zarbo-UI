@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-card width="100%" class="card-design">
       <v-card-title>
-        Designs
+        {{ $t('settingsDesigns.artwork') }}
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -104,9 +104,9 @@ export default {
       search: '',
       dialog: true,
       headers: [
-        { text: 'Image', value: 'image', sortable: false, width: '15%' },
+        { text: this.$i18n.t('settingsDesigns.image'), value: 'image', sortable: false, width: '15%' },
         {
-          text: 'Title',
+          text: this.$i18n.t('settingsDesigns.title'),
           align: 'start',
           sortable: true,
           value: 'title',
@@ -117,9 +117,9 @@ export default {
           sortable: true,
           value: 'created_at_dates.created_at_human',
         }, */
-        { text: 'Status', value: 'is_live', width: '20%' },
-        { text: 'Edit', value: 'id', width: '8%' },
-        { text: 'Delete', value: 'description', width: '8%' },
+        { text: this.$i18n.t('settingsDesigns.status'), value: 'is_live', width: '20%' },
+        { text: this.$i18n.t('settingsDesigns.edit'), value: 'id', width: '8%' },
+        { text: this.$i18n.t('settingsDesigns.delete'), value: 'description', width: '8%' },
         // { text: 'Actions', value: '' },
       ],
 

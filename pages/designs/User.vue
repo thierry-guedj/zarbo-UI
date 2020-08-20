@@ -24,7 +24,7 @@
               :items="itemsOrderBy"
               item-text="title"
               item-value="value"
-              label="Order by"
+              :label="$t('search.orderBy')"
               outlined
               width="250px"
               @change="fetchData"
@@ -36,14 +36,14 @@
               id="has_comments"
               v-model="filters.has_comments"
               field="has_comments"
-              label="Has Comments"
+              :label="$t('search.hasComments')"
               class="mr-3"
               true-value="1"
               false-value="0"
               @change="fetchData"
             ></v-checkbox>
 
-          <!--   <v-checkbox
+            <!--   <v-checkbox
               id="has_team"
               v-model="filters.has_team"
               field="has_team"
@@ -73,7 +73,7 @@
                   type="submit"
                 >
                   <v-icon>mdi-magnify</v-icon>
-                  Search
+                  {{ $t('search.search') }}
                 </v-btn>
               </template>
             </v-text-field>
@@ -87,25 +87,26 @@
       </div>
       <div v-else class="pt-8 pl-6 pb-6 pr-6">
         <template v-if="(!designs.length)" class="pb-6 text-center">
-          <div class="mx-auto"><v-alert
-            border="left"
-            color="#0f1219"
-            dark
-            width="60%"
-            class="mx-auto deep-orange darken-4"
-          >
-            No results
-            <v-spacer />
-            <nuxt-link :to="{name: 'users.search'}">
-            <v-btn class="mt-3">Back to users list</v-btn>
-            </nuxt-link>
-          </v-alert></div>
-          
+          <div class="mx-auto">
+            <v-alert
+              border="left"
+              color="#0f1219"
+              dark
+              width="60%"
+              class="mx-auto deep-orange darken-4"
+            >
+              No results
+              <v-spacer />
+              <nuxt-link :to="{ name: 'users.search' }">
+                <v-btn class="mt-3">Back to users list</v-btn>
+              </nuxt-link>
+            </v-alert>
+          </div>
         </template>
         <template v-else id="row-designs">
-           <nuxt-link :to="{name: 'users.search'}">
+          <nuxt-link :to="{ name: 'users.search' }">
             <v-btn class="mt-3">Back to users list</v-btn>
-            </nuxt-link>
+          </nuxt-link>
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
@@ -147,7 +148,7 @@
       :dialog.sync="visible"
       :fullscreen="fullscreen"
       @showDesign="styleModal()"
-      @closeDialog="hideModal"
+      @closeDialog="hideModal()"
     />
     <!-- </keep-alive> -->
     <!-- End Modal -->
@@ -186,8 +187,8 @@ export default {
         page: 1,
       },
       itemsOrderBy: [
-        { title: 'Latest first', value: 'latest' },
-        { title: 'Most liked first', value: 'likes' },
+        { title: this.$i18n.t('search.latestFirst'), value: 'latest' },
+        { title: this.$i18n.t('search.mostLikedFirst'), value: 'likes' },
       ],
       fullscreen: false,
 

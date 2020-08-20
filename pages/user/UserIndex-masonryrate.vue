@@ -81,20 +81,17 @@
           </v-alert>
         </template>
         <template v-else id="row-designs">
-          <v-row
-            transition-duration="0.3s"
-            item-selector=".item"
-            class="mb-6"
-            justify="center"
-            no-gutters
-          >
-            <lazy-component
+         
+          <masonry
+  :cols="3"
+  :gutter="30"
+  >
+     <lazy-component
               v-for="(user, i) in users"
               :key="`${i}-${user.id}`"
               :user="user"
             ></lazy-component>
-          </v-row>
-          <infinite-loading
+<infinite-loading
             ref="infiniteLoading"
             slot="append"
             :identifier="identifier"
@@ -103,6 +100,7 @@
             @infinite="infiniteHandler"
           >
           </infinite-loading>
+</masonry>
         </template>
       </div>
     </v-container>
@@ -121,6 +119,7 @@
 import { mapActions, mapGetters } from 'vuex'
 // import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
+import VueMasonryWall from 'vue-masonry-wall'
 export default {
   name: 'Search',
   layout: 'designs-listing',
@@ -128,6 +127,7 @@ export default {
     // RingLoader,
     lazyComponent: () => import('@/components/user/UserCard.vue'),
     Circle8,
+    VueMasonryWall,
   },
   data() {
     return {
@@ -176,19 +176,15 @@ export default {
       this.filters.page += 1
     },
 
-    infiniteHandler($state) {
+    infiniteHandler() {
       console.log(this.url)
       this.$axios
         .$get(this.url)
         .then((response) => {
           if (response.data.length > 1) {
             if (this.filters.page < response.meta.last_page) {
-              response.data.forEach((item) => this.users.push(item))
-              $state.loaded()
+              response.data.forEach((item) => this.items.push(item))
             } else {
-              $state.loaded()
-
-              $state.complete()
             }
           }
         })

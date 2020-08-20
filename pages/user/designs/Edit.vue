@@ -138,7 +138,7 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   middleware: ['auth'],
-  layout: 'page2',
+  layout: 'designs-listing',
   components: {
     InputTag: () => import('vue-input-tag'),
   },

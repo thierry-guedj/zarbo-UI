@@ -31,20 +31,24 @@
                 <v-icon>face</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Signin</v-list-item-title>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.signin')
+                }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item
               to=""
               router
               exact
-              @click="goTo('RegisterForm', 'auth')"
+              @click.stop="goTo('RegisterForm', 'auth')"
             >
               <v-list-item-action>
                 <v-icon>brush</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Signup</v-list-item-title>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.signup')
+                }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -54,7 +58,21 @@
                 <v-icon>looks</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Your designs</v-list-item-title>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.yourDesigns')
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item to=""
+              router
+              exact @click.stop="logout()">
+              <v-list-item-action>
+                <v-icon>exit_to_app</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.signout')
+                }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -78,12 +96,14 @@
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
         <nuxt-link :to="{ name: 'designs.search' }"
-          ><v-btn small color="transparent" class="mr-2 ml-3"
-            >Artwork</v-btn
-          ></nuxt-link
+          ><v-btn small color="transparent" class="mr-2 ml-3">{{
+            $t('navbar.artwork')
+          }}</v-btn></nuxt-link
         >
         <nuxt-link :to="{ name: 'users.search' }"
-          ><v-btn small color="transparent" class="mr-2">Artists</v-btn>
+          ><v-btn small color="transparent" class="mr-2">{{
+            $t('navbar.artists')
+          }}</v-btn>
         </nuxt-link>
 
         <template v-if="$auth.loggedIn">
@@ -91,7 +111,7 @@
             to="/upload"
             button-class="upload-button mr-2"
             icon="mdi-cloud-upload"
-            >Upload</base-button
+            >{{ $t('navbar.upload') }}</base-button
           >
         </template>
         <template v-else>
@@ -101,7 +121,7 @@
             folder-name="auth"
             button-class="upload-button mr-2"
             icon="mdi-cloud-upload"
-            >Upload</base-button
+            >{{ $t('navbar.upload') }}</base-button
           >
         </template>
         <v-spacer />
@@ -120,7 +140,7 @@
             folder-name="auth"
             icon="face"
             color="transparent"
-            >Login</base-button
+            >{{ $t('navbar.signin') }}</base-button
           >
           <base-button
             toggle-modal
@@ -128,7 +148,7 @@
             folder-name="auth"
             icon="brush"
             color="transparent"
-            >Sign Up</base-button
+            >{{ $t('navbar.signup') }}</base-button
           >
         </template>
         <!-- End Before Login -->
@@ -140,8 +160,9 @@
               small
               color="transparent"
               class="mr-2 ml-3"
+           
               @click.prevent="logout"
-              >Sign Out</v-btn
+              ><v-icon right dark class="mr-2">exit_to_app</v-icon>{{ $t('navbar.signout') }}</v-btn
             ></nuxt-link
           >
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
@@ -212,24 +233,23 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: this.$i18n.t('navigationDrawer.welcome'),
           to: '/',
         },
         {
           icon: 'mdi-looks',
-          title: 'Artwork',
+          title: this.$i18n.t('navigationDrawer.artwork'),
           to: '/designs',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Artists',
+          title: this.$i18n.t('navigationDrawer.artists'),
           to: '/users',
         },
       ],
       menuAccount: [
-     
         {
-          title: 'Your designs',
+          title: this.$i18n.t('menuAccount.yourDesigns'),
           route: 'settings.designs',
         },
       ],
@@ -263,16 +283,16 @@ export default {
       this.hideModal()
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')
-        const nav_classes = navbar.classList
+        const navClasses = navbar.classList
         if (document.documentElement.scrollTop >= 100) {
-          if (nav_classes.contains('bg-dark') === false) {
+          if (navClasses.contains('bg-dark') === false) {
             console.log('scrolll')
-            nav_classes.toggle('bg-dark')
-            nav_classes.toggle('bg-transparent')
+            navClasses.toggle('bg-dark')
+            navClasses.toggle('bg-transparent')
           }
-        } else if (nav_classes.contains('bg-transparent') === false) {
-          nav_classes.toggle('bg-transparent')
-          nav_classes.toggle('bg-dark')
+        } else if (navClasses.contains('bg-transparent') === false) {
+          navClasses.toggle('bg-transparent')
+          navClasses.toggle('bg-dark')
         }
       })
     })
@@ -283,11 +303,18 @@ export default {
     logout() {
       this.$auth.logout()
     },
-  },
-
-  toTop() {
+      toTop() {
     this.$vuetify.goTo(0)
   },
+  goTo(to, folderName) {
+    setTimeout(
+      () => this.showModal({ componentName: to, folder: folderName }),
+      300
+    )
+  },
+  },
+
+
 }
 </script>
 

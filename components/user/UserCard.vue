@@ -1,11 +1,11 @@
 <template>
-  <v-col class="item" cols="12" md="auto">
+
     <!-- <v-hover v-slot:default="{ hover }"> -->
     <v-card
       :color="user.color"
       dark
       hover
-      style="max-height: 100%; max-width: 100vh; min-width: 15%;"
+      style="max-height: 100%; max-width: 100vh;"
       class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
       @click="goToUser(`${user.id}`)"
     >
@@ -43,15 +43,13 @@
           <v-card-actions class="mt-4">
             <v-spacer></v-spacer>
             <span class="mr-2 caption text-orange lighten-5"
-              >Registered {{ user.created_dates.created_at_human }}</span
+              >{{ $t('userCard.registered') }} {{ user.created_dates.created_at_human }}</span
             >
           </v-card-actions>
         </div>
       </div>
     </v-card>
-    <h6>{{ user.id }}</h6>
-    <!--   </v-hover> -->
-  </v-col>
+
 </template>
 
 <script>

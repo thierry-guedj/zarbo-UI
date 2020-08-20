@@ -1,5 +1,18 @@
 <template>
   <v-layout column justify-center align-center>
+  <v-btn
+      v-show="fab"
+      v-scroll="onScroll"
+      fab
+      dark
+      fixed
+      bottom
+      right
+      color="primary"
+      @click="toTop"
+    >
+    <v-icon>keyboard_arrow_up</v-icon>
+    </v-btn>
     <v-flex xs12 sm8 md6>
       <v-container
         height="50"
@@ -22,6 +35,7 @@
           :success="false"
           :status="''"
           :width="width"
+          @closeDialog="hideModal()"
         />
         <!-- </keep-alive> -->
         <!-- End Modal -->
@@ -54,6 +68,7 @@ export default {
   data() {
     return {
       width: '500px',
+      fab: false,
     }
   },
   computed: {
@@ -64,7 +79,18 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
-    goTo(to, folderName) {
+styleModal() {
+      this.fullscreen = false
+    },
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
+        goTo(to, folderName) {
       // this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),

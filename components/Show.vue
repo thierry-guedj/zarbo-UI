@@ -22,7 +22,7 @@
         <!-- End Single Image -->
         <div class="float-right mt-2">
           <v-btn size="large" color="deep-orange accent-2" @click="hideModal()"
-            ><v-icon>flip_to_back</v-icon>Back to designs</v-btn
+            ><v-icon>flip_to_back</v-icon>{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
         <!-- Design Comments -->
@@ -73,14 +73,14 @@
               {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0" inset></v-divider>
-            <p class="text-h6 text-left block">by {{ design.user.username }}</p>
+            <p class="text-h6 text-left block">{{ $t('show.by') }} {{ design.user.username }}</p>
             <p class="text-subtitle-1 text-left pb-3 pt-2">
               {{ design.description }}
             </p>
           </div>
           <div class="pb-2">
             <p class="text-subtitle-2 text-left">
-              Published: {{ design.created_at_dates.created_at_human }}
+              {{ $t('show.published') }} {{ design.created_at_dates.created_at_human }}
             </p>
             <DesignLike :design="design"></DesignLike>
           </div>

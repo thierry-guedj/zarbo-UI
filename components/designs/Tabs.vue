@@ -1,7 +1,7 @@
 <template>
   <v-tabs>
-    <v-tab>More from {{ user.name }}</v-tab>
-    <v-tab>Some similar</v-tab>
+    <v-tab>{{ $t('widgetTitle.moreFromUser') }} {{ user.name }}</v-tab>
+    <v-tab>{{ $t('widgetTitle.moreFromTags') }}</v-tab>
     <v-tab-item class="mx-auto">
       <more-from-user :design-id="designIdComp" :user="user"></more-from-user>
     </v-tab-item>

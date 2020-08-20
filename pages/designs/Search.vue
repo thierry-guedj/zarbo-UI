@@ -8,7 +8,7 @@
       fixed
       bottom
       right
-      color="primary"
+      color="accent"
       @click="toTop"
     >
       <v-icon>keyboard_arrow_up</v-icon>
@@ -24,7 +24,7 @@
               :items="itemsOrderBy"
               item-text="title"
               item-value="value"
-              label="Order by"
+              :label="$t('search.orderBy')"
               outlined
               width="250px"
               @change="fetchData"
@@ -36,14 +36,14 @@
               id="has_comments"
               v-model="filters.has_comments"
               field="has_comments"
-              label="Has Comments"
+              :label="$t('search.hasComments')"
               class="mr-3"
               true-value="1"
               false-value="0"
               @change="fetchData"
             ></v-checkbox>
 
-           <!--  <v-checkbox
+            <!--  <v-checkbox
               id="has_team"
               v-model="filters.has_team"
               field="has_team"
@@ -73,7 +73,7 @@
                   type="submit"
                 >
                   <v-icon>mdi-magnify</v-icon>
-                  Search
+                  {{ $t('search.search') }}
                 </v-btn>
               </template>
             </v-text-field>
@@ -177,8 +177,8 @@ export default {
         page: 0,
       },
       itemsOrderBy: [
-        { title: 'Latest first', value: 'latest' },
-        { title: 'Most liked first', value: 'likes' },
+        { title: this.$i18n.t('search.latestFirst'), value: 'latest' },
+        { title: this.$i18n.t('search.mostLikedFirst'), value: 'likes' },
       ],
       fullscreen: false,
       identifier: new Date(),
@@ -193,13 +193,9 @@ export default {
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
     },
-    ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleDesign', 'modalDesignComponent']),
+    ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
-    },
-    designTitle() {
-      if (!this.design.title) return 'Sans Titre'
-      else return this.design.title
     },
   },
   mounted() {
@@ -207,7 +203,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['showModal', 'hideModal', 'showDesignModal', 'hideDesignModal']),
+    ...mapActions(['showModal', 'hideModal']),
     async fetchData() {
       this.identifier = new Date()
       this.filters.page = 1
@@ -269,6 +265,13 @@ export default {
     },
     toTop() {
       this.$vuetify.goTo(0)
+    },
+    goTo(to, folderName) {
+      // this.hideModal()
+      setTimeout(
+        () => this.showModal({ componentName: to, folder: folderName }),
+        300
+      )
     },
   },
 }

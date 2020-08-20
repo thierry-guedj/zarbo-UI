@@ -15,7 +15,9 @@
     <v-avatar left class="avatar-is-live">
       <v-icon>mdi-checkbox-marked-circle</v-icon>
     </v-avatar>
-    {{ isLive ? 'Published' : 'Draft' }}</v-btn
+    {{
+      isLive ? $t('settingsDesigns.published') : $t('settingsDesigns.draft')
+    }}</v-btn
   >
 </template>
 
@@ -56,8 +58,8 @@ export default {
           id: parseInt(`${id}`),
           is_live: `${is_live}`,
         })
-        .then((res) => { 
-             this.isLive = !this.isLive
+        .then((res) => {
+          this.isLive = !this.isLive
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
@@ -70,6 +72,6 @@ export default {
 
 <style lang="scss" scoped>
 .avatar-is-live {
-    padding: 0;
+  padding: 0;
 }
 </style>

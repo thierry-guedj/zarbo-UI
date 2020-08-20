@@ -97,6 +97,7 @@ export default {
     '~plugins/filters.js',
     { src: '~plugins/infiniteloading', mode: 'client' },
     '~plugins/components.js',
+    { src: '~/plugins/vue-masonry-css', ssr: false },
   ],
   /*
    ** Auto import components
@@ -135,33 +136,32 @@ export default {
         code: 'fr',
         name: 'Français',
         file: 'fr-FR.js',
-      }
+      },
     ],
     lazy: true,
-  langDir: 'lang/',
+    langDir: 'lang/',
     defaultLocale: 'fr',
-   
   },
   auth: {
     strategies: {
-        local: {
-          scheme: 'refresh',
-          token: {
-            property: 'access_token',
-            maxAge: 1800,
-            // type: 'Bearer'
-          },
-          refreshToken: {
-            property: 'refresh_token',
-            data: 'refresh_token',
-            maxAge: 60 * 60 * 24 * 30
-          },
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          maxAge: 1800,
+          // type: 'Bearer'
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30,
+        },
 
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           logout: { url: '/logout', method: 'post' },
           user: { url: '/me', method: 'get', propertyName: 'data' },
-          refresh: { url: '/refresh', method: 'post' },
+          refresh: { url: '/refresh', method: 'post', propertyName: 'token' },
         },
 
         /* tokenRequired: true,
@@ -184,6 +184,7 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     treeShake: true,
     defaultAssets: false,
+
     theme: {
       dark: true,
       themes: {

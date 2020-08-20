@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h2 class="ml-3">Last published designs</h2>
+    <h2 class="ml-3">{{ $t('widgetTitle.lastPublishedDesigns') }}</h2>
     <div v-if="searching" class="loader">
       <Circle8></Circle8>
     </div>

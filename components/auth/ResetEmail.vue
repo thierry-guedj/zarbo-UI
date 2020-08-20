@@ -1,8 +1,7 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">fingerprint</i>Reset password
-      email</v-card-title
+      ><i class="material-icons md-24 mr-2">fingerprint</i>{{ $t('resetEmail.resetEmail') }}</v-card-title
     >
     <v-alert
       v-if="this.$v.form.$model.successful"
@@ -25,7 +24,7 @@
       {{ form.errors.get('emailNotVerified') }}
       <p>
         <base-link component-name="ResendForm" folder-name="auth"
-          >Resend verification email</base-link
+          >{{ $t('resetEmail.resendVerificationEmail') }}</base-link
         >
       </p>
     </v-alert>
@@ -39,10 +38,10 @@
     >
       {{ form.errors.get('email') }}
       <p class="font-14 fw-400 text-center mt-4">
-        Don't have an account yet?
+        {{ $t('resetEmail.noAccount') }}
 
         <base-link component-name="RegisterForm" folder-name="auth">
-          Create an account</base-link
+          {{ $t('resetEmail.createAccount') }}</base-link
         >
       </p>
     </v-alert>
@@ -50,7 +49,7 @@
       <v-text-field
         v-model="$v.form.email.$model"
         :error-messages="emailErrors"
-        label="E-mail"
+        :label="$t('resetEmail.email')"
         required
         @input="$v.form.email.$touch()"
         @blur="$v.form.email.$touch()"
@@ -63,14 +62,14 @@
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
         type="submit"
-        >Send password reset link</v-btn
+        >{{ $t('resetEmail.sendResetLink') }}</v-btn
       >
-      <v-btn @click="clear">clear</v-btn>
+      <v-btn @click="clear">{{ $t('resetEmail.clear') }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
-        Don't have an account yet?
+        {{ $t('resetEmail.noAccount') }}
 
         <base-link component-name="RegisterForm" folder-name="auth">
-          Create an account</base-link
+          {{ $t('resetEmail.createAccount') }}</base-link
         >
       </div>
     </template>

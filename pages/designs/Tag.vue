@@ -24,7 +24,7 @@
               :items="itemsOrderBy"
               item-text="title"
               item-value="value"
-              label="Order by"
+              :label="$t('search.orderBy')"
               outlined
               width="250px"
               @change="fetchData"
@@ -36,13 +36,13 @@
               id="has_comments"
               v-model="filters.has_comments"
               field="has_comments"
-              label="Has Comments"
+              :label="$t('search.hasComments')"
               class="mr-3"
               true-value="1"
               false-value="0"
               @change="fetchData"
             ></v-checkbox>
-           <!--  <v-checkbox
+            <!--  <v-checkbox
               id="has_team"
               v-model="filters.has_team"
               field="has_team"
@@ -72,7 +72,7 @@
                   type="submit"
                 >
                   <v-icon>mdi-magnify</v-icon>
-                  Search
+                  {{ $t('search.search') }}
                 </v-btn>
               </template>
             </v-text-field>
@@ -138,7 +138,7 @@
       :dialog.sync="visible"
       :fullscreen="fullscreen"
       @showDesign="styleModal()"
-      @closeDialog="hideModal"
+      @closeDialog="hideModal()"
     />
     <!-- </keep-alive> -->
     <!-- End Modal -->
@@ -177,8 +177,8 @@ export default {
         page: 1,
       },
       itemsOrderBy: [
-        { title: 'Latest first', value: 'latest' },
-        { title: 'Most liked first', value: 'likes' },
+        { title: this.$i18n.t('search.latestFirst'), value: 'latest' },
+        { title: this.$i18n.t('search.mostLikedFirst'), value: 'likes' },
       ],
       fullscreen: false,
       identifier: new Date(),

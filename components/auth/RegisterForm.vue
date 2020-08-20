@@ -1,7 +1,7 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">brush</i>Register</v-card-title
+      ><i class="material-icons md-24 mr-2">brush</i>{{ $t('register.register') }}</v-card-title
     >
     <v-alert
       v-if="form.errors.has('username')"
@@ -32,14 +32,14 @@
       icon="mark_email_unread"
       border="right"
       :form="form"
-      >We have sent you an email to activate your account.</v-alert
+      >{{ $t('register.emailSent') }}</v-alert
     >
     <div v-if="!this.$v.form.$model.successful">
       <v-text-field
         v-model.trim="$v.form.name.$model"
         :error-messages="nameErrors"
         :counter="35"
-        label="Name"
+        :label="$t('register.name')"
         required
         @input="$v.form.name.$touch()"
         @blur="$v.form.name.$touch()"
@@ -48,7 +48,7 @@
         v-model.trim="$v.form.username.$model"
         :error-messages="usernameErrors"
         :counter="35"
-        label="Username"
+        :label="$t('register.username')"
         required
         @input="$v.form.username.$touch()"
         @blur="$v.form.username.$touch()"
@@ -56,7 +56,7 @@
       <v-text-field
         v-model.trim="$v.form.email.$model"
         :error-messages="emailErrors"
-        label="E-mail"
+        :label="$t('register.email')"
         required
         @input="$v.form.email.$touch()"
         @blur="$v.form.email.$touch()"
@@ -64,7 +64,7 @@
       <v-text-field
         v-model.trim="$v.form.password.$model"
         :error-messages="passwordErrors"
-        label="Password"
+        :label="$t('register.password')"
         type="password"
         required
         @input="$v.form.password.$touch()"
@@ -73,7 +73,7 @@
       <v-text-field
         v-model.trim="$v.form.password_confirmation.$model"
         :error-messages="password_confirmationErrors"
-        label="Confirm password"
+        :label="$t('register.confirmPassword')"
         required
         type="password"
         @input="$v.form.password_confirmation.$touch()"
@@ -84,15 +84,15 @@
         class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
-        type="submit"
-        >submit</v-btn
+        :type="$t('register.submit')"
+        >{{ $t('register.submit') }}</v-btn
       >
-      <v-btn @click="clear">clear</v-btn>
+      <v-btn @click="clear">{{ $t('register.clear') }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
-        Already have an account?
+        {{ $t('register.haveAccount') }}
 
         <base-link component-name="LoginForm" folder-name="auth"
-          >Login</base-link
+          >{{ $t('register.login') }}</base-link
         >
       </div>
     </div>

@@ -7,8 +7,8 @@ const page = (path) => () =>
 
 const routes = [
   { path: '/', name: 'index', component: page('Index.vue') },
-  { path: '/', name: 'index___fr', component: page('Index.vue') },
-  { path: '/', name: 'index___en', component: page('Index.vue') },
+  { path: '/fr/', name: 'index___fr', component: page('Index.vue') },
+  { path: '/en/', name: 'index___en', component: page('Index.vue') },
 /*   {
     path: '/login',
     name: 'login',
@@ -55,6 +55,16 @@ const routes = [
         name: 'settings.designs',
         component: page('user/settings/Designs.vue'),
       },
+      {
+        path: 'designs/fr/',
+        name: 'settings.designs___fr',
+        component: page('user/settings/Designs.vue'),
+      },
+      {
+        path: 'designs/en/',
+        name: 'settings.designs___en',
+        component: page('user/settings/Designs.vue'),
+      },
     ],
   },
   {
@@ -63,8 +73,28 @@ const routes = [
     component: page('designs/Search.vue'),
   },
   {
+    path: '/designs/fr/',
+    name: 'designs.search___fr',
+    component: page('designs/Search.vue'),
+  },
+  {
+    path: '/designs/en/',
+    name: 'designs.search___en',
+    component: page('designs/Search.vue'),
+  },
+  {
     path: '/designs/:tag/tag',
     name: 'designs.tag',
+    component: page('designs/Tag.vue'),
+  },
+  {
+    path: '/designs/:tag/tag/fr/',
+    name: 'designs.tag___fr',
+    component: page('designs/Tag.vue'),
+  },
+  {
+    path: '/designs/:tag/tag/en/',
+    name: 'designs.tag___en',
     component: page('designs/Tag.vue'),
   },
   {
@@ -73,8 +103,28 @@ const routes = [
     component: page('designs/User.vue'),
   },
   {
+    path: '/designs/:id/user/fr/',
+    name: 'designs.user___fr',
+    component: page('designs/User.vue'),
+  },
+  {
+    path: '/designs/:id/user/en/',
+    name: 'designs.user___en',
+    component: page('designs/User.vue'),
+  },
+  {
     path: '/users',
     name: 'users.search',
+    component: page('user/UserIndex.vue'),
+  },
+  {
+    path: '/users/fr/',
+    name: 'users.search___fr',
+    component: page('user/UserIndex.vue'),
+  },
+  {
+    path: '/users/en/',
+    name: 'users.search___en',
     component: page('user/UserIndex.vue'),
   },
   /* {

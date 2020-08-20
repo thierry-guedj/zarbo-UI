@@ -1,8 +1,8 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">fingerprint</i>Reset
-      password</v-card-title
+      ><i class="material-icons md-24 mr-2">fingerprint</i>{{ $t('passwordResetForm.resetPasswordEmail') }}
+    </v-card-title
     >
     <v-card-text>
       <v-alert
@@ -33,7 +33,7 @@
       <template v-if="!this.$v.form.$model.successful">
         <v-text-field
           v-model="form.email"
-          label="E-mail"
+          :label="$t('passwordResetForm.email')"
           readonly
         ></v-text-field>
         <v-text-field

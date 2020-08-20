@@ -1,8 +1,7 @@
 <template>
   <section>
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">mark_email_read</i>Email
-      Verification</v-card-title
+      ><i class="material-icons md-24 mr-2">mark_email_read</i>{{ $t('verifyForm.emailVerification') }}</v-card-title
     >
     <v-card-text>
       <div v-if="success">
@@ -10,7 +9,7 @@
           {{ status }}
 
           <base-link component-name="LoginForm" folder-name="auth" redirect
-            >Proceed to Login</base-link
+            >{{ $t('verifyForm.proceedToLogin') }}</base-link
           >
         </v-alert>
       </div>
@@ -20,12 +19,12 @@
             {{ status }}
             <p v-if="status === 'Email address already verified'">
               <base-link component-name="LoginForm" folder-name="auth"
-                >Proceed to Login</base-link
+                >{{ $t('verifyForm.proceedToLogin') }}</base-link
               >
             </p>
             <p v-else>
               <base-link component-name="ResendForm" folder-name="auth" redirect
-                >Resend verification email</base-link
+                >{{ $t('verifyForm.resendVerificationEmail') }}</base-link
               >
             </p>
           </div>

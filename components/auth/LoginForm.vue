@@ -2,7 +2,8 @@
   <section>
     <v-form novalidate @submit.stop.prevent="submit">
       <v-card-title class="headline"
-        ><i class="material-icons md-24 mr-2">face</i>Login</v-card-title
+        ><i class="material-icons md-24 mr-2">face</i
+        >{{ $t('login.login') }}</v-card-title
       >
       <v-alert
         v-if="form.errors.has('emailNotVerified')"
@@ -14,9 +15,9 @@
       >
         {{ form.errors.get('emailNotVerified') }}
         <p>
-          <base-link component-name="Resend" folder-name="auth"
-            >Resend verification email</base-link
-          >
+          <base-link component-name="Resend" folder-name="auth">{{
+            $t('login.resendVerificationEmail')
+          }}</base-link>
         </p>
       </v-alert>
       <v-alert
@@ -29,11 +30,11 @@
       >
         {{ form.errors.get('email') }}
         <p class="font-14 fw-400 text-center mt-4">
-          Don't have an account yet?
+          {{ $t('login.noAccount') }}
 
-          <base-link component-name="RegisterForm" folder-name="auth"
-            >Create an account</base-link
-          >
+          <base-link component-name="RegisterForm" folder-name="auth">{{
+            $t('login.createAccount')
+          }}</base-link>
         </p>
       </v-alert>
       <v-alert
@@ -46,15 +47,15 @@
       >
         {{ form.errors.get('message') }}
         <p>
-          <base-link component-name="ResendForm" folder-name="auth"
-            >Resend verification email</base-link
-          >
+          <base-link component-name="ResendForm" folder-name="auth">{{
+            $t('resendVerificationEmail')
+          }}</base-link>
         </p>
       </v-alert>
       <v-text-field
         v-model="$v.form.email.$model"
         :error-messages="emailErrors"
-        label="E-mail"
+        :label="$t('login.email')"
         required
         @input="$v.form.email.$touch()"
         @blur="$v.form.email.$touch()"
@@ -63,7 +64,7 @@
         v-model="$v.form.password.$model"
         :error-messages="passwordErrors"
         :counter="8"
-        label="Password"
+        :label="$t('login.password')"
         type="password"
         required
         @input="$v.form.password.$touch()"
@@ -71,9 +72,9 @@
       ></v-text-field>
       <v-spacer class="mb-3" />
       <div class="mt-4 mb-4 clearfix">
-        <base-link component-name="ResetEmail" folder-name="auth"
-          >Forgot password?</base-link
-        >
+        <base-link component-name="ResetEmail" folder-name="auth">{{
+          $t('login.forgotPassword')
+        }}</base-link>
       </div>
       <v-btn
         class="mr-4 float-right"
@@ -81,15 +82,15 @@
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
       >
-        submit</v-btn
+        {{ $t('login.submit') }}</v-btn
       >
-      <v-btn @click="clear">clear</v-btn>
+      <v-btn @click="clear">{{ $t('login.clear') }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
-        Don't have an account yet?
+        {{ $t('login.noAccount') }}
 
-        <base-link component-name="RegisterForm" folder-name="auth"
-          >Create an account</base-link
-        >
+        <base-link component-name="RegisterForm" folder-name="auth">{{
+          $t('login.createAccount')
+        }}</base-link>
       </div>
     </v-form>
   </section>

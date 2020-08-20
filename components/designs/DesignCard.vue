@@ -17,32 +17,60 @@
 
       <div class="portfolio-item__info">
         <h3 class="portfolio-item__header">{{ designTitle }}</h3>
-        <h4 class="portfolio-item__subheader">by {{ design.user.name }}</h4>
+        <h4 class="portfolio-item__subheader">
+          {{ $t('designCard.by') }} {{ design.user.name }}
+        </h4>
         <div class="portfolio-item__links">
           <div class="portfolio-item__link-block">
-            <a
+            <v-tooltip top content-class="tooltip">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  fab
+                  dark
+                  small
+                  class="portfolio-item__link image mx-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click.stop="$emit('lightbox')"
+                >
+                  <v-icon dark>link</v-icon>
+                </v-btn>
+                <!--  <a
               class="portfolio-item__link image"
               :title="designTitle"
               @click.stop="$emit('lightbox')"
             >
               <i class="material-icons">link</i>
-            </a>
+            </a> -->
+              </template>
+              <span>Top tooltip</span>
+            </v-tooltip>
           </div>
 
           <div class="portfolio-item__link-block">
-            <a
-              class="portfolio-item__link"
-              :title="designTitle"
-              @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
-            >
-              <i class="material-icons">zoom_out_map</i>
-            </a>
+            <v-tooltip top content-class="tooltip">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  fab
+                  dark
+                  small
+                  class="portfolio-item__link image mx-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
+                >
+                  <v-icon dark>zoom_out_map</v-icon>
+                </v-btn>
+              </template>
+              <span>Top tooltip</span>
+            </v-tooltip>
           </div>
         </div>
         <v-card-actions class="mt-4">
           <v-spacer></v-spacer>
           <span class="mr-2 caption text-orange lighten-5"
-            >Uploaded {{ design.created_at_dates.created_at_human }}</span
+            >{{ $t('designCard.uploaded') }}
+            {{ design.created_at_dates.created_at_human }}</span
           >
           <span class="mr-2"
             ><v-icon class="like mr-1 text-orange lighten-1">mdi-heart</v-icon
@@ -59,7 +87,9 @@
     <!-- </v-hover> -->
     <div class="ml-3 mb-2">
       <h3 class="font-weight-medium mb-0">{{ designTitle | capitalize }}</h3>
-      <h5 class="font-weight-regular">by {{ design.user.name }}</h5>
+      <h5 class="font-weight-regular">
+        {{ $t('designCard.by') }} {{ design.user.name }}
+      </h5>
       <h6>{{ design.id }}</h6>
     </div>
   </v-col>
@@ -107,6 +137,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tooltip {
+  background-color: #0f1219;
+  color: whitesmoke;
+}
 img {
   max-width: 100%;
   height: auto;

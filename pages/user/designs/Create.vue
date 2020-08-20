@@ -11,9 +11,15 @@
           <p>An error occurred during the upload process</p>
           <p>{{ error }}</p>
         </div>
-        <slim-cropper :options="slimOptions" class="text-black">
-          <input type="file" name="image" />
-        </slim-cropper>
+        <div>
+          <slim-cropper
+            :options="slimOptions"
+            class="text-black"
+            data-did-upload="imageUpload"
+          >
+            <input type="file" name="image" />
+          </slim-cropper>
+        </div>
         <div v-if="uploading" class="text-success caption-sm mt-2">
           <i class="fas fa-spinner fa-spin"></i>
         </div>
@@ -35,7 +41,7 @@ import { mapActions } from 'vuex'
 import Slim from '@/components/slim/slim.vue'
 export default {
   middleware: ['auth'],
-  layout: 'page2',
+  layout: 'designs-listing',
   components: {
     'slim-cropper': Slim,
   },
@@ -49,12 +55,12 @@ export default {
     return {
       slimOptions: {
         service: this.slimService,
-        post: 'output',
+        post: 'input, output',
         defaultInputName: 'image',
         minSize: '800,600',
         // size: '800,600',
         label: 'Select Image...',
-        ratio: 'input',
+        ratio: 'free',
         maxFileSize: 10, // value is 2MB
         // forceType: 'jpg',
         // serviceFormat: 'file',
@@ -68,9 +74,15 @@ export default {
 
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-
+    slimInitialised(data) {
+      console.log(data)
+    },
+    imageUpload(error, data, response) {
+      console.log(error, data, response)
+    },
     slimService(formdata, failure) {
       this.uploading = true
+      console.log(formdata)
       this.$axios
         .post('/designs', formdata)
         .then((res) => {

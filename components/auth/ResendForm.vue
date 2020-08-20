@@ -1,8 +1,7 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">mark_email_unread</i>Resend
-      verification email</v-card-title
+      ><i class="material-icons md-24 mr-2">mark_email_unread</i>{{ $t('resendForm.resendVerificationEmail') }}</v-card-title
     >
     <v-alert
       v-if="form.errors.has('message')"
@@ -18,14 +17,14 @@
         class="font-14 fw-400 text-center mt-4"
       >
         <base-link component-name="LoginForm" folder-name="auth"
-          >Proceed to Login</base-link
+          >{{ $t('resendForm.proceedToLogin') }}</base-link
         >
       </p>
       <p v-else class="font-14 fw-400 text-center mt-4">
-        Don't have an account yet?
+        {{ $t('resendForm.noAccount') }}
 
         <base-link component-name="RegisterForm" folder-name="auth">
-          Create an account</base-link
+          {{ $t('resendForm.createAccount') }}</base-link
         >
       </p>
     </v-alert>
@@ -37,12 +36,12 @@
       border="right"
       :form="form"
     >
-      We have resent the verification Email</v-alert
+      {{ $t('resendForm.resentEmail') }}</v-alert
     >
     <v-text-field
       v-model="$v.form.email.$model"
       :error-messages="emailErrors"
-      label="E-mail"
+      :label="$t('resendForm.email')"
       required
       @input="$v.form.email.$touch()"
       @blur="$v.form.email.$touch()"
@@ -53,14 +52,14 @@
       :loading="loadingSubmit"
       :disabled="$v.form.$invalid"
       type="submit"
-      >submit</v-btn
+      >{{ $t('resendForm.submit') }}</v-btn
     >
     <v-btn @click="clear">clear</v-btn>
     <div class="font-14 fw-400 text-center mt-4 right">
-      Don't have an account yet?
+      {{ $t('resendForm.noAccount') }}
 
       <base-link component-name="RegisterForm" folder-name="auth">
-        Create an account</base-link
+        {{ $t('resendForm.createAccount') }}</base-link
       >
     </div>
   </v-form>
