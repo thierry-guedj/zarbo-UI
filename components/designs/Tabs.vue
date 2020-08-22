@@ -19,7 +19,7 @@
 import { mapActions, mapGetters } from 'vuex'
 // import RingLoader from 'vue-spinner/src/RingLoader.vue'
 export default {
-  name: 'Search',
+  name: 'Tabs',
   /* components: {
     RingLoader,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),

@@ -1,33 +1,36 @@
+/*
+ * Slim v5.3.1 - Image Cropping Made Easy
+ * Copyright (c) 2020 Rik Schennink - https://pqina.nl/slim
+ */
 <template>
-  <div class="slim">
-    <client-only>
-      <slot></slot>
-    </client-only>
-  </div>
+    <div class="slim">
+        <slot></slot>
+    </div>
 </template>
 
 <script>
-import Slim from './slim.module.js'
+  // Slim (place slim CSS and slim.module.js file in same folder as this file)
+  import Slim from './slim.module.js'
 
-let instance = null
+  var instance = null
 
-export default {
-  name: 'SlimCropper',
-  props: ['options'],
-  mounted() {
-    if (this.options.initialImage) {
-      const img = document.createElement('img')
-      img.setAttribute('alt', '')
-      img.src = this.options.initialImage
-      this.$el.appendChild(img)
+  export default {
+    props: ['options'],
+    name: 'slim-cropper',
+    mounted: function () {
+      if (this.options.initialImage) {
+        var img = document.createElement('img')
+        img.setAttribute('alt', '')
+        img.src = this.options.initialImage
+        this.$el.appendChild(img)
+      }
+      instance = new Slim(this.$el, this.options)
+    },
+    beforeDestroy: function () {
+      instance.destroy()
     }
-    instance = new Slim(this.$el, this.options)
-  },
-  beforeDestroy() {
-    instance.destroy()
-  },
-}
+  }
 </script>
 <style lang="css">
-@import './slim.min.css';
+    @import "./slim.min.css";
 </style>

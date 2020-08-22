@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'IsLive',
   props: {
     id: {
       type: Number,

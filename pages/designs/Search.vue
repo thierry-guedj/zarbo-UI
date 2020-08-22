@@ -85,7 +85,7 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="pt-8 pl-6 pb-6 pr-6">
+      <div v-else class="pt-8 pl-0 pb-6 pr-0">
         <template v-if="(!designs.length)" class="pb-6 text-center">
           <v-alert
             border="left"
@@ -101,7 +101,7 @@
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
-            class="mb-6"
+            class="mb-6 row-design"
             justify="center"
             no-gutters
           >
@@ -114,12 +114,16 @@
             >
             </CoolLightBox>
             <!-- <div class="images-wrapper"> -->
-            <lazy-component
-              v-for="(design, i) in designs"
-              :key="`${i}-${design.id}`"
-              :design="design"
-              @lightbox="index = parseInt(`${i}`)"
-            ></lazy-component>
+            <masonry
+              :cols="{ default: 6, 1000: 3, 700: 2, 400: 1 }"
+              :gutter="{ default: '0px', 700: '15px' }"
+              ><lazy-component
+                v-for="(design, i) in designs"
+                :key="`${i}-${design.id}`"
+                :design="design"
+                @lightbox="index = parseInt(`${i}`)"
+              ></lazy-component
+            ></masonry>
             <!-- </div> -->
           </v-row>
 
@@ -214,7 +218,7 @@ export default {
         this.itemsDesigns.push({
           title: design.title === '' ? design.title : 'Sans Titre',
           description: design.description,
-          src: design.images.large,
+          src: design.images.extralarge,
         })
       })
 
@@ -234,7 +238,7 @@ export default {
                 this.itemsDesigns.push({
                   title: item.title === '' ? item.title : 'Sans Titre',
                   description: item.description,
-                  src: item.images.large,
+                  src: item.images.extralarge,
                 })
               })
 
@@ -310,5 +314,8 @@ html {
   .cool-lightbox__wrapper.cool-lightbox__wrapper--swipe
   .cool-lightbox__slide {
   opacity: 1 !important;
+}
+.row.row-design {
+  display: contents !important;
 }
 </style>

@@ -13,7 +13,7 @@
     <section class="hero text-center mb-4 text-white">
       <v-container>
         <h1 class="font-28 fw-600 text-uppercase text-white">
-          Update Design Information
+          {{ $t('editDesign.updateDesignInfo') }}
         </h1>
       </v-container>
     </section>
@@ -53,7 +53,7 @@
                   v-model.trim="$v.form.title.$model"
                   :error-messages="titleErrors"
                   :counter="155"
-                  label="Title"
+                  :label="$t('editDesign.title')"
                   required
                   field="title"
                   outlined
@@ -66,7 +66,7 @@
                   v-model.trim="$v.form.description.$model"
                   :error-messages="descriptionErrors"
                   :counter="155"
-                  label="Description"
+                  :label="$t('editDesign.description')"
                   required
                   outlined
                   class="mb-1"
@@ -81,7 +81,7 @@
                     :tags="form.tags"
                     field="tags"
                     class="mb-1"
-                    placeholder="Tags separated by commas"
+                    :placeholder="$t('editDesign.tagsLabel')"
                     on-paste-delimiter=","
                     outlined
                   ></input-tag>
@@ -90,7 +90,7 @@
                 <template v-if="teams.length">
                   <v-checkbox
                     v-model="form.assign_to_team"
-                    label="Assign to team"
+                    :label="$t('editDesign.assignToTeam')"
                     field="assign_to_team"
                     :value="form.assign_to_team"
                   ></v-checkbox>
@@ -102,7 +102,7 @@
                     item-text="name"
                     item-value="id"
                     outlined
-                    label="Select a team"
+                    :label="$t('editDesign.selectTeam')"
                   >
                   </v-select>
                   <has-error :form="form" field="team"></has-error>
@@ -112,7 +112,7 @@
                   id="is_live"
                   v-model="form.is_live"
                   field="is_live"
-                  label="Publish this design"
+                  :label="$t('editDesign.publishDesign')"
                 ></v-checkbox>
 
                 <v-spacer class="mb-3" />
@@ -121,9 +121,9 @@
                   :loading="loadingSubmit"
                   :disabled="$v.form.$invalid"
                   type="submit"
-                  >Update design</v-btn
+                  >{{ $t('editDesign.updateDesign') }}</v-btn
                 >
-                <v-btn @click="clear">clear</v-btn>
+                <v-btn @click="clear">{{ $t('editDesign.clear') }}</v-btn>
               </form>
             </v-card-text>
           </v-card>
@@ -137,6 +137,7 @@
 // import InputTag from 'vue-input-tag'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
+  name: 'Edit',
   middleware: ['auth'],
   layout: 'designs-listing',
   components: {

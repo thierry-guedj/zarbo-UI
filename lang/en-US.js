@@ -120,4 +120,31 @@ export default {
     draft: 'Draft',
     artwork: 'Your artwork',
   },
+  editDesign: {
+    updateDesignInfo: 'Update Design Information',
+    title: 'Title',
+    description: 'Description',
+    tagsLabel: 'Tags separated by commas',
+    publishDesign: 'Publish this design',
+    updateDesign: 'Update design',
+    clear: 'Clear',
+    assignToTeam: 'Assign to team',
+    selectTeam: 'Select a team',
+    updated: 'Design successfully updated',
+  },
+  create: {
+    uploadArtwork: 'Upload an artwok',
+    selectImage: 'Select image',
+    uploadNotice:
+      'Your image dimensions must be at least 800px x 600px in size. Also the image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
+    uploadError: 'An error occurred during the upload process',
+  },
+  user: {
+    noResult: 'No result',
+    backToUsersList: 'Back to users list',
+  },
+  designCard: {
+    tooltipLightbox: '',
+    tooltipFullscreen: '',
+  },
 }

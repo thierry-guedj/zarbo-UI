@@ -121,4 +121,27 @@ export default {
     draft: 'Brouillon',
     artwork: 'Vos oeuvres',
   },
+  editDesign: {
+    updateDesignInfo: 'Modifier les informations de cette oeuvre',
+    title: 'Titre',
+    description: 'Description',
+    tagsLabel: 'Tags séparés par une virgule',
+    publishDesign: 'Publier cette oeuvre',
+    updateDesign: "Modifier l'oeuvre",
+    clear: 'Effacer',
+    assignToTeam: 'Asociée à une équipe',
+    selectTeam: 'Selectionner une équipe',
+    updated: "L'oeuvre a été modifiée avec succès",
+  },
+  create: {
+    uploadArtwork: 'Poster une oeuvre',
+    selectImage: 'Selectionnez une image',
+    uploadNotice:
+      'Les dimensions de votre image doivent être au moins de 800px sur 600px. Le poids de votre image ne doit pas dépasser 10MB.',
+    uploadError: 'Une erreur est survenue lors du téléchargement',
+  },
+  user: {
+    noResult: 'Pas de résultat',
+    backToUsersList: 'Retour à la liste des artistes',
+  },
 }

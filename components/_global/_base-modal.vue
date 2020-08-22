@@ -24,7 +24,7 @@
       >
       <v-card-text>
         <component
-          :is="modalComponent"
+          :is="componentInstance"
           :key="unique"
           :modal-closed="modalClosed"
           :success="success"
@@ -36,15 +36,16 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import LoginForm from '@/components/auth/LoginForm.vue'
+/* import LoginForm from '@/components/auth/LoginForm.vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
 import VerifyForm from '@/components/auth/VerifyForm.vue'
-import Show from '@/components/Show.vue'
+import Show from '@/components/Show.vue' */
 export default {
-  components: {
+  name: 'BaseModal',
+ /*  components: {
     LoginForm,
     RegisterForm,
     PasswordResetForm,
@@ -52,7 +53,7 @@ export default {
     ResetEmail,
     VerifyForm,
     Show,
-  },
+  }, */
   props: {
     value: {
       type: Boolean,
@@ -98,12 +99,12 @@ export default {
       'getStyle',
     ]),
 
-    /* componentInstance() {
+    componentInstance() {
       if (!this.modalComponent) return
       const name = this.modalComponent
       const folderName = this.folder
       return () => import(`@/components/${folderName}/${name}`)
-    }, */
+    },
   },
   watch: {
     visible(val) {

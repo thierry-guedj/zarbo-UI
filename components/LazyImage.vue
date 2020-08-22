@@ -3,6 +3,7 @@
 </template>
 <script>
 export default {
+  name: 'LazyImage',
   props: {
     src: { type: String, required: true },
   },

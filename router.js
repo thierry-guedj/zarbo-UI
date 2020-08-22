@@ -30,11 +30,30 @@ const routes = [
     component: page('user/designs/Create.vue'),
   },
   {
+    path: '/upload/fr/',
+    name: 'designs.upload___fr',
+    component: page('user/designs/Create.vue'),
+  },
+  {
+    path: '/upload/en/',
+    name: 'designs.upload___en',
+    component: page('user/designs/Create.vue'),
+  },
+  {
     path: '/designs/:id/edit',
     name: 'designs.edit',
     component: page('user/designs/Edit.vue'),
   },
-
+  {
+    path: '/designs/:id/edit/fr/',
+    name: 'designs.edit___fr',
+    component: page('user/designs/Edit.vue'),
+  },
+  {
+    path: '/designs/:id/edit/en/',
+    name: 'designs.edit___en',
+    component: page('user/designs/Edit.vue'),
+  },
   {
     path: '/settings',
     component: page('user/settings/Index.vue'),

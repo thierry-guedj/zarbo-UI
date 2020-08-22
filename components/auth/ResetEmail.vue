@@ -80,7 +80,7 @@
 import { required, email } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 export default {
-  name: 'ResendForm',
+  name: 'ResetEmail',
   middleware: ['guest'],
   props: {
     modalClosed: {

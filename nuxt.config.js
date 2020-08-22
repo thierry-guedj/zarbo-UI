@@ -97,7 +97,8 @@ export default {
     '~plugins/filters.js',
     { src: '~plugins/infiniteloading', mode: 'client' },
     '~plugins/components.js',
-    { src: '~/plugins/vue-masonry-css', ssr: false },
+    '~/plugins/vue-masonry-css.js',
+    { src: '~/plugins/vue-masonry', ssr: false },
   ],
   /*
    ** Auto import components
@@ -109,12 +110,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/vuetify',
-    '@nuxtjs/router',
-    '@nuxt/components',
-  ],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify', '@nuxtjs/router'],
   /*
    ** Nuxt.js modules
    */

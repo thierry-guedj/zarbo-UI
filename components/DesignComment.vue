@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'DesignComment',
   props: {
     comment: {
       type: Object,

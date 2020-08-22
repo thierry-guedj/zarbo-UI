@@ -12,6 +12,7 @@ const placeholder =
   'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 
 export default {
+  name: 'ResponsiveImage',
   props: {
     // the props required to compute `srcset` should go here
 

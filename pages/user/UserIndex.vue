@@ -122,7 +122,7 @@ import { mapActions, mapGetters } from 'vuex'
 // import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
-  name: 'Search',
+  name: 'UserIndex',
   layout: 'designs-listing',
   components: {
     // RingLoader,

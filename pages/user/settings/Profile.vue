@@ -111,6 +111,7 @@
 
 <script>
 export default {
+  name: 'Profile',
   data() {
     return {
       form: this.$vform({

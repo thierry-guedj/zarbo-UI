@@ -1,5 +1,6 @@
 <template>
-  <v-col class="item" cols="12" md="2">
+<div>
+  <!-- <v-col class="item" cols="12" md="2"> -->
     <!-- <v-hover v-slot:default="{ hover }"> -->
     <v-card
       class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
@@ -12,6 +13,8 @@
       <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.thumbnail}`"
+         min-height="240px"
+         min-width="280px"
       >
       </v-img>
 
@@ -43,7 +46,7 @@
               <i class="material-icons">link</i>
             </a> -->
               </template>
-              <span>Top tooltip</span>
+              <span>{{ $t('designCard.tooltipLightbox') }}</span>
             </v-tooltip>
           </div>
 
@@ -62,7 +65,7 @@
                   <v-icon dark>zoom_out_map</v-icon>
                 </v-btn>
               </template>
-              <span>Top tooltip</span>
+              <span>{{ $t('designCard.tooltipFullscreen') }}</span>
             </v-tooltip>
           </div>
         </div>
@@ -92,13 +95,15 @@
       </h5>
       <h6>{{ design.id }}</h6>
     </div>
-  </v-col>
+  <!-- </v-col> -->
+</div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  name: 'DesignCard',
   props: {
     design: {
       type: Object,

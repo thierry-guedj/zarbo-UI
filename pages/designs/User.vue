@@ -95,17 +95,23 @@
               width="60%"
               class="mx-auto deep-orange darken-4"
             >
-              No results
+              {{ $t('user.noResult') }}
               <v-spacer />
               <nuxt-link :to="{ name: 'users.search' }">
-                <v-btn class="mt-3">Back to users list</v-btn>
+                <v-btn class="mt-3"
+                  ><v-icon right dark class="mx-2">reply</v-icon
+                  >{{ $t('user.backToUsersList') }}</v-btn
+                >
               </nuxt-link>
             </v-alert>
           </div>
         </template>
         <template v-else id="row-designs">
           <nuxt-link :to="{ name: 'users.search' }">
-            <v-btn class="mt-3">Back to users list</v-btn>
+            <v-btn class="mt-3"
+              ><v-icon right dark class="mx-2">reply</v-icon
+              >{{ $t('user.backToUsersList') }}</v-btn
+            >
           </nuxt-link>
           <v-row
             transition-duration="0.3s"
@@ -162,7 +168,7 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 export default {
-  name: 'Search',
+  name: 'User',
   layout: 'designs-listing',
   components: {
     // RingLoader,

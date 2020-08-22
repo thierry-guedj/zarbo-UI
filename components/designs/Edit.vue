@@ -123,6 +123,7 @@
 // import InputTag from 'vue-input-tag'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
+  name: 'Edit',
   middleware: ['auth'],
   layout: 'page',
   components: {

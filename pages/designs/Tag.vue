@@ -152,7 +152,7 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 export default {
-  name: 'Search',
+  name: 'Tag',
   layout: 'designs-listing',
   components: {
     // RingLoader,

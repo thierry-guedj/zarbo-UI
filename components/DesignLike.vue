@@ -36,6 +36,7 @@ thumb_up
 
 <script>
 export default {
+  name: 'DesignLike',
   props: {
     design: {
       type: Object,

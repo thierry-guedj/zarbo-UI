@@ -2,8 +2,8 @@
   <section>
     <v-card width="60%" class="mx-auto">
       <v-card-title class="headline"
-        ><i class="material-icons md-24 mr-4">cloud_upload</i>Upload a
-        design</v-card-title
+        ><i class="material-icons md-24 mr-4">cloud_upload</i
+        >{{ $t('create.uploadArtwork') }}</v-card-title
       >
 
       <v-card-text>
@@ -26,9 +26,7 @@
       </v-card-text>
       <div class="upload-para mt-2 ml-4">
         <p class="font-14 fw-400">
-          Your image dimensions must be at least 800px x 600px in size. Also the
-          image size should be a maximum of 2MB. Please resize your file
-          accordingly before you upload.
+          {{ $t('create.uploadNotice') }}
         </p>
       </div>
     </v-card>
@@ -40,6 +38,7 @@
 import { mapActions } from 'vuex'
 import Slim from '@/components/slim/slim.vue'
 export default {
+  name: 'Create',
   middleware: ['auth'],
   layout: 'designs-listing',
   components: {
@@ -59,12 +58,13 @@ export default {
         defaultInputName: 'image',
         minSize: '800,600',
         // size: '800,600',
-        label: 'Select Image...',
+        label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10, // value is 2MB
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
+       
 
       uploading: false,
       error: '',

@@ -9,6 +9,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  name: 'BaseLink',
   props: {
     folderName: {
       type: String,

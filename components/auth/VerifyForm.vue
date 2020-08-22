@@ -37,6 +37,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  name: 'VerifyForm',
   layout: 'default',
   middleware: ['guest'],
   props: {

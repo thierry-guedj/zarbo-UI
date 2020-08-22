@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <!-- LEFT -->
-       <!--  <div id="myScrollspy" class="col-sm-3">
+        <!--  <div id="myScrollspy" class="col-sm-3">
           <v-list class="list-settings">
             <v-list-item-group>
               <v-list-item v-for="link in links" :key="link.route">
@@ -33,8 +33,9 @@
 
 <script>
 export default {
+  name: 'IndexSettings',
   middleware: ['auth'],
-  layout:"page2",
+  layout: 'designs-listing',
   data() {
     return {
       links: [
@@ -65,7 +66,8 @@ export default {
   border: 1px solid whitesmoke;
   border-radius: 6px;
 }
-.v-application--is-ltr .v-list-item__action:first-child, .v-application--is-ltr .v-list-item__icon:first-child {
+.v-application--is-ltr .v-list-item__action:first-child,
+.v-application--is-ltr .v-list-item__icon:first-child {
   margin-right: 3px;
 }
 .list-item-settings {

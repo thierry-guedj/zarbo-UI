@@ -56,7 +56,8 @@
 import { mapActions, mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
 export default {
-  layout: 'page2',
+  name: 'UserCard',
+  layout: 'designs-listing',
   components: {
     Avatar,
   },

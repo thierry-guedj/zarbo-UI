@@ -15,6 +15,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  name: 'BaseButton',
   props: {
     needsAuth: {
       type: Boolean,

@@ -1,5 +1,24 @@
 <template>
   <v-row justify="center">
+    <v-dialog v-model="confirm" max-width="290">
+      <v-card>
+        <v-card-title class="headline">Are you sure ?</v-card-title>
+
+        <v-card-text> </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="confirm = false">
+            Cancel
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="destroy(item.id)">
+            Agree
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-card width="100%" class="card-design">
       <v-card-title>
         {{ $t('settingsDesigns.artwork') }}
@@ -20,7 +39,6 @@
         class="elevation-1"
         :search="search"
       >
-
         <template v-slot:item.image="{ item }">
           <div class="px-2 my-2 align-middle">
             <v-img
@@ -33,11 +51,7 @@
 
         <template v-slot:item.is_live="{ item }">
           <div class="mr-3">
-    
-            <is-live
-              :id="item.id"
-              :is_live="item.is_live"
-            ></is-live>
+            <is-live :id="item.id" :is_live="item.is_live"></is-live>
           </div>
         </template>
         <template v-slot:item.id="{ item }">
@@ -95,8 +109,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-  middleware: ['auth'],
-  layout: 'page2',
+  name: 'Designs',
+    middleware: ['auth'],
+  layout: 'designs-listing',
   data() {
     return {
       designs: [],
@@ -104,7 +119,12 @@ export default {
       search: '',
       dialog: true,
       headers: [
-        { text: this.$i18n.t('settingsDesigns.image'), value: 'image', sortable: false, width: '15%' },
+        {
+          text: this.$i18n.t('settingsDesigns.image'),
+          value: 'image',
+          sortable: false,
+          width: '15%',
+        },
         {
           text: this.$i18n.t('settingsDesigns.title'),
           align: 'start',
@@ -117,13 +137,26 @@ export default {
           sortable: true,
           value: 'created_at_dates.created_at_human',
         }, */
-        { text: this.$i18n.t('settingsDesigns.status'), value: 'is_live', width: '20%' },
-        { text: this.$i18n.t('settingsDesigns.edit'), value: 'id', width: '8%' },
-        { text: this.$i18n.t('settingsDesigns.delete'), value: 'description', width: '8%' },
+        {
+          text: this.$i18n.t('settingsDesigns.status'),
+          value: 'is_live',
+          width: '20%',
+        },
+        {
+          text: this.$i18n.t('settingsDesigns.edit'),
+          value: 'id',
+          width: '8%',
+        },
+        {
+          text: this.$i18n.t('settingsDesigns.delete'),
+          value: 'description',
+          width: '8%',
+        },
         // { text: 'Actions', value: '' },
       ],
 
       loadingSubmit: false,
+      confirm: false,
     }
   },
   computed: {
@@ -143,6 +176,8 @@ export default {
       this.loadingSubmit = false
     },
     async destroy(id) {
+      this.confirm = true
+
       this.loading = true
       try {
         const res = await this.$axios.$delete(`/designs/${id}`)
@@ -163,7 +198,6 @@ export default {
         300
       )
     },
-   
   },
 }
 </script>
