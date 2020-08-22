@@ -1,4 +1,6 @@
-# arthouse-vuetify
+# zarbo
+## Le site des arts beaux
+Nuxt interface for https://www.zarbo.fr
 
 ## Build Setup
 
