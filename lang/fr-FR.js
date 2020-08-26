@@ -144,4 +144,8 @@ export default {
     noResult: 'Pas de résultat',
     backToUsersList: 'Retour à la liste des artistes',
   },
+  designs: {
+    backToResults: 'Retour aux résultats',
+    noResult: 'Pas de résultat',
+  },
 }

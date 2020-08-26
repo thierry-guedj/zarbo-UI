@@ -1,12 +1,13 @@
 <template>
   <section>
+    <div id="grad1" class="line"></div>
     <v-parallax :src="backgroundUrl" height="600">
-      <div id="grad1" class="line"></div>
       <div class="mt-18 text-center text-parallax mb-0">
         <h1 class="teal--text text-center text--lighten-2 mb-2">Zarbo,</h1>
         <p class="text-center">{{ $t('index.title') }}</p>
       </div>
     </v-parallax>
+
     <v-app dark>
       <v-navigation-drawer
         v-model="drawer"
@@ -41,9 +42,12 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item to=""
+            <v-list-item
+              to=""
               router
-              exact @click.stop="goTo('RegisterForm', 'auth')">
+              exact
+              @click.stop="goTo('RegisterForm', 'auth')"
+            >
               <v-list-item-action>
                 <v-icon>brush</v-icon>
               </v-list-item-action>
@@ -65,9 +69,7 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item to=""
-              router
-              exact @click.stop="logout()">
+            <v-list-item to="" router exact @click.stop="logout()">
               <v-list-item-action>
                 <v-icon>exit_to_app</v-icon>
               </v-list-item-action>
@@ -137,13 +139,13 @@
           >
         </template>
         <v-spacer />
-        <v-text-field
+        <!-- <v-text-field
           solo-inverted
           flat
           hide-details
           label="Search"
           prepend-inner-icon="search"
-        ></v-text-field>
+        ></v-text-field> -->
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
           <base-button
@@ -173,7 +175,9 @@
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-              >  <v-icon right dark class="mr-2">exit_to_app</v-icon>{{ $t('navbar.signout') }}</v-btn
+            >
+              <v-icon right dark class="mr-2">exit_to_app</v-icon
+              >{{ $t('navbar.signout') }}</v-btn
             ></nuxt-link
           >
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
@@ -213,6 +217,7 @@
         height="10"
         class="gradientBody justify-start align-content-md-start pt-0"
       ></v-container> -->
+      <div id="grad1" class="line"></div>
       <v-main>
         <v-container class="main-container">
           <nuxt />
@@ -325,6 +330,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-application a {
+  text-decoration: none;
+}
 .gradientBody {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
@@ -402,6 +410,59 @@ footer {
   padding-top: 0;
 }
 
+#grad1 {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* Standard syntax (must be last) */
+}
+.line {
+  height: 6px;
+  border-radius: 4px;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
+  }
+}
 .container {
   max-width: 100%;
 }
@@ -409,7 +470,6 @@ footer {
   padding-top: 0 !important;
 }
 .main-container {
-  max-width: 95%;
-  border-top: 1px solid whitesmoke;
+  max-width: 100%;
 }
 </style>

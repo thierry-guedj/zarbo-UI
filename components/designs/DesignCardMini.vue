@@ -1,40 +1,27 @@
 <template>
   <v-container>
     <v-card
-      fluid
+      class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
+      width="auto"
+      height="auto"
       tile
       elevation="5"
       hover
-      class="portfolio-item portfolio-effect__item portfolio-item--eff1"
+      @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
     >
       <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.thumbnail}`"
       ></v-img>
-      <v-container class="portfolio-item__info">
-        <h3 class="portfolio-item__header">{{ designTitle }}</h3>
-        <div class="portfolio-item__links">
-          <div class="portfolio-item__link-block">
-            <a
-              class="portfolio-item__link"
-              :title="designTitle"
-              @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
-            >
-              <i class="material-icons">link</i>
-            </a>
-          </div>
-
-          <div class="portfolio-item__link-block">
-            <a
-              class="portfolio-item__link"
-              :title="designTitle"
-              @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
-            >
-              <i class="material-icons">zoom_out_map</i>
-            </a>
-          </div>
-        </div>
-      </v-container>
+      <div class="portfolio-item__info">
+        <h3 class="portfolio-item__header">
+          {{ designTitle | truncate(17, '...') }}
+        </h3>
+        <h4 class="portfolio-item__subheader">
+          <span>{{ $t('designCard.by') }} {{ design.user.name }}</span>
+        </h4>
+        <!--  -->
+      </div>
     </v-card>
   </v-container>
 </template>
@@ -46,7 +33,7 @@ export default {
   props: {
     design: {
       type: Object,
-      default: null,
+      required: true,
     },
   },
   computed: {
@@ -57,10 +44,10 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-     toTop() {
+    toTop() {
       this.$vuetify.goTo(0)
     },
-       goTo(to, folderName, id, modalStyle) {
+    goTo(to, folderName, id, modalStyle) {
       // this.$emit('showDesign')
       this.toTop()
       this.hideModal()
@@ -71,13 +58,15 @@ export default {
         style: modalStyle,
       })
     },
-   
   },
-  
 }
 </script>
 
 <style lang="scss" scoped>
+.tooltip {
+  background-color: #0f1219;
+  color: whitesmoke;
+}
 .v-list-item__content {
   max-width: max-content;
 }
@@ -87,13 +76,101 @@ img {
   width: auto\9; /* ie8 */
 }
 
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.6;
+  position: absolute;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 8.1%,
+    rgba(0, 0, 0, 0.001) 15.5%,
+    rgba(0, 0, 0, 0.003) 22.5%,
+    rgba(0, 0, 0, 0.005) 29%,
+    rgba(0, 0, 0, 0.008) 35.3%,
+    rgba(0, 0, 0, 0.011) 41.2%,
+    rgba(0, 0, 0, 0.014) 47.1%,
+    rgba(0, 0, 0, 0.016) 52.9%,
+    rgba(0, 0, 0, 0.019) 58.8%,
+    rgba(0, 0, 0, 0.022) 64.7%,
+    rgba(0, 0, 0, 0.025) 71%,
+    rgba(0, 0, 0, 0.027) 77.5%,
+    rgba(0, 0, 0, 0.029) 84.5%,
+    rgba(0, 0, 0, 0.03) 91.9%,
+    rgba(0, 0, 0, 0.03) 100%
+  );
+}
+
+.theme--dark.v-card {
+  background-color: rgba(23, 22, 18, 0.85);
+
+  border: 1px none #f8b4b4;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 25.1%,
+    rgba(0, 0, 0, 0.001) 15.5%,
+    rgba(0, 0, 0, 0.003) 22.5%,
+    rgba(0, 0, 0, 0.005) 29%,
+    rgba(0, 0, 0, 0.008) 35.3%,
+    rgba(0, 0, 0, 0.011) 41.2%,
+    rgba(0, 0, 0, 0.014) 47.1%,
+    rgba(0, 0, 0, 0.016) 52.9%,
+    rgba(0, 0, 0, 0.019) 58.8%,
+    rgba(0, 0, 0, 0.022) 64.7%,
+    rgba(0, 0, 0, 0.025) 71%,
+    rgba(0, 0, 0, 0.027) 77.5%,
+    rgba(0, 0, 0, 0.029) 84.5%,
+    rgba(0, 0, 0, 0.03) 91.9%,
+    rgba(0, 0, 0, 0.03) 100%
+  );
+
+  font-size: 12px;
+  transition-property: opacity;
+  transition-duration: 0.35s;
+  line-height: 1.6em;
+  text-rendering: optimizelegibility;
+  color: #fff3e0;
+}
+
+.theme--dark.v-list-item .v-list-item__subtitle,
+.theme--dark.v-list-item .v-list-item__action-text {
+  color: #fff3e0;
+}
+.theme--dark.v-list-item.design-info {
+  color: #fff3e0 !important;
+  font-size: 0.8em !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.design-info {
+  color: #fff3e0;
+}
+.theme--dark.v-btn.v-btn--icon {
+  color: #fff3e0;
+}
+.show-btns {
+  color: rgba(255, 255, 255, 1) !important;
+}
+.v-application .headline {
+  font-size: 1.2 rem;
+}
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
 //VARIABLES
 $accent-theme-color: #7a306c;
 $accent-theme-color2: #8d909b;
 $dark-theme-color: #101010;
 $light-theme-color: #fff;
 
-$portfolio-item-width: 300px;
+$portfolio-item-width: auto;
 $portfolio-item-height: auto;
 
 $portfolio-item-info-offset: 7px;
@@ -182,11 +259,11 @@ $portfolio-link-offset: 10px;
 .portfolio-item__header {
   position: relative;
 
-  margin: 0 0 20px 0;
-  padding: 15px 0;
+  margin: 0 0 10px 0;
+  padding: 2px 0;
 
   font: {
-    size: 12px;
+    size: 16px;
   }
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -207,9 +284,9 @@ $portfolio-link-offset: 10px;
 .portfolio-item__subheader {
   position: relative;
 
-  margin: 0 0 20px 0;
-  padding: 15px 0;
-
+  margin: 0 0 2px 0;
+  padding: 5px 0 5px;
+  display: block;
   font: {
     size: 14px;
   }
@@ -238,6 +315,7 @@ $portfolio-link-offset: 10px;
   width: $portfolio-link-dimensions;
   height: $portfolio-link-dimensions;
   margin-right: $portfolio-link-offset;
+  margin-top: 3px;
 
   &:last-child {
     margin-right: 0;
@@ -283,7 +361,7 @@ $portfolio-link-offset: 10px;
   }
 
   .portfolio-item__link-block {
-    top: 20px;
+    top: 45px;
 
     opacity: 0;
   }

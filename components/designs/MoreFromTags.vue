@@ -1,14 +1,13 @@
 <template>
- <v-container v-if="searching">
+  <v-container v-if="searching">
     <div class="loader"><Circle8></Circle8></div>
   </v-container>
   <v-container v-else class="px-3">
-  <v-row class="px-3">
-    <v-col v-for="design in designs" :key="design.id" cols="12" md="6">
-      
-      <lazy-component :design="design"></lazy-component>
-    </v-col>
-  </v-row>
+    <v-row class="px-3">
+      <v-col v-for="design in designs" :key="design.id" cols="12" md="6">
+        <lazy-component :design="design"></lazy-component>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -93,29 +92,6 @@ export default {
 
     styleModal() {
       this.fullscreen = true
-    },
-
-    infiniteHandler($state) {
-      this.$axios
-        .$get(`search/designs`, {
-          params: {
-            tags: this.tags.reduce((f, s) => `[${f},${s}]`),
-          },
-        })
-        .then((response) => {
-          if (response.data.length > 1) {
-            response.data.forEach((item) => this.designs.push(item))
-
-            $state.loaded()
-          } else {
-            $state.loaded()
-            $state.complete()
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      this.filters.page = this.filters.page + 1
     },
   },
 }

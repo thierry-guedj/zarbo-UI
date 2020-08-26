@@ -6,6 +6,7 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Verify',
+  layout: 'default',
   middleware: ['guest'],
   props: {
     modalClosed: {

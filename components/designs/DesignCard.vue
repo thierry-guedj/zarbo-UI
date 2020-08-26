@@ -1,6 +1,6 @@
 <template>
-<div>
-  <!-- <v-col class="item" cols="12" md="2"> -->
+  <div>
+    <!-- <v-col class="item" cols="12" md="2"> -->
     <!-- <v-hover v-slot:default="{ hover }"> -->
     <v-card
       class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
@@ -9,19 +9,20 @@
       tile
       elevation="5"
       hover
+      @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
     >
       <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.thumbnail}`"
-         min-height="240px"
-         min-width="280px"
       >
       </v-img>
 
       <div class="portfolio-item__info">
-        <h3 class="portfolio-item__header">{{ designTitle }}</h3>
+        <h3 class="portfolio-item__header">
+          {{ designTitle | truncate(17, '...') }}
+        </h3>
         <h4 class="portfolio-item__subheader">
-          {{ $t('designCard.by') }} {{ design.user.name }}
+          <span>{{ $t('designCard.by') }} {{ design.user.name }}</span>
         </h4>
         <div class="portfolio-item__links">
           <div class="portfolio-item__link-block">
@@ -71,10 +72,7 @@
         </div>
         <v-card-actions class="mt-4">
           <v-spacer></v-spacer>
-          <span class="mr-2 caption text-orange lighten-5"
-            >{{ $t('designCard.uploaded') }}
-            {{ design.created_at_dates.created_at_human }}</span
-          >
+
           <span class="mr-2"
             ><v-icon class="like mr-1 text-orange lighten-1">mdi-heart</v-icon
             >{{ design.likes_count }}</span
@@ -91,17 +89,25 @@
     <div class="ml-3 mb-2">
       <h3 class="font-weight-medium mb-0">{{ designTitle | capitalize }}</h3>
       <h5 class="font-weight-regular">
-        {{ $t('designCard.by') }} {{ design.user.name }}
+        {{ $t('designCard.by') }}
+        <nuxt-link :to="`/designs/${design.user.id}/user`" class="text-white">
+          {{ design.user.name }}</nuxt-link
+        >
       </h5>
+      <h6>
+        <span class="mr-2 caption text-orange lighten-5"
+          >{{ $t('designCard.uploaded') }} {{ computedDate }}</span
+        >
+      </h6>
       <h6>{{ design.id }}</h6>
     </div>
-  <!-- </v-col> -->
-</div>
+    <!-- </v-col> -->
+  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
+import moment from 'moment'
 export default {
   name: 'DesignCard',
   props: {
@@ -123,6 +129,10 @@ export default {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
+    computedDate() {
+      const date = this.design.created_at_dates.created_at
+      return moment(date).format('LL')
+    },
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
@@ -142,8 +152,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) {
+  .portfolio-item__header {
+    font-size: 0.8rem;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  .portfolio-item__header {
+    font-size: 0.5rem;
+  }
+}
 .tooltip {
   background-color: #0f1219;
+  color: whitesmoke;
+}
+.v-application a {
   color: whitesmoke;
 }
 img {
@@ -334,11 +360,11 @@ $portfolio-link-offset: 10px;
 .portfolio-item__header {
   position: relative;
 
-  margin: 0 0 20px 0;
-  padding: 15px 0;
+  margin: 0 0 10px 0;
+  padding: 2px 0;
 
   font: {
-    size: 20px;
+    size: 16px;
   }
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -359,8 +385,9 @@ $portfolio-link-offset: 10px;
 .portfolio-item__subheader {
   position: relative;
 
-  margin: 0 0 20px 0;
-  padding: 15px 0;
+  margin: 0 0 2px 0;
+  padding: 5px 0 5px;
+  display: block;
 
   font: {
     size: 14px;
@@ -390,6 +417,7 @@ $portfolio-link-offset: 10px;
   width: $portfolio-link-dimensions;
   height: $portfolio-link-dimensions;
   margin-right: $portfolio-link-offset;
+  margin-top: 3px;
 
   &:last-child {
     margin-right: 0;
@@ -435,7 +463,7 @@ $portfolio-link-offset: 10px;
   }
 
   .portfolio-item__link-block {
-    top: 20px;
+    top: 45px;
 
     opacity: 0;
   }

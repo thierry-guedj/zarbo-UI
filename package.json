@@ -21,6 +21,7 @@
     "lazysizes": "^5.2.2",
     "nuxt": "^2.13.0",
     "nuxt-i18n": "^6.13.9",
+    "nuxt-moment": "^1.0.5",
     "vform": "^1.0.1",
     "vue-avatar": "^2.3.0",
     "vue-cool-lightbox": "^2.4.1",

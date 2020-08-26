@@ -8,16 +8,16 @@
       fixed
       bottom
       right
-      color="primary"
+      color="accent"
       @click="toTop"
     >
     <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
     <v-flex xs12 sm8 md6>
-      <v-container
+     <!--  <v-container
         height="50"
         class="gradientBody justify-start align-content-md-start pt-0"
-      ></v-container>
+      ></v-container> -->
       {{ $t('hello') }}
       <nuxt-link
         v-for="locale in availableLocales"

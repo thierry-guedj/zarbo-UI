@@ -63,9 +63,7 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item to=""
-              router
-              exact @click.stop="logout()">
+            <v-list-item to="" router exact @click.stop="logout()">
               <v-list-item-action>
                 <v-icon>exit_to_app</v-icon>
               </v-list-item-action>
@@ -125,13 +123,13 @@
           >
         </template>
         <v-spacer />
-        <v-text-field
+        <!--   <v-text-field
           solo-inverted
           flat
           hide-details
           label="Search"
           prepend-inner-icon="search"
-        ></v-text-field>
+        ></v-text-field> -->
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
           <base-button
@@ -160,9 +158,9 @@
               small
               color="transparent"
               class="mr-2 ml-3"
-           
               @click.prevent="logout"
-              ><v-icon right dark class="mr-2">exit_to_app</v-icon>{{ $t('navbar.signout') }}</v-btn
+              ><v-icon right dark class="mr-2">exit_to_app</v-icon
+              >{{ $t('navbar.signout') }}</v-btn
             ></nuxt-link
           >
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
@@ -303,18 +301,16 @@ export default {
     logout() {
       this.$auth.logout()
     },
-      toTop() {
-    this.$vuetify.goTo(0)
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
+    goTo(to, folderName) {
+      setTimeout(
+        () => this.showModal({ componentName: to, folder: folderName }),
+        300
+      )
+    },
   },
-  goTo(to, folderName) {
-    setTimeout(
-      () => this.showModal({ componentName: to, folder: folderName }),
-      300
-    )
-  },
-  },
-
-
 }
 </script>
 
@@ -323,6 +319,9 @@ export default {
   opacity: 0.95;
   background-color: #0f1219;
 } */
+.v-application a {
+  text-decoration: none;
+}
 .gradientBody {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;

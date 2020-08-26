@@ -1,6 +1,6 @@
 <template>
   <div v-if="$fetchState.pending" class="loader">
-    <GoogleSpin></GoogleSpin>
+    <Circle8></Circle8>
   </div>
   <div v-else class="pt-6 pl-6">
     <v-row class="row-md-12">
@@ -73,14 +73,17 @@
               {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0" inset></v-divider>
-            <p class="text-h6 text-left block">{{ $t('show.by') }} {{ design.user.username }}</p>
+            <p class="text-h6 text-left block">
+              {{ $t('show.by') }} {{ design.user.username }}
+            </p>
             <p class="text-subtitle-1 text-left pb-3 pt-2">
               {{ design.description }}
             </p>
           </div>
           <div class="pb-2">
             <p class="text-subtitle-2 text-left">
-              {{ $t('show.published') }} {{ design.created_at_dates.created_at_human }}
+              {{ $t('show.published') }}
+              {{ design.created_at_dates.created_at_human }}
             </p>
             <DesignLike :design="design"></DesignLike>
           </div>
@@ -110,7 +113,7 @@
               <v-divider class="mx-0 pb-3 pt-6"></v-divider>
             </div>
             <!-- End Designs Tags -->
-
+         
             <!-- Designer info -->
             <div class="white-bg-color">
               <v-avatar class="float-left mr-3" href="#">
@@ -118,7 +121,8 @@
               </v-avatar>
               <div class="modal-user-detail ml-2">
                 <h1 class="font-13 fw-500">
-                  <v-btn text
+                  <v-btn
+                    text
                     size="large"
                     color="whitesmoke"
                     @click="goToUser(`${design.user.id}`)"
@@ -145,7 +149,7 @@
             <!-- End Designer info -->
             <v-divider class="mt-6 mb-6"></v-divider>
             <!-- Designer Design Info -->
-<!-- <vue-goodshare></vue-goodshare>
+            <!-- <vue-goodshare></vue-goodshare>
  <v-divider class="mt-6 mb-6"></v-divider> -->
             <!-- <ul class="details-side-meta font-14 fw-400 mx-0">
               <li class="d-table w-100 mt-3">
@@ -164,7 +168,6 @@
               ></tabs>
             </v-card>
             <!-- End Designer More Designs -->
-            
           </div>
           <!-- <VueSocialSharing></VueSocialSharing> -->
         </v-card-text>
@@ -178,19 +181,19 @@
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
 // const Circle8 = require('vue-loading-spinner/src/components/Circle8.vue')
-// import { Circle8 } from 'vue-loading-spinner/src/components/Circle8.vue'
-import RingLoader from 'vue-spinner/src/RingLoader.vue'
+import { Circle8 } from 'vue-loading-spinner/src/components/Circle8.vue'
+// import RingLoader from 'vue-spinner/src/RingLoader.vue'
 // import VueGoodshare from 'vue-goodshare'
 // import SocialSharing from 'vue-social-sharing'
-import GoogleSpin from 'vue-loading-spinner/src/components/Circle8.vue'
+// import GoogleSpin from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
   name: 'Show',
   components: {
-    RingLoader,
+    // RingLoader,
     // VueGoodshare,
     // SocialSharing,
-    // Circle8,
-    GoogleSpin,
+    Circle8,
+    // GoogleSpin,
   },
   async fetch() {
     const url = `/designs/${this.designId}`
@@ -199,7 +202,7 @@ export default {
     this.comments = response.data.comments
     this.user = response.data.user
     this.images = response.data.images
-    console.log(this.design)
+   
   },
 
   data() {
@@ -233,7 +236,6 @@ export default {
       this.designId = val
       this.toTop()
       this.fetchData()
-      
     },
   },
   methods: {
@@ -270,9 +272,9 @@ export default {
       this.comments = response.data.comments
       console.log(this.design)
     },
-     toTop() {
-     window.scrollTo(0,0);
-  },
+    toTop() {
+      window.scrollTo(0, 0)
+    },
   },
 }
 </script>

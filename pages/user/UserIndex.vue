@@ -8,7 +8,7 @@
       fixed
       bottom
       right
-      color="primary"
+      color="accent"
       @click="toTop"
     >
       <v-icon>keyboard_arrow_up</v-icon>
@@ -70,11 +70,11 @@
         </v-row>
       </form>
     </v-container>
-    <v-container class="p-0 m-0">
+    <v-container class="p-0 m-0 row-designs">
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="pt-8 pl-6 pb-6 pr-6">
+       <div v-else class="pt-8 pl-0 pb-6 pr-0">
         <template v-if="(!users.length)" class="pb-6">
           <v-alert border="left" color="#0f1219" dark>
             No results found
@@ -84,7 +84,7 @@
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
-            class="mb-6"
+            class="mb-6 row-design"
             justify="center"
             no-gutters
           >
@@ -136,7 +136,7 @@ export default {
       loader: null,
       loadingSubmit: false,
       filters: {
-        has_team: 0,
+        // has_team: 0,
         q: '',
         orderBy: 'latest',
         page: 0,
@@ -177,19 +177,23 @@ export default {
     },
 
     infiniteHandler($state) {
-      console.log(this.url)
+    
       this.$axios
         .$get(this.url)
         .then((response) => {
-          if (response.data.length > 1) {
-            if (this.filters.page < response.meta.last_page) {
+          if (response.data.length > 0) {
+             if (response.meta.current_page <= response.meta.last_page) {
               response.data.forEach((item) => this.users.push(item))
-              $state.loaded()
+                
+          $state.loaded()
             } else {
               $state.loaded()
 
               $state.complete()
             }
+          } else {
+            $state.loaded()
+            $state.complete()
           }
         })
         .catch((err) => {
@@ -237,6 +241,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-application a {
+  text-decoration: none;
+}
 .v-select__selections input {
   display: none;
 }
@@ -252,4 +259,8 @@ export default {
   top: 50%;
   left: 50%;
 }
+.col-md-2 {
+  padding: 0;
+}
+
 </style>

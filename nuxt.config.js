@@ -120,6 +120,7 @@ export default {
     '@nuxtjs/auth',
     'vue-social-sharing/nuxt',
     'nuxt-i18n',
+    'nuxt-moment',
   ],
   i18n: {
     locales: [

@@ -9,7 +9,7 @@
     rounded
     @click.native="
       loadingSubmit = true
-      toggleIsLive(is_live, id)
+      toggleIsLive(isLive, id)
     "
   >
     <v-avatar left class="avatar-is-live">
@@ -29,35 +29,35 @@ export default {
       type: Number,
       default: null,
     },
-    is_live: {
+    isLive: {
       type: Boolean,
-      default: 0,
+      default: false,
     },
   },
   data() {
     return {
       loadingSubmit: false,
-      isLive: this.is_live,
+      // isLive: this.is_live,
     }
   },
   methods: {
-    getColor(is_live) {
-      if (is_live) return 'green'
+    getColor(isLive) {
+      if (isLive) return 'green'
       else return 'orange'
     },
-    async toggleIsLive(is_live, id) {
+    async toggleIsLive(isLive, id) {
       this.loadingSubmit = true
       const url = `/designs/${id}/updateIsLive`
-      if (is_live === true) is_live = 0
-      else if (is_live === false) is_live = 1
-      else is_live = 0
-      console.log(is_live)
+      if (isLive === true) isLive = 0
+      else if (isLive === false) isLive = 1
+      else isLive = 0
+      console.log(isLive)
       this.loader = 'loadingSubmit'
 
       await this.$axios
         .put(url, {
           id: parseInt(`${id}`),
-          is_live: `${is_live}`,
+          isLive: `${isLive}`,
         })
         .then((res) => {
           this.isLive = !this.isLive
@@ -65,6 +65,7 @@ export default {
         .catch((err) => console.log(err.response))
         .finally(() => {
           this.loadingSubmit = false
+          this.$emit('isLiveToggle')
         })
     },
   },

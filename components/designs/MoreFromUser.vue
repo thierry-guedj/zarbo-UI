@@ -2,11 +2,32 @@
   <v-container v-if="searching">
     <div class="loader"><Circle8></Circle8></div>
   </v-container>
-  <v-container v-else class="px-3">
-    <v-row>
-      <v-col v-for="design in designs" :key="design.id" cols="12" md="6">
-        <lazy-component :design="design"></lazy-component>
-      </v-col>
+  <v-container v-else class="px-2">
+    <v-row
+      transition-duration="0.3s"
+      item-selector=".item"
+      class="mb-6 row-design"
+      justify="center"
+      no-gutters
+    >
+      <CoolLightBox
+        :items="itemsDesigns"
+        :index="index !== null ? parseInt(`${index}`) : index"
+        :use-zoom-bar="true"
+        :effect="'fade'"
+        @close="index = null"
+      >
+      </CoolLightBox>
+      <masonry
+        :cols="{ default: 2, 1000: 1, 700: 1, 400: 1 }"
+        :gutter="{ default: '0px', 700: '10px' }"
+        ><lazy-component
+          v-for="(design, i) in designs"
+          :key="`${i}-${design.id}`"
+          :design="design"
+          @lightbox="index = parseInt(`${i}`)"
+        ></lazy-component
+      ></masonry>
     </v-row>
   </v-container>
 </template>
@@ -123,5 +144,28 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
+}
+.col-md-2 {
+  padding: 0;
+}
+.image {
+  height: 300px;
+  width: 300px;
+  display: block;
+  background-color: red;
+}
+
+body,
+html {
+  height: 100%; /* REMOVING THIS FIXES THE ISSUE */
+  scroll-behavior: smooth;
+}
+.cool-lightbox
+  .cool-lightbox__wrapper.cool-lightbox__wrapper--swipe
+  .cool-lightbox__slide {
+  opacity: 1 !important;
+}
+.row.row-design {
+  display: contents !important;
 }
 </style>

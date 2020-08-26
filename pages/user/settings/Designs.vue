@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="confirm" max-width="290">
+ <!--    <v-dialog v-model="confirm" max-width="290">
       <v-card>
         <v-card-title class="headline">Are you sure ?</v-card-title>
 
@@ -13,12 +13,12 @@
             Cancel
           </v-btn>
 
-          <v-btn color="green darken-1" text @click="destroy(item.id)">
+          <v-btn color="green darken-1" text @click="confirm = true">
             Agree
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
     <v-card width="100%" class="card-design">
       <v-card-title>
         {{ $t('settingsDesigns.artwork') }}
@@ -34,10 +34,14 @@
       <v-data-table
         :loading="loading"
         :headers="headers"
-        :items="designs"
-        :items-per-page="5"
-        class="elevation-1"
+        :items="indexedItems"
         :search="search"
+        sort-by="calories"
+        class="elevation-1"
+        :items-per-page="5"
+        item-key="id"
+        :options.sync="options"
+      :server-items-length="totalDesigns"
       >
         <template v-slot:item.image="{ item }">
           <div class="px-2 my-2 align-middle">
@@ -48,57 +52,68 @@
             ></v-img>
           </div>
         </template>
-
-        <template v-slot:item.is_live="{ item }">
-          <div class="mr-3">
-            <is-live :id="item.id" :is_live="item.is_live"></is-live>
-          </div>
+        <template v-slot:item.title="props">
+          <v-edit-dialog
+            :return-value.sync="props.item.title"
+            @save="save"
+            @cancel="cancel"
+            @open="open"
+            @close="close"
+          >
+            {{ props.item.title }}
+            <template v-slot:input>
+              <v-text-field
+                v-model="props.item.title"
+                :rules="[max25chars]"
+                label="Edit"
+                single-line
+                counter
+              ></v-text-field>
+            </template>
+          </v-edit-dialog>
         </template>
-        <template v-slot:item.id="{ item }">
-          <div class="ml-3 float-right">
-            <nuxt-link :to="{ name: 'designs.edit', params: { id: item.id } }"
-              ><v-btn
-                class="my-2 align-middle"
-                fab
-                dark
-                small
-                color="transparent"
-              >
-                <v-icon dark>edit</v-icon></v-btn
-              >
-            </nuxt-link>
-          </div>
-        </template>
-        <template v-slot:item.description="{ item }">
-          <div class="ml-3 float-right">
-            <v-btn
-              class="my-2 align-middle"
-              fab
-              dark
-              small
-              color="transparent"
-              @click.native="destroy(item.id)"
-            >
-              <v-icon dark>delete_forever</v-icon></v-btn
-            >
-          </div>
+        <!-- <template v-slot:item.iron="props">
+        <v-edit-dialog
+          :return-value.sync="props.item.iron"
+          large
+          persistent
+          @save="save"
+          @cancel="cancel"
+          @open="open"
+          @close="close"
+        >
+          <div>{{ props.item.iron }}</div>
+          <template v-slot:input>
+            <div class="mt-4 title">Update Iron</div>
+          </template>
+          <template v-slot:input>
+            <v-text-field
+              v-model="props.item.iron"
+              :rules="[max25chars]"
+              label="Edit"
+              single-line
+              counter
+              autofocus
+            ></v-text-field>
+          </template>
+        </v-edit-dialog>
+      </template> -->
+        <template v-slot:item.actions="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon>
+          <v-icon small @click="deleteItem(item)">
+            mdi-delete
+          </v-icon>
         </template>
       </v-data-table>
     </v-card>
-    <v-snackbar
-      :value="visibleSnackbar"
-      class="v-snackbar"
-      multi-line
-      timeout="2000"
-      color="teal darken-4"
-      top
-      vertical
-      @input="hideSnackbar()"
-      @close="hideSnackbar()"
-    >
-      Your design has been deleted
+
+    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+      {{ snackText }}
+
       <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="hideSnackbar()">
+        <v-btn v-bind="attrs" text @click="snack = false">
           Close
         </v-btn>
       </template>
@@ -110,14 +125,16 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Designs',
-    middleware: ['auth'],
+  middleware: ['auth'],
   layout: 'designs-listing',
   data() {
     return {
+      totalDesigns: 0,
       designs: [],
       loading: true,
+        options: {},
       search: '',
-      dialog: true,
+      dialog: false,
       headers: [
         {
           text: this.$i18n.t('settingsDesigns.image'),
@@ -128,7 +145,7 @@ export default {
         {
           text: this.$i18n.t('settingsDesigns.title'),
           align: 'start',
-          sortable: true,
+          sortable: false,
           value: 'title',
         },
         /* {
@@ -142,7 +159,8 @@ export default {
           value: 'is_live',
           width: '20%',
         },
-        {
+        { text: 'Actions', value: 'actions', sortable: false },
+        /* {
           text: this.$i18n.t('settingsDesigns.edit'),
           value: 'id',
           width: '8%',
@@ -151,17 +169,41 @@ export default {
           text: this.$i18n.t('settingsDesigns.delete'),
           value: 'description',
           width: '8%',
-        },
+        }, */
         // { text: 'Actions', value: '' },
       ],
 
       loadingSubmit: false,
       confirm: false,
+     snack: false,
+        snackColor: '',
+        snackText: '',
+        max25chars: v => v.length <= 25 || 'Input too long!',
+        pagination: {},
     }
   },
+  watch: {
+      options: {
+        handler () {
+          this.getDataFromApi()
+            .then(data => {
+              this.designs = data.items
+              this.totalDesigns = data.total
+            })
+        },
+        deep: true,
+      },
+    },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
+    indexedItems() {
+      return this.designs.map((design, index) => ({
+        id: index,
+        ...design,
+      }))
+    },
   },
+
   created() {
     this.fetchUserDesigns()
     console.log(this.designs)
@@ -176,20 +218,41 @@ export default {
       this.loadingSubmit = false
     },
     async destroy(id) {
-      this.confirm = true
-
-      this.loading = true
-      try {
-        const res = await this.$axios.$delete(`/designs/${id}`)
-      } catch (err) {
-        console.log(err)
-      } finally {
-        await this.fetchUserDesigns()
-        this.showSnackbar()
-        this.loading = false
+      if (this.confirm === true) {
+        this.loading = true
+        try {
+          const res = await this.$axios.$delete(`/designs/${id}`)
+        } catch (err) {
+          console.log(err)
+        } finally {
+          await this.fetchUserDesigns()
+          this.showSnackbar()
+          this.loading = false
+        }
       }
     },
-
+    save() {
+      this.snack = true
+      this.snackColor = 'success'
+      this.snackText = 'Data saved'
+    },
+    cancel() {
+      this.snack = true
+      this.snackColor = 'error'
+      this.snackText = 'Canceled'
+    },
+    open() {
+      this.snack = true
+      this.snackColor = 'info'
+      this.snackText = 'Dialog opened'
+    },
+    close() {
+      console.log('Dialog closed')
+    },
+    updateIsLive() {
+      // this.designs[id].is_live = !this.designs[id].is_live
+      console.log('emit ok')
+    },
     ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
     goTo(to, folderName) {
       this.hideModal()

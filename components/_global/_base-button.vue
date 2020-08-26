@@ -115,4 +115,10 @@ export default {
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
+.theme--dark.v-btn {
+  text-decoration: none;
+}
+.v-application a {
+  text-decoration: none;
+}
 </style>

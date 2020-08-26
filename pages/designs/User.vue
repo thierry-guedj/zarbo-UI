@@ -8,7 +8,7 @@
       fixed
       bottom
       right
-      color="primary"
+      color="accent"
       @click="toTop"
     >
       <v-icon>keyboard_arrow_up</v-icon>
@@ -61,6 +61,7 @@
               field="q"
               class="combobox"
               outlined
+              placeholder="rechercher dans les titres et les descriptions"
               @input="fetchData"
             >
               <template v-slot:append>
@@ -85,15 +86,15 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="pt-8 pl-6 pb-6 pr-6">
+      <div v-else class="pt-8 pl-0 pb-6 pr-0">
         <template v-if="(!designs.length)" class="pb-6 text-center">
           <div class="mx-auto">
             <v-alert
               border="left"
-              color="#0f1219"
+              color="accent"
               dark
               width="60%"
-              class="mx-auto deep-orange darken-4"
+              class="mx-auto"
             >
               {{ $t('user.noResult') }}
               <v-spacer />
@@ -116,7 +117,7 @@
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
-            class="mb-6"
+            class="mb-6 row-design"
             justify="center"
             no-gutters
           >
@@ -128,12 +129,16 @@
               @close="index = null"
             >
             </CoolLightBox>
-            <lazy-component
-              v-for="(design, i) in designs"
-              :key="`${i}-${design.id}`"
-              :design="design"
-              @lightbox="index = parseInt(`${i}`)"
-            ></lazy-component>
+            <masonry
+              :cols="{ default: 6, 1400: 4, 1000: 3, 700: 2, 400: 1 }"
+              :gutter="{ default: '0px', 700: '15px' }"
+              ><lazy-component
+                v-for="(design, i) in designs"
+                :key="`${i}-${design.id}`"
+                :design="design"
+                @lightbox="index = parseInt(`${i}`)"
+              ></lazy-component
+            ></masonry>
           </v-row>
 
           <infinite-loading
@@ -223,6 +228,8 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     async fetchData() {
+      this.itemsDesigns = []
+      this.searching = true
       this.identifier = new Date()
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)
@@ -232,7 +239,7 @@ export default {
         this.itemsDesigns.push({
           title: design.title === '' ? design.title : 'Sans Titre',
           description: design.description,
-          src: design.images.large,
+          src: design.images.extralarge,
         })
       })
       this.searching = false
@@ -242,14 +249,14 @@ export default {
       this.$axios
         .$get(this.url)
         .then((response) => {
-          if (response.data.length > 1) {
-            if (this.filters.page < response.meta.last_page) {
-              response.data.forEach((item) => this.designs.push(item))
-              this.designs.forEach((design) => {
+          if (response.data.length > 0) {
+            if (response.meta.current_page <= response.meta.last_page) {
+              response.data.forEach((itemData) => {
+                this.designs.push(itemData)
                 this.itemsDesigns.push({
-                  title: design.title === '' ? design.title : 'Sans Titre',
-                  description: design.description,
-                  src: design.images.large,
+                  title: itemData.title === '' ? itemData.title : 'Sans Titre',
+                  description: itemData.description,
+                  src: itemData.images.extralarge,
                 })
               })
               $state.loaded()
@@ -317,5 +324,8 @@ html {
   .cool-lightbox__wrapper.cool-lightbox__wrapper--swipe
   .cool-lightbox__slide {
   opacity: 1 !important;
+}
+.row.row-design {
+  display: contents !important;
 }
 </style>

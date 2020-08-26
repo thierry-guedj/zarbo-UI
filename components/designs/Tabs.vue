@@ -25,7 +25,7 @@ export default {
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
   }, */
   components: {
-     lazyComponent: () => import('@/components/designs/MoreFromTags.vue'),
+    lazyComponent: () => import('@/components/designs/MoreFromTags.vue'),
   },
   props: {
     user: {
@@ -127,6 +127,9 @@ img {
   max-width: 100%;
   height: auto;
   width: auto\9; /* ie8 */
+}
+.v-tab {
+  font-size: 0.575rem;
 }
 .v-tab--active.v-tab:not(:focus)::before {
   color: whitesmoke !important;

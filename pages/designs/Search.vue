@@ -61,6 +61,7 @@
               field="q"
               class="combobox"
               outlined
+              placeholder="rechercher dans les titres et les descriptions"
               @input="fetchData"
             >
               <template v-slot:append>
@@ -94,10 +95,23 @@
             width="60%"
             class="mx-auto deep-orange darken-4"
           >
-            No results
+            {{ $t('designs.noResult') }}
+            <v-spacer />
+            <nuxt-link :to="{ name: 'designs.search' }">
+              <v-btn class="mt-3"
+                ><v-icon right dark class="mx-2">reply</v-icon
+                >{{ $t('designs.backToResults') }}</v-btn
+              >
+            </nuxt-link>
           </v-alert>
         </template>
         <template v-else id="row-designs">
+          <!-- <nuxt-link :to="{ name: 'users.search' }">
+            <v-btn class="mt-3"
+              ><v-icon right dark class="mx-2">reply</v-icon
+              >{{ $t('designs.backToResults') }}</v-btn
+            >
+          </nuxt-link> -->
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
@@ -113,9 +127,8 @@
               @close="index = null"
             >
             </CoolLightBox>
-            <!-- <div class="images-wrapper"> -->
             <masonry
-              :cols="{ default: 6, 1000: 3, 700: 2, 400: 1 }"
+              :cols="{ default: 6, 1400: 4, 1000: 3, 700: 2, 400: 1 }"
               :gutter="{ default: '0px', 700: '15px' }"
               ><lazy-component
                 v-for="(design, i) in designs"
@@ -124,7 +137,6 @@
                 @lightbox="index = parseInt(`${i}`)"
               ></lazy-component
             ></masonry>
-            <!-- </div> -->
           </v-row>
 
           <infinite-loading
@@ -209,6 +221,8 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     async fetchData() {
+      this.itemsDesigns = []
+      this.searching = true
       this.identifier = new Date()
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)
@@ -231,14 +245,14 @@ export default {
       this.$axios
         .$get(this.url)
         .then((response) => {
-          if (response.data.length > 1) {
-            if (this.filters.page < response.meta.last_page) {
-              response.data.forEach((item) => {
-                this.designs.push(item)
+          if (response.data.length > 0) {
+            if (response.meta.current_page <= response.meta.last_page) {
+              response.data.forEach((itemData) => {
+                this.designs.push(itemData)
                 this.itemsDesigns.push({
-                  title: item.title === '' ? item.title : 'Sans Titre',
-                  description: item.description,
-                  src: item.images.extralarge,
+                  title: itemData.title === '' ? itemData.title : 'Sans Titre',
+                  description: itemData.description,
+                  src: itemData.images.extralarge,
                 })
               })
 
@@ -282,6 +296,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-application a {
+  text-decoration: none;
+}
 .v-select__selections input {
   display: none;
 }
@@ -297,7 +314,9 @@ export default {
   top: 50%;
   left: 50%;
 }
-
+.col-md-2 {
+  padding: 0;
+}
 .image {
   height: 300px;
   width: 300px;

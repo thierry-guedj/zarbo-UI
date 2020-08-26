@@ -156,10 +156,11 @@ export default {
       },
     },
   },
+ 
 
   async asyncData({ $axios, params, error, redirect }) {
     try {
-      const design = await $axios.$get(`/designs/${params.id}/byUser`)
+      const design = await $axios.$get(`/designs/${params.id}/edit`)
       const teams = await $axios.$get(`/users/teams`)
 
       return { design: design.data, teams: teams.data }
@@ -240,7 +241,7 @@ export default {
         .then((res) => {
           setTimeout(() => {
             this.$router.push({ name: 'settings.designs' })
-          }, 4000)
+          }, 1000)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {

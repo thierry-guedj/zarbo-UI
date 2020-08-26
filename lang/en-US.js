@@ -38,6 +38,8 @@ export default {
   designCard: {
     by: 'by',
     uploaded: 'Published date: ',
+    tooltipLightbox: '',
+    tooltipFullscreen: '',
   },
   userCard: {
     registered: 'Registered',
@@ -143,8 +145,8 @@ export default {
     noResult: 'No result',
     backToUsersList: 'Back to users list',
   },
-  designCard: {
-    tooltipLightbox: '',
-    tooltipFullscreen: '',
+  designs: {
+    backToResults: 'Back to results',
+    noResult: 'No result',
   },
 }
