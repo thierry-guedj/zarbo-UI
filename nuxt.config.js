@@ -204,5 +204,9 @@ export default {
     extend(config, { isClient, isDev, loaders: { vue } }) {
       vue.transformAssetUrls.LazyImage = ['src']
     },
+    // SDU: This will be fixed in future versions of nuxt https://github.com/nuxt/nuxt.js/issues/7703
+    filenames: {
+      chunk: ({ isDev }) => (isDev ? 'c[name].js' : 'c[id].[contenthash].js'),
+    },
   },
 }
