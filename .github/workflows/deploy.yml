@@ -28,11 +28,9 @@ jobs:
         host: ${{ secrets.ZARBO_HOST }}
         key: ${{ secrets.ZARBO_SSH_KEY }}
         script: |
-          whoami
-          ls -al
           cd zarbo-UI
           git fetch
-          pm2 start zarbo
+          pm2 stop zarbo
           git reset --hard origin/master
           npm install
           npm run build
