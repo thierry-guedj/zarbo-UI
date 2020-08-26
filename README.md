@@ -1,6 +1,14 @@
 # zarbo
+
+![Logo](static/apple-touch-icon.png)
+
+
+
 ## Le site des arts beaux
-Nuxt interface for https://www.zarbo.fr
+
+[VueJS Nuxt](https://nuxtjs.org/) interface for https://www.zarbo.fr
+
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbanzo%2Fzarbo-UI%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/banzo/zarbo-UI/goto?ref=master)
 
 ## Build Setup
 
