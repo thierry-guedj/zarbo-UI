@@ -16,8 +16,12 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
+    /*
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
+     */
+    titleTemplate: 'Zarbo',
+    title: 'Zarbo',
     script: [
       {
         src: 'https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js',
