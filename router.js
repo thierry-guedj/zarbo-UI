@@ -9,14 +9,35 @@ const routes = [
   { path: '/', name: 'index', component: page('Index.vue') },
   { path: '/fr/', name: 'index___fr', component: page('Index.vue') },
   { path: '/en/', name: 'index___en', component: page('Index.vue') },
-/*   {
-    path: '/login',
+  {
+    path: '/login/',
     name: 'login',
     component: page('auth/Login.vue'),
-  }, */
+  },
+  {
+    path: '/login/fr/',
+    name: 'login___fr',
+    component: page('auth/Login.vue'),
+  },
+  {
+    path: '/login/en/',
+    name: 'login___en',
+    component: page('auth/Login.vue'),
+  },
+ 
   {
     path: '/verification/verify/:id',
     name: 'verify',
+    component: page('auth/verification/Verify.vue'),
+  },
+  {
+    path: '/verification/verify/:id/fr/',
+    name: 'verify___fr',
+    component: page('auth/verification/Verify.vue'),
+  },
+  {
+    path: '/verification/verify/:id/en/',
+    name: 'verify___en',
     component: page('auth/verification/Verify.vue'),
   },
   {
@@ -130,6 +151,21 @@ const routes = [
     path: '/designs/:id/user/en/',
     name: 'designs.user___en',
     component: page('designs/User.vue'),
+  },
+  {
+    path: '/design/:id',
+    name: 'design.details',
+    component: page('designs/Design.vue'),
+  },
+  {
+    path: '/design/:id/fr/',
+    name: 'design.details___fr',
+    component: page('designs/Design.vue'),
+  },
+  {
+    path: '/designs/:id/en/',
+    name: 'design.details___en',
+    component: page('designs/Design.vue'),
   },
   {
     path: '/users',
