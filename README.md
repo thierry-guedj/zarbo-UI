@@ -8,7 +8,7 @@
 
 [VueJS Nuxt](https://nuxtjs.org/) interface for https://www.zarbo.fr
 
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fbanzo%2Fzarbo-UI%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/banzo/zarbo-UI/goto?ref=master)
+[![Build Status](https://img.shields.io/github/workflow/status/thierry-guedj/zarbo-UI/CI)](https://github.com/thierry-guedj/zarbo-UI/actions?query=workflow%3ACI)
 
 ## Build Setup
 
