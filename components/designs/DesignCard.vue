@@ -9,7 +9,7 @@
       tile
       elevation="5"
       hover
-      @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
+      @click="goToDetails(`${design.id}`)"
     >
       <v-img
         :src="`${design.images.thumbnail}`"
@@ -21,9 +21,11 @@
         <h3 class="portfolio-item__header">
           {{ designTitle | truncate(17, '...') }}
         </h3>
-        <h4 class="portfolio-item__subheader">
-          <span>{{ $t('designCard.by') }} {{ design.user.name }}</span>
-        </h4>
+        <nuxt-link :to="localePath(`/designs/${design.user.id}/user/fr/`)">
+          <h4 class="portfolio-item__subheader">
+            <span> {{ $t('designCard.by') }} {{ design.user.name }}</span>
+          </h4>
+        </nuxt-link>
         <div class="portfolio-item__links">
           <div class="portfolio-item__link-block">
             <v-tooltip top content-class="tooltip">
@@ -32,7 +34,7 @@
                   fab
                   dark
                   small
-                  class="portfolio-item__link image mx-2"
+                  class="portfolio-item__link image"
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="$emit('lightbox')"
@@ -54,17 +56,25 @@
           <div class="portfolio-item__link-block">
             <v-tooltip top content-class="tooltip">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  fab
-                  dark
-                  small
-                  class="portfolio-item__link image mx-2"
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
+                <nuxt-link
+                  :to="
+                    localePath({
+                      name: 'design.details',
+                      params: { id: design.id },
+                    })
+                  "
                 >
-                  <v-icon dark>zoom_out_map</v-icon>
-                </v-btn>
+                  <v-btn
+                    fab
+                    dark
+                    small
+                    class="portfolio-item__link image"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon dark>zoom_out_map</v-icon>
+                  </v-btn>
+                </nuxt-link>
               </template>
               <span>{{ $t('designCard.tooltipFullscreen') }}</span>
             </v-tooltip>
@@ -136,22 +146,19 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    goTo(to, folderName, id, modalStyle) {
-      // this.$emit('showDesign')
-      this.hideModal()
-
-      this.showModal({
-        componentName: to,
-        folder: folderName,
-        idDesign: id,
-        style: modalStyle,
-      })
+    goToDetails(id) {
+      this.$router.push(
+        this.localePath({ name: 'design.details', params: { id } })
+      )
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.v-application a {
+  text-decoration: none;
+}
 /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
 @media screen and (min-width: 601px) {
   .portfolio-item__header {
@@ -253,6 +260,7 @@ img {
 .theme--dark.v-btn.v-btn--icon {
   color: #fff3e0;
 }
+
 .show-btns {
   color: rgba(255, 255, 255, 1) !important;
 }
@@ -410,14 +418,16 @@ $portfolio-link-offset: 10px;
 .portfolio-item__links {
   display: flex;
 }
-
+.theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
+  background-color: transparent;
+}
 .portfolio-item__link-block {
   position: relative;
 
   width: $portfolio-link-dimensions;
   height: $portfolio-link-dimensions;
   margin-right: $portfolio-link-offset;
-  margin-top: 3px;
+  margin-top: 5px;
 
   &:last-child {
     margin-right: 0;
@@ -432,6 +442,7 @@ $portfolio-link-offset: 10px;
   justify-content: center;
   width: 100%;
   height: 100%;
+  background-color: transparent;
 
   color: $light-theme-color;
   text-decoration: none;

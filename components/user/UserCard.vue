@@ -25,7 +25,7 @@
           
           </v-img>
         </v-avatar> -->
-        <avatar :username="user.name" class="mx-3 mt-3" :size="80"></avatar>
+        <avatar :username="user.name" class="mx-3 mt-3" :size="40"></avatar>
         <div class="portfolio-item__info">
           <h4 class="portfolio-item__header">{{ user.username }}</h4>
           <h4 class="portfolio-item__subheader">{{ user.name }}</h4>

@@ -23,7 +23,10 @@
     <v-container>
       <v-row>
         <v-col class="col-md-6 edit-info">
-          <div v-if="design.images" class="card-body p-0 m-0">
+          <!-- <div v-if="!upload" class="loader p-0">
+            <Circle8></Circle8>
+          </div> -->
+          <div class="card-body p-0 m-0">
             <img
               :src="design.images.large"
               class="mb-4"
@@ -62,17 +65,24 @@
                   @blur="$v.form.title.$touch()"
                 ></v-text-field>
                 <has-error :form="form" field="title"></has-error>
-                <v-textarea
+                <!-- <v-textarea
                   v-model.trim="$v.form.description.$model"
                   :error-messages="descriptionErrors"
                   :counter="155"
                   :label="$t('editDesign.description')"
-                  required
                   outlined
                   class="mb-1"
                   field="description"
                   @input="$v.form.description.$touch()"
                   @blur="$v.form.description.$touch()"
+                ></v-textarea> -->
+                <v-textarea
+                  v-model.trim="form.description"
+                  :counter="155"
+                  :label="$t('editDesign.description')"
+                  outlined
+                  class="mb-1"
+                  field="description"
                 ></v-textarea>
                 <has-error :form="form" field="description"></has-error>
                 <client-only>
@@ -87,7 +97,7 @@
                   ></input-tag>
                 </client-only>
 
-                <template v-if="teams.length">
+                <!--  <template v-if="teams.length">
                   <v-checkbox
                     v-model="form.assign_to_team"
                     :label="$t('editDesign.assignToTeam')"
@@ -106,7 +116,7 @@
                   >
                   </v-select>
                   <has-error :form="form" field="team"></has-error>
-                </template>
+                </template> -->
 
                 <v-checkbox
                   id="is_live"
@@ -116,6 +126,7 @@
                 ></v-checkbox>
 
                 <v-spacer class="mb-3" />
+                <v-btn @click="clear">{{ $t('editDesign.clear') }}</v-btn>
                 <v-btn
                   class="mr-4"
                   :loading="loadingSubmit"
@@ -123,7 +134,6 @@
                   type="submit"
                   >{{ $t('editDesign.updateDesign') }}</v-btn
                 >
-                <v-btn @click="clear">{{ $t('editDesign.clear') }}</v-btn>
               </form>
             </v-card-text>
           </v-card>
@@ -136,12 +146,14 @@
 <script>
 // import InputTag from 'vue-input-tag'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
   name: 'Edit',
   middleware: ['auth'],
   layout: 'designs-listing',
   components: {
     InputTag: () => import('vue-input-tag'),
+    Circle8,
   },
   validations: {
     form: {
@@ -150,10 +162,9 @@ export default {
         minLen: minLength(3),
         maxLen: maxLength(35),
       },
-      description: {
-        minLen: minLength(6),
+      /*      description: {
         maxLen: maxLength(450),
-      },
+      }, */
     },
   },
 
@@ -186,6 +197,7 @@ export default {
       loader: null,
       loadingSubmit: false,
       dialog: true,
+      upload: false,
     }
   },
   computed: {
@@ -197,16 +209,16 @@ export default {
       // !this.$v.form.name.required && errors.push('Name is required.')
       return errors
     },
-    descriptionErrors() {
+    /*  descriptionErrors() {
       const errors = []
       if (!this.$v.form.description.$dirty) return errors
       !this.$v.form.description.minLen &&
         errors.push(`Description must be at least 3 characters long`)
       !this.$v.form.description.maxLen &&
         errors.push(`Description must be at most 35 characters long`)
-      // !this.$v.form.username.required && errors.push('Username is required.')
+       !this.$v.form.username.required && errors.push('Username is required.')
       return errors
-    },
+    }, */
   },
   watch: {
     loader() {

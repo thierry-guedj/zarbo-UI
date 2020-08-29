@@ -60,7 +60,8 @@
               field="q"
               class="combobox"
               outlined
-               placeholder="rechercher dans les titres et les descriptions"              @input="fetchData"
+               placeholder="rechercher dans les titres et les descriptions"
+                         @input="fetchData"
             >
               <template v-slot:append>
                 <v-btn
@@ -87,11 +88,11 @@
       <div v-else class="pt-8 pl-0 pb-6 pr-0">
         <template v-if="(!designs.length)" class="pb-6 text-center">
           <v-alert
-            border="left"
-            color="#0f1219"
+            border="right"
+            color="accent"
             dark
             width="60%"
-            class="mx-auto deep-orange darken-4"
+            class="alert"
           >
             No results
           </v-alert>
@@ -113,7 +114,7 @@
             >
             </CoolLightBox>
             <masonry
-              :cols="{ default: 6, 1400: 4, 1000: 3, 700: 2, 400: 1 }"
+              :cols="{ default: 6, 1500: 5, 1400: 4, 1000: 3, 700: 2, 500: 1 }"
               :gutter="{ default: '0px', 700: '15px' }"
               ><lazy-component
                 v-for="(design, i) in designs"
@@ -274,6 +275,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.alert {
+  text-align: center;
+  margin: auto;
+}
 .v-select__selections input {
   display: none;
 }

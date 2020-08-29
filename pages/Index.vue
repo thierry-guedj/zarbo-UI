@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-  <v-btn
+    <v-btn
       v-show="fab"
       v-scroll="onScroll"
       fab
@@ -11,10 +11,10 @@
       color="accent"
       @click="toTop"
     >
-    <v-icon>keyboard_arrow_up</v-icon>
+      <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
     <v-flex xs12 sm8 md6>
-     <!--  <v-container
+      <!--  <v-container
         height="50"
         class="gradientBody justify-start align-content-md-start pt-0"
       ></v-container> -->
@@ -32,8 +32,6 @@
         <!-- <keep-alive> -->
         <base-modal
           :dialog.sync="visible"
-          :success="false"
-          :status="''"
           :width="width"
           @closeDialog="hideModal()"
         />
@@ -80,7 +78,7 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
-styleModal() {
+    styleModal() {
       this.fullscreen = false
     },
     onScroll(e) {
@@ -91,7 +89,7 @@ styleModal() {
     toTop() {
       this.$vuetify.goTo(0)
     },
-        goTo(to, folderName) {
+    goTo(to, folderName) {
       // this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),

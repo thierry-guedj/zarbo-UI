@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-snackbar
+    <!-- <v-snackbar
       v-model="snackbar"
       color="success"
       multi-line
@@ -15,8 +15,13 @@
           Close
         </v-btn>
       </template>
-    </v-snackbar>
-    <base-modal :value="visible" />
+    </v-snackbar> -->
+
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <base-modal :value="visible" :width="width" @closeDialog="hideModal()" />
+    <!-- </keep-alive> -->
+    <!-- End Modal -->
   </section>
 </template>
 
@@ -24,6 +29,7 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Login',
+  layout: 'default',
   middleware: ['guest'],
   props: {
     modalClosed: {
@@ -35,6 +41,7 @@ export default {
     return {
       snackbar: true,
       snackbarValue: false,
+      width: '500px',
     }
   },
   computed: {
@@ -42,14 +49,18 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
-      this.showModal({
-        componentName: 'LoginForm',
-        folder: 'auth',
-      })
+      this.hideModal()
+      this.goTo('LoginForm', 'auth')
     })
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
+    goTo(to, folderName) {
+      setTimeout(
+        () => this.showModal({ componentName: to, folder: folderName }),
+        300
+      )
+    },
   },
 }
 </script>

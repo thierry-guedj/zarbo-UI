@@ -7,7 +7,7 @@
       tile
       elevation="5"
       hover
-      @click="goTo('Show', '', `${design.id}`, 'fullscreen')"
+      @click="goToDetails(`${design.id}`)"
     >
       <v-img
         :src="`${design.images.thumbnail}`"
@@ -47,16 +47,10 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
-    goTo(to, folderName, id, modalStyle) {
-      // this.$emit('showDesign')
-      this.toTop()
-      this.hideModal()
-      this.showModal({
-        componentName: to,
-        folder: folderName,
-        idDesign: id,
-        style: modalStyle,
-      })
+    goToDetails(id) {
+      this.$router.push(
+        this.localePath({ name: 'design.details', params: { id } })
+      )
     },
   },
 }

@@ -15,7 +15,7 @@
           class="mx-2"
           fab
           dark
-          small
+          large
           color="transparent"
           @click="hideModal()"
         >
@@ -27,8 +27,7 @@
           :is="modalComponent"
           :key="unique"
           :modal-closed="modalClosed"
-          :success="success"
-          :status="status"
+         
         ></component>
       </v-card-text>
     </v-card>
@@ -42,7 +41,7 @@ import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
 import VerifyForm from '@/components/auth/VerifyForm.vue'
-import Show from '@/components/Show.vue'
+
 export default {
   name: 'BaseModal',
   components: {
@@ -52,20 +51,12 @@ export default {
     ResendForm,
     ResetEmail,
     VerifyForm,
-    Show,
   },
   props: {
     value: {
       type: Boolean,
     },
-    success: {
-      type: Boolean,
-      default: false,
-    },
-    status: {
-      type: String,
-      default: '',
-    },
+   
     width: {
       type: String,
       default: '500',

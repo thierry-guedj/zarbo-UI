@@ -74,7 +74,7 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-       <div v-else class="pt-8 pl-0 pb-6 pr-0">
+      <div v-else class="pt-8 pl-0 pb-6 pr-0">
         <template v-if="(!users.length)" class="pb-6">
           <v-alert border="left" color="#0f1219" dark>
             No results found
@@ -87,6 +87,7 @@
             class="mb-6 row-design"
             justify="center"
             no-gutters
+    
           >
             <lazy-component
               v-for="(user, i) in users"
@@ -177,15 +178,14 @@ export default {
     },
 
     infiniteHandler($state) {
-    
       this.$axios
         .$get(this.url)
         .then((response) => {
           if (response.data.length > 0) {
-             if (response.meta.current_page <= response.meta.last_page) {
+            if (response.meta.current_page <= response.meta.last_page) {
               response.data.forEach((item) => this.users.push(item))
-                
-          $state.loaded()
+
+              $state.loaded()
             } else {
               $state.loaded()
 
@@ -262,5 +262,4 @@ export default {
 .col-md-2 {
   padding: 0;
 }
-
 </style>

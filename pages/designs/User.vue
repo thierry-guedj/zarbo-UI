@@ -90,11 +90,11 @@
         <template v-if="(!designs.length)" class="pb-6 text-center">
           <div class="mx-auto">
             <v-alert
-              border="left"
+              border="right"
               color="accent"
               dark
               width="60%"
-              class="mx-auto"
+              class="alert"
             >
               {{ $t('user.noResult') }}
               <v-spacer />
@@ -130,7 +130,7 @@
             >
             </CoolLightBox>
             <masonry
-              :cols="{ default: 6, 1400: 4, 1000: 3, 700: 2, 400: 1 }"
+              :cols="{ default: 6, 1500: 5, 1400: 4, 1000: 3, 700: 2, 500: 1 }"
               :gutter="{ default: '0px', 700: '15px' }"
               ><lazy-component
                 v-for="(design, i) in designs"
@@ -292,6 +292,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.alert {
+  text-align: center;
+  margin: auto;
+}
 .v-select__selections input {
   display: none;
 }

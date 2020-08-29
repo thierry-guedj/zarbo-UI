@@ -1,19 +1,40 @@
 <template>
-  <base-modal :value="visible" :status="status" :success="success" />
-</template>
+  <section class="authentication">
+    <div class="auth-body">
+      <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
+        Email Verification
+      </h1>
 
+      <div v-if="success" class="form-group">
+        <div class="alert alert-success">
+          {{ status }}
+        </div>
+        <nuxt-link :to="localePath('login')">Proceed to Login</nuxt-link>
+      </div>
+      <div v-else class="form-group">
+        <div class="alert alert-danger">
+          {{ status }}
+        </div>
+      </div>
+    </div>
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <base-modal
+      :dialog.sync="visible"
+    
+      :width="width"
+      @closeDialog="hideModal()"
+    />
+    <!-- </keep-alive> -->
+    <!-- End Modal -->
+  </section>
+</template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Verify',
-  layout: 'default',
+  layout: 'designs-listing',
   middleware: ['guest'],
-  props: {
-    modalClosed: {
-      type: Boolean,
-      default: false,
-    },
-  },
   async asyncData({ params, query, app }) {
     const q = await Object.keys(query)
       .map((k) => `${k}=${query[k]}`)
@@ -28,20 +49,31 @@ export default {
       return { success: false, status: e.response.data.errors.message }
     }
   },
+  data() {
+    return {
+      width: '500px',
+    }
+  },
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder']),
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
   },
-  mounted() {
-    this.$nextTick(function () {
-      this.showModal({
-        componentName: 'VerifyForm',
-        folder: 'auth',
-      })
-    })
-  },
-
   methods: {
-    ...mapActions(['showModal', 'hideModal']),
+    ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
+
+    goTo(to, folderName) {
+      // this.hideModal()
+      setTimeout(
+        () => this.showModal({ componentName: to, folder: folderName }),
+        300
+      )
+    },
+    goToUpload() {
+      if (!this.$auth.loggedIn) {
+        this.goTo('LoginForm', 'auth')
+      } else {
+        this.goTo('CreateForm', 'user')
+      }
+    },
   },
 }
 </script>
@@ -51,5 +83,8 @@ export default {
 }
 a.color-white {
   color: #ffffff;
+}
+.auth-body {
+  text-align: center;
 }
 </style>

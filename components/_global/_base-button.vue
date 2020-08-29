@@ -5,6 +5,8 @@
       :class="buttonClass"
       :color="color"
       :size="size"
+      :component-name="componentName"
+      :folder-name="folderName"
       @click.native="goTo()"
       ><v-icon v-if="icon" right dark :class="iconClass">{{ icon }}</v-icon
       ><slot
@@ -18,10 +20,6 @@ export default {
   name: 'BaseButton',
   props: {
     needsAuth: {
-      type: Boolean,
-      default: false,
-    },
-    toggleModal: {
       type: Boolean,
       default: false,
     },
@@ -61,24 +59,19 @@ export default {
       type: String,
       default: 'small',
     },
-    width: {
-      type: String,
-      default: '500px',
-    },
   },
   data() {
     return {
       needsRedirect: ['password.reset', 'verify'],
       redirectPage: false,
-      componentFile: this.componentName,
-      folderPath: this.folderName,
+     
       linkTo: '',
     }
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     goTo() {
-      if (this.needsAuth) {
+      /*  if (this.needsAuth) {
         if (!this.$auth.loggedIn) {
           this.componentFile = 'LoginForm'
           this.folderPath = 'auth'
@@ -87,26 +80,21 @@ export default {
       const currentRoute = this.$route.name
       if (this.needsRedirect.includes(currentRoute)) {
         this.redirectPage = true
-      }
-      if (this.toggleModal) {
+      } */
+     
         this.hideModal()
-        if (this.redirect || this.redirectPage)
+        /* if (this.redirect || this.redirectPage)
           this.$router.replace({ path: '/' })
         setTimeout(
-          () =>
-            this.showModal({
-              componentName: this.componentFile,
-              folder: this.folderPath,
-            }),
-          400
-        )
-      }
+          () => */
+        this.showModal({
+          componentName: this.componentName,
+          folder: this.folderName,
+        })
+        /*   400
+        ) */
+     
     },
-    /* get getTo() {
-    return {
-        to: '/upload',
-    }
-} */
   },
 }
 </script>

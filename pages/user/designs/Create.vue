@@ -30,7 +30,7 @@
         </p>
       </div>
     </v-card>
-    <!-- </v-dialog> -->
+
   </section>
 </template>
 
@@ -54,9 +54,9 @@ export default {
     return {
       slimOptions: {
         service: this.slimService,
-        post: 'input, output',
+        post: 'output',
         defaultInputName: 'image',
-        minSize: '800,600',
+        // minSize: '800,600',
         // size: '800,600',
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
@@ -64,7 +64,6 @@ export default {
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
-       
 
       uploading: false,
       error: '',
@@ -86,17 +85,19 @@ export default {
       this.$axios
         .post('/designs', formdata)
         .then((res) => {
-          this.$router.push({
-            name: 'designs.edit',
-            params: { id: res.data.id },
-          })
+          this.$router.push(
+            this.localePath({
+              name: 'designs.edit',
+              params: { id: res.data.id },
+            })
+          )
         })
         .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
         })
-        .finally(() => (this.uploading = false))
+        
     },
   },
 }

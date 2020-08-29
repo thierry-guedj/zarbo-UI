@@ -88,13 +88,7 @@
       </div>
       <div v-else class="pt-8 pl-0 pb-6 pr-0">
         <template v-if="(!designs.length)" class="pb-6 text-center">
-          <v-alert
-            border="left"
-            color="#0f1219"
-            dark
-            width="60%"
-            class="mx-auto deep-orange darken-4"
-          >
+          <v-alert border="right" color="accent" dark width="60%" class="alert">
             {{ $t('designs.noResult') }}
             <v-spacer />
             <nuxt-link :to="{ name: 'designs.search' }">
@@ -128,7 +122,7 @@
             >
             </CoolLightBox>
             <masonry
-              :cols="{ default: 6, 1400: 4, 1000: 3, 700: 2, 400: 1 }"
+              :cols="{ default: 6, 1500: 5, 1400: 4, 1000: 3, 700: 2, 500: 1 }"
               :gutter="{ default: '0px', 700: '15px' }"
               ><lazy-component
                 v-for="(design, i) in designs"
@@ -152,13 +146,13 @@
       </div>
     </v-container>
     <!-- Modal  -->
-    <!-- <keep-alive> -->
+    <keep-alive>
     <base-modal
       :dialog.sync="visible"
-      :fullscreen="fullscreen"
       @showDesign="styleModal()"
       @closeDialog="hideModal()"
     />
+    </keep-alive>
   </section>
 </template>
 
@@ -296,6 +290,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.alert {
+  text-align: center;
+  margin: auto;
+}
 .v-application a {
   text-decoration: none;
 }
