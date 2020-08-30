@@ -105,12 +105,15 @@
         </nuxt-link>
 
         <template v-if="$auth.loggedIn">
-          <base-button
-            to="/upload"
-            button-class="upload-button mr-2"
-            icon="mdi-cloud-upload"
-            >{{ $t('navbar.upload') }}</base-button
+          <nuxt-link
+            to="/upload">
+            <v-btn small
+            class="upload-button mr-2"
+            
+            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+      >{{ $t('navbar.upload') }}</v-btn
           >
+          </nuxt-link>
         </template>
         <template v-else>
           <base-button
@@ -319,6 +322,9 @@ export default {
   opacity: 0.95;
   background-color: #0f1219;
 } */
+.theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
+  background-color: rgba(31, 124, 142, 0.65);
+}
 .v-application a {
   text-decoration: none;
 }

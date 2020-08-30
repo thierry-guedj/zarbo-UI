@@ -87,7 +87,6 @@
             class="mb-6 row-design"
             justify="center"
             no-gutters
-    
           >
             <lazy-component
               v-for="(user, i) in users"
@@ -109,12 +108,7 @@
     </v-container>
     <!-- Modal  -->
     <!-- <keep-alive> -->
-    <base-modal
-      :dialog.sync="visible"
-      :fullscreen="fullscreen"
-      @showDesign="styleModal()"
-      @closeDialog="hideModal()"
-    />
+    <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
   </section>
 </template>
 
@@ -218,9 +212,7 @@ export default {
           this.loader = null
         })
     }, */
-    styleModal() {
-      this.fullscreen = true
-    },
+ 
     onScroll(e) {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
@@ -230,7 +222,7 @@ export default {
       this.$vuetify.goTo(0)
     },
     goTo(to, folderName) {
-      // this.hideModal()
+       this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),
         300

@@ -67,7 +67,7 @@ export default {
 
       uploading: false,
       error: '',
-      dialog: true,
+     
     }
   },
 
