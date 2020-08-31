@@ -21,7 +21,10 @@
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
-          <v-btn size="large" color="deep-orange accent-2" @click="goToDesigns()"
+          <v-btn
+            size="large"
+            color="deep-orange accent-2"
+            @click="goToDesigns()"
             ><v-icon>flip_to_back</v-icon>{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
@@ -113,7 +116,7 @@
               <v-divider class="mx-0 pb-3 pt-6"></v-divider>
             </div>
             <!-- End Designs Tags -->
-         
+
             <!-- Designer info -->
             <div class="white-bg-color">
               <v-avatar class="float-left mr-3" href="#">
@@ -162,7 +165,7 @@
             <!-- Designer More Designs -->
             <v-card>
               <tabs
-                :design-id="designIdComp"
+                :design-id="design.id"
                 :user="user"
                 :tags="design.tag_list.tags"
               ></tabs>
@@ -175,11 +178,20 @@
         <!--/ END RIGHT-->
       </v-col>
     </v-row>
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <base-modal
+      :dialog.sync="visible"
+      :width="width"
+      @closeDialog="hideModal()"
+    />
+    <!-- </keep-alive> -->
+    <!-- End Modal -->
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 // const Circle8 = require('vue-loading-spinner/src/components/Circle8.vue')
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import RingLoader from 'vue-spinner/src/RingLoader.vue'
@@ -187,7 +199,7 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import SocialSharing from 'vue-social-sharing'
 // import GoogleSpin from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
-  name: 'Show',
+  name: 'Design',
   layout: 'designs-listing',
   components: {
     // RingLoader,
@@ -203,12 +215,10 @@ export default {
     this.comments = response.data.comments
     this.user = response.data.user
     this.images = response.data.images
-   
   },
 
   data() {
     return {
-      ...mapState(['idDesign']),
       form: this.$vform({
         body: '',
       }),
@@ -218,25 +228,18 @@ export default {
       created_at_dates: {},
       images: {},
       designId: this.$route.params.id,
+      width: '500px',
     }
   },
   fetchOnServer: true,
   computed: {
-    ...mapGetters(['getIdDesign', 'getDesignModal']),
+    ...mapGetters(['visible']),
     designTitle() {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
     designIdComp() {
-      return parseInt(this.getIdDesign)
-    },
-  },
-
-  watch: {
-    getIdDesign(val) {
-      this.designId = val
-      this.toTop()
-      this.fetchData()
+      return parseInt(this.design.id)
     },
   },
   methods: {
@@ -266,17 +269,15 @@ export default {
       }
       this.hideModal()
     },
-    goToDesigns(id) {
-      this.$router.push(
-        this.localePath({ name: 'designs.search' })
-      )
+    goToDesigns() {
+      // this.$router.push(this.localePath({ name: 'designs.search' }))
+      this.$router.go(-1)
     },
     async fetchData() {
       const url = `/designs/${this.designId}`
       const response = await this.$axios.$get(url)
       this.design = response.data
       this.comments = response.data.comments
-      console.log(this.design)
     },
     toTop() {
       window.scrollTo(0, 0)

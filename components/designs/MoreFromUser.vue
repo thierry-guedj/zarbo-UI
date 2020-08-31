@@ -10,14 +10,6 @@
       justify="center"
       no-gutters
     >
-      <CoolLightBox
-        :items="itemsDesigns"
-        :index="index !== null ? parseInt(`${index}`) : index"
-        :use-zoom-bar="true"
-        :effect="'fade'"
-        @close="index = null"
-      >
-      </CoolLightBox>
       <masonry
         :cols="{ default: 2, 1000: 1, 700: 1, 400: 1 }"
         :gutter="{ default: '0px', 700: '10px' }"
@@ -34,13 +26,11 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-// import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
   name: 'MoreFromUser',
   components: {
     lazyComponent: () => import('@/components/designs/DesignCardMini.vue'),
-    // RingLoader,
     Circle8,
   },
   props: {
@@ -78,18 +68,9 @@ export default {
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
     },
-    ...mapGetters(['visible', 'modalComponent', 'folder', 'getIdDesign']),
+    ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
-    },
-    designIdComp() {
-      return parseInt(this.getIdDesign)
-    },
-  },
-  watch: {
-    getIdDesign(val) {
-      this.filters.whereNotIn = val
-      this.fetchData()
     },
   },
   mounted() {
@@ -103,38 +84,11 @@ export default {
       const response = await this.$axios.$get(`search/designs`, {
         params: {
           idUser: this.filters.idUser,
-          whereNotIn: [this.designIdComp],
+          whereNotIn: [this.designId],
         },
       })
       this.designs = response.data
       this.searching = false
-    },
-
-    styleModal() {
-      this.fullscreen = true
-    },
-
-    infiniteHandler($state) {
-      this.$axios
-        .$get(`search/designs`, {
-          params: {
-            whereNotIn: this.filters.whereNotIn.reduce((f, s) => `[${f},${s}]`),
-          },
-        })
-        .then((response) => {
-          if (response.data.length > 1) {
-            response.data.forEach((item) => this.designs.push(item))
-
-            $state.loaded()
-          } else {
-            $state.loaded()
-            $state.complete()
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      this.filters.page = this.filters.page + 1
     },
   },
 }

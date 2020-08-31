@@ -3,11 +3,11 @@
     <v-tab>{{ $t('widgetTitle.moreFromUser') }} {{ user.name }}</v-tab>
     <v-tab>{{ $t('widgetTitle.moreFromTags') }}</v-tab>
     <v-tab-item class="mx-auto">
-      <more-from-user :design-id="designIdComp" :user="user"></more-from-user>
+      <more-from-user :design-id="designId" :user="user"></more-from-user>
     </v-tab-item>
     <v-tab-item>
       <lazy-component
-        :design-id="designIdComp"
+        :design-id="designId"
         :user="user"
         :tags="tags"
       ></lazy-component>
@@ -17,13 +17,8 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-// import RingLoader from 'vue-spinner/src/RingLoader.vue'
 export default {
   name: 'Tabs',
-  /* components: {
-    RingLoader,
-    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
-  }, */
   components: {
     lazyComponent: () => import('@/components/designs/MoreFromTags.vue'),
   },
@@ -54,8 +49,6 @@ export default {
         idDesign: this.designId,
         page: 1,
       },
-      fullscreen: false,
-
       identifier: new Date(),
     }
   },
@@ -66,17 +59,10 @@ export default {
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
     },
-    ...mapGetters(['visible', 'modalComponent', 'folder', 'getIdDesign']),
+    ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
     },
-    designIdComp() {
-      return parseInt(this.getIdDesign)
-    },
-    /*   designTitle() {
-      if (!this.design.title) return 'Sans Titre'
-      else return this.design.title
-    }, */
   },
   mounted() {
     this.fetchData()
@@ -85,35 +71,11 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     async fetchData() {
-      console.log(this.tags)
       this.identifier = new Date()
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
       this.searching = false
-    },
-
-    styleModal() {
-      this.fullscreen = true
-    },
-
-    infiniteHandler($state) {
-      this.$axios
-        .$get(this.url)
-        .then((response) => {
-          if (response.data.length > 1) {
-            response.data.forEach((item) => this.designs.push(item))
-
-            $state.loaded()
-          } else {
-            $state.loaded()
-            $state.complete()
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      this.filters.page = this.filters.page + 1
     },
   },
 }
