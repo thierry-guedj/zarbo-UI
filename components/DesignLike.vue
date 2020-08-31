@@ -2,24 +2,26 @@
   <section>
     <li class="d-table w-100">
       <div class="stats-txt d-table-cell w-50">
-        <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
-          <template v-if="userLikes">
-            <!--        <span class="material-icons" style="color:red">
+        <div v-if="design.user.id !== $auth.user.id">
+          <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
+            <template v-if="userLikes">
+              <!--        <span class="material-icons" style="color:red">
 thumb_down
 </span> -->
-            <v-btn class="mx-2" icon dark small color="red darken-4">
-              <v-icon dark>not_interested</v-icon>
-            </v-btn>
-          </template>
-          <template v-else>
-            <!--       <span class="material-icons" style="color:blue">
+              <v-btn class="mx-2" icon dark small color="red darken-4">
+                <v-icon dark>not_interested</v-icon>
+              </v-btn>
+            </template>
+            <template v-else>
+              <!--       <span class="material-icons" style="color:blue">
 thumb_up
 </span> -->
-            <v-btn class="mx-2" icon color="pink" dark small>
-              <v-icon dark>favorite</v-icon>
-            </v-btn>
-          </template>
-        </a>
+              <v-btn class="mx-2" icon color="pink" dark small>
+                <v-icon dark>favorite</v-icon>
+              </v-btn>
+            </template>
+          </a>
+        </div>
       </div>
 
       <div>
