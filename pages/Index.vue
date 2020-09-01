@@ -37,7 +37,7 @@
         />
         <!-- </keep-alive> -->
         <!-- End Modal -->
-        <v-snackbar
+        <!-- <v-snackbar
           :value="visibleSnackbar"
           class="v-snackbar"
           multi-line
@@ -54,7 +54,7 @@
               Close
             </v-btn>
           </template>
-        </v-snackbar>
+        </v-snackbar> -->
       </div>
     </v-flex>
   </v-layout>

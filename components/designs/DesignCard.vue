@@ -97,7 +97,9 @@
     </v-card>
     <!-- </v-hover> -->
     <div class="ml-3 mb-2">
-      <h3 class="font-weight-medium mb-0">{{ designTitle | capitalize }}</h3>
+      <h3 class="font-weight-medium mb-0 ellipsis">
+        {{ designTitle | capitalize }}
+      </h3>
       <h5 class="font-weight-regular">
         {{ $t('designCard.by') }}
         <nuxt-link :to="`/designs/${design.user.id}/user`" class="text-white">
@@ -156,6 +158,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* .ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} */
 .v-application a {
   text-decoration: none;
 }

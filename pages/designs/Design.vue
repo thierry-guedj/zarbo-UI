@@ -238,9 +238,7 @@ export default {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
-    designIdComp() {
-      return parseInt(this.design.id)
-    },
+ 
   },
   methods: {
     ...mapActions(['hideModal']),

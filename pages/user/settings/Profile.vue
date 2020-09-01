@@ -1,16 +1,9 @@
 <template>
-  <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="80%"
-      hide-overlay
-      transition="dialog-bottom-transition"
-      content-class="modal"
-    >
+  <v-container class="text-center container">
+ 
       <div class="setting-title font-16 fw-500">Profile</div>
 
-      <div class="setting-body white-bg-color">
+      <div class="text-center">
         <form class="custom-form" @submit.prevent="update">
           <div class="row">
             <div class="col-md-6">
@@ -18,50 +11,20 @@
                 >Profile information updated successfully</alert-success
               >
 
-              <!-- <div class="form-group">
-              <base-input
-                v-model="form.name"
-                :form="form"
-                field="name"
-                placeholder="Full name"
-              ></base-input>
-            </div> -->
               <v-text-field
                 v-model.trim="form.name"
                 :form="form"
                 field="name"
                 label="Name"
               ></v-text-field>
-              <!-- <div class="form-group">
-              <base-input
-                v-model="form.tagline"
-                :form="form"
-                field="tagline"
-                placeholder="Tagline"
-              ></base-input>
-            </div> -->
+        
               <v-text-field
                 v-model.trim="form.tagline"
                 label="Tagline"
                 :form="form"
                 field="tagline"
               ></v-text-field>
-              <!-- <div class="form-group">
-                <base-gmap
-                  :initial-value="form.formatted_address"
-                  @address-response="handleAddress"
-                ></base-gmap>
-              </div> -->
-
-              <!-- <div class="form-group">
-              <base-textarea
-                v-model="form.about"
-                :form="form"
-                field="about"
-                :rows="4"
-                placeholder="Please enter some information about yourself"
-              ></base-textarea>
-            </div> -->
+          
               <v-textarea
                 v-model.trim="form.about"
                 :form="form"
@@ -70,20 +33,7 @@
                 outlined
                 class="mb-1"
               ></v-textarea>
-              <!-- <div class="form-group custom-control custom-checkbox">
-              <input
-                id="available_to_hire"
-                v-model="form.available_to_hire"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label
-                class="custom-control-label"
-                :value="true"
-                for="available_to_hire"
-                >Available to hire?</label
-              >
-            </div> -->
+        
               <v-checkbox
                 v-model="form.available_to_hire"
                 label="Available to hire?"
@@ -105,8 +55,8 @@
           </div>
         </form>
       </div>
-    </v-dialog>
-  </v-row>
+
+  </v-container>
 </template>
 
 <script>
@@ -167,6 +117,10 @@ export default {
 </script>
 
 <style>
+.container {
+  margin: auto;
+  text-align: center;
+}
 .modal {
   background-color: rgba(23, 22, 18, 0.85);
 }

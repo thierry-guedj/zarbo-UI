@@ -27,6 +27,7 @@ export default {
   },
   menuAccount: {
     yourDesigns: 'Vos oeuvres',
+    yourProfile: 'Votre profil',
   },
   index: {
     title: 'le site des arts beaux.',

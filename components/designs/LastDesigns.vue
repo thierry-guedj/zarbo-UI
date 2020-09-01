@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <section>
     <h2 class="ml-3">{{ $t('widgetTitle.lastPublishedDesigns') }}</h2>
     <div v-if="searching" class="loader">
       <Circle8></Circle8>
@@ -32,7 +32,7 @@
         ></masonry>
       </v-row>
     </div>
-  </v-container>
+  </section>
 </template>
 
 <script>

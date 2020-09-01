@@ -26,6 +26,7 @@ export default {
   },
   menuAccount: {
     yourDesigns: 'Your artwork',
+    yourProfile: 'Your profile',
   },
   index: {
     title: 'the beautiful arts site',

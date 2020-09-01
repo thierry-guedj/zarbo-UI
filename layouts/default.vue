@@ -3,8 +3,8 @@
     <div id="grad1" class="line"></div>
     <v-parallax :src="backgroundUrl" height="600">
       <div class="mt-18 text-center text-parallax mb-0">
-        <h1 class="teal--text text-center text--lighten-2 mb-2">Zarbo,</h1>
-        <p class="text-center">{{ $t('index.title') }}</p>
+        <h1 class="teal--text text-center text--lighten-2 mb-0">Zarbo,</h1>
+        <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
       </div>
     </v-parallax>
 
@@ -265,6 +265,10 @@ export default {
           title: this.$i18n.t('menuAccount.yourDesigns'),
           route: 'settings.designs',
         },
+           {
+          title: this.$i18n.t('menuAccount.yourProfile'),
+          route: 'settings.profile',
+        },
       ],
 
       miniVariant: false,
@@ -330,6 +334,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.subtitle {
+  font-size: 16px;
+  margin-left: 20px;
+}
 .v-application a {
   text-decoration: none;
 }

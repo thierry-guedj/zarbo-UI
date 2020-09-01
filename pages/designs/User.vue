@@ -83,6 +83,13 @@
       </form>
     </v-container>
     <v-container class="p-0 m-0 row-designs">
+      <section class="hero text-center mb-4 text-white">
+      <v-container>
+        <h1 class="font-28 fw-600 text-uppercase text-white">
+          {{ $t('editDesign.updateDesignInfo') }}
+        </h1>
+      </v-container>
+    </section>
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>

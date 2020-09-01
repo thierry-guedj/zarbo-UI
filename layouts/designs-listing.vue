@@ -253,6 +253,10 @@ export default {
           title: this.$i18n.t('menuAccount.yourDesigns'),
           route: 'settings.designs',
         },
+        {
+          title: this.$i18n.t('menuAccount.yourProfile'),
+          route: 'settings.profile',
+        },
       ],
 
       miniVariant: false,
