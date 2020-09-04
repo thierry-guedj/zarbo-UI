@@ -31,7 +31,7 @@
         <!-- Design Comments -->
         <div class="design-comments mt-3 px-4">
           <h1 class="font-16 fw-300 mb-4">
-            <strong class="fw-500">{{ comments.length }} comments</strong>
+            <strong class="fw-500">{{ comments.length }} {{ $t('comments.comments') }}</strong>
           </h1>
           <v-list-item>
             <v-list-item-content>
@@ -53,12 +53,12 @@
               :rows="2"
               :form="form"
               field="body"
-              placeholder="Enter a comment"
+              v-bind:placeholder="$t('comments.enterComment')"
               class="pl-4 pr-14"
             ></v-textarea>
             <div class="mt-2 text-right pr-14">
               <v-btn type="submit" size="sm">
-                Post comment
+                {{ $t('comments.postComment') }}
               </v-btn>
             </div>
           </form>

@@ -39,8 +39,8 @@ export default {
   designCard: {
     by: 'by',
     uploaded: 'Published date: ',
-    tooltipLightbox: '',
-    tooltipFullscreen: '',
+    tooltipLightbox: 'Open in fullscreen',
+    tooltipFullscreen: 'Open the detailed page',
   },
   userCard: {
     registered: 'Registered',
@@ -59,9 +59,12 @@ export default {
     by: 'By',
     published: 'Publishing date: ',
     backToArtwork: 'Back to artwork',
+    youLike: 'You like this artwork',
   },
   comments: {
     comments: 'Comments',
+    enterComment: 'Enter a comment',
+    postComment: 'Post comment',
   },
   register: {
     register: 'Register',

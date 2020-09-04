@@ -27,7 +27,7 @@
       >
 
       <last-designs></last-designs>
-      <div class="text-center" style="max-width: '80%';">
+      <div class="text-center" style="max-width: '95%';">
         <!-- Modal  -->
         <!-- <keep-alive> -->
         <base-modal

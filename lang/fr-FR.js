@@ -40,6 +40,8 @@ export default {
   designCard: {
     by: 'par',
     uploaded: 'Publiée le ',
+    tooltipLightbox: 'Voir en plein écran',
+    tooltipFullscreen: 'Ouvrir la page détaillée',
   },
   userCard: {
     registered: 'Enregistré le ',
@@ -58,9 +60,12 @@ export default {
     by: 'Par',
     published: 'Publiée le: ',
     backToArtwork: 'Retour aux oeuvres',
+    youLike: 'Vous aimez cette oeuvre',
   },
   comments: {
     comments: 'Commentaires',
+    enterComment: 'Entrer un commentaire',
+    postComment: 'Poster votre commentaire',
   },
   register: {
     register: 'Créer un compte',

@@ -80,7 +80,7 @@
             </v-tooltip>
           </div>
         </div>
-        <v-card-actions class="mt-4">
+        <v-card-actions class="mt-4 ml-3">
           <v-spacer></v-spacer>
 
           <span class="mr-2"
@@ -106,12 +106,11 @@
           {{ design.user.name }}</nuxt-link
         >
       </h5>
-      <h6>
-        <span class="mr-2 caption text-orange lighten-5"
+      <h5>
+        <span class="mr-2 text-orange lighten-5"
           >{{ $t('designCard.uploaded') }} {{ computedDate }}</span
         >
-      </h6>
-      <h6>{{ design.id }}</h6>
+      </h5>
     </div>
     <!-- </v-col> -->
   </div>
