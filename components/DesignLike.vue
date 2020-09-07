@@ -30,7 +30,7 @@ thumb_up
     </li>
     <template v-if="userLikes && $auth.loggedIn">
       <div class="mt-2">
-        You like this design
+        {{ $t('show.youLike') }}
       </div>
     </template>
   </section>

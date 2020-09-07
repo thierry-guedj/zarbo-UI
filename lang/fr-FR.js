@@ -108,6 +108,7 @@ export default {
     noAccount: 'Pas encore membre ? ',
     createAccount: 'Créer votre compte',
     submit: 'Renvoyer',
+    email: 'E-mail',
   },
   verifyForm: {
     emailVerification: 'Vérification de votre e-mail',
@@ -123,9 +124,13 @@ export default {
     rowsPerPage: 'Lignes par page',
     of: 'sur',
     search: 'Recherche',
-    published: 'Publié',
+    published: 'Publiée',
     draft: 'Brouillon',
     artwork: 'Vos oeuvres',
+    description: 'Description',
+    tags: 'Tags',
+    confirmDelete: 'Veuillez confirmer la suppression',
+    cancel: 'Annuler',
   },
   editDesign: {
     updateDesignInfo: 'Modifier les informations de cette oeuvre',
@@ -138,6 +143,8 @@ export default {
     assignToTeam: 'Asociée à une équipe',
     selectTeam: 'Selectionner une équipe',
     updated: "L'oeuvre a été modifiée avec succès",
+    newItem: 'Nouvelle oeuvre',
+    editItem: 'Editer une oeuvre',
   },
   create: {
     uploadArtwork: 'Poster une oeuvre',
@@ -147,7 +154,7 @@ export default {
     uploadError: 'Une erreur est survenue lors du téléchargement',
   },
   user: {
-    noResult: 'Pas de résultat',
+    noResult: "Cet artiste n'a pas encore publié d'oeuvre",
     backToUsersList: 'Retour à la liste des artistes',
   },
   designs: {

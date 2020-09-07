@@ -1,22 +1,23 @@
 <template>
   <v-btn
     :loading="loadingSubmit"
-    class="ma-0"
-    style="cursor: pointer;"
-    :color="getColor(isLive)"
+    class="ma-0 is-live"
+    :color="getColor"
     text-color="white"
     small
     rounded
     @click.native="
       loadingSubmit = true
-      toggleIsLive(isLive, id)
+      toggleIsLive(item.is_live, item.id)
     "
   >
     <v-avatar left class="avatar-is-live">
       <v-icon>mdi-checkbox-marked-circle</v-icon>
     </v-avatar>
     {{
-      isLive ? $t('settingsDesigns.published') : $t('settingsDesigns.draft')
+      item.is_live === true
+        ? $t('settingsDesigns.published')
+        : $t('settingsDesigns.draft')
     }}</v-btn
   >
 </template>
@@ -25,14 +26,18 @@
 export default {
   name: 'IsLive',
   props: {
-    id: {
+    /* id: {
       type: Number,
       default: null,
     },
     isLive: {
       type: Boolean,
       default: false,
-    },
+    }, */
+    item: {
+      type: Object,
+      default: null,
+    }
   },
   data() {
     return {
@@ -40,11 +45,14 @@ export default {
       // isLive: this.is_live,
     }
   },
-  methods: {
-    getColor(isLive) {
-      if (isLive) return 'green'
-      else return 'orange'
+
+  computed: {
+    getColor() {
+      if (this.item.is_live === false) return 'orange darken-3'
+      else return 'teal darken-3'
     },
+  },
+  methods: {
     async toggleIsLive(isLive, id) {
       this.loadingSubmit = true
       const url = `/designs/${id}/updateIsLive`
@@ -60,12 +68,12 @@ export default {
           isLive: `${isLive}`,
         })
         .then((res) => {
-          this.isLive = !this.isLive
+          this.item.is_live = !this.item.is_live
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
           this.loadingSubmit = false
-          this.$emit('isLiveToggle')
+          this.$emit('isLiveToggle', this.item)
         })
     },
   },
@@ -75,5 +83,9 @@ export default {
 <style lang="scss" scoped>
 .avatar-is-live {
   padding: 0;
+}
+.is-live {
+  cursor: pointer;
+  font-size: 10px;
 }
 </style>

@@ -1,113 +1,131 @@
 <template>
-  <v-row justify="center">
-    <v-card width="100%" class="card-design">
-      <v-card-title>
-        {{ $t('settingsDesigns.artwork') }}
-        <v-spacer></v-spacer>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-        ></v-text-field>
-      </v-card-title>
-
-      <v-data-table
-        :loading="loading"
-        :headers="headers"
-        :options.sync="options"
-        :server-items-length="totalDesigns"
-        :items="designs"
-        :items-per-page="5"
-        class="elevation-1"
-        :search="search"
-      >
-        <template v-slot:item.image="{ item }">
-          <div class="px-2 my-2 align-middle">
-            <v-img
-              :src="item.images.thumbnail"
-              :alt="item.title"
-              width="120px"
-            ></v-img>
-          </div>
-        </template>
-
-        <template v-slot:item.is_live="{ item }">
-          <div class="mr-3">
-            <is-live :id="item.id" :is_live="item.is_live"></is-live>
-          </div>
-        </template>
-        <template v-slot:item.id="{ item }">
-          <div class="ml-3 float-right">
-            <nuxt-link :to="{ name: 'designs.edit', params: { id: item.id } }"
-              ><v-btn
-                class="my-2 align-middle"
-                fab
-                dark
-                small
-                color="transparent"
-              >
-                <v-icon dark>edit</v-icon></v-btn
-              >
-            </nuxt-link>
-          </div>
-        </template>
-        <template v-slot:item.description="{ item }">
-          <div class="ml-3 float-right">
-            <v-btn
-              class="my-2 align-middle"
-              fab
-              dark
-              small
-              color="transparent"
-              @click.native="destroy(item.id)"
-            >
-              <v-icon dark>delete_forever</v-icon></v-btn
-            >
-          </div>
-        </template>
-      </v-data-table>
-    </v-card>
-    <v-snackbar
-      :value="visibleSnackbar"
-      class="v-snackbar"
-      multi-line
-      timeout="2000"
-      color="teal darken-4"
-      top
-      vertical
-      @input="hideSnackbar()"
-      @close="hideSnackbar()"
+  <section>
+    <v-data-table
+      :headers="headers"
+      :items="designs"
+      sort-by="calories"
+      class="elevation-1"
+      :search="search"
+      :loading="loading"
     >
-      Your design has been deleted
-      <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="hideSnackbar()">
-          Close
-        </v-btn>
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>{{ $t('settingsDesigns.artwork') }}</v-toolbar-title>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            :label="$t('settingsDesigns.search')"
+            single-line
+            hide-details
+          ></v-text-field>
+
+          <v-dialog v-model="dialog" max-width="600px" class="editItem">
+            <!-- <template v-slot:activator="{ on, attrs }">
+            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on"
+              >New Item</v-btn
+            >
+          </template> -->
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
+              <v-divider class="mx-4"></v-divider>
+              <v-card-text>
+                <v-container>
+                  <v-text-field
+                    v-model="editedItem.title"
+                    :label="$t('editDesign.title')"
+                    field="title"
+                  ></v-text-field>
+
+                  <v-textarea
+                    v-model.trim="editedItem.description"
+                    :counter="155"
+                    :label="$t('editDesign.description')"
+                    outlined
+                    class="mb-1"
+                    field="description"
+                  ></v-textarea>
+
+                  <client-only>
+                    <input-tag
+                      v-model="editedItem.tags"
+                      :tags="editedItem.tags"
+                      field="tags"
+                      class="mb-1"
+                      :placeholder="$t('editDesign.tagsLabel')"
+                      on-paste-delimiter=","
+                      outlined
+                    ></input-tag>
+                  </client-only>
+
+                  <v-checkbox
+                    id="is_live"
+                    v-model="editedItem.is_live"
+                    field="is_live"
+                    :label="$t('editDesign.publishDesign')"
+                  ></v-checkbox>
+                </v-container>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
       </template>
-    </v-snackbar>
-  </v-row>
+      <template v-slot:item.image="{ item }">
+        <div class="px-2 my-2 align-middle">
+          <v-img
+            :src="item.images.thumbnail"
+            :lazy-src="item.images.minithumbnail"
+            :alt="item.title"
+            max-width="120px"
+          >
+          </v-img>
+        </div>
+      </template>
+      <template v-slot:item.is_live="{ item }">
+        <div class="mr-3">
+          <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
+        </div>
+      </template>
+
+      <template v-slot:item.actions="{ item }">
+        <!-- <confirm-delete :item="item" :dialog.sync="dialogDelete" /> -->
+        <v-icon small class="mr-2" @click="editItem(item)">
+          mdi-pencil
+        </v-icon>
+        <v-icon small @click="deleteItem(item)">
+          mdi-delete
+        </v-icon>
+      </template>
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
+  </section>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 export default {
-  middleware: ['auth'],
-  layout: 'page2',
+  components: {
+    InputTag: () => import('vue-input-tag'),
+  },
   data() {
     return {
-      designs: [],
-      loading: true,
-      search: '',
-      dialog: true,
-      totalDesigns: 0,
-      options: {},
+      dialog: false,
       headers: [
         {
           text: this.$i18n.t('settingsDesigns.image'),
           value: 'image',
           sortable: false,
+          align: 'start',
           width: '15%',
         },
         {
@@ -116,167 +134,207 @@ export default {
           sortable: true,
           value: 'title',
         },
-        /* {
-          text: 'Uploaded',
+        {
+          text: this.$i18n.t('settingsDesigns.description'),
           align: 'start',
           sortable: true,
-          value: 'created_at_dates.created_at_human',
-        }, */
+          value: 'description',
+        },
+        {
+          text: this.$i18n.t('settingsDesigns.tags'),
+          align: 'start',
+          sortable: true,
+          value: 'tags',
+        },
         {
           text: this.$i18n.t('settingsDesigns.status'),
           value: 'is_live',
-          width: '20%',
+          // width: '20%',
         },
-        {
-          text: this.$i18n.t('settingsDesigns.edit'),
-          value: 'id',
-          width: '8%',
-        },
-        {
-          text: this.$i18n.t('settingsDesigns.delete'),
-          value: 'description',
-          width: '8%',
-        },
-        // { text: 'Actions', value: '' },
+        { text: 'Actions', value: 'actions', sortable: false },
       ],
-
-      loadingSubmit: false,
+      designs: [],
+      editedIndex: -1,
+      editedItem: {
+        title: '',
+        description: '',
+        is_live: false,
+        tags: [],
+        assign_to_team: false,
+        team: null,
+      },
+      defaultItem: {
+        title: '',
+        description: '',
+        is_live: false,
+        tags: [],
+        assign_to_team: false,
+        team: null,
+      },
+      /*  form: {
+        title: '',
+        description: '',
+        is_live: false,
+        tags: [],
+        assign_to_team: false,
+        team: null,
+      }, */
+      loading: true,
+      search: '',
+      dialogDelete: false,
     }
   },
-  watch: {
-    options: {
-      handler() {
-        this.fetchUserDesigns().then((data) => {
-          this.designs = data
-          this.totalDesigns = data.length
-        })
-      },
-      deep: true,
-    },
-  },
-  mounted() {
-    this.hideSnackbar()
-    this.getDataFromApi().then((data) => {
-      this.designs = data
-      this.totalDesigns = data.length
-    })
-  },
+
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
+    formTitle() {
+      return this.editedIndex === -1
+        ? this.$i18n.t('editDesign.newItem')
+        : this.$i18n.t('editDesign.editItem')
+    },
   },
-  /*   created() {
-    this.fetchUserDesigns()
-  }, */
+
+  watch: {
+    dialog(val) {
+      val || this.close()
+    },
+    dialogDelete(val) {
+      val || this.closeDelete()
+    },
+  },
+
+  created() {
+    this.initialize()
+  },
+
   methods: {
-    async fetchUserDesigns() {
-      //this.designs = []
-      const dataTemp = await this.$axios.$get(`/users/${this.$auth.user.id}/designs`)
-      console.log(dataTemp)
-      this.designs = dataTemp.data
-      return this.designs
-      // return dataTemp
-      /*   this.designs = data
+    async initialize() {
+      this.designs = []
+      const { data } = await this.$axios.$get(
+        `/users/${this.$auth.user.id}/designs`
+      )
+      this.designs = data
+    
+      this.designs.forEach((design, index) => {
+        design.tags = design.tag_list.tags
+        this.designs[index] = design
+      })
       this.loading = false
-      this.loadingSubmit = false */
     },
-    async destroy(id) {
-      this.loading = true
-      try {
-        const res = await this.$axios.$delete(`/designs/${id}`)
-      } catch (err) {
-        console.log(err)
-      } finally {
-        await this.fetchUserDesigns()
-        this.showSnackbar()
-        this.loading = false
+
+    editItem(item) {
+      this.editedIndex = this.designs.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.editedItem.tags = this.editedItem.tag_list.tags
+      this.dialog = true
+    },
+    async updateItem(item) {
+      let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
+      design = design.data
+      design.tags = design.tag_list.tags
+      this.editedItem = design
+      this.designs[this.designs.indexOf(item)] = design
+    },
+    deleteItem(item) {
+      /* confirm('Are you sure you want to delete this item?') &&
+        this.designs.splice(index, 1) */
+      const options = {
+        loader: true, // set to true if you want the dailog to show a loader after click on "proceed"
+
+        okText: this.$i18n.t('settingsDesigns.delete'),
+        cancelText: this.$i18n.t('settingsDesigns.cancel'),
+        animation: 'zoom', // Available: "zoom", "bounce", "fade"
+        customClass: 'theme--dark.v-sheet.v-card', // Custom class to be injected into the parent node for the current dialog instance
       }
+      this.$dialog
+        .confirm(this.$i18n.t('settingsDesigns.confirmDelete'), options)
+        .then((dialog) => {
+          console.log('Clicked on confirm')
+
+          const res = this.$axios.$delete(`/designs/${item.id}`)
+          const index = this.designs.indexOf(item)
+          this.designs.splice(index, 1)
+
+          dialog.loader = false
+          dialog.close()
+        })
+        .catch(function () {
+          console.log('Clicked on cancel')
+        })
     },
-    getDataFromApi() {
-      this.loading = true
-      return new Promise((resolve, reject) => {
-        const { sortBy, sortDesc, page, itemsPerPage } = this.options
 
-       
-        let items = this.fetchUserDesigns()
-        const total = items.length
-
-        if (sortBy.length === 1 && sortDesc.length === 1) {
-          items = items.sort((a, b) => {
-            const sortA = a[sortBy[0]]
-            const sortB = b[sortBy[0]]
-
-            if (sortDesc[0]) {
-              if (sortA < sortB) return 1
-              if (sortA > sortB) return -1
-              return 0
-            } else {
-              if (sortA < sortB) return -1
-              if (sortA > sortB) return 1
-              return 0
-            }
-          })
-        }
-
-        if (itemsPerPage > 0) {
-          items = items.slice((page - 1) * itemsPerPage, page * itemsPerPage)
-        }
-
-        setTimeout(() => {
-          this.loading = false
-          resolve({
-            items,
-            total,
-          })
-        }, 1000)
+    close() {
+      this.dialog = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
       })
     },
-    ...mapActions(['showModal', 'hideModal', 'showSnackbar', 'hideSnackbar']),
-    goTo(to, folderName) {
-      this.hideModal()
-      setTimeout(
-        () => this.showModal({ componentName: to, folder: folderName }),
-        300
-      )
+    closeDelete() {
+      this.dialogDelete = false
+    },
+
+    async save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.designs[this.editedIndex], this.editedItem)
+      } else {
+        this.designs.push(this.editedItem)
+      }
+      if (!this.editedItem.tags) {
+        this.editedItem.tags = []
+      }
+
+      const form = {
+        title: this.editedItem.title,
+        description: this.editedItem.description,
+        is_live: this.editedItem.is_live,
+        tags: this.editedItem.tags,
+        assign_to_team: false,
+        team: null,
+      }
+
+      const res = await this.$axios.put(`/designs/${this.editedItem.id}`, form)
+      /* this.form
+        .put(`/designs/${this.editedItem.id}`)
+        .then((res) => {
+          setTimeout(() => {
+            this.$router.push({ name: 'settings.designs' })
+          }, 1000)
+        })
+        .catch((err) => console.log(err.response))
+        .finally(() => {
+          
+          this.loader = null
+          this.loadingSubmit = false
+        }) */
+
+      this.close()
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.v-chip.v-size--default {
-  height: 25px;
+.theme--dark.v-sheet.v-card {
+  background-color: #0f1219;
 }
-.v-data-table {
-  line-height: 0.5;
-  padding: 6px;
+.vue-input-tag-wrapper {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px thin;
+  border-color: rgba(255, 255, 255, 0.24);
 }
-.card-designs {
-  background-color: rgba(23, 22, 18, 0.85);
-  padding: 12px;
-  border-radius: 12px;
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9; /* ie8 */
 }
-.v-data-table__wrapper {
-  background-color: rgba(23, 22, 18, 0.5);
+.container {
+  max-width: 100% !important;
+}
+.editItem {
+  background-color: #0f1219;
 }
 .theme--dark.v-data-table {
   background-color: #0f1219;
-}
-.modal {
-  max-height: 60%;
-}
-.v-dialog:not(.v-dialog--fullscreen) {
-  height: 70%;
-}
-.container {
-  max-width: 100%;
-}
-.theme--dark.v-sheet {
-  background-color: #0f1219;
-}
-.v-sheet.v-list:not(.v-sheet--outlined) {
-  background-color: #0f1219;
-
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2),
-    0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
 }
 </style>

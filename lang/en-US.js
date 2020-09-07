@@ -107,6 +107,7 @@ export default {
     noAccount: "Don't have an account yet ? ",
     createAccount: 'Create an account',
     submit: 'Submit',
+    email: 'E-mail',
   },
   verifyForm: {
     emailVerification: 'Email verification',
@@ -125,6 +126,10 @@ export default {
     published: 'Published',
     draft: 'Draft',
     artwork: 'Your artwork',
+    description: 'Description',
+    tags: 'Tags',
+    confirmDelete: 'Please confirm',
+    cancel: 'Cancel',
   },
   editDesign: {
     updateDesignInfo: 'Update Design Information',
@@ -137,6 +142,8 @@ export default {
     assignToTeam: 'Assign to team',
     selectTeam: 'Select a team',
     updated: 'Design successfully updated',
+    newItem: 'New Item',
+    editItem: 'Edit Item',
   },
   create: {
     uploadArtwork: 'Upload an artwok',
@@ -146,7 +153,7 @@ export default {
     uploadError: 'An error occurred during the upload process',
   },
   user: {
-    noResult: 'No result',
+    noResult: "This artist didn't published any artwork yet",
     backToUsersList: 'Back to users list',
   },
   designs: {

@@ -229,6 +229,7 @@ export default {
       images: {},
       designId: this.$route.params.id,
       width: '500px',
+      prevRoute: null,
     }
   },
   fetchOnServer: true,
@@ -240,6 +241,7 @@ export default {
     },
  
   },
+
   methods: {
     ...mapActions(['hideModal']),
     handleDelete(id) {
