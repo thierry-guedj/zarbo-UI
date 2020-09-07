@@ -213,7 +213,7 @@ export default {
         `/users/${this.$auth.user.id}/designs`
       )
       this.designs = data
-    
+
       this.designs.forEach((design, index) => {
         design.tags = design.tag_list.tags
         this.designs[index] = design
@@ -318,10 +318,11 @@ export default {
   background-color: #0f1219;
 }
 .vue-input-tag-wrapper {
-  background-color: transparent;
+  background-color: #0f1219;
   border-radius: 4px;
   border: 1px thin;
   border-color: rgba(255, 255, 255, 0.24);
+  color: whitesmoke;
 }
 img {
   max-width: 100%;
@@ -345,12 +346,11 @@ img {
   color: whitesmoke;
   background-color: transparent;
   border: none;
-
 }
 .dg-btn--ok {
   color: whitesmoke;
-background-color: transparent;
- border: none;
+  background-color: transparent;
+  border: none;
 }
 .dg-content-cont {
   width: 100%;

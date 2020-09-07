@@ -287,6 +287,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  text-align: left;
+}
 .showDesign {
   background-color: #0f1219;
 
