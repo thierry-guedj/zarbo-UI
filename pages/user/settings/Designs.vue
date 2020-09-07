@@ -243,7 +243,7 @@ export default {
         okText: this.$i18n.t('settingsDesigns.delete'),
         cancelText: this.$i18n.t('settingsDesigns.cancel'),
         animation: 'zoom', // Available: "zoom", "bounce", "fade"
-        customClass: 'theme--dark.v-sheet.v-card', // Custom class to be injected into the parent node for the current dialog instance
+        customClass: 'custom-dialog', // Custom class to be injected into the parent node for the current dialog instance
       }
       this.$dialog
         .confirm(this.$i18n.t('settingsDesigns.confirmDelete'), options)
@@ -313,7 +313,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .theme--dark.v-sheet.v-card {
   background-color: #0f1219;
 }
@@ -337,13 +337,20 @@ img {
 .theme--dark.v-data-table {
   background-color: #0f1219;
 }
+.custom-dialog {
+  font-family: 'Josefin Sans', sans-serif;
+  color: whitesmoke;
+}
 .dg-btn--cancel {
   color: whitesmoke;
+  background-color: transparent;
+  border: none;
 
 }
 .dg-btn--ok {
   color: whitesmoke;
-
+background-color: transparent;
+ border: none;
 }
 .dg-content-cont {
   width: 100%;
