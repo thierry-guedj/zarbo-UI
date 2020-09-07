@@ -337,4 +337,26 @@ img {
 .theme--dark.v-data-table {
   background-color: #0f1219;
 }
+.dg-btn--cancel {
+  color: whitesmoke;
+
+}
+.dg-btn--ok {
+  color: whitesmoke;
+
+}
+.dg-content-cont {
+  width: 100%;
+  font-family: 'Josefin Sans', sans-serif;
+  color: whitesmoke;
+}
+.dg-main-content {
+  width: 98%;
+  /*width: calc(98% - 30px);*/
+  max-width: 400px;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 25px auto;
+  background-color: #0f1219;
+}
 </style>

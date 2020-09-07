@@ -41,7 +41,7 @@
     <v-text-field
       v-model="$v.form.email.$model"
       :error-messages="emailErrors"
-      :label="$t('resendForm.email')"
+      v-bind:label="$t('resendForm.email')"
       required
       @input="$v.form.email.$touch()"
       @blur="$v.form.email.$touch()"
@@ -54,7 +54,7 @@
       type="submit"
       >{{ $t('resendForm.submit') }}</v-btn
     >
-    <v-btn @click="clear">clear</v-btn>
+    <v-btn @click="clear">{{ $t('resendForm.clear') }}</v-btn>
     <div class="font-14 fw-400 text-center mt-4 right">
       {{ $t('resendForm.noAccount') }}
 
