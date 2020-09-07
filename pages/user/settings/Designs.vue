@@ -318,11 +318,23 @@ export default {
   background-color: #0f1219;
 }
 .vue-input-tag-wrapper {
-  background-color: #0f1219;
+  background-color: #0f1219 !important;
   border-radius: 4px;
   border: 1px thin;
   border-color: rgba(255, 255, 255, 0.24);
   color: whitesmoke;
+}
+.vue-input-tag-wrapper .input-tag {
+    background-color: #004D40 !important;
+    border-radius: 4px !important;
+    border: 1px solid #a5d24a;
+    color: whitesmoke !important;
+    display: inline-block;
+    font-size: 15px !important;
+    font-weight: 400;
+    margin-bottom: 4px;
+    margin-right: 4px;
+    padding: 3px;
 }
 img {
   max-width: 100%;
