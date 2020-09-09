@@ -251,7 +251,6 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'zarbo',
-      bgImage: Math.floor(Math.random() * 21) + '_resultat.jpg',
       scrollPosition: null,
     }
   },
@@ -264,10 +263,6 @@ export default {
     }
   },
   computed: {
-    backgroundUrl() {
-      return require(`~/assets/images/bg1280-hauteur/${this.bgImage}`)
-    },
-
     ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
   mounted() {
