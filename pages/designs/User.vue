@@ -243,13 +243,8 @@ export default {
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
 
-      if (this.designs.length > 0) {
-        console.log('coucou')
-        this.user = Object.assign(this.user, this.designs[0].user)
-        console.log(this.user)
-      }
-      /* const res = await this.$axios.$get(`/user/${this.filters.userId}`)
-      this.user = res.data */
+      const res = await this.$axios.$get(`/user/${this.filters.userId}/findById`)
+      this.user = res.data
 
       this.designs.forEach((design) => {
         this.itemsDesigns.push({
