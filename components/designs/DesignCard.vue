@@ -166,6 +166,9 @@ export default {
 .v-application a {
   text-decoration: none;
 }
+.v-application .ml-3 {
+  text-align: left;
+}
 /* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
 @media screen and (min-width: 601px) {
   .portfolio-item__header {
