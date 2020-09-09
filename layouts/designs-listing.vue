@@ -165,9 +165,7 @@
           ></avatar>
           <v-menu
             offset-y
-            bottom
-            origin="bottom center"
-            transition="scale-transition"
+         
             color="#0f1219"
           >
             <template v-slot:activator="{ on, attrs }">
