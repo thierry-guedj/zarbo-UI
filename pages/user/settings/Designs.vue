@@ -328,5 +328,4 @@ img {
 .theme--dark.v-card {
   background-color: #0f1219;
 }
-
 </style>

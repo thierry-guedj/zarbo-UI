@@ -24,7 +24,7 @@ const routes = [
     name: 'login___en',
     component: page('auth/Login.vue'),
   },
- 
+
   {
     path: '/verification/verify/:id',
     name: 'verify',
@@ -88,6 +88,16 @@ const routes = [
       {
         path: 'profile',
         name: 'settings.profile',
+        component: page('user/settings/Profile.vue'),
+      },
+      {
+        path: 'profile/fr/',
+        name: 'settings.profile___fr',
+        component: page('user/settings/Profile.vue'),
+      },
+      {
+        path: 'profile/en/',
+        name: 'settings.profile___en',
         component: page('user/settings/Profile.vue'),
       },
       {
@@ -195,7 +205,6 @@ const routes = [
       showModal: true,
     },
   }, */
-
 ]
 
 export function createRouter() {

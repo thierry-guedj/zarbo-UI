@@ -93,19 +93,19 @@
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
-        <nuxt-link :to="{ name: 'designs.search' }"
+        <nuxt-link :to="localePath({ name: 'designs.search' })"
           ><v-btn small color="transparent" class="mr-2 ml-3">{{
             $t('navbar.artwork')
           }}</v-btn></nuxt-link
         >
-        <nuxt-link :to="{ name: 'users.search' }"
+        <nuxt-link :to="localePath({ name: 'users.search' })"
           ><v-btn small color="transparent" class="mr-2">{{
             $t('navbar.artists')
           }}</v-btn>
         </nuxt-link>
 
         <template v-if="$auth.loggedIn">
-          <nuxt-link to="/upload">
+          <nuxt-link :to="localePath({ name: 'designs.upload' })">
             <v-btn small class="upload-button mr-2"
               ><v-icon class="mr-2">mdi-cloud-upload</v-icon
               >{{ $t('navbar.upload') }}</v-btn
@@ -123,13 +123,6 @@
           >
         </template>
         <v-spacer />
-        <!--   <v-text-field
-          solo-inverted
-          flat
-          hide-details
-          label="Search"
-          prepend-inner-icon="search"
-        ></v-text-field> -->
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
           <base-button
@@ -213,11 +206,6 @@
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
     </v-app>
-    <!-- Modal  -->
-    <!-- <keep-alive> -->
-    <!-- <base-modal :dialog.sync="visible" :success="false" :status="''" /> -->
-    <!-- </keep-alive> -->
-    <!-- End Modal -->
   </section>
 </template>
 
@@ -237,17 +225,17 @@ export default {
         {
           icon: 'mdi-apps',
           title: this.$i18n.t('navigationDrawer.welcome'),
-          to: '/',
+          to: this.localePath({ name: 'index' }),
         },
         {
           icon: 'mdi-looks',
           title: this.$i18n.t('navigationDrawer.artwork'),
-          to: '/designs',
+          to: this.localePath({ name: 'designs.search' }),
         },
         {
           icon: 'mdi-chart-bubble',
           title: this.$i18n.t('navigationDrawer.artists'),
-          to: '/users',
+          to: this.localePath({ name: 'users.search' }),
         },
       ],
       menuAccount: [
@@ -284,7 +272,6 @@ export default {
 
     ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
-
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
@@ -304,7 +291,6 @@ export default {
       })
     })
   },
-
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     logout() {
@@ -324,10 +310,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* .theme--dark.v-app-bar.v-toolbar.v-sheet {
-  opacity: 0.95;
-  background-color: #0f1219;
-} */
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
@@ -338,28 +320,8 @@ export default {
 .theme--dark.v-list {
   background: #0f1219;
 }
-.gradientBody {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .theme--dark.v-application {
-  background: #0f1219;
-}
-.v-application {
+  background-color: #0f1219;
   font-family: 'Josefin Sans', sans-serif;
 
   font-size: 15px;

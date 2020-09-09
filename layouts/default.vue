@@ -99,34 +99,24 @@
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
-        <nuxt-link :to="{ name: 'designs.search' }"
+        <nuxt-link :to="localePath({ name: 'designs.search' })"
           ><v-btn small color="transparent" class="mr-2 ml-3">{{
             $t('navbar.artwork')
           }}</v-btn></nuxt-link
         >
-        <nuxt-link :to="{ name: 'users.search' }"
+        <nuxt-link :to="localePath({ name: 'users.search' })"
           ><v-btn small color="transparent" class="mr-2">{{
             $t('navbar.artists')
           }}</v-btn>
         </nuxt-link>
 
         <template v-if="$auth.loggedIn">
-          <base-button
-            to="/upload"
-            button-class="upload-button mr-2"
-            icon="mdi-cloud-upload"
-            >{{ $t('navbar.upload') }}</base-button
-          >
-          <!--  <base-button
-            toggle-modal
-            needs-auth
-            component-name="CreateForm"
-            folder-name="user"
-            button-class="upload-button mr-2"
-            icon="mdi-cloud-upload"
-          
-            >Upload</base-button
-          > -->
+          <nuxt-link :to="localePath({ name: 'designs.upload' })">
+            <v-btn small class="upload-button mr-2"
+              ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+              >{{ $t('navbar.upload') }}</v-btn
+            >
+          </nuxt-link>
         </template>
         <template v-else>
           <base-button
@@ -139,13 +129,6 @@
           >
         </template>
         <v-spacer />
-        <!-- <v-text-field
-          solo-inverted
-          flat
-          hide-details
-          label="Search"
-          prepend-inner-icon="search"
-        ></v-text-field> -->
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
           <base-button
@@ -175,8 +158,7 @@
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-            >
-              <v-icon right dark class="mr-2">exit_to_app</v-icon
+              ><v-icon right dark class="mr-2">exit_to_app</v-icon
               >{{ $t('navbar.signout') }}</v-btn
             ></nuxt-link
           >
@@ -186,7 +168,7 @@
             class="ml-3 mr-2"
             :size="40"
           ></avatar>
-         <v-menu
+          <v-menu
             offset-y
             bottom
             origin="bottom center"
@@ -219,10 +201,6 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-      <!--  <v-container
-        height="10"
-        class="gradientBody justify-start align-content-md-start pt-0"
-      ></v-container> -->
       <div id="grad1" class="line"></div>
       <v-main>
         <v-container class="main-container">
@@ -253,17 +231,17 @@ export default {
         {
           icon: 'mdi-apps',
           title: this.$i18n.t('navigationDrawer.welcome'),
-          to: '/',
+          to: this.localePath({ name: 'index' }),
         },
         {
           icon: 'mdi-looks',
           title: this.$i18n.t('navigationDrawer.artwork'),
-          to: '/designs',
+          to: this.localePath({ name: 'designs.search' }),
         },
         {
           icon: 'mdi-chart-bubble',
           title: this.$i18n.t('navigationDrawer.artists'),
-          to: '/users',
+          to: this.localePath({ name: 'users.search' }),
         },
       ],
       menuAccount: [
@@ -271,7 +249,7 @@ export default {
           title: this.$i18n.t('menuAccount.yourDesigns'),
           route: this.localePath({ name: 'settings.designs' }),
         },
-           {
+        {
           title: this.$i18n.t('menuAccount.yourProfile'),
           route: this.localePath({ name: 'settings.profile' }),
         },
@@ -324,16 +302,14 @@ export default {
     logout() {
       this.$auth.logout()
     },
-
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
     goTo(to, folderName) {
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),
         300
       )
-    },
-
-    toTop() {
-      this.$vuetify.goTo(0)
     },
   },
 }
@@ -344,27 +320,16 @@ export default {
   font-size: 16px;
   margin-left: 20px;
 }
+.theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
+  background-color: rgba(31, 124, 142, 0.65);
+}
 .v-application a {
   text-decoration: none;
+  color: whitesmoke;
 }
-.gradientBody {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+.theme--dark.v-list {
+  background: #0f1219;
 }
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
 
 .text-parallax {

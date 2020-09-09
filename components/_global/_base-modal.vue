@@ -8,7 +8,6 @@
     eager
     transition="dialog-bottom-transition"
     @keydown.esc="hideModal"
-    
   >
     <v-card style="max-height: 100%; max-width: 320vh; width: auto;">
       <v-card-actions class="float-md-right justify-end"
