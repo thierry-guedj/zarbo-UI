@@ -1,58 +1,51 @@
 <template>
-  <v-btn
-    :loading="loadingSubmit"
-    class="ma-0 is-live pl-0 pr-3"
-    :color="getColor"
-    text-color="white"
-    small
-    rounded
-    @click.native="
-      loadingSubmit = true
-      toggleIsLive(item.is_live, item.id)
-    "
-  >
-    <v-avatar left class="avatar-is-live">
-      <v-icon>mdi-checkbox-marked-circle</v-icon>
-    </v-avatar>
-    {{
-      item.is_live === true
-        ? $t('settingsDesigns.published')
-        : $t('settingsDesigns.draft')
-    }}</v-btn
-  >
+  <section>
+    <v-card flat>
+      <v-card-title class="message">{{
+        $t('confirmDelete.confirmMessage')
+      }}</v-card-title>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+
+        <v-btn color="green darken-1" text @click="close()">
+          {{ $t('confirmDelete.cancel') }}
+        </v-btn>
+
+        <v-btn color="green darken-1" text @click="agree()">
+          {{ $t('confirmDelete.confirm') }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </section>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: 'IsLive',
-  props: {
-    /* id: {
-      type: Number,
-      default: null,
-    },
-    isLive: {
-      type: Boolean,
-      default: false,
-    }, */
+  name: 'ConfirmDelete',
+  /*   props: {
     item: {
       type: Object,
       default: null,
-    }
-  },
+    },
+  
+  }, */
   data() {
     return {
       loadingSubmit: false,
-      // isLive: this.is_live,
     }
   },
 
   computed: {
-    getColor() {
-      if (this.item.is_live === false) return 'orange darken-3'
-      else return 'teal darken-3'
+    ...mapGetters(['getItem']),
+
+    item() {
+      return this.getItem
     },
   },
   methods: {
+    ...mapActions(['showModal', 'hideModal']),
     async toggleIsLive(isLive, id) {
       this.loadingSubmit = true
       const url = `/designs/${id}/updateIsLive`
@@ -76,16 +69,21 @@ export default {
           this.$emit('isLiveToggle', this.item)
         })
     },
+    close() {
+      this.hideModal()
+    },
+    agree() {
+      this.$emit('destroyItem')
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.avatar-is-live {
-  padding: 0;
+.message {
+  font-size: 18px;
 }
-.is-live {
-  cursor: pointer;
-  font-size: 11px;
+.theme--dark.v-card {
+  background-color: #0f1219;
 }
 </style>

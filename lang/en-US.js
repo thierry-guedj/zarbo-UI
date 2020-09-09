@@ -155,9 +155,15 @@ export default {
   user: {
     noResult: "This artist didn't published any artwork yet",
     backToUsersList: 'Back to users list',
+    userPageTitle: 'Portfolio of ',
   },
   designs: {
     backToResults: 'Back to results',
     noResult: 'No result',
+  },
+  confirmDelete: {
+    confirmMessage: 'Please confirm the deletion of this artwork.',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
   },
 }

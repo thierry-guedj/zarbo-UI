@@ -61,9 +61,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-account-setting {
-  text-align: center;
+.container {
+  max-width: 100% !important;
 }
+/* .user-account-setting {
+  text-align: center;
+} */
 .list-settings {
   background: #0f1219;
   border: 1px solid whitesmoke;

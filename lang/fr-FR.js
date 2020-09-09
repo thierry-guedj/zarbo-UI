@@ -156,9 +156,15 @@ export default {
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
     backToUsersList: 'Retour à la liste des artistes',
+    userPageTitle: 'Portfolio de ',
   },
   designs: {
     backToResults: 'Retour aux résultats',
     noResult: 'Pas de résultat',
+  },
+  confirmDelete: {
+    confirmMessage: 'Veuillez confirmer la suppression de cette oeuvre.',
+    cancel: 'Annuler',
+    confirm: 'Confirmer',
   },
 }

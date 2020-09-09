@@ -86,7 +86,7 @@
       <section class="hero text-center mb-4 text-white">
       <v-container>
         <h1 class="font-28 fw-600 text-uppercase text-white">
-          {{ $t('editDesign.updateDesignInfo') }}
+          {{ $t('user.userPageTitle') }} {{ user.name }}
         </h1>
       </v-container>
     </section>
@@ -214,6 +214,7 @@ export default {
       fab: false,
       index: null,
       itemsDesigns: [],
+      user: null,
     }
   },
 
@@ -241,6 +242,9 @@ export default {
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
+
+      const res = await this.$axios.$get(`/users/${this.filters.userId}`)
+      this.user = res.data
 
       this.designs.forEach((design) => {
         this.itemsDesigns.push({

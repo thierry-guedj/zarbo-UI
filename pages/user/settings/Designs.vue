@@ -97,11 +97,10 @@
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <!-- <confirm-delete :item="item" :dialog.sync="dialogDelete" /> -->
         <v-icon small class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-        <v-icon small @click="deleteItem(item)">
+        <v-icon small @click="confirmDeleteItem(item)">
           mdi-delete
         </v-icon>
       </template>
@@ -109,10 +108,25 @@
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
     </v-data-table>
+    <!-- <confirm-delete
+          :item="item"
+          :dialog.sync="dialogDelete"
+          @deleteItem="deleteItem(item)"
+        /> -->
+    <!-- Modal  -->
+    <keep-alive>
+      <base-modal
+        :dialog.sync="visible"
+        @showDesign="styleModal()"
+        @closeDialog="hideModal()"
+        @destroyItem="deleteItem()"
+      />
+    </keep-alive>
   </section>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     InputTag: () => import('vue-input-tag'),
@@ -171,14 +185,6 @@ export default {
         assign_to_team: false,
         team: null,
       },
-      /*  form: {
-        title: '',
-        description: '',
-        is_live: false,
-        tags: [],
-        assign_to_team: false,
-        team: null,
-      }, */
       loading: true,
       search: '',
       dialogDelete: false,
@@ -187,18 +193,17 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1
-        ? this.$i18n.t('editDesign.newItem')
-        : this.$i18n.t('editDesign.editItem')
+      return this.$i18n.t('editDesign.editItem')
+    },
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'getItem']),
+    itemToDelete() {
+      return this.getItem
     },
   },
 
   watch: {
     dialog(val) {
       val || this.close()
-    },
-    dialogDelete(val) {
-      val || this.closeDelete()
     },
   },
 
@@ -207,6 +212,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(['showModal', 'hideModal']),
     async initialize() {
       this.designs = []
       const { data } = await this.$axios.$get(
@@ -227,6 +233,13 @@ export default {
       this.editedItem.tags = this.editedItem.tag_list.tags
       this.dialog = true
     },
+    confirmDeleteItem(item) {
+      this.showModal({
+        componentName: 'ConfirmDelete',
+        folder: 'designs',
+        item,
+      })
+    },
     async updateItem(item) {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
@@ -234,32 +247,12 @@ export default {
       this.editedItem = design
       this.designs[this.designs.indexOf(item)] = design
     },
-    deleteItem(item) {
-      /* confirm('Are you sure you want to delete this item?') &&
-        this.designs.splice(index, 1) */
-      const options = {
-        loader: true, // set to true if you want the dailog to show a loader after click on "proceed"
+    deleteItem() {
+      const index = this.designs.indexOf(this.itemToDelete)
+      this.designs.splice(index, 1)
+      const res = this.$axios.$delete(`/designs/${this.itemToDelete.id}`)
 
-        okText: this.$i18n.t('settingsDesigns.delete'),
-        cancelText: this.$i18n.t('settingsDesigns.cancel'),
-        animation: 'zoom', // Available: "zoom", "bounce", "fade"
-        customClass: 'custom-dialog', // Custom class to be injected into the parent node for the current dialog instance
-      }
-      this.$dialog
-        .confirm(this.$i18n.t('settingsDesigns.confirmDelete'), options)
-        .then((dialog) => {
-          console.log('Clicked on confirm')
-
-          const res = this.$axios.$delete(`/designs/${item.id}`)
-          const index = this.designs.indexOf(item)
-          this.designs.splice(index, 1)
-
-          dialog.loader = false
-          dialog.close()
-        })
-        .catch(function () {
-          console.log('Clicked on cancel')
-        })
+      this.hideModal()
     },
 
     close() {
@@ -293,30 +286,13 @@ export default {
       }
 
       const res = await this.$axios.put(`/designs/${this.editedItem.id}`, form)
-      /* this.form
-        .put(`/designs/${this.editedItem.id}`)
-        .then((res) => {
-          setTimeout(() => {
-            this.$router.push({ name: 'settings.designs' })
-          }, 1000)
-        })
-        .catch((err) => console.log(err.response))
-        .finally(() => {
-          
-          this.loader = null
-          this.loadingSubmit = false
-        }) */
-
       this.close()
     },
   },
 }
 </script>
 
-<style lang="scss">
-.theme--dark.v-sheet.v-card {
-  background-color: #0f1219;
-}
+<style lang="scss" scoped>
 .vue-input-tag-wrapper {
   background-color: #0f1219 !important;
   border-radius: 4px;
@@ -325,16 +301,16 @@ export default {
   color: whitesmoke;
 }
 .vue-input-tag-wrapper .input-tag {
-    background-color: #004D40 !important;
-    border-radius: 4px !important;
-    border: 1px solid #a5d24a;
-    color: whitesmoke !important;
-    display: inline-block;
-    font-size: 15px !important;
-    font-weight: 400;
-    margin-bottom: 4px;
-    margin-right: 4px;
-    padding: 3px;
+  background-color: #004d40 !important;
+  border-radius: 4px !important;
+  border: 1px solid #a5d24a;
+  color: whitesmoke !important;
+  display: inline-block;
+  font-size: 15px !important;
+  font-weight: 400;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  padding: 3px;
 }
 img {
   max-width: 100%;
@@ -347,35 +323,11 @@ img {
 .editItem {
   background-color: #0f1219;
 }
-.theme--dark.v-data-table {
+/* .theme--dark.v-data-table {
+  background-color: #0f1219;
+} */
+.theme--dark.v-card {
   background-color: #0f1219;
 }
-.custom-dialog {
-  font-family: 'Josefin Sans', sans-serif;
-  color: whitesmoke;
-}
-.dg-btn--cancel {
-  color: whitesmoke;
-  background-color: transparent;
-  border: none;
-}
-.dg-btn--ok {
-  color: whitesmoke;
-  background-color: transparent;
-  border: none;
-}
-.dg-content-cont {
-  width: 100%;
-  font-family: 'Josefin Sans', sans-serif;
-  color: whitesmoke;
-}
-.dg-main-content {
-  width: 98%;
-  /*width: calc(98% - 30px);*/
-  max-width: 400px;
-  padding: 15px;
-  border-radius: 5px;
-  margin: 25px auto;
-  background-color: #0f1219;
-}
+
 </style>

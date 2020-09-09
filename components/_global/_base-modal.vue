@@ -8,6 +8,7 @@
     eager
     transition="dialog-bottom-transition"
     @keydown.esc="hideModal"
+    
   >
     <v-card style="max-height: 100%; max-width: 320vh; width: auto;">
       <v-card-actions class="float-md-right justify-end"
@@ -27,7 +28,7 @@
           :is="modalComponent"
           :key="unique"
           :modal-closed="modalClosed"
-         
+          @destroyItem="deleteItem"
         ></component>
       </v-card-text>
     </v-card>
@@ -40,7 +41,8 @@ import RegisterForm from '@/components/auth/RegisterForm.vue'
 import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
-import VerifyForm from '@/components/auth/VerifyForm.vue'
+import ConfirmDelete from '@/components/designs/ConfirmDelete.vue'
+// import VerifyForm from '@/components/auth/VerifyForm.vue'
 
 export default {
   name: 'BaseModal',
@@ -50,20 +52,16 @@ export default {
     PasswordResetForm,
     ResendForm,
     ResetEmail,
-    VerifyForm,
+    ConfirmDelete,
   },
   props: {
     value: {
       type: Boolean,
     },
-   
+
     width: {
       type: String,
       default: '500',
-    },
-    slug: {
-      type: String,
-      default: '',
     },
     fullscreen: {
       type: Boolean,
@@ -82,13 +80,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'visible',
-      'modalComponent',
-      'folder',
-      'getSlugDesign',
-      'getStyle',
-    ]),
+    ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
 
     /* componentInstance() {
       if (!this.modalComponent) return
@@ -116,6 +108,10 @@ export default {
     },
     openDialog() {
       this.modalClosed = false
+    },
+    deleteItem() {
+      console.log('coucou')
+      this.$emit('destroyItem')
     },
     //
   },

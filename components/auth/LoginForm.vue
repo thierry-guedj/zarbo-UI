@@ -175,7 +175,7 @@ export default {
           })
           .then((res) => {
             this.hideModal()
-            this.showSnackbar()
+            // this.showSnackbar()
             // this.$router.go(0)
             // this.$emit('loginSuccess', this.loginMsg)
           })
