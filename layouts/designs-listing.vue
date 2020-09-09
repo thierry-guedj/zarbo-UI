@@ -105,14 +105,11 @@
         </nuxt-link>
 
         <template v-if="$auth.loggedIn">
-          <nuxt-link
-            to="/upload">
-            <v-btn small
-            class="upload-button mr-2"
-            
-            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
-      >{{ $t('navbar.upload') }}</v-btn
-          >
+          <nuxt-link to="/upload">
+            <v-btn small class="upload-button mr-2"
+              ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+              >{{ $t('navbar.upload') }}</v-btn
+            >
           </nuxt-link>
         </template>
         <template v-else>
@@ -173,12 +170,12 @@
             class="ml-3 mr-2"
             :size="40"
           ></avatar>
-
           <v-menu
+            offset-y
             bottom
-            origin="center center"
+            origin="bottom center"
             transition="scale-transition"
-            color="rgba(23, 22, 18, 0.64)"
+            color="#0f1219"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="transparent" dark v-bind="attrs" v-on="on">
@@ -189,8 +186,13 @@
             </template>
 
             <v-list>
-              <v-list-item v-for="(item, i) in menuAccount" :key="i">
-                <nuxt-link :to="{ name: item.route }">
+              <v-list-item
+                v-for="(item, i) in menuAccount"
+                :key="i"
+                link
+                class="text-white"
+              >
+                <nuxt-link :to="item.route">
                   <v-list-item-title>{{
                     item.title
                   }}</v-list-item-title></nuxt-link
@@ -251,11 +253,11 @@ export default {
       menuAccount: [
         {
           title: this.$i18n.t('menuAccount.yourDesigns'),
-          route: 'settings.designs',
+          route: this.localePath({ name: 'settings.designs' }),
         },
         {
           title: this.$i18n.t('menuAccount.yourProfile'),
-          route: 'settings.profile',
+          route: this.localePath({ name: 'settings.profile' }),
         },
       ],
 
@@ -331,6 +333,10 @@ export default {
 }
 .v-application a {
   text-decoration: none;
+  color: whitesmoke;
+}
+.theme--dark.v-list {
+  background: #0f1219;
 }
 .gradientBody {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);

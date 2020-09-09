@@ -292,7 +292,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .vue-input-tag-wrapper {
   background-color: #0f1219 !important;
   border-radius: 4px;
@@ -303,7 +303,6 @@ export default {
 .vue-input-tag-wrapper .input-tag {
   background-color: #004d40 !important;
   border-radius: 4px !important;
-  border: 1px solid #a5d24a;
   color: whitesmoke !important;
   display: inline-block;
   font-size: 15px !important;

@@ -186,11 +186,12 @@
             class="ml-3 mr-2"
             :size="40"
           ></avatar>
-          <v-menu
+         <v-menu
+            offset-y
             bottom
-            origin="center center"
+            origin="bottom center"
             transition="scale-transition"
-            color="rgba(23, 22, 18, 0.64)"
+            color="#0f1219"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="transparent" dark v-bind="attrs" v-on="on">
@@ -201,8 +202,13 @@
             </template>
 
             <v-list>
-              <v-list-item v-for="(item, i) in menuAccount" :key="i">
-                <nuxt-link :to="{ name: item.route }">
+              <v-list-item
+                v-for="(item, i) in menuAccount"
+                :key="i"
+                link
+                class="text-white"
+              >
+                <nuxt-link :to="item.route">
                   <v-list-item-title>{{
                     item.title
                   }}</v-list-item-title></nuxt-link
@@ -263,11 +269,11 @@ export default {
       menuAccount: [
         {
           title: this.$i18n.t('menuAccount.yourDesigns'),
-          route: 'settings.designs',
+          route: this.localePath({ name: 'settings.designs' }),
         },
            {
           title: this.$i18n.t('menuAccount.yourProfile'),
-          route: 'settings.profile',
+          route: this.localePath({ name: 'settings.profile' }),
         },
       ],
 
