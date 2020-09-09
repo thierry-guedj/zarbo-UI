@@ -163,11 +163,7 @@
             class="ml-3 mr-2"
             :size="40"
           ></avatar>
-          <v-menu
-            offset-y
-         
-            color="#0f1219"
-          >
+          <v-menu offset-y color="#0f1219">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="transparent" dark v-bind="attrs" v-on="on">
                 <span class="user-name font-12 fw-500">

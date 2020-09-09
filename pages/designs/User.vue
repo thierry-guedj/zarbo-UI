@@ -243,7 +243,9 @@ export default {
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
 
-      const res = await this.$axios.$get(`/user/${this.filters.userId}/findById`)
+      const res = await this.$axios.$get(
+        `/user/${this.filters.userId}/findById`
+      )
       this.user = res.data
 
       this.designs.forEach((design) => {
