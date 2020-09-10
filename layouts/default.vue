@@ -444,6 +444,7 @@ footer {
 }
 .container {
   max-width: 100%;
+  text-align: left;
 }
 .v-main {
   padding-top: 0 !important;

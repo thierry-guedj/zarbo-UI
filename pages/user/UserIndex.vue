@@ -242,6 +242,7 @@ export default {
 .container {
   max-width: 100%;
   padding: 0;
+  text-align: left;
 }
 .search-control {
   max-width: 75%;

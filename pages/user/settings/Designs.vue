@@ -318,6 +318,7 @@ img {
 }
 .container {
   max-width: 100% !important;
+  text-align: left;
 }
 .editItem {
   background-color: #0f1219;
