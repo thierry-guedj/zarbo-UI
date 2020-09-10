@@ -306,7 +306,7 @@ export default {
   text-align: left;
 }
 .search-control {
-  max-width: 75%;
+  max-width: 75% !important;
 }
 .loader {
   position: fixed;

@@ -27,7 +27,7 @@
               >New Item</v-btn
             >
           </template> -->
-            <v-card>
+            <v-card class="modalEditDelete">
               <v-card-title>
                 <span class="headline">{{ formTitle }}</span>
               </v-card-title>
@@ -116,6 +116,7 @@
     <!-- Modal  -->
     <keep-alive>
       <base-modal
+        class="modalEditDelete"
         :dialog.sync="visible"
         @showDesign="styleModal()"
         @closeDialog="hideModal()"
@@ -317,7 +318,7 @@ img {
   width: auto\9; /* ie8 */
 }
 .container {
-  max-width: 100% !important;
+  // max-width: 100% !important;
   text-align: left;
 }
 .editItem {
@@ -326,7 +327,7 @@ img {
 /* .theme--dark.v-data-table {
   background-color: #0f1219;
 } */
-.theme--dark.v-card {
-  background-color: #0f1219;
+.modalEditDelete {
+  background-color: #0f1219 !important;
 }
 </style>
