@@ -44,7 +44,7 @@
             <v-card-text>
               <form class="auth-form" @submit.prevent="submit">
                 <v-alert
-                  v-if="this.$v.form.$model.successful"
+                  v-if="form.successful"
                   color="#388E3C"
                   dark
                   icon="mark_email_unread"
@@ -53,18 +53,16 @@
                   >Design successfully updated</v-alert
                 >
                 <v-text-field
-                  v-model.trim="$v.form.title.$model"
-                  :error-messages="titleErrors"
-                  :counter="155"
+                  v-model.trim="form.title"
+          
                   :label="$t('editDesign.title')"
-                  required
+
                   field="title"
                   outlined
                   class="mb-1"
-                  @input="$v.form.title.$touch()"
-                  @blur="$v.form.title.$touch()"
+
                 ></v-text-field>
-                <has-error :form="form" field="title"></has-error>
+                
                 <!-- <v-textarea
                   v-model.trim="$v.form.description.$model"
                   :error-messages="descriptionErrors"
@@ -84,7 +82,7 @@
                   class="mb-1"
                   field="description"
                 ></v-textarea>
-                <has-error :form="form" field="description"></has-error>
+  
                 <client-only>
                   <input-tag
                     v-model="form.tags"
@@ -130,7 +128,7 @@
                 <v-btn
                   class="mr-4"
                   :loading="loadingSubmit"
-                  :disabled="$v.form.$invalid"
+                  :disabled="form.$invalid"
                   type="submit"
                   >{{ $t('editDesign.updateDesign') }}</v-btn
                 >
@@ -155,18 +153,7 @@ export default {
     InputTag: () => import('vue-input-tag'),
     Circle8,
   },
-  validations: {
-    form: {
-      title: {
-        required,
-        minLen: minLength(3),
-        maxLen: maxLength(35),
-      },
-      /*      description: {
-        maxLen: maxLength(450),
-      }, */
-    },
-  },
+
 
   async asyncData({ $axios, params, error, redirect }) {
     try {
@@ -204,26 +191,7 @@ export default {
       upload: false,
     }
   },
-  computed: {
-    titleErrors() {
-      const errors = []
-      if (!this.$v.form.title.$dirty) return errors
-      !this.$v.form.title.minLen &&
-        errors.push('Title must be at least 6 characters long')
-      // !this.$v.form.name.required && errors.push('Name is required.')
-      return errors
-    },
-    /*  descriptionErrors() {
-      const errors = []
-      if (!this.$v.form.description.$dirty) return errors
-      !this.$v.form.description.minLen &&
-        errors.push(`Description must be at least 3 characters long`)
-      !this.$v.form.description.maxLen &&
-        errors.push(`Description must be at most 35 characters long`)
-       !this.$v.form.username.required && errors.push('Username is required.')
-      return errors
-    }, */
-  },
+ 
   watch: {
     loader() {
       const l = this.loader
@@ -267,7 +235,6 @@ export default {
     },
     clear() {
       this.form.reset()
-      this.$v.form.$reset()
     },
   },
 }
