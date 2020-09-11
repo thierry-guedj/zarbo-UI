@@ -1,4 +1,9 @@
 <template>
+<section>
+  <div v-if="$fetchState.pending" class="loader">
+    <Circle8></Circle8>
+  </div>
+  <div v-else class="pt-6 pl-6">
   <v-row justify="center">
     <!-- <v-dialog
       v-model="dialog"
@@ -139,6 +144,8 @@
       </v-row>
     </v-container>
   </v-row>
+    </div>
+</section>
 </template>
 
 <script>
@@ -175,6 +182,17 @@ export default {
         error({ statusCode: 500, message: 'Internal server error' })
       }
     }
+  },
+   async fetch() {
+    const url = `/designs/${this.$route.params.id}/byUser`
+    if(this.design.upload_successful === false) {
+const response = await this.$axios.$get(url)
+    this.design = response.data
+    this.comments = response.data.comments
+    this.user = response.data.user
+    this.images = response.data.images
+    }
+    
   },
   data() {
     return {
@@ -242,6 +260,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
 .container {
   max-width: 900;
 }
