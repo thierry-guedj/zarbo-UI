@@ -85,7 +85,7 @@
             :src="item.images.thumbnail"
             :lazy-src="item.images.minithumbnail"
             :alt="item.title"
-            max-width="120px"
+            max-width="80px"
           >
           </v-img>
         </div>

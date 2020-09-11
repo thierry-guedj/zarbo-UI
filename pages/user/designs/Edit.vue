@@ -172,6 +172,10 @@ export default {
     try {
       const design = await $axios.$get(`/designs/${params.id}/byUser`)
       const teams = await $axios.$get(`/users/teams`)
+      if (design.upload_successful === 0) {
+        const design = await $axios.$get(`/designs/${params.id}/byUser`)
+        return { design: design.data, teams: teams.data }
+      }
 
       return { design: design.data, teams: teams.data }
     } catch (err) {

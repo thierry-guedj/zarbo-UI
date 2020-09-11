@@ -166,4 +166,14 @@ export default {
     cancel: 'Cancel',
     confirm: 'Confirm',
   },
+  profile: {
+    name: 'Name',
+    tagline: 'Tagline',
+    description: 'Description',
+    clear: 'Clear',
+    updateProfile: 'Update profile',
+    someInfo: 'Please enter some information about yourself',
+    profileUpdated: 'Profile updated successfully',
+    profile: 'Profile',
+  },
 }
