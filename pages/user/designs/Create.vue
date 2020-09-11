@@ -30,7 +30,6 @@
         </p>
       </div>
     </v-card>
-
   </section>
 </template>
 
@@ -67,7 +66,6 @@ export default {
 
       uploading: false,
       error: '',
-     
     }
   },
 
@@ -85,11 +83,14 @@ export default {
       this.$axios
         .post('/designs', formdata)
         .then((res) => {
-          this.$router.push(
-            this.localePath({
-              name: 'designs.edit',
-              params: { id: res.data.id },
-            })
+          setTimeout(
+            this.$router.push(
+              this.localePath({
+                name: 'designs.edit',
+                params: { id: res.data.id },
+              })
+            ),
+            4000
           )
         })
         .catch((err) => {
@@ -97,7 +98,6 @@ export default {
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
         })
-        
     },
   },
 }
