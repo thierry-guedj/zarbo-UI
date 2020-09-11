@@ -158,8 +158,9 @@ export default {
   async asyncData({ $axios, params, error, redirect }) {
     try {
       const design = await $axios.$get(`/designs/${params.id}/byUser`)
+      console.log(design)
       const teams = await $axios.$get(`/users/teams`)
-      if (design.upload_successful === 0) {
+      if (design.data.upload_successful === false) {
         const design = await $axios.$get(`/designs/${params.id}/byUser`)
         return { design: design.data, teams: teams.data }
       }
