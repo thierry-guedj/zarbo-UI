@@ -1,5 +1,4 @@
 <template>
-  <v-container>
     <v-card
       class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
       width="auto"
@@ -23,7 +22,6 @@
         <!--  -->
       </div>
     </v-card>
-  </v-container>
 </template>
 
 <script>

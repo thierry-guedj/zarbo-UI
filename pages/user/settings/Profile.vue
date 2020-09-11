@@ -1,62 +1,98 @@
 <template>
-  <v-container class="text-center container">
- 
-      <div class="setting-title font-16 fw-500">Profile</div>
+  <section>
+    <div class="profile">
+    <v-form novalidate @submit.stop.prevent="submit">
+      <v-card-title class="headline text-center"
+        ><i class="material-icons md-24 mr-2">face</i
+        >{{ $t('profile.profile') }}</v-card-title
+      >
+      <alert-success :form="form"
+        >{{ $t('profile.profileUpdated') }}</alert-success
+      >
 
-      <div class="text-center">
-        <form class="custom-form" @submit.prevent="update">
-          <div class="row">
-            <div class="col-md-6">
-              <alert-success :form="form"
-                >Profile information updated successfully</alert-success
-              >
-
-              <v-text-field
-                v-model.trim="form.name"
+      <!-- <div class="form-group">
+              <base-input
+                v-model="form.name"
                 :form="form"
                 field="name"
-                label="Name"
-              ></v-text-field>
-        
-              <v-text-field
-                v-model.trim="form.tagline"
-                label="Tagline"
+                placeholder="Full name"
+              ></base-input>
+            </div> -->
+      <v-text-field
+        v-model.trim="form.name"
+        :form="form"
+        field="name"
+        :label="$t('profile.name')"
+      ></v-text-field>
+      <!-- <div class="form-group">
+              <base-input
+                v-model="form.tagline"
                 :form="form"
                 field="tagline"
-              ></v-text-field>
-          
-              <v-textarea
-                v-model.trim="form.about"
+                placeholder="Tagline"
+              ></base-input>
+            </div> -->
+      <v-text-field
+        v-model.trim="form.tagline"
+        :label="$t('profile.tagline')"
+        :form="form"
+        field="tagline"
+      ></v-text-field>
+      <!-- <div class="form-group">
+                <base-gmap
+                  :initial-value="form.formatted_address"
+                  @address-response="handleAddress"
+                ></base-gmap>
+              </div> -->
+
+      <!-- <div class="form-group">
+              <base-textarea
+                v-model="form.about"
                 :form="form"
-                placeholder="Please enter some information about yourself"
                 field="about"
-                outlined
-                class="mb-1"
-              ></v-textarea>
-        
-              <v-checkbox
+                :rows="4"
+                placeholder="Please enter some information about yourself"
+              ></base-textarea>
+            </div> -->
+      <v-textarea
+        v-model.trim="form.about"
+        :form="form"
+        :placeholder="$t('profile.someInfo')"
+        field="about"
+        outlined
+        class="mb-1"
+      ></v-textarea>
+      <!-- <div class="form-group custom-control custom-checkbox">
+              <input
+                id="available_to_hire"
+                v-model="form.available_to_hire"
+                type="checkbox"
+                class="custom-control-input"
+              />
+              <label
+                class="custom-control-label"
+                :value="true"
+                for="available_to_hire"
+                >Available to hire?</label
+              >
+            </div> -->
+      <!--  <v-checkbox
                 v-model="form.available_to_hire"
                 label="Available to hire?"
                 field="available_to_hire"
                 :form="form"
                 :value="form.available_to_hire"
-              ></v-checkbox>
-              <div class="text-right">
-                <v-spacer class="mb-3" />
-                <v-btn
-                  class="ml-8 float-right"
-                  :loading="loadingSubmit"
-                  type="submit"
-                  >Update profile</v-btn
-                >
-                <v-btn @click="clear">clear</v-btn>
-              </div>
-            </div>
-          </div>
-        </form>
+              ></v-checkbox> -->
+      <div class="text-right">
+        <v-spacer class="mb-3" />
+        <v-btn class="ml-8 float-right" :loading="loadingSubmit" type="submit"
+          >{{ $t('profile.updateProfile') }}</v-btn
+        >
+        <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
       </div>
-
-  </v-container>
+    </v-form>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -117,11 +153,11 @@ export default {
 </script>
 
 <style>
-.container {
-  margin: auto;
-  text-align: center;
-}
 .modal {
   background-color: rgba(23, 22, 18, 0.85);
+}
+.profile {
+  max-width: 80%;
+  text-align: center;
 }
 </style>
