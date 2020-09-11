@@ -360,5 +360,4 @@ export default {
   text-align: center;
   cursor: pointer;
 }
-@import '@/assets/slim.css';
 </style>
