@@ -30,7 +30,7 @@
       <div>
         <slim-cropper
           :options="slimOptions"
-          class="text-black slim-avatar"
+          class="text-black slim slim-avatar"
           data-did-upload="imageUpload"
         >
           <input type="file" name="image" />

@@ -36,7 +36,9 @@
 
             <div v-if="uploading" class="text-success caption-sm mt-2">
               <i class="fas fa-spinner fa-spin"></i>
+              <div class="loader">
               <Circle8></Circle8>
+              </div>
             </div>
           </v-card-text>
           <div class="upload-para mt-2 ml-4">
@@ -212,7 +214,7 @@ export default {
         // size: '800,600',
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
-        maxFileSize: 10, // value is 2MB
+        maxFileSize: 10, // value is 10MB
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
@@ -376,5 +378,10 @@ export default {
 .container {
   // max-width: 100% !important;
   text-align: left;
+}
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 </style>
