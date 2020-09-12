@@ -169,7 +169,7 @@ export default {
   },
   profile: {
     name: 'Nom',
-    tagline: 'Tagline',
+    tagline: 'Apophtegme',
     description: 'Description',
     clear: 'Effacer',
     updateProfile: 'Modifier votre profil',

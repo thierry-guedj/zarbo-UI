@@ -1,16 +1,16 @@
 <template>
   <section>
     <div class="profile">
-    <v-form novalidate @submit.stop.prevent="submit">
-      <v-card-title class="headline text-center"
-        ><i class="material-icons md-24 mr-2">face</i
-        >{{ $t('profile.profile') }}</v-card-title
-      >
-      <alert-success :form="form"
-        >{{ $t('profile.profileUpdated') }}</alert-success
-      >
+      <v-form novalidate class="avatar" @submit.stop.prevent="submit">
+        <v-card-title class="headline text-center"
+          ><i class="material-icons md-24 mr-2">face</i
+          >{{ $t('profile.profile') }}</v-card-title
+        >
+        <alert-success :form="form">{{
+          $t('profile.profileUpdated')
+        }}</alert-success>
 
-      <!-- <div class="form-group">
+        <!-- <div class="form-group">
               <base-input
                 v-model="form.name"
                 :form="form"
@@ -18,86 +18,76 @@
                 placeholder="Full name"
               ></base-input>
             </div> -->
-      <v-text-field
-        v-model.trim="form.name"
-        :form="form"
-        field="name"
-        :label="$t('profile.name')"
-      ></v-text-field>
-      <!-- <div class="form-group">
-              <base-input
-                v-model="form.tagline"
-                :form="form"
-                field="tagline"
-                placeholder="Tagline"
-              ></base-input>
-            </div> -->
-      <v-text-field
-        v-model.trim="form.tagline"
-        :label="$t('profile.tagline')"
-        :form="form"
-        field="tagline"
-      ></v-text-field>
-      <!-- <div class="form-group">
-                <base-gmap
-                  :initial-value="form.formatted_address"
-                  @address-response="handleAddress"
-                ></base-gmap>
-              </div> -->
 
-      <!-- <div class="form-group">
-              <base-textarea
-                v-model="form.about"
-                :form="form"
-                field="about"
-                :rows="4"
-                placeholder="Please enter some information about yourself"
-              ></base-textarea>
-            </div> -->
-      <v-textarea
-        v-model.trim="form.about"
-        :form="form"
-        :placeholder="$t('profile.someInfo')"
-        field="about"
-        outlined
-        class="mb-1"
-      ></v-textarea>
-      <!-- <div class="form-group custom-control custom-checkbox">
-              <input
-                id="available_to_hire"
-                v-model="form.available_to_hire"
-                type="checkbox"
-                class="custom-control-input"
-              />
-              <label
-                class="custom-control-label"
-                :value="true"
-                for="available_to_hire"
-                >Available to hire?</label
-              >
-            </div> -->
-      <!--  <v-checkbox
-                v-model="form.available_to_hire"
-                label="Available to hire?"
-                field="available_to_hire"
-                :form="form"
-                :value="form.available_to_hire"
-              ></v-checkbox> -->
-      <div class="text-right">
-        <v-spacer class="mb-3" />
-        <v-btn class="ml-8 float-right" :loading="loadingSubmit" type="submit"
-          >{{ $t('profile.updateProfile') }}</v-btn
+        <!--  <div
+          class="slim"
+          data-label="Drop your avatar here"
+          data-fetcher="fetch.php"
+          data-size="240,240"
+          data-ratio="1:1"
         >
-        <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
-      </div>
-    </v-form>
+          <input type="file" name="slim[]" required />
+        </div> -->
+        <div>
+          <slim-cropper
+            :options="slimOptions"
+            class="text-black slim"
+            data-did-upload="imageUpload"
+          >
+            <input type="file" name="image" />
+          </slim-cropper>
+        </div>
+        <!-- <button type="submit">Upload now!</button> -->
+
+        <v-text-field
+          v-model.trim="form.name"
+          :form="form"
+          field="name"
+          :label="$t('profile.name')"
+        ></v-text-field>
+        <v-text-field
+          v-model.trim="form.tagline"
+          :label="$t('profile.tagline')"
+          :form="form"
+          field="tagline"
+        ></v-text-field>
+
+        <v-textarea
+          v-model.trim="form.about"
+          :form="form"
+          :placeholder="$t('profile.someInfo')"
+          field="about"
+          outlined
+          class="mb-1"
+        ></v-textarea>
+
+        <div class="text-right">
+          <v-spacer class="mb-3" />
+          <v-btn
+                  class="slim-btn2 slim-btn-upload2 ml-8 float-right"
+                  title="Upload"
+                  type="button"
+                  data-action="upload"
+                  style="opacity: 1;"
+                  :loading="loadingSubmit"
+                  @click="submit"
+                  >{{ $t('profile.updateProfile') }}</v-btn
+                >
+         
+          <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
+        </div>
+      </v-form>
     </div>
   </section>
 </template>
 
 <script>
+import Slim from '@/components/slim/slim.vue'
 export default {
   name: 'Profile',
+  components: {
+    'slim-cropper': Slim,
+  },
   data() {
     return {
       form: this.$vform({
@@ -111,6 +101,18 @@ export default {
       loader: null,
       loadingSubmit: false,
       dialog: true,
+      slimOptions: {
+        service: this.slimService,
+        post: 'output',
+        defaultInputName: 'image',
+        // minSize: '800,600',
+        // size: '800,600',
+        label: this.$i18n.t('create.selectImage'),
+        ratio: '1:1',
+        maxFileSize: 10, // value is 2MB
+        // forceType: 'jpg',
+        // serviceFormat: 'file',
+      },
     }
   },
 
@@ -144,6 +146,37 @@ export default {
         longitude: data.longitude,
       }
     },
+    slimService(formdata, failure) {
+      this.uploading = true
+      console.log(formdata)
+
+      formdata.append('name', this.form.name)
+      formdata.append('about', this.form.about)
+      formdata.append('tagline', this.tagline)
+
+      console.log(formdata)
+      this.$axios
+        .post('/user', formdata)
+        .then((res) => {
+          
+        })
+        .catch((err) => {
+          const message = err.response.data.errors
+          this.error = message[Object.keys(message)[0]][0]
+          failure(500)
+        })
+    },
+     submit() {
+      this.form.busy = true
+      this.loader = 'loadingSubmit'
+      const slibtn = document.getElementsByClassName('slim-btn-upload')
+      console.log(slibtn.length)
+      slibtn[0].click()
+
+      this.form.busy = false
+      this.loader = null
+      this.loadingSubmit = false
+    },
     clear() {
       this.form.reset()
       this.$v.form.$reset()
@@ -159,5 +192,10 @@ export default {
 .profile {
   max-width: 80%;
   text-align: center;
+}
+.slim {
+  width: 240px;
+  border-radius: 50%;
+  color: black;
 }
 </style>
