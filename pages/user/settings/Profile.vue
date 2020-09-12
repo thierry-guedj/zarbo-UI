@@ -1,16 +1,15 @@
 <template>
   <section>
     <div class="profile">
-      
-        <v-card-title class="headline text-center"
-          ><i class="material-icons md-24 mr-2">face</i
-          >{{ $t('profile.profile') }}</v-card-title
-        >
-        <alert-success :form="form">{{
-          $t('profile.profileUpdated')
-        }}</alert-success>
+      <v-card-title class="headline text-center"
+        ><i class="material-icons md-24 mr-2">face</i
+        >{{ $t('profile.profile') }}</v-card-title
+      >
+      <alert-success :form="form">{{
+        $t('profile.profileUpdated')
+      }}</alert-success>
 
-        <!-- <div class="form-group">
+      <!-- <div class="form-group">
               <base-input
                 v-model="form.name"
                 :form="form"
@@ -19,7 +18,7 @@
               ></base-input>
             </div> -->
 
-        <!--  <div
+      <!--  <div
           class="slim"
           data-label="Drop your avatar here"
           data-fetcher="fetch.php"
@@ -28,17 +27,17 @@
         >
           <input type="file" name="slim[]" required />
         </div> -->
-        <div>
-          <slim-cropper
-            :options="slimOptions"
-            class="text-black slim-avatar"
-            data-did-upload="imageUpload"
-          >
-            <input type="file" name="image" />
-          </slim-cropper>
-        </div>
-        <!-- <button type="submit">Upload now!</button> -->
-<form novalidate class="avatar" @submit.prevent="submit">
+      <div>
+        <slim-cropper
+          :options="slimOptions"
+          class="text-black slim-avatar"
+          data-did-upload="imageUpload"
+        >
+          <input type="file" name="image" />
+        </slim-cropper>
+      </div>
+      <!-- <button type="submit">Upload now!</button> -->
+      <form novalidate class="avatar" @submit.prevent="submit">
         <v-text-field
           v-model.trim="form.name"
           :form="form"
@@ -153,15 +152,17 @@ export default {
       this.uploading = true
       console.log(formdata)
 
-      formdata.append('name', this.form.name)
+      /* formdata.append('name', this.form.name)
       formdata.append('about', this.form.about)
-      formdata.append('tagline', this.tagline)
+      formdata.append('tagline', this.tagline) */
 
       console.log(formdata)
       const url = `/user/${this.$auth.user.id}`
       this.$axios
         .put(url, formdata)
-        .then((res) => {})
+        .then((res) => {
+          this.update()
+        })
         .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
