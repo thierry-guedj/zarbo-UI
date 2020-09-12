@@ -290,16 +290,14 @@ export default {
 
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
-        const design = this.$axios
-          .$get(`designs/${res.data.id}`)
-          .then((response) => {
+        
             console.log(design)
-            this.form.put(`designs/${design.id}`).then((result) => {
+            this.form.put(`designs/${res.data.id}`).then((result) => {
               setTimeout(() => {
                 this.$router.push({ name: 'settings.designs' })
               }, 1000)
             })
-          })
+          
 
         this.$router.push(
           this.localePath({
