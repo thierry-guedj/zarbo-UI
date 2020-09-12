@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="profile">
-      <v-form novalidate class="avatar" @submit.stop.prevent="submit">
+      
         <v-card-title class="headline text-center"
           ><i class="material-icons md-24 mr-2">face</i
           >{{ $t('profile.profile') }}</v-card-title
@@ -38,7 +38,7 @@
           </slim-cropper>
         </div>
         <!-- <button type="submit">Upload now!</button> -->
-
+<form novalidate class="avatar" @submit.prevent="submit">
         <v-text-field
           v-model.trim="form.name"
           :form="form"
@@ -76,17 +76,19 @@
 
           <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
         </div>
-      </v-form>
+      </form>
     </div>
   </section>
 </template>
 
 <script>
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import Slim from '@/components/slim/slim.vue'
 export default {
   name: 'Profile',
   components: {
     'slim-cropper': Slim,
+    Circle8,
   },
   data() {
     return {
