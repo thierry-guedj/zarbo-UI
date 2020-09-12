@@ -291,7 +291,7 @@ export default {
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
         
-            console.log(design)
+            
             this.form.put(`designs/${res.data.id}`).then((result) => {
               setTimeout(() => {
                 this.$router.push({ name: 'settings.designs' })
