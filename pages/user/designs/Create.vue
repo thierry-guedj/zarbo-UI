@@ -1,6 +1,5 @@
 <template>
-
-    <!-- <section class="hero text-center mb-4 text-white">
+  <!-- <section class="hero text-center mb-4 text-white">
       <v-container>
         <h1 class="font-28 fw-600 text-uppercase text-white">
           {{ $t('editDesign.updateDesignInfo') }}
@@ -9,48 +8,49 @@
     </section>
     End Hero -->
 
-    <!-- Upload Shot -->
-    <v-container>
-      <v-row>
-        <v-col class="col-md-6 edit-info">
-          <v-card width="100%" class="mx-auto">
-            <v-card-title class="headline"
-              ><i class="material-icons md-24 mr-4">cloud_upload</i
-              >{{ $t('create.uploadArtwork') }}</v-card-title
-            >
+  <!-- Upload Shot -->
+  <v-container>
+    <v-row>
+      <v-col class="col-md-6 edit-info">
+        <v-card width="100%" class="mx-auto">
+          <v-card-title class="headline"
+            ><i class="material-icons md-24 mr-4">cloud_upload</i
+            >{{ $t('create.uploadArtwork') }}</v-card-title
+          >
 
-            <v-card-text>
-              <div v-if="error" class="alert alert-danger">
-                <p>An error occurred during the upload process</p>
-                <p>{{ error }}</p>
-              </div>
-
-              <div>
-                <slim-cropper
-                  :options="slimOptions"
-                  class="text-black"
-                  data-did-upload="imageUpload"
-                >
-                  <input type="file" name="image" />
-                </slim-cropper>
-              </div>
-
-              <div v-if="uploading" class="text-success caption-sm mt-2">
-                <i class="fas fa-spinner fa-spin"></i>
-              </div>
-            </v-card-text>
-            <div class="upload-para mt-2 ml-4">
-              <p class="font-14 fw-400">
-                {{ $t('create.uploadNotice') }}
-              </p>
+          <v-card-text>
+            <div v-if="error" class="alert alert-danger">
+              <p>An error occurred during the upload process</p>
+              <p>{{ error }}</p>
             </div>
-          </v-card>
-        </v-col>
-        <v-col class="col-md-5 edit-info ml-2">
-          <v-card flat>
-            <v-card-text>
-              <form class="auth-form" @submit.prevent="submit">
-                <!-- <v-alert
+
+            <div>
+              <slim-cropper
+                :options="slimOptions"
+                class="text-black"
+                data-did-upload="imageUpload"
+              >
+                <input type="file" name="image" />
+              </slim-cropper>
+            </div>
+
+            <div v-if="uploading" class="text-success caption-sm mt-2">
+              <i class="fas fa-spinner fa-spin"></i>
+              <Circle8></Circle8>
+            </div>
+          </v-card-text>
+          <div class="upload-para mt-2 ml-4">
+            <p class="font-14 fw-400">
+              {{ $t('create.uploadNotice') }}
+            </p>
+          </div>
+        </v-card>
+      </v-col>
+      <v-col class="col-md-5 edit-info ml-2">
+        <v-card flat>
+          <v-card-text>
+            <form class="auth-form" @submit.prevent="submit">
+              <!-- <v-alert
                   v-if="this.$v.form.$model.successful"
                   color="#388E3C"
                   dark
@@ -59,31 +59,31 @@
                   :form="form"
                   >Design successfully updated</v-alert
                 > -->
-                <v-text-field
-                  v-model.trim="$v.form.title.$model"
-                  :error-messages="titleErrors"
-                  :counter="120"
-                  :label="$t('editDesign.title')"
-                  field="title"
-                  outlined
-                  class="mb-1"
-                  @input="$v.form.title.$touch()"
-                  @blur="$v.form.title.$touch()"
-                ></v-text-field>
-                <has-error :form="form" field="title"></has-error>
-                <v-textarea
-                  v-model.trim="$v.form.description.$model"
-                  :error-messages="descriptionErrors"
-                  :counter="3000"
-                  :label="$t('editDesign.description')"
-                  outlined
-                  class="mb-1"
-                  field="description"
-                  @input="$v.form.description.$touch()"
-                  @blur="$v.form.description.$touch()"
-                ></v-textarea>
-                <has-error :form="form" field="description"></has-error>
-                <!--  <v-textarea
+              <v-text-field
+                v-model.trim="$v.form.title.$model"
+                :error-messages="titleErrors"
+                :counter="120"
+                :label="$t('editDesign.title')"
+                field="title"
+                outlined
+                class="mb-1"
+                @input="$v.form.title.$touch()"
+                @blur="$v.form.title.$touch()"
+              ></v-text-field>
+              <has-error :form="form" field="title"></has-error>
+              <v-textarea
+                v-model.trim="$v.form.description.$model"
+                :error-messages="descriptionErrors"
+                :counter="3000"
+                :label="$t('editDesign.description')"
+                outlined
+                class="mb-1"
+                field="description"
+                @input="$v.form.description.$touch()"
+                @blur="$v.form.description.$touch()"
+              ></v-textarea>
+              <has-error :form="form" field="description"></has-error>
+              <!--  <v-textarea
                   v-model.trim="$v.form.description"
                   :counter="155"
                   :label="$t('editDesign.description')"
@@ -92,19 +92,19 @@
                   field="description"
                 ></v-textarea> -->
 
-                <client-only>
-                  <input-tag
-                    v-model="form.tags"
-                    :tags="form.tags"
-                    field="tags"
-                    class="mb-1"
-                    :placeholder="$t('editDesign.tagsLabel')"
-                    on-paste-delimiter=","
-                    outlined
-                  ></input-tag>
-                </client-only>
+              <client-only>
+                <input-tag
+                  v-model="form.tags"
+                  :tags="form.tags"
+                  field="tags"
+                  class="mb-1"
+                  :placeholder="$t('editDesign.tagsLabel')"
+                  on-paste-delimiter=","
+                  outlined
+                ></input-tag>
+              </client-only>
 
-                <!--  <template v-if="teams.length">
+              <!--  <template v-if="teams.length">
                   <v-checkbox
                     v-model="form.assign_to_team"
                     :label="$t('editDesign.assignToTeam')"
@@ -125,16 +125,16 @@
                   <has-error :form="form" field="team"></has-error>
                 </template> -->
 
-                <v-checkbox
-                  id="is_live"
-                  v-model="$v.form.is_live"
-                  field="is_live"
-                  :label="$t('editDesign.publishDesign')"
-                ></v-checkbox>
+              <v-checkbox
+                id="is_live"
+                v-model="$v.form.is_live"
+                field="is_live"
+                :label="$t('editDesign.publishDesign')"
+              ></v-checkbox>
 
-                <v-spacer class="mb-3" />
-                <v-btn @click="clear">{{ $t('editDesign.clear') }}</v-btn>
-                <!-- <v-btn
+              <v-spacer class="mb-3" />
+              <v-btn @click="clear">{{ $t('editDesign.clear') }}</v-btn>
+              <!-- <v-btn
                   class="mr-4"
                   :loading="loadingSubmit"
                   :disabled="$v.form.$invalid"
@@ -142,29 +142,28 @@
                   @click="slimService()"
                   >{{ $t('editDesign.updateDesign') }}</v-btn
                 > -->
-                <v-btn
-                  class="slim-btn2 slim-btn-upload2"
-                  title="Upload"
-                  type="button"
-                  data-action="upload"
-                  style="opacity: 1;"
-                  @click="submit"
-                  >Upload</v-btn
-                >
-              </form>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-
+              <v-btn
+                class="slim-btn2 slim-btn-upload2"
+                title="Upload"
+                type="button"
+                data-action="upload"
+                style="opacity: 1;"
+                @click="submit"
+                >Upload</v-btn
+              >
+            </form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import Slim from '@/components/slim/slim.vue'
-
 export default {
   name: 'Create',
   middleware: ['auth'],
@@ -172,6 +171,7 @@ export default {
   components: {
     InputTag: () => import('vue-input-tag'),
     'slim-cropper': Slim,
+    Circle8,
   },
   props: {
     modalClosed: {
@@ -289,24 +289,34 @@ export default {
       formdata.append('is_live', this.form.is_live)
 
       console.log(formdata)
-      this.$axios
-        .post('/designs', formdata)
-        .then((res) => {
-          this.$router.push(
-            this.localePath({
-              name: 'designs.edit',
-              params: { id: res.data.id },
+      this.$axios.post('designs', formdata).then((res) => {
+        const design = this.$axios
+          .$get(`designs/${res.data.id}`)
+          .then((response) => {
+            console.log(design)
+            this.form.put(`designs/${design.id}`).then((result) => {
+              setTimeout(() => {
+                this.$router.push({ name: 'settings.designs' })
+              }, 1000)
             })
-          )
-        })
-        .catch((err) => {
+          })
+
+        this.$router.push(
+          this.localePath({
+            name: 'designs.edit',
+            params: { id: res.data.id },
+          })
+        )
+      })
+      /* .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
-        })
+        }) */
     },
     submit() {
       this.form.busy = true
+      this.uploading = true
       this.loader = 'loadingSubmit'
       const slibtn = document.getElementsByClassName('slim-btn-upload')
       console.log(slibtn.length)
@@ -345,7 +355,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .vue-input-tag-wrapper {
   background-color: transparent !important;
   border-radius: 4px !important;

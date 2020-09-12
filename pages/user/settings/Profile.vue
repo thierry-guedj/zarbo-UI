@@ -185,7 +185,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .modal {
   background-color: rgba(23, 22, 18, 0.85);
 }
