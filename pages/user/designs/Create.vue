@@ -37,7 +37,7 @@
             <div v-if="uploading" class="text-success caption-sm mt-2">
               <i class="fas fa-spinner fa-spin"></i>
               <div class="loader">
-              <Circle8></Circle8>
+                <Circle8></Circle8>
               </div>
             </div>
           </v-card-text>
@@ -284,12 +284,12 @@ export default {
         this.form.is_live = 1
       }
       console.log(this.form.tags)
-      formdata.append('title', this.form.title)
+      /* formdata.append('title', this.form.title)
       formdata.append('description', this.form.description)
       formdata.append('tags', this.form.tags)
       formdata.append('slug', this.slug)
-      formdata.append('is_live', this.form.is_live)
-
+      formdata.append('is_live', this.form.is_live) */
+      this.form.slug = this.slug
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
         this.form.put(`designs/${res.data.id}`).then((response) => {

@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import Slim from '@/components/slim/slim.vue'
 export default {
   name: 'IndexSettings',
   middleware: ['auth'],
