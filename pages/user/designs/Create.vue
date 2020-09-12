@@ -290,21 +290,19 @@ export default {
 
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
-        
-            
-            this.form.put(`designs/${res.data.id}`).then((result) => {
-              setTimeout(() => {
+        this.form.put(`designs/${res.data.id}`).then((response) => {
+          /* setTimeout(() => {
                 this.$router.push({ name: 'settings.designs' })
-              }, 1000)
-            })
-          
-
-        this.$router.push(
-          this.localePath({
-            name: 'designs.edit',
-            params: { id: res.data.id },
+              }, 4000) */
+          setTimeout(() => {
+            this.$router.push(
+              this.localePath({
+                name: 'designs.edit',
+                params: { id: res.data.id },
+              })
+            )
           })
-        )
+        })
       })
       /* .catch((err) => {
           const message = err.response.data.errors
