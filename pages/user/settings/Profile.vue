@@ -31,7 +31,7 @@
         <div>
           <slim-cropper
             :options="slimOptions"
-            class="text-black slim"
+            class="text-black slim-avatar"
             data-did-upload="imageUpload"
           >
             <input type="file" name="image" />
@@ -64,16 +64,16 @@
         <div class="text-right">
           <v-spacer class="mb-3" />
           <v-btn
-                  class="slim-btn2 slim-btn-upload2 ml-8 float-right"
-                  title="Upload"
-                  type="button"
-                  data-action="upload"
-                  style="opacity: 1;"
-                  :loading="loadingSubmit"
-                  @click="submit"
-                  >{{ $t('profile.updateProfile') }}</v-btn
-                >
-         
+            class="slim-btn2 slim-btn-upload2 ml-8 float-right"
+            title="Upload"
+            type="button"
+            data-action="upload"
+            style="opacity: 1;"
+            :loading="loadingSubmit"
+            @click="submit"
+            >{{ $t('profile.updateProfile') }}</v-btn
+          >
+
           <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
         </div>
       </v-form>
@@ -109,10 +109,11 @@ export default {
         // size: '800,600',
         label: this.$i18n.t('create.selectImage'),
         ratio: '1:1',
-        maxFileSize: 10, // value is 2MB
+        maxFileSize: 2, // value is 2MB
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
+      uploading: false,
     }
   },
 
@@ -155,18 +156,17 @@ export default {
       formdata.append('tagline', this.tagline)
 
       console.log(formdata)
+      const url = `/user/${this.$auth.user.id}`
       this.$axios
-        .post('/user', formdata)
-        .then((res) => {
-          
-        })
+        .put(url, formdata)
+        .then((res) => {})
         .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
         })
     },
-     submit() {
+    submit() {
       this.form.busy = true
       this.loader = 'loadingSubmit'
       const slibtn = document.getElementsByClassName('slim-btn-upload')
@@ -193,7 +193,7 @@ export default {
   max-width: 80%;
   text-align: center;
 }
-.slim {
+.slim-avatar {
   width: 240px;
   border-radius: 50%;
   color: black;

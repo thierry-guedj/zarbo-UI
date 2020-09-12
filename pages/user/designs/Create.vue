@@ -1,13 +1,13 @@
 <template>
-  <v-row justify="center">
-    <section class="hero text-center mb-4 text-white">
+
+    <!-- <section class="hero text-center mb-4 text-white">
       <v-container>
         <h1 class="font-28 fw-600 text-uppercase text-white">
           {{ $t('editDesign.updateDesignInfo') }}
         </h1>
       </v-container>
     </section>
-    <!-- End Hero -->
+    End Hero -->
 
     <!-- Upload Shot -->
     <v-container>
@@ -157,7 +157,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </v-row>
+
 </template>
 
 <script>
@@ -305,9 +305,6 @@ export default {
           failure(500)
         })
     },
-    submitSlim() {
-      this.slimService(formdata, failure)
-    },
     submit() {
       this.form.busy = true
       this.loader = 'loadingSubmit'
@@ -348,16 +345,30 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.theme--dark.v-card > .v-card__text,
-.theme--dark.v-card .v-card__subtitle {
+<style lang="scss">
+.vue-input-tag-wrapper {
+  background-color: transparent !important;
+  border-radius: 4px !important;
+  border: 1px thin !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+}
+.vue-input-tag-wrapper .input-tag {
+  background-color: #004d40 !important;
+  border-radius: 4px !important;
+  color: whitesmoke !important;
+  display: inline-block;
+  font-size: 15px !important;
+  border: none !important;
+  font-weight: 400;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  padding: 3px;
+}
+.text-black {
   color: black !important;
 }
-.file-drop-area label {
-  display: block;
-  padding: 2em;
-  background: #eee;
-  text-align: center;
-  cursor: pointer;
+.container {
+  // max-width: 100% !important;
+  text-align: left;
 }
 </style>
