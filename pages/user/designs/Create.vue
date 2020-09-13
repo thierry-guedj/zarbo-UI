@@ -204,7 +204,7 @@ export default {
                 /*  assign_to_team: false,
         team: null, */
       }),
-
+loader: null,
       loadingSubmit: false,
       dialog: true,
       upload: false,
