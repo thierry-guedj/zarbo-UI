@@ -35,7 +35,7 @@
             </div>
 
             <div v-if="uploading" class="text-success caption-sm mt-2">
-              <i class="fas fa-spinner fa-spin"></i>
+              <!-- <i class="fas fa-spinner fa-spin"></i> -->
               <div class="loader">
                 <Circle8></Circle8>
               </div>
@@ -198,7 +198,8 @@ export default {
         description: '',
         is_live: false,
         tags: [],
-        /*  assign_to_team: false,
+        slug: '',
+                /*  assign_to_team: false,
         team: null, */
       }),
 
