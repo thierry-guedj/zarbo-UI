@@ -151,7 +151,7 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
-                :disabled="form.$invalid"
+                :disabled="uploading"
                 @click="submit"
                 >Upload</v-btn
               >
