@@ -30,14 +30,15 @@
       <div>
         <slim-cropper
           :options="slimOptions"
-          class="text-black slim slim-avatar"
+          class="text-black"
           data-did-upload="imageUpload"
+          data-status-upload-success="Saved successfully"
         >
           <input type="file" name="image" />
         </slim-cropper>
       </div>
       <!-- <button type="submit">Upload now!</button> -->
-      <form novalidate class="avatar" @submit.prevent="submit">
+      <form class="auth-form avatar" @submit.prevent="submit">
         <v-text-field
           v-model.trim="form.name"
           :form="form"

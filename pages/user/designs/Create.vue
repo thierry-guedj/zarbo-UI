@@ -29,6 +29,7 @@
                 :options="slimOptions"
                 class="text-black"
                 data-did-upload="imageUpload"
+                data-did-load="imageLoaded"
               >
                 <input type="file" name="image" />
               </slim-cropper>
@@ -151,7 +152,7 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
-                :disabled="uploading"
+                :disabled="uploading || imageIsLoaded"
                 @click="submit"
                 >Upload</v-btn
               >
@@ -224,6 +225,7 @@ loader: null,
 
       uploading: false,
       error: '',
+      imageIsLoaded: false,
     }
   },
   computed: {
@@ -330,6 +332,9 @@ loader: null,
     clear() {
       this.form.reset()
       this.$v.form.$reset()
+    },
+    imageLoaded() {
+      this.imageIsLoaded = true
     },
     sanitizeTitle(title) {
       let slug = ''
