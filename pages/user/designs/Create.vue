@@ -214,13 +214,13 @@ export default {
       slimOptions: {
         service: this.slimService,
         post: 'output',
-        defaultInputName: 'slim_output_0',
+        defaultInputName: 'image',
         // minSize: '800,600',
         // size: '800,600',
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10, // value is 10MB
-        didUpload: 'imageUpload',
+        didLoad: 'imageUpload',
         uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
