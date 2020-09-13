@@ -294,17 +294,17 @@ loader: null,
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
         this.form.put(`designs/${res.data.id}`).then((response) => {
-          /* setTimeout(() => {
-                this.$router.push({ name: 'settings.designs' })
-              }, 4000) */
           setTimeout(() => {
+                this.$router.push({ name: 'settings.designs' })
+              }, 4000)
+          /* setTimeout(() => {
             this.$router.push(
               this.localePath({
                 name: 'designs.edit',
                 params: { id: res.data.id },
               })
             )
-          })
+          }) */
         })
       })
       /* .catch((err) => {
