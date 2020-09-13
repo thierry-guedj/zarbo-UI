@@ -62,6 +62,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Index',
   layout: 'default',
