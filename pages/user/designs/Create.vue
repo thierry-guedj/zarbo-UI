@@ -27,9 +27,10 @@
             <div>
               <slim-cropper
                 :options="slimOptions"
-                class="text-black"
+                class="text-black slim-avatar"
                 data-did-upload="imageUpload"
                 data-did-load="imageLoaded"
+                data-upload-method="PUT"
               >
                 <input type="file" name="image" />
               </slim-cropper>
@@ -152,7 +153,7 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
-                :disabled="uploading || !imageIsLoaded"
+                :disabled="uploading"
                 @click="submit"
                 >Upload</v-btn
               >
@@ -202,10 +203,10 @@ export default {
         is_live: false,
         tags: [],
         slug: '',
-                /*  assign_to_team: false,
+        /*  assign_to_team: false,
         team: null, */
       }),
-loader: null,
+      loader: null,
       loadingSubmit: false,
       dialog: true,
       upload: false,
@@ -213,12 +214,15 @@ loader: null,
       slimOptions: {
         service: this.slimService,
         post: 'output',
-        defaultInputName: 'image',
+        defaultInputName: 'slim_output_0',
         // minSize: '800,600',
         // size: '800,600',
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10, // value is 10MB
+        didUpload: 'imageUpload',
+        uploadMethod: 'PUT',
+        statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
@@ -253,24 +257,8 @@ loader: null,
       const l = this.loader
       this[l] = !this[l]
     },
+    loadedImage() {},
   },
-  /*  mounted() {
-      if (this.design) {
-        Object.keys(this.form).forEach((key) => {
-          if (this.design.hasOwnProperty(key)) {
-            this.form[key] = this.design[key]
-          }
-        })
-        this.form.tags = this.design.tag_list.tags || []
-
-        if (this.design.team) {
-          this.form.team = this.design.team.id
-          this.form.assign_to_team = true
-        } else {
-          this.form.assign_to_team = false
-        }
-      }
-    }, */
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     slimInitialised(data) {
@@ -289,14 +277,14 @@ loader: null,
         this.form.is_live = 1
       }
       console.log(this.form.tags)
-      
+
       this.form.slug = this.slug
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
         this.form.put(`designs/${res.data.id}`).then((response) => {
           setTimeout(() => {
-                this.$router.push({ name: 'settings.designs' })
-              }, 4000)
+            this.$router.push({ name: 'settings.designs' })
+          }, 4000)
           /* setTimeout(() => {
             this.$router.push(
               this.localePath({
@@ -330,9 +318,9 @@ loader: null,
       this.$v.form.$reset()
     },
     imageLoaded() {
-      this.imageIsLoaded = true
+      console.log(this.imageIsLoaded)
       return true
-      console.log(this.imageIsLoaded )
+      
     },
     sanitizeTitle(title) {
       let slug = ''

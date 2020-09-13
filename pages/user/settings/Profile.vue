@@ -28,18 +28,13 @@
           <input type="file" name="slim[]" required />
         </div> -->
       <div>
-        <slim-cropper
-          :options="slimOptions"
-          class="text-black slim-avatar"
-          data-did-upload="imageUpload"
-          data-status-upload-success="Saved successfully"
-        >
+        <slim-cropper :options="slimOptions" class="text-black slim-avatar">
           <input type="file" name="image" />
         </slim-cropper>
       </div>
       <!-- <button type="submit">Upload now!</button> -->
       <form class="auth-form avatar" @submit.prevent="submit">
-        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_method" value="PUT" />
         <v-text-field
           v-model.trim="form.name"
           :form="form"
@@ -113,6 +108,9 @@ export default {
         label: this.$i18n.t('create.selectImage'),
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
+        didUpload: 'imageUpload',
+        uploadMethod: 'PUT',
+        statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
@@ -155,13 +153,13 @@ export default {
       console.log(formdata)
 
       /* formdata.append('name', this.form.name)
-      formdata.append('about', this.form.about)
-      formdata.append('tagline', this.tagline) */
+      formdata.append('about', this.form.about) */
+      formdata.append('_method', this.form._method)
 
       console.log(formdata)
-      const url = `/user/${this.$auth.user.id}`
+      const url = `user/${this.$auth.user.id}`
       this.$axios
-        .$put(url, formdata)
+        .put(url, formdata)
         .then((res) => {
           this.update()
         })
