@@ -30,7 +30,7 @@
       <div>
         <slim-cropper
           :options="slimOptions"
-          class="text-black"
+          class="text-black slim-avatar"
           data-did-upload="imageUpload"
           data-status-upload-success="Saved successfully"
         >

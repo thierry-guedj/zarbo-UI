@@ -1,27 +1,27 @@
 <template>
-    <v-card
-      class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
-      width="auto"
-      height="auto"
-      tile
-      elevation="5"
-      hover
-      @click="goToDetails(`${design.id}`)"
-    >
-      <v-img
-        :src="`${design.images.thumbnail}`"
-        :lazy-src="`${design.images.thumbnail}`"
-      ></v-img>
-      <div class="portfolio-item__info">
-        <h3 class="portfolio-item__header">
-          {{ designTitle | truncate(17, '...') }}
-        </h3>
-        <h4 class="portfolio-item__subheader">
-          <span>{{ $t('designCard.by') }} {{ design.user.name }}</span>
-        </h4>
-        <!--  -->
-      </div>
-    </v-card>
+  <v-card
+    class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
+    width="auto"
+    height="auto"
+    tile
+    elevation="5"
+    hover
+    @click="goToDetails(`${design.id}`)"
+  >
+    <v-img
+      :src="`${design.images.thumbnail}`"
+      :lazy-src="`${design.images.thumbnail}`"
+    ></v-img>
+    <div class="portfolio-item__info">
+      <h3 class="portfolio-item__header">
+        {{ designTitle | truncate(17, '...') }}
+      </h3>
+      <h4 class="portfolio-item__subheader">
+        <span>{{ $t('designCard.by') }} {{ design.user.name }}</span>
+      </h4>
+      <!--  -->
+    </div>
+  </v-card>
 </template>
 
 <script>
