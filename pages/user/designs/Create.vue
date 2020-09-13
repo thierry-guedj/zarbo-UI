@@ -28,9 +28,6 @@
               <slim-cropper
                 :options="slimOptions"
                 class="text-black slim-avatar"
-                data-did-upload="imageUpload"
-                data-did-load="imageLoaded"
-                data-upload-method="PUT"
               >
                 <input type="file" name="image" />
               </slim-cropper>
@@ -220,7 +217,7 @@ export default {
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10, // value is 10MB
-        didLoad: 'imageUpload',
+        // didLoad: 'imageLoaded',
         uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
@@ -265,7 +262,9 @@ export default {
       console.log(data)
     },
     imageUpload(error, data, response) {
+
       console.log(error, data, response)
+      return true
     },
     slimService(formdata, failure) {
       this.uploading = true
