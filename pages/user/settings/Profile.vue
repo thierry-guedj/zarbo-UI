@@ -39,6 +39,7 @@
       </div>
       <!-- <button type="submit">Upload now!</button> -->
       <form class="auth-form avatar" @submit.prevent="submit">
+        <input type="hidden" name="_method" value="PUT">
         <v-text-field
           v-model.trim="form.name"
           :form="form"
@@ -160,7 +161,7 @@ export default {
       console.log(formdata)
       const url = `/user/${this.$auth.user.id}`
       this.$axios
-        .put(url, formdata)
+        .$put(url, formdata)
         .then((res) => {
           this.update()
         })
