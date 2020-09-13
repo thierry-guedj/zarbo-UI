@@ -150,6 +150,8 @@
                 type="button"
                 data-action="upload"
                 style="opacity: 1;"
+                :loading="loadingSubmit"
+                :disabled="form.$invalid"
                 @click="submit"
                 >Upload</v-btn
               >
@@ -285,11 +287,11 @@ export default {
         this.form.is_live = 1
       }
       console.log(this.form.tags)
-      /* formdata.append('title', this.form.title)
+      formdata.append('title', this.form.title)
       formdata.append('description', this.form.description)
       formdata.append('tags', this.form.tags)
       formdata.append('slug', this.slug)
-      formdata.append('is_live', this.form.is_live) */
+      formdata.append('is_live', this.form.is_live)
       this.form.slug = this.slug
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
