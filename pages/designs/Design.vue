@@ -25,7 +25,7 @@
             size="large"
             color="deep-orange accent-2"
             @click="goToDesigns()"
-            ><v-icon>flip_to_back</v-icon>{{ $t('show.backToArtwork') }}</v-btn
+            ><v-icon class="mr-2">flip_to_back</v-icon>{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
         <!-- Design Comments -->
@@ -58,7 +58,7 @@
             ></v-textarea>
             <div class="mt-2 text-right pr-14">
               <v-btn type="submit" size="sm">
-                {{ $t('comments.postComment') }}
+                <v-icon class="mr-2">insert_comment</v-icon>{{ $t('comments.postComment') }}
               </v-btn>
             </div>
           </form>

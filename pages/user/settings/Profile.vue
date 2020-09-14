@@ -137,7 +137,7 @@ export default {
   methods: {
     update() {
       this.form
-        .put(`/settings/profile`)
+        .$put(`/settings/profile`)
         .then((res) => console.log(res))
         .catch((e) => console.log(e))
     },
@@ -152,14 +152,20 @@ export default {
       this.uploading = true
       console.log(formdata)
 
-      /* formdata.append('name', this.form.name)
-      formdata.append('about', this.form.about) */
-      formdata.append('_method', this.form._method)
+      formdata.append('name', this.form.name)
+      formdata.append('about', this.form.about)
+      formdata.append('_method', 'put')
 
       console.log(formdata)
       const url = `user/${this.$auth.user.id}`
+      /*     let config = {
+  headers: {
+    Content-Type: "application/x-www-form-urlencoded",
+  }
+} */
+      // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
       this.$axios
-        .put(url, formdata)
+        .$post(url, formdata)
         .then((res) => {
           this.update()
         })
