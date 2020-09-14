@@ -27,6 +27,7 @@
             <div>
               <slim-cropper
                 :options="slimOptions"
+                data-did-load="imageLoaded"
                 class="text-black slim-avatar"
               >
                 <input type="file" name="image" />
@@ -317,9 +318,8 @@ export default {
       this.$v.form.$reset()
     },
     imageLoaded() {
-      console.log(this.imageIsLoaded)
+      console.log('taratata')
       return true
-      
     },
     sanitizeTitle(title) {
       let slug = ''
