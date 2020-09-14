@@ -8,53 +8,55 @@
       <alert-success :form="form">{{
         $t('profile.profileUpdated')
       }}</alert-success>
-
-      <!-- <div class="form-group">
-              <base-input
-                v-model="form.name"
-                :form="form"
-                field="name"
-                placeholder="Full name"
-              ></base-input>
-            </div> -->
-
-      <!--  <div
-          class="slim"
-          data-label="Drop your avatar here"
-          data-fetcher="fetch.php"
-          data-size="240,240"
-          data-ratio="1:1"
-        >
-          <input type="file" name="slim[]" required />
-        </div> -->
       <div>
         <slim-cropper :options="slimOptions" class="text-black slim-avatar">
           <input type="file" name="image" />
         </slim-cropper>
+        <div v-if="uploading" class="text-success caption-sm mt-2">
+          <!-- <i class="fas fa-spinner fa-spin"></i> -->
+          <div class="loader">
+            <Circle8></Circle8>
+          </div>
+        </div>
       </div>
-      <!-- <button type="submit">Upload now!</button> -->
+
       <form class="auth-form avatar" @submit.prevent="submit">
         <input type="hidden" name="_method" value="PUT" />
         <v-text-field
-          v-model.trim="form.name"
+          v-model.trim="$v.form.name.$model"
+          :error-messages="nameErrors"
+          :counter="120"
           :form="form"
           field="name"
           :label="$t('profile.name')"
+          outlined
+          class="mb-1"
+          @input="$v.form.name.$touch()"
+          @blur="$v.form.name.$touch()"
         ></v-text-field>
+        <has-error :form="form" field="name"></has-error>
         <v-text-field
-          v-model.trim="form.tagline"
+          v-model.trim="$v.form.tagline.$model"
+          :error-messages="taglineErrors"
+          :counter="300"
           :label="$t('profile.tagline')"
           :form="form"
           field="tagline"
+          @input="$v.form.tagline.$touch()"
+          @blur="$v.form.tagline.$touch()"
         ></v-text-field>
 
         <v-textarea
-          v-model.trim="form.about"
+          v-model.trim="$v.form.about.$model"
+          :error-messages="aboutErrors"
+          :counter="3000"
           :form="form"
           :placeholder="$t('profile.someInfo')"
           field="about"
           outlined
           class="mb-1"
+          @input="$v.form.about.$touch()"
+          @blur="$v.form.about.$touch()"
         ></v-textarea>
 
         <div class="text-right">
@@ -79,12 +81,27 @@
 
 <script>
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
+import { required, maxLength } from 'vuelidate/lib/validators'
 import Slim from '@/components/slim/slim.vue'
 export default {
   name: 'Profile',
   components: {
     'slim-cropper': Slim,
     Circle8,
+  },
+  validations: {
+    form: {
+      name: {
+        required,
+        maxLen: maxLength(120),
+      },
+      tagline: {
+        maxLen: maxLength(300),
+      },
+      about: {
+        maxLen: maxLength(3000),
+      },
+    },
   },
   data() {
     return {
@@ -105,11 +122,11 @@ export default {
         defaultInputName: 'image',
         // minSize: '800,600',
         // size: '800,600',
-        label: this.$i18n.t('create.selectImage'),
+        label: this.$i18n.t('profile.label'),
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
-        didUpload: 'imageUpload',
-        uploadMethod: 'PUT',
+        // didUpload: 'imageUpload',
+        // uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
@@ -134,11 +151,49 @@ export default {
       this.form.location = {}
     }
   },
+  computed: {
+    nameErrors() {
+      const errors = []
+      if (!this.$v.form.name.$dirty) return errors
+      !this.$v.form.name.maxLen &&
+        errors.push('Name must be less than 120 characters long')
+      !this.$v.form.name.required && errors.push('Name is required.')
+      return errors
+    },
+    taglineErrors() {
+      const errors = []
+      if (!this.$v.form.tagline.$dirty) return errors
+      !this.$v.form.tagline.maxLen &&
+        errors.push('Tagline must be less than 300 characters long')
+      return errors
+    },
+    aboutErrors() {
+      const errors = []
+      if (!this.$v.form.about.$dirty) return errors
+      !this.$v.form.about.maxLen &&
+        errors.push('Description must be less than 3000 characters long')
+      return errors
+    },
+  
+  },
+  watch: {
+    loader() {
+      const l = this.loader
+      this[l] = !this[l]
+    },
+  
+  },
   methods: {
     update() {
       this.form
         .$put(`/settings/profile`)
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res)
+           setTimeout(() => {
+            this.$router.push({ name: 'settings.designs' })
+          }, 4000)
+          this.uploading = false
+        })
         .catch((e) => console.log(e))
     },
     handleAddress(data) {
@@ -152,8 +207,8 @@ export default {
       this.uploading = true
       console.log(formdata)
 
-      formdata.append('name', this.form.name)
-      formdata.append('about', this.form.about)
+      /* formdata.append('name', this.form.name)
+      formdata.append('about', this.form.about) */
       formdata.append('_method', 'put')
 
       console.log(formdata)
@@ -201,10 +256,16 @@ export default {
 .profile {
   max-width: 80%;
   text-align: center;
+  margin: 0 auto;
 }
 .slim-avatar {
   width: 240px;
   border-radius: 50%;
   color: black;
+}
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 </style>
