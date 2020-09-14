@@ -125,7 +125,7 @@ export default {
         label: this.$i18n.t('profile.label'),
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
-        // didUpload: 'imageUpload',
+        didLoad: 'imageLoad',
         // uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
@@ -244,6 +244,9 @@ export default {
     clear() {
       this.form.reset()
       this.$v.form.$reset()
+    },
+    imageLoad() {
+      console.log("coucou le cnsole log")
     },
   },
 }
