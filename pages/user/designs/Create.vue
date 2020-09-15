@@ -273,6 +273,7 @@ export default {
           this.loader = null
           this.loadingSubmit = false
         })
+     },
     slimInitialised(data) {
       console.log(data)
     },
