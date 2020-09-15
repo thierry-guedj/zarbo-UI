@@ -261,7 +261,7 @@ export default {
     ...mapActions(['showModal', 'hideModal']),
      update(id) {
       this.form
-        .$put(`designs/${id}`)
+        .put(`designs/${id}`)
         .then((res) => {
           setTimeout(() => {
             this.$router.push({ name: 'settings.designs' })
