@@ -83,6 +83,7 @@
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import Slim from '@/components/slim/slim.vue'
+
 export default {
   name: 'Profile',
   components: {
@@ -125,30 +126,13 @@ export default {
         label: this.$i18n.t('profile.label'),
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
-        didLoad: 'imageLoad',
+        // didLoad: 'imageLoad',
         // uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
       uploading: false,
-    }
-  },
-
-  mounted() {
-    Object.keys(this.form).forEach((k) => {
-      if (this.$auth.user.hasOwnProperty(k)) {
-        this.form[k] = this.$auth.user[k]
-      }
-    })
-
-    if (this.$auth.user.location) {
-      this.form.location = {
-        longitude: this.$auth.user.location.coordinates[0],
-        latitude: this.$auth.user.location.coordinates[1],
-      }
-    } else {
-      this.form.location = {}
     }
   },
   computed: {
@@ -174,14 +158,29 @@ export default {
         errors.push('Description must be less than 3000 characters long')
       return errors
     },
-  
   },
   watch: {
     loader() {
       const l = this.loader
       this[l] = !this[l]
     },
-  
+  },
+
+  mounted() {
+    Object.keys(this.form).forEach((k) => {
+      if (this.$auth.user.hasOwnProperty(k)) {
+        this.form[k] = this.$auth.user[k]
+      }
+    })
+
+    if (this.$auth.user.location) {
+      this.form.location = {
+        longitude: this.$auth.user.location.coordinates[0],
+        latitude: this.$auth.user.location.coordinates[1],
+      }
+    } else {
+      this.form.location = {}
+    }
   },
   methods: {
     update() {
@@ -189,7 +188,7 @@ export default {
         .$put(`/settings/profile`)
         .then((res) => {
           console.log(res)
-           setTimeout(() => {
+          setTimeout(() => {
             this.$router.push({ name: 'settings.designs' })
           }, 4000)
           this.uploading = false
@@ -246,7 +245,8 @@ export default {
       this.$v.form.$reset()
     },
     imageLoad() {
-      console.log("coucou le cnsole log")
+      console.log('coucou le cnsole log')
+      return true
     },
   },
 }

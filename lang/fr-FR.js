@@ -176,5 +176,6 @@ export default {
     someInfo: 'Veuillez entre quelques informations à propos de vous',
     profileUpdated: 'Profil modifié avec succès',
     profile: 'Votre profil',
+    label: 'Sélectionnez votre avatar',
   },
 }

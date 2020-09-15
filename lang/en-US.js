@@ -175,5 +175,6 @@ export default {
     someInfo: 'Please enter some information about yourself',
     profileUpdated: 'Profile updated successfully',
     profile: 'Profile',
+    label: 'Drop your avatar here',
   },
 }
