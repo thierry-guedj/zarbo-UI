@@ -259,9 +259,9 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-     update() {
+     update(id) {
       this.form
-        .$put(`designs/${res.data.id}`)
+        .$put(`designs/${id}`)
         .then((res) => {
           setTimeout(() => {
             this.$router.push({ name: 'settings.designs' })
@@ -297,7 +297,7 @@ export default {
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
         this.form.put(`designs/${res.data.id}`).then((response) => {
-          this.update()
+          this.update(res.data.id)
           /* setTimeout(() => {
             this.$router.push(
               this.localePath({
