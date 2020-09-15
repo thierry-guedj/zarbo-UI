@@ -259,6 +259,20 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
+     update() {
+      this.form
+        .$put(`designs/${res.data.id}`)
+        .then((res) => {
+          setTimeout(() => {
+            this.$router.push({ name: 'settings.designs' })
+          }, 1000)
+        })
+        .catch((err) => console.log(err.response))
+        .finally(() => {
+          this.form.busy = false
+          this.loader = null
+          this.loadingSubmit = false
+        })
     slimInitialised(data) {
       console.log(data)
     },
@@ -282,9 +296,7 @@ export default {
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
         this.form.put(`designs/${res.data.id}`).then((response) => {
-          setTimeout(() => {
-            this.$router.push({ name: 'settings.designs' })
-          }, 4000)
+          this.update()
           /* setTimeout(() => {
             this.$router.push(
               this.localePath({
