@@ -1,23 +1,22 @@
 <template>
+  <!-- <v-hover v-slot:default="{ hover }"> -->
+  <v-card
+    :color="user.color"
+    dark
+    hover
+    style="max-height: 100%; max-width: 100vh;"
+    class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
+    @click="goToUser(`${user.id}`)"
+  >
+    <div class="d-flex flex-no-wrap justify-space-between">
+      <div>
+        <v-card-title class="headline" v-text="user.name"></v-card-title>
 
-    <!-- <v-hover v-slot:default="{ hover }"> -->
-    <v-card
-      :color="user.color"
-      dark
-      hover
-      style="max-height: 100%; max-width: 100vh;"
-      class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
-      @click="goToUser(`${user.id}`)"
-    >
-      <div class="d-flex flex-no-wrap justify-space-between">
-        <div>
-          <v-card-title class="headline" v-text="user.name"></v-card-title>
+        <v-card-subtitle v-text="user.username"></v-card-subtitle>
+        <v-card-text v-text="user.tagline"></v-card-text>
+      </div>
 
-          <v-card-subtitle v-text="user.username"></v-card-subtitle>
-          <v-card-text v-text="user.tagline"></v-card-text>
-        </div>
-
-        <!--  <v-avatar class="ma-3" size="100">
+      <!--  <v-avatar class="ma-3" size="100">
           <v-img
             :src="`${user.photo_url}`"
             style="max-height: 100%; max-width: 100vh; min-width: 6.6666%;"
@@ -25,31 +24,36 @@
           
           </v-img>
         </v-avatar> -->
-        <avatar :username="user.name" class="mx-3 mt-3" :size="40"></avatar>
-        <div class="portfolio-item__info">
-          <h4 class="portfolio-item__header">{{ user.username }}</h4>
-          <h4 class="portfolio-item__subheader">{{ user.name }}</h4>
-          <div class="portfolio-item__links">
-            <div class="portfolio-item__link-block">
-              <a
-                class="portfolio-item__link"
-                :title="user.username"
-                @click="goToUser('Show', '', `${user.id}`, 'fullscreen')"
-              >
-                <i class="material-icons">collections</i>
-              </a>
-            </div>
-          </div>
-          <v-card-actions class="mt-4">
-            <v-spacer></v-spacer>
-            <span class="mr-2 caption text-orange lighten-5"
-              >{{ $t('userCard.registered') }} {{ user.created_dates.created_at_human }}</span
+      <avatar
+        :username="user.name"
+        :src="user.avatars.medium"
+        class="mx-3 mt-3"
+        :size="40"
+      ></avatar>
+      <div class="portfolio-item__info">
+        <h4 class="portfolio-item__header">{{ user.username }}</h4>
+        <h4 class="portfolio-item__subheader">{{ user.name }}</h4>
+        <div class="portfolio-item__links">
+          <div class="portfolio-item__link-block">
+            <a
+              class="portfolio-item__link"
+              :title="user.username"
+              @click="goToUser('Show', '', `${user.id}`, 'fullscreen')"
             >
-          </v-card-actions>
+              <i class="material-icons">collections</i>
+            </a>
+          </div>
         </div>
+        <v-card-actions class="mt-4">
+          <v-spacer></v-spacer>
+          <span class="mr-2 caption text-orange lighten-5"
+            >{{ $t('userCard.registered') }}
+            {{ user.created_dates.created_at_human }}</span
+          >
+        </v-card-actions>
       </div>
-    </v-card>
-
+    </div>
+  </v-card>
 </template>
 
 <script>

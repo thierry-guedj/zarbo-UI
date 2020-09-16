@@ -165,6 +165,7 @@
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
           <avatar
             :username="$auth.user.name"
+            :src="$auth.user.avatars.medium"
             class="ml-3 mr-2"
             :size="40"
           ></avatar>

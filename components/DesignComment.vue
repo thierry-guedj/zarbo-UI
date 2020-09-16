@@ -2,7 +2,11 @@
   <v-list-item-title>
     <div class="comment-thumb float-left mr-3">
       <v-avatar>
-        <img :src="comment.user.photo_url" width="30px" />
+        <img
+          :src="$auth.user.avatars.small"
+          :username="comment.user.name"
+          width="30px"
+        />
       </v-avatar>
     </div>
     <div class="comment-meta mb-3">
@@ -58,6 +62,5 @@ export default {
   font-weight: 109;
   letter-spacing: 0.0333333333em !important;
   line-height: 1.25rem;
- 
 }
 </style>
