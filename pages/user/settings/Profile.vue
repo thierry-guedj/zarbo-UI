@@ -223,12 +223,12 @@ export default {
         .then((res) => {
           this.update()
         })
-        .catch((err) => {
+        /* .catch((err) => {
           console.log('error')
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
-        })
+        }) */
     },
     submit() {
       this.form.busy = true
