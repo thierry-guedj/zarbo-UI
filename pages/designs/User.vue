@@ -113,7 +113,7 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="pt-8 pl-0 pb-6 pr-0">
+      <div v-else class="pl-0 pb-6 pr-0">
         <template v-if="(!designs.length)" class="pb-6 text-center">
           <div class="mx-auto">
             <v-alert
@@ -135,12 +135,12 @@
           </div>
         </template>
         <template v-else id="row-designs">
-          <nuxt-link :to="{ name: 'users.search' }">
+          <!-- <nuxt-link :to="{ name: 'users.search' }">
             <v-btn class="mt-3"
               ><v-icon right dark class="mx-2">reply</v-icon
               >{{ $t('user.backToUsersList') }}</v-btn
             >
-          </nuxt-link>
+          </nuxt-link> -->
           <v-row
             transition-duration="0.3s"
             item-selector=".item"
