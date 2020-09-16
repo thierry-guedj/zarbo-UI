@@ -28,7 +28,8 @@
         :username="user.name"
         :src="user.avatars.medium"
         class="mx-3 mt-3"
-        :size="40"
+        inline="true"
+        :size="60"
       ></avatar>
       <div class="portfolio-item__info">
         <h4 class="portfolio-item__header">{{ user.username }}</h4>

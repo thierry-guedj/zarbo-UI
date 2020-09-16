@@ -95,12 +95,15 @@
           ></avatar>
             </v-col>
             <v-col>
-          <h1 class="font-28 fw-600 text-uppercase text-white">
+          <h1 class="font-38 fw-600 text-uppercase text-white">
             {{ $t('user.userPageTitle') }} {{ user.name }}
           </h1>
-          <h1 class="font-24 fw-600 text-uppercase text-white">
+          <h2 class="font-28 fw-600 text-white">
             {{ user.tagline }}
-          </h1>
+          </h2>
+          <p class="font-22 fw-600 text-white">
+            {{ user.about }}
+          </p>
             </v-col>
           </v-row>
         </v-container>
