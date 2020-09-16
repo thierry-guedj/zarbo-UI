@@ -86,24 +86,24 @@
       <section class="hero text-center mb-4 text-white">
         <v-container>
           <v-row class="row-md-12">
-            <v-col class="col-md-3">
-          <avatar
-            :username="user.name"
-            :src="user.avatars.large"
-            class="ml-3 mr-2"
-            :size="240"
-          ></avatar>
+            <v-col class="col-md-3 avatarUser">
+              <avatar
+                :username="user.name"
+                :src="user.avatars.large"
+                class="ml-3 mr-2"
+                :size="240"
+              ></avatar>
             </v-col>
             <v-col class="col-md-9">
-          <h1 class="font-48 fw-600 text-uppercase text-white">
-            {{ $t('user.userPageTitle') }} {{ user.name }}
-          </h1>
-          <h2 class="font-28 fw-600 text-white">
-            {{ user.tagline }}
-          </h2>
-          <p class="font-22 fw-600 text-white">
-            {{ user.about }}
-          </p>
+              <p class="titleUser text-uppercase text-white">
+                {{ $t('user.userPageTitle') }} {{ user.name }}
+              </p>
+              <h2 class="font-28 fw-600 text-white">
+                {{ user.tagline }}
+              </h2>
+              <p class="font-22 fw-600 text-white">
+                {{ user.about }}
+              </p>
             </v-col>
           </v-row>
         </v-container>
@@ -323,6 +323,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.titleUser {
+  font-size: 60px;
+}
+.avatarUser {
+  max-width: 280px;
+  min-width: 240px;
+}
 .alert {
   text-align: center;
   margin: auto;
@@ -365,6 +372,6 @@ html {
   display: contents !important;
 }
 .userTitle {
-  font-size: 48px; 
+  font-size: 48px;
 }
 </style>

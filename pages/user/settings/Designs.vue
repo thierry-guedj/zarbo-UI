@@ -130,7 +130,6 @@
       timeout="5000"
       top
       vertical
-      @loginSuccess="snackbar = true"
     >
       Your design has been uploaded
       <template v-slot:action="{ attrs }">
@@ -225,7 +224,7 @@ export default {
     },
   },
 beforeRouteUpdate(to, from, next) {
-    if (to.params.upload) {
+    if (from.params.upload) {
       this.snackbar = true
     }
   
