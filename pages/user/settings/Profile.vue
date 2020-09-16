@@ -105,6 +105,27 @@ export default {
       },
     },
   },
+ /*  async fetch() {
+    const res = await this.$axios.$get(`/user/${this.$auth.user.id}/findById`)
+    this.user = res.data
+  }, */
+/*   async asyncData({ $axios, context, error, redirect }) {
+    try {
+      const user = await $axios.$get(`/user/${context.$auth.user.id}/findById`)
+      console.log(user)
+     
+
+      return { user: user.data }
+    } catch (err) {
+      if (err.response.status === 404) {
+        error({ statusCode: 404, message: 'Design not found' })
+      } else if (err.response.status === 401) {
+        redirect('/login')
+      } else {
+        error({ statusCode: 500, message: 'Internal server error' })
+      }
+    }
+  }, */
   data() {
     return {
       form: this.$vform({
@@ -166,13 +187,14 @@ export default {
       this[l] = !this[l]
     },
   },
-
   mounted() {
-    Object.keys(this.form).forEach((k) => {
-      if (this.$auth.user.hasOwnProperty(k)) {
-        this.form[k] = this.$auth.user[k]
-      }
-    })
+    if (this.user) {
+      Object.keys(this.form).forEach((k) => {
+        if (this.user.hasOwnProperty(k)) {
+          this.form[k] = this.user[k]
+        }
+      })
+    }
 
     if (this.$auth.user.location) {
       this.form.location = {
