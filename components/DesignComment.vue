@@ -5,7 +5,7 @@
         <img
           :src="$auth.user.avatars.small"
           :username="comment.user.name"
-          width="20px"
+          width="40px"
         />
       </v-avatar>
     </div>
