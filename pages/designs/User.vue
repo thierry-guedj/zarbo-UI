@@ -15,7 +15,7 @@
     </v-btn>
 
     <v-container class="p-0 m-0 row-designs">
-      <section class="hero text-center mb-4 text-white">
+      <section class="hero text-center text-white">
         <v-container>
           <v-row class="row-md-12">
             <v-col class="col-md-3 avatarUser">
@@ -354,6 +354,8 @@ export default {
 }
 .search-control {
   max-width: 75%;
+  margin-top: 25px;
+  margin-bottom: 0;
 }
 .loader {
   position: fixed;
