@@ -33,8 +33,10 @@
         <div class="design-comments mt-3 px-4">
           <h1 class="font-16 fw-300 mb-4">
             <strong class="fw-500"
-              >{{ comments.length }} <span v-if="comments.length > 1"> {{ $t('comments.comments') }}</span
-          ><span v-else> {{ $t('comments.comment') }}</span></strong
+              >{{ comments.length }}
+              <span v-if="comments.length > 1">
+                {{ $t('comments.comments') }}</span
+              ><span v-else> {{ $t('comments.comment') }}</span></strong
             >
           </h1>
           <v-list-item>
@@ -126,33 +128,34 @@
             <div class="white-bg-color">
               <v-row class="row-md-12">
                 <v-col class="col-md-3">
-              <avatar
-                :username="user.name"
-                :src="user.avatars.medium"
-                class="mx-3 mt-3"
-                inline="true"
-                :size="80"
-              ></avatar>
+                  <avatar
+                    :username="user.name"
+                    :src="user.avatars.medium"
+                    class="mx-3 mt-3"
+                    inline="true"
+                    :size="60"
+                  ></avatar>
                 </v-col>
                 <v-col class="col-md-9">
-              <div class="modal-user-detail ml-2">
-                <h1 class="font-13 fw-500">
-                  <v-btn
-                    text
-                    size="large"
-                    color="whitesmoke"
-                    @click="goToUser(`${design.user.id}`)"
-                    >{{ design.user.name }}</v-btn
-                  >
-                </h1>
-                <p class="font-12 fw-300 mt-1">
-                  <span class="shot-by">{{ design.user.tagline }}</span>
-                </p>
-                <!-- <p class="font-12 fw-300 mt-1">
+                  <div class="modal-user-detail ml-2">
+                    <h1 class="font-13 fw-500">
+                      <v-btn
+                        text
+                        size="large"
+                        color="whitesmoke"
+                        @click="goToUser(`${design.user.id}`)"
+                        >{{ design.user.name }}</v-btn
+                      >
+                    </h1>
+                    <p class="font-12 fw-300 mt-1">
+                      <span class="shot-by">{{ design.user.tagline }}</span>
+                    </p>
+                    <!-- <p class="font-12 fw-300 mt-1">
                   {{ design.created_at_dates.created_at_human }}
                 </p> -->
-              </div>
+                  </div>
                 </v-col>
+              </v-row>
             </div>
             <!-- End Designer info -->
             <v-divider class="mt-6 mb-6"></v-divider>

@@ -127,8 +127,8 @@ export default {
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
         // didLoad: 'imageLoad',
-        // uploadMethod: 'PUT',
-        // statusUploadSuccess: 'Saved successfully',
+        uploadMethod: 'PUT',
+        statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
@@ -185,7 +185,7 @@ export default {
   methods: {
     update() {
       this.form
-        .$put(`/settings/profile`)
+        .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
           setTimeout(() => {
