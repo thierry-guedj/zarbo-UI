@@ -130,7 +130,7 @@
                 :src="user.avatars.medium"
                 class="mx-3 mt-3"
                 inline="true"
-                :size="80"
+                :size="100"
               ></avatar>
                 </v-col>
                 <v-col class="col-md-9">
