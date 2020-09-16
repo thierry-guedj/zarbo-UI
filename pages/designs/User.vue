@@ -85,18 +85,24 @@
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-center mb-4 text-white">
         <v-container>
+          <v-row>
+            <v-col>
           <avatar
             :username="user.name"
             :src="user.avatars.large"
             class="ml-3 mr-2"
             :size="240"
           ></avatar>
+            </v-col>
+            <v-col>
           <h1 class="font-28 fw-600 text-uppercase text-white">
             {{ $t('user.userPageTitle') }} {{ user.name }}
           </h1>
           <h1 class="font-24 fw-600 text-uppercase text-white">
             {{ user.tagline }}
           </h1>
+            </v-col>
+          </v-row>
         </v-container>
       </section>
       <div v-if="searching" class="loader p-0">
