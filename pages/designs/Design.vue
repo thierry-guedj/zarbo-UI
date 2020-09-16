@@ -123,13 +123,17 @@
 
             <!-- Designer info -->
             <div class="white-bg-color">
+              <v-row class="row-md-12">
+                <v-col class="col-md-3">
               <avatar
                 :username="user.name"
                 :src="user.avatars.medium"
                 class="mx-3 mt-3"
                 inline="true"
-                :size="100"
+                :size="80"
               ></avatar>
+                </v-col>
+                <v-col class="col-md-9">
               <div class="modal-user-detail ml-2">
                 <h1 class="font-13 fw-500">
                   <v-btn
@@ -147,6 +151,7 @@
                   {{ design.created_at_dates.created_at_human }}
                 </p> -->
               </div>
+                </v-col>
             </div>
             <!-- End Designer info -->
             <v-divider class="mt-6 mb-6"></v-divider>
