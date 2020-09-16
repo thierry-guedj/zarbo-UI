@@ -95,10 +95,10 @@
               ></avatar>
             </v-col>
             <v-col class="col-md-9">
-              <p class="titleUser text-uppercase text-white">
+              <p class="titleUser text-white">
                 {{ $t('user.userPageTitle') }} {{ user.name }}
               </p>
-              <pclass="tagline text-white">
+              <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
               <p class="about text-white">
