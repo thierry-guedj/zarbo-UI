@@ -86,7 +86,7 @@
       <section class="hero text-center mb-4 text-white">
         <v-container>
           <v-row class="row-md-12">
-            <v-col class="col-md-4">
+            <v-col class="col-md-3">
           <avatar
             :username="user.name"
             :src="user.avatars.large"
@@ -94,8 +94,8 @@
             :size="240"
           ></avatar>
             </v-col>
-            <v-col class="col-md-7">
-          <h1 class="font-38 fw-600 text-uppercase text-white">
+            <v-col class="col-md-9">
+          <h1 class="font-58 fw-600 text-uppercase text-white">
             {{ $t('user.userPageTitle') }} {{ user.name }}
           </h1>
           <h2 class="font-28 fw-600 text-white">
