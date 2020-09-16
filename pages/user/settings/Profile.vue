@@ -128,7 +128,7 @@ export default {
         maxFileSize: 2, // value is 2MB
         // didLoad: 'imageLoad',
         // uploadMethod: 'PUT',
-        statusUploadSuccess: 'Saved successfully',
+        // statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
       },
@@ -224,6 +224,7 @@ export default {
           this.update()
         })
         .catch((err) => {
+          console.log('error')
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
