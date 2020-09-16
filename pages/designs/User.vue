@@ -85,8 +85,17 @@
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-center mb-4 text-white">
         <v-container>
+          <avatar
+            :username="user.name"
+            :src="user.avatars.large"
+            class="ml-3 mr-2"
+            :size="240"
+          ></avatar>
           <h1 class="font-28 fw-600 text-uppercase text-white">
             {{ $t('user.userPageTitle') }} {{ user.name }}
+          </h1>
+          <h1 class="font-24 fw-600 text-uppercase text-white">
+            {{ user.tagline }}
           </h1>
         </v-container>
       </section>
@@ -179,6 +188,7 @@ import { mapActions, mapGetters } from 'vuex'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
+import Avatar from 'vue-avatar'
 export default {
   name: 'User',
   layout: 'designs-listing',
@@ -187,6 +197,11 @@ export default {
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     Circle8,
     CoolLightBox,
+    Avatar,
+  },
+  async fetch() {
+    const res = await this.$axios.$get(`/user/${this.filters.userId}/findById`)
+    this.user = res.data
   },
 
   data() {
@@ -217,7 +232,6 @@ export default {
       user: {},
     }
   },
-
   computed: {
     queryString() {
       return Object.keys(this.filters)
@@ -242,11 +256,6 @@ export default {
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
-
-      const res = await this.$axios.$get(
-        `/user/${this.filters.userId}/findById`
-      )
-      this.user = res.data
 
       this.designs.forEach((design) => {
         this.itemsDesigns.push({

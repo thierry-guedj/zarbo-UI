@@ -25,13 +25,16 @@
             size="large"
             color="deep-orange accent-2"
             @click="goToDesigns()"
-            ><v-icon class="mr-2">flip_to_back</v-icon>{{ $t('show.backToArtwork') }}</v-btn
+            ><v-icon class="mr-2">flip_to_back</v-icon
+            >{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
         <!-- Design Comments -->
         <div class="design-comments mt-3 px-4">
           <h1 class="font-16 fw-300 mb-4">
-            <strong class="fw-500">{{ comments.length }} {{ $t('comments.comments') }}</strong>
+            <strong class="fw-500"
+              >{{ comments.length }} {{ $t('comments.comments') }}</strong
+            >
           </h1>
           <v-list-item>
             <v-list-item-content>
@@ -53,12 +56,13 @@
               :rows="2"
               :form="form"
               field="body"
-              v-bind:placeholder="$t('comments.enterComment')"
+              :placeholder="$t('comments.enterComment')"
               class="pl-4 pr-14"
             ></v-textarea>
             <div class="mt-2 text-right pr-14">
               <v-btn type="submit" size="sm">
-                <v-icon class="mr-2">insert_comment</v-icon>{{ $t('comments.postComment') }}
+                <v-icon class="mr-2">insert_comment</v-icon
+                >{{ $t('comments.postComment') }}
               </v-btn>
             </div>
           </form>
@@ -131,15 +135,6 @@
                     @click="goToUser(`${design.user.id}`)"
                     >{{ design.user.name }}</v-btn
                   >
-                  <!-- <nuxt-link
-                    :to="{
-                      name: 'designs.user',
-                      params: { id: design.user.id },
-                    }"
-                    @click="hideModal()"
-                  >
-                    {{ design.user.name }}
-                  </nuxt-link> -->
                 </h1>
                 <p class="font-12 fw-300 mt-1">
                   <span class="shot-by">{{ design.user.tagline }}</span>
@@ -239,7 +234,6 @@ export default {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
- 
   },
 
   methods: {
