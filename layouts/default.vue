@@ -317,6 +317,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.vue-avatar--wrapper {
+  min-width: 40px;
+}
 .subtitle {
   font-size: 16px;
   margin-left: 20px;

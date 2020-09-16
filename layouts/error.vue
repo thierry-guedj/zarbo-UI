@@ -38,6 +38,9 @@ export default {
 </script>
 
 <style scoped>
+.vue-avatar--wrapper {
+  min-width: 40px;
+}
 h1 {
   font-size: 20px;
 }

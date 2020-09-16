@@ -320,4 +320,7 @@ export default {
 .v-application ol .v-application a {
   padding-left: 0;
 }
+.vue-avatar--wrapper {
+  min-width: 100px;
+}
 </style>

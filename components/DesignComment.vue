@@ -63,4 +63,7 @@ export default {
   letter-spacing: 0.0333333333em !important;
   line-height: 1.25rem;
 }
+.vue-avatar--wrapper {
+  min-width: 40px;
+}
 </style>
