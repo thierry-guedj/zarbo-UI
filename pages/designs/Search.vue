@@ -13,6 +13,22 @@
     >
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
+    <v-container class="p-0 m-0 row-designs">
+      <section class="hero text-center text-white">
+        <v-container>
+          <v-row class="row-md-12">
+            <v-col class="col-md-3 avatarUser">
+              
+            </v-col>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-col class="col-md-9">
+              <p class="titleUser text-white">
+               Oeuvres Publiées
+              </p>
+             
+            </v-col>
+          </v-row>
+        </v-container>
     <v-container fluid class="search-control">
       <form @submit.prevent="fetchData">
         <v-row
@@ -43,16 +59,6 @@
               @change="fetchData"
             ></v-checkbox>
 
-            <!--  <v-checkbox
-              id="has_team"
-              v-model="filters.has_team"
-              field="has_team"
-              label="By team"
-              true-value="1"
-              false-value="0"
-              class="mr-3"
-              @change="fetchData"
-            ></v-checkbox> -->
           </v-col>
           <v-col>
             <v-text-field
@@ -86,7 +92,7 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="pt-8 pl-0 pb-6 pr-0">
+      <div v-else class="pl-0 pb-6 pr-0">
         <template v-if="(!designs.length)" class="pb-6 text-center">
           <v-alert border="right" color="accent" dark width="60%" class="alert">
             {{ $t('designs.noResult') }}
@@ -290,6 +296,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.titleUser {
+  font-size: 44px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+}
 .alert {
   text-align: center;
   margin: auto;
@@ -307,6 +318,8 @@ export default {
 }
 .search-control {
   max-width: 75% !important;
+   margin-top: 25px;
+  margin-bottom: 0;
 }
 .loader {
   position: fixed;
@@ -336,4 +349,5 @@ html {
 .row.row-design {
   display: contents !important;
 }
+
 </style>

@@ -69,17 +69,6 @@
                   false-value="0"
                   @change="fetchData"
                 ></v-checkbox>
-
-                <!--   <v-checkbox
-              id="has_team"
-              v-model="filters.has_team"
-              field="has_team"
-              label="By team"
-              true-value="1"
-              false-value="0"
-              class="mr-3"
-              @change="fetchData"
-            ></v-checkbox> -->
               </v-col>
               <v-col>
                 <v-text-field
@@ -184,7 +173,6 @@
     <!-- <keep-alive> -->
     <base-modal
       :dialog.sync="visible"
-      :fullscreen="fullscreen"
       @showDesign="styleModal()"
       @closeDialog="hideModal()"
     />
@@ -383,7 +371,5 @@ html {
 .row.row-design {
   display: contents !important;
 }
-.userTitle {
-  font-size: 48px;
-}
+
 </style>
