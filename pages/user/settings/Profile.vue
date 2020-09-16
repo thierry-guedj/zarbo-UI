@@ -13,7 +13,7 @@
           <input type="file" name="image" />
         </slim-cropper>
         <div v-if="uploading" class="text-success caption-sm mt-2">
-          <!-- <i class="fas fa-spinner fa-spin"></i> -->
+          <i class="fas fa-spinner fa-spin"></i>
           <div class="loader">
             <Circle8></Circle8>
           </div>

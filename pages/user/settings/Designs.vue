@@ -123,6 +123,22 @@
         @destroyItem="deleteItem()"
       />
     </keep-alive>
+    <v-snackbar
+      v-model="snackbar"
+      color="success"
+      multi-line
+      timeout="5000"
+      top
+      vertical
+      @loginSuccess="snackbar = true"
+    >
+      Your design has been uploaded
+      <template v-slot:action="{ attrs }">
+        <v-btn dark text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </section>
 </template>
 
@@ -135,6 +151,7 @@ export default {
   data() {
     return {
       dialog: false,
+      snackbar: false,
       headers: [
         {
           text: this.$i18n.t('settingsDesigns.image'),
@@ -207,7 +224,13 @@ export default {
       val || this.close()
     },
   },
-
+beforeRouteUpdate(to, from, next) {
+    if (to.params.upload) {
+      this.snackbar = true
+    }
+  
+    next();
+  },
   created() {
     this.initialize()
   },

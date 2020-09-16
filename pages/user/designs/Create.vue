@@ -259,12 +259,17 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-     update(id) {
+    update(id) {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
           setTimeout(() => {
-            this.$router.push({ name: 'settings.designs' })
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            })
           }, 1000)
         })
         .catch((err) => console.log(err.response))
@@ -273,12 +278,11 @@ export default {
           this.loader = null
           this.loadingSubmit = false
         })
-     },
+    },
     slimInitialised(data) {
       console.log(data)
     },
     imageUpload(error, data, response) {
-
       console.log(error, data, response)
       return true
     },
