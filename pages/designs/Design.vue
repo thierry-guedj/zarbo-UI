@@ -123,9 +123,13 @@
 
             <!-- Designer info -->
             <div class="white-bg-color">
-              <v-avatar class="float-left mr-3" href="#">
-                <img :src="design.user.avatars.medium" width="100px" />
-              </v-avatar>
+              <avatar
+                :username="user.name"
+                :src="user.avatars.medium"
+                class="mx-3 mt-3"
+                inline="true"
+                :size="100"
+              ></avatar>
               <div class="modal-user-detail ml-2">
                 <h1 class="font-13 fw-500">
                   <v-btn
