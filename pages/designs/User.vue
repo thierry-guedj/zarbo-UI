@@ -98,10 +98,10 @@
               <p class="titleUser text-uppercase text-white">
                 {{ $t('user.userPageTitle') }} {{ user.name }}
               </p>
-              <h2 class="font-28 fw-600 text-white">
+              <pclass="tagline text-white">
                 {{ user.tagline }}
-              </h2>
-              <p class="font-22 fw-600 text-white">
+              </p>
+              <p class="about text-white">
                 {{ user.about }}
               </p>
             </v-col>
@@ -324,7 +324,13 @@ export default {
 
 <style lang="scss" scoped>
 .titleUser {
-  font-size: 60px;
+  font-size: 44px;
+}
+.tagline {
+  font-size: 24px
+}
+.about {
+  font-size: 16px;
 }
 .avatarUser {
   max-width: 280px;
