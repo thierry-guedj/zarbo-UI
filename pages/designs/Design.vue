@@ -34,7 +34,7 @@
           <h1 class="font-16 fw-300 mb-4">
             <strong class="fw-500"
               >{{ comments.length }} <span v-if="comments.length > 1"> {{ $t('comments.comments') }}</span
-          ><span v-else> {{ $t('comments.comment') }}</span>{{ $t('comments.comments') }}</strong
+          ><span v-else> {{ $t('comments.comment') }}</span></strong
             >
           </h1>
           <v-list-item>
@@ -322,6 +322,6 @@ export default {
   padding-left: 0;
 }
 .vue-avatar--wrapper {
-  min-width: 100px;
+  min-width: 80px;
 }
 </style>

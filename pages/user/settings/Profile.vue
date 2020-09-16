@@ -45,7 +45,7 @@
           @input="$v.form.tagline.$touch()"
           @blur="$v.form.tagline.$touch()"
         ></v-text-field>
-
+<has-error :form="form" field="tagline"></has-error>
         <v-textarea
           v-model.trim="$v.form.about.$model"
           :error-messages="aboutErrors"
@@ -58,7 +58,7 @@
           @input="$v.form.about.$touch()"
           @blur="$v.form.about.$touch()"
         ></v-textarea>
-
+<has-error :form="form" field="about"></has-error>
         <div class="text-right">
           <v-spacer class="mb-3" />
           <v-btn
