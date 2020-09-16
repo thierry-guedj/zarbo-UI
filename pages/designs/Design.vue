@@ -33,7 +33,8 @@
         <div class="design-comments mt-3 px-4">
           <h1 class="font-16 fw-300 mb-4">
             <strong class="fw-500"
-              >{{ comments.length }} {{ $t('comments.comments') }}</strong
+              >{{ comments.length }} <span v-if="comments.length > 1"> {{ $t('comments.comments') }}</span
+          ><span v-else> {{ $t('comments.comment') }}</span>{{ $t('comments.comments') }}</strong
             >
           </h1>
           <v-list-item>
@@ -130,7 +131,7 @@
                 :src="user.avatars.medium"
                 class="mx-3 mt-3"
                 inline="true"
-                :size="100"
+                :size="80"
               ></avatar>
                 </v-col>
                 <v-col class="col-md-9">

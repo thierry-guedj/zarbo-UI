@@ -64,6 +64,7 @@ export default {
   },
   comments: {
     comments: 'Commentaires',
+    comment: 'Commentaire',
     enterComment: 'Entrer un commentaire',
     postComment: 'Poster votre commentaire',
   },

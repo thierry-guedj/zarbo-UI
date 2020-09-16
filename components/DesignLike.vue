@@ -2,7 +2,7 @@
   <section>
     <li class="d-table w-100">
       <div class="stats-txt d-table-cell w-50">
-        <div v-if="$auth.loggedIn && (design.user.id !== $auth.user.id)">
+        <div v-if="$auth.loggedIn && design.user.id !== $auth.user.id">
           <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
             <template v-if="userLikes">
               <!--        <span class="material-icons" style="color:red">
@@ -25,7 +25,10 @@ thumb_up
       </div>
 
       <div>
-        <a class="text-white">{{ likes }} Likes</a>
+        <a class="text-white"
+          >{{ likes }} <span v-if="likes > 1"> Likes</span
+          ><span v-else> Like</span></a
+        >
       </div>
     </li>
     <template v-if="userLikes && $auth.loggedIn">

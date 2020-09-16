@@ -63,6 +63,7 @@ export default {
   },
   comments: {
     comments: 'Comments',
+    comment: 'Comment',
     enterComment: 'Enter a comment',
     postComment: 'Post comment',
   },
