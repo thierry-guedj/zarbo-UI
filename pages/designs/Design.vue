@@ -197,6 +197,7 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import VueGoodshare from 'vue-goodshare'
 // import SocialSharing from 'vue-social-sharing'
 // import GoogleSpin from 'vue-loading-spinner/src/components/Circle8.vue'
+import Avatar from 'vue-avatar'
 export default {
   name: 'Design',
   layout: 'designs-listing',
@@ -206,6 +207,7 @@ export default {
     // SocialSharing,
     Circle8,
     // GoogleSpin,
+    Avatar,
   },
   async fetch() {
     const url = `/designs/${this.designId}`
