@@ -13,75 +13,7 @@
     >
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
-    <v-container fluid class="search-control">
-      <form @submit.prevent="fetchData">
-        <v-row
-          class="filters d-flex justify-content-between align-items-center"
-        >
-          <v-col cols="auto"
-            ><v-select
-              v-model="filters.orderBy"
-              :items="itemsOrderBy"
-              item-text="title"
-              item-value="value"
-              :label="$t('search.orderBy')"
-              outlined
-              width="250px"
-              @change="fetchData"
-            ></v-select
-          ></v-col>
 
-          <v-col cols="auto" class="d-flex align-items-center">
-            <v-checkbox
-              id="has_comments"
-              v-model="filters.has_comments"
-              field="has_comments"
-              :label="$t('search.hasComments')"
-              class="mr-3"
-              true-value="1"
-              false-value="0"
-              @change="fetchData"
-            ></v-checkbox>
-
-            <!--   <v-checkbox
-              id="has_team"
-              v-model="filters.has_team"
-              field="has_team"
-              label="By team"
-              true-value="1"
-              false-value="0"
-              class="mr-3"
-              @change="fetchData"
-            ></v-checkbox> -->
-          </v-col>
-          <v-col>
-            <v-text-field
-              id="q"
-              v-model="filters.q"
-              field="q"
-              class="combobox"
-              outlined
-              placeholder="rechercher dans les titres et les descriptions"
-              @input="fetchData"
-            >
-              <template v-slot:append>
-                <v-btn
-                  :disabled="searching"
-                  class="searchBtn"
-                  height="auto"
-                  text
-                  :loading="searching"
-                  type="submit"
-                >
-                  <v-icon>mdi-magnify</v-icon>
-                  {{ $t('search.search') }}
-                </v-btn>
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-row>
-      </form>
-    </v-container>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-center mb-4 text-white">
         <v-container>
@@ -107,6 +39,75 @@
               </p>
             </v-col>
           </v-row>
+        </v-container>
+        <v-container fluid class="search-control">
+          <form @submit.prevent="fetchData">
+            <v-row
+              class="filters d-flex justify-content-between align-items-center"
+            >
+              <v-col cols="auto"
+                ><v-select
+                  v-model="filters.orderBy"
+                  :items="itemsOrderBy"
+                  item-text="title"
+                  item-value="value"
+                  :label="$t('search.orderBy')"
+                  outlined
+                  width="250px"
+                  @change="fetchData"
+                ></v-select
+              ></v-col>
+
+              <v-col cols="auto" class="d-flex align-items-center">
+                <v-checkbox
+                  id="has_comments"
+                  v-model="filters.has_comments"
+                  field="has_comments"
+                  :label="$t('search.hasComments')"
+                  class="mr-3"
+                  true-value="1"
+                  false-value="0"
+                  @change="fetchData"
+                ></v-checkbox>
+
+                <!--   <v-checkbox
+              id="has_team"
+              v-model="filters.has_team"
+              field="has_team"
+              label="By team"
+              true-value="1"
+              false-value="0"
+              class="mr-3"
+              @change="fetchData"
+            ></v-checkbox> -->
+              </v-col>
+              <v-col>
+                <v-text-field
+                  id="q"
+                  v-model="filters.q"
+                  field="q"
+                  class="combobox"
+                  outlined
+                  placeholder="rechercher dans les titres et les descriptions"
+                  @input="fetchData"
+                >
+                  <template v-slot:append>
+                    <v-btn
+                      :disabled="searching"
+                      class="searchBtn"
+                      height="auto"
+                      text
+                      :loading="searching"
+                      type="submit"
+                    >
+                      <v-icon>mdi-magnify</v-icon>
+                      {{ $t('search.search') }}
+                    </v-btn>
+                  </template>
+                </v-text-field>
+              </v-col>
+            </v-row>
+          </form>
         </v-container>
       </section>
       <div v-if="searching" class="loader p-0">
@@ -330,7 +331,7 @@ export default {
   margin-bottom: 30px;
 }
 .tagline {
-  font-size: 24px
+  font-size: 24px;
 }
 .about {
   font-size: 16px;
