@@ -124,7 +124,7 @@
             <!-- Designer info -->
             <div class="white-bg-color">
               <v-avatar class="float-left mr-3" href="#">
-                <img :src="design.user.avatars.medium" width="80px" />
+                <img :src="design.user.avatars.medium" width="60px" />
               </v-avatar>
               <div class="modal-user-detail ml-2">
                 <h1 class="font-13 fw-500">

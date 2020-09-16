@@ -95,7 +95,7 @@
           ></avatar>
             </v-col>
             <v-col class="col-md-9">
-          <h1 class="font-58 fw-600 text-uppercase text-white">
+          <h1 class="font-48 fw-600 text-uppercase text-white">
             {{ $t('user.userPageTitle') }} {{ user.name }}
           </h1>
           <h2 class="font-28 fw-600 text-white">
@@ -363,5 +363,8 @@ html {
 }
 .row.row-design {
   display: contents !important;
+}
+.userTitle {
+  font-size: 48px; 
 }
 </style>
