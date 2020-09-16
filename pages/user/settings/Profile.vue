@@ -10,6 +10,7 @@
       }}</alert-success>
       <div>
         <slim-cropper :options="slimOptions" class="text-black slim-avatar">
+          <img :src="$auth.user.avatars.large" alt="" />
           <input type="file" name="image" />
         </slim-cropper>
         <div v-if="uploading" class="text-success caption-sm mt-2">
@@ -45,7 +46,7 @@
           @input="$v.form.tagline.$touch()"
           @blur="$v.form.tagline.$touch()"
         ></v-text-field>
-<has-error :form="form" field="tagline"></has-error>
+        <has-error :form="form" field="tagline"></has-error>
         <v-textarea
           v-model.trim="$v.form.about.$model"
           :error-messages="aboutErrors"
@@ -58,7 +59,7 @@
           @input="$v.form.about.$touch()"
           @blur="$v.form.about.$touch()"
         ></v-textarea>
-<has-error :form="form" field="about"></has-error>
+        <has-error :form="form" field="about"></has-error>
         <div class="text-right">
           <v-spacer class="mb-3" />
           <v-btn
@@ -218,12 +219,10 @@ export default {
   }
 } */
       // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
-      this.$axios
-        .$post(url, formdata)
-        .then((res) => {
-          this.update()
-        })
-        /* .catch((err) => {
+      this.$axios.$post(url, formdata).then((res) => {
+        this.update()
+      })
+      /* .catch((err) => {
           console.log('error')
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
@@ -266,6 +265,7 @@ export default {
   width: 240px;
   border-radius: 50%;
   color: black;
+  margin-bottom: 5px;
 }
 .loader {
   position: absolute;
