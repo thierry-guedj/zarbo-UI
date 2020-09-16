@@ -94,6 +94,7 @@
                 :size="240"
               ></avatar>
             </v-col>
+            <v-divider class="mx-4" inset vertical></v-divider>
             <v-col class="col-md-9">
               <p class="titleUser text-white">
                 {{ $t('user.userPageTitle') }} {{ user.name }}
@@ -325,6 +326,8 @@ export default {
 <style lang="scss" scoped>
 .titleUser {
   font-size: 44px;
+  padding-top: 20px;
+  margin-bottom: 30px;
 }
 .tagline {
   font-size: 24px
