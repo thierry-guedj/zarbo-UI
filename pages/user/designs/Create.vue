@@ -145,7 +145,7 @@
                   >{{ $t('editDesign.updateDesign') }}</v-btn
                 > -->
               <v-btn
-                class="slim-btn2 slim-btn-upload2"
+                class="slim-btn slim-btn-upload"
                 title="Upload"
                 type="button"
                 data-action="upload"
@@ -168,6 +168,45 @@ import { mapActions } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import Slim from '@/components/slim/slim.vue'
+function slimInitialised(data) {
+      console.log(data)
+    }
+ function imageUpload(error, data, response) {
+      console.log(error, data, response)
+      return true
+    }
+  function slimService(formdata, failure) {
+      this.uploading = true
+      console.log(formdata)
+      console.log(this.form.title)
+      if (this.form.is_live === false) {
+        this.form.is_live = 0
+      } else {
+        this.form.is_live = 1
+      }
+      console.log(this.form.tags)
+
+      this.form.slug = this.slug
+      console.log(formdata)
+      this.$axios.post('designs', formdata).then((res) => {
+        this.form.put(`designs/${res.data.id}`).then((response) => {
+          this.update(res.data.id)
+          /* setTimeout(() => {
+            this.$router.push(
+              this.localePath({
+                name: 'designs.edit',
+                params: { id: res.data.id },
+              })
+            )
+          }) */
+        })
+      })
+      /* .catch((err) => {
+          const message = err.response.data.errors
+          this.error = message[Object.keys(message)[0]][0]
+          failure(500)
+        }) */
+    }
 export default {
   name: 'Create',
   middleware: ['auth'],
@@ -270,7 +309,7 @@ export default {
                 upload: true,
               },
             })
-          }, 1000)
+          }, 3000)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
@@ -279,45 +318,7 @@ export default {
           this.loadingSubmit = false
         })
     },
-    slimInitialised(data) {
-      console.log(data)
-    },
-    imageUpload(error, data, response) {
-      console.log(error, data, response)
-      return true
-    },
-    slimService(formdata, failure) {
-      this.uploading = true
-      console.log(formdata)
-      console.log(this.form.title)
-      if (this.form.is_live === false) {
-        this.form.is_live = 0
-      } else {
-        this.form.is_live = 1
-      }
-      console.log(this.form.tags)
-
-      this.form.slug = this.slug
-      console.log(formdata)
-      this.$axios.post('designs', formdata).then((res) => {
-        this.form.put(`designs/${res.data.id}`).then((response) => {
-          this.update(res.data.id)
-          /* setTimeout(() => {
-            this.$router.push(
-              this.localePath({
-                name: 'designs.edit',
-                params: { id: res.data.id },
-              })
-            )
-          }) */
-        })
-      })
-      /* .catch((err) => {
-          const message = err.response.data.errors
-          this.error = message[Object.keys(message)[0]][0]
-          failure(500)
-        }) */
-    },
+   
     submit() {
       this.form.busy = true
       this.uploading = true

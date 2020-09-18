@@ -8,74 +8,90 @@
       <alert-success :form="form">{{
         $t('profile.profileUpdated')
       }}</alert-success>
-      <div>
-        <slim-cropper :options="slimOptions" class="text-black slim-avatar">
-          <img :src="$auth.user.avatars.large" alt="" />
-          <input type="file" name="image" />
-        </slim-cropper>
-        <div v-if="uploading" class="text-success caption-sm mt-2">
-          <i class="fas fa-spinner fa-spin"></i>
-          <div class="loader">
-            <Circle8></Circle8>
+      <v-row class="row-md-12">
+        <v-col class="col-md-4">
+          <div>
+            <slim-cropper :options="slimOptions" class="text-black slim-avatar">
+              <img :src="$auth.user.avatars.large" alt="" />
+              <input type="file" name="image" />
+            </slim-cropper>
+            <div v-if="uploading" class="text-success caption-sm mt-2">
+              <i class="fas fa-spinner fa-spin"></i>
+              <div class="loader">
+                <Circle8></Circle8>
+              </div>
+            </div>
+            <v-spacer class="mb-3" />
+            <v-btn
+              class="slim-btn2 slim-btn-upload2 ml-8 float-right"
+              title="Upload"
+              type="button"
+              data-action="upload"
+              style="opacity: 1;"
+              :loading="loadingSubmit"
+              @click="submit"
+              >{{ $t('profile.updateAvatar') }}</v-btn
+            >
           </div>
-        </div>
-      </div>
+        </v-col>
+        <v-col class="col-md-8">
+          <form class="auth-form avatar" @submit.prevent="submit">
+            <input type="hidden" name="_method" value="PUT" />
+            <v-text-field
+              v-model.trim="$v.form.name.$model"
+              :error-messages="nameErrors"
+              :counter="120"
+              :form="form"
+              field="name"
+              :label="$t('profile.name')"
+              outlined
+              class="mb-1"
+              @input="$v.form.name.$touch()"
+              @blur="$v.form.name.$touch()"
+            ></v-text-field>
+            <has-error :form="form" field="name"></has-error>
+            <v-text-field
+              v-model.trim="$v.form.tagline.$model"
+              :error-messages="taglineErrors"
+              :counter="300"
+              :label="$t('profile.tagline')"
+              :form="form"
+              field="tagline"
+              @input="$v.form.tagline.$touch()"
+              @blur="$v.form.tagline.$touch()"
+            ></v-text-field>
+            <has-error :form="form" field="tagline"></has-error>
+            <v-textarea
+              v-model.trim="$v.form.about.$model"
+              :error-messages="aboutErrors"
+              :counter="3000"
+              :form="form"
+              :placeholder="$t('profile.someInfo')"
+              field="about"
+              outlined
+              class="mb-1"
+              @input="$v.form.about.$touch()"
+              @blur="$v.form.about.$touch()"
+            ></v-textarea>
+            <has-error :form="form" field="about"></has-error>
+            <div class="text-right">
+              <v-spacer class="mb-3" />
+              <v-btn
+                class="ml-8 float-right"
+                title="Upload"
+                type="button"
+                data-action="upload"
+                style="opacity: 1;"
+                :loading="loadingSubmit"
+                @click="update"
+                >{{ $t('profile.updateProfile') }}</v-btn
+              >
 
-      <form class="auth-form avatar" @submit.prevent="submit">
-        <input type="hidden" name="_method" value="PUT" />
-        <v-text-field
-          v-model.trim="$v.form.name.$model"
-          :error-messages="nameErrors"
-          :counter="120"
-          :form="form"
-          field="name"
-          :label="$t('profile.name')"
-          outlined
-          class="mb-1"
-          @input="$v.form.name.$touch()"
-          @blur="$v.form.name.$touch()"
-        ></v-text-field>
-        <has-error :form="form" field="name"></has-error>
-        <v-text-field
-          v-model.trim="$v.form.tagline.$model"
-          :error-messages="taglineErrors"
-          :counter="300"
-          :label="$t('profile.tagline')"
-          :form="form"
-          field="tagline"
-          @input="$v.form.tagline.$touch()"
-          @blur="$v.form.tagline.$touch()"
-        ></v-text-field>
-        <has-error :form="form" field="tagline"></has-error>
-        <v-textarea
-          v-model.trim="$v.form.about.$model"
-          :error-messages="aboutErrors"
-          :counter="3000"
-          :form="form"
-          :placeholder="$t('profile.someInfo')"
-          field="about"
-          outlined
-          class="mb-1"
-          @input="$v.form.about.$touch()"
-          @blur="$v.form.about.$touch()"
-        ></v-textarea>
-        <has-error :form="form" field="about"></has-error>
-        <div class="text-right">
-          <v-spacer class="mb-3" />
-          <v-btn
-            class="slim-btn2 slim-btn-upload2 ml-8 float-right"
-            title="Upload"
-            type="button"
-            data-action="upload"
-            style="opacity: 1;"
-            :loading="loadingSubmit"
-            @click="submit"
-            >{{ $t('profile.updateProfile') }}</v-btn
-          >
-
-          <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
-        </div>
-      </form>
+              <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
+            </div>
+          </form>
+        </v-col>
+      </v-row>
     </div>
   </section>
 </template>
@@ -84,7 +100,44 @@
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import Slim from '@/components/slim/slim.vue'
+// called when slim has initialized
+function slimInit(data, slim) {
+  // slim instance reference
+  console.log(slim)
 
+  // current slim data object and slim reference
+  console.log(data)
+}
+function slimService(formdata, failure) {
+  this.uploading = true
+  console.log(formdata)
+
+  /* formdata.append('name', this.form.name)
+      formdata.append('about', this.form.about) */
+  formdata.append('_method', 'put')
+
+  console.log(formdata)
+  const url = `user/${this.$auth.user.id}`
+  /*     let config = {
+  headers: {
+    Content-Type: "application/x-www-form-urlencoded",
+  }
+} */
+  // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
+  this.$axios.$post(url, formdata).then((res) => {
+    // this.update()
+  })
+  /* .catch((err) => {
+          console.log('error')
+          const message = err.response.data.errors
+          this.error = message[Object.keys(message)[0]][0]
+          failure(500)
+        }) */
+}
+function imageLoad() {
+  console.log('coucou le cnsole log')
+  return true
+}
 export default {
   name: 'Profile',
   components: {
@@ -105,11 +158,11 @@ export default {
       },
     },
   },
- /*  async fetch() {
+  /*  async fetch() {
     const res = await this.$axios.$get(`/user/${this.$auth.user.id}/findById`)
     this.user = res.data
   }, */
-/*   async asyncData({ $axios, context, error, redirect }) {
+  /*   async asyncData({ $axios, context, error, redirect }) {
     try {
       const user = await $axios.$get(`/user/${context.$auth.user.id}/findById`)
       console.log(user)
@@ -148,11 +201,12 @@ export default {
         label: this.$i18n.t('profile.label'),
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
-        // didLoad: 'imageLoad',
+        didLoad: 'imageLoad',
         uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
         // serviceFormat: 'file',
+        didInit: slimInit,
       },
       uploading: false,
     }
@@ -225,32 +279,7 @@ export default {
         longitude: data.longitude,
       }
     },
-    slimService(formdata, failure) {
-      this.uploading = true
-      console.log(formdata)
 
-      /* formdata.append('name', this.form.name)
-      formdata.append('about', this.form.about) */
-      formdata.append('_method', 'put')
-
-      console.log(formdata)
-      const url = `user/${this.$auth.user.id}`
-      /*     let config = {
-  headers: {
-    Content-Type: "application/x-www-form-urlencoded",
-  }
-} */
-      // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
-      this.$axios.$post(url, formdata).then((res) => {
-        this.update()
-      })
-      /* .catch((err) => {
-          console.log('error')
-          const message = err.response.data.errors
-          this.error = message[Object.keys(message)[0]][0]
-          failure(500)
-        }) */
-    },
     submit() {
       this.form.busy = true
       this.loader = 'loadingSubmit'
@@ -265,10 +294,6 @@ export default {
     clear() {
       this.form.reset()
       this.$v.form.$reset()
-    },
-    imageLoad() {
-      console.log('coucou le cnsole log')
-      return true
     },
   },
 }

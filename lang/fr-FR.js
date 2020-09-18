@@ -178,5 +178,6 @@ export default {
     profileUpdated: 'Profil modifié avec succès',
     profile: 'Votre profil',
     label: 'Sélectionnez votre avatar',
+    updateAvatar: 'Modifiez votre avatar',
   },
 }

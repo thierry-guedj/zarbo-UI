@@ -177,5 +177,6 @@ export default {
     profileUpdated: 'Profile updated successfully',
     profile: 'Profile',
     label: 'Drop your avatar here',
+    updateAvatar: 'Update your avatar',
   },
 }
