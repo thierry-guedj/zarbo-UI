@@ -130,7 +130,7 @@
 
               <v-checkbox
                 id="is_live"
-                v-model="$v.form.is_live"
+                v-model="form.is_live"
                 field="is_live"
                 :label="$t('editDesign.publishDesign')"
               ></v-checkbox>
