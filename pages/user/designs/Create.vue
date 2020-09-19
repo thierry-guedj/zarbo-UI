@@ -337,14 +337,14 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          /*  setTimeout(() => {
+           setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
               params: {
                 upload: true,
               },
             })
-          }, 3000) */
+          }, 3000)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
@@ -432,11 +432,11 @@ export default {
 }
 
 .progress {
-  height: 15px;
+  height: 10px;
   margin-bottom: 20px;
   margin-top: 10px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: transparent;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -447,9 +447,9 @@ export default {
   height: 100%;
   font-size: 12px;
   line-height: 20px;
-  color: #fff;
+  color: rgba(31, 124, 142, 1);
   text-align: center;
-  background-color: #337ab7;
+  background-color: #b78933;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
