@@ -11,8 +11,12 @@
       <v-row class="row-md-12">
         <v-col class="col-md-4">
           <div>
-            <slim-cropper :options="slimOptions" class="text-black slim-avatar">
-              <img :src="$auth.user.avatars.large" alt="" />
+            <slim-cropper
+              :options="slimOptions"
+              class="text-black slim-avatar"
+              data-did-load="imageLoad"
+              :initial-image="$auth.user.avatars.large"
+            >
               <input type="file" name="image" />
             </slim-cropper>
             <div v-if="uploading" class="text-success caption-sm mt-2">
@@ -108,32 +112,7 @@ function slimInit(data, slim) {
   // current slim data object and slim reference
   console.log(data)
 }
-function slimService(formdata, failure) {
-  this.uploading = true
-  console.log(formdata)
 
-  /* formdata.append('name', this.form.name)
-      formdata.append('about', this.form.about) */
-  formdata.append('_method', 'put')
-
-  console.log(formdata)
-  const url = `user/${this.$auth.user.id}`
-  /*     let config = {
-  headers: {
-    Content-Type: "application/x-www-form-urlencoded",
-  }
-} */
-  // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
-  this.$axios.$post(url, formdata).then((res) => {
-    // this.update()
-  })
-  /* .catch((err) => {
-          console.log('error')
-          const message = err.response.data.errors
-          this.error = message[Object.keys(message)[0]][0]
-          failure(500)
-        }) */
-}
 function imageLoad() {
   console.log('coucou le cnsole log')
   return true
@@ -260,6 +239,32 @@ export default {
     }
   },
   methods: {
+    slimService(formdata, failure) {
+      this.uploading = true
+      console.log(formdata)
+
+      /* formdata.append('name', this.form.name)
+      formdata.append('about', this.form.about) */
+      formdata.append('_method', 'put')
+
+      console.log(formdata)
+      const url = `user/${this.$auth.user.id}`
+      /*     let config = {
+  headers: {
+    Content-Type: "application/x-www-form-urlencoded",
+  }
+} */
+      // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
+      this.$axios.$post(url, formdata).then((res) => {
+        // this.update()
+      })
+      /* .catch((err) => {
+          console.log('error')
+          const message = err.response.data.errors
+          this.error = message[Object.keys(message)[0]][0]
+          failure(500)
+        }) */
+    },
     update() {
       this.form
         .put(`/settings/profile`)
