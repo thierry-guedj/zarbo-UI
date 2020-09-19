@@ -15,8 +15,10 @@
               :options="slimOptions"
               class="text-black slim-avatar"
               data-did-upLoad="imageUpload"
-              :src="$auth.user.avatars.large"
+              
+              data-download="true"
             >
+              <img :src="$auth.user.avatars.large" />
               <input type="file" name="image" />
             </slim-cropper>
             <div v-if="uploading" class="text-success caption-sm mt-2">
