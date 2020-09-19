@@ -28,7 +28,6 @@
         :username="user.name"
         :src="user.avatars.medium"
         class="mx-3 mt-3"
-        inline="true"
         :size="80"
       ></avatar>
       <div class="portfolio-item__info">
@@ -39,7 +38,7 @@
             <a
               class="portfolio-item__link"
               :title="user.username"
-              @click="goToUser('Show', '', `${user.id}`, 'fullscreen')"
+              @click="goToUser('Show', '', `${user.id}`)"
             >
               <i class="material-icons">collections</i>
             </a>
@@ -85,7 +84,9 @@ export default {
     ...mapActions(['showModal', 'hideModal']),
     goToUser(userId) {
       if (this.$route.path !== `/designs/${userId}/user`) {
-        this.$router.push({ name: 'designs.user', params: { id: userId } })
+        this.$router.push(
+          this.localePath({ name: 'designs.user', params: { id: userId } })
+        )
       }
     },
   },
