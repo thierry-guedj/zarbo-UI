@@ -21,7 +21,7 @@
         >
         </CoolLightBox>
         <masonry
-          :cols="{ default: 6, 1000: 3, 700: 2, 400: 1 }"
+          :cols="{ default: 7, 1000: 3, 700: 2, 400: 1 }"
           :gutter="{ default: '0px', 700: '15px' }"
           ><lazy-component
             v-for="(design, i) in designs"

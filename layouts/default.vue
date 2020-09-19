@@ -208,11 +208,13 @@
           <nuxt />
         </v-container>
       </v-main>
-
+      <div id="grad2" class="line"></div>
+<v-parallax :src="backgroundUrl" height="600"> </v-parallax>
       <v-footer :absolute="!fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
     </v-app>
+    
   </section>
 </template>
 
@@ -395,6 +397,46 @@ footer {
 }
 
 #grad1 {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    left,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(
+    to right,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  ); /* Standard syntax (must be last) */
+}
+
+#grad2 {
   background: red; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(
     left,

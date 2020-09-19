@@ -112,6 +112,9 @@
               width="60%"
               class="alert"
             >
+            <!-- On teste pourquoi il n'y a pas de résultat -->
+            <!-- 1° cas : les critères de recherche ne donnent aucun résultat -->
+            <!-- 2° cas : l'artiste n'a pas publié d'oeuvre -->
               {{ $t('user.noResult') }}
               <v-spacer />
               <nuxt-link :to="{ name: 'users.search' }">
