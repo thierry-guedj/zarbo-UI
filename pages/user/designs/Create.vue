@@ -12,42 +12,47 @@
   <v-container>
     <v-row>
       <v-col class="col-md-6 edit-info">
-        <v-card width="100%" class="mx-auto">
-          <v-card-title class="headline"
-            ><i class="material-icons md-24 mr-4">cloud_upload</i
-            >{{ $t('create.uploadArtwork') }}</v-card-title
-          >
+        <div class="upload-shot">
+          <div class="container">
+            <div
+              class="row justify-content-center align-items-center text-center"
+            >
+              <div class="col-md-6">
+                <div class="card bg-white shadow-sm">
+                  <div class="d-flex flex-column justify-content-center p-1">
+                    <div v-if="error" class="alert alert-danger">
+                      <p>An error occurred during the upload process</p>
+                      <p>{{ error }}</p>
+                    </div>
+                    <slim-cropper :options="slimOptions">
+                      <input type="file" name="image" />
+                    </slim-cropper>
+                    <div id="progress" class="progress">
+                      <div
+                        class="progress-bar progress-bar-success"
+                        :style="{ width: uploadPercentage + '%' }"
+                      ></div>
+                    </div>
 
-          <v-card-text>
-            <div v-if="error" class="alert alert-danger">
-              <p>An error occurred during the upload process</p>
-              <p>{{ error }}</p>
-            </div>
-
-            <div>
-              <slim-cropper
-                :options="slimOptions"
-                data-did-load="imageLoad"
-                data-did-upload="imageUpload"
-                class="text-black slim-avatar"
-              >
-                <input type="file" name="image" />
-              </slim-cropper>
-            </div>
-
-            <div v-if="uploading" class="text-success caption-sm mt-2">
-              <!-- <i class="fas fa-spinner fa-spin"></i> -->
-              <div class="loader">
-                <Circle8></Circle8>
+                    <p v-if="dialog_msg !== ''" class="alert alert-warning">
+                      {{ dialog_msg }}
+                    </p>
+                    <div v-if="uploading" class="text-success caption-sm mt-2">
+                      <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="upload-para mt-2">
+                  <p class="font-14 fw-400">
+                    Your image dimensions must be at least 800px x 600px in
+                    size. Also the image size should be a maximum of 2MB. Please
+                    resize your file accordingly before you upload.
+                  </p>
+                </div>
               </div>
             </div>
-          </v-card-text>
-          <div class="upload-para mt-2 ml-4">
-            <p class="font-14 fw-400">
-              {{ $t('create.uploadNotice') }}
-            </p>
           </div>
-        </v-card>
+        </div>
       </v-col>
       <v-col class="col-md-5 edit-info ml-2">
         <v-card flat>
@@ -239,7 +244,10 @@ export default {
 
       uploading: false,
       error: '',
-      imageIsLoaded: false,
+      imageSelectionDone: true,
+      progressWidth: 0,
+      uploadPercentage: 0,
+      dialog_msg: '',
     }
   },
   computed: {
@@ -277,9 +285,25 @@ export default {
       console.log(success)
 
       console.log(formdata)
-      this.$axios.post('designs', formdata).then((res) => {
-        this.update(res.data.id)
-        /* setTimeout(() => {
+      this.$axios
+        .post('designs', formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              (progressEvent.loaded / progressEvent.total) * 100,
+              10
+            )
+            if (this.uploadPercentage === 100) {
+              this.dialog_msg = 'Still uploading... Please wait'
+            }
+          }.bind(this),
+        })
+        .then((res) => {
+          this.dialog_msg = 'Cover photo is updated successfully'
+          this.update(res.data.id)
+          /* setTimeout(() => {
             this.$router.push(
               this.localePath({
                 name: 'designs.edit',
@@ -287,7 +311,7 @@ export default {
               })
             )
           }) */
-      })
+        })
       /* .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
@@ -307,14 +331,14 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          setTimeout(() => {
+         /*  setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
               params: {
                 upload: true,
               },
             })
-          }, 3000)
+          }, 3000) */
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
