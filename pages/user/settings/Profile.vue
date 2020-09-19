@@ -113,9 +113,22 @@ function slimInit(data, slim) {
   console.log(data)
 }
 
-function imageLoad() {
-  console.log('coucou le cnsole log')
-  return true
+function imageLoad(file, image, meta) {
+
+    // average image color
+    var averageColor = averagePixelColor(image);
+
+    // color to HSL
+    var color = rgbToHsl(averageColor);
+
+    // does the hue part fall in the warm range
+    // and is the image not too dark or bright
+    if ((color.h > 300 || color.h < 60) &&
+            (color.l > 10 && color.l < 90)) {
+        return true;
+    }
+
+    return 'This image is just not hot enough.';
 }
 function imageUpload(error, data, response) {
     console.log(error, data, response);

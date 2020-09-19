@@ -274,6 +274,7 @@ export default {
     slimService(formdata, progress, success, failure) {
       this.uploading = true
       console.log(progress)
+      console.log(success)
 
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
