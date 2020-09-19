@@ -15,6 +15,7 @@
               :options="slimOptions"
               class="text-black slim-avatar"
               data-did-upLoad="imageUpload"
+              data-did-init="slimInitialised"
               data-download="true"
             >
               <img :src="$auth.user.avatars.large" />

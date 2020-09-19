@@ -12,47 +12,53 @@
   <v-container>
     <v-row>
       <v-col class="col-md-6 edit-info">
-        <div class="upload-shot">
-          <div class="container">
-            <div
-              class="row justify-content-center align-items-center text-center"
-            >
-              <div class="col-md-6">
-                <div class="card bg-white shadow-sm">
-                  <div class="d-flex flex-column justify-content-center p-1">
-                    <div v-if="error" class="alert alert-danger">
-                      <p>An error occurred during the upload process</p>
-                      <p>{{ error }}</p>
-                    </div>
-                    <slim-cropper :options="slimOptions">
-                      <input type="file" name="image" />
-                    </slim-cropper>
-                    <div id="progress" class="progress">
-                      <div
-                        class="progress-bar progress-bar-success"
-                        :style="{ width: uploadPercentage + '%' }"
-                      ></div>
-                    </div>
+        <v-card width="100%" class="mx-auto">
+          <v-card-title class="headline"
+            ><i class="material-icons md-24 mr-4">cloud_upload</i
+            >{{ $t('create.uploadArtwork') }}</v-card-title
+          >
 
-                    <p v-if="dialog_msg !== ''" class="alert alert-warning">
-                      {{ dialog_msg }}
-                    </p>
-                    <div v-if="uploading" class="text-success caption-sm mt-2">
-                      <i class="fas fa-spinner fa-spin"></i>
-                    </div>
-                  </div>
-                </div>
-                <div class="upload-para mt-2">
-                  <p class="font-14 fw-400">
-                    Your image dimensions must be at least 800px x 600px in
-                    size. Also the image size should be a maximum of 2MB. Please
-                    resize your file accordingly before you upload.
-                  </p>
-                </div>
+          <v-card-text>
+            <div v-if="error" class="alert alert-danger">
+              <p>An error occurred during the upload process</p>
+              <p>{{ error }}</p>
+            </div>
+
+            <div>
+              <slim-cropper
+                :options="slimOptions"
+                data-did-load="imageLoaded"
+                class="text-black slim-avatar"
+              >
+                <input type="file" name="image" />
+              </slim-cropper>
+              <div id="progress" class="progress">
+                <div
+                  class="progress-bar progress-bar-success"
+                  :style="{ width: uploadPercentage + '%' }"
+                ></div>
+              </div>
+              <p v-if="dialog_msg !== ''" class="alert alert-warning">
+                {{ dialog_msg }}
+              </p>
+              <div v-if="uploading" class="text-success caption-sm mt-2">
+                <i class="fas fa-spinner fa-spin"></i>
               </div>
             </div>
+
+            <div v-if="uploading" class="text-success caption-sm mt-2">
+              <!-- <i class="fas fa-spinner fa-spin"></i> -->
+              <div class="loader">
+                <Circle8></Circle8>
+              </div>
+            </div>
+          </v-card-text>
+          <div class="upload-para mt-2 ml-4">
+            <p class="font-14 fw-400">
+              {{ $t('create.uploadNotice') }}
+            </p>
           </div>
-        </div>
+        </v-card>
       </v-col>
       <v-col class="col-md-5 edit-info ml-2">
         <v-card flat>
@@ -331,7 +337,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-         /*  setTimeout(() => {
+          /*  setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
               params: {
@@ -421,7 +427,33 @@ export default {
 }
 .loader {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 45%;
+  left: 45%;
+}
+
+.progress {
+  height: 15px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
 }
 </style>
