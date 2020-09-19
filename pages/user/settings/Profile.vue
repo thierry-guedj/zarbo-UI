@@ -87,6 +87,7 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
+                :disabled="$v.form.$invalid"
                 @click="update"
                 >{{ $t('profile.updateProfile') }}</v-btn
               >
@@ -196,7 +197,7 @@ export default {
         label: this.$i18n.t('profile.label'),
         ratio: '1:1',
         maxFileSize: 2, // value is 2MB
-        didLoad: 'imageLoad',
+        // didLoad: 'imageLoad',
         uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
         // forceType: 'jpg',
