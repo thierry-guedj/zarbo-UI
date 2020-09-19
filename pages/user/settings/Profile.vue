@@ -15,7 +15,7 @@
               :options="slimOptions"
               class="text-black slim-avatar"
               data-did-upLoad="imageUpload"
-              :initial-image="$auth.user.avatars.large"
+              :src="$auth.user.avatars.large"
             >
               <input type="file" name="image" />
             </slim-cropper>
