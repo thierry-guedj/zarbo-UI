@@ -4,7 +4,7 @@
     <v-parallax :src="backgroundUrl" height="600">
       <div class="mt-18 text-center text-parallax mb-0">
         <h1 class="teal--text text-center text--lighten-2 mb-0">Zarbo,</h1>
-        <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
+        <!-- <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p> -->
       </div>
     </v-parallax>
 
@@ -209,7 +209,10 @@
         </v-container>
       </v-main>
       <div class="line"></div>
-<v-parallax :src="backgroundUrl" height="600"> </v-parallax>
+<v-parallax :src="backgroundUrl" height="600"><div class="mt-18 text-center text-parallax mb-0">
+       
+        <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
+      </div> </v-parallax>
       <v-footer :absolute="!fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>

@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <section>
     <h2 class="ml-3">{{ $t('widgetTitle.lastPublishedDesigns') }}</h2>
-    <div v-if="searching" class="loader">
+    <v-container class="p-0 m-0 row-designs">
+    <div v-if="searching" class="loader p-0">
       <Circle8></Circle8>
     </div>
     <div v-else class="pt-8 pl-0 pb-6 pr-0">
@@ -21,7 +22,14 @@
         >
         </CoolLightBox>
         <masonry
-          :cols="{ default: 7, 1000: 3, 700: 2, 400: 1 }"
+          :cols="{
+            default: 6,
+            1500: 5,
+            1400: 4,
+            1000: 3,
+            700: 2,
+            500: 1,
+          }"
           :gutter="{ default: '0px', 700: '15px' }"
           ><lazy-component
             v-for="(design, i) in designs"
@@ -32,7 +40,8 @@
         ></masonry>
       </v-row>
     </div>
-  </div>
+    </v-container>
+  </section>
 </template>
 
 <script>
@@ -53,7 +62,7 @@ export default {
       searching: true,
       loader: null,
       loadingSubmit: false,
-      loaderPage: false,     
+      loaderPage: false,
       fab: false,
       identifier: new Date(),
       index: null,
@@ -89,6 +98,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.container {
+  max-width: 100%;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
 .loader {
   position: fixed;
 
