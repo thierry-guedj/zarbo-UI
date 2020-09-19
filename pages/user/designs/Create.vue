@@ -168,16 +168,17 @@
 import { mapActions } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
+// import $axios from '@nuxtjs/axios'
 import Slim from '@/components/slim/slim.vue'
 function slimInitialised(data) {
-      console.log(data)
-    }
- function imageLoad(error, data, response) {
-      console.log(error, data, response)
-      return true
-    }
-  function imageUpload(error, data, response) {
-    console.log(error, data, response);
+  console.log(data)
+}
+function imageLoad(error, data, response) {
+  console.log(error, data, response)
+  return true
+}
+function imageUpload(error, data, response) {
+  console.log(error, data, response)
 }
 export default {
   name: 'Create',
@@ -273,12 +274,11 @@ export default {
     slimService(formdata, progress, success, failure) {
       this.uploading = true
       console.log(progress)
-      
+
       console.log(formdata)
       this.$axios.post('designs', formdata).then((res) => {
-       
-          this.update(res.data.id)
-          /* setTimeout(() => {
+        this.update(res.data.id)
+        /* setTimeout(() => {
             this.$router.push(
               this.localePath({
                 name: 'designs.edit',
@@ -286,7 +286,6 @@ export default {
               })
             )
           }) */
-        
       })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -301,7 +300,7 @@ export default {
       } else {
         this.form.is_live = 1
       }
-      console.log(this.form.tags)
+      console.log(this.form.is_live)
 
       this.form.slug = this.slug
       this.form
@@ -323,7 +322,7 @@ export default {
           this.loadingSubmit = false
         })
     },
-   
+
     submit() {
       this.form.busy = true
       this.uploading = true
