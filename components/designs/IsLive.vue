@@ -87,5 +87,6 @@ export default {
 .is-live {
   cursor: pointer;
   font-size: 11px;
+  min-width: 120px;
 }
 </style>
