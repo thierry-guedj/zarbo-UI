@@ -21,11 +21,11 @@
         <h3 class="portfolio-item__header">
           {{ designTitle | truncate(17, '...') }}
         </h3>
-        <nuxt-link :to="localePath(`/designs/${design.user.id}/user/fr/`)">
+        <!-- <nuxt-link :to="localePath(`/designs/${design.user.id}/user/fr/`)">
           <h4 class="portfolio-item__subheader">
             <span> {{ $t('designCard.by') }} {{ design.user.name }}</span>
           </h4>
-        </nuxt-link>
+        </nuxt-link> -->
         <div class="portfolio-item__links">
           <div class="portfolio-item__link-block">
             <v-tooltip top content-class="tooltip">

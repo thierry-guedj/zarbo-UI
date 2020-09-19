@@ -202,13 +202,13 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-      <div id="grad1" class="line"></div>
+      <div class="line"></div>
       <v-main>
         <v-container class="main-container">
           <nuxt />
         </v-container>
       </v-main>
-      <div id="grad2" class="line"></div>
+      <div class="line"></div>
 <v-parallax :src="backgroundUrl" height="600"> </v-parallax>
       <v-footer :absolute="!fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -319,6 +319,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.layout {
+  display: contents;
+}
 .vue-avatar--wrapper {
   min-width: 40px;
 }
@@ -476,8 +479,9 @@ footer {
   ); /* Standard syntax (must be last) */
 }
 .line {
-  height: 6px;
-  border-radius: 4px;
+  height: 10px;
+  border-radius: 0px;
+  background: whitesmoke;
 }
 @media screen and (min-width: 320px) {
   html {
@@ -498,5 +502,6 @@ footer {
 }
 .main-container {
   max-width: 100%;
+  padding: 5px 10px;
 }
 </style>
