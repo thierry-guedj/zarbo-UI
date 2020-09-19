@@ -115,24 +115,22 @@ function slimInit(data, slim) {
 }
 
 function imageLoad(file, image, meta) {
+  // average image color
+  const averageColor = averagePixelColor(image)
 
-    // average image color
-    var averageColor = averagePixelColor(image);
+  // color to HSL
+  const color = rgbToHsl(averageColor)
 
-    // color to HSL
-    var color = rgbToHsl(averageColor);
+  // does the hue part fall in the warm range
+  // and is the image not too dark or bright
+  if ((color.h > 300 || color.h < 60) && color.l > 10 && color.l < 90) {
+    return true
+  }
 
-    // does the hue part fall in the warm range
-    // and is the image not too dark or bright
-    if ((color.h > 300 || color.h < 60) &&
-            (color.l > 10 && color.l < 90)) {
-        return true;
-    }
-
-    return 'This image is just not hot enough.';
+  return 'This image is just not hot enough.'
 }
 function imageUpload(error, data, response) {
-    console.log(error, data, response);
+  console.log(error, data, response)
 }
 export default {
   name: 'Profile',
@@ -272,9 +270,21 @@ export default {
   }
 } */
       // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
-      this.$axios.$post(url, formdata).then((res) => {
-        // this.update()
-      })
+      this.$axios
+        .$post(url, formdata)
+        .then((res) => {
+          console.log(res)
+          setTimeout(() => {
+            this.$router.push(
+              this.localePath({
+                name: 'designs.user',
+                params: { id: this.$auth.user.id },
+              })
+            )
+          }, 4000)
+          this.uploading = false
+        })
+        .catch((e) => console.log(e))
       /* .catch((err) => {
           console.log('error')
           const message = err.response.data.errors
