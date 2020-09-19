@@ -27,7 +27,8 @@
             <div>
               <slim-cropper
                 :options="slimOptions"
-                data-did-load="imageLoaded"
+                data-did-load="imageLoad"
+                data-did-upload="imageUpload"
                 class="text-black slim-avatar"
               >
                 <input type="file" name="image" />
@@ -145,7 +146,7 @@
                   >{{ $t('editDesign.updateDesign') }}</v-btn
                 > -->
               <v-btn
-                class="slim-btn slim-btn-upload"
+                class="slim-btn2 slim-btn-upload2"
                 title="Upload"
                 type="button"
                 data-action="upload"
@@ -171,42 +172,13 @@ import Slim from '@/components/slim/slim.vue'
 function slimInitialised(data) {
       console.log(data)
     }
- function imageUpload(error, data, response) {
+ function imageLoad(error, data, response) {
       console.log(error, data, response)
       return true
     }
-  function slimService(formdata, failure) {
-      this.uploading = true
-      console.log(formdata)
-      console.log(this.form.title)
-      if (this.form.is_live === false) {
-        this.form.is_live = 0
-      } else {
-        this.form.is_live = 1
-      }
-      console.log(this.form.tags)
-
-      this.form.slug = this.slug
-      console.log(formdata)
-      this.$axios.post('designs', formdata).then((res) => {
-        this.form.put(`designs/${res.data.id}`).then((response) => {
-          this.update(res.data.id)
-          /* setTimeout(() => {
-            this.$router.push(
-              this.localePath({
-                name: 'designs.edit',
-                params: { id: res.data.id },
-              })
-            )
-          }) */
-        })
-      })
-      /* .catch((err) => {
-          const message = err.response.data.errors
-          this.error = message[Object.keys(message)[0]][0]
-          failure(500)
-        }) */
-    }
+  function imageUpload(error, data, response) {
+    console.log(error, data, response);
+}
 export default {
   name: 'Create',
   middleware: ['auth'],
@@ -298,7 +270,40 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
+    slimService(formdata, progress, success, failure) {
+      this.uploading = true
+      console.log(progress)
+      
+      console.log(formdata)
+      this.$axios.post('designs', formdata).then((res) => {
+       
+          this.update(res.data.id)
+          /* setTimeout(() => {
+            this.$router.push(
+              this.localePath({
+                name: 'designs.edit',
+                params: { id: res.data.id },
+              })
+            )
+          }) */
+        
+      })
+      /* .catch((err) => {
+          const message = err.response.data.errors
+          this.error = message[Object.keys(message)[0]][0]
+          failure(500)
+        }) */
+    },
     update(id) {
+      console.log(this.form.title)
+      if (this.form.is_live === false) {
+        this.form.is_live = 0
+      } else {
+        this.form.is_live = 1
+      }
+      console.log(this.form.tags)
+
+      this.form.slug = this.slug
       this.form
         .put(`designs/${id}`)
         .then((res) => {
