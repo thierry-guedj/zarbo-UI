@@ -260,7 +260,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'zarbo',
-      bgImage: Math.floor(Math.random() * 21) + '.jpg',
+      bgImage: Math.floor(Math.random() * 28) + '.jpg',
       scrollPosition: null,
     }
   },
