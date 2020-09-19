@@ -57,7 +57,7 @@
         </v-snackbar> -->
       </div>
     </v-flex>
-    <cookie-consent />
+    <!-- <cookie-consent /> -->
   </v-layout>
 </template>
 <script>

@@ -260,7 +260,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'zarbo',
-      bgImage: Math.floor(Math.random() * 21) + '_resultat.jpg',
+      bgImage: Math.floor(Math.random() * 21) + '.jpg',
       scrollPosition: null,
     }
   },
@@ -274,7 +274,7 @@ export default {
   },
   computed: {
     backgroundUrl() {
-      return require(`~/assets/images/bg1280-hauteur/${this.bgImage}`)
+      return require(`~/assets/images/bg-ok2/${this.bgImage}`)
     },
 
     ...mapGetters(['visible', 'modalComponent', 'folder']),
@@ -321,7 +321,7 @@ export default {
   min-width: 40px;
 }
 .subtitle {
-  font-size: 16px;
+  font-size: 26px;
   margin-left: 20px;
 }
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
@@ -335,6 +335,7 @@ export default {
   background: #0f1219;
 }
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@600&display=swap');
 
 .text-parallax {
   font-family: 'Josefin Sans', sans-serif;
