@@ -14,7 +14,7 @@
             <slim-cropper
               :options="slimOptions"
               class="text-black slim-avatar"
-              data-did-load="imageLoad"
+              data-did-upLoad="imageUpload"
               :initial-image="$auth.user.avatars.large"
             >
               <input type="file" name="image" />
@@ -116,6 +116,9 @@ function slimInit(data, slim) {
 function imageLoad() {
   console.log('coucou le cnsole log')
   return true
+}
+function imageUpload(error, data, response) {
+    console.log(error, data, response);
 }
 export default {
   name: 'Profile',
