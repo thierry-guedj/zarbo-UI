@@ -2,44 +2,44 @@
   <section>
     <h2 class="ml-3">{{ $t('widgetTitle.lastPublishedDesigns') }}</h2>
     <v-container class="p-0 m-0 row-designs">
-    <div v-if="searching" class="loader p-0">
-      <Circle8></Circle8>
-    </div>
-    <div v-else class="pt-8 pl-0 pb-6 pr-0">
-      <v-row
-        transition-duration="0.3s"
-        item-selector=".item"
-        class="mb-6 row-design"
-        justify="center"
-        no-gutters
-      >
-        <CoolLightBox
-          :items="itemsDesigns"
-          :index="index !== null ? parseInt(`${index}`) : index"
-          :use-zoom-bar="true"
-          :effect="'fade'"
-          @close="index = null"
+      <div v-if="searching" class="loader p-0">
+        <Circle8></Circle8>
+      </div>
+      <div v-else class="pt-8 pl-0 pb-6 pr-0">
+        <v-row
+          transition-duration="0.3s"
+          item-selector=".item"
+          class="mb-6 row-design"
+          justify="center"
+          no-gutters
         >
-        </CoolLightBox>
-        <masonry
-          :cols="{
-            default: 6,
-            1500: 5,
-            1400: 4,
-            1000: 3,
-            700: 2,
-            500: 1,
-          }"
-          :gutter="{ default: '0px', 700: '15px' }"
-          ><lazy-component
-            v-for="(design, i) in designs"
-            :key="`${i}-${design.id}`"
-            :design="design"
-            @lightbox="index = parseInt(`${i}`)"
-          ></lazy-component
-        ></masonry>
-      </v-row>
-    </div>
+          <CoolLightBox
+            :items="itemsDesigns"
+            :index="index !== null ? parseInt(`${index}`) : index"
+            :use-zoom-bar="true"
+            :effect="'fade'"
+            @close="index = null"
+          >
+          </CoolLightBox>
+          <masonry
+            :cols="{
+              default: 6,
+              1500: 5,
+              1400: 4,
+              1000: 3,
+              700: 2,
+              500: 1,
+            }"
+            :gutter="{ default: '0px', 700: '15px' }"
+            ><lazy-component
+              v-for="(design, i) in designs"
+              :key="`${i}-${design.id}`"
+              :design="design"
+              @lightbox="index = parseInt(`${i}`)"
+            ></lazy-component
+          ></masonry>
+        </v-row>
+      </div>
     </v-container>
   </section>
 </template>
