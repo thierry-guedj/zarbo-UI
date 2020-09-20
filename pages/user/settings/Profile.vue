@@ -22,14 +22,14 @@
               <input type="file" name="image" />
             </slim-cropper>
             <div id="progress" class="progress">
-                <div
-                  class="progress-bar progress-bar-success"
-                  :style="{ width: uploadPercentage + '%' }"
-                ></div>
-              </div>
-              <p v-if="dialog_msg !== ''" class="alert alert-warning">
-                {{ dialog_msg }}
-              </p>
+              <div
+                class="progress-bar progress-bar-success"
+                :style="{ width: uploadPercentage + '%' }"
+              ></div>
+            </div>
+            <p v-if="dialog_msg !== ''" class="alert alert-warning">
+              {{ dialog_msg }}
+            </p>
             <div v-if="uploading" class="text-success caption-sm mt-2">
               <i class="fas fa-spinner fa-spin"></i>
               <div class="loader">
@@ -38,7 +38,7 @@
             </div>
             <v-spacer class="mb-3" />
             <v-btn
-              class="slim-btn2 slim-btn-upload2 ml-8 float-right"
+              class="slim-btn2 slim-btn-upload2 ml-8"
               title="Upload"
               type="button"
               data-action="upload"
@@ -162,6 +162,27 @@ export default {
         maxLen: maxLength(3000),
       },
     },
+  },
+  /* async fetch() {
+    const res = await this.$axios.$get(`/user/${this.auth.user.id}/findById`)
+    this.user = res.data
+  }, */
+  async asyncData({ $axios, $auth, error, redirect }) {
+    try {
+      const id = $auth.user.id
+      const user = await $axios.$get(`/user/${id}/findById`)
+      console.log(user)
+
+      return { user: user.data }
+    } catch (err) {
+      if (err.response.status === 404) {
+        error({ statusCode: 404, message: 'Design not found' })
+      } else if (err.response.status === 401) {
+        redirect('/login')
+      } else {
+        error({ statusCode: 500, message: 'Internal server error' })
+      }
+    }
   },
   /*  async fetch() {
     const res = await this.$axios.$get(`/user/${this.$auth.user.id}/findById`)
@@ -290,7 +311,7 @@ export default {
         .then((res) => {
           console.log(res)
           this.checkUpload(this.$auth.user.id)
-          
+
           this.uploading = false
         })
         .catch((e) => console.log(e))
@@ -306,7 +327,7 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
-          
+
           setTimeout(() => {
             this.$router.push(
               this.localePath({
@@ -323,7 +344,6 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
-        
           setTimeout(() => {
             this.$router.push(
               this.localePath({

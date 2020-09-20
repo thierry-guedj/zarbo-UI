@@ -173,7 +173,7 @@ export default {
     description: 'Description',
     clear: 'Effacer',
     updateProfile: 'Modifier votre profil',
-    someInfo: 'Veuillez entre quelques informations à propos de vous',
+    someInfo: 'Veuillez entrez quelques informations à propos de vous',
     profileUpdated: 'Profil modifié avec succès',
     profile: 'Votre profil',
     label: 'Sélectionnez votre avatar',
