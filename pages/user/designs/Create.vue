@@ -340,7 +340,7 @@ export default {
           const uploadIsOk = await this.$axios
             .$get(`designs/${id}/uploadIsSuccessful`)
             .then((response) => {
-              console.log(response)
+              console.log(uploadIsOk)
               setTimeout(() => {
                 this.$router.push({
                   name: 'settings.designs',
