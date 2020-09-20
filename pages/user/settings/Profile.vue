@@ -287,6 +287,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
+          this.$auth.fetchUser()
           this.checkUpload(this.$auth.user.id)
           this.uploading = false
         })
@@ -303,6 +304,7 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
+          this.$auth.fetchUser()
           setTimeout(() => {
             this.$router.push(
               this.localePath({
