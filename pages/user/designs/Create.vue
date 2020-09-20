@@ -352,7 +352,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          this.checkUpload(res.data.id)
+          this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
