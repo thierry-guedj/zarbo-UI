@@ -265,7 +265,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'zarbo',
-      bgImage: Math.floor(Math.random() * 28) + '.jpg',
+      bgImage: Math.floor(Math.random() * 31) + '.jpg',
       scrollPosition: null,
     }
   },
@@ -279,7 +279,7 @@ export default {
   },
   computed: {
     backgroundUrl() {
-      return require(`~/assets/images/bg-ok2/${this.bgImage}`)
+      return require(`~/assets/images/bg-ok3/${this.bgImage}`)
     },
 
     ...mapGetters(['visible', 'modalComponent', 'folder']),
