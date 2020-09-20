@@ -201,6 +201,12 @@ export default {
     CoolLightBox,
     Avatar,
   },
+  async fetch() {
+    const res = await this.$axios.$get(
+      `/user/${this.$route.params.id}/findById`
+    )
+    this.user = res.data
+  },
 
   data() {
     return {
@@ -227,7 +233,7 @@ export default {
       fab: false,
       index: null,
       itemsDesigns: [],
-      user: {},
+      user: null,
     }
   },
   computed: {
