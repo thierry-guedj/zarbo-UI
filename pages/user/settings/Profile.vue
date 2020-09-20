@@ -271,7 +271,20 @@ export default {
       const url = `user/${this.$auth.user.id}`
 
       this.$axios
-        .$post(url, formdata)
+        .$post(url, formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          onUploadProgress: function (progressEvent) {
+            this.uploadPercentage = parseInt(
+              (progressEvent.loaded / progressEvent.total) * 100,
+              10
+            )
+            if (this.uploadPercentage === 100) {
+              this.dialog_msg = 'Still uploading... Please wait'
+            }
+          }.bind(this),
+        })
         .then((res) => {
           console.log(res)
           this.checkUpload(this.$auth.user.id)
