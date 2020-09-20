@@ -321,6 +321,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
+          this.$auth.fetchUser()
           this.dialog_msg = 'Cover photo is updated successfully'
           this.uploading = false
           setTimeout(() => {
