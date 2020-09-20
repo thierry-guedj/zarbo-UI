@@ -1,5 +1,10 @@
 <template>
   <section>
+    <div v-if="$fetchState.pending" class="loader">
+    <Circle8></Circle8>
+  </div>
+  <div v-else class="pt-6 pl-6">
+    
     <v-btn
       v-show="fab"
       v-scroll="onScroll"
@@ -234,6 +239,7 @@ export default {
       index: null,
       itemsDesigns: [],
       user: null,
+      fetchOnServer: true,
     }
   },
   computed: {
