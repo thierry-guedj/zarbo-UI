@@ -275,7 +275,6 @@ export default {
         .then((res) => {
           console.log(res)
           this.checkUpload(this.$auth.user.id)
-          this.$auth.user.avatar = res.data.avatar
           this.uploading = false
         })
         .catch((e) => console.log(e))
@@ -291,7 +290,6 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
-          this.$auth.user = res.data
           setTimeout(() => {
             this.$router.push(
               this.localePath({
@@ -309,6 +307,7 @@ export default {
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = 'Cover photo is updated successfully'
+          this.$nuxt.$emit('user-updated')
           setTimeout(() => {
             this.$router.push(
               this.localePath({
