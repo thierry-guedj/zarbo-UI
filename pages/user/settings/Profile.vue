@@ -365,4 +365,29 @@ export default {
   top: 50%;
   left: 50%;
 }
+.progress {
+  height: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  overflow: hidden;
+  background-color: transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(31, 124, 142, 1);
+  text-align: center;
+  background-color: #b78933;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
 </style>
