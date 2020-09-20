@@ -163,10 +163,7 @@ export default {
       },
     },
   },
-  /* async fetch() {
-    const res = await this.$axios.$get(`/user/${this.auth.user.id}/findById`)
-    this.user = res.data
-  }, */
+
   async asyncData({ $axios, $auth, error, redirect }) {
     try {
       const id = $auth.user.id
@@ -184,27 +181,7 @@ export default {
       }
     }
   },
-  /*  async fetch() {
-    const res = await this.$axios.$get(`/user/${this.$auth.user.id}/findById`)
-    this.user = res.data
-  }, */
-  /*   async asyncData({ $axios, context, error, redirect }) {
-    try {
-      const user = await $axios.$get(`/user/${context.$auth.user.id}/findById`)
-      console.log(user)
-     
 
-      return { user: user.data }
-    } catch (err) {
-      if (err.response.status === 404) {
-        error({ statusCode: 404, message: 'Design not found' })
-      } else if (err.response.status === 401) {
-        redirect('/login')
-      } else {
-        error({ statusCode: 500, message: 'Internal server error' })
-      }
-    }
-  }, */
   data() {
     return {
       form: this.$vform({
@@ -222,16 +199,11 @@ export default {
         service: this.slimService,
         post: 'output',
         defaultInputName: 'image',
-        // minSize: '800,600',
-        // size: '800,600',
         label: this.$i18n.t('profile.label'),
         ratio: '1:1',
         maxFileSize: 5, // value is 5MB
-        // didLoad: 'imageLoad',
         uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
-        // forceType: 'jpg',
-        // serviceFormat: 'file',
         didInit: slimInit,
       },
       uploading: false,
@@ -336,6 +308,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
+          this.dialog_msg = 'Cover photo is updated successfully'
           setTimeout(() => {
             this.$router.push(
               this.localePath({
@@ -343,7 +316,7 @@ export default {
                 params: { id: this.$auth.user.id },
               })
             )
-          }, 4000)
+          }, 1000)
         })
     },
     handleAddress(data) {
