@@ -307,7 +307,7 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          this.dialog_msg = 'Cover photo is updated successfully'
+          
           this.update(res.data.id)
           /* setTimeout(() => {
             this.$router.push(
@@ -328,7 +328,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          console.log(uploadIsOk)
+          this.dialog_msg = 'Cover photo is updated successfully'
           setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
