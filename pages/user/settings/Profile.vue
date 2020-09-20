@@ -21,6 +21,15 @@
               <img :src="$auth.user.avatars.large" />
               <input type="file" name="image" />
             </slim-cropper>
+            <div id="progress" class="progress">
+                <div
+                  class="progress-bar progress-bar-success"
+                  :style="{ width: uploadPercentage + '%' }"
+                ></div>
+              </div>
+              <p v-if="dialog_msg !== ''" class="alert alert-warning">
+                {{ dialog_msg }}
+              </p>
             <div v-if="uploading" class="text-success caption-sm mt-2">
               <i class="fas fa-spinner fa-spin"></i>
               <div class="loader">
@@ -196,7 +205,7 @@ export default {
         // size: '800,600',
         label: this.$i18n.t('profile.label'),
         ratio: '1:1',
-        maxFileSize: 2, // value is 2MB
+        maxFileSize: 5, // value is 5MB
         // didLoad: 'imageLoad',
         uploadMethod: 'PUT',
         statusUploadSuccess: 'Saved successfully',
@@ -205,6 +214,10 @@ export default {
         didInit: slimInit,
       },
       uploading: false,
+      imageSelectionDone: true,
+      progressWidth: 0,
+      uploadPercentage: 0,
+      dialog_msg: '',
     }
   },
   computed: {
@@ -276,14 +289,8 @@ export default {
         .$post(url, formdata)
         .then((res) => {
           console.log(res)
-          setTimeout(() => {
-            this.$router.push(
-              this.localePath({
-                name: 'designs.user',
-                params: { id: this.$auth.user.id },
-              })
-            )
-          }, 4000)
+          this.checkUpload(this.$auth.user.id)
+          
           this.uploading = false
         })
         .catch((e) => console.log(e))
@@ -299,12 +306,33 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
+          
           setTimeout(() => {
-            this.$router.push({ name: 'settings.designs' })
-          }, 4000)
+            this.$router.push(
+              this.localePath({
+                name: 'designs.user',
+                params: { id: this.$auth.user.id },
+              })
+            )
+          }, 1000)
           this.uploading = false
         })
         .catch((e) => console.log(e))
+    },
+    async checkUpload(id) {
+      const uploadIsOk = await this.$axios
+        .$get(`designs/${id}/uploadIsSuccessful`)
+        .then((response) => {
+          console.log(uploadIsOk)
+          setTimeout(() => {
+            this.$router.push(
+              this.localePath({
+                name: 'designs.user',
+                params: { id: this.$auth.user.id },
+              })
+            )
+          }, 4000)
+        })
     },
     handleAddress(data) {
       this.form.formatted_address = data.formatted_address

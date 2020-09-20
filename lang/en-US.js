@@ -150,7 +150,7 @@ export default {
     uploadArtwork: 'Upload an artwok',
     selectImage: 'Select image',
     uploadNotice:
-      'Your image dimensions must be at least 800px x 600px in size. Also the image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
+      'Tthe image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
     uploadError: 'An error occurred during the upload process',
   },
   user: {
