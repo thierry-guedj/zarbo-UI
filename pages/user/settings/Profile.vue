@@ -322,7 +322,7 @@ export default {
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = 'Cover photo is updated successfully'
-          this.$nuxt.$emit('user-updated')
+          this.uploading = false
           setTimeout(() => {
             this.$router.push(
               this.localePath({

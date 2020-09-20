@@ -329,6 +329,7 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = 'Cover photo is updated successfully'
+          this.uploading = false
           setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
