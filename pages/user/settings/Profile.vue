@@ -262,7 +262,7 @@ export default {
     }
   },
   methods: {
-    slimService(formdata, failure) {
+    slimService(formdata, progress, success, failure) {
       this.uploading = true
 
 
