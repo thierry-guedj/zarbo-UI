@@ -262,11 +262,7 @@ export default {
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
-  created() {
-    this.$nuxt.$on('user-updated', () => {
-      this.fetchUser()
-    })
-  },
+
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
@@ -287,12 +283,7 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    async fetchUser() {
-      const id = $auth.user.id
-      const user = await $axios.$get(`/user/${id}/findById`)
-      console.log(user)
-      this.$auth.user = user.data
-    },
+   
     logout() {
       this.$auth.logout()
     },
