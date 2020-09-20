@@ -337,16 +337,19 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          this.$axios.$get(`designs/${id}/uploadIsSuccessful`).then((res) => {
-            setTimeout(() => {
-              this.$router.push({
-                name: 'settings.designs',
-                params: {
-                  upload: true,
-                },
-              })
-            }, 1000)
-          })
+          const uploadIsOk = await this.$axios
+            .$get(`designs/${id}/uploadIsSuccessful`)
+            .then((response) => {
+              console.log(response)
+              setTimeout(() => {
+                this.$router.push({
+                  name: 'settings.designs',
+                  params: {
+                    upload: true,
+                  },
+                })
+              }, 1000)
+            })
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
