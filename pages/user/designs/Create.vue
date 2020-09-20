@@ -324,6 +324,21 @@ export default {
           failure(500)
         }) */
     },
+    async checkUpload(id) {
+      const uploadIsOk = await this.$axios
+        .$get(`designs/${id}/uploadIsSuccessful`)
+        .then((response) => {
+          console.log(uploadIsOk)
+          setTimeout(() => {
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            })
+          }, 1000)
+        })
+    },
     update(id) {
       console.log(this.form.title)
       if (this.form.is_live === false) {
@@ -337,19 +352,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          const uploadIsOk = await this.$axios
-            .$get(`designs/${id}/uploadIsSuccessful`)
-            .then((response) => {
-              console.log(uploadIsOk)
-              setTimeout(() => {
-                this.$router.push({
-                  name: 'settings.designs',
-                  params: {
-                    upload: true,
-                  },
-                })
-              }, 1000)
-            })
+          this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
