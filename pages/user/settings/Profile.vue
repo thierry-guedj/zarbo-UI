@@ -287,7 +287,6 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          this.$auth.fetchUser()
           this.checkUpload(this.$auth.user.id)
           this.uploading = false
         })
@@ -321,10 +320,11 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
-          this.$auth.fetchUser()
+          
           this.dialog_msg = 'Cover photo is updated successfully'
           this.uploading = false
           setTimeout(() => {
+            this.$auth.fetchUser()
             this.$router.push(
               this.localePath({
                 name: 'designs.user',
@@ -377,7 +377,7 @@ export default {
   margin-bottom: 5px;
 }
 .loader {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
 }
