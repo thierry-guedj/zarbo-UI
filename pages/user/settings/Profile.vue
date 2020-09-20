@@ -292,26 +292,18 @@ export default {
   methods: {
     slimService(formdata, failure) {
       this.uploading = true
-      console.log(formdata)
 
-      /* formdata.append('name', this.form.name)
-      formdata.append('about', this.form.about) */
+
       formdata.append('_method', 'put')
 
-      console.log(formdata)
       const url = `user/${this.$auth.user.id}`
-      /*     let config = {
-  headers: {
-    Content-Type: "application/x-www-form-urlencoded",
-  }
-} */
-      // this.$axios.setHeader('Content-Type', 'application/x-www-form-urlencoded')
+
       this.$axios
         .$post(url, formdata)
         .then((res) => {
           console.log(res)
           this.checkUpload(this.$auth.user.id)
-
+          this.$auth.user.avatar = res.data.avatar
           this.uploading = false
         })
         .catch((e) => console.log(e))
@@ -327,7 +319,7 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
-
+          this.$auth.user = res.data
           setTimeout(() => {
             this.$router.push(
               this.localePath({
