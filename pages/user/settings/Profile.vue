@@ -321,9 +321,9 @@ export default {
     },
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
-        .$get(`designs/${id}/uploadIsSuccessful`)
+        .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
-          console.log(uploadIsOk)
+        
           setTimeout(() => {
             this.$router.push(
               this.localePath({
