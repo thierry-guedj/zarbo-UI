@@ -279,7 +279,7 @@ export default {
   },
   computed: {
     backgroundUrl() {
-      return require(`~/assets/images/bg/$.bgImage}`)
+      return require(`~/assets/images/bg/${this.bgImage}`)
     },
 
     ...mapGetters(['visible', 'modalComponent', 'folder']),
