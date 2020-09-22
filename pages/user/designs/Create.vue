@@ -420,7 +420,7 @@ export default {
   line-height: 20px;
   color: rgba(31, 124, 142, 1);
   text-align: center;
-  background-color: #b78933;
+  background-color: #00C853;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
