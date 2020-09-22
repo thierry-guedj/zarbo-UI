@@ -84,7 +84,7 @@
             </p>
             <v-divider class="mx-0" inset></v-divider>
             <p class="text-h6 text-left block">
-              {{ $t('show.by') }} {{ design.user.username }}
+              {{ $t('show.by') }} {{ design.user.name }}
             </p>
             <p class="text-subtitle-1 text-left pb-3 pt-2">
               {{ design.description }}
