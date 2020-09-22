@@ -265,7 +265,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'zarbo',
-      bgImage: 'bg' + Math.floor(Math.random() * 31) + '.jpg',
+      bgImage: 'bg' + Math.floor(Math.random() * 39) + '.jpg',
       scrollPosition: null,
     }
   },
@@ -279,7 +279,7 @@ export default {
   },
   computed: {
     backgroundUrl() {
-      return require(`~/assets/images/bg/${this.bgImage}`)
+      return require(`~/assets/images/bg/$.bgImage}`)
     },
 
     ...mapGetters(['visible', 'modalComponent', 'folder']),
@@ -403,46 +403,6 @@ footer {
 }
 
 #grad1 {
-  background: red; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(
-    left,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
-  ); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(
-    right,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
-  ); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(
-    right,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
-  ); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(
-    to right,
-    orange,
-    yellow,
-    green,
-    cyan,
-    blue,
-    violet
-  ); /* Standard syntax (must be last) */
-}
-
-#grad2 {
   background: red; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(
     left,
