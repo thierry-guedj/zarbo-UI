@@ -323,7 +323,7 @@ export default {
           
           this.dialog_msg = 'Cover photo is updated successfully'
           this.uploading = false
-          setTimeout(() => {
+         /*  setTimeout(() => {
             this.$auth.fetchUser()
             this.$router.push(
               this.localePath({
@@ -331,7 +331,7 @@ export default {
                 params: { id: this.$auth.user.id },
               })
             )
-          }, 1000)
+          }, 1000) */
         })
     },
     handleAddress(data) {
