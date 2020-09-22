@@ -77,7 +77,7 @@
                 v-model.trim="$v.form.title.$model"
                 :error-messages="titleErrors"
                 :counter="120"
-                :label="$t('editDesign.title')"
+                :label="$t('create.title')"
                 field="title"
                 outlined
                 class="mb-1"
@@ -89,7 +89,7 @@
                 v-model.trim="$v.form.description.$model"
                 :error-messages="descriptionErrors"
                 :counter="3000"
-                :label="$t('editDesign.description')"
+                :label="$t('create.description')"
                 outlined
                 class="mb-1"
                 field="description"
@@ -105,57 +105,28 @@
                   class="mb-1"
                   field="description"
                 ></v-textarea> -->
-
+              <p class="tags-notice">{{ $t('create.tagsNotice') }}</p>
+              <p class="tags-notice">{{ $t('create.tagsNotice2') }}</p>
               <client-only>
                 <input-tag
                   v-model="form.tags"
                   :tags="form.tags"
                   field="tags"
                   class="mb-1"
-                  :placeholder="$t('editDesign.tagsLabel')"
+                  :placeholder="$t('create.tagsLabel')"
                   on-paste-delimiter=","
                   outlined
                 ></input-tag>
               </client-only>
-
-              <!--  <template v-if="teams.length">
-                  <v-checkbox
-                    v-model="form.assign_to_team"
-                    :label="$t('editDesign.assignToTeam')"
-                    field="assign_to_team"
-                    :value="form.assign_to_team"
-                  ></v-checkbox>
-
-                  <v-select
-                    v-model="form.team"
-                    :disabled="!form.assign_to_team"
-                    :items="teams"
-                    item-text="name"
-                    item-value="id"
-                    outlined
-                    :label="$t('editDesign.selectTeam')"
-                  >
-                  </v-select>
-                  <has-error :form="form" field="team"></has-error>
-                </template> -->
-
               <v-checkbox
                 id="is_live"
                 v-model="form.is_live"
                 field="is_live"
-                :label="$t('editDesign.publishDesign')"
+                :label="$t('create.publishDesign')"
               ></v-checkbox>
 
               <v-spacer class="mb-3" />
-              <v-btn @click="clear">{{ $t('editDesign.clear') }}</v-btn>
-              <!-- <v-btn
-                  class="mr-4"
-                  :loading="loadingSubmit"
-                  :disabled="$v.form.$invalid"
-                  type="submit"
-                  @click="slimService()"
-                  >{{ $t('editDesign.updateDesign') }}</v-btn
-                > -->
+              <v-btn @click="clear">{{ $t('create.clear') }}</v-btn>
               <v-btn
                 class="slim-btn2 slim-btn-upload2"
                 title="Upload"
@@ -307,16 +278,7 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          
           this.update(res.data.id)
-          /* setTimeout(() => {
-            this.$router.push(
-              this.localePath({
-                name: 'designs.edit',
-                params: { id: res.data.id },
-              })
-            )
-          }) */
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -464,5 +426,12 @@ export default {
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
   transition: width 0.6s ease;
+}
+.tags-notice {
+  font-size: 15px;
+  margin-bottom: 2px !important;
+}
+.application p {
+  margin-bottom: 2px !important;
 }
 </style>

@@ -25,10 +25,7 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
-      this.showModal({
-        componentName: 'PasswordResetForm',
-        folder: 'auth',
-      })
+      this.goTo('PasswordResetForm', 'auth')
     })
   },
   created() {
@@ -37,6 +34,13 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
+    goTo(to, folderName) {
+      // this.hideModal()
+      setTimeout(
+        () => this.showModal({ componentName: to, folder: folderName }),
+        300
+      )
+    },
   },
 }
 </script>

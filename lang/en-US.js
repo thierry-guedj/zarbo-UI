@@ -69,7 +69,7 @@ export default {
   },
   register: {
     register: 'Register',
-    name: 'Name',
+    name: 'Name or Username',
     username: 'Username',
     email: 'E-mail',
     password: 'Password',
@@ -132,7 +132,12 @@ export default {
     confirmDelete: 'Please confirm',
     cancel: 'Cancel',
   },
-  editDesign: {
+  create: {
+    uploadArtwork: 'Upload an artwok',
+    selectImage: 'Select image',
+    uploadNotice:
+      'Tthe image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
+    uploadError: 'An error occurred during the upload process',
     updateDesignInfo: 'Update Design Information',
     title: 'Title',
     description: 'Description',
@@ -145,13 +150,9 @@ export default {
     updated: 'Design successfully updated',
     newItem: 'New Item',
     editItem: 'Edit Item',
-  },
-  create: {
-    uploadArtwork: 'Upload an artwok',
-    selectImage: 'Select image',
-    uploadNotice:
-      'Tthe image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
-    uploadError: 'An error occurred during the upload process',
+    tagsNotice:
+      'Please enter some tags about the technique of this artwork (pastel, watercolor etc) or about the subject (landscape, portrait etc).',
+    tagsNotice2: 'Each tag must be validate by a coma after it.',
   },
   user: {
     noResult: "This artist didn't published any artwork yet",

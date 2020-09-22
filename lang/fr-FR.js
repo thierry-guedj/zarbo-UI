@@ -70,7 +70,7 @@ export default {
   },
   register: {
     register: 'Créer un compte',
-    name: 'Nom',
+    name: 'Nom ou Pseudo',
     username: "Nom d'utilisateur",
     email: 'E-mail',
     password: 'Mot de passe',
@@ -129,15 +129,19 @@ export default {
     draft: 'Brouillon',
     artwork: 'Vos oeuvres',
     description: 'Description',
-    tags: 'Tags',
+    tags: 'Mots-clés',
     confirmDelete: 'Veuillez confirmer la suppression',
     cancel: 'Annuler',
   },
-  editDesign: {
+  create: {
+    uploadArtwork: 'Poster une oeuvre',
+    selectImage: 'Selectionnez une image',
+    uploadNotice: 'Le poids de votre image ne doit pas dépasser 10MB.',
+    uploadError: 'Une erreur est survenue lors du téléchargement',
     updateDesignInfo: 'Modifier les informations de cette oeuvre',
     title: 'Titre',
     description: 'Description',
-    tagsLabel: 'Tags séparés par une virgule',
+    tagsLabel: 'Mots-clés séparés par une virgule',
     publishDesign: 'Publier cette oeuvre',
     updateDesign: "Modifier l'oeuvre",
     clear: 'Effacer',
@@ -146,12 +150,10 @@ export default {
     updated: "L'oeuvre a été modifiée avec succès",
     newItem: 'Nouvelle oeuvre',
     editItem: 'Editer une oeuvre',
-  },
-  create: {
-    uploadArtwork: 'Poster une oeuvre',
-    selectImage: 'Selectionnez une image',
-    uploadNotice: 'Le poids de votre image ne doit pas dépasser 10MB.',
-    uploadError: 'Une erreur est survenue lors du téléchargement',
+    tagsNotice:
+      'Veuillez entrer quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
+    tagsNotice2:
+      "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
