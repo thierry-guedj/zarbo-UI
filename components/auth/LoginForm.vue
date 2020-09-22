@@ -136,16 +136,16 @@ export default {
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
-      !this.$v.form.email.email && errors.push('Must be valid e-mail')
-      !this.$v.form.email.required && errors.push('E-mail is required')
+      !this.$v.form.email.email && errors.push(this.$i18n.t('validation.emailValid'))
+      !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
     passwordErrors() {
       const errors = []
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&
-        errors.push('Password must be at most 8 characters long')
-      !this.$v.form.password.required && errors.push('Password is required.')
+        errors.push(this.$i18n.t('validation.passwordMinLength'))
+      !this.$v.form.password.required && errors.push(this.$i18n.t('validation.passwordRequired'))
       return errors
     },
   },
@@ -199,12 +199,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.alert-error {
-  background-color: rgba(229, 57, 53, 0.7);
-}
-.alert-success {
-  background-color: rgb(56, 142, 60, 0.7);
-}
 a.color-white {
   color: #ffffff;
 }

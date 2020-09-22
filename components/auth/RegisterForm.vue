@@ -1,10 +1,11 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">brush</i>{{ $t('register.register') }}</v-card-title
+      ><i class="material-icons md-24 mr-2">brush</i
+      >{{ $t('register.register') }}</v-card-title
     >
     <v-alert
-      v-if="form.errors.has('username')"
+      v-if="form.errors.has('name')"
       color="#e53935"
       dark
       icon="person_add_disabled"
@@ -12,7 +13,7 @@
       :form="form"
       class="mb-2"
     >
-      {{ form.errors.get('username') }}
+      {{ form.errors.get('name') }}
     </v-alert>
     <v-alert
       v-if="form.errors.has('email')"
@@ -27,7 +28,7 @@
     </v-alert>
     <v-alert
       v-if="this.$v.form.$model.successful"
-      color="#388E3C"
+      class="alert-success"
       dark
       icon="mark_email_unread"
       border="right"
@@ -38,13 +39,13 @@
       <v-text-field
         v-model.trim="$v.form.name.$model"
         :error-messages="nameErrors"
-        :counter="35"
+        :counter="120"
         :label="$t('register.name')"
         required
         @input="$v.form.name.$touch()"
         @blur="$v.form.name.$touch()"
       ></v-text-field>
-      <v-text-field
+      <!-- <v-text-field
         v-model.trim="$v.form.username.$model"
         :error-messages="usernameErrors"
         :counter="35"
@@ -52,7 +53,7 @@
         required
         @input="$v.form.username.$touch()"
         @blur="$v.form.username.$touch()"
-      ></v-text-field>
+      ></v-text-field> -->
       <v-text-field
         v-model.trim="$v.form.email.$model"
         :error-messages="emailErrors"
@@ -91,9 +92,9 @@
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('register.haveAccount') }}
 
-        <base-link component-name="LoginForm" folder-name="auth"
-          >{{ $t('register.login') }}</base-link
-        >
+        <base-link component-name="LoginForm" folder-name="auth">{{
+          $t('register.login')
+        }}</base-link>
       </div>
     </div>
   </v-form>
@@ -119,14 +120,15 @@ export default {
   },
   validations: {
     form: {
-      username: {
+      /* username: {
         required,
         minLen: minLength(3),
         maxLen: maxLength(25),
-      },
+      }, */
       name: {
         required,
-        minLen: minLength(6),
+        minLen: minLength(3),
+        maxLen: maxLength(120),
       },
       email: {
         required,
@@ -164,11 +166,13 @@ export default {
       const errors = []
       if (!this.$v.form.name.$dirty) return errors
       !this.$v.form.name.minLen &&
-        errors.push('Name must be at least 6 characters long')
+        errors.push('Name must be at least 3 characters long')
+      !this.$v.form.name.maxLen &&
+        errors.push(`Name must be at most 120 characters long`)
       !this.$v.form.name.required && errors.push('Name is required.')
       return errors
     },
-    usernameErrors() {
+    /* usernameErrors() {
       const errors = []
       if (!this.$v.form.username.$dirty) return errors
       !this.$v.form.username.minLen &&
@@ -177,29 +181,29 @@ export default {
         errors.push(`Username must be at most 25 characters long`)
       !this.$v.form.username.required && errors.push('Username is required.')
       return errors
-    },
+    }, */
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
-      !this.$v.form.email.email && errors.push('Must be valid e-mail')
-      !this.$v.form.email.required && errors.push('E-mail is required')
+      !this.$v.form.email.email && errors.push(this.$i18n.t('validation.emailValid'))
+      !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
     passwordErrors() {
       const errors = []
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&
-        errors.push('Password must be at least 8 characters long')
-      !this.$v.form.password.required && errors.push('Password is required.')
+        errors.push(this.$i18n.t('validation.passwordMinLength'))
+      !this.$v.form.password.required && errors.push(this.$i18n.t('validation.passwordRequired'))
       return errors
     },
     password_confirmationErrors() {
       const errors = []
       if (!this.$v.form.password_confirmation.$dirty) return errors
       !this.$v.form.password_confirmation.required &&
-        errors.push('Password confirmation is required.')
+        errors.push(this.$i18n.t('validation.passwordConfirmRequired'))
       !this.$v.form.password_confirmation.sameAs &&
-        errors.push('Password confirmation needs to match password')
+        errors.push(this.$i18n.t('validation.passwordMatch'))
       return errors
     },
   },
@@ -220,6 +224,8 @@ export default {
       this.loader = 'loadingSubmit'
       this.form.busy = true
       if (!this.$v.form.$anyError) {
+        this.form.username = this.form.name
+        console.log(this.form.username)
         this.form
           .post(`/register`)
           .then((res) => {})
@@ -244,12 +250,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.alert-error {
-  background-color: rgba(229, 57, 53, 0.7);
-}
-.alert-success {
-  background-color: rgb(56, 142, 60, 0.7);
-}
 a.color-white {
   color: #ffffff;
 }

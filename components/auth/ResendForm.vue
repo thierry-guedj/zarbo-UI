@@ -1,7 +1,8 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">mark_email_unread</i>{{ $t('resendForm.resendVerificationEmail') }}</v-card-title
+      ><i class="material-icons md-24 mr-2">mark_email_unread</i
+      >{{ $t('resendForm.resendVerificationEmail') }}</v-card-title
     >
     <v-alert
       v-if="form.errors.has('message')"
@@ -16,9 +17,9 @@
         v-if="form.errors.get('message') === 'Email address already verified'"
         class="font-14 fw-400 text-center mt-4"
       >
-        <base-link component-name="LoginForm" folder-name="auth"
-          >{{ $t('resendForm.proceedToLogin') }}</base-link
-        >
+        <base-link component-name="LoginForm" folder-name="auth">{{
+          $t('resendForm.proceedToLogin')
+        }}</base-link>
       </p>
       <p v-else class="font-14 fw-400 text-center mt-4">
         {{ $t('resendForm.noAccount') }}
@@ -38,29 +39,31 @@
     >
       {{ $t('resendForm.resentEmail') }}</v-alert
     >
-    <v-text-field
-      v-model="$v.form.email.$model"
-      :error-messages="emailErrors"
-      v-bind:label="$t('resendForm.email')"
-      required
-      @input="$v.form.email.$touch()"
-      @blur="$v.form.email.$touch()"
-    ></v-text-field>
-    <v-spacer class="mb-3" />
-    <v-btn
-      class="mr-4 float-right"
-      :loading="loadingSubmit"
-      :disabled="$v.form.$invalid"
-      type="submit"
-      >{{ $t('resendForm.submit') }}</v-btn
-    >
-    <v-btn @click="clear">{{ $t('resendForm.clear') }}</v-btn>
-    <div class="font-14 fw-400 text-center mt-4 right">
-      {{ $t('resendForm.noAccount') }}
-
-      <base-link component-name="RegisterForm" folder-name="auth">
-        {{ $t('resendForm.createAccount') }}</base-link
+    <div v-if="this.$v.form.$model.successful">
+      <v-text-field
+        v-model="$v.form.email.$model"
+        :error-messages="emailErrors"
+        :label="$t('resendForm.email')"
+        required
+        @input="$v.form.email.$touch()"
+        @blur="$v.form.email.$touch()"
+      ></v-text-field>
+      <v-spacer class="mb-3" />
+      <v-btn
+        class="mr-4 float-right"
+        :loading="loadingSubmit"
+        :disabled="$v.form.$invalid"
+        type="submit"
+        >{{ $t('resendForm.submit') }}</v-btn
       >
+      <v-btn @click="clear">{{ $t('resendForm.clear') }}</v-btn>
+      <div class="font-14 fw-400 text-center mt-4 right">
+        {{ $t('resendForm.noAccount') }}
+
+        <base-link component-name="RegisterForm" folder-name="auth">
+          {{ $t('resendForm.createAccount') }}</base-link
+        >
+      </div>
     </div>
   </v-form>
 </template>
@@ -98,8 +101,8 @@ export default {
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
-      !this.$v.form.email.email && errors.push('Must be valid e-mail')
-      !this.$v.form.email.required && errors.push('E-mail is required')
+      !this.$v.form.email.email && errors.push(this.$i18n.t('validation.emailValid'))
+      !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
   },
@@ -140,12 +143,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.alert-error {
-  background-color: rgba(229, 57, 53, 0.7);
-}
-.alert-success {
-  background-color: rgb(56, 142, 60, 0.7);
-}
 a.color-white {
   color: #ffffff;
 }

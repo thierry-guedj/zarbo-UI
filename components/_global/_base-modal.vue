@@ -27,6 +27,8 @@
           :is="modalComponent"
           :key="unique"
           :modal-closed="modalClosed"
+          :success="success"
+          :status="status"
           @destroyItem="deleteItem"
         ></component>
       </v-card-text>
@@ -41,7 +43,7 @@ import PasswordResetForm from '@/components/auth/PasswordResetForm.vue'
 import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
 import ConfirmDelete from '@/components/designs/ConfirmDelete.vue'
-// import VerifyForm from '@/components/auth/VerifyForm.vue'
+import VerifyForm from '@/components/auth/VerifyForm.vue'
 
 export default {
   name: 'BaseModal',
@@ -52,6 +54,7 @@ export default {
     ResendForm,
     ResetEmail,
     ConfirmDelete,
+    VerifyForm,
   },
   props: {
     value: {
@@ -70,6 +73,14 @@ export default {
     transition: {
       type: String,
       default: 'dialog-bottom-transition',
+    },
+    success: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      default: '',
     },
   },
   data() {

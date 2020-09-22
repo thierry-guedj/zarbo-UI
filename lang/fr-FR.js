@@ -111,6 +111,17 @@ export default {
     submit: 'Renvoyer',
     email: 'E-mail',
   },
+  passwordResetForm: {
+    resetPasswordEmail: 'Réinitialisez votre mot de passe',
+    email: 'Email',
+    newPassword: 'Nouveau mot de passe',
+    newPasswordConfirm: 'Confirmation du nouveau mot de passe',
+    reset: 'Valider',
+    clear: 'Effacer',
+    noAccount: 'Pas encore membre ? ',
+    createAccount: 'Créer votre compte',
+    proceedToLogin: 'Connectez-vous',
+  },
   verifyForm: {
     emailVerification: 'Vérification de votre e-mail',
     proceedToLogin: 'Connectez-vous',
@@ -180,5 +191,13 @@ export default {
     profile: 'Votre profil',
     label: 'Sélectionnez votre avatar',
     updateAvatar: 'Modifiez votre avatar',
+  },
+  validation: {
+    passwordMinLength: 'La longueur du mot de passe doit être au moins de 8 caractères',
+    passwordRequired: 'Le mot de passe est requis',
+    emailRequired: "L' e-mail est requis",
+    emailValid: "L' e-mail doit être valide",
+    passwordConfirmRequired: 'La confirmation du mot de passe est requise',
+    passwordMatch: 'Les 2 mots de passe ne correspondent pas',
   },
 }

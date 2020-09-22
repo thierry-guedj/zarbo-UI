@@ -110,6 +110,17 @@ export default {
     submit: 'Submit',
     email: 'E-mail',
   },
+  passwordResetForm: {
+    resetPasswordEmail: 'Reset password',
+    email: 'Email',
+    newPassword: 'New password',
+    newPasswordConfirm: 'New password confirmation',
+    reset: 'Reset',
+    clear: 'Clear',
+    noAccount: "Don't have an account yet ? ",
+    createAccount: 'Create an account',
+    proceedToLogin: 'Proceed to Login',
+  },
   verifyForm: {
     emailVerification: 'Email verification',
     proceedToLogin: 'Proceed to Login',
@@ -179,5 +190,13 @@ export default {
     profile: 'Profile',
     label: 'Drop your avatar here',
     updateAvatar: 'Update your avatar',
+  },
+  validation: {
+    passwordMinLength: 'Password must be at least 8 characters long',
+    passwordRequired: 'Password is required',
+    emailRequired: 'E-mail is required',
+    emailValid: 'Must be valid e-mail',
+    passwordConfirmRequired: 'Password confirmation is required',
+    passwordMatch: 'Password confirmation needs to match password',
   },
 }

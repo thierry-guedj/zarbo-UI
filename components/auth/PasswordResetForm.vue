@@ -16,7 +16,7 @@
         {{ status }}
         <p>
           <base-link component-name="LoginForm" folder-name="auth" redirect
-            >Proceed to login</base-link
+            >{{ $t('passwordResetForm.proceedToLogin') }}</base-link
           >
         </p></v-alert
       >
@@ -40,7 +40,7 @@
           v-model="$v.form.password.$model"
           :error-messages="passwordErrors"
           type="password"
-          label="New password"
+          :label="$t('passwordResetForm.newPassword')"
           required
           @input="$v.form.password.$touch()"
           @blur="$v.form.password.$touch()"
@@ -49,7 +49,7 @@
           v-model="$v.form.password_confirmation.$model"
           :error-messages="passwordConfirmationErrors"
           type="password"
-          label="New password confirmation"
+          :label="$t('passwordResetForm.newPasswordConfirm')"
           required
           @input="$v.form.password_confirmation.$touch()"
           @blur="$v.form.password_confirmation.$touch()"
@@ -62,16 +62,16 @@
           :loading="loadingSubmit"
           :disabled="$v.form.$invalid"
         >
-          submit</v-btn
+          {{ $t('passwordResetForm.reset') }}</v-btn
         >
-        <v-btn @click="clear">clear</v-btn>
+        <v-btn @click="clear">{{ $t('passwordResetForm.clear') }}</v-btn>
         <div class="font-14 fw-400 text-center mt-4 right">
-          Don't have an account yet?
+        {{ $t('passwordResetForm.noAccount') }}
 
-          <base-link component-name="RegisterForm" folder-name="auth" redirect
-            >Create an account</base-link
-          >
-        </div>
+        <base-link component-name="RegisterForm" folder-name="auth">
+          {{ $t('passwordResetForm.createAccount') }}</base-link
+        >
+      </div>
       </template>
     </v-card-text>
   </v-form>
@@ -127,17 +127,17 @@ export default {
       const errors = []
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&
-        errors.push('Password must be at least 8 characters long')
-      !this.$v.form.password.required && errors.push('Password is required.')
+        errors.push(this.$i18n.t('validation.passwordMinLength'))
+      !this.$v.form.password.required && errors.push(this.$i18n.t('validation.passwordRequired'))
       return errors
     },
     passwordConfirmationErrors() {
       const errors = []
       if (!this.$v.form.password_confirmation.$dirty) return errors
       !this.$v.form.password_confirmation.required &&
-        errors.push('Password confirmation is required.')
+        errors.push(this.$i18n.t('validation.passwordRequired'))
       !this.$v.form.password_confirmation.sameAs &&
-        errors.push('Password confirmation needs to match password')
+        errors.push(this.$i18n.t('validation.passwordMatch'))
       return errors
     },
   },
@@ -185,12 +185,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.alert-error {
-  background-color: rgba(229, 57, 53, 0.7);
-}
-.alert-success {
-  background-color: rgb(56, 142, 60, 0.7);
-}
 a.color-white {
   color: #ffffff;
 }

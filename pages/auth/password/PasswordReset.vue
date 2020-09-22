@@ -45,9 +45,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.alert-error {
-  background-color: rgba(229, 57, 53, 0.7);
-}
 a.color-white {
   color: #ffffff;
 }
