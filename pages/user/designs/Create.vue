@@ -274,7 +274,7 @@ export default {
             )
             progress(progressEvent.loaded, progressEvent.total)
             if (this.uploadPercentage === 100) {
-              this.dialog_msg = this.$i18n.t('create.stillUploading'),
+              this.dialog_msg = this.$i18n.t('create.stillUploading')
             }
           }.bind(this),
         })
