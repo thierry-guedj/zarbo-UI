@@ -240,7 +240,7 @@ export default {
       if (!this.$v.form.description.$dirty) return errors
       !this.$v.form.description.maxLen &&
         errors.push(this.$i18n.t('validation.descriptionMaxLength'))
-    
+
       return errors
     },
     slug() {
@@ -281,7 +281,25 @@ export default {
         })
         .then((res) => {
           // this.checkUpload(res.data.id)
-          this.update(res.data.id)
+          // this.update(res.data.id)
+          if (this.form.is_live === false) {
+            this.form.is_live = 0
+          } else {
+            this.form.is_live = 1
+          }
+
+          this.form.slug = this.slug
+          this.form
+            .put(`designs/${res.data.id}`)
+            .then((response) => {
+              this.checkUpload(res.data.id)
+            })
+            .catch((err) => console.log(err.response))
+            .finally(() => {
+              this.form.busy = false
+              this.loader = null
+              this.loadingSubmit = false
+            })
           success('upload done')
         })
       /* .catch((err) => {
@@ -306,7 +324,7 @@ export default {
           }, 4000)
         })
     },
-    update(id, success) {
+    update(id) {
       console.log(this.form.title)
       if (this.form.is_live === false) {
         this.form.is_live = 0
@@ -320,7 +338,6 @@ export default {
         .put(`designs/${id}`)
         .then((res) => {
           this.checkUpload(id)
-          success('upload done')
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
