@@ -185,8 +185,10 @@ export default {
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
-      !this.$v.form.email.email && errors.push(this.$i18n.t('validation.emailValid'))
-      !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
+      !this.$v.form.email.email &&
+        errors.push(this.$i18n.t('validation.emailValid'))
+      !this.$v.form.email.required &&
+        errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
     passwordErrors() {
@@ -194,7 +196,8 @@ export default {
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&
         errors.push(this.$i18n.t('validation.passwordMinLength'))
-      !this.$v.form.password.required && errors.push(this.$i18n.t('validation.passwordRequired'))
+      !this.$v.form.password.required &&
+        errors.push(this.$i18n.t('validation.passwordRequired'))
       return errors
     },
     password_confirmationErrors() {
@@ -224,7 +227,7 @@ export default {
       this.loader = 'loadingSubmit'
       this.form.busy = true
       if (!this.$v.form.$anyError) {
-        this.form.username = this.form.email
+        this.form.username = this.form.email.replace('@', '')
         console.log(this.form.username)
         this.form
           .post(`/register`)
