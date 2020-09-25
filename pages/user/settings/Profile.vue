@@ -217,22 +217,23 @@ export default {
       const errors = []
       if (!this.$v.form.name.$dirty) return errors
       !this.$v.form.name.maxLen &&
-        errors.push('Name must be less than 120 characters long')
-      !this.$v.form.name.required && errors.push('Name is required.')
+      errors.push(this.$i18n.t('validation.nameMaxLength'))
+      !this.$v.form.name.required && errors.push(this.$i18n.t('validation.nameRequired'))
       return errors
     },
     taglineErrors() {
       const errors = []
       if (!this.$v.form.tagline.$dirty) return errors
       !this.$v.form.tagline.maxLen &&
-        errors.push('Tagline must be less than 300 characters long')
+      errors.push(this.$i18n.t('validation.taglineMaxLength'))
+
       return errors
     },
     aboutErrors() {
       const errors = []
       if (!this.$v.form.about.$dirty) return errors
       !this.$v.form.about.maxLen &&
-        errors.push('Description must be less than 3000 characters long')
+        errors.push(this.$i18n.t('validation.descriptionMaxLength'))
       return errors
     },
   },
@@ -280,7 +281,7 @@ export default {
             )
             progress(progressEvent.loaded, progressEvent.total)
             if (this.uploadPercentage === 100) {
-              this.dialog_msg = 'Still uploading... Please wait'
+              this.dialog_msg = this.$i18n.t('profile.stillUploading')
             }
           }.bind(this),
         })
@@ -320,7 +321,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
-          this.dialog_msg = 'Cover photo is updated successfully'
+          this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
 
           this.uploading = false
           setTimeout(() => {

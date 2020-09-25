@@ -194,6 +194,9 @@ export default {
     profile: 'Votre profil',
     label: 'Sélectionnez votre avatar',
     updateAvatar: 'Modifiez votre avatar',
+    stillUploading:
+      'Votre avatar est toujours en cours de téléchargement...Patience...',
+    uploadSuccess: 'Avatar téléchargé avec succès',
   },
   editDesign: {
     editItem: 'Editer une oeuvre',

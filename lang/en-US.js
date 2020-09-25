@@ -193,6 +193,8 @@ export default {
     profile: 'Profile',
     label: 'Drop your avatar here',
     updateAvatar: 'Update your avatar',
+    stillUploading: 'Avatar is still uploading...Please wait',
+    uploadSuccess: 'Avatar successfully uploaded',
   },
   editDesign: {
     editItem: 'Edit Item',
@@ -215,5 +217,6 @@ export default {
     passwordMatch: 'Password confirmation needs to match password',
     titleMaxLength: 'Title must be less than 120 characters long',
     descriptionMaxLength: 'Description must be less than 3000 characters long',
+    taglineMaxLength: 'Tagline must be less than 300 characters long',
   },
 }
