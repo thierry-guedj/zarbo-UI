@@ -227,7 +227,7 @@ export default {
       this.loader = 'loadingSubmit'
       this.form.busy = true
       if (!this.$v.form.$anyError) {
-        this.form.username = this.form.email.replace('@', '')
+        this.form.username = this.form.email.replace('@', '').replace('.', '')
         console.log(this.form.username)
         this.form
           .post(`/register`)
