@@ -81,13 +81,14 @@
       </template>
       <template v-slot:item.image="{ item }">
         <div class="px-2 my-2 align-middle">
+          <nuxt-link :to="{name: 'design.details', params: { id: item.id} }"
           <v-img
             :src="item.images.thumbnail"
             :lazy-src="item.images.minithumbnail"
             :alt="item.title"
             max-width="80px"
           >
-          </v-img>
+          </v-img></nuxt-link>
         </div>
       </template>
       <template v-slot:item.is_live="{ item }">
