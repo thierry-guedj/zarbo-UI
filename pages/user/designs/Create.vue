@@ -257,7 +257,7 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     slimService(formdata, progress, success, failure) {
-      // this.uploading = true
+      this.uploading = true
       /* console.log(progress)
       console.log(success)
 
@@ -293,7 +293,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          this.dialog_msg = 'Cover photo is updated successfully'
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           this.uploading = false
           setTimeout(() => {
             this.$router.push({

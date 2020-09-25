@@ -158,15 +158,16 @@ export default {
     clear: 'Effacer',
     assignToTeam: 'Asociée à une équipe',
     selectTeam: 'Selectionner une équipe',
-    updated: "L'oeuvre a été modifiée avec succès",
+    updated: "L'oeuvre a été téléchargée avec succès",
     newItem: 'Nouvelle oeuvre',
     editItem: 'Editer une oeuvre',
     tagsNotice:
-      'Veuillez entrer quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
+      'Vous pouvez entrer ci-dessous quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
     tagsNotice2:
       "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
     saved: 'Image téléchargée avec succès',
-    stillUploading: 'Téléchargement en cours...Patience.',
+    stillUploading: 'Téléchargement en cours...Patience...',
+    uploadSuccess: 'Oeuvre téléchargée avec succès',
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
