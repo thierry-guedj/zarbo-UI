@@ -282,6 +282,15 @@ export default {
         .then((res) => {
           if (this.checkUpload(res.data.id)) {
             this.update(res.data.id)
+            this.uploading = false
+            setTimeout(() => {
+              this.$router.push({
+                name: 'settings.designs',
+                params: {
+                  upload: true,
+                },
+              })
+            }, 3000)
             success('upload done')
           }
         })
@@ -296,15 +305,6 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.uploading = false
-          setTimeout(() => {
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            })
-          }, 4000)
         })
       return true
     },
