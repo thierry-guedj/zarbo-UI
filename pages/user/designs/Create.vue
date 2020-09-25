@@ -293,13 +293,14 @@ export default {
             .put(`designs/${res.data.id}`)
             .then((response) => {
               this.checkUpload(res.data.id)
+              success('upload done')
             })
             .catch((err) => console.log(err.response))
             .finally(() => {
               this.form.busy = false
               this.loader = null
               this.loadingSubmit = false
-              success('upload done')
+              
             })
           
         })
@@ -426,7 +427,7 @@ export default {
 }
 
 .progress {
-  height: 5px;
+  height: 3px;
   margin-bottom: 20px;
   margin-top: 10px;
   overflow: hidden;
