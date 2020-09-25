@@ -264,7 +264,6 @@ export default {
     slimService(formdata, progress, success, failure) {
       this.uploading = true
 
-
       formdata.append('_method', 'put')
 
       const url = `user/${this.$auth.user.id}`
@@ -305,7 +304,7 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
-          
+
           setTimeout(() => {
             this.$router.push(
               this.localePath({
@@ -322,19 +321,12 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
-          
           this.dialog_msg = 'Cover photo is updated successfully'
-          this.$auth.fetchUser()
+
           this.uploading = false
-         /*  setTimeout(() => {
+          setTimeout(() => {
             this.$auth.fetchUser()
-            this.$router.push(
-              this.localePath({
-                name: 'designs.user',
-                params: { id: this.$auth.user.id },
-              })
-            )
-          }, 1000) */
+          }, 4000)
         })
     },
     handleAddress(data) {
@@ -388,7 +380,7 @@ export default {
   left: 50%;
 }
 .progress {
-  height: 10px;
+  height: 5px;
   margin-bottom: 20px;
   margin-top: 10px;
   overflow: hidden;
