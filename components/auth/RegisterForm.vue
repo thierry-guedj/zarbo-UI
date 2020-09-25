@@ -224,7 +224,7 @@ export default {
       this.loader = 'loadingSubmit'
       this.form.busy = true
       if (!this.$v.form.$anyError) {
-        this.form.username = this.form.email
+        this.form.username = this.form.name
         console.log(this.form.username)
         this.form
           .post(`/register`)
