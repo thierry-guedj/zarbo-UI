@@ -158,7 +158,7 @@ export default {
     clear: 'Clear',
     assignToTeam: 'Assign to team',
     selectTeam: 'Select a team',
-    updated: 'Design successfully updated',
+    updated: 'Design successfully uploaded',
     newItem: 'New Item',
     editItem: 'Edit Item',
     tagsNotice:
@@ -166,6 +166,7 @@ export default {
     tagsNotice2: 'Each tag must be validate by a coma after it.',
     saved: 'Saved successfully',
     stillUploading: 'Still uploading...Please wait',
+    uploadSuccess: 'Design successfully uploaded',
   },
   user: {
     noResult: "This artist didn't published any artwork yet",

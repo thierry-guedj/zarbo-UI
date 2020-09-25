@@ -279,7 +279,7 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          this.checkUpload(res.data.id)
+          // this.checkUpload(res.data.id)
           this.update(res.data.id)
           success('upload done')
         })
@@ -318,7 +318,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          // this.checkUpload(id)
+          this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
