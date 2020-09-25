@@ -202,7 +202,7 @@ export default {
         ratio: '1:1',
         maxFileSize: 5, // value is 5MB
         uploadMethod: 'PUT',
-        statusUploadSuccess: 'Saved successfully',
+        statusUploadSuccess: this.$i18n.t('profile.saved'),
         didInit: slimInit,
       },
       uploading: false,
@@ -326,7 +326,7 @@ export default {
           this.uploading = false
           setTimeout(() => {
             this.$auth.fetchUser()
-          }, 4000)
+          }, 3000)
         })
     },
     handleAddress(data) {

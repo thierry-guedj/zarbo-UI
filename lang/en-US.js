@@ -193,6 +193,7 @@ export default {
     profile: 'Profile',
     label: 'Drop your avatar here',
     updateAvatar: 'Update your avatar',
+    saved: 'Avatar saved successfully',
     stillUploading: 'Avatar is still uploading...Please wait',
     uploadSuccess: 'Avatar successfully uploaded',
   },
