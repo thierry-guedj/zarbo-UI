@@ -299,8 +299,9 @@ export default {
               this.form.busy = false
               this.loader = null
               this.loadingSubmit = false
+              success('upload done')
             })
-          success('upload done')
+          
         })
       /* .catch((err) => {
           const message = err.response.data.errors
