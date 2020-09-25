@@ -257,7 +257,7 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     slimService(formdata, progress, success, failure) {
-      this.uploading = true
+      // this.uploading = true
       /* console.log(progress)
       console.log(success)
 
