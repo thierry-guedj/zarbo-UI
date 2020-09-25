@@ -280,29 +280,10 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          // this.checkUpload(res.data.id)
-          // this.update(res.data.id)
-          if (this.form.is_live === false) {
-            this.form.is_live = 0
-          } else {
-            this.form.is_live = 1
+          if (this.checkUpload(res.data.id)) {
+            this.update(res.data.id)
+            success('upload done')
           }
-
-          this.form.slug = this.slug
-          this.form
-            .put(`designs/${res.data.id}`)
-            .then((response) => {
-              this.checkUpload(res.data.id)
-              // success('upload done')
-            })
-            .catch((err) => console.log(err.response))
-            .finally(() => {
-              this.form.busy = false
-              this.loader = null
-              this.loadingSubmit = false
-              
-            })
-          
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -325,6 +306,7 @@ export default {
             })
           }, 4000)
         })
+      return true
     },
     update(id) {
       console.log(this.form.title)
@@ -427,7 +409,7 @@ export default {
 }
 
 .progress {
-  height: 3px;
+  height: 5px;
   margin-bottom: 20px;
   margin-top: 10px;
   overflow: hidden;
