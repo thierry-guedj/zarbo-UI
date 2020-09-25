@@ -179,6 +179,7 @@ export default {
 }
 .v-application a {
   text-decoration: none;
+  color: #546E7A;
 }
 .v-application .ml-3 {
   text-align: left;

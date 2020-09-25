@@ -61,7 +61,7 @@
         @blur="$v.form.email.$touch()"
       ></v-text-field>
       <v-text-field
-        v-model="$v.form.password.$model"
+        v-model="form.password"
         :label="$t('login.password')"
         type="password"
         required
@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators'
+import { required, email } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 export default {
   name: 'LoginForm',
