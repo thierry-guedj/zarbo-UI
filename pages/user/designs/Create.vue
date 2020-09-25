@@ -216,7 +216,7 @@ export default {
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10,
-        statusUploadSuccess: 'Saved successfully',
+        statusUploadSuccess: this.$i18n.t('create.saved'),
       },
 
       uploading: false,
@@ -274,7 +274,7 @@ export default {
             )
             progress(progressEvent.loaded, progressEvent.total)
             if (this.uploadPercentage === 100) {
-              this.dialog_msg = 'Still uploading... Please wait'
+              this.dialog_msg = this.$i18n.t('create.stillUploading'),
             }
           }.bind(this),
         })
@@ -282,7 +282,6 @@ export default {
           this.checkUpload(res.data.id)
           this.update(res.data.id)
           success('upload done')
-          
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -294,7 +293,6 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          
           this.dialog_msg = 'Cover photo is updated successfully'
           this.uploading = false
           /* setTimeout(() => {

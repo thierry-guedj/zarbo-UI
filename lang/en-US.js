@@ -164,6 +164,8 @@ export default {
     tagsNotice:
       'Please enter some tags about the technique of this artwork (pastel, watercolor etc) or about the subject (landscape, portrait etc).',
     tagsNotice2: 'Each tag must be validate by a coma after it.',
+    saved: 'Saved successfully',
+    stillUploading: 'Still uploading...Please wait',
   },
   user: {
     noResult: "This artist didn't published any artwork yet",
@@ -190,6 +192,18 @@ export default {
     profile: 'Profile',
     label: 'Drop your avatar here',
     updateAvatar: 'Update your avatar',
+  },
+  editDesign: {
+    editItem: 'Edit Item',
+    title: 'Title',
+    description: 'Description',
+    tagsLabel: 'Tags separated by commas',
+    tagsNotice:
+      'Please enter some tags about the technique of this artwork (pastel, watercolor etc) or about the subject (landscape, portrait etc).',
+    tagsNotice2: 'Each tag must be validate by a coma after it.',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    publishDesign: 'Publish this artwork',
   },
   validation: {
     passwordMinLength: 'Password must be at least 8 characters long',

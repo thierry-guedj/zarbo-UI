@@ -165,6 +165,8 @@ export default {
       'Veuillez entrer quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
     tagsNotice2:
       "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
+    saved: 'Image téléchargée avec succès',
+    stillUploading: 'Téléchargement en cours...Patience.',
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
@@ -192,8 +194,22 @@ export default {
     label: 'Sélectionnez votre avatar',
     updateAvatar: 'Modifiez votre avatar',
   },
+  editDesign: {
+    editItem: 'Editer une oeuvre',
+    title: 'Titre',
+    description: 'Description',
+    tagsLabel: 'Mots-clés séparés par une virgule',
+    tagsNotice:
+      'Vous pouvez entrer ci-dessous quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
+    tagsNotice2:
+      "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
+    cancel: 'Annuler',
+    confirm: 'Confirmer',
+    publishDesign: 'Publier cette oeuvre',
+  },
   validation: {
-    passwordMinLength: 'La longueur du mot de passe doit être au moins de 8 caractères',
+    passwordMinLength:
+      'La longueur du mot de passe doit être au moins de 8 caractères',
     passwordRequired: 'Le mot de passe est requis',
     emailRequired: "L' e-mail est requis",
     emailValid: "L' e-mail doit être valide",
