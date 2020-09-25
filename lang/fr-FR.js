@@ -166,8 +166,8 @@ export default {
     tagsNotice2:
       "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
     saved: 'Image téléchargée avec succès',
-    stillUploading: 'Téléchargement en cours...Patience...',
-    uploadSuccess: 'Oeuvre téléchargée avec succès',
+    stillUploading: 'Téléchargement toujours en cours...Patience...',
+    uploadSuccess: 'Image téléchargée avec succès',
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
@@ -194,7 +194,7 @@ export default {
     profile: 'Votre profil',
     label: 'Sélectionnez votre avatar',
     updateAvatar: 'Modifiez votre avatar',
-    saved: 'Avatar chargé avec succès',
+    saved: 'Avatar téléchargé avec succès',
     stillUploading:
       'Votre avatar est toujours en cours de téléchargement...Patience...',
     uploadSuccess: 'Avatar téléchargé avec succès',
