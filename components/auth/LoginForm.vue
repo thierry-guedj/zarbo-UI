@@ -62,13 +62,9 @@
       ></v-text-field>
       <v-text-field
         v-model="$v.form.password.$model"
-        :error-messages="passwordErrors"
-        :counter="8"
         :label="$t('login.password')"
         type="password"
         required
-        @input="$v.form.password.$touch()"
-        @blur="$v.form.password.$touch()"
       ></v-text-field>
       <v-spacer class="mb-3" />
       <div class="mt-4 mb-4 clearfix">
@@ -114,10 +110,6 @@ export default {
         required,
         email,
       },
-      password: {
-        required,
-        minLen: minLength(8),
-      },
     },
   },
   data() {
@@ -140,14 +132,14 @@ export default {
       !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
-    passwordErrors() {
+/*     passwordErrors() {
       const errors = []
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&
         errors.push(this.$i18n.t('validation.passwordMinLength'))
       !this.$v.form.password.required && errors.push(this.$i18n.t('validation.passwordRequired'))
       return errors
-    },
+    }, */
   },
   watch: {
     loader() {

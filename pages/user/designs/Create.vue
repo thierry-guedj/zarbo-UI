@@ -280,7 +280,8 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          if (this.checkUpload(res.data.id)) {
+          const uploadOk = this.checkUpload(res.data.id)
+          if (uploadOk === true) {
             this.update(res.data.id)
             this.uploading = false
             this.dialog_msg = this.$i18n.t('create.uploadSuccess')

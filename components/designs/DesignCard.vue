@@ -72,7 +72,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon dark>zoom_out_map</v-icon>
+                    <v-icon dark>play_arrow</v-icon>
                   </v-btn>
                 </nuxt-link>
               </template>
@@ -97,15 +97,23 @@
     </v-card>
     <!-- </v-hover> -->
     <div class="ml-3 mb-2">
-      <h3 class="font-weight-medium mb-0 ellipsis">
-        {{ designTitle | capitalize }}
-      </h3>
-      <h5 class="font-weight-regular">
+      <nuxt-link
+        :to="
+          localePath({
+            name: 'design.details',
+            params: { id: design.id },
+          })
+        "
+        ><h3 class="font-weight-medium mb-0 ellipsis">
+          {{ designTitle | capitalize }}
+        </h3></nuxt-link
+      >
+      <h4 class="font-weight-regular user-link">
         {{ $t('designCard.by') }}
         <nuxt-link :to="`/designs/${design.user.id}/user`" class="text-white">
           {{ design.user.name }}</nuxt-link
         >
-      </h5>
+      </h4>
       <h5>
         <span class="mr-2 text-orange lighten-5"
           >{{ $t('designCard.uploaded') }} {{ computedDate }}</span
@@ -163,6 +171,12 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 } */
+.user-link {
+  color: #B0BEC5;
+}
+.user-link:hover {
+  text-decoration: underline;
+}
 .v-application a {
   text-decoration: none;
 }
