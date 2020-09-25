@@ -283,6 +283,8 @@ export default {
           if (this.checkUpload(res.data.id)) {
             this.update(res.data.id)
             this.uploading = false
+            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+            success('upload done')
             setTimeout(() => {
               this.$router.push({
                 name: 'settings.designs',
@@ -291,7 +293,6 @@ export default {
                 },
               })
             }, 3000)
-            success('upload done')
           }
         })
       /* .catch((err) => {
@@ -303,9 +304,7 @@ export default {
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
-        .then((response) => {
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-        })
+        .then((response) => {})
       return true
     },
     update(id) {
