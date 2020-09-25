@@ -240,7 +240,7 @@ export default {
       if (!this.$v.form.description.$dirty) return errors
       !this.$v.form.description.maxLen &&
         errors.push(this.$i18n.t('validation.descriptionMaxLength'))
-      errors.push('Description must be less than 3000 characters long')
+    
       return errors
     },
     slug() {
@@ -306,7 +306,7 @@ export default {
           }, 4000)
         })
     },
-    update(id) {
+    update(id, success) {
       console.log(this.form.title)
       if (this.form.is_live === false) {
         this.form.is_live = 0
@@ -320,6 +320,7 @@ export default {
         .put(`designs/${id}`)
         .then((res) => {
           this.checkUpload(id)
+          success('upload done')
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
@@ -407,7 +408,7 @@ export default {
 }
 
 .progress {
-  height: 10px;
+  height: 5px;
   margin-bottom: 20px;
   margin-top: 10px;
   overflow: hidden;
