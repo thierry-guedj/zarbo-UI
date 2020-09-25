@@ -39,7 +39,7 @@
                   v-on="on"
                   @click.stop="$emit('lightbox')"
                 >
-                  <v-icon dark>link</v-icon>
+                  <v-icon dark>play_arrow</v-icon>
                 </v-btn>
                 <!--  <a
               class="portfolio-item__link image"
@@ -72,7 +72,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon dark>play_arrow</v-icon>
+                    <v-icon dark>zoom_out_map</v-icon>
                   </v-btn>
                 </nuxt-link>
               </template>
@@ -108,9 +108,9 @@
           {{ designTitle | capitalize }}
         </h3></nuxt-link
       >
-      <h4 class="font-weight-regular user-link">
+      <h4 class="font-weight-regular">
         {{ $t('designCard.by') }}
-        <nuxt-link :to="`/designs/${design.user.id}/user`" class="text-white">
+        <nuxt-link :to="`/designs/${design.user.id}/user`" class="user-link">
           {{ design.user.name }}</nuxt-link
         >
       </h4>
@@ -172,7 +172,7 @@ export default {
   white-space: nowrap;
 } */
 .user-link {
-  color: #B0BEC5;
+  color: #546E7A;
 }
 .user-link:hover {
   text-decoration: underline;
