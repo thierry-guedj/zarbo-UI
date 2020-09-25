@@ -195,8 +195,7 @@ export default {
     label: 'Sélectionnez votre avatar',
     updateAvatar: 'Modifiez votre avatar',
     saved: 'Avatar téléchargé avec succès',
-    stillUploading:
-      'Votre avatar est toujours en cours de téléchargement...Patience...',
+    stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Avatar téléchargé avec succès',
   },
   editDesign: {
