@@ -9,7 +9,7 @@
         $t('profile.profileUpdated')
       }}</alert-success>
       <v-row class="row-md-12">
-        <v-col class="col-md-4">
+        <v-col class="col-md-4 uploadAvatar">
           <div>
             <slim-cropper
               :options="slimOptions"
@@ -38,7 +38,6 @@
             </div>
             <v-spacer class="mb-3" />
             <v-btn
-              class="slim-btn2 slim-btn-upload2 ml-8"
               title="Upload"
               type="button"
               data-action="upload"
@@ -377,7 +376,10 @@ export default {
   width: 240px;
   border-radius: 50%;
   color: black;
-  margin-bottom: 5px;
+  margin: 0 auto 5px auto;
+}
+.uploadAvatar {
+  margin: 0 auto;
 }
 .loader {
   position: fixed;
