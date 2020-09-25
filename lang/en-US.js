@@ -213,5 +213,7 @@ export default {
     emailValid: 'Must be valid e-mail',
     passwordConfirmRequired: 'Password confirmation is required',
     passwordMatch: 'Password confirmation needs to match password',
+    titleMaxLength: 'Title must be less than 120 characters long',
+    descriptionMaxLength: 'Description must be less than 3000 characters long',
   },
 }

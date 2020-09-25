@@ -216,5 +216,7 @@ export default {
     emailValid: "L' e-mail doit être valide",
     passwordConfirmRequired: 'La confirmation du mot de passe est requise',
     passwordMatch: 'Les 2 mots de passe ne correspondent pas',
+    titleMaxLength: 'Le titre ne doit pas dépasser 120  caractères',
+    descriptionMaxLength: 'La description ne doit pas dépasser 3000 caractères',
   },
 }

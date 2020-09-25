@@ -232,14 +232,15 @@ export default {
       const errors = []
       if (!this.$v.form.title.$dirty) return errors
       !this.$v.form.title.maxLen &&
-        errors.push('Title must be less than 120 characters long')
+        errors.push(this.$i18n.t('validation.titleMaxLength'))
       return errors
     },
     descriptionErrors() {
       const errors = []
       if (!this.$v.form.description.$dirty) return errors
       !this.$v.form.description.maxLen &&
-        errors.push('Description must be less than 3000 characters long')
+        errors.push(this.$i18n.t('validation.descriptionMaxLength'))
+      errors.push('Description must be less than 3000 characters long')
       return errors
     },
     slug() {
@@ -302,7 +303,7 @@ export default {
                 upload: true,
               },
             })
-          }, 2000)
+          }, 4000)
         })
     },
     update(id) {
