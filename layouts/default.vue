@@ -91,9 +91,9 @@
         app
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-btn icon @click.stop="miniVariant = !miniVariant">
+        <!-- <v-btn icon @click.stop="miniVariant = !miniVariant">
           <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-        </v-btn>
+        </v-btn> -->
 
         <nuxt-link :to="{ name: 'index' }"
           ><v-btn text class="mr-2 ml-3"
