@@ -207,16 +207,10 @@ export default {
         service: this.slimService,
         post: 'output',
         defaultInputName: 'image',
-        // minSize: '800,600',
-        // size: '800,600',
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
-        maxFileSize: 10, // value is 10MB
-        // didLoad: 'imageLoaded',
-        uploadMethod: 'PUT',
+        maxFileSize: 10,
         statusUploadSuccess: 'Saved successfully',
-        // forceType: 'jpg',
-        // serviceFormat: 'file',
       },
 
       uploading: false,
@@ -258,10 +252,10 @@ export default {
     ...mapActions(['showModal', 'hideModal']),
     slimService(formdata, progress, success, failure) {
       this.uploading = true
-      console.log(progress)
+      /* console.log(progress)
       console.log(success)
 
-      console.log(formdata)
+      console.log(formdata) */
       this.$axios
         .post('designs', formdata, {
           headers: {
@@ -272,12 +266,14 @@ export default {
               (progressEvent.loaded / progressEvent.total) * 100,
               10
             )
+            progress(progressEvent.loaded, progressEvent.total)
             if (this.uploadPercentage === 100) {
               this.dialog_msg = 'Still uploading... Please wait'
             }
           }.bind(this),
         })
         .then((res) => {
+          success('upload done')
           this.update(res.data.id)
         })
       /* .catch((err) => {
@@ -290,6 +286,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
+          
           this.dialog_msg = 'Cover photo is updated successfully'
           this.uploading = false
           /* setTimeout(() => {
@@ -420,7 +417,7 @@ export default {
   line-height: 20px;
   color: rgba(31, 124, 142, 1);
   text-align: center;
-  background-color: #00C853;
+  background-color: #00c853;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
