@@ -288,7 +288,6 @@ export default {
           console.log(res)
           this.checkUpload(this.$auth.user.id)
           success('upload done')
-          this.$auth.fetchUser()
           this.uploading = false
         })
         .catch((e) => console.log(e))
