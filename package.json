@@ -20,10 +20,12 @@
     "@nuxtjs/router": "^1.5.0",
     "lazysizes": "^5.2.2",
     "nuxt": "^2.13.0",
+    "nuxt-cookie-control": "^1.9.5",
     "nuxt-i18n": "^6.13.9",
     "nuxt-moment": "^1.0.5",
     "vform": "^1.0.1",
     "vue-avatar": "^2.3.0",
+    "vue-cookieconsent-component": "^1.2.0",
     "vue-cool-lightbox": "^2.4.1",
     "vue-goodshare": "^1.5.1",
     "vue-infinite-loading": "^2.4.5",
@@ -34,7 +36,8 @@
     "vue-social-sharing": "^3.0.0-beta.11",
     "vue-spinner": "^1.0.4",
     "vue2-google-maps-withscopedautocomp": "^0.12.1",
-    "vuelidate": "^0.7.5"
+    "vuelidate": "^0.7.5",
+    "vuetify-i18n-language-switcher-nuxt": "0.0.3"
   },
   "devDependencies": {
     "@nuxt/components": "^0.1.2",

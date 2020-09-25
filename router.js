@@ -41,8 +41,18 @@ const routes = [
     component: page('auth/verification/Verify.vue'),
   },
   {
-    path: '/password/reset/:token',
+    path: '/password/reset/:token/',
     name: 'password.reset',
+    component: page('auth/password/PasswordReset.vue'),
+  },
+  {
+    path: '/password/reset/:token/fr',
+    name: 'password.reset___fr',
+    component: page('auth/password/PasswordReset.vue'),
+  },
+  {
+    path: '/password/reset/:token/en',
+    name: 'password.reset___en',
     component: page('auth/password/PasswordReset.vue'),
   },
   {

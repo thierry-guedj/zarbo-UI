@@ -201,6 +201,13 @@
           </v-menu>
         </template>
         <!-- End After Login -->
+      <nuxt-link
+        v-for="locale in availableLocales"
+        :key="locale.code"
+        :to="switchLocalePath(locale.code)"
+        >{{ locale.name }}</nuxt-link
+      >
+
       </v-app-bar>
       <div class="line"></div>
       <v-main>
@@ -267,6 +274,18 @@ export default {
       title: 'zarbo',
       bgImage: 'bg' + Math.floor(Math.random() * 39) + '.jpg',
       scrollPosition: null,
+      languages: [
+        {
+          id: 'en',
+          title: 'English',
+          flagSrc: 'https://cdn.vuetifyjs.com/images/flags/us.png'
+        },
+        {
+          id: 'kr',
+          title: 'Korean',
+          flagSrc: 'https://cdn.vuetifyjs.com/images/flags/kr.png'
+        }
+      ]
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -281,12 +300,16 @@ export default {
     backgroundUrl() {
       return require(`~/assets/images/bg/${this.bgImage}`)
     },
-
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
+      this.$moment().locale('fr')
+      this.$axios.$get(`setLang/${this.$i18n.locale}`)
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')
         const navClasses = navbar.classList

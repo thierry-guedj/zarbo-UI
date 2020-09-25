@@ -101,8 +101,8 @@ export default {
     '~plugins/filters.js',
     { src: '~plugins/infiniteloading', mode: 'client' },
     '~plugins/components.js',
-    '~/plugins/vue-masonry-css.js',
-    { src: '~/plugins/vue-masonry', ssr: false },
+    '~plugins/vue-masonry-css.js',
+    { src: '~plugins/vue-masonry', ssr: false },
   ],
   /*
    ** Auto import components
@@ -125,6 +125,7 @@ export default {
     'vue-social-sharing/nuxt',
     'nuxt-i18n',
     'nuxt-moment',
+    'nuxt-cookie-control',
   ],
   i18n: {
     locales: [
@@ -167,8 +168,8 @@ export default {
 
         /* tokenRequired: true,
         tokenType: 'bearer',
-        globalToken: true,
-        autoFetchUser: true, */
+        globalToken: true, */
+        autoFetchUser: true,
       },
     },
   },
