@@ -293,7 +293,7 @@ export default {
             .put(`designs/${res.data.id}`)
             .then((response) => {
               this.checkUpload(res.data.id)
-              success('upload done')
+              // success('upload done')
             })
             .catch((err) => console.log(err.response))
             .finally(() => {
