@@ -305,7 +305,7 @@ export default {
         .put(`/settings/profile`)
         .then((res) => {
           console.log(res)
-          this.$auth.fetchUser()
+          
           setTimeout(() => {
             this.$router.push(
               this.localePath({
@@ -324,6 +324,7 @@ export default {
         .then((response) => {
           
           this.dialog_msg = 'Cover photo is updated successfully'
+          this.$auth.fetchUser()
           this.uploading = false
          /*  setTimeout(() => {
             this.$auth.fetchUser()
