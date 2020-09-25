@@ -280,6 +280,7 @@ export default {
               (progressEvent.loaded / progressEvent.total) * 100,
               10
             )
+            progress(progressEvent.loaded, progressEvent.total)
             if (this.uploadPercentage === 100) {
               this.dialog_msg = 'Still uploading... Please wait'
             }
@@ -288,6 +289,7 @@ export default {
         .then((res) => {
           console.log(res)
           this.checkUpload(this.$auth.user.id)
+          success('upload done')
           this.uploading = false
         })
         .catch((e) => console.log(e))

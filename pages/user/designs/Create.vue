@@ -25,6 +25,12 @@
             </div>
 
             <div>
+              <div class="progress">
+                <div
+                  class="progress-bar progress-bar-success"
+                  :style="{ width: uploadPercentage + '%' }"
+                ></div>
+              </div>
               <slim-cropper
                 :options="slimOptions"
                 data-did-load="imageLoaded"
@@ -273,8 +279,10 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          success('upload done')
+          this.checkUpload(res.data.id)
           this.update(res.data.id)
+          success('upload done')
+          
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -312,7 +320,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          this.checkUpload(id)
+          // this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
