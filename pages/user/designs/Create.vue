@@ -51,12 +51,12 @@
               </div>
             </div>
 
-            <div v-if="uploading" class="text-success caption-sm mt-2">
+            <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
               <!-- <i class="fas fa-spinner fa-spin"></i> -->
               <div class="loader">
                 <Circle8></Circle8>
               </div>
-            </div>
+            </div> -->
           </v-card-text>
           <div class="upload-para mt-2 ml-4">
             <p class="font-14 fw-400">
@@ -156,7 +156,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
-import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
+// import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import $axios from '@nuxtjs/axios'
 import Slim from '@/components/slim/slim.vue'
 function slimInitialised(data) {
@@ -173,7 +173,6 @@ export default {
   components: {
     InputTag: () => import('vue-input-tag'),
     'slim-cropper': Slim,
-    Circle8,
   },
   props: {
     modalClosed: {
