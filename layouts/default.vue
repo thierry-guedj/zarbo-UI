@@ -204,7 +204,7 @@
         <nuxt-link
           v-for="locale in availableLocales"
           :key="locale.code"
-          :to="switchLocalePath(locale.code)"
+          to=""
           @click="setLang"
           >{{ locale.name }}</nuxt-link
         >
@@ -329,6 +329,7 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     setLang() {
+      this.switchLocalePath(this.locale.code)
       this.$axios.$get(`setLang/${this.$i18n.locale}`)
     },
     logout() {
