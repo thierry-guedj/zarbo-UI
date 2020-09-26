@@ -131,7 +131,7 @@
               ></v-checkbox>
 
               <v-spacer class="mb-3" />
-              <v-btn :disabled="loadingSubmit" @click="clear">{{
+              <v-btn :disabled="upload" @click="clear">{{
                 $t('create.clear')
               }}</v-btn>
               <v-btn
@@ -216,7 +216,7 @@ export default {
         ratio: 'free',
         maxFileSize: 10,
         didLoad: this.imageLoaded,
-        willRemove: this.cancelImageLoaded,
+        didRemove: this.imageRemoved,
         statusUploadSuccess: this.$i18n.t('create.saved'),
       },
 
@@ -307,7 +307,8 @@ export default {
       this.uploadButton = true
       return true
     },
-    cancelImageLoaded() {
+    imageRemoved(data) {
+      console.log(data)
       this.uploadButton = false
     },
     async checkUpload(id) {
