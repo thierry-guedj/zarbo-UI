@@ -195,7 +195,7 @@ export default {
       form: this.$vform({
         title: '',
         description: '',
-        is_live: false,
+        is_live: true,
         tags: [],
         slug: '',
         /*  assign_to_team: false,
