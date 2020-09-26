@@ -143,6 +143,11 @@ export default {
     lazy: true,
     langDir: 'lang/',
     defaultLocale: 'fr',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      onlyOnRoot: true,
+    },
   },
   auth: {
     strategies: {
