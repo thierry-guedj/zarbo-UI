@@ -309,6 +309,7 @@ export default {
     this.$nextTick(function () {
       this.hideModal()
       this.$moment().locale('fr')
+      this.$axios.$get(`setLang/${this.$i18n.locale}`)
 
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')
@@ -328,9 +329,7 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    setLang() {
-      this.$axios.$get(`setLang/${this.$i18n.locale}`)
-    },
+
     logout() {
       this.$auth.logout()
     },

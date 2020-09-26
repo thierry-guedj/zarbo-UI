@@ -52,7 +52,7 @@
             </div>
 
             <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
-              <!-- <i class="fas fa-spinner fa-spin"></i> -->
+             
               <div class="loader">
                 <Circle8></Circle8>
               </div>
