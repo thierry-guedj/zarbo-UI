@@ -33,7 +33,6 @@
               </div>
               <slim-cropper
                 :options="slimOptions"
-                data-did-load="imageLoaded"
                 class="text-black slim-avatar"
               >
                 <input type="file" name="image" />
@@ -214,7 +213,8 @@ export default {
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10,
-        didLoad: this.imageLoad,
+        didLoad: this.imageLoaded,
+        didCancel: this.cancelImageLoaded,
         statusUploadSuccess: this.$i18n.t('create.saved'),
       },
 
@@ -301,10 +301,13 @@ export default {
           failure(500)
         }) */
     },
-    imageLoad(error, data, response) {
+    imageLoaded(error, data, response) {
       console.log(error, data, response)
       this.uploadButton = true
       return true
+    },
+    cancelImageLoaded() {
+      this.uploadButton = false
     },
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
