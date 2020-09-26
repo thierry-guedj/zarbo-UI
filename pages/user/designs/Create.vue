@@ -131,7 +131,9 @@
               ></v-checkbox>
 
               <v-spacer class="mb-3" />
-              <v-btn @click="clear">{{ $t('create.clear') }}</v-btn>
+              <v-btn :disabled="loadingSubmit" @click="clear">{{
+                $t('create.clear')
+              }}</v-btn>
               <v-btn
                 class="slim-btn2 slim-btn-upload2"
                 title="Upload"
@@ -252,7 +254,6 @@ export default {
       const l = this.loader
       this[l] = !this[l]
     },
-    loadedImage() {},
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),

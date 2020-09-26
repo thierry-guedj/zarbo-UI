@@ -156,6 +156,7 @@ export default {
     publishDesign: 'Publier cette oeuvre',
     updateDesign: "Modifier l'oeuvre",
     clear: 'Effacer',
+    upload: 'Poster',
     assignToTeam: 'Asociée à une équipe',
     selectTeam: 'Selectionner une équipe',
     updated: "L'oeuvre a été téléchargée avec succès",

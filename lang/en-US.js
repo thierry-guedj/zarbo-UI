@@ -156,6 +156,7 @@ export default {
     publishDesign: 'Publish this design',
     updateDesign: 'Update design',
     clear: 'Clear',
+    upload: 'Upload',
     assignToTeam: 'Assign to team',
     selectTeam: 'Select a team',
     updated: 'Design successfully uploaded',
