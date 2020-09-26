@@ -97,7 +97,7 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
-                :disabled="$v.form.$invalid"
+                :disabled="disabledButton"
                 @click="update"
                 >{{ $t('profile.updateProfile') }}</v-btn
               >
@@ -115,33 +115,7 @@
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import Slim from '@/components/slim/slim.vue'
-// called when slim has initialized
-function slimInit(data, slim) {
-  // slim instance reference
-  console.log(slim)
 
-  // current slim data object and slim reference
-  console.log(data)
-}
-
-function imageLoad(file, image, meta) {
-  // average image color
-  const averageColor = averagePixelColor(image)
-
-  // color to HSL
-  const color = rgbToHsl(averageColor)
-
-  // does the hue part fall in the warm range
-  // and is the image not too dark or bright
-  if ((color.h > 300 || color.h < 60) && color.l > 10 && color.l < 90) {
-    return true
-  }
-
-  return 'This image is just not hot enough.'
-}
-function imageUpload(error, data, response) {
-  console.log(error, data, response)
-}
 export default {
   name: 'Profile',
   components: {
@@ -194,6 +168,7 @@ export default {
       loader: null,
       loadingSubmit: false,
       dialog: true,
+      uploadButton: false,
       slimOptions: {
         service: this.slimService,
         post: 'output',
@@ -204,6 +179,8 @@ export default {
         uploadMethod: 'PUT',
         statusUploadSuccess: this.$i18n.t('profile.saved'),
         didInit: slimInit,
+        didLoad: this.imageLoaded,
+        didRemove: this.imageRemoved,
       },
       uploading: false,
       imageSelectionDone: true,
@@ -217,15 +194,16 @@ export default {
       const errors = []
       if (!this.$v.form.name.$dirty) return errors
       !this.$v.form.name.maxLen &&
-      errors.push(this.$i18n.t('validation.nameMaxLength'))
-      !this.$v.form.name.required && errors.push(this.$i18n.t('validation.nameRequired'))
+        errors.push(this.$i18n.t('validation.nameMaxLength'))
+      !this.$v.form.name.required &&
+        errors.push(this.$i18n.t('validation.nameRequired'))
       return errors
     },
     taglineErrors() {
       const errors = []
       if (!this.$v.form.tagline.$dirty) return errors
       !this.$v.form.tagline.maxLen &&
-      errors.push(this.$i18n.t('validation.taglineMaxLength'))
+        errors.push(this.$i18n.t('validation.taglineMaxLength'))
 
       return errors
     },
@@ -235,6 +213,13 @@ export default {
       !this.$v.form.about.maxLen &&
         errors.push(this.$i18n.t('validation.descriptionMaxLength'))
       return errors
+    },
+    disabledButton() {
+      if (!this.uploadButton || this.$v.form.busy) {
+        return true
+      } else {
+        return false
+      }
     },
   },
   watch: {
@@ -298,6 +283,15 @@ export default {
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
         }) */
+    },
+    imageLoaded(error, data, response) {
+      console.log(error, data, response)
+      this.uploadButton = true
+      return true
+    },
+    imageRemoved(data) {
+      console.log(data)
+      this.uploadButton = false
     },
     update() {
       this.form
