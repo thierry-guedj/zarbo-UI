@@ -255,6 +255,10 @@ export default {
       this[l] = !this[l]
     },
   },
+  mounted() {
+    const slibtn = document.getElementsByClassName('slim-btn-upload')
+    slibtn[0].style.display = 'none'
+  },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     slimService(formdata, progress, success, failure) {
