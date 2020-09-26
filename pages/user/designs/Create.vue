@@ -216,7 +216,7 @@ export default {
         ratio: 'free',
         maxFileSize: 10,
         didLoad: this.imageLoaded,
-        didCancel: this.cancelImageLoaded,
+        willRemove: this.cancelImageLoaded,
         statusUploadSuccess: this.$i18n.t('create.saved'),
       },
 
