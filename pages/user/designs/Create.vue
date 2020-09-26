@@ -355,10 +355,6 @@ export default {
       this.form.reset()
       this.$v.form.$reset()
     },
-    imageLoaded() {
-      console.log('taratata')
-      return true
-    },
     sanitizeTitle(title) {
       let slug = ''
       // Change to lower case
