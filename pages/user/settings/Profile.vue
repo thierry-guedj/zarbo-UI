@@ -178,7 +178,6 @@ export default {
         maxFileSize: 5, // value is 5MB
         uploadMethod: 'PUT',
         statusUploadSuccess: this.$i18n.t('profile.saved'),
-        didInit: slimInit,
         didLoad: this.imageLoaded,
         didRemove: this.imageRemoved,
       },
