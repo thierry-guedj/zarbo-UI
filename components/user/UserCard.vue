@@ -10,7 +10,7 @@
   >
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
-        <v-card-title class="headline" v-text="user.name"></v-card-title>
+        <v-card-title v-text="user.name"></v-card-title>
 
         <v-card-subtitle v-text="user.username"></v-card-subtitle>
         <v-card-text v-text="user.tagline"></v-card-text>
@@ -96,6 +96,9 @@ export default {
 <style lang="scss" scoped>
 .vue-avatar--wrapper {
   min-width: 80px;
+}
+.v-card__title {
+  font-size: 16px;
 }
 .v-card--reveal {
   align-items: center;

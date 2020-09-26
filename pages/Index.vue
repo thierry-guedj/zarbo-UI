@@ -18,13 +18,7 @@
         height="50"
         class="gradientBody justify-start align-content-md-start pt-0"
       ></v-container> -->
-      {{ $t('hello') }}
-      <nuxt-link
-        v-for="locale in availableLocales"
-        :key="locale.code"
-        :to="switchLocalePath(locale.code)"
-        >{{ locale.name }}</nuxt-link
-      >
+     
 
       <last-designs></last-designs>
       <div class="text-center" style="max-width: '95%';">
@@ -71,6 +65,9 @@ export default {
       width: '500px',
       fab: false,
     }
+  },
+  mounted() {
+    this.$cookies.modal = true
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),

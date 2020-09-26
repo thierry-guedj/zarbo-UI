@@ -145,7 +145,7 @@ export default {
     cancel: 'Annuler',
   },
   create: {
-    uploadArtwork: 'Poster une oeuvre',
+    uploadArtwork: 'Publier une oeuvre',
     selectImage: 'Selectionnez une image',
     uploadNotice: 'Le poids de votre image ne doit pas dépasser 10MB.',
     uploadError: 'Une erreur est survenue lors du téléchargement',

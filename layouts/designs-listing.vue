@@ -162,7 +162,7 @@
             :username="$auth.user.name"
             :src="$auth.user.avatars.medium"
             class="ml-3 mr-2"
-            :size="40"
+            :size="50"
           ></avatar>
           <v-menu offset-y color="#0f1219">
             <template v-slot:activator="{ on, attrs }">
@@ -266,6 +266,8 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
+      const url = `setLang/${this.$i18n.locale}`
+      this.$axios.$get(`${url}`)
       this.$auth.fetchUser()
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')

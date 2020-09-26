@@ -309,7 +309,8 @@ export default {
     this.$nextTick(function () {
       this.hideModal()
       this.$moment().locale('fr')
-      this.$axios.$get(`setLang/${this.$i18n.locale}`)
+      const url = `setLang/${this.$i18n.locale}`
+      this.$axios.$get(`${url}`)
 
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')
