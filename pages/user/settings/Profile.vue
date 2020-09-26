@@ -215,7 +215,7 @@ export default {
       return errors
     },
     disabledButton() {
-      if (!this.uploadButton || this.$v.form.busy) {
+      if (!this.uploadButton || this.$vform.busy) {
         return true
       } else {
         return false
