@@ -161,10 +161,7 @@ import Slim from '@/components/slim/slim.vue'
 function slimInitialised(data) {
   console.log(data)
 }
-function imageLoad(error, data, response) {
-  console.log(error, data, response)
-  return true
-}
+
 function imageUpload(error, data, response) {
   console.log(error, data, response)
 }
@@ -216,6 +213,7 @@ export default {
         label: this.$i18n.t('create.selectImage'),
         ratio: 'free',
         maxFileSize: 10,
+        didLoad: this.imageLoad,
         statusUploadSuccess: this.$i18n.t('create.saved'),
       },
 
@@ -301,6 +299,10 @@ export default {
           this.error = message[Object.keys(message)[0]][0]
           failure(500)
         }) */
+    },
+    imageLoad(error, data, response) {
+      console.log(error, data, response)
+      return true
     },
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
