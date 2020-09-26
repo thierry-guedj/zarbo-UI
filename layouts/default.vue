@@ -328,8 +328,8 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     setLang(localeCode) {
-      this.$i18n.setLocaleCookie(locale)
-      this.$router.push(this.switchLocalePath(locale))
+      this.$i18n.setLocaleCookie(localeCode)
+      this.$router.push(this.switchLocalePath(localeCode))
       this.$axios.$get(`setLang/${this.$i18n.locale}`)
     },
     logout() {
