@@ -43,6 +43,7 @@
               data-action="upload"
               style="opacity: 1;"
               :loading="loadingSubmit"
+              :disabled="disabledButton"
               @click="submit"
               >{{ $t('profile.updateAvatar') }}</v-btn
             >
@@ -97,12 +98,11 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
-                :disabled="disabledButton"
                 @click="update"
                 >{{ $t('profile.updateProfile') }}</v-btn
               >
 
-              <v-btn @click="clear">{{ $t('profile.clear') }}</v-btn>
+              <v-btn :disabled="upload" @click="clear">{{ $t('profile.clear') }}</v-btn>
             </div>
           </form>
         </v-col>
@@ -244,6 +244,8 @@ export default {
     } else {
       this.form.location = {}
     }
+    const slibtn = document.getElementsByClassName('slim-btn-upload')
+    slibtn[0].style.display = 'none'
   },
   methods: {
     slimService(formdata, progress, success, failure) {
