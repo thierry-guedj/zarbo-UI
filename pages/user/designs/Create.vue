@@ -140,9 +140,9 @@
                 data-action="upload"
                 style="opacity: 1;"
                 :loading="loadingSubmit"
-                :disabled="uploading"
+                :disabled="!uploadButton"
                 @click="submit"
-                >Upload</v-btn
+                >{{ $t('create.upload') }}</v-btn
               >
             </form>
           </v-card-text>
@@ -205,6 +205,7 @@ export default {
       loadingSubmit: false,
       dialog: true,
       upload: false,
+      uploadButton: false,
 
       slimOptions: {
         service: this.slimService,
@@ -302,6 +303,7 @@ export default {
     },
     imageLoad(error, data, response) {
       console.log(error, data, response)
+      this.uploadButton = true
       return true
     },
     async checkUpload(id) {
