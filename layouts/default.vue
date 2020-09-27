@@ -16,6 +16,9 @@
         class="mt-16"
         app
       >
+      client-only>
+        <Cookie />
+      </client-only>
         <v-list>
           <v-list-item
             v-for="(item, i) in items"
@@ -231,9 +234,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
+import Cookie from '@/components/Cookie.vue'
 export default {
   components: {
     Avatar,
+    Cookie,
   },
   data() {
     return {

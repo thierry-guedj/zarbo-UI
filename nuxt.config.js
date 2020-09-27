@@ -103,6 +103,10 @@ export default {
     '~plugins/components.js',
     '~plugins/vue-masonry-css.js',
     { src: '~plugins/vue-masonry', ssr: false },
+    {
+      src: './plugins/GoogleAnalytics.js',
+      mode: 'client',
+    },
   ],
   /*
    ** Auto import components

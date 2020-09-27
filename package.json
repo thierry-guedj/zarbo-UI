@@ -24,6 +24,7 @@
     "nuxt-i18n": "^6.13.9",
     "nuxt-moment": "^1.0.5",
     "vform": "^1.0.1",
+    "vue-analytics": "^5.22.1",
     "vue-avatar": "^2.3.0",
     "vue-cookieconsent-component": "^1.2.0",
     "vue-cool-lightbox": "^2.4.1",
