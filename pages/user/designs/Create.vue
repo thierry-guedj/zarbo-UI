@@ -218,7 +218,7 @@ export default {
       progressWidth: 0,
       uploadPercentage: 0,
       dialog_msg: '',
-      slibtn: document.getElementsByClassName('slim-btn-upload'),
+      // slibtn: document.getElementsByClassName('slim-btn-upload'),
     }
   },
   computed: {
@@ -249,8 +249,8 @@ export default {
     },
   },
   mounted() {
-    // const slibtn = document.getElementsByClassName('slim-btn-upload')
-    this.slibtn[0].style.display = 'none'
+    const slibtn = document.getElementsByClassName('slim-btn-upload')
+    slibtn[0].style.display = 'none'
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
@@ -301,8 +301,8 @@ export default {
     },
     imageLoaded(error, data, response) {
       console.log(error, data, response)
-      // const slibtn = document.getElementsByClassName('slim-btn-upload')
-      this.slibtn[0].style.display = 'none'
+      const slibtn = document.getElementsByClassName('slim-btn-upload')
+      slibtn[0].style.display = 'none'
       this.uploadButton = true
       return true
     },
@@ -342,8 +342,8 @@ export default {
       this.form.busy = true
       this.uploading = true
       this.loader = 'loadingSubmit'
-      // const slibtn = document.getElementsByClassName('slim-btn-upload')
-      this.slibtn[0].click()
+      const slibtn = document.getElementsByClassName('slim-btn-upload')
+      slibtn[0].click()
     },
     clear() {
       this.form.reset()
