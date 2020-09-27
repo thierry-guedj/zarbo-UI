@@ -277,8 +277,8 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          /* const uploadOk = this.checkUpload(res.data.id)
-          if (uploadOk) { */
+          const uploadOk = this.checkUpload(res.data.id)
+          if (uploadOk) {
           this.update(res.data.id)
 
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
@@ -313,8 +313,9 @@ export default {
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
-        .then((response) => {})
-      return true
+        .then((response) => {
+          return true
+        })
     },
     update(id) {
       if (this.form.is_live === false) {
@@ -327,10 +328,10 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          this.checkUpload(id)
+          const uploadOk = this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
-      .finally(() => {
+        .finally(() => {
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
