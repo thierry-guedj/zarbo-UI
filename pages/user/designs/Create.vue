@@ -313,20 +313,12 @@ export default {
     },
     imageUploaded(error, data, response) {
       console.log(error, data, response)
-      setTimeout(() => {
-        this.$router.push({
-          name: 'settings.designs',
-          params: {
-            upload: true,
-          },
-        })
-      }, 3000)
     },
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          fetch(response.data.images.thumbnail, { method: 'HEAD' })
+          fetch(response.image, { method: 'HEAD' })
             .then((res) => {
               if (res.ok) {
                 console.log('Image exists.')
