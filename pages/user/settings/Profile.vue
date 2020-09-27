@@ -30,12 +30,12 @@
             <p v-if="dialog_msg !== ''" class="alert alert-warning">
               {{ dialog_msg }}
             </p>
-            <div v-if="uploading" class="text-success caption-sm mt-2">
+            <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
               <i class="fas fa-spinner fa-spin"></i>
               <div class="loader">
                 <Circle8></Circle8>
               </div>
-            </div>
+            </div> -->
             <v-spacer class="mb-3" />
             <v-btn
               title="Upload"
@@ -102,7 +102,9 @@
                 >{{ $t('profile.updateProfile') }}</v-btn
               >
 
-              <v-btn :disabled="upload" @click="clear">{{ $t('profile.clear') }}</v-btn>
+              <v-btn :disabled="upload" @click="clear">{{
+                $t('profile.clear')
+              }}</v-btn>
             </div>
           </form>
         </v-col>
@@ -112,7 +114,7 @@
 </template>
 
 <script>
-import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
+// import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
 import Slim from '@/components/slim/slim.vue'
 
@@ -120,7 +122,6 @@ export default {
   name: 'Profile',
   components: {
     'slim-cropper': Slim,
-    Circle8,
   },
   validations: {
     form: {
@@ -288,7 +289,7 @@ export default {
     imageLoaded(error, data, response) {
       console.log(error, data, response)
       const slibtn = document.getElementsByClassName('slim-btn-upload')
-    slibtn[0].style.display = 'none'
+      slibtn[0].style.display = 'none'
       this.uploadButton = true
       return true
     },

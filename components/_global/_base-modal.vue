@@ -120,7 +120,6 @@ export default {
       this.modalClosed = false
     },
     deleteItem() {
-      console.log('coucou')
       this.$emit('destroyItem')
     },
     //

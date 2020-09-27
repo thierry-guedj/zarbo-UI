@@ -225,6 +225,7 @@ export default {
       progressWidth: 0,
       uploadPercentage: 0,
       dialog_msg: '',
+      slibtn: document.getElementsByClassName('slim-btn-upload'),
     }
   },
   computed: {
@@ -255,8 +256,8 @@ export default {
     },
   },
   mounted() {
-    const slibtn = document.getElementsByClassName('slim-btn-upload')
-    slibtn[0].style.display = 'none'
+    // const slibtn = document.getElementsByClassName('slim-btn-upload')
+    this.slibtn[0].style.display = 'none'
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
@@ -289,6 +290,9 @@ export default {
             this.uploading = false
             this.dialog_msg = this.$i18n.t('create.uploadSuccess')
             success('upload done')
+            this.form.busy = false
+            this.loader = null
+            this.loadingSubmit = false
             setTimeout(() => {
               this.$router.push({
                 name: 'settings.designs',
@@ -307,13 +311,14 @@ export default {
     },
     imageLoaded(error, data, response) {
       console.log(error, data, response)
-      const slibtn = document.getElementsByClassName('slim-btn-upload')
-    slibtn[0].style.display = 'none'
+      // const slibtn = document.getElementsByClassName('slim-btn-upload')
+      this.slibtn[0].style.display = 'none'
       this.uploadButton = true
       return true
     },
     imageRemoved(data) {
       console.log(data)
+      this.slibtn[0].style.display = 'none'
       this.uploadButton = false
     },
     async checkUpload(id) {
@@ -352,10 +357,6 @@ export default {
       const slibtn = document.getElementsByClassName('slim-btn-upload')
       console.log(slibtn.length)
       slibtn[0].click()
-
-      this.form.busy = false
-      this.loader = null
-      this.loadingSubmit = false
     },
     clear() {
       this.form.reset()

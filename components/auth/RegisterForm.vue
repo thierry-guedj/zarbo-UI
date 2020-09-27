@@ -166,10 +166,10 @@ export default {
       const errors = []
       if (!this.$v.form.name.$dirty) return errors
       !this.$v.form.name.minLen &&
-        errors.push('Name must be at least 3 characters long')
+        errors.push(this.$i18n.t('validation.nameMinLength'))
       !this.$v.form.name.maxLen &&
         errors.push(`Name must be at most 120 characters long`)
-      !this.$v.form.name.required && errors.push('Name is required.')
+      !this.$v.form.name.required && errors.push(this.$i18n.t('validation.nameRequired'))
       return errors
     },
     /* usernameErrors() {

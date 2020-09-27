@@ -141,6 +141,9 @@ export default {
       index: null,
     }
   },
+  mounted() {
+    this.$moment().locale('fr')
+  },
 
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
@@ -150,6 +153,7 @@ export default {
     },
     computedDate() {
       const date = this.design.created_at_dates.created_at
+      this.$moment().locale('fr')
       return moment(date).format('LL')
     },
   },
