@@ -277,21 +277,21 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          const uploadOk = this.checkUpload(res.data.id)
-          if (uploadOk) {
-            this.update(res.data.id)
+          /* const uploadOk = this.checkUpload(res.data.id)
+          if (uploadOk) { */
+          this.update(res.data.id)
 
-            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-            success('upload done')
-            setTimeout(() => {
-              this.$router.push({
-                name: 'settings.designs',
-                params: {
-                  upload: true,
-                },
-              })
-            }, 3000)
-          }
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          success('upload done')
+          setTimeout(() => {
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            })
+          }, 3000)
+          // }
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -327,15 +327,15 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          // this.checkUpload(id)
+          this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
-      /* .finally(() => {
+      .finally(() => {
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
           this.uploading = false
-        }) */
+        })
     },
 
     submit() {
