@@ -159,13 +159,7 @@ import { maxLength } from 'vuelidate/lib/validators'
 // import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import $axios from '@nuxtjs/axios'
 import Slim from '@/components/slim/slim.vue'
-function slimInitialised(data) {
-  console.log(data)
-}
 
-function imageUpload(error, data, response) {
-  console.log(error, data, response)
-}
 export default {
   name: 'Create',
   middleware: ['auth'],
@@ -221,7 +215,6 @@ export default {
 
       uploading: false,
       error: '',
-      imageSelectionDone: true,
       progressWidth: 0,
       uploadPercentage: 0,
       dialog_msg: '',
@@ -287,7 +280,7 @@ export default {
           const uploadOk = this.checkUpload(res.data.id)
           if (uploadOk) {
             this.update(res.data.id)
-            this.uploading = false
+           
             this.dialog_msg = this.$i18n.t('create.uploadSuccess')
             success('upload done')
             setTimeout(() => {
@@ -324,25 +317,26 @@ export default {
       return true
     },
     update(id) {
-      console.log(this.form.title)
+
       if (this.form.is_live === false) {
         this.form.is_live = 0
       } else {
         this.form.is_live = 1
       }
-      console.log(this.form.is_live)
+
 
       this.form.slug = this.slug
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          this.checkUpload(id)
+          // this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
+          this.uploading = false
         })
     },
 
@@ -350,13 +344,8 @@ export default {
       this.form.busy = true
       this.uploading = true
       this.loader = 'loadingSubmit'
-      const slibtn = document.getElementsByClassName('slim-btn-upload')
-      console.log(slibtn.length)
+      // const slibtn = document.getElementsByClassName('slim-btn-upload')
       slibtn[0].click()
-
-      this.form.busy = false
-      this.loader = null
-      this.loadingSubmit = false
     },
     clear() {
       this.form.reset()
