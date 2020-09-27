@@ -280,11 +280,11 @@ export default {
         .then((res) => {
           const uploadOk = this.checkUpload(res.data.id)
           if (uploadOk) {
-          this.update(res.data.id)
+            this.update(res.data.id)
 
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          success('upload done')
-         /*  setTimeout(() => {
+            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+            success('upload done')
+            /*  setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
               params: {
@@ -312,24 +312,33 @@ export default {
       this.uploadButton = false
     },
     imageUploaded(error, data, response) {
-    console.log(error, data, response);
-     setTimeout(() => {
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            })
-          }, 3000)
-
+      console.log(error, data, response)
+      setTimeout(() => {
+        this.$router.push({
+          name: 'settings.designs',
+          params: {
+            upload: true,
+          },
+        })
+      }, 3000)
     },
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
+          fetch(response.data.images.thumbnail, { method: 'HEAD' })
+            .then((res) => {
+              if (res.ok) {
+                console.log('Image exists.')
+              } else {
+                console.log('Image does not exist.')
+              }
+            })
+            .catch((err) => console.log('Error:', err))
           return true
         })
     },
+
     update(id) {
       if (this.form.is_live === false) {
         this.form.is_live = 0
