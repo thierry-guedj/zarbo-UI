@@ -210,6 +210,7 @@ export default {
         maxFileSize: 10,
         didLoad: this.imageLoaded,
         didRemove: this.imageRemoved,
+        didUpload: this.imageUploaded,
         statusUploadSuccess: this.$i18n.t('create.saved'),
       },
 
@@ -283,14 +284,14 @@ export default {
 
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
-          setTimeout(() => {
+         /*  setTimeout(() => {
             this.$router.push({
               name: 'settings.designs',
               params: {
                 upload: true,
               },
             })
-          }, 3000)
+          }, 3000) */
           }
         })
       /* .catch((err) => {
@@ -309,6 +310,18 @@ export default {
     imageRemoved(data) {
       console.log(data)
       this.uploadButton = false
+    },
+    imageUploaded(error, data, response) {
+    console.log(error, data, response);
+     setTimeout(() => {
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            })
+          }, 3000)
+
     },
     async checkUpload(id) {
       const uploadIsOk = await this.$axios
