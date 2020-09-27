@@ -218,7 +218,7 @@ export default {
       progressWidth: 0,
       uploadPercentage: 0,
       dialog_msg: '',
-      slibtn: document.getElementsByClassName('slim-btn-upload')
+      slibtn: document.getElementsByClassName('slim-btn-upload'),
     }
   },
   computed: {
@@ -280,7 +280,7 @@ export default {
           const uploadOk = this.checkUpload(res.data.id)
           if (uploadOk) {
             this.update(res.data.id)
-           
+
             this.dialog_msg = this.$i18n.t('create.uploadSuccess')
             success('upload done')
             setTimeout(() => {
@@ -302,7 +302,7 @@ export default {
     imageLoaded(error, data, response) {
       console.log(error, data, response)
       // const slibtn = document.getElementsByClassName('slim-btn-upload')
-    this.slibtn[0].style.display = 'none'
+      this.slibtn[0].style.display = 'none'
       this.uploadButton = true
       return true
     },
@@ -317,13 +317,11 @@ export default {
       return true
     },
     update(id) {
-
       if (this.form.is_live === false) {
         this.form.is_live = 0
       } else {
         this.form.is_live = 1
       }
-
 
       this.form.slug = this.slug
       this.form
@@ -332,12 +330,12 @@ export default {
           // this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
-        .finally(() => {
+      /* .finally(() => {
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
           this.uploading = false
-        })
+        }) */
     },
 
     submit() {
@@ -345,7 +343,7 @@ export default {
       this.uploading = true
       this.loader = 'loadingSubmit'
       // const slibtn = document.getElementsByClassName('slim-btn-upload')
-      slibtn[0].click()
+      this.slibtn[0].click()
     },
     clear() {
       this.form.reset()
