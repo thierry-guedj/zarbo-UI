@@ -102,14 +102,6 @@
                 @blur="$v.form.description.$touch()"
               ></v-textarea>
               <has-error :form="form" field="description"></has-error>
-              <!--  <v-textarea
-                  v-model.trim="$v.form.description"
-                  :counter="155"
-                  :label="$t('editDesign.description')"
-                  outlined
-                  class="mb-1"
-                  field="description"
-                ></v-textarea> -->
               <p class="tags-notice">{{ $t('create.tagsNotice') }}</p>
               <p class="tags-notice">{{ $t('create.tagsNotice2') }}</p>
               <client-only>
@@ -159,13 +151,7 @@ import { maxLength } from 'vuelidate/lib/validators'
 // import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import $axios from '@nuxtjs/axios'
 import Slim from '@/components/slim/slim.vue'
-function slimInitialised(data) {
-  console.log(data)
-}
 
-function imageUpload(error, data, response) {
-  console.log(error, data, response)
-}
 export default {
   name: 'Create',
   middleware: ['auth'],
@@ -287,21 +273,24 @@ export default {
           const uploadOk = this.checkUpload(res.data.id)
           if (uploadOk) {
             this.update(res.data.id)
-            this.uploading = false
+
             this.dialog_msg = this.$i18n.t('create.uploadSuccess')
             success('upload done')
-            this.form.busy = false
-            this.loader = null
-            this.loadingSubmit = false
-            setTimeout(() => {
-              this.$router.push({
-                name: 'settings.designs',
-                params: {
-                  upload: true,
-                },
-              })
-            }, 3000)
           }
+        })
+        .finally(() => {
+          this.uploading = false
+          this.form.busy = false
+          this.loader = null
+          this.loadingSubmit = false
+          setTimeout(() => {
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            })
+          }, 3000)
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -340,7 +329,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          this.checkUpload(id)
+          // this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
