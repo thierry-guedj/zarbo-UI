@@ -15,150 +15,162 @@
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-center text-white">
-        <v-container>
-          <v-row class="row-md-12">
-            <v-col class="col-md-3 avatarUser">
-              
-            </v-col>
-            <v-divider class="mx-4" inset vertical></v-divider>
-            <v-col class="col-md-9">
-              <p class="titleUser text-white">
-               Oeuvres Publiées
-              </p>
-             
-            </v-col>
-          </v-row>
-        </v-container>
-    <v-container fluid class="search-control">
-      <form @submit.prevent="fetchData">
-        <v-row
-          class="filters d-flex justify-content-between align-items-center"
-        >
-          <v-col cols="auto"
-            ><v-select
-              v-model="filters.orderBy"
-              :items="itemsOrderBy"
-              item-text="title"
-              item-value="value"
-              :label="$t('search.orderBy')"
-              outlined
-              width="250px"
-              @change="fetchData"
-            ></v-select
-          ></v-col>
-
-          <v-col cols="auto" class="d-flex align-items-center">
-            <v-checkbox
-              id="has_comments"
-              v-model="filters.has_comments"
-              field="has_comments"
-              :label="$t('search.hasComments')"
-              class="mr-3"
-              true-value="1"
-              false-value="0"
-              @change="fetchData"
-            ></v-checkbox>
-
-          </v-col>
-          <v-col>
-            <v-text-field
-              id="q"
-              v-model="filters.q"
-              field="q"
-              class="combobox"
-              outlined
-              placeholder="rechercher dans les titres et les descriptions"
-              @input="fetchData"
-            >
-              <template v-slot:append>
-                <v-btn
-                  :disabled="searching"
-                  class="searchBtn"
-                  height="auto"
-                  text
-                  :loading="searching"
-                  type="submit"
-                >
-                  <v-icon>mdi-magnify</v-icon>
-                  {{ $t('search.search') }}
-                </v-btn>
-              </template>
-            </v-text-field>
+        <!-- <v-container> -->
+        <v-row class="row-md-12">
+          <v-col class="col-md-3 avatarUser"> </v-col>
+          <v-img src="@/static/artworkIcon.png">
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-col class="col-md-9">
+            <p class="titleUser text-white">
+              Oeuvres Publiées
+            </p>
           </v-col>
         </v-row>
-      </form>
-    </v-container>
-    <v-container class="p-0 m-0 row-designs">
-      <div v-if="searching" class="loader p-0">
-        <Circle8></Circle8>
-      </div>
-      <div v-else class="pl-0 pb-6 pr-0">
-        <template v-if="(!designs.length)" class="pb-6 text-center">
-          <v-alert border="right" color="accent" dark width="60%" class="alert">
-            {{ $t('designs.noResult') }}
-            <v-spacer />
-            <nuxt-link :to="{ name: 'designs.search' }">
-              <v-btn class="mt-3"
-                ><v-icon right dark class="mx-2">reply</v-icon
-                >{{ $t('designs.backToResults') }}</v-btn
+        <!-- </v-container> -->
+      </section>
+      <v-container fluid class="search-control">
+        <form @submit.prevent="fetchData">
+          <v-row
+            class="filters d-flex justify-content-between align-items-center"
+          >
+            <v-col cols="auto"
+              ><v-select
+                v-model="filters.orderBy"
+                :items="itemsOrderBy"
+                item-text="title"
+                item-value="value"
+                :label="$t('search.orderBy')"
+                outlined
+                width="250px"
+                @change="fetchData"
+              ></v-select
+            ></v-col>
+
+            <v-col cols="auto" class="d-flex align-items-center">
+              <v-checkbox
+                id="has_comments"
+                v-model="filters.has_comments"
+                field="has_comments"
+                :label="$t('search.hasComments')"
+                class="mr-3"
+                true-value="1"
+                false-value="0"
+                @change="fetchData"
+              ></v-checkbox>
+            </v-col>
+            <v-col>
+              <v-text-field
+                id="q"
+                v-model="filters.q"
+                field="q"
+                class="combobox"
+                outlined
+                placeholder="rechercher dans les titres et les descriptions"
+                @input="fetchData"
               >
-            </nuxt-link>
-          </v-alert>
-        </template>
-        <template v-else id="row-designs">
-          <!-- <nuxt-link :to="{ name: 'users.search' }">
+                <template v-slot:append>
+                  <v-btn
+                    :disabled="searching"
+                    class="searchBtn"
+                    height="auto"
+                    text
+                    :loading="searching"
+                    type="submit"
+                  >
+                    <v-icon>mdi-magnify</v-icon>
+                    {{ $t('search.search') }}
+                  </v-btn>
+                </template>
+              </v-text-field>
+            </v-col>
+          </v-row>
+        </form>
+      </v-container>
+      <v-container class="p-0 m-0 row-designs">
+        <div v-if="searching" class="loader p-0">
+          <Circle8></Circle8>
+        </div>
+        <div v-else class="pl-0 pb-6 pr-0">
+          <template v-if="(!designs.length)" class="pb-6 text-center">
+            <v-alert
+              border="right"
+              color="accent"
+              dark
+              width="60%"
+              class="alert"
+            >
+              {{ $t('designs.noResult') }}
+              <v-spacer />
+              <nuxt-link :to="{ name: 'designs.search' }">
+                <v-btn class="mt-3"
+                  ><v-icon right dark class="mx-2">reply</v-icon
+                  >{{ $t('designs.backToResults') }}</v-btn
+                >
+              </nuxt-link>
+            </v-alert>
+          </template>
+          <template v-else id="row-designs">
+            <!-- <nuxt-link :to="{ name: 'users.search' }">
             <v-btn class="mt-3"
               ><v-icon right dark class="mx-2">reply</v-icon
               >{{ $t('designs.backToResults') }}</v-btn
             >
           </nuxt-link> -->
-          <v-row
-            transition-duration="0.3s"
-            item-selector=".item"
-            class="mb-6 row-design"
-            justify="center"
-            no-gutters
-          >
-            <CoolLightBox
-              :items="itemsDesigns"
-              :index="index !== null ? parseInt(`${index}`) : index"
-              :use-zoom-bar="true"
-              :effect="'fade'"
-              @close="index = null"
+            <v-row
+              transition-duration="0.3s"
+              item-selector=".item"
+              class="mb-6 row-design"
+              justify="center"
+              no-gutters
             >
-            </CoolLightBox>
-            <masonry
-              :cols="{ default: 6, 1500: 5, 1400: 4, 1000: 3, 700: 2, 500: 1 }"
-              :gutter="{ default: '0px', 700: '15px' }"
-              ><lazy-component
-                v-for="(design, i) in designs"
-                :key="`${i}-${design.id}`"
-                :design="design"
-                @lightbox="index = parseInt(`${i}`)"
-              ></lazy-component
-            ></masonry>
-          </v-row>
+              <CoolLightBox
+                :items="itemsDesigns"
+                :index="index !== null ? parseInt(`${index}`) : index"
+                :use-zoom-bar="true"
+                :effect="'fade'"
+                @close="index = null"
+              >
+              </CoolLightBox>
+              <masonry
+                :cols="{
+                  default: 6,
+                  1500: 5,
+                  1400: 4,
+                  1000: 3,
+                  700: 2,
+                  500: 1,
+                }"
+                :gutter="{ default: '0px', 700: '15px' }"
+                ><lazy-component
+                  v-for="(design, i) in designs"
+                  :key="`${i}-${design.id}`"
+                  :design="design"
+                  @lightbox="index = parseInt(`${i}`)"
+                ></lazy-component
+              ></masonry>
+            </v-row>
 
-          <infinite-loading
-            ref="infiniteLoading"
-            slot="append"
-            :identifier="identifier"
-            spinner="ring-loader"
-            force-use-infinite-wrapper="row-designs"
-            @infinite="infiniteHandler"
-          >
-          </infinite-loading>
-        </template>
-      </div>
+            <infinite-loading
+              ref="infiniteLoading"
+              slot="append"
+              :identifier="identifier"
+              spinner="ring-loader"
+              force-use-infinite-wrapper="row-designs"
+              @infinite="infiniteHandler"
+            >
+            </infinite-loading>
+          </template>
+        </div>
+      </v-container>
+      <!-- Modal  -->
+      <keep-alive>
+        <base-modal
+          :dialog.sync="visible"
+          @showDesign="styleModal()"
+          @closeDialog="hideModal()"
+        />
+      </keep-alive>
     </v-container>
-    <!-- Modal  -->
-    <keep-alive>
-    <base-modal
-      :dialog.sync="visible"
-      @showDesign="styleModal()"
-      @closeDialog="hideModal()"
-    />
-    </keep-alive>
   </section>
 </template>
 
@@ -318,7 +330,7 @@ export default {
 }
 .search-control {
   max-width: 75% !important;
-   margin-top: 25px;
+  margin-top: 25px;
   margin-bottom: 0;
 }
 .loader {
@@ -349,5 +361,4 @@ html {
 .row.row-design {
   display: contents !important;
 }
-
 </style>
