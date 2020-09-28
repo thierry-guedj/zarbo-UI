@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RGPD from '@components/RGPD.vue'
+import RGPD from '@/components/RGPD.vue'
 export default {
   layouts: 'designs-listing',
   components: {
