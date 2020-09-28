@@ -217,6 +217,7 @@ export default {
       uploadPercentage: 0,
       dialog_msg: '',
       design: null,
+      successFunction: null,
     }
   },
   computed: {
@@ -271,12 +272,11 @@ export default {
         })
         .then((res) => {
           this.checkUpload(res.data.id)
-           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          success('upload done')
-        
+          
+          this.successFunction = success
         })
         .catch((err) => console.log(err.response))
-        /* .finally(() => {
+      /* .finally(() => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
@@ -309,15 +309,14 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-
-         
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
           this.uploading = false
-          
-   
+
           this.update(id)
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          this.successFunction('Upload done')
           setTimeout(
             this.$router.push({
               name: 'settings.designs',
