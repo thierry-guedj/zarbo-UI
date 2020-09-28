@@ -272,6 +272,7 @@ export default {
         })
         .then((res) => {
           this.design = this.checkUpload(res.data.id)
+          console.log(this.design)
           this.design = this.design.data
         })
         .catch((err) => console.log(err.response))
@@ -447,6 +448,9 @@ export default {
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
   transition: width 0.6s ease;
+}
+.alert-warning {
+  margin-top: 20px;
 }
 .tags-notice {
   font-size: 15px;
