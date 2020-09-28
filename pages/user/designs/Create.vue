@@ -297,7 +297,16 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           // setTimeout(this.update(id), 10000)
-
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          this.successFunction(this.slimOptions.statusUploadSuccess)
+          const imageUrl = response.data.images.thumbnail
+          fetch(imageUrl, { method: 'HEAD' }).then((res) => {
+            if (res.ok) {
+              this.uploadDone()
+            } else {
+              console.log('Image does not exist.')
+            }
+          })
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
@@ -323,11 +332,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          const uploadOk = this.checkUpload(id).then((response) => {
-            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-            this.successFunction(this.slimOptions.statusUploadSuccess)
-            this.uploadDone()
-          })
+          const uploadOk = this.checkUpload(id).then((response) => {})
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
@@ -342,6 +347,7 @@ export default {
       this.loader = null
       this.loadingSubmit = false
       this.uploading = false
+
       setTimeout(
         this.$router.push({
           name: 'settings.designs',
