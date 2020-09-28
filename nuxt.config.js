@@ -129,7 +129,6 @@ export default {
     'vue-social-sharing/nuxt',
     'nuxt-i18n',
     'nuxt-moment',
-    'nuxt-cookie-control',
   ],
   i18n: {
     locales: [

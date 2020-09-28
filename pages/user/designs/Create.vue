@@ -281,15 +281,7 @@ export default {
           this.loader = null
           this.loadingSubmit = false
           this.uploading = false
-          setTimeout(
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            }),
-            3000
-          )
+          
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -316,6 +308,15 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.update(id)
+          setTimeout(
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            }),
+            3000
+          )
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
