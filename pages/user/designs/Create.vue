@@ -275,7 +275,6 @@ export default {
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
-          
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
@@ -283,15 +282,12 @@ export default {
           this.loadingSubmit = false
           this.uploading = false
           setTimeout(
-            this.$router.push(
-              {
-                name: 'settings.designs',
-                params: {
-                  upload: true,
-                },
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
               },
-              3000
-            ),
+            }),
             3000
           )
         })

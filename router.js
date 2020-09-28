@@ -202,6 +202,21 @@ const routes = [
     name: 'users.search___en',
     component: page('user/UserIndex.vue'),
   },
+  {
+    path: '/privacy/',
+    name: 'privacy.policy',
+    component: page('PrivacyPolicy.vue'),
+  },
+  {
+    path: '/privacy/fr/',
+    name: 'privacy.policy___fr',
+    component: page('PrivacyPolicy.vue'),
+  },
+  {
+    path: '/privacy/en/',
+    name: 'privacy.policy___en',
+    component: page('PrivacyPolicy.vue'),
+  },
   /* {
     path: '/design/:slug',
     name: 'designs.show',
