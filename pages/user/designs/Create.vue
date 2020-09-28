@@ -302,7 +302,6 @@ export default {
           const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
-              setTimeout(this.uploadDone(), 5000)
             } else {
               console.log('Image does not exist.')
             }
@@ -318,6 +317,14 @@ export default {
             .catch((err) => console.log('Error:', err)) */
 
           return uploadIsOk
+        })
+        .finally(() => {
+          setTimeout(
+            this.$router.push({
+              name: 'settings.designs',
+            }),
+            5000
+          )
         })
     },
 
@@ -351,9 +358,6 @@ export default {
       setTimeout(
         this.$router.push({
           name: 'settings.designs',
-          params: {
-            upload: true,
-          },
         }),
         5000
       )
