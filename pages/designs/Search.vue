@@ -14,14 +14,14 @@
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
-      <section class="hero text-center text-white">
+      <section class="hero text-white">
         <!-- <v-container> -->
         <v-row class="row-md-12">
           <v-col class="col-md-3 avatarUser">
             <img src="/artworkIcon.png" class="iconTitle"
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-col class="col-md-9">
+          <v-col class="col-md-8">
             <p class="titleArtwork text-white">
               Oeuvres Publiées
             </p>
