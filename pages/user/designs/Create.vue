@@ -274,10 +274,11 @@ export default {
         })
         .then((res) => {
           const uploadOk = this.checkUpload(res.data.id)
-          this.update(res.data.id)
+          
         })
         .catch((err) => console.log(err.response))
-        .finally(() => {
+        .finally((res) => {
+          this.update(res.data.id)
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
