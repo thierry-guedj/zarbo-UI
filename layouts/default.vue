@@ -16,9 +16,9 @@
         class="mt-16"
         app
       >
-      client-only>
-        <Cookie />
-      </client-only>
+        <client-only>
+          <Cookie />
+        </client-only>
         <v-list>
           <v-list-item
             v-for="(item, i) in items"

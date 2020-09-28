@@ -272,6 +272,7 @@ export default {
         })
         .then((res) => {
           this.design = this.checkUpload(res.data.id)
+          this.design = this.design.data
         })
         .catch((err) => console.log(err.response))
         .finally(() => {

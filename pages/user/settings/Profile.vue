@@ -379,8 +379,8 @@ export default {
 }
 .progress {
   height: 5px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
   overflow: hidden;
   background-color: transparent;
   border-radius: 4px;
@@ -395,7 +395,7 @@ export default {
   line-height: 20px;
   color: rgba(31, 124, 142, 1);
   text-align: center;
-  background-color: #b78933;
+  background-color: #00c853;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
