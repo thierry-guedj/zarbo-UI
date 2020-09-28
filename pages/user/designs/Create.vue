@@ -272,7 +272,7 @@ export default {
         })
         .then((res) => {
           this.checkUpload(res.data.id)
-          
+
           this.successFunction = success
         })
         .catch((err) => console.log(err.response))
@@ -311,11 +311,9 @@ export default {
         .then((response) => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           this.successFunction(this.statusUploadSuccess)
-          
 
-          this.update(id)
-          
-          
+          setTimeout(this.update(id), 3000)
+
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
