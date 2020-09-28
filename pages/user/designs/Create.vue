@@ -312,7 +312,7 @@ export default {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           this.successFunction(this.statusUploadSuccess)
 
-          setTimeout(this.update(id), 3000)
+          setTimeout(this.update(id), 10000)
 
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
