@@ -270,9 +270,9 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          const uploadOk = this.checkUpload(res.data.id)
+          this.checkUpload(res.data.id)
            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.success('upload done')
+          success('upload done')
         
         })
         .catch((err) => console.log(err.response))
