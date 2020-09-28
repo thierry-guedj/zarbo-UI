@@ -284,14 +284,6 @@ export default {
 
             this.dialog_msg = this.$i18n.t('create.uploadSuccess')
             success('upload done')
-             setTimeout(() => {
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            })
-          }, 3000)
           }
         })
       /* .catch((err) => {
@@ -318,7 +310,18 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          const imageUrl = 'https://les2hiboux.s3.eu-west-3.amazonaws.com/uploads/designs/minithumbnail/' + response.image
+          console.log(response)
+          setTimeout(() => {
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            })
+          }, 3000)
+          const imageUrl =
+            'https://les2hiboux.s3.eu-west-3.amazonaws.com/uploads/designs/minithumbnail/' +
+            response.image
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
               if (res.ok) {
