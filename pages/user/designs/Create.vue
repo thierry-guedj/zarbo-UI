@@ -309,14 +309,15 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          this.successFunction(this.statusUploadSuccess)
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
           this.uploading = false
 
           this.update(id)
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.successFunction('Upload done')
+          
           setTimeout(
             this.$router.push({
               name: 'settings.designs',
