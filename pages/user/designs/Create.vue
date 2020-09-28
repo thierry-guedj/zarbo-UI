@@ -271,11 +271,11 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          this.design = this.checkUpload(res.data.id)
+          const uploadOk = this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
-          this.update(this.design.id)
+          
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
@@ -319,6 +319,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
+          this.update(id)
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
