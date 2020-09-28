@@ -31,10 +31,7 @@
                   :style="{ width: uploadPercentage + '%' }"
                 ></div>
               </div>
-              <slim-cropper
-                :options="slimOptions"
-                class="text-black slim-avatar"
-              >
+              <slim-cropper :options="slimOptions" class="text-black">
                 <input type="file" name="image" />
               </slim-cropper>
               <div id="progress" class="progress">
@@ -219,6 +216,7 @@ export default {
       progressWidth: 0,
       uploadPercentage: 0,
       dialog_msg: '',
+      design: null,
       // slibtn: document.getElementsByClassName('slim-btn-upload'),
     }
   },
@@ -273,12 +271,11 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          const uploadOk = this.checkUpload(res.data.id)
-          
+          this.design = this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
-        .finally((res) => {
-          this.update(res.data.id)
+        .finally(() => {
+          this.update(this.design.id)
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
@@ -427,8 +424,8 @@ export default {
 
 .progress {
   height: 5px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
   overflow: hidden;
   background-color: transparent;
   border-radius: 4px;
