@@ -18,7 +18,7 @@
         <!-- <v-container> -->
         <v-row class="row-md-12">
           <v-col class="col-md-3 avatarUser"> </v-col>
-          <v-img src="/artworkIcon.png">
+          <v-img src="/artworkIcon.png"></v-img>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
             <p class="titleUser text-white">
