@@ -302,7 +302,7 @@ export default {
           const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
-              //this.uploadDone()
+              setTimeout(this.uploadDone(), 5000)
             } else {
               console.log('Image does not exist.')
             }
