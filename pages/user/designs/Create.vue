@@ -256,11 +256,6 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     slimService(formdata, progress, success, failure) {
-      this.uploading = true
-      /* console.log(progress)
-      console.log(success)
-
-      console.log(formdata) */
       this.$axios
         .post('designs', formdata, {
           headers: {
@@ -278,13 +273,18 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          const uploadOk = this.checkUpload(res.data.id)
-          if (uploadOk) {
-            this.update(res.data.id)
+          const uploadOk = this.checkUpload(id)
+        })
+        .catch((err) => console.log(err.response))
+        .finally(() => {
+          this.update(res.data.id)
 
-            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-            success('upload done')
-          }
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          success('upload done')
+          this.form.busy = false
+          this.loader = null
+          this.loadingSubmit = false
+          this.uploading = false
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -310,20 +310,19 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          console.log(response)
-          setTimeout(() => {
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            })
-          }, 3000)
           const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
               if (res.ok) {
-                console.log('Image exists.')
+                this.$router.push(
+                  {
+                    name: 'settings.designs',
+                    params: {
+                      upload: true,
+                    },
+                  },
+                  3000
+                )
               } else {
                 console.log('Image does not exist.')
               }
@@ -344,14 +343,14 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          const uploadOk = this.checkUpload(id)
+          // const uploadOk = this.checkUpload(id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
-          this.form.busy = false
+          /*    this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
-          this.uploading = false
+          this.uploading = false */
         })
     },
 
