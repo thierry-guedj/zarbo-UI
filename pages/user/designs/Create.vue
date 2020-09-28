@@ -128,7 +128,7 @@
               ></v-checkbox>
 
               <v-spacer class="mb-3" />
-              <v-btn :disabled="upload" @click="clear">{{
+              <v-btn :disabled="uploading" @click="clear">{{
                 $t('create.clear')
               }}</v-btn>
               <v-btn
@@ -192,11 +192,6 @@ export default {
         /*  assign_to_team: false,
         team: null, */
       }),
-      loader: null,
-      loadingSubmit: false,
-      dialog: true,
-      upload: false,
-      uploadButton: false,
 
       slimOptions: {
         service: this.slimService,
@@ -210,7 +205,9 @@ export default {
         didUpload: this.imageUploaded,
         statusUploadSuccess: this.$i18n.t('create.saved'),
       },
-
+      loader: null,
+      loadingSubmit: false,
+      uploadButton: false,
       uploading: false,
       error: '',
       progressWidth: 0,
@@ -276,15 +273,6 @@ export default {
           this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
-      /* .finally(() => {
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          success('upload done')
-          this.form.busy = false
-          this.loader = null
-          this.loadingSubmit = false
-          this.uploading = false
-          
-        }) */
       /* .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
@@ -309,9 +297,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.successFunction(this.slimOptions.statusUploadSuccess)
-          setTimeout(this.uploadDone(), 3000)
+          this.uploadDone()
 
           // setTimeout(this.update(id), 10000)
 
@@ -351,16 +337,21 @@ export default {
         })
     },
     uploadDone() {
+      this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+      this.successFunction(this.slimOptions.statusUploadSuccess)
       this.form.busy = false
       this.loader = null
       this.loadingSubmit = false
       this.uploading = false
-      this.$router.push({
-        name: 'settings.designs',
-        params: {
-          upload: true,
-        },
-      })
+      setTimeout(
+        this.$router.push({
+          name: 'settings.designs',
+          params: {
+            upload: true,
+          },
+        }),
+        5000
+      )
     },
     submit() {
       this.form.busy = true
