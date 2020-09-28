@@ -272,12 +272,10 @@ export default {
         })
         .then((res) => {
           this.design = this.checkUpload(res.data.id)
-          console.log(this.design)
-          this.design = this.design.data
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
-          this.update(this.design.id)
+          this.update(this.design.data.id)
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
