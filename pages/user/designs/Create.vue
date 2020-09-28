@@ -274,7 +274,7 @@ export default {
         
         })
         .catch((err) => console.log(err.response))
-        .finally(() => {
+        /* .finally(() => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
@@ -282,7 +282,7 @@ export default {
           this.loadingSubmit = false
           this.uploading = false
           
-        })
+        }) */
       /* .catch((err) => {
           const message = err.response.data.errors
           this.error = message[Object.keys(message)[0]][0]
@@ -307,6 +307,15 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
+
+          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          this.success('upload done')
+          this.form.busy = false
+          this.loader = null
+          this.loadingSubmit = false
+          this.uploading = false
+          
+   
           this.update(id)
           setTimeout(
             this.$router.push({
@@ -326,6 +335,7 @@ export default {
               }
             })
             .catch((err) => console.log('Error:', err)) */
+
           return uploadIsOk
         })
     },
