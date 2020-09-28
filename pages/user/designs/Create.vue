@@ -273,7 +273,7 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          const uploadOk = this.checkUpload(id)
+          const uploadOk = this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
