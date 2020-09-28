@@ -271,6 +271,8 @@ export default {
         })
         .then((res) => {
           const uploadOk = this.checkUpload(res.data.id)
+           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+          this.success('upload done')
         
         })
         .catch((err) => console.log(err.response))
@@ -308,8 +310,7 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
 
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.success('upload done')
+         
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
