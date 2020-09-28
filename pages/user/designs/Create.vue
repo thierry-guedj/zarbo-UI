@@ -274,17 +274,28 @@ export default {
         })
         .then((res) => {
           const uploadOk = this.checkUpload(res.data.id)
+          this.update(res.data.id)
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
-          this.update(res.data.id)
-
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
           this.loader = null
           this.loadingSubmit = false
           this.uploading = false
+          setTimeout(
+            this.$router.push(
+              {
+                name: 'settings.designs',
+                params: {
+                  upload: true,
+                },
+              },
+              3000
+            ),
+            3000
+          )
         })
       /* .catch((err) => {
           const message = err.response.data.errors
@@ -310,25 +321,16 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          const imageUrl = response.data.images.thumbnail
+          /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
               if (res.ok) {
-                this.$router.push(
-                  {
-                    name: 'settings.designs',
-                    params: {
-                      upload: true,
-                    },
-                  },
-                  3000
-                )
               } else {
                 console.log('Image does not exist.')
               }
             })
-            .catch((err) => console.log('Error:', err))
-          return true
+            .catch((err) => console.log('Error:', err)) */
+          return uploadIsOk
         })
     },
 
