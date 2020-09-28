@@ -272,9 +272,8 @@ export default {
           }.bind(this),
         })
         .then((res) => {
+          this.update(res.data.id)
           this.checkUpload(res.data.id)
-
-          
         })
         .catch((err) => console.log(err.response))
       /* .finally(() => {
@@ -312,6 +311,7 @@ export default {
         .then((response) => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           this.successFunction(this.slimOptions.statusUploadSuccess)
+          setTimeout(this.uploadDone(), 3000)
 
           // setTimeout(this.update(id), 10000)
 
@@ -341,19 +341,6 @@ export default {
         .put(`designs/${id}`)
         .then((res) => {
           // const uploadOk = this.checkUpload(id)
-          this.form.busy = false
-          this.loader = null
-          this.loadingSubmit = false
-          this.uploading = false
-          setTimeout(
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            }),
-            3000
-          )
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
@@ -363,7 +350,18 @@ export default {
           this.uploading = false */
         })
     },
-
+    uploadDone() {
+      this.form.busy = false
+      this.loader = null
+      this.loadingSubmit = false
+      this.uploading = false
+      this.$router.push({
+        name: 'settings.designs',
+        params: {
+          upload: true,
+        },
+      })
+    },
     submit() {
       this.form.busy = true
       this.uploading = true
