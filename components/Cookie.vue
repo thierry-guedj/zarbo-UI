@@ -1,6 +1,6 @@
 <template>
   <div v-if="isOpen" class="cookie">
-    <v-alert prominent type="info" color="#e9f8f8">
+    <v-alert prominent type="info" color="#455A64">
       <v-row align="center">
         <v-col class="grow">
           <slot name="message">

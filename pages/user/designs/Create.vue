@@ -311,22 +311,11 @@ export default {
         .then((response) => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           this.successFunction(this.statusUploadSuccess)
-          this.form.busy = false
-          this.loader = null
-          this.loadingSubmit = false
-          this.uploading = false
+          
 
           this.update(id)
           
-          setTimeout(
-            this.$router.push({
-              name: 'settings.designs',
-              params: {
-                upload: true,
-              },
-            }),
-            3000
-          )
+          
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
@@ -353,6 +342,19 @@ export default {
         .put(`designs/${id}`)
         .then((res) => {
           // const uploadOk = this.checkUpload(id)
+          this.form.busy = false
+          this.loader = null
+          this.loadingSubmit = false
+          this.uploading = false
+          setTimeout(
+            this.$router.push({
+              name: 'settings.designs',
+              params: {
+                upload: true,
+              },
+            }),
+            3000
+          )
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
