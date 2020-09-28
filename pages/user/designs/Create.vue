@@ -269,7 +269,8 @@ export default {
           }.bind(this),
         })
         .then((res) => {
-          this.update(res.data.id)
+          // this.update(res.data.id)
+          this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
       /* .catch((err) => {
@@ -302,6 +303,8 @@ export default {
           const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
+              this.update(response.data.id)
+              return uploadIsOk
             } else {
               console.log('Image does not exist.')
             }
@@ -316,16 +319,16 @@ export default {
             })
             .catch((err) => console.log('Error:', err)) */
 
-          return uploadIsOk
+          
         })
-        .finally(() => {
+        /* .finally(() => {
           setTimeout(
             this.$router.push({
               name: 'settings.designs',
             }),
             5000
           )
-        })
+        }) */
     },
 
     update(id) {
@@ -339,15 +342,15 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          const uploadOk = this.checkUpload(id).then((response) => {})
+          setTimeout(
+            this.$router.push({
+              name: 'settings.designs',
+            }),
+            5000
+          )
         })
         .catch((err) => console.log(err.response))
-        .finally(() => {
-          /*    this.form.busy = false
-          this.loader = null
-          this.loadingSubmit = false
-          this.uploading = false */
-        })
+        
     },
     uploadDone() {
       this.form.busy = false
