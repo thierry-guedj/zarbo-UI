@@ -300,7 +300,8 @@ export default {
           // setTimeout(this.update(id), 10000)
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           this.successFunction(this.slimOptions.statusUploadSuccess)
-          const imageUrl = response.data.images.thumbnail
+          this.update(response.data.id)
+          /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
               this.update(response.data.id)
@@ -308,7 +309,7 @@ export default {
             } else {
               console.log('Image does not exist.')
             }
-          })
+          }) */
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
@@ -318,10 +319,8 @@ export default {
               }
             })
             .catch((err) => console.log('Error:', err)) */
-
-          
         })
-        /* .finally(() => {
+      /* .finally(() => {
           setTimeout(
             this.$router.push({
               name: 'settings.designs',
@@ -342,15 +341,9 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          setTimeout(
-            this.$router.push({
-              name: 'settings.designs',
-            }),
-            5000
-          )
+          
         })
         .catch((err) => console.log(err.response))
-        
     },
     uploadDone() {
       this.form.busy = false
