@@ -17,8 +17,9 @@
       <section class="hero text-center text-white">
         <!-- <v-container> -->
         <v-row class="row-md-12">
-          <v-col class="col-md-3 avatarUser"> </v-col>
-          <img src="/artworkIcon.png" class="iconTitle" />
+          <v-col class="col-md-3 avatarUser">
+            <img src="/artworkIcon.png" class="iconTitle"
+          /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
             <p class="titleUser text-white">
