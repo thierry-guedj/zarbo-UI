@@ -275,7 +275,7 @@ export default {
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
-          this.update(this.design.data.id)
+          this.update(this.design.id)
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
           success('upload done')
           this.form.busy = false
