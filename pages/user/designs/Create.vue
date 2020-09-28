@@ -324,6 +324,8 @@ export default {
         .put(`designs/${id}`)
         .then((res) => {
           const uploadOk = this.checkUpload(id).then((response) => {
+            this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+            this.successFunction(this.slimOptions.statusUploadSuccess)
             this.uploadDone()
           })
         })
@@ -336,8 +338,6 @@ export default {
         })
     },
     uploadDone() {
-      this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-      this.successFunction(this.slimOptions.statusUploadSuccess)
       this.form.busy = false
       this.loader = null
       this.loadingSubmit = false
