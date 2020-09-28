@@ -321,7 +321,7 @@ export default {
           }, 3000)
           const imageUrl =
             'https://les2hiboux.s3.eu-west-3.amazonaws.com/uploads/designs/minithumbnail/' +
-            response.image
+            response.data.image
           fetch(imageUrl, { method: 'HEAD' })
             .then((res) => {
               if (res.ok) {
