@@ -217,7 +217,6 @@ export default {
       uploadPercentage: 0,
       dialog_msg: '',
       design: null,
-      // slibtn: document.getElementsByClassName('slim-btn-upload'),
     }
   },
   computed: {
