@@ -270,7 +270,7 @@ export default {
         })
         .then((res) => {
           this.update(res.data.id)
-          this.checkUpload(res.data.id)
+          
         })
         .catch((err) => console.log(err.response))
       /* .catch((err) => {
@@ -297,7 +297,7 @@ export default {
       const uploadIsOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
-          this.uploadDone()
+          
 
           // setTimeout(this.update(id), 10000)
 
@@ -326,7 +326,11 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          // const uploadOk = this.checkUpload(id)
+          const uploadOk = this.checkUpload(id)
+          .then((response) => {
+            this.uploadDone()
+          }
+          
         })
         .catch((err) => console.log(err.response))
         .finally(() => {
