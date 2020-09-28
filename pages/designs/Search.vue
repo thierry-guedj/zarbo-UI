@@ -22,7 +22,7 @@
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
-            <p class="titleUser text-white">
+            <p class="titleArtwork text-white">
               Oeuvres Publiées
             </p>
           </v-col>
@@ -309,10 +309,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.titleUser {
+.titleArtwork {
   font-size: 44px;
   padding-top: 20px;
   margin-bottom: 30px;
+  justify-self: center;
 }
 .iconTitle {
   max-width: 280px;
