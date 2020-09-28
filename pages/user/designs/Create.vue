@@ -254,6 +254,7 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     slimService(formdata, progress, success, failure) {
+      this.successFunction = success
       this.$axios
         .post('designs', formdata, {
           headers: {
@@ -273,7 +274,7 @@ export default {
         .then((res) => {
           this.checkUpload(res.data.id)
 
-          this.successFunction = success
+          
         })
         .catch((err) => console.log(err.response))
       /* .finally(() => {
@@ -310,7 +311,7 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.successFunction(this.statusUploadSuccess)
+          this.successFunction(this.slimOptions.statusUploadSuccess)
 
           setTimeout(this.update(id), 10000)
 
