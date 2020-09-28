@@ -18,7 +18,7 @@
         <!-- <v-container> -->
         <v-row class="row-md-12">
           <v-col class="col-md-3 avatarUser"> </v-col>
-          <v-img src="/artworkIcon.png"></v-img>
+          <img src="/artworkIcon.png" class="iconTitle" />
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
             <p class="titleUser text-white">
@@ -312,6 +312,10 @@ export default {
   font-size: 44px;
   padding-top: 20px;
   margin-bottom: 30px;
+}
+.iconTitle {
+  max-width: 280px;
+  min-width: 240px;
 }
 .alert {
   text-align: center;
