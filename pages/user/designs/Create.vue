@@ -215,6 +215,7 @@ export default {
       dialog_msg: '',
       design: null,
       successFunction: null,
+      uploadIsOk: false,
     }
   },
   computed: {
@@ -242,6 +243,9 @@ export default {
     loader() {
       const l = this.loader
       this[l] = !this[l]
+    },
+    uploadIsOk() {
+      this.update(this.design.id)
     },
   },
   mounted() {
@@ -294,11 +298,12 @@ export default {
       console.log(error, data, response)
     },
     async checkUpload(id) {
-      const uploadIsOk = await this.$axios
+      this.design = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           // setTimeout(this.update(id), 10000)
-          this.uploadMessage(id)
+          this.uploadIsOk = true
+          
 
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
@@ -325,6 +330,7 @@ export default {
     },
 
     update(id) {
+      this.uploadMessage(id)
       if (this.form.is_live === false) {
         this.form.is_live = 0
       } else {
