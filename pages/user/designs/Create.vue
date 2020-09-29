@@ -277,7 +277,8 @@ export default {
           this.design = this.checkUpload(res.data.id)
           console.log(this.design)
           if (this.design) {
-            this.uploadIsOk = true
+            // this.uploadIsOk = true
+            this.update(this.design.id)
           }
         })
         .catch((err) => console.log(err.response))
