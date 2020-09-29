@@ -324,9 +324,9 @@ export default {
             })
             .catch((err) => console.log('Error:', err)) */
         })
-        .finally(() => {
+     /*    .finally(() => {
           setTimeout(this.update(id), 5000)
-        })
+        }) */
     },
 
     update(id) {
