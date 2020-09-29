@@ -275,7 +275,9 @@ export default {
         .then((res) => {
           // this.update(res.data.id)
           this.design = this.checkUpload(res.data.id)
-          if(this.design) { // this.uploadIsOk = true}
+          if (this.design) {
+            this.uploadIsOk = true
+          }
         })
         .catch((err) => console.log(err.response))
       /* .catch((err) => {
@@ -306,7 +308,6 @@ export default {
           // this.design = response.data
           // this.uploadIsOk = true
           return upOk.data
-          
 
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
@@ -327,7 +328,7 @@ export default {
             })
             .catch((err) => console.log('Error:', err)) */
         })
-     /*    .finally(() => {
+      /*    .finally(() => {
           setTimeout(this.update(id), 5000)
         }) */
     },
