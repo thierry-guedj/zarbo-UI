@@ -275,6 +275,7 @@ export default {
         .then((res) => {
           // this.update(res.data.id)
           this.design = this.checkUpload(res.data.id)
+          if(this.design) { // this.uploadIsOk = true}
         })
         .catch((err) => console.log(err.response))
       /* .catch((err) => {
@@ -303,7 +304,7 @@ export default {
         .then((response) => {
           // setTimeout(this.update(id), 10000)
           // this.design = response.data
-          this.uploadIsOk = true
+          // this.uploadIsOk = true
           return upOk.data
           
 
