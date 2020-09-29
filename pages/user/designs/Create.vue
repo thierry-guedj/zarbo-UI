@@ -298,8 +298,8 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           // setTimeout(this.update(id), 10000)
-          this.dialog_msg = this.$i18n.t('create.uploadSuccess')
-          this.successFunction(this.slimOptions.statusUploadSuccess)
+          this.uploadMessage()
+
           this.update(response.data.id)
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
@@ -341,9 +341,14 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          setTimeout(this.uploadDone(), 5000)
+          
         })
         .catch((err) => console.log(err.response))
+    },
+    uploadMessage() {
+      this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+      this.successFunction(this.slimOptions.statusUploadSuccess)
+      setTimeout(this.uploadDone(), 5000)
     },
     uploadDone() {
       this.form.busy = false

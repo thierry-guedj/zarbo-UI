@@ -153,8 +153,11 @@ export default {
     },
     computedDate() {
       const date = this.design.created_at_dates.created_at
-      this.$moment().locale('fr')
-      return moment(date).format('LL')
+      return date.toLocaleDateString(this.$i18n.locale, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
     },
   },
   methods: {
@@ -176,14 +179,14 @@ export default {
   white-space: nowrap;
 } */
 .user-link {
-  color: #546E7A;
+  color: #546e7a;
 }
 .user-link:hover {
   text-decoration: underline;
 }
 .v-application a {
   text-decoration: none;
-  color: #546E7A;
+  color: #546e7a;
 }
 .v-application .ml-3 {
   text-align: left;
