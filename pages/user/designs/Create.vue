@@ -275,6 +275,7 @@ export default {
         .then((res) => {
           // this.update(res.data.id)
           this.design = this.checkUpload(res.data.id)
+          console.log(this.design)
           if (this.design) {
             this.uploadIsOk = true
           }
@@ -307,7 +308,7 @@ export default {
           // setTimeout(this.update(id), 10000)
           // this.design = response.data
           // this.uploadIsOk = true
-          return upOk.data
+          return response.data
 
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
