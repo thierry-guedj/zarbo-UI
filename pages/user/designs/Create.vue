@@ -300,7 +300,6 @@ export default {
           // setTimeout(this.update(id), 10000)
           this.uploadMessage(id)
 
-          
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
@@ -320,14 +319,9 @@ export default {
             })
             .catch((err) => console.log('Error:', err)) */
         })
-      /* .finally(() => {
-          setTimeout(
-            this.$router.push({
-              name: 'settings.designs',
-            }),
-            5000
-          )
-        }) */
+        .finally(() => {
+          setTimeout(this.update(id), 5000)
+        })
     },
 
     update(id) {
@@ -348,7 +342,6 @@ export default {
     uploadMessage(id) {
       this.dialog_msg = this.$i18n.t('create.uploadSuccess')
       this.successFunction(this.slimOptions.statusUploadSuccess)
-      setTimeout(this.update(id), 5000)
     },
     uploadDone() {
       this.form.busy = false
