@@ -274,7 +274,7 @@ export default {
         })
         .then((res) => {
           // this.update(res.data.id)
-          this.checkUpload(res.data.id)
+          this.design = this.checkUpload(res.data.id)
         })
         .catch((err) => console.log(err.response))
       /* .catch((err) => {
@@ -302,8 +302,9 @@ export default {
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           // setTimeout(this.update(id), 10000)
-          this.design = response.data
+          // this.design = response.data
           this.uploadIsOk = true
+          return upOk.data
           
 
           /* const imageUrl = response.data.images.thumbnail
