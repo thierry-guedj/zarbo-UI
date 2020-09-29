@@ -309,6 +309,7 @@ export default {
           // setTimeout(this.update(id), 10000)
           // this.design = response.data
           // this.uploadIsOk = true
+          console.log(response.data)
           return response.data
 
           /* const imageUrl = response.data.images.thumbnail
