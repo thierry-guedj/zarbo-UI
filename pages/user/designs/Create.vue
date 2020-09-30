@@ -310,6 +310,7 @@ export default {
           // this.design = response.data
           // this.uploadIsOk = true
           console.log(response.data)
+          this.update(this.design.id)
 
           /* const imageUrl = response.data.images.thumbnail
           fetch(imageUrl, { method: 'HEAD' }).then((res) => {
