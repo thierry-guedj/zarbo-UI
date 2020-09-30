@@ -276,10 +276,10 @@ export default {
           // this.update(res.data.id)
           this.checkUpload(res.data.id)
           console.log(this.design)
-          if (this.design) {
+          /* if (this.design) {
             // this.uploadIsOk = true
             this.update(this.design.id)
-          }
+          } */
         })
         .catch((err) => console.log(err.response))
       /* .catch((err) => {
