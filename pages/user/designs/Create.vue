@@ -274,7 +274,7 @@ export default {
         })
         .then((res) => {
           // this.update(res.data.id)
-          this.design = this.checkUpload(res.data.id)
+          this.checkUpload(res.data.id)
           console.log(this.design)
           if (this.design) {
             // this.uploadIsOk = true
