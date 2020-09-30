@@ -303,13 +303,14 @@ export default {
       console.log(error, data, response)
     },
     async checkUpload(id) {
-      this.design = await this.$axios
+      const upOk = await this.$axios
         .$get(`designs/${id}/uploadIsSuccessful`)
         .then((response) => {
           // setTimeout(this.update(id), 10000)
           // this.design = response.data
           // this.uploadIsOk = true
           console.log(response.data)
+          this.design = response.data
           this.update(this.design.id)
 
           /* const imageUrl = response.data.images.thumbnail
