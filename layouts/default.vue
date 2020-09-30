@@ -205,7 +205,7 @@
           v-for="locale in availableLocales"
           :key="locale.code"
           :to="switchLocalePath(locale.code)"
-          @click="setLang()"
+         
           >{{ locale.name }}</nuxt-link
         >
       </v-app-bar>
@@ -497,5 +497,8 @@ footer {
 .main-container {
   max-width: 100%;
   padding: 5px 10px;
+}
+.cookie {
+  width: 100%;
 }
 </style>

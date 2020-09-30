@@ -396,6 +396,9 @@ export default {
   height: 6px;
   border-radius: 4px;
 }
+.cookie {
+  width: 100%;
+}
 @media screen and (min-width: 320px) {
   html {
     font-size: calc(16px + 6 * ((100vw - 320px) / 680));
