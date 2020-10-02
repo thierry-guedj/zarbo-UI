@@ -205,7 +205,6 @@
           v-for="locale in availableLocales"
           :key="locale.code"
           :to="switchLocalePath(locale.code)"
-         
           >{{ locale.name }}</nuxt-link
         >
       </v-app-bar>
@@ -313,7 +312,7 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
-      this.$moment().locale('fr')
+      // this.$moment().locale('fr')
       const url = `setLang/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
 
