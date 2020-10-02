@@ -5,7 +5,6 @@
       border="left"
       close-text="Close Alert"
       class="alert-success"
-      dark
       dismissible
     >
     {{ $t('settingsDesigns.uploadDoneMessage') }}

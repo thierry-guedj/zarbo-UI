@@ -127,6 +127,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
+import 'moment/locale/fr'
+// import 'moment/locale/es'
 export default {
   name: 'DesignCard',
   props: {
@@ -142,7 +144,9 @@ export default {
     }
   },
   mounted() {
-    this.$moment().locale('fr')
+    console.log(this.$i18n.locale)
+    
+   // this.$moment().locale('fr')
   },
 
   computed: {
@@ -159,15 +163,23 @@ export default {
         day: 'numeric',
       })
     }, */
+    /* computedDate() {
+      const prefix = ''
+      return typeof time === 'object'
+        ? prefix +
+            this.design.created_at_dates.created_at.toLocaleDateString(
+              this.$i18n.locale,
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              }
+            )
+        : ''
+    }, */
     computedDate() {
-      return this.design.created_at_dates.created_at.toLocaleDateString(
-        this.$i18n.locale,
-        {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }
-      )
+      const date = this.design.created_at_dates.created_at
+      return moment(date).format('LL')
     },
   },
   methods: {

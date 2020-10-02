@@ -1,13 +1,19 @@
 <template>
   <v-list-item-title>
     <div class="comment-thumb float-left mr-3">
-      <v-avatar>
+      <!-- <v-avatar>
         <img
-          :src="$auth.user.avatars.small"
+          :src="comment.user.avatars.small"
           :username="comment.user.name"
           width="40px"
         />
-      </v-avatar>
+      </v-avatar> -->
+      <avatar
+        :username="comment.user.name"
+        :src="comment.user.avatars.medium"
+        class="mx-3 mt-3"
+        :size="40"
+      ></avatar>
     </div>
     <div class="comment-meta mb-3">
       <h4 class="font-14 fw-500 mb-2">
@@ -33,15 +39,18 @@
 </template>
 
 <script>
+import Avatar from 'vue-avatar'
 export default {
   name: 'DesignComment',
+  components: {
+    Avatar,
+  },
   props: {
     comment: {
       type: Object,
       required: true,
     },
   },
-
   methods: {
     destroyComment() {
       this.$axios
