@@ -223,6 +223,7 @@ export default {
     taglineMaxLength: 'Tagline must be less than 300 characters long',
   },
   contact: {
+    contact: 'Contact',
     name: 'Name',
     email: 'Email',
     subject: 'Subject',

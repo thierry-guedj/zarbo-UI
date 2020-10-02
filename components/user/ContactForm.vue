@@ -2,7 +2,7 @@
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
       ><i class="material-icons md-24 mr-2">brush</i
-      >{{ $t('contact.register') }}</v-card-title
+      >{{ $t('contact.contact') }}</v-card-title
     >
     <v-alert
       v-if="form.errors.has('name')"
@@ -77,7 +77,7 @@
         :type="$t('contact.submit')"
         >{{ $t('contact.submit') }}</v-btn
       >
-      <v-btn @click="clear">{{ $t('contact.clear') }}</v-btn>
+      <v-btn @click="clear">{{ $t('contact.cancel') }}</v-btn>
     </div>
   </v-form>
 </template>

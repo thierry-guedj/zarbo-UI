@@ -225,6 +225,7 @@ export default {
     descriptionMaxLength: 'La description ne doit pas dépasser 3000 caractères',
   },
   contact: {
+    contact: 'Contact',
     name: 'Nom',
     email: 'Email',
     subject: 'Sujet',
