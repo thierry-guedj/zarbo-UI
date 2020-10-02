@@ -116,8 +116,7 @@
       </h4>
       <h5>
         <span class="mr-2 text-orange lighten-5"
-          >{{ $t('designCard.uploaded') }}
-          {{ design.created_at_dates.created_at | formatDate }}</span
+          >{{ $t('designCard.uploaded') }} {{ computedDate | formatDate }}</span
         >
       </h5>
     </div>
@@ -160,6 +159,19 @@ export default {
         day: 'numeric',
       })
     }, */
+    computedDate(prefix = '') {
+      return typeof time === 'object'
+        ? prefix +
+            this.design.created_at_dates.created_at.toLocaleDateString(
+              this.$i18n.locale,
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              }
+            )
+        : ''
+    },
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
