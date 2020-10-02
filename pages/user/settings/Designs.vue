@@ -1,5 +1,17 @@
 <template>
   <section>
+    <v-alert
+      v-model="alert"
+      border="left"
+      close-text="Close Alert"
+      class="success"
+      dark
+      dismissible
+    >
+      Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.
+
+      Vivamus consectetuer hendrerit lacus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur blandit mollis lacus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
+    </v-alert>
     <v-data-table
       :headers="headers"
       :items="designs"
@@ -206,6 +218,7 @@ export default {
       loading: true,
       search: '',
       dialogDelete: false,
+      alert: false,
     }
   },
 
@@ -233,6 +246,9 @@ beforeRouteUpdate(to, from, next) {
   },
   created() {
     this.initialize()
+    if(this.$route.params.upload) {
+      this.alert = true
+    }
   },
 
   methods: {

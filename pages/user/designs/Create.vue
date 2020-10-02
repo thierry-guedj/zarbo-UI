@@ -349,7 +349,7 @@ export default {
       this.form
         .put(`designs/${id}`)
         .then((res) => {
-          setTimeout(this.uploadDone(), 3000)
+          this.uploadDone()
         })
         .catch((err) => console.log(err.response))
     },
@@ -366,6 +366,9 @@ export default {
       setTimeout(
         this.$router.push({
           name: 'settings.designs',
+          params: {
+            upload: true,
+          },
         }),
         5000
       )
