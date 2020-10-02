@@ -224,4 +224,12 @@ export default {
     titleMaxLength: 'Le titre ne doit pas dépasser 120  caractères',
     descriptionMaxLength: 'La description ne doit pas dépasser 3000 caractères',
   },
+  contact: {
+    name: 'Nom',
+    email: 'Email',
+    subject: 'Sujet',
+    message: 'Message',
+    cancel: 'Annuler',
+    submit: 'Envoyer',
+  },
 }

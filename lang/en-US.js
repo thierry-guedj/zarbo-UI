@@ -222,4 +222,12 @@ export default {
     descriptionMaxLength: 'Description must be less than 3000 characters long',
     taglineMaxLength: 'Tagline must be less than 300 characters long',
   },
+  contact: {
+    name: 'Name',
+    email: 'Email',
+    subject: 'Subject',
+    message: 'Message',
+    cancel: 'Cancel',
+    submit: 'Submit',
+  },
 }

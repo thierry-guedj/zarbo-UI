@@ -44,6 +44,7 @@ import ResendForm from '@/components/auth/ResendForm.vue'
 import ResetEmail from '@/components/auth/ResetEmail.vue'
 import ConfirmDelete from '@/components/designs/ConfirmDelete.vue'
 import VerifyForm from '@/components/auth/VerifyForm.vue'
+import ContactForm from '@/components/user/ContactForm.vue'
 
 export default {
   name: 'BaseModal',
@@ -55,6 +56,7 @@ export default {
     ResetEmail,
     ConfirmDelete,
     VerifyForm,
+    ContactForm,
   },
   props: {
     value: {

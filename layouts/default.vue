@@ -201,12 +201,21 @@
           </v-menu>
         </template>
         <!-- End After Login -->
+
         <nuxt-link
           v-for="locale in availableLocales"
           :key="locale.code"
           :to="switchLocalePath(locale.code)"
           >{{ locale.name }}</nuxt-link
         >
+
+        <!--  <a
+          v-for="locale in availableLocales"
+          :key="locale.code"
+          href="#"
+          @click.prevent.stop="setLocaleCookie(locale.code)"
+          >{{ locale.name }}</a
+        > -->
       </v-app-bar>
       <div class="line"></div>
       <v-main>
@@ -220,8 +229,74 @@
           <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
         </div>
       </v-parallax>
-      <v-footer :absolute="!fixed" app>
+
+      <!--  <v-footer :absolute="!fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
+      </v-footer> -->
+
+      <v-footer :absolute="!fixed" app dark padless>
+        <v-col class="line" cols="12"> </v-col>
+        <v-row justify="center" no-gutters>
+          <v-btn
+            v-for="footerLink in footerLinks"
+            :key="footerLink.icon"
+            color="white"
+            text
+            rounded
+            class="my-2"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon size="24px" v-bind="attrs" v-on="on">
+                  {{ footerLink.icon }}
+                </v-icon>
+              </template>
+              <span>Tooltip</span>
+            </v-tooltip>
+          </v-btn>
+          <v-btn
+            color="white"
+            text
+            rounded
+            class="my-2"
+            @click="goTo('ContactForm', 'user')"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }"
+                ><v-icon size="24px" v-bind="attrs" v-on="on">
+                  mail
+                </v-icon>
+              </template>
+              <span>Tooltip</span>
+            </v-tooltip>
+          </v-btn>
+          <template v-if="!$auth.loggedIn">
+            <v-btn
+              color="white"
+              text
+              rounded
+              class="my-2"
+              @click="goTo('LoginForm', 'auth')"
+              ><v-icon size="24px">
+                face
+              </v-icon>
+            </v-btn>
+            <v-btn
+              color="white"
+              text
+              rounded
+              class="my-2"
+              @click.stop="goTo('RegisterForm', 'auth')"
+              ><v-icon size="24px">
+                brush
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-else> </template>
+          <v-col class="footer-bottom py-4 text-center white--text" cols="12">
+            {{ new Date().getFullYear() }} — <strong>Zarbo</strong>
+          </v-col>
+        </v-row>
       </v-footer>
       <client-only>
         <Cookie />
@@ -271,6 +346,26 @@ export default {
           route: this.localePath({ name: 'settings.profile' }),
         },
       ],
+      footerLinks: [
+        {
+          icon: 'mdi-apps',
+          title: this.$i18n.t('navigationDrawer.welcome'),
+          to: this.localePath({ name: 'index' }),
+          toolTip: 'Accueil',
+        },
+        {
+          icon: 'mdi-looks',
+          title: this.$i18n.t('navigationDrawer.artwork'),
+          to: this.localePath({ name: 'designs.search' }),
+          toolTip: 'Accueil',
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: this.$i18n.t('navigationDrawer.artists'),
+          to: this.localePath({ name: 'users.search' }),
+          toolTip: 'Accueil',
+        },
+      ],
 
       miniVariant: false,
       right: true,
@@ -278,18 +373,7 @@ export default {
       title: 'zarbo',
       bgImage: 'bg' + Math.floor(Math.random() * 39) + '.jpg',
       scrollPosition: null,
-      languages: [
-        {
-          id: 'en',
-          title: 'English',
-          flagSrc: 'https://cdn.vuetifyjs.com/images/flags/us.png',
-        },
-        {
-          id: 'kr',
-          title: 'Korean',
-          flagSrc: 'https://cdn.vuetifyjs.com/images/flags/kr.png',
-        },
-      ],
+      locale: this.$i18n.locale,
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -299,6 +383,15 @@ export default {
     } else {
       next()
     }
+  },
+
+  watch: {
+    locale(newVal) {
+      console.log(newVal)
+      // require(`moment/locale/${newVal}.js`)
+      this.$moment().locale(newVal)
+      this.$i18n.setLocale(newVal)
+    },
   },
   computed: {
     backgroundUrl() {
@@ -312,7 +405,11 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
-      // this.$moment().locale('fr')
+      console.log(this.locale)
+      if (this.$i18n.locale !== 'en') {
+        require(`moment/locale/${this.$i18n.locale}.js`)
+      }
+
       const url = `setLang/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
 
@@ -321,7 +418,6 @@ export default {
         const navClasses = navbar.classList
         if (document.documentElement.scrollTop >= 100) {
           if (navClasses.contains('bg-dark') === false) {
-            console.log('scrolll')
             navClasses.toggle('bg-dark')
             navClasses.toggle('bg-transparent')
           }
@@ -352,6 +448,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.footer-bottom {
+  background-color: #0f1219;
+}
 .layout {
   display: contents;
 }
@@ -475,6 +574,7 @@ footer {
   height: 10px;
   border-radius: 0px;
   background: whitesmoke;
+  padding: 0;
 }
 @media screen and (min-width: 320px) {
   html {
