@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import moment from 'moment'
 
 Vue.filter('capitalize', function (value) {
   if (!value) return ''
@@ -12,4 +13,10 @@ Vue.filter('truncate', function (text, length, clamp) {
   node.innerHTML = text
   const content = node.textContent
   return content.length > length ? content.slice(0, length) + clamp : content
+})
+
+Vue.filter('formatDate', function (value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY hh:mm')
+  }
 })

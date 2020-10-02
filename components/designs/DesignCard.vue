@@ -116,7 +116,8 @@
       </h4>
       <h5>
         <span class="mr-2 text-orange lighten-5"
-          >{{ $t('designCard.uploaded') }} {{ computedDate }}</span
+          >{{ $t('designCard.uploaded') }}
+          {{ design.created_at_dates.created_at | formatDate }}</span
         >
       </h5>
     </div>
@@ -151,14 +152,14 @@ export default {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
-    computedDate() {
+    /*  computedDate() {
       const date = this.design.created_at_dates.created_at
       return date.toLocaleDateString(this.$i18n.locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
       })
-    },
+    }, */
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
