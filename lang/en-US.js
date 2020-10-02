@@ -142,6 +142,7 @@ export default {
     tags: 'Tags',
     confirmDelete: 'Please confirm',
     cancel: 'Cancel',
+    uploadDoneMessage: 'Your artwork has been uploaded.',
   },
   create: {
     uploadArtwork: 'Upload an artwok',

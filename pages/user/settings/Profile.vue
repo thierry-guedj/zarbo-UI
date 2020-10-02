@@ -324,7 +324,7 @@ export default {
           this.uploading = false
           setTimeout(() => {
             this.$auth.fetchUser()
-          }, 3000)
+          }, 4000)
         })
     },
     handleAddress(data) {

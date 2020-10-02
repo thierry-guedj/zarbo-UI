@@ -338,7 +338,9 @@ export default {
     },
 
     update(id) {
-      this.uploadMessage(id)
+      // this.uploadMessage(id)
+      this.dialog_msg = this.$i18n.t('create.uploadSuccess')
+      this.successFunction(this.slimOptions.statusUploadSuccess)
       if (this.form.is_live === false) {
         this.form.is_live = 0
       } else {
@@ -353,10 +355,10 @@ export default {
         })
         .catch((err) => console.log(err.response))
     },
-    uploadMessage(id) {
+/*     uploadMessage(id) {
       this.dialog_msg = this.$i18n.t('create.uploadSuccess')
       this.successFunction(this.slimOptions.statusUploadSuccess)
-    },
+    }, */
     uploadDone() {
       this.form.busy = false
       this.loader = null
@@ -370,7 +372,7 @@ export default {
             upload: true,
           },
         }),
-        5000
+        1000
       )
     },
     submit() {

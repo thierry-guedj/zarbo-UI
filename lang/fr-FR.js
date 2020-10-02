@@ -143,6 +143,7 @@ export default {
     tags: 'Mots-clés',
     confirmDelete: 'Veuillez confirmer la suppression',
     cancel: 'Annuler',
+    uploadDoneMessage: 'Votre oeuvre a été téléchargée avec succès.',
   },
   create: {
     uploadArtwork: 'Publier une oeuvre',
