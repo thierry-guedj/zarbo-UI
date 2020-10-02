@@ -66,9 +66,7 @@ export default {
       fab: false,
     }
   },
-  mounted() {
-    this.$cookies.modal = true
-  },
+
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
     availableLocales() {
