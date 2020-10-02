@@ -160,18 +160,14 @@ export default {
       })
     }, */
     computedDate() {
-      const prefix = ''
-      return typeof time === 'object'
-        ? prefix +
-            this.design.created_at_dates.created_at.toLocaleDateString(
-              this.$i18n.locale,
-              {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              }
-            )
-        : ''
+      return this.design.created_at_dates.created_at.toLocaleDateString(
+        this.$i18n.locale,
+        {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }
+      )
     },
   },
   methods: {
