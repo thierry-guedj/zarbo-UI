@@ -22,7 +22,7 @@
         <section class="hero text-center text-white">
           <v-container>
             <v-row class="row-md-12">
-              <v-col class="col-md-3 avatarUser">
+              <v-col class="col-md-3 iconTitle">
                 <avatar
                   :username="user.name"
                   :src="user.avatars.large"
@@ -32,7 +32,7 @@
               </v-col>
               <v-divider class="mx-4" inset vertical></v-divider>
               <v-col class="col-md-8">
-                <p class="titleUser text-white">
+                <p class="titlePage text-white">
                   {{ $t('user.userPageTitle') }} {{ user.name }}
                 </p>
                 <p class="tagline text-white">
@@ -333,7 +333,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.titleUser {
+.titlePage {
   font-size: 44px;
   padding-top: 20px;
   margin-bottom: 30px;
@@ -345,9 +345,9 @@ export default {
 .about {
   font-size: 16px;
 }
-.avatarUser {
-  max-width: 280px;
-  min-width: 240px;
+.iconTitle {
+  max-width: 180px;
+  min-width: 180px;
 }
 .alert {
   text-align: center;

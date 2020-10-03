@@ -51,6 +51,12 @@
               </div>
 
               <div>
+                <p v-if="dialog_msg !== ''" class="alert alert-warning">
+                  {{ dialog_msg }}
+                </p>
+                <div v-if="uploading" class="text-success caption-sm mt-2">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </div>
                 <div class="progress">
                   <div
                     class="progress-bar progress-bar-success"
