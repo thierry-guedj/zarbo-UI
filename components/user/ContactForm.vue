@@ -88,7 +88,6 @@ import {
   maxLength,
   minLength,
   email,
-  sameAs,
 } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 export default {
