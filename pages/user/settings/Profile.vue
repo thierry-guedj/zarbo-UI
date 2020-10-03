@@ -151,6 +151,7 @@ export default {
     try {
       const id = $auth.user.id
       const user = await $axios.$get(`/user/${id}/findById`)
+      
       console.log(user)
 
       return { user: user.data }
