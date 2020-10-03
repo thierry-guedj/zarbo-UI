@@ -22,11 +22,6 @@ export default {
      */
     titleTemplate: 'Zarbo',
     title: 'Zarbo',
-    script: [
-      {
-        src: 'https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js',
-      },
-    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -102,7 +97,6 @@ export default {
     { src: '~plugins/infiniteloading', mode: 'client' },
     '~plugins/components.js',
     '~plugins/vue-masonry-css.js',
-    { src: '~plugins/vue-masonry', ssr: false },
     {
       src: './plugins/GoogleAnalytics.js',
       mode: 'client',
