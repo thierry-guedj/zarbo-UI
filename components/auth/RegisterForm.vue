@@ -76,6 +76,14 @@
         :error-messages="password_confirmationErrors"
         :label="$t('register.confirmPassword')"
         required
+        @input="$v.form.invitation_code.$touch()"
+        @blur="$v.form.invitation_code.$touch()"
+      ></v-text-field>
+      <v-text-field
+        v-model.trim="$v.form.invitation_code.$model"
+        :error-messages="invitation_codeErrors"
+        :label="$t('register.invitation_code')"
+        required
         type="password"
         @input="$v.form.password_confirmation.$touch()"
         @blur="$v.form.password_confirmation.$touch()"
@@ -145,6 +153,9 @@ export default {
           return vm.password
         }),
       },
+      invitation_code: {
+        required,
+      },
     },
   },
 
@@ -156,6 +167,7 @@ export default {
         password: '',
         password_confirmation: '',
         email: '',
+        invitation_code: '',
       }),
       loader: null,
       loadingSubmit: false,
@@ -169,7 +181,8 @@ export default {
         errors.push(this.$i18n.t('validation.nameMinLength'))
       !this.$v.form.name.maxLen &&
         errors.push(`Name must be at most 120 characters long`)
-      !this.$v.form.name.required && errors.push(this.$i18n.t('validation.nameRequired'))
+      !this.$v.form.name.required &&
+        errors.push(this.$i18n.t('validation.nameRequired'))
       return errors
     },
     /* usernameErrors() {
@@ -207,6 +220,13 @@ export default {
         errors.push(this.$i18n.t('validation.passwordConfirmRequired'))
       !this.$v.form.password_confirmation.sameAs &&
         errors.push(this.$i18n.t('validation.passwordMatch'))
+      return errors
+    },
+    invitation_codeErrors() {
+      const errors = []
+      if (!this.$v.form.invitation_code.$dirty) return errors
+      !this.$v.form.password_confirmation.required &&
+        errors.push(this.$i18n.t('validation.invitation_codeRequired'))
       return errors
     },
   },
