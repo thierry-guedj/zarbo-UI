@@ -145,8 +145,8 @@ export default {
   },
   mounted() {
     console.log(this.$i18n.locale)
-    
-   // this.$moment().locale('fr')
+
+    // this.$moment().locale('fr')
   },
 
   computed: {

@@ -98,7 +98,8 @@ export default {
   min-width: 80px;
 }
 .v-card__title {
-  font-size: 16px;
+  line-height: 1.5em;
+  font-size: 14px;
 }
 .v-card--reveal {
   align-items: center;

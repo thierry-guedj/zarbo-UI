@@ -118,7 +118,20 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify', '@nuxtjs/router'],
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/router',
+    '@nuxtjs/moment',
+  ],
+  moment: {
+    timezone: true,
+    locales: ['fr'],
+  },
+  /* moment: {
+    defaultLocale: 'fr',
+    locales: ['en'],
+  }, */
   /*
    ** Nuxt.js modules
    */
@@ -128,7 +141,6 @@ export default {
     '@nuxtjs/auth',
     'vue-social-sharing/nuxt',
     'nuxt-i18n',
-    'nuxt-moment',
   ],
   i18n: {
     locales: [
@@ -146,11 +158,11 @@ export default {
     lazy: true,
     langDir: 'lang/',
     defaultLocale: 'fr',
-    detectBrowserLanguage: {
-      useCookie: true,
+    /* detectBrowserLanguage: {
+      useCookie: false,
       cookieKey: 'i18n_redirected',
       onlyOnRoot: true,
-    },
+    }, */
   },
   auth: {
     strategies: {

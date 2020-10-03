@@ -212,7 +212,7 @@ export default {
           this.loader = null
         })
     }, */
- 
+
     onScroll(e) {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
@@ -222,7 +222,7 @@ export default {
       this.$vuetify.goTo(0)
     },
     goTo(to, folderName) {
-       this.hideModal()
+      this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),
         300
