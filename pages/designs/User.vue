@@ -351,6 +351,9 @@ export default {
   text-align: center;
   margin: auto;
 }
+.v-application a {
+  text-decoration: none;
+}
 .v-select__selections input {
   display: none;
 }
@@ -360,7 +363,7 @@ export default {
   text-align: left;
 }
 .search-control {
-  max-width: 75%;
+  max-width: 75% !important;
   margin-top: 25px;
   margin-bottom: 0;
 }

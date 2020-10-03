@@ -17,12 +17,12 @@
       <section class="hero text-white">
         <!-- <v-container> -->
         <v-row class="row-md-12">
-          <v-col class="col-md-3 text-center">
-            <img src="/artworkIcon.png" class="iconTitle ml-3 mr-2"
+          <v-col class="col-md-2 text-center">
+            <img src="/titleIcon.png" class="iconTitle ml-3 mr-2"
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-col class="col-md-8">
-            <p class="titleArtwork text-white">
+          <v-col class="col-md-9">
+            <p class="titlePage text-white">
               Oeuvres Publiées
             </p>
           </v-col>
@@ -297,27 +297,27 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
-    goTo(to, folderName) {
+    /* goTo(to, folderName) {
       // this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),
         300
       )
-    },
+    }, */
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.titleArtwork {
+.titlePage {
   font-size: 44px;
   padding-top: 20px;
   margin-bottom: 30px;
   line-height: 1em;
 }
 .iconTitle {
-  max-width: 280px;
-  min-width: 240px;
+  max-width: 180px;
+  min-width: 180px;
 }
 .alert {
   text-align: center;

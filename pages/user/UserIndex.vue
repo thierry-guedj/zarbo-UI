@@ -13,6 +13,22 @@
     >
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
+    <v-container class="p-0 m-0 row-designs">
+      <section class="hero text-white">
+        <!-- <v-container> -->
+        <v-row class="row-md-12">
+          <v-col class="col-md-2 text-center">
+            <img src="/artistsIcon.png" class="iconTitle ml-3 mr-2"
+          /></v-col>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-col class="col-md-9">
+            <p class="titlePage text-white">
+              Artistes membres
+            </p>
+          </v-col>
+        </v-row>
+        <!-- </v-container> -->
+      </section>
     <v-container fluid class="search-control">
       <form @submit.prevent="fetchData">
         <v-row
@@ -109,7 +125,7 @@
     <!-- Modal  -->
     <!-- <keep-alive> -->
     <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
-  </section>
+</v-container>  </section>
 </template>
 
 <script>
@@ -233,6 +249,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.titlePage {
+  font-size: 44px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+  line-height: 1em;
+}
+.iconTitle {
+  max-width: 180px;
+  min-width: 180px;
+}
 .v-application a {
   text-decoration: none;
 }
@@ -245,7 +271,9 @@ export default {
   text-align: left;
 }
 .search-control {
-  max-width: 75%;
+  max-width: 75% !important;
+  margin-top: 25px;
+  margin-bottom: 0;
 }
 .loader {
   position: fixed;
