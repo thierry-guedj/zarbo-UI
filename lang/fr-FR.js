@@ -82,6 +82,7 @@ export default {
     login: 'Se connecter',
     clear: 'Effacer',
     invitationCode: 'Code invitation',
+    contactUs: 'Vous pouvez nous contacter',
   },
   login: {
     login: 'Se connecter',

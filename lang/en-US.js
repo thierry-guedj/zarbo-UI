@@ -81,6 +81,7 @@ export default {
     login: 'Login',
     clear: 'Clear',
     invitationCode: 'Invitation code',
+    contactUs: 'Please, contact us',
   },
   login: {
     login: 'Login',
