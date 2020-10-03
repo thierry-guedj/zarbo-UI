@@ -233,7 +233,7 @@ export default {
     cancel: 'Annuler',
     submit: 'Envoyer',
   },
-  cookies: {
+  cookie: {
     label1:
       'Nous utilisons des cookies pour proposer nos services et pour analyses. Pour en savoir plus sur les cookies, vous pouvez consulter notre ',
     label2:

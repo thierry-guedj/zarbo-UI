@@ -4,12 +4,12 @@
       <v-row align="center">
         <v-col class="grow">
           <slot name="message">
-            {{ $t('cookies.label1') }}
+            {{ $t('cookie.label1') }}
             <nuxt-link
               class="cookie__link"
               :to="localePath({ name: 'privacy.policy' })"
-              >{{ $t('cookies.privacyPolicy') }}</nuxt-link
-            >{{ $t('cookies.label2') }}
+              >{{ $t('cookie.privacyPolicy') }}</nuxt-link
+            >{{ $t('cookie.label2') }}
           </slot>
         </v-col>
         <v-col class="shrink d-flex justify-end" cols="12" md="3">
@@ -28,19 +28,19 @@ export default {
     buttonTextAccept: {
       type: String,
       default() {
-        this.$i18n.t('cookies.accept')
+        this.$i18n.t('cookie.accept')
       },
     },
     buttonTextDeny: {
       type: String,
       default() {
-        this.$i18n.t('cookies.deny')
+        this.$i18n.t('cookie.deny')
       },
     },
     message: {
       type: String,
       default() {
-        this.$i18n.t('cookies.label1')
+        this.$i18n.t('cookie.label1')
       },
     },
     position: {
