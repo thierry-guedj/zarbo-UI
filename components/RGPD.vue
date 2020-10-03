@@ -638,7 +638,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'RGPD',
+}
 </script>
 
 <style lang="scss" scoped></style>
