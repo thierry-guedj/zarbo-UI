@@ -296,6 +296,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-application .text-h6 {
+  line-height: 1.3em;
+  font-weight: 200;
+}
+.v-application .text-subtitle-1 {
+  font-size: 12px;
+  line-height: 1.15em;
+  font-weight: inherit;
+  font-style: italic;
+}
 .container {
   text-align: left;
 }
