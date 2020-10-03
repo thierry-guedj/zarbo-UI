@@ -233,4 +233,13 @@ export default {
     cancel: 'Annuler',
     submit: 'Envoyer',
   },
+  cookies: {
+    label1:
+      'Nous utilisons des cookies pour proposer nos services et pour analyses. Pour en savoir plus sur les cookies, vous pouvez consulter notre ',
+    label2:
+      '. Cliquez sur Accepter pour une meilleure expérience sur notre site.',
+    privacyPolicy: 'Politique de confidentialité',
+    deny: 'Refuser',
+    accept: 'Accepter',
+  },
 }

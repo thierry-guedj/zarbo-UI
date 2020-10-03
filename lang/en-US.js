@@ -231,4 +231,12 @@ export default {
     cancel: 'Cancel',
     submit: 'Submit',
   },
+  cookies: {
+    label1:
+      'We use cookies to provide our services and for analytics and marketing. To find out more about our use of cookies, please see our ',
+    label2: '. Click accept for the best user experience on our app.',
+    privacyPolicy: 'Privacy Policy',
+    deny: 'Deny',
+    accept: 'Accept',
+  },
 }

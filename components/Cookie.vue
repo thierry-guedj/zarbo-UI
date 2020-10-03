@@ -4,13 +4,12 @@
       <v-row align="center">
         <v-col class="grow">
           <slot name="message">
-            We use cookies to provide our services and for analytics and
-            marketing. To find out more about our use of cookies, please see our
+            {{ $t('cookies.label1') }}
             <nuxt-link
               class="cookie__link"
               :to="localePath({ name: 'privacy.policy' })"
-              >Privacy Policy</nuxt-link
-            >. Click accept for the best user experience on our app.
+              >{{ $t('cookies.privacyPolicy') }}</nuxt-link
+            >{{ $t('cookies.label2') }}
           </slot>
         </v-col>
         <v-col class="shrink d-flex justify-end" cols="12" md="3">
@@ -24,20 +23,19 @@
 
 <script>
 export default {
-  name: 'CookieMessage',
+  name: 'Cookie',
   props: {
     buttonTextAccept: {
       type: String,
-      default: 'Accept',
+      default: this.$i18n.t('cookies.accept'),
     },
     buttonTextDeny: {
       type: String,
-      default: 'Deny',
+      default: this.$i18n.t('cookies.deny'),
     },
     message: {
       type: String,
-      default:
-        'We use cookies to provide our services and for analytics and marketing. To find out more about our use of cookies, please see our Privacy Policy. By continuing to browse our website, you agree to our use of cookies.',
+      default: this.$i18n.t('cookies.label1'),
     },
     position: {
       type: String,
