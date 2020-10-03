@@ -200,6 +200,26 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 } */
+h3 {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  padding: 20px;
+  font-size: 1.3rem;
+  margin: 0;
+ 
+  resize: horizontal;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #ccc;
+}
 .user-link {
   color: #546e7a;
 }

@@ -313,7 +313,7 @@ $portfolio-link-offset: 10px;
   padding: 0 0 2px 5px;
 
   font: {
-    size: 12px;
+    size: 1px;
   }
   text-transform: capitalize;
   letter-spacing: 2px;

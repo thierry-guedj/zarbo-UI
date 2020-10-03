@@ -79,7 +79,7 @@
         <v-card-text>
           <!-- Design Infos -->
           <div class="mb-6">
-            <p class="text-h3 text-left block">
+            <p class="text-h4 text-left block">
               {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0" inset></v-divider>
