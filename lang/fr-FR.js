@@ -223,6 +223,11 @@ export default {
     passwordMatch: 'Les 2 mots de passe ne correspondent pas',
     titleMaxLength: 'Le titre ne doit pas dépasser 120  caractères',
     descriptionMaxLength: 'La description ne doit pas dépasser 3000 caractères',
+    nameMaxLength: 'Votre nom ou pseudo ne doit pas dépasser 120 caractères',
+    subjectMaxLength: 'Le sujet ne doit pas dépasser 120 caractères',
+    subjectRequired: 'Le sujet est requis',
+    messageRequired: 'Le message est requis',
+    messageMaxLength: 'Le message ne doit pas dépasser 4000 caractères',
   },
   contact: {
     contact: 'Contact',

@@ -36,7 +36,7 @@
       >{{ $t('contact.emailSent') }}</v-alert
     >
     <div v-if="!this.$v.form.$model.successful">
-       <v-text-field
+      <v-text-field
         v-model.trim="$v.form.name.$model"
         :error-messages="nameErrors"
         :label="$t('contact.name')"
@@ -137,10 +137,7 @@ export default {
     nameErrors() {
       const errors = []
       if (!this.$v.form.name.$dirty) return errors
-      !this.$v.form.name.minLen &&
-        errors.push(this.$i18n.t('validation.nameMinLength'))
-      !this.$v.form.name.maxLen &&
-        errors.push(`Name must be at most 120 characters long`)
+      !this.$v.form.name.maxLen && errors.push('validation.nameMaxLength')
       !this.$v.form.name.required &&
         errors.push(this.$i18n.t('validation.nameRequired'))
       return errors

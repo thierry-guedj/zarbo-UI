@@ -25,16 +25,14 @@
 export default {
   name: 'Cookie',
   props: {
-    buttonTextAccept: {
+    /* buttonTextAccept: {
       type: String,
-      default() {
-        this.$i18n.t('cookie.accept')
-      },
+      default: 'Accept',
     },
     buttonTextDeny: {
       type: String,
       default() {
-        this.$i18n.t('cookie.deny')
+        this.$t('cookie.deny')
       },
     },
     message: {
@@ -42,7 +40,7 @@ export default {
       default() {
         this.$i18n.t('cookie.label1')
       },
-    },
+    }, */
     position: {
       type: String,
       default: 'top',
@@ -51,6 +49,9 @@ export default {
   data() {
     return {
       isOpen: false,
+      buttonTextAccept: this.$i18n.t('cookie.accept'),
+      buttonTextDeny: this.$i18n.t('cookie.deny'),
+      message: this.$i18n.t('cookie.label1'),
     }
   },
   computed: {
