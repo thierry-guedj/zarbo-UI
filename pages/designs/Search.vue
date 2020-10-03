@@ -25,11 +25,7 @@
             <p class="titlePage text-white">
               Oeuvres Publiées
             </p>
-          </v-col>
-        </v-row>
-        <!-- </v-container> -->
-      </section>
-      <v-container fluid class="search-control">
+            <v-container fluid class="search-control">
         <form @submit.prevent="fetchData">
           <v-row
             class="filters d-flex justify-content-between align-items-center"
@@ -87,6 +83,12 @@
           </v-row>
         </form>
       </v-container>
+          </v-col>
+
+        </v-row>
+        <!-- </v-container> -->
+      </section>
+      
       <v-container class="p-0 m-0 row-designs">
         <div v-if="searching" class="loader p-0">
           <Circle8></Circle8>
@@ -335,7 +337,7 @@ export default {
   text-align: left;
 }
 .search-control {
-  max-width: 75% !important;
+  max-width: 100% !important;
   margin-top: 25px;
   margin-bottom: 0;
 }
