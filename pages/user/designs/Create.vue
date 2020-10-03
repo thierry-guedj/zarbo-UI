@@ -1,78 +1,92 @@
 <template>
-<section>  <v-container class="p-0 m-0 row-designs">
+  <section>
+    <v-btn
+      v-show="fab"
+      v-scroll="onScroll"
+      fab
+      dark
+      fixed
+      bottom
+      right
+      color="accent"
+      @click="toTop"
+    >
+      <v-icon>keyboard_arrow_up</v-icon>
+    </v-btn>
+    <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
         <!-- <v-container> -->
         <v-row class="row-md-12">
           <v-col class="col-md-2 text-center">
-            <img src="/artworksIcon.png" class="iconTitle ml-3 mr-2"
+            <img src="/createIcon.png" class="iconTitle ml-3 mr-2"
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
             <p class="titlePage text-white">
-              Oeuvres Publiées
+              {{ $t('create.uploadArtwork') }}
             </p>
-            </v-col>
+          </v-col>
         </v-row>
       </section>
-        </v-container>
-  <v-container>
-    <v-row>
-      <v-col class="col-md-6 edit-info">
-        <v-card width="100%" class="mx-auto">
-          <v-card-title class="headline"
-            ><i class="material-icons md-24 mr-4">cloud_upload</i
-            >{{ $t('create.uploadArtwork') }}</v-card-title
-          >
+    </v-container>
+    <v-container>
+      <v-row>
+        <v-col class="col-md-6 edit-info">
+          <v-card width="100%" class="mx-auto">
+            <v-card-title class="headline"
+              ><i class="material-icons md-24 mr-4">cloud_upload</i
+              >{{ $t('create.uploadArtwork') }}</v-card-title
+            >
 
-          <v-card-text>
-            <div v-if="error" class="alert alert-danger">
-              <p>An error occurred during the upload process</p>
-              <p>{{ error }}</p>
-            </div>
+            <v-card-text>
+              <div v-if="error" class="alert alert-danger">
+                <p>An error occurred during the upload process</p>
+                <p>{{ error }}</p>
+              </div>
 
-            <div>
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-success"
-                  :style="{ width: uploadPercentage + '%' }"
-                ></div>
+              <div>
+                <div class="progress">
+                  <div
+                    class="progress-bar progress-bar-success"
+                    :style="{ width: uploadPercentage + '%' }"
+                  ></div>
+                </div>
+                <slim-cropper :options="slimOptions" class="text-black">
+                  <input type="file" name="image" />
+                </slim-cropper>
+                <div id="progress" class="progress">
+                  <div
+                    class="progress-bar progress-bar-success"
+                    :style="{ width: uploadPercentage + '%' }"
+                  ></div>
+                </div>
+                <p v-if="dialog_msg !== ''" class="alert alert-warning">
+                  {{ dialog_msg }}
+                </p>
+                <div v-if="uploading" class="text-success caption-sm mt-2">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </div>
               </div>
-              <slim-cropper :options="slimOptions" class="text-black">
-                <input type="file" name="image" />
-              </slim-cropper>
-              <div id="progress" class="progress">
-                <div
-                  class="progress-bar progress-bar-success"
-                  :style="{ width: uploadPercentage + '%' }"
-                ></div>
-              </div>
-              <p v-if="dialog_msg !== ''" class="alert alert-warning">
-                {{ dialog_msg }}
-              </p>
-              <div v-if="uploading" class="text-success caption-sm mt-2">
-                <i class="fas fa-spinner fa-spin"></i>
-              </div>
-            </div>
 
-            <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
+              <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
              
               <div class="loader">
                 <Circle8></Circle8>
               </div>
             </div> -->
-          </v-card-text>
-          <div class="upload-para mt-2 ml-4">
-            <p class="font-14 fw-400">
-              {{ $t('create.uploadNotice') }}
-            </p>
-          </div>
-        </v-card>
-      </v-col>
-      <v-col class="col-md-5 edit-info ml-2">
-        <v-card flat>
-          <v-card-text>
-            <form class="auth-form" @submit.prevent="submit">
-              <!-- <v-alert
+            </v-card-text>
+            <div class="upload-para mt-2 ml-4">
+              <p class="font-14 fw-400">
+                {{ $t('create.uploadNotice') }}
+              </p>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col class="col-md-5 edit-info ml-2">
+          <v-card flat>
+            <v-card-text>
+              <form class="auth-form" @submit.prevent="submit">
+                <!-- <v-alert
                   v-if="this.$v.form.$model.successful"
                   color="#388E3C"
                   dark
@@ -81,31 +95,31 @@
                   :form="form"
                   >Design successfully updated</v-alert
                 > -->
-              <v-text-field
-                v-model.trim="$v.form.title.$model"
-                :error-messages="titleErrors"
-                :counter="120"
-                :label="$t('create.title')"
-                field="title"
-                outlined
-                class="mb-1"
-                @input="$v.form.title.$touch()"
-                @blur="$v.form.title.$touch()"
-              ></v-text-field>
-              <has-error :form="form" field="title"></has-error>
-              <v-textarea
-                v-model.trim="$v.form.description.$model"
-                :error-messages="descriptionErrors"
-                :counter="3000"
-                :label="$t('create.description')"
-                outlined
-                class="mb-1"
-                field="description"
-                @input="$v.form.description.$touch()"
-                @blur="$v.form.description.$touch()"
-              ></v-textarea>
-              <has-error :form="form" field="description"></has-error>
-              <!--  <v-textarea
+                <v-text-field
+                  v-model.trim="$v.form.title.$model"
+                  :error-messages="titleErrors"
+                  :counter="120"
+                  :label="$t('create.title')"
+                  field="title"
+                  outlined
+                  class="mb-1"
+                  @input="$v.form.title.$touch()"
+                  @blur="$v.form.title.$touch()"
+                ></v-text-field>
+                <has-error :form="form" field="title"></has-error>
+                <v-textarea
+                  v-model.trim="$v.form.description.$model"
+                  :error-messages="descriptionErrors"
+                  :counter="3000"
+                  :label="$t('create.description')"
+                  outlined
+                  class="mb-1"
+                  field="description"
+                  @input="$v.form.description.$touch()"
+                  @blur="$v.form.description.$touch()"
+                ></v-textarea>
+                <has-error :form="form" field="description"></has-error>
+                <!--  <v-textarea
                   v-model.trim="$v.form.description"
                   :counter="155"
                   :label="$t('editDesign.description')"
@@ -113,48 +127,48 @@
                   class="mb-1"
                   field="description"
                 ></v-textarea> -->
-              <p class="tags-notice">{{ $t('create.tagsNotice') }}</p>
-              <p class="tags-notice">{{ $t('create.tagsNotice2') }}</p>
-              <client-only>
-                <input-tag
-                  v-model="form.tags"
-                  :tags="form.tags"
-                  field="tags"
-                  class="mb-1"
-                  :placeholder="$t('create.tagsLabel')"
-                  on-paste-delimiter=","
-                  outlined
-                ></input-tag>
-              </client-only>
-              <v-checkbox
-                id="is_live"
-                v-model="form.is_live"
-                field="is_live"
-                :label="$t('create.publishDesign')"
-              ></v-checkbox>
+                <p class="tags-notice">{{ $t('create.tagsNotice') }}</p>
+                <p class="tags-notice">{{ $t('create.tagsNotice2') }}</p>
+                <client-only>
+                  <input-tag
+                    v-model="form.tags"
+                    :tags="form.tags"
+                    field="tags"
+                    class="mb-1"
+                    :placeholder="$t('create.tagsLabel')"
+                    on-paste-delimiter=","
+                    outlined
+                  ></input-tag>
+                </client-only>
+                <v-checkbox
+                  id="is_live"
+                  v-model="form.is_live"
+                  field="is_live"
+                  :label="$t('create.publishDesign')"
+                ></v-checkbox>
 
-              <v-spacer class="mb-3" />
-              <v-btn :disabled="uploading" @click="clear">{{
-                $t('create.clear')
-              }}</v-btn>
-              <v-btn
-                class="slim-btn2 slim-btn-upload2"
-                title="Upload"
-                type="button"
-                data-action="upload"
-                style="opacity: 1;"
-                :loading="loadingSubmit"
-                :disabled="!uploadButton"
-                @click="submit"
-                >{{ $t('create.upload') }}</v-btn
-              >
-            </form>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-</section>
+                <v-spacer class="mb-3" />
+                <v-btn :disabled="uploading" @click="clear">{{
+                  $t('create.clear')
+                }}</v-btn>
+                <v-btn
+                  class="slim-btn2 slim-btn-upload2"
+                  title="Upload"
+                  type="button"
+                  data-action="upload"
+                  style="opacity: 1;"
+                  :loading="loadingSubmit"
+                  :disabled="!uploadButton"
+                  @click="submit"
+                  >{{ $t('create.upload') }}</v-btn
+                >
+              </form>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </section>
 </template>
 
 <script>
@@ -223,6 +237,7 @@ export default {
       design: null,
       successFunction: null,
       uploadIsOk: false,
+      fab: false,
     }
   },
   computed: {
@@ -362,7 +377,7 @@ export default {
         })
         .catch((err) => console.log(err.response))
     },
-/*     uploadMessage(id) {
+    /*     uploadMessage(id) {
       this.dialog_msg = this.$i18n.t('create.uploadSuccess')
       this.successFunction(this.slimOptions.statusUploadSuccess)
     }, */
@@ -414,11 +429,29 @@ export default {
 
       return slug
     },
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.titlePage {
+  font-size: 44px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+  line-height: 1em;
+}
+.iconTitle {
+  max-width: 180px;
+  min-width: 180px;
+}
 .vue-input-tag-wrapper {
   background-color: transparent !important;
   border-radius: 4px !important;
