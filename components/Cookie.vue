@@ -27,15 +27,21 @@ export default {
   props: {
     buttonTextAccept: {
       type: String,
-      default: this.$i18n.t('cookies.accept'),
+      default() {
+        this.$i18n.t('cookies.accept')
+      },
     },
     buttonTextDeny: {
       type: String,
-      default: this.$i18n.t('cookies.deny'),
+      default() {
+        this.$i18n.t('cookies.deny')
+      },
     },
     message: {
       type: String,
-      default: this.$i18n.t('cookies.label1'),
+      default() {
+        this.$i18n.t('cookies.label1')
+      },
     },
     position: {
       type: String,
