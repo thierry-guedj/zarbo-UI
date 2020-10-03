@@ -256,7 +256,6 @@ export default {
 }
 .container {
   max-width: 100%;
-  padding: 0;
   text-align: left;
 }
 .search-control {
@@ -268,8 +267,5 @@ export default {
   position: fixed;
   top: 50%;
   left: 50%;
-}
-.col-md-2 {
-  padding: 0;
 }
 </style>
