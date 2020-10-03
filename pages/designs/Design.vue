@@ -299,6 +299,7 @@ export default {
 .v-application .text-h6 {
   line-height: 1.3em;
   font-weight: 200;
+  padding-top: 10px;
 }
 .v-application .text-subtitle-1 {
   font-size: 12px;
