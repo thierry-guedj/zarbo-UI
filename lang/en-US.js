@@ -46,6 +46,7 @@ export default {
     registered: 'Registered',
   },
   search: {
+    publishedArtworks: 'Published artworks',
     orderBy: 'Order by',
     hasComments: 'Has comments',
     search: 'Search',

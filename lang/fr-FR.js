@@ -47,6 +47,7 @@ export default {
     registered: 'Enregistré le ',
   },
   search: {
+    publishedArtworks: 'Oeuvres publiées',
     orderBy: 'Trier par',
     hasComments: 'Avec commentaires',
     search: 'Recherche',
