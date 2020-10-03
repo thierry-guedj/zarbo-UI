@@ -83,12 +83,7 @@
 </template>
 
 <script>
-import {
-  required,
-  maxLength,
-  minLength,
-  email,
-} from 'vuelidate/lib/validators'
+import { required, maxLength, minLength, email } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 export default {
   name: 'ContactForm',
@@ -198,7 +193,9 @@ export default {
       if (!this.$v.form.$anyError) {
         console.log(this.form.username)
         this.form
-          .get(`/contact`)
+          .get(
+            `/contact/${this.form.name}/${this.form.email}/${this.form.subject}/${this.form.message}`
+          )
           .then((res) => {})
           .catch((e) => {
             this.form.errors.set(e.response.data.errors)
