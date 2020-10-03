@@ -26,24 +26,24 @@
               Artistes membres
             </p>
             <v-container fluid class="search-control">
-      <form @submit.prevent="fetchData">
-        <v-row
-          class="filters d-flex justify-content-between align-items-center"
-        >
-          <v-col cols="auto"
-            ><v-select
-              v-model="filters.orderBy"
-              :items="itemsOrderBy"
-              item-text="title"
-              item-value="value"
-              :label="$t('search.orderBy')"
-              outlined
-              width="250px"
-              @change="fetchData"
-            ></v-select
-          ></v-col>
+              <form @submit.prevent="fetchData">
+                <v-row
+                  class="filters d-flex justify-content-between align-items-center"
+                >
+                  <v-col cols="auto"
+                    ><v-select
+                      v-model="filters.orderBy"
+                      :items="itemsOrderBy"
+                      item-text="title"
+                      item-value="value"
+                      :label="$t('search.orderBy')"
+                      outlined
+                      width="250px"
+                      @change="fetchData"
+                    ></v-select
+                  ></v-col>
 
-          <!-- <v-col cols="auto" class="d-flex align-items-center">
+                  <!-- <v-col cols="auto" class="d-flex align-items-center">
             <v-checkbox
               id="has_team"
               v-model="filters.has_team"
@@ -55,78 +55,79 @@
               @change="fetchData"
             ></v-checkbox>
           </v-col> -->
-          <v-col>
-            <v-text-field
-              id="q"
-              v-model="filters.q"
-              field="q"
-              class="combobox"
-              outlined
-              @input="fetchData"
-            >
-              <template v-slot:append>
-                <v-btn
-                  :disabled="searching"
-                  class="searchBtn"
-                  height="auto"
-                  text
-                  :loading="searching"
-                  type="submit"
-                >
-                  <v-icon>mdi-magnify</v-icon>
-                  {{ $t('search.search') }}
-                </v-btn>
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-row>
-      </form>
-    </v-container>
+                  <v-col>
+                    <v-text-field
+                      id="q"
+                      v-model="filters.q"
+                      field="q"
+                      class="combobox"
+                      outlined
+                      @input="fetchData"
+                    >
+                      <template v-slot:append>
+                        <v-btn
+                          :disabled="searching"
+                          class="searchBtn"
+                          height="auto"
+                          text
+                          :loading="searching"
+                          type="submit"
+                        >
+                          <v-icon>mdi-magnify</v-icon>
+                          {{ $t('search.search') }}
+                        </v-btn>
+                      </template>
+                    </v-text-field>
+                  </v-col>
+                </v-row>
+              </form>
+            </v-container>
           </v-col>
         </v-row>
         <!-- </v-container> -->
       </section>
-    
-    <v-container class="p-0 m-0 row-designs">
-      <div v-if="searching" class="loader p-0">
-        <Circle8></Circle8>
-      </div>
-      <div v-else class="pt-8 pl-0 pb-6 pr-0">
-        <template v-if="(!users.length)" class="pb-6">
-          <v-alert border="left" color="#0f1219" dark>
-            No results found
-          </v-alert>
-        </template>
-        <template v-else id="row-designs">
-          <v-row
-            transition-duration="0.3s"
-            item-selector=".item"
-            class="mb-6 row-design"
-            justify="center"
-            no-gutters
-          >
-            <lazy-component
-              v-for="(user, i) in users"
-              :key="`${i}-${user.id}`"
-              :user="user"
-            ></lazy-component>
-          </v-row>
-          <infinite-loading
-            ref="infiniteLoading"
-            slot="append"
-            :identifier="identifier"
-            spinner="ring-loader"
-            force-use-infinite-wrapper="row-designs"
-            @infinite="infiniteHandler"
-          >
-          </infinite-loading>
-        </template>
-      </div>
+
+      <v-container class="p-0 m-0 row-designs">
+        <div v-if="searching" class="loader p-0">
+          <Circle8></Circle8>
+        </div>
+        <div v-else class="pt-8 pl-0 pb-6 pr-0">
+          <template v-if="(!users.length)" class="pb-6">
+            <v-alert border="left" color="#0f1219" dark>
+              No results found
+            </v-alert>
+          </template>
+          <template v-else id="row-designs">
+            <v-row
+              transition-duration="0.3s"
+              item-selector=".item"
+              class="mb-6 row-design"
+              justify="center"
+              no-gutters
+            >
+              <lazy-component
+                v-for="(user, i) in users"
+                :key="`${i}-${user.id}`"
+                :user="user"
+              ></lazy-component>
+            </v-row>
+            <infinite-loading
+              ref="infiniteLoading"
+              slot="append"
+              :identifier="identifier"
+              spinner="ring-loader"
+              force-use-infinite-wrapper="row-designs"
+              @infinite="infiniteHandler"
+            >
+            </infinite-loading>
+          </template>
+        </div>
+      </v-container>
+      <!-- Modal  -->
+      <!-- <keep-alive> -->
+      <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
     </v-container>
-    <!-- Modal  -->
-    <!-- <keep-alive> -->
-    <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
-</v-container>  </section>
+  </section>
 </template>
 
 <script>

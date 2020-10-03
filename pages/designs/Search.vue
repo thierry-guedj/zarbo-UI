@@ -157,12 +157,12 @@
               slot="append"
               :identifier="identifier"
               spinner="ring-loader"
-              no-more="Plus de résultat" 
-              no-results="Pas de résultat" 
+              no-more="Plus de résultat"
+              no-results="Pas de résultat"
               force-use-infinite-wrapper="row-designs"
               @infinite="infiniteHandler"
             >
-              <div slot="no-more">Plus de </div>
+              <div slot="no-more">Plus de</div>
               <div slot="no-results">Pas de résultat</div>
             </infinite-loading>
           </template>

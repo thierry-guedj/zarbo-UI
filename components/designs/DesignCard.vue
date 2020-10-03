@@ -205,11 +205,11 @@ h3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+
   padding: 20px;
   font-size: 1.3rem;
   margin: 0;
- 
+
   resize: horizontal;
 }
 

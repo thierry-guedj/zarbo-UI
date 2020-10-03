@@ -25,6 +25,12 @@
             <p class="titlePage text-white">
               {{ $t('create.uploadArtwork') }}
             </p>
+            <p>
+              Vous pouvez, ci-dessous, séléctionner une image sur votre
+              ordinateur ou la déposer directement. Vous pouvez compléter
+              également les informations suivantes: titre, description,
+              mots-clé.
+            </p>
           </v-col>
         </v-row>
       </section>
@@ -33,10 +39,10 @@
       <v-row>
         <v-col class="col-md-6 edit-info">
           <v-card width="100%" class="mx-auto">
-            <v-card-title class="headline"
+            <!--  <v-card-title class="headline"
               ><i class="material-icons md-24 mr-4">cloud_upload</i
               >{{ $t('create.uploadArtwork') }}</v-card-title
-            >
+            > -->
 
             <v-card-text>
               <div v-if="error" class="alert alert-danger">
