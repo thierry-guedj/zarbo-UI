@@ -29,7 +29,7 @@
               Vous pouvez, ci-dessous, séléctionner une image sur votre
               ordinateur ou la déposer directement. Vous pouvez compléter
               également les informations suivantes: titre, description,
-              mots-clé...
+              mots-clé.
             </p>
           </v-col>
         </v-row>
