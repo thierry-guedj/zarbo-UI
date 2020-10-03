@@ -198,7 +198,7 @@ export default {
       if (!this.$v.form.$anyError) {
         console.log(this.form.username)
         this.form
-          .post(`/contact`)
+          .get(`/contact`)
           .then((res) => {})
           .catch((e) => {
             this.form.errors.set(e.response.data.errors)
