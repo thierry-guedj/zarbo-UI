@@ -310,10 +310,10 @@ $portfolio-link-offset: 10px;
   position: relative;
 
   margin: 0 0 20px 0;
-  padding: 15px 0;
+  padding: 0 0 2px 5px;
 
   font: {
-    size: 14px;
+    size: 12px;
   }
   text-transform: capitalize;
   letter-spacing: 2px;
