@@ -42,19 +42,6 @@
                       @change="fetchData"
                     ></v-select
                   ></v-col>
-
-                  <!-- <v-col cols="auto" class="d-flex align-items-center">
-            <v-checkbox
-              id="has_team"
-              v-model="filters.has_team"
-              field="has_team"
-              label="By team"
-              true-value="1"
-              false-value="0"
-              class="mr-3"
-              @change="fetchData"
-            ></v-checkbox>
-          </v-col> -->
                   <v-col>
                     <v-text-field
                       id="q"
@@ -84,51 +71,49 @@
             </v-container>
           </v-col>
         </v-row>
-        <!-- </v-container> -->
       </section>
-
-      <v-container class="p-0 m-0 row-designs">
-        <div v-if="searching" class="loader p-0">
-          <Circle8></Circle8>
-        </div>
-        <div v-else class="pt-8 pl-0 pb-6 pr-0">
-          <template v-if="(!users.length)" class="pb-6">
-            <v-alert border="left" color="#0f1219" dark>
-              No results found
-            </v-alert>
-          </template>
-          <template v-else id="row-designs">
-            <v-row
-              transition-duration="0.3s"
-              item-selector=".item"
-              class="mb-6 row-design"
-              justify="center"
-              no-gutters
-            >
-              <lazy-component
-                v-for="(user, i) in users"
-                :key="`${i}-${user.id}`"
-                :user="user"
-              ></lazy-component>
-            </v-row>
-            <infinite-loading
-              ref="infiniteLoading"
-              slot="append"
-              :identifier="identifier"
-              spinner="ring-loader"
-              force-use-infinite-wrapper="row-designs"
-              @infinite="infiniteHandler"
-            >
-              <div slot="no-more">Plus de résultat</div>
-              <div slot="no-results">Pas de résultat</div>                         
-            </infinite-loading>
-          </template>
-        </div>
-      </v-container>
-      <!-- Modal  -->
-      <!-- <keep-alive> -->
-      <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
     </v-container>
+    <v-container class="p-0 m-0 row-designs">
+      <div v-if="searching" class="loader p-0">
+        <Circle8></Circle8>
+      </div>
+      <div v-else class="pt-8 pl-0 pb-6 pr-0">
+        <template v-if="(!users.length)" class="pb-6">
+          <v-alert border="left" color="#0f1219" dark>
+            No results found
+          </v-alert>
+        </template>
+        <template v-else id="row-designs">
+          <v-row
+            transition-duration="0.3s"
+            item-selector=".item"
+            class="mb-6 row-design"
+            justify="center"
+            no-gutters
+          >
+            <lazy-component
+              v-for="(user, i) in users"
+              :key="`${i}-${user.id}`"
+              :user="user"
+            ></lazy-component>
+          </v-row>
+          <infinite-loading
+            ref="infiniteLoading"
+            slot="append"
+            :identifier="identifier"
+            spinner="ring-loader"
+            force-use-infinite-wrapper="row-designs"
+            @infinite="infiniteHandler"
+          >
+            <div slot="no-more">Plus de résultat</div>
+            <div slot="no-results">Pas de résultat</div>
+          </infinite-loading>
+        </template>
+      </div>
+    </v-container>
+    <!-- Modal  -->
+    <!-- <keep-alive> -->
+    <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
   </section>
 </template>
 

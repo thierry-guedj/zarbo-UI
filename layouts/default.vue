@@ -248,8 +248,8 @@
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-icon size="24px" v-bind="attrs" v-on="on">
-                  {{ footerLink.icon }} 
-                </v-icon>{{ footerLink.title }}
+                  {{ footerLink.icon }} </v-icon
+                >{{ footerLink.title }}
               </template>
               <span>Tooltip</span>
             </v-tooltip>
@@ -263,9 +263,8 @@
           >
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }"
-                ><v-icon size="24px" v-bind="attrs" v-on="on">
-                  mail
-                </v-icon>{{ $t('footer.contact') }}
+                ><v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
+                >{{ $t('footer.contact') }}
               </template>
               <span>Tooltip</span>
             </v-tooltip>
@@ -290,7 +289,6 @@
               ><v-icon size="24px">
                 brush
               </v-icon>
-             
             </v-btn>
           </template>
           <template v-else> </template>
