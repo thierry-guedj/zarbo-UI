@@ -486,7 +486,7 @@ export default {
   color: black !important;
 }
 .container {
-  // max-width: 100% !important;
+  max-width: 100% !important;
   text-align: left;
 }
 .loader {
