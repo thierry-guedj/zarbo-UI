@@ -32,8 +32,6 @@
     "vue-infinite-loading": "^2.4.5",
     "vue-input-tag": "^2.0.7",
     "vue-loading-spinner": "^1.0.11",
-    "vue-masonry": "^0.11.8",
-    "vue-masonry-wall": "^0.2.5",
     "vue-social-sharing": "^3.0.0-beta.11",
     "vue-spinner": "^1.0.4",
     "vue2-google-maps-withscopedautocomp": "^0.12.1",

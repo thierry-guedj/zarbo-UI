@@ -25,11 +25,7 @@
             <p class="titlePage text-white">
               Artistes membres
             </p>
-          </v-col>
-        </v-row>
-        <!-- </v-container> -->
-      </section>
-    <v-container fluid class="search-control">
+            <v-container fluid class="search-control">
       <form @submit.prevent="fetchData">
         <v-row
           class="filters d-flex justify-content-between align-items-center"
@@ -86,6 +82,11 @@
         </v-row>
       </form>
     </v-container>
+          </v-col>
+        </v-row>
+        <!-- </v-container> -->
+      </section>
+    
     <v-container class="p-0 m-0 row-designs">
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>

@@ -1,14 +1,20 @@
 <template>
-  <!-- <section class="hero text-center mb-4 text-white">
-      <v-container>
-        <h1 class="font-28 fw-600 text-uppercase text-white">
-          {{ $t('editDesign.updateDesignInfo') }}
-        </h1>
-      </v-container>
-    </section>
-    End Hero -->
-
-  <!-- Upload Shot -->
+<section>  <v-container class="p-0 m-0 row-designs">
+      <section class="hero text-white">
+        <!-- <v-container> -->
+        <v-row class="row-md-12">
+          <v-col class="col-md-2 text-center">
+            <img src="/artworksIcon.png" class="iconTitle ml-3 mr-2"
+          /></v-col>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-col class="col-md-9">
+            <p class="titlePage text-white">
+              Oeuvres Publiées
+            </p>
+            </v-col>
+        </v-row>
+      </section>
+        </v-container>
   <v-container>
     <v-row>
       <v-col class="col-md-6 edit-info">
@@ -148,6 +154,7 @@
       </v-col>
     </v-row>
   </v-container>
+</section>
 </template>
 
 <script>
