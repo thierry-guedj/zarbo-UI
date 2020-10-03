@@ -27,6 +27,17 @@
       {{ form.errors.get('email') }}
     </v-alert>
     <v-alert
+      v-if="form.errors.has('invitation_code')"
+      color="#e53935"
+      dark
+      icon="person_add_disabled"
+      border="right"
+      :form="form"
+      class="mb-2"
+    >
+      {{ form.errors.get('invitation_code') }}
+    </v-alert>
+    <v-alert
       v-if="this.$v.form.$model.successful"
       class="alert-success"
       dark
@@ -82,7 +93,7 @@
       <v-text-field
         v-model.trim="$v.form.invitation_code.$model"
         :error-messages="invitation_codeErrors"
-        :label="$t('register.invitation_code')"
+        :label="$t('register.invitationCode')"
         required
         type="password"
         @input="$v.form.password_confirmation.$touch()"

@@ -80,6 +80,7 @@ export default {
     haveAccount: 'Already an account ?',
     login: 'Login',
     clear: 'Clear',
+    invitationCode: 'Invitation code',
   },
   login: {
     login: 'Login',

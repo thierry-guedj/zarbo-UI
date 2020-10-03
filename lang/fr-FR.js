@@ -81,6 +81,7 @@ export default {
     haveAccount: 'Déjà membre ?',
     login: 'Se connecter',
     clear: 'Effacer',
+    invitationCode: 'Code invitation',
   },
   login: {
     login: 'Se connecter',
