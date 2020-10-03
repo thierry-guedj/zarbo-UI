@@ -7,9 +7,8 @@
       class="alert-success"
       dismissible
     >
-    {{ $t('settingsDesigns.uploadDoneMessage') }}
-    
- </v-alert>
+      {{ $t('settingsDesigns.uploadDoneMessage') }}
+    </v-alert>
     <v-data-table
       :headers="headers"
       :items="designs"
@@ -91,14 +90,14 @@
       </template>
       <template v-slot:item.image="{ item }">
         <div class="px-2 my-2 align-middle">
-          <nuxt-link :to="{name: 'design.details', params: { id: item.id} }"
-          <v-img
-            :src="item.images.thumbnail"
-            :lazy-src="item.images.minithumbnail"
-            :alt="item.title"
-            max-width="80px"
-          >
-          </v-img></nuxt-link>
+          <nuxt-link :to="{ name: 'design.details', params: { id: item.id } }">
+            <img
+              :src="item.images.thumbnail"
+              :lazy-src="item.images.minithumbnail"
+              :alt="item.title"
+              max-width="80px"
+            />
+          </nuxt-link>
         </div>
       </template>
       <template v-slot:item.is_live="{ item }">
@@ -235,16 +234,16 @@ export default {
       val || this.close()
     },
   },
-beforeRouteUpdate(to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     if (from.params.upload) {
       this.snackbar = true
     }
-  
-    next();
+
+    next()
   },
   created() {
     this.initialize()
-    if(this.$route.params.upload) {
+    if (this.$route.params.upload) {
       this.alert = true
     }
   },

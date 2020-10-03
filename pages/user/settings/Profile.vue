@@ -8,107 +8,116 @@
       <alert-success :form="form">{{
         $t('profile.profileUpdated')
       }}</alert-success>
-      <v-row class="row-md-12">
-        <v-col class="col-md-4 uploadAvatar">
-          <div>
-            <slim-cropper
-              :options="slimOptions"
-              class="text-black slim-avatar"
-              data-did-upLoad="imageUpload"
-              data-did-init="slimInitialised"
-              data-download="true"
-            >
-              <img :src="$auth.user.avatars.large" />
-              <input type="file" name="image" />
-            </slim-cropper>
-            <div id="progress" class="progress">
-              <div
-                class="progress-bar progress-bar-success"
-                :style="{ width: uploadPercentage + '%' }"
-              ></div>
-            </div>
-            <p v-if="dialog_msg !== ''" class="alert alert-warning">
-              {{ dialog_msg }}
-            </p>
-            <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
+      <v-container class="p-0 m-0 row-designs">
+        <section class="hero text-center text-white">
+          <v-container>
+            <v-row class="row-md-12">
+              <v-col class="col-md-4 uploadAvatar">
+                <div>
+                  <slim-cropper
+                    :options="slimOptions"
+                    class="text-black slim-avatar"
+                    data-did-upLoad="imageUpload"
+                    data-did-init="slimInitialised"
+                    data-download="true"
+                  >
+                    <img :src="$auth.user.avatars.large" />
+                    <input type="file" name="image" />
+                  </slim-cropper>
+                  <div id="progress" class="progress">
+                    <div
+                      class="progress-bar progress-bar-success"
+                      :style="{ width: uploadPercentage + '%' }"
+                    ></div>
+                  </div>
+                  <p v-if="dialog_msg !== ''" class="alert alert-warning">
+                    {{ dialog_msg }}
+                  </p>
+                  <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
               <i class="fas fa-spinner fa-spin"></i>
               <div class="loader">
                 <Circle8></Circle8>
               </div>
             </div> -->
-            <v-spacer class="mb-3" />
-            <v-btn
-              title="Upload"
-              type="button"
-              data-action="upload"
-              style="opacity: 1;"
-              :loading="loadingSubmit"
-              :disabled="disabledButton"
-              @click="submit"
-              >{{ $t('profile.updateAvatar') }}</v-btn
-            >
-          </div>
-        </v-col>
-        <v-col class="col-md-8">
-          <form class="auth-form avatar" @submit.prevent="submit">
-            <input type="hidden" name="_method" value="PUT" />
-            <v-text-field
-              v-model.trim="$v.form.name.$model"
-              :error-messages="nameErrors"
-              :counter="120"
-              :form="form"
-              field="name"
-              :label="$t('profile.name')"
-              outlined
-              class="mb-1"
-              @input="$v.form.name.$touch()"
-              @blur="$v.form.name.$touch()"
-            ></v-text-field>
-            <has-error :form="form" field="name"></has-error>
-            <v-text-field
-              v-model.trim="$v.form.tagline.$model"
-              :error-messages="taglineErrors"
-              :counter="300"
-              :label="$t('profile.tagline')"
-              :form="form"
-              field="tagline"
-              @input="$v.form.tagline.$touch()"
-              @blur="$v.form.tagline.$touch()"
-            ></v-text-field>
-            <has-error :form="form" field="tagline"></has-error>
-            <v-textarea
-              v-model.trim="$v.form.about.$model"
-              :error-messages="aboutErrors"
-              :counter="3000"
-              :form="form"
-              :placeholder="$t('profile.someInfo')"
-              field="about"
-              outlined
-              class="mb-1"
-              @input="$v.form.about.$touch()"
-              @blur="$v.form.about.$touch()"
-            ></v-textarea>
-            <has-error :form="form" field="about"></has-error>
-            <div class="text-right">
-              <v-spacer class="mb-3" />
-              <v-btn
-                class="ml-8 float-right"
-                title="Upload"
-                type="button"
-                data-action="upload"
-                style="opacity: 1;"
-                :loading="loadingSubmit"
-                @click="update"
-                >{{ $t('profile.updateProfile') }}</v-btn
-              >
+                  <v-spacer class="mb-3" />
+                  <v-btn
+                    title="Upload"
+                    type="button"
+                    data-action="upload"
+                    style="opacity: 1;"
+                    :loading="loadingSubmit"
+                    :disabled="disabledButton"
+                    @click="submit"
+                    >{{ $t('profile.updateAvatar') }}</v-btn
+                  >
+                </div>
+              </v-col>
+              <v-divider class="mx-4" inset vertical></v-divider>
+              <v-col class="col-md-8">
+                <form class="auth-form avatar" @submit.prevent="submit">
+                  <input type="hidden" name="_method" value="PUT" />
+                  <v-text-field
+                    v-model.trim="$v.form.name.$model"
+                    :error-messages="nameErrors"
+                    :counter="120"
+                    :form="form"
+                    field="name"
+                    :label="$t('profile.name')"
+                    outlined
+                    class="mb-1"
+                    @input="$v.form.name.$touch()"
+                    @blur="$v.form.name.$touch()"
+                  ></v-text-field>
+                  <has-error :form="form" field="name"></has-error>
+                  <v-text-field
+                    v-model.trim="$v.form.tagline.$model"
+                    :error-messages="taglineErrors"
+                    :counter="300"
+                    :label="$t('profile.tagline')"
+                    :form="form"
+                    field="tagline"
+                    @input="$v.form.tagline.$touch()"
+                    @blur="$v.form.tagline.$touch()"
+                  ></v-text-field>
+                  <has-error :form="form" field="tagline"></has-error>
+                  <v-textarea
+                    v-model.trim="$v.form.about.$model"
+                    :error-messages="aboutErrors"
+                    :counter="3000"
+                    :form="form"
+                    :placeholder="$t('profile.someInfo')"
+                    field="about"
+                    outlined
+                    class="mb-1"
+                    @input="$v.form.about.$touch()"
+                    @blur="$v.form.about.$touch()"
+                  ></v-textarea>
+                  <has-error :form="form" field="about"></has-error>
+                  <div class="text-right">
+                    <v-spacer class="mb-3" />
+                    <v-btn
+                      class="ml-8 float-right"
+                      title="Upload"
+                      type="button"
+                      data-action="upload"
+                      style="opacity: 1;"
+                      :loading="loadingSubmit"
+                      @click="update"
+                      >{{ $t('profile.updateProfile') }}</v-btn
+                    >
 
-              <v-btn :disabled="upload" @click="clear">{{
-                $t('profile.clear')
-              }}</v-btn>
-            </div>
-          </form>
-        </v-col>
-      </v-row>
+                    <v-btn :disabled="upload" @click="clear">{{
+                      $t('profile.clear')
+                    }}</v-btn>
+                  </div>
+                </form>
+              </v-col>
+            </v-row>
+          </v-container>
+        </section>
+      </v-container>
+
+      //
     </div>
   </section>
 </template>
