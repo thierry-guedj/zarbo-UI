@@ -21,7 +21,7 @@
             <img src="/artworkIcon.png" class="iconTitle ml-3 mr-2"
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-col class="col-md-9">
+          <v-col class="col-md-8">
             <p class="titleArtwork text-white">
               Oeuvres Publiées
             </p>
@@ -313,7 +313,7 @@ export default {
   font-size: 44px;
   padding-top: 20px;
   margin-bottom: 30px;
-  justify-self: center;
+  line-height: 1em;
 }
 .iconTitle {
   max-width: 280px;

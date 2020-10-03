@@ -31,7 +31,7 @@
                 ></avatar>
               </v-col>
               <v-divider class="mx-4" inset vertical></v-divider>
-              <v-col class="col-md-9">
+              <v-col class="col-md-8">
                 <p class="titleUser text-white">
                   {{ $t('user.userPageTitle') }} {{ user.name }}
                 </p>
