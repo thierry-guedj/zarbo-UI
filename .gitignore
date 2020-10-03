@@ -90,8 +90,8 @@ sw.*
 *.swp
 
 # big images
-assets/images/bg
 assets/images/original
 assets/images/bg1280-largeur
 
 components/slim
+key.txt
