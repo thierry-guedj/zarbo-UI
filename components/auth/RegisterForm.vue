@@ -87,6 +87,7 @@
         v-model.trim="$v.form.password_confirmation.$model"
         :error-messages="password_confirmationErrors"
         :label="$t('register.confirmPassword')"
+        type="password"
         required
         @input="$v.form.invitation_code.$touch()"
         @blur="$v.form.invitation_code.$touch()"

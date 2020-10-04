@@ -229,6 +229,7 @@ export default {
     subjectRequired: 'Subject is required',
     messageRequired: 'Message is required',
     messageMaxLength: 'Message must be less than 400 characters long',
+    nameRequired: 'Name is required',
   },
   contact: {
     contact: 'Contact',

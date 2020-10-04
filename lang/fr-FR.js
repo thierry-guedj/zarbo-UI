@@ -231,6 +231,7 @@ export default {
     subjectRequired: 'Le sujet est requis',
     messageRequired: 'Le message est requis',
     messageMaxLength: 'Le message ne doit pas dépasser 4000 caractères',
+    nameRequired: 'Le nom est requis',
   },
   contact: {
     contact: 'Contact',
