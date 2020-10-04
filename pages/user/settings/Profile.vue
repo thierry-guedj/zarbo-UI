@@ -50,8 +50,14 @@
                 @click="submit"
                 >{{ $t('profile.updateAvatar') }}</v-btn
               >
-            </div>
-           </v-col>
+            </div></v-col>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-col class="col-md-9">
+            <p class="titlePage text-white">
+              {{ $t('profile.profile') }}
+            </p>
+            
+          </v-col>
         </v-row>
       </section>
     </v-container>
