@@ -307,11 +307,13 @@ export default {
       const slibtn = document.getElementsByClassName('slim-btn-upload')
       slibtn[0].style.display = 'none'
       this.uploadButton = true
+      this.dialog_msg = ''
       return true
     },
     imageRemoved(data) {
       console.log(data)
       this.uploadButton = false
+      this.dialog_msg = ''
     },
     update() {
       this.form
@@ -340,7 +342,7 @@ export default {
           this.uploading = false
           setTimeout(() => {
             this.$auth.fetchUser()
-          }, 4000)
+          }, 5000)
         })
     },
     handleAddress(data) {
