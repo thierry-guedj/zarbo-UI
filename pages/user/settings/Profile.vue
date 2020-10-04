@@ -251,6 +251,8 @@ export default {
           this.form[k] = this.user[k]
         }
       })
+      const slibtn = document.getElementsByClassName('slim-btn-upload')
+      slibtn[0].style.display = 'none'
     }
 
     if (this.$auth.user.location) {
@@ -312,6 +314,8 @@ export default {
     },
     imageRemoved(data) {
       console.log(data)
+      const slibtn = document.getElementsByClassName('slim-btn-upload')
+      slibtn[0].style.display = 'none'
       this.uploadButton = false
       this.dialog_msg = ''
     },

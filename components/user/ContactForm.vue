@@ -6,23 +6,21 @@
     >
     <v-alert
       v-if="form.errors.has('name')"
-      color="#e53935"
+      class="alert-error mb-2"
       dark
       icon="person_add_disabled"
       border="right"
       :form="form"
-      class="mb-2"
     >
       {{ form.errors.get('name') }}
     </v-alert>
     <v-alert
       v-if="form.errors.has('email')"
-      color="#e53935"
+      class="alert-error mb-2"
       dark
       icon="mark_email_unread"
       border="right"
       :form="form"
-      class="mb-2"
     >
       {{ form.errors.get('email') }}
     </v-alert>
