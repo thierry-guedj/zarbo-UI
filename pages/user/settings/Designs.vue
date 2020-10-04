@@ -19,8 +19,10 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>{{ $t('settingsDesigns.artwork') }}</v-toolbar-title>
+          <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" />
           <v-divider class="mx-4" inset vertical></v-divider>
+          <v-toolbar-title>{{ $t('settingsDesigns.artwork') }}</v-toolbar-title>
+
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
