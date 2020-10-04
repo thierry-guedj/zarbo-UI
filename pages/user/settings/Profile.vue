@@ -17,7 +17,7 @@
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
         <v-row class="row-md-12">
-          <v-col class="col-md-4 text-center">
+          <v-col class="col-md-3 text-center">
             <div>
               <slim-cropper
                 :options="slimOptions"
