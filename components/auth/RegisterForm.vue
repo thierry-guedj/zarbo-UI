@@ -193,7 +193,7 @@ export default {
       !this.$v.form.name.minLen &&
         errors.push(this.$i18n.t('validation.nameMinLength'))
       !this.$v.form.name.maxLen &&
-        errors.push(`Name must be at most 120 characters long`)
+        errors.push(this.$i18n.t('validation.nameMaxLength'))
       !this.$v.form.name.required &&
         errors.push(this.$i18n.t('validation.nameRequired'))
       return errors
@@ -239,7 +239,7 @@ export default {
       const errors = []
       if (!this.$v.form.invitation_code.$dirty) return errors
       !this.$v.form.password_confirmation.required &&
-        errors.push(this.$i18n.t('validation.invitation_codeRequired'))
+        errors.push(this.$i18n.t('validation.codeInvitationRequired'))
       return errors
     },
   },

@@ -232,6 +232,7 @@ export default {
     messageRequired: 'Le message est requis',
     messageMaxLength: 'Le message ne doit pas dépasser 4000 caractères',
     nameRequired: 'Le nom est requis',
+    codeInvitationRequired: "Le code d'invitation est requis",
   },
   contact: {
     contact: 'Contact',

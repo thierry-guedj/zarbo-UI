@@ -230,6 +230,7 @@ export default {
     messageRequired: 'Message is required',
     messageMaxLength: 'Message must be less than 400 characters long',
     nameRequired: 'Name is required',
+    codeInvitationRequired: 'Invitation code is required',
   },
   contact: {
     contact: 'Contact',
