@@ -17,7 +17,7 @@
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
         <v-row class="row-md-12">
-          <v-col class="col-md-2 text-center">
+          <v-col class="col-md-4 text-center">
             <div>
               <slim-cropper
                 :options="slimOptions"
@@ -52,7 +52,7 @@
               >
             </div></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-col class="col-md-9">
+          <v-col class="col-md-7">
             <p class="titlePage text-white">
               {{ $t('profile.profile') }}
             </p>
