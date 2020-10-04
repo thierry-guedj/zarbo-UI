@@ -1,10 +1,20 @@
 <template>
   <section>
-    <div class="profile">
-      <v-card-title class="headline text-center"
-        ><i class="material-icons md-24 mr-2">face</i
-        >{{ $t('profile.profile') }}</v-card-title
-      >
+  <v-btn
+      v-show="fab"
+      v-scroll="onScroll"
+      fab
+      dark
+      fixed
+      bottom
+      right
+      color="accent"
+      @click="toTop"
+    >
+    <v-icon>keyboard_arrow_up</v-icon>
+    </v-btn>
+
+      
       <alert-success :form="form">{{
         $t('profile.profileUpdated')
       }}</alert-success>
@@ -117,8 +127,6 @@
         </section>
       </v-container>
 
-      //
-    </div>
   </section>
 </template>
 
@@ -360,11 +368,33 @@ export default {
       this.form.reset()
       this.$v.form.$reset()
     },
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.titlePage {
+  font-size: 44px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+  line-height: 1em;
+}
+.iconTitle {
+  max-width: 180px;
+  min-width: 180px;
+}
+.container {
+  max-width: 100% !important;
+  text-align: left;
+}
 .modal {
   background-color: rgba(23, 22, 18, 0.85);
 }

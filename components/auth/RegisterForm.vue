@@ -6,12 +6,11 @@
     >
     <v-alert
       v-if="form.errors.has('name')"
-      class="alert-error"
+      class="alert-error mb-2"
       dark
       icon="person_add_disabled"
       border="right"
       :form="form"
-      class="mb-2"
     >
       {{ form.errors.get('name') }}
     </v-alert>
