@@ -22,7 +22,7 @@
         <section class="hero text-white">
           <!-- <v-container> -->
           <v-row class="row-md-12">
-            <v-col class="col-md-2 text-center">
+            <v-col class="col-md-3 text-center">
               <avatar
                 :username="user.name"
                 :src="user.avatars.large"
@@ -31,7 +31,7 @@
               ></avatar>
             </v-col>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-col class="col-md-9">
+            <v-col class="col-md-8">
               <p class="titlePage text-white">
                 {{ $t('user.userPageTitle') }} {{ user.name }}
               </p>
