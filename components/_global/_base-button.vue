@@ -45,7 +45,7 @@ export default {
     },
     buttonClass: {
       type: String,
-      default: 'mr-2 ml-3',
+      default: 'mr-2 ml-3 nuxt-link-active nuxt-link-exact-active',
     },
     icon: {
       type: String,
@@ -64,7 +64,7 @@ export default {
     return {
       needsRedirect: ['password.reset', 'verify'],
       redirectPage: false,
-     
+
       linkTo: '',
     }
   },
@@ -81,19 +81,18 @@ export default {
       if (this.needsRedirect.includes(currentRoute)) {
         this.redirectPage = true
       } */
-     
-        this.hideModal()
-        /* if (this.redirect || this.redirectPage)
+
+      this.hideModal()
+      /* if (this.redirect || this.redirectPage)
           this.$router.replace({ path: '/' })
         setTimeout(
           () => */
-        this.showModal({
-          componentName: this.componentName,
-          folder: this.folderName,
-        })
-        /*   400
+      this.showModal({
+        componentName: this.componentName,
+        folder: this.folderName,
+      })
+      /*   400
         ) */
-     
     },
   },
 }

@@ -58,9 +58,15 @@
               {{ $t('profile.profile') }}
             </p>
             <v-container fluid class="search-control">
-              <v-alert class="alert-success" :form="form">{{
-                $t('profile.profileUpdated')
-              }}</v-alert>
+              <v-alert
+                v-model="alert"
+                border="left"
+                :form="form"
+                close-text="Close Alert"
+                class="alert-success"
+                dismissible
+                >{{ $t('profile.profileUpdated') }}}</v-alert
+              >
               <v-row>
                 <v-col class="col-md-6 edit-info">
                   <form class="auth-form avatar" @submit.prevent="submit">
@@ -206,6 +212,7 @@ export default {
       progressWidth: 0,
       uploadPercentage: 0,
       dialog_msg: '',
+      alert: false,
     }
   },
   computed: {
@@ -328,15 +335,16 @@ export default {
         .then((res) => {
           console.log(res)
 
-          setTimeout(() => {
+          /* setTimeout(() => {
             this.$router.push(
               this.localePath({
                 name: 'designs.user',
                 params: { id: this.$auth.user.id },
               })
             )
-          }, 1000)
+          }, 1000) */
           this.uploading = false
+          this.alert = true
         })
         .catch((e) => console.log(e))
     },
