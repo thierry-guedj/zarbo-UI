@@ -68,7 +68,7 @@
                 >{{ $t('profile.profileUpdated') }}</v-alert
               >
               <v-row>
-                <v-col class="col-md-6 edit-info">
+                <v-col class="col-md-12 edit-info">
                   <form class="auth-form avatar" @submit.prevent="submit">
                     <input type="hidden" name="_method" value="PUT" />
                     <v-text-field
