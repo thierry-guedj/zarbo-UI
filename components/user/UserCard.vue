@@ -152,7 +152,7 @@ export default {
     rgba(0, 0, 0, 0.03) 91.9%,
     rgba(0, 0, 0, 0.03) 100%
   ); */
-  font-family: 'Ek Mukta', sans-serif;
+  // font-family: 'Ek Mukta', sans-serif;
   font-size: 12px;
   transition-property: opacity;
   transition-duration: 0.35s;
