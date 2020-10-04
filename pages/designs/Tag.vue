@@ -13,142 +13,156 @@
     >
       <v-icon>keyboard_arrow_up</v-icon>
     </v-btn>
-    <v-container fluid class="search-control">
-      <form @submit.prevent="fetchData">
-        <v-row
-          class="filters d-flex justify-content-between align-items-center"
-        >
-          <v-col cols="auto"
-            ><v-select
-              v-model="filters.orderBy"
-              :items="itemsOrderBy"
-              item-text="title"
-              item-value="value"
-              :label="$t('search.orderBy')"
-              outlined
-              width="250px"
-              @change="fetchData"
-            ></v-select
-          ></v-col>
-
-          <v-col cols="auto" class="d-flex align-items-center">
-            <v-checkbox
-              id="has_comments"
-              v-model="filters.has_comments"
-              field="has_comments"
-              :label="$t('search.hasComments')"
-              class="mr-3"
-              true-value="1"
-              false-value="0"
-              @change="fetchData"
-            ></v-checkbox>
-            <!--  <v-checkbox
-              id="has_team"
-              v-model="filters.has_team"
-              field="has_team"
-              label="By team"
-              true-value="1"
-              false-value="0"
-              class="mr-3"
-              @change="fetchData"
-            ></v-checkbox> -->
-          </v-col>
-          <v-col>
-            <v-text-field
-              id="q"
-              v-model="filters.q"
-              field="q"
-              class="combobox"
-              outlined
-               placeholder="rechercher dans les titres et les descriptions"
-                         @input="fetchData"
-            >
-              <template v-slot:append>
-                <v-btn
-                  :disabled="searching"
-                  class="searchBtn"
-                  height="auto"
-                  text
-                  :loading="searching"
-                  type="submit"
+    <v-container class="p-0 m-0 row-designs">
+      <section class="hero text-white">
+        <!-- <v-container> -->
+        <v-row class="row-md-12">
+          <v-col class="col-md-2 text-center">
+            <img src="/tagsIcon.png" class="iconTitle ml-3 mr-2"
+          /></v-col>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-col class="col-md-9">
+            <p class="titlePage text-white">
+              {{ $t('tag.tags') }}
+            </p>
+            <v-container fluid class="search-control">
+              <form @submit.prevent="fetchData">
+                <v-row
+                  class="filters d-flex justify-content-between align-items-center"
                 >
-                  <v-icon>mdi-magnify</v-icon>
-                  {{ $t('search.search') }}
-                </v-btn>
-              </template>
-            </v-text-field>
+                  <v-col cols="auto"
+                    ><v-select
+                      v-model="filters.orderBy"
+                      :items="itemsOrderBy"
+                      item-text="title"
+                      item-value="value"
+                      :label="$t('search.orderBy')"
+                      outlined
+                      width="250px"
+                      @change="fetchData"
+                    ></v-select
+                  ></v-col>
+
+                  <v-col cols="auto" class="d-flex align-items-center">
+                    <v-checkbox
+                      id="has_comments"
+                      v-model="filters.has_comments"
+                      field="has_comments"
+                      :label="$t('search.hasComments')"
+                      class="mr-3"
+                      true-value="1"
+                      false-value="0"
+                      @change="fetchData"
+                    ></v-checkbox>
+                  </v-col>
+                  <v-col>
+                    <v-text-field
+                      id="q"
+                      v-model="filters.q"
+                      field="q"
+                      class="combobox"
+                      outlined
+                      placeholder="rechercher dans les titres et les descriptions"
+                      @input="fetchData"
+                    >
+                      <template v-slot:append>
+                        <v-btn
+                          :disabled="searching"
+                          class="searchBtn"
+                          height="auto"
+                          text
+                          :loading="searching"
+                          type="submit"
+                        >
+                          <v-icon>mdi-magnify</v-icon>
+                          {{ $t('search.search') }}
+                        </v-btn>
+                      </template>
+                    </v-text-field>
+                  </v-col>
+                </v-row>
+              </form>
+            </v-container>
           </v-col>
         </v-row>
-      </form>
-    </v-container>
-    <v-container class="p-0 m-0 row-designs">
-      <div v-if="searching" class="loader p-0">
-        <Circle8></Circle8>
-      </div>
-      <div v-else class="pt-8 pl-0 pb-6 pr-0">
-        <template v-if="(!designs.length)" class="pb-6 text-center">
-          <v-alert
-            border="right"
-            color="accent"
-            dark
-            width="60%"
-            class="alert"
-          >
-            No results
-          </v-alert>
-        </template>
-        <template v-else id="row-designs">
-          <v-row
-            transition-duration="0.3s"
-            item-selector=".item"
-            class="mb-6 row-design"
-            justify="center"
-            no-gutters
-          >
-            <CoolLightBox
-              :items="itemsDesigns"
-              :index="index !== null ? parseInt(`${index}`) : index"
-              :use-zoom-bar="true"
-              :effect="'fade'"
-              @close="index = null"
+      </section>
+      <v-container class="p-0 m-0 row-designs">
+        <div v-if="searching" class="loader p-0">
+          <Circle8></Circle8>
+        </div>
+        <div v-else class="pl-0 pb-6 pr-0">
+          <template v-if="(!designs.length)" class="pb-6 text-center">
+            <div class="mx-auto">
+              <v-alert
+                border="right"
+                color="accent"
+                dark
+                width="60%"
+                class="alert"
+              >
+                {{ $t('user.noResult') }}
+              </v-alert>
+            </div>
+          </template>
+          <template v-else id="row-designs">
+            <v-row
+              transition-duration="0.3s"
+              item-selector=".item"
+              class="mb-6 row-design"
+              justify="center"
+              no-gutters
             >
-            </CoolLightBox>
-            <masonry
-              :cols="{ default: 6, 1500: 5, 1400: 4, 1000: 3, 700: 2, 500: 1 }"
-              :gutter="{ default: '0px', 700: '15px' }"
-              ><lazy-component
-                v-for="(design, i) in designs"
-                :key="`${i}-${design.id}`"
-                :design="design"
-                @lightbox="index = parseInt(`${i}`)"
-              ></lazy-component
-            ></masonry>
-          </v-row>
+              <CoolLightBox
+                :items="itemsDesigns"
+                :index="index !== null ? parseInt(`${index}`) : index"
+                :use-zoom-bar="true"
+                :effect="'fade'"
+                @close="index = null"
+              >
+              </CoolLightBox>
+              <masonry
+                :cols="{
+                  default: 6,
+                  1500: 5,
+                  1400: 4,
+                  1000: 3,
+                  700: 2,
+                  500: 1,
+                }"
+                :gutter="{ default: '0px', 700: '15px' }"
+                ><lazy-component
+                  v-for="(design, i) in designs"
+                  :key="`${i}-${design.id}`"
+                  :design="design"
+                  @lightbox="index = parseInt(`${i}`)"
+                ></lazy-component
+              ></masonry>
+            </v-row>
 
-          <infinite-loading
-            ref="infiniteLoading"
-            slot="append"
-            :identifier="identifier"
-            spinner="ring-loader"
-            force-use-infinite-wrapper="row-designs"
-            @infinite="infiniteHandler"
-          >
+            <infinite-loading
+              ref="infiniteLoading"
+              slot="append"
+              :identifier="identifier"
+              spinner="ring-loader"
+              force-use-infinite-wrapper="row-designs"
+              @infinite="infiniteHandler"
+            >
               <div slot="no-more">Plus de résultat</div>
-              <div slot="no-results">Pas de résultat</div>                       
-          </infinite-loading>
-        </template>
-      </div>
+              <div slot="no-results">Pas de résultat</div>
+            </infinite-loading>
+          </template>
+        </div>
+      </v-container>
+      <!-- Modal  -->
+      <!-- <keep-alive> -->
+      <base-modal
+        :dialog.sync="visible"
+        @showDesign="styleModal()"
+        @closeDialog="hideModal()"
+      />
+      <!-- </keep-alive> -->
+      <!-- End Modal -->
     </v-container>
-    <!-- Modal  -->
-    <!-- <keep-alive> -->
-    <base-modal
-      :dialog.sync="visible"
-      :fullscreen="fullscreen"
-      @showDesign="styleModal()"
-      @closeDialog="hideModal()"
-    />
-    <!-- </keep-alive> -->
-    <!-- End Modal -->
   </section>
 </template>
 
@@ -277,6 +291,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.titlePage {
+  font-size: 44px;
+  padding-top: 20px;
+  margin-bottom: 30px;
+  line-height: 1em;
+}
+.iconTitle {
+  max-width: 180px;
+  min-width: 180px;
+}
 .alert {
   text-align: center;
   margin: auto;
@@ -286,11 +310,12 @@ export default {
 }
 .container {
   max-width: 100%;
-  padding: 0;
   text-align: left;
 }
 .search-control {
-  max-width: 75%;
+  max-width: 100% !important;
+  margin-top: 25px;
+  margin-bottom: 0;
 }
 .loader {
   position: fixed;

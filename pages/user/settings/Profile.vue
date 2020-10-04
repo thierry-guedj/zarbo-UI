@@ -344,10 +344,10 @@ export default {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
 
           this.uploading = false
-          setTimeout(() => {
+          /* setTimeout(() => {
             this.$auth.fetchUser()
           }, 5000)
-        })
+        }) */
     },
     handleAddress(data) {
       this.form.formatted_address = data.formatted_address
