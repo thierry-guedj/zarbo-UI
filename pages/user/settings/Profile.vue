@@ -57,9 +57,7 @@
             <p class="titlePage text-white">
               {{ $t('profile.profile') }}
             </p>
-          </v-col>
-          <v-col>
-            <v-container>
+            <v-container fluid class="search-control">
               <v-row>
                 <v-col class="col-md-6 edit-info">
                   <form class="auth-form avatar" @submit.prevent="submit">
