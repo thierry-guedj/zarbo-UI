@@ -65,7 +65,7 @@
                 close-text="Close Alert"
                 class="alert-success"
                 dismissible
-                >{{ $t('profile.profileUpdated') }}}</v-alert
+                >{{ $t('profile.profileUpdated') }}</v-alert
               >
               <v-row>
                 <v-col class="col-md-6 edit-info">
