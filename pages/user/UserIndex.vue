@@ -23,7 +23,7 @@
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
             <p class="titlePage text-white">
-              Artistes membres
+              {{ $t('userIndex.memberArtists') }}
             </p>
             <v-container fluid class="search-control">
               <form @submit.prevent="fetchData">
@@ -72,48 +72,49 @@
           </v-col>
         </v-row>
       </section>
+
+      <v-container class="p-0 m-0 row-designs">
+        <div v-if="searching" class="loader p-0">
+          <Circle8></Circle8>
+        </div>
+        <div v-else class="pt-8 pl-0 pb-6 pr-0">
+          <template v-if="(!users.length)" class="pb-6">
+            <v-alert border="left" color="#0f1219" dark>
+              No results found
+            </v-alert>
+          </template>
+          <template v-else id="row-designs">
+            <v-row
+              transition-duration="0.3s"
+              item-selector=".item"
+              class="mb-6 row-design"
+              justify="center"
+              no-gutters
+            >
+              <lazy-component
+                v-for="(user, i) in users"
+                :key="`${i}-${user.id}`"
+                :user="user"
+              ></lazy-component>
+            </v-row>
+            <infinite-loading
+              ref="infiniteLoading"
+              slot="append"
+              :identifier="identifier"
+              spinner="ring-loader"
+              force-use-infinite-wrapper="row-designs"
+              @infinite="infiniteHandler"
+            >
+              <div slot="no-more">Plus de résultat</div>
+              <div slot="no-results">Pas de résultat</div>
+            </infinite-loading>
+          </template>
+        </div>
+      </v-container>
+      <!-- Modal  -->
+      <!-- <keep-alive> -->
+      <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
     </v-container>
-    <v-container class="p-0 m-0 row-designs">
-      <div v-if="searching" class="loader p-0">
-        <Circle8></Circle8>
-      </div>
-      <div v-else class="pt-8 pl-0 pb-6 pr-0">
-        <template v-if="(!users.length)" class="pb-6">
-          <v-alert border="left" color="#0f1219" dark>
-            No results found
-          </v-alert>
-        </template>
-        <template v-else id="row-designs">
-          <v-row
-            transition-duration="0.3s"
-            item-selector=".item"
-            class="mb-6 row-design"
-            justify="center"
-            no-gutters
-          >
-            <lazy-component
-              v-for="(user, i) in users"
-              :key="`${i}-${user.id}`"
-              :user="user"
-            ></lazy-component>
-          </v-row>
-          <infinite-loading
-            ref="infiniteLoading"
-            slot="append"
-            :identifier="identifier"
-            spinner="ring-loader"
-            force-use-infinite-wrapper="row-designs"
-            @infinite="infiniteHandler"
-          >
-            <div slot="no-more">Plus de résultat</div>
-            <div slot="no-results">Pas de résultat</div>
-          </infinite-loading>
-        </template>
-      </div>
-    </v-container>
-    <!-- Modal  -->
-    <!-- <keep-alive> -->
-    <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
   </section>
 </template>
 
@@ -259,7 +260,7 @@ export default {
   text-align: left;
 }
 .search-control {
-  max-width: 75% !important;
+  max-width: 100% !important;
   margin-top: 25px;
   margin-bottom: 0;
 }
