@@ -173,6 +173,9 @@ export default {
     stillUploading: 'Still uploading...Please wait',
     uploadSuccess: 'Design successfully uploaded',
   },
+  userIndex: {
+    memberArtists: 'Member artists',
+  },
   user: {
     noResult: "This artist didn't published any artwork yet",
     backToUsersList: 'Back to users list',

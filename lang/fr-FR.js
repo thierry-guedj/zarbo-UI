@@ -174,6 +174,9 @@ export default {
     stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Image téléchargée avec succès',
   },
+  userIndex: {
+    memberArtists: 'Artistes membres',
+  },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
     backToUsersList: 'Retour à la liste des artistes',
