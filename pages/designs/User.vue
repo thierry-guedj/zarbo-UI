@@ -38,8 +38,8 @@
               <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
-              <p class="about text-white">
-                {{ user.about }}
+              <p class="about text-white" v-html="user.about">
+                <!-- {{ user.about }} -->
               </p>
 
               <v-container fluid class="search-control">
