@@ -58,6 +58,9 @@
               {{ $t('profile.profile') }}
             </p>
             <v-container fluid class="search-control">
+              <v-alert class="alert-success" :form="form">{{
+                $t('profile.profileUpdated')
+              }}</v-alert>
               <v-row>
                 <v-col class="col-md-6 edit-info">
                   <form class="auth-form avatar" @submit.prevent="submit">
@@ -346,8 +349,8 @@ export default {
           this.uploading = false
           /* setTimeout(() => {
             this.$auth.fetchUser()
-          }, 5000)
-        }) */
+          }, 5000) */
+        })
     },
     handleAddress(data) {
       this.form.formatted_address = data.formatted_address
