@@ -23,7 +23,7 @@
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
             <p class="titlePage text-white">
-              {{ $t('tag.tags') }}
+              {{ $t('tag.tagTitle') }} {{ this.$route.params.tag }}
             </p>
             <v-container fluid class="search-control">
               <form @submit.prevent="fetchData">

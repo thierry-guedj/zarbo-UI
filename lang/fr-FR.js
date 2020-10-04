@@ -183,6 +183,11 @@ export default {
     backToResults: 'Retour aux résultats',
     noResult: 'Pas de résultat',
   },
+  tag: {
+    tag: 'Mot-clé',
+    tags: 'Mots-clés',
+    tagTitle: 'Oeuvres répondant au mot-clé ',
+  },
   confirmDelete: {
     confirmMessage: 'Veuillez confirmer la suppression de cette oeuvre.',
     cancel: 'Annuler',

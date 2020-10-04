@@ -182,6 +182,11 @@ export default {
     backToResults: 'Back to results',
     noResult: 'No result',
   },
+  tag: {
+    tag: 'Tag',
+    tags: 'Tags',
+    tagTitle: 'Artworks with tag ',
+  },
   confirmDelete: {
     confirmMessage: 'Please confirm the deletion of this artwork.',
     cancel: 'Cancel',
