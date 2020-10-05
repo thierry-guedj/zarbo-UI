@@ -213,6 +213,7 @@ export default {
       uploadPercentage: 0,
       dialog_msg: '',
       alert: false,
+      uploadIsSuccessful: false,
     }
   },
   computed: {
@@ -252,6 +253,11 @@ export default {
     loader() {
       const l = this.loader
       this[l] = !this[l]
+    },
+    uploadIsSuccessful() {
+      if (this.uploadIsSuccessful) {
+        this.$auth.fetchUser()
+      }
     },
   },
   mounted() {
@@ -349,7 +355,7 @@ export default {
         .catch((e) => console.log(e))
     },
     async checkUpload(id) {
-      const uploadIsOk = await this.$axios
+      this.uploadIsSuccessful = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
