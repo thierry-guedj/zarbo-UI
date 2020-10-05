@@ -309,7 +309,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          this.uploadIsSuccessful = this.getUploadIsSuccessful(
+          this.getUploadIsSuccessful(
             this.$auth.user.id
           )
           success('upload done')
@@ -358,7 +358,7 @@ export default {
         .catch((e) => console.log(e))
     },
     async getUploadIsSuccessful(id) {
-      const uploadOk = await this.checkUpload(id)
+      this.uploadIsSuccessful = await this.checkUpload(id)
       console.log(uploadOk)
     },
     async checkUpload(id) {
