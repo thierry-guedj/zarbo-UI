@@ -46,18 +46,27 @@
               <v-card-text>
                 <v-container>
                   <v-text-field
-                    v-model="editedItem.title"
+                    v-model.trim="$v.form.title.$model"
+                    :error-messages="titleErrors"
+                    :counter="120"
                     :label="$t('editDesign.title')"
                     field="title"
+                    outlined
+                    class="mb-1"
+                    @input="$v.form.title.$touch()"
+                    @blur="$v.form.title.$touch()"
                   ></v-text-field>
 
                   <v-textarea
-                    v-model.trim="editedItem.description"
-                    :counter="155"
+                    v-model.trim="$v.form.description.$model"
+                    :error-messages="descriptionErrors"
+                    :counter="3000"
                     :label="$t('editDesign.description')"
                     outlined
                     class="mb-1"
                     field="description"
+                    @input="$v.form.description.$touch()"
+                    @blur="$v.form.description.$touch()"
                   ></v-textarea>
 
                   <client-only>
@@ -155,6 +164,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { maxLength } from 'vuelidate/lib/validators'
 export default {
   components: {
     InputTag: () => import('vue-input-tag'),
@@ -220,8 +230,32 @@ export default {
       alert: false,
     }
   },
-
+  validations: {
+    form: {
+      title: {
+        maxLen: maxLength(120),
+      },
+      description: {
+        maxLen: maxLength(3000),
+      },
+    },
+  },
   computed: {
+    titleErrors() {
+      const errors = []
+      if (!this.$v.form.title.$dirty) return errors
+      !this.$v.form.title.maxLen &&
+        errors.push(this.$i18n.t('validation.titleMaxLength'))
+      return errors
+    },
+    descriptionErrors() {
+      const errors = []
+      if (!this.$v.form.description.$dirty) return errors
+      !this.$v.form.description.maxLen &&
+        errors.push(this.$i18n.t('validation.descriptionMaxLength'))
+
+      return errors
+    },
     formTitle() {
       return this.$i18n.t('editDesign.editItem')
     },
