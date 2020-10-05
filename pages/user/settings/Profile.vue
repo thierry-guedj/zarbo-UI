@@ -369,16 +369,23 @@ export default {
       }
     },
     async checkUpload(id) {
-      const tempVar = await this.$axios
+      try {
+        const tempVar = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
-        .then((response) => {
+      }
+      catch (err) {
+        return false
+      } finally {
+        this.$auth.fetchUser()
+      }
+       /*  .then((response) => {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
 
           this.uploading = false
-          /* setTimeout(() => {
+         setTimeout(() => {
             this.$auth.fetchUser()
-          }, 5000) */
-        })
+          }, 5000) 
+        }) */
     },
     handleAddress(data) {
       this.form.formatted_address = data.formatted_address
