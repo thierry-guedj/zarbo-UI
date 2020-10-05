@@ -309,7 +309,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          this.checkUpload(this.$auth.user.id)
+          this.uploadIsSuccessful = this.checkUpload(this.$auth.user.id)
           success('upload done')
           this.uploading = false
         })
@@ -356,7 +356,7 @@ export default {
         .catch((e) => console.log(e))
     },
     async checkUpload(id) {
-      this.uploadIsSuccessful = await this.$axios
+      const tempVar = await this.$axios
         .$get(`user/${id}/uploadIsSuccessful`)
         .then((response) => {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
