@@ -365,20 +365,18 @@ export default {
       } catch (err) {
         return false
       } finally {
-        // this.$auth.fetchUser()
+        this.$auth.fetchUser()
       }
     },
     async checkUpload(id) {
       try {
-        const tempVar = await this.$axios
-        .$get(`user/${id}/uploadIsSuccessful`)
-      }
-      catch (err) {
+        const tempVar = await this.$axios.$get(`user/${id}/uploadIsSuccessful`)
+      } catch (err) {
         return false
       } finally {
-        this.$auth.fetchUser()
+        // this.$auth.fetchUser()
       }
-       /*  .then((response) => {
+      /*  .then((response) => {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
 
           this.uploading = false
