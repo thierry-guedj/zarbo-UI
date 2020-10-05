@@ -62,7 +62,7 @@
               :placeholder="$t('comments.enterComment')"
               class="pl-4 pr-14"
             ></v-textarea>
-            <div class="mt-2 text-right pr-14">
+            <div class="mt-2 text-right pr-0">
               <v-btn type="submit" size="sm">
                 <v-icon class="mr-2">insert_comment</v-icon
                 >{{ $t('comments.postComment') }}
