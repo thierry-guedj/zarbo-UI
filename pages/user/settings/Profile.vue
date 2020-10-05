@@ -254,12 +254,12 @@ export default {
       const l = this.loader
       this[l] = !this[l]
     },
-    /* uploadIsSuccessful() {
+    uploadIsSuccessful() {
       console.log(this.uploadIsSuccessful)
       if (this.uploadIsSuccessful === true) {
         this.$auth.fetchUser()
       }
-    }, */
+    },
   },
   mounted() {
     if (this.user) {
@@ -309,9 +309,9 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          const uploadIsSuccessful = (data) =>
-            this.getUploadIsSuccessful(this.$auth.user.id)
-          uploadIsSuccessful(this.data).then(this.$auth.fetchUser())
+          this.uploadIsSuccessful = this.getUploadIsSuccessful(
+            this.$auth.user.id
+          )
           success('upload done')
           this.uploading = false
         })
@@ -358,16 +358,8 @@ export default {
         .catch((e) => console.log(e))
     },
     async getUploadIsSuccessful(id) {
-      try {
-        const uploadOk = await this.checkUpload(id)
-        console.log(uploadOk)
-
-        return true
-      } catch (err) {
-        return false
-      } finally {
-        // this.$auth.fetchUser()
-      }
+      const uploadOk = await this.checkUpload(id)
+      console.log(uploadOk)
     },
     async checkUpload(id) {
       try {
