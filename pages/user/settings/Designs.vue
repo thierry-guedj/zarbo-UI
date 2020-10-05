@@ -171,6 +171,15 @@ export default {
   },
   data() {
     return {
+      form: this.$vform({
+        title: '',
+        description: '',
+        is_live: true,
+        tags: [],
+        slug: '',
+        /*  assign_to_team: false,
+        team: null, */
+      }),
       dialog: false,
       snackbar: false,
       headers: [
@@ -262,6 +271,10 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'getItem']),
     itemToDelete() {
       return this.getItem
+    },
+    slug() {
+      const slug = this.sanitizeTitle(this.form.title)
+      return slug
     },
   },
 
@@ -360,6 +373,27 @@ export default {
 
       const res = await this.$axios.put(`/designs/${this.editedItem.id}`, form)
       this.close()
+    },
+    sanitizeTitle(title) {
+      let slug = ''
+      // Change to lower case
+      const titleLower = title.toLowerCase()
+      // Letter "e"
+      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e')
+      // Letter "a"
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a')
+      // Letter "o"
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o')
+      // Letter "u"
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u')
+      // Letter "d"
+      slug = slug.replace(/đ/gi, 'd')
+      // Trim the last whitespace
+      slug = slug.replace(/\s*$/g, '')
+      // Change whitespace to "-"
+      slug = slug.replace(/\s+/g, '-')
+
+      return slug
     },
   },
 }
