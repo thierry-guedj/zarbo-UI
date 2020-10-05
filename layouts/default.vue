@@ -454,7 +454,7 @@ export default {
   display: contents;
 }
 .vue-avatar--wrapper {
-  min-width: 40px;
+  min-width: 50px;
 }
 .subtitle {
   font-size: 26px;

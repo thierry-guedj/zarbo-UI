@@ -310,7 +310,7 @@ export default {
 
 <style lang="scss" scoped>
 .vue-avatar--wrapper {
-  min-width: 40px;
+  min-width: 50px;
 }
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);

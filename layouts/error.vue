@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .vue-avatar--wrapper {
-  min-width: 40px;
+  min-width: 50px;
 }
 h1 {
   font-size: 20px;

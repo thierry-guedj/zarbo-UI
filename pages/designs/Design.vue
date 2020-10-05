@@ -336,6 +336,6 @@ export default {
   padding-left: 0;
 }
 .vue-avatar--wrapper {
-  min-width: 60px;
+  min-width: 50px;
 }
 </style>

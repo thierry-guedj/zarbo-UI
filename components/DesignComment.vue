@@ -73,6 +73,6 @@ export default {
   line-height: 1.25rem;
 }
 .vue-avatar--wrapper {
-  min-width: 40px;
+  min-width: 50px;
 }
 </style>
