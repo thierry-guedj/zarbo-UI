@@ -310,7 +310,7 @@ export default {
         .then((res) => {
           console.log(res)
           this.uploadIsSuccessful = this.getUploadIsSuccessful(
-            // this.$auth.user.id
+            this.$auth.user.id
           )
           success('upload done')
           this.uploading = false
