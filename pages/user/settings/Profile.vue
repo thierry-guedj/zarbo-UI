@@ -310,7 +310,7 @@ export default {
         .then((res) => {
           console.log(res)
           this.uploadIsSuccessful = this.getUploadIsSuccessful(
-            this.$auth.user.id
+            // this.$auth.user.id
           )
           success('upload done')
           this.uploading = false
@@ -376,7 +376,7 @@ export default {
       catch (err) {
         return false
       } finally {
-        this.$auth.fetchUser()
+        // this.$auth.fetchUser()
       }
        /*  .then((response) => {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
