@@ -365,7 +365,7 @@ export default {
       } catch (err) {
         return false
       } finally {
-        this.$auth.fetchUser()
+        // this.$auth.fetchUser()
       }
     },
     async checkUpload(id) {
@@ -376,7 +376,7 @@ export default {
       catch (err) {
         return false
       } finally {
-        // this.$auth.fetchUser()
+        this.$auth.fetchUser()
       }
        /*  .then((response) => {
           this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
