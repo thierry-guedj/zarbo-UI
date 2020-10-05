@@ -359,7 +359,7 @@ export default {
     },
     async getUploadIsSuccessful(id) {
       try {
-        const uploadOk = await checkUpload(id)
+        const uploadOk = await this.checkUpload(id)
         return true
       } catch (err) {
         return false
