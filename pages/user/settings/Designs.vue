@@ -46,7 +46,7 @@
               <v-card-text>
                 <v-container>
                   <v-text-field
-                    v-model.trim="$v.form.title.$model"
+                    v-model.trim="editedItem.title"
                     :error-messages="titleErrors"
                     :counter="120"
                     :label="$t('editDesign.title')"
@@ -58,7 +58,7 @@
                   ></v-text-field>
 
                   <v-textarea
-                    v-model.trim="$v.form.description.$model"
+                    v-model.trim="editedItem.description"
                     :error-messages="descriptionErrors"
                     :counter="3000"
                     :label="$t('editDesign.description')"
@@ -174,7 +174,7 @@ export default {
       form: this.$vform({
         title: '',
         description: '',
-        is_live: true,
+        is_live: '',
         tags: [],
         slug: '',
         /*  assign_to_team: false,
