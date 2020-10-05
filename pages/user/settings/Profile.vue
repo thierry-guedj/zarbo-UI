@@ -357,7 +357,9 @@ export default {
     },
     async getUploadIsSuccessful(id) {
       this.uploadIsSuccessful = await this.checkUpload(id).then((res) => {
-        this.$auth.fetchUser()
+        setTimeout(() => {
+          this.$auth.fetchUser()
+        }, 5000)
       })
     },
     async checkUpload(id) {
