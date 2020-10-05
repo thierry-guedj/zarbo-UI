@@ -256,7 +256,7 @@ export default {
     },
     uploadIsSuccessful() {
       console.log(this.uploadIsSuccessful)
-      if (this.uploadIsSuccessful) {
+      if (this.uploadIsSuccessful === true) {
         this.$auth.fetchUser()
       }
     },
@@ -309,7 +309,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          this.uploadIsSuccessful = this.checkUpload(this.$auth.user.id)
+          this.uploadIsSuccessful = await this.checkUpload(this.$auth.user.id)
           success('upload done')
           this.uploading = false
         })
