@@ -17,7 +17,7 @@
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
         <v-row class="row-md-12">
-          <v-col class="col-md-3 text-center">
+          <v-col class="col-md-3 text-center avatar-col">
             <div>
               <slim-cropper
                 :options="slimOptions"
@@ -255,6 +255,7 @@ export default {
       this[l] = !this[l]
     },
     uploadIsSuccessful() {
+      console.log(this.uploadIsSuccessful)
       if (this.uploadIsSuccessful) {
         this.$auth.fetchUser()
       }
@@ -402,6 +403,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatar-col {
+  max-width: 27%;
+}
 .titlePage {
   font-size: 44px;
   padding-top: 20px;
