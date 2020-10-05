@@ -158,12 +158,14 @@
           >
           <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
 
-          <avatar
-            :username="$auth.user.name"
-            :src="$auth.user.avatars.medium"
-            class="ml-3 mr-2"
-            :size="50"
-          ></avatar>
+          <nuxt-link :to="localePath({ name: 'settings.profile' })"
+            ><avatar
+              :username="$auth.user.name"
+              :src="$auth.user.avatars.medium"
+              class="ml-3 mr-2"
+              :size="50"
+            ></avatar>
+          </nuxt-link>
           <v-menu offset-y color="#0f1219">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="transparent" dark v-bind="attrs" v-on="on">

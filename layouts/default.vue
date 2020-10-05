@@ -168,7 +168,7 @@
               :username="$auth.user.name"
               :src="$auth.user.avatars.medium"
               class="ml-3 mr-2"
-              :size="40"
+              :size="50"
             ></avatar>
           </nuxt-link>
           <v-menu
