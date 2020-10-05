@@ -284,14 +284,14 @@ export default {
     slibtn[0].style.display = 'none'
   },
   methods: {
-    async slimService(formdata, progress, success, failure) {
+    slimService(formdata, progress, success, failure) {
       this.uploading = true
 
       formdata.append('_method', 'put')
 
       const url = `user/${this.$auth.user.id}`
 
-      await this.$axios
+      this.$axios
         .$post(url, formdata, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -360,10 +360,12 @@ export default {
     async getUploadIsSuccessful(id) {
       try {
         const uploadOk = await this.checkUpload(id)
-        this.$auth.fetchUser()
+
         return true
       } catch (err) {
         return false
+      } finally {
+        this.$auth.fetchUser()
       }
     },
     async checkUpload(id) {
