@@ -254,12 +254,12 @@ export default {
       const l = this.loader
       this[l] = !this[l]
     },
-    uploadIsSuccessful() {
+    /* uploadIsSuccessful() {
       console.log(this.uploadIsSuccessful)
       if (this.uploadIsSuccessful === true) {
         this.$auth.fetchUser()
       }
-    },
+    }, */
   },
   mounted() {
     if (this.user) {
@@ -360,6 +360,7 @@ export default {
     async getUploadIsSuccessful(id) {
       try {
         const uploadOk = await this.checkUpload(id)
+        this.$auth.fetchUser()
         return true
       } catch (err) {
         return false
