@@ -257,7 +257,7 @@ export default {
     uploadIsSuccessful() {
       console.log(this.uploadIsSuccessful)
       if (this.uploadIsSuccessful === 1) {
-        this.$auth.fetchUser()
+        // this.$auth.fetchUser()
       }
     },
   },
@@ -309,9 +309,7 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          this.getUploadIsSuccessful(
-            this.$auth.user.id
-          )
+          this.getUploadIsSuccessful(this.$auth.user.id)
           success('upload done')
           this.uploading = false
         })
@@ -358,7 +356,9 @@ export default {
         .catch((e) => console.log(e))
     },
     async getUploadIsSuccessful(id) {
-      this.uploadIsSuccessful = await this.checkUpload(id)
+      this.uploadIsSuccessful = await this.checkUpload(id).then((res) => {
+        this.$auth.fetchUser()
+      })
     },
     async checkUpload(id) {
       try {
