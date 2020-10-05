@@ -19,9 +19,9 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" />
-          <v-divider class="mx-4" inset vertical></v-divider>
+          <!-- <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" /> -->
           <v-toolbar-title>{{ $t('settingsDesigns.artwork') }}</v-toolbar-title>
+          <v-divider class="mx-4" inset vertical></v-divider>
 
           <v-spacer></v-spacer>
           <v-text-field

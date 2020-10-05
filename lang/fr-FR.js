@@ -59,7 +59,7 @@ export default {
   },
   show: {
     by: 'Par',
-    published: 'Publiée le: ',
+    published: 'Publiée ',
     backToArtwork: 'Retour aux oeuvres',
     youLike: 'Vous aimez cette oeuvre',
   },
