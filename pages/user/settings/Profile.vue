@@ -284,14 +284,14 @@ export default {
     slibtn[0].style.display = 'none'
   },
   methods: {
-    slimService(formdata, progress, success, failure) {
+    async slimService(formdata, progress, success, failure) {
       this.uploading = true
 
       formdata.append('_method', 'put')
 
       const url = `user/${this.$auth.user.id}`
 
-      this.$axios
+      await this.$axios
         .$post(url, formdata, {
           headers: {
             'Content-Type': 'multipart/form-data',
