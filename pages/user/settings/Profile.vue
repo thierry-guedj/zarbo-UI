@@ -309,7 +309,9 @@ export default {
         })
         .then((res) => {
           console.log(res)
-          this.uploadIsSuccessful = await this.checkUpload(this.$auth.user.id)
+          this.uploadIsSuccessful = this.getUploadIsSuccessful(
+            this.$auth.user.id
+          )
           success('upload done')
           this.uploading = false
         })
@@ -354,6 +356,14 @@ export default {
           this.alert = true
         })
         .catch((e) => console.log(e))
+    },
+    async getUploadIsSuccessful(id) {
+      try {
+        const uploadOk = await checkUpload(id)
+        return true
+      } catch (err) {
+        return false
+      }
     },
     async checkUpload(id) {
       const tempVar = await this.$axios
