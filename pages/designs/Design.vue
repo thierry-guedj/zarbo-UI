@@ -259,7 +259,7 @@ export default {
 
     save() {
       this.form
-        .any(`/designs/${this.design.id}/comments`)
+        .post(`/designs/${this.design.id}/comments`)
         .then((res) => {
           this.form.reset()
           this.comments = [...this.comments, res.data.data]
