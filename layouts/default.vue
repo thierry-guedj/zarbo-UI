@@ -366,6 +366,12 @@ export default {
           to: this.localePath({ name: 'users.search' }),
           toolTip: this.$i18n.t('footer.artists'),
         },
+        {
+          icon: 'mdi-chart-bubble',
+          title: this.$i18n.t('footer.privacyPolicy'),
+          to="localePath({ name: 'privacy.policy' })"
+          toolTip: this.$i18n.t('footer.privacyPolicy'),
+        },
       ],
 
       miniVariant: false,
