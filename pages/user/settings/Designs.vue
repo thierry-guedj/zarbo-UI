@@ -52,7 +52,6 @@
                     :label="$t('editDesign.title')"
                     field="title"
                     outlined
-                   
                     class="mb-1"
                     @input="$v.form.title.$touch()"
                     @blur="$v.form.title.$touch()"
@@ -152,7 +151,6 @@
         @destroyItem="deleteItem()"
       />
     </keep-alive>
-    
   </section>
 </template>
 
@@ -359,7 +357,7 @@ export default {
       }
 
       const form = {
-        title: this.editedItem.title,
+        title: this.$v.form.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.editedItem.tags,
@@ -367,7 +365,11 @@ export default {
         team: null,
       }
 
-      const res = await this.$axios.put(`/designs/${this.editedItem.id}`, form)
+      const res = await this.$axios
+        .put(`/designs/${this.editedItem.id}`, form)
+        .then((response) => {
+          this.alert = true
+        })
       this.close()
     },
     sanitizeTitle(title) {
