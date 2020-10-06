@@ -357,7 +357,7 @@ export default {
       }
 
       const form = {
-        title: this.$v.form.title,
+        title: this.$v.form.title.$model,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.editedItem.tags,
