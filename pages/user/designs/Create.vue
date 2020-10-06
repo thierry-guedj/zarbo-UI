@@ -309,8 +309,8 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    const getTags = this.$axios.$get('tags')
-    this.autocompleteItems = getTags.data.map((item) => {
+    const [getTags] = this.$axios.$get('tags')
+    this.autocompleteItems = getTags.map((item) => {
       return {
         text: item.name,
       }
