@@ -309,9 +309,9 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    const getTags = this.$axios.$get('tags')
-     console.log(getTags)
-    this.autocompleteItems = getTags.map((item) => {
+    const allTags = this.$axios.$get('tags')
+     console.log(allTags)
+    this.autocompleteItems = allTags.map((item) => {
       return {
         text: item.name,
       }
@@ -320,6 +320,10 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
+    async getAllTags() {
+      const {getTags} = await this.$axios.$get('tags')
+      return getTags
+    },
     slimService(formdata, progress, success, failure) {
       this.successFunction = success
       this.$axios
