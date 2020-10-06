@@ -154,8 +154,8 @@
                 </client-only> -->
                 <no-ssr>
                   <vue-tags-input
-                    v-model="tag"
-                    :tags="tags"
+                    v-model="form.tag"
+                    :tags="form.tags"
                     @tags-changed="(newTags) => (tags = newTags)"
                   />
                 </no-ssr>
@@ -202,7 +202,7 @@ export default {
   middleware: ['auth'],
   layout: 'designs-listing',
   components: {
-    InputTag: () => import('vue-input-tag'),
+    // InputTag: () => import('vue-input-tag'),
     'slim-cropper': Slim,
   },
   props: {
@@ -227,6 +227,7 @@ export default {
         title: '',
         description: '',
         is_live: true,
+        tag: '',
         tags: [],
         slug: '',
         /*  assign_to_team: false,
@@ -257,6 +258,7 @@ export default {
       successFunction: null,
       uploadIsOk: false,
       fab: false,
+      autocompleteItems: [],
     }
   },
   computed: {
@@ -292,6 +294,8 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
+    const getTags = this.$axios.$get('tags')
+    console.log(getTags)
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
