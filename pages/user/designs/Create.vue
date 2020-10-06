@@ -391,6 +391,7 @@ export default {
       } else {
         this.form.is_live = 1
       }
+      console.log(this.form.tags)
 
       this.form.slug = this.slug
       this.form
