@@ -309,7 +309,16 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
+
       this.editedItem.tags = this.editedItem.tag_list.tags
+      this.form = {
+        title: this.editedItem.title,
+        description: this.editedItem.description,
+        is_live: this.editedItem.is_live,
+        tags: this.editedItem.tags,
+        assign_to_team: false,
+        team: null,
+      }
       this.dialog = true
     },
     confirmDeleteItem(item) {
@@ -349,18 +358,18 @@ export default {
       if (this.editedIndex > -1) {
         const editedForm = {
           title: this.$v.form.title.$model,
-          description: this.$v.form.title.description,
-          is_live: this.$v.form.title.is_live,
-          tags: this.$v.form.title.tags,
+          description: this.$v.form.description.$model,
+          is_live: this.form.is_live,
+          tags: this.form.tags,
           assign_to_team: false,
           team: null,
         }
         Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
-        this.designs.push(this.editedItem)
+        this.designs.push(this.editedForm)
       }
-      if (!this.editedItem.tags) {
-        this.editedItem.tags = []
+      if (!this.editedForm.tags) {
+        this.editedForm.tags = []
       }
 
       const form = {
