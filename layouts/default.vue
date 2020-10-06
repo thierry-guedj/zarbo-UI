@@ -369,7 +369,7 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: this.$i18n.t('footer.privacyPolicy'),
-          to="localePath({ name: 'privacy.policy' })"
+          to: this.localePath({ name: 'privacy.policy' }),
           toolTip: this.$i18n.t('footer.privacyPolicy'),
         },
       ],
