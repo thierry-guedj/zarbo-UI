@@ -350,21 +350,21 @@ export default {
       footerLinks: [
         {
           icon: 'mdi-apps',
-          title: this.$i18n.t('navigationDrawer.welcome'),
+          title: this.$i18n.t('footer.home'),
           to: this.localePath({ name: 'index' }),
-          toolTip: 'Accueil',
+          toolTip: this.$i18n.t('footer.home'),
         },
         {
           icon: 'mdi-looks',
-          title: this.$i18n.t('navigationDrawer.artwork'),
+          title: this.$i18n.t('footer.artworks'),
           to: this.localePath({ name: 'designs.search' }),
-          toolTip: 'Accueil',
+          toolTip: this.$i18n.t('footer.artworks'),
         },
         {
           icon: 'mdi-chart-bubble',
-          title: this.$i18n.t('navigationDrawer.artists'),
+          title: this.$i18n.t('footer.artists'),
           to: this.localePath({ name: 'users.search' }),
-          toolTip: 'Accueil',
+          toolTip: this.$i18n.t('footer.artists'),
         },
       ],
 

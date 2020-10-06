@@ -257,4 +257,13 @@ export default {
     deny: 'Deny',
     accept: 'Accept',
   },
+  footer: {
+    contact: 'Contact',
+    artwork: 'Artwork',
+    artists: 'Artists',
+    yourDesigns: 'Your artwork',
+    signin: 'Sign in',
+    signup: 'Sign up',
+    signout: 'Sign out',
+  },
 }

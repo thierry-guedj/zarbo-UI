@@ -260,4 +260,13 @@ export default {
     deny: 'Refuser',
     accept: 'Accepter',
   },
+  footer: {
+    contact: 'Contact',
+    artwork: 'Oeuvres',
+    artists: 'Artistes',
+    yourDesigns: 'Vos oeuvres',
+    signin: 'Se connecter',
+    signup: 'Devenir membre',
+    signout: 'Se déconnecter',
+  },
 }
