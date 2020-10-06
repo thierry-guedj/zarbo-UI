@@ -166,7 +166,7 @@ export default {
   data() {
     return {
       form: this.$vform({
-        title: this.form.title,
+        title: '',
         description: '',
         is_live: '',
         tags: [],
