@@ -17,8 +17,8 @@
       <section class="hero text-white">
         <!-- <v-container> -->
         <v-row class="row-md-12">
-          <v-col class="col-md-2 text-center">
-            <img src="/createIcon.png" class="iconTitle ml-3 mr-2"
+          <v-col class="col-md-2 text-center iconTitle">
+            <img src="/createIcon.png" class="ml-3 mr-2"
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-9">
@@ -462,6 +462,8 @@ export default {
 }
 .iconTitle {
   max-width: 180px;
+  min-width: 180px;
+  max-width: 20%;
   min-width: 180px;
 }
 .vue-input-tag-wrapper {

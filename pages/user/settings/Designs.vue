@@ -347,7 +347,15 @@ export default {
 
     async save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.designs[this.editedIndex], this.$v.form)
+        const editedForm = {
+          title: this.$v.form.title.$model,
+          description: this.$v.form.title.description,
+          is_live: this.$v.form.title.is_live,
+          tags: this.$v.form.title.tags,
+          assign_to_team: false,
+          team: null,
+        }
+        Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
         this.designs.push(this.editedItem)
       }
