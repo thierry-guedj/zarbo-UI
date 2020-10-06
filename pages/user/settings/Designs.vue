@@ -52,6 +52,7 @@
                     :label="$t('editDesign.title')"
                     field="title"
                     outlined
+                   
                     class="mb-1"
                     @input="$v.form.title.$touch()"
                     @blur="$v.form.title.$touch()"
@@ -165,7 +166,7 @@ export default {
   data() {
     return {
       form: this.$vform({
-        title: this.editItem.title,
+        title: '',
         description: '',
         is_live: '',
         tags: [],
@@ -311,6 +312,7 @@ export default {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
+      this.$v.form = this.editItem
       this.dialog = true
     },
     confirmDeleteItem(item) {
