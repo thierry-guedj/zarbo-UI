@@ -320,8 +320,9 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     async getAllTags() {
-      const getTags = await this.$axios.$get('tags')
-      return getTags
+      await this.$axios.$get('tags').then((response) => {
+        return response
+      })
     },
     slimService(formdata, progress, success, failure) {
       this.successFunction = success
