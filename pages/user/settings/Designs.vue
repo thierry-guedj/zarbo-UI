@@ -46,7 +46,7 @@
               <v-card-text>
                 <v-container>
                   <v-text-field
-                    v-model.trim="editedItem.title"
+                    v-model.trim="$v.form.title.$model"
                     :error-messages="titleErrors"
                     :counter="120"
                     :label="$t('editDesign.title')"
@@ -93,7 +93,14 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  :loading="loadingSubmit"
+                  :disabled="$v.form.$invalid"
+                  text
+                  @click="save"
+                  >Save</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -144,21 +151,7 @@
         @destroyItem="deleteItem()"
       />
     </keep-alive>
-    <v-snackbar
-      v-model="snackbar"
-      color="success"
-      multi-line
-      timeout="5000"
-      top
-      vertical
-    >
-      Your design has been uploaded
-      <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    
   </section>
 </template>
 
@@ -172,7 +165,7 @@ export default {
   data() {
     return {
       form: this.$vform({
-        title: '',
+        title: this.editItem.title,
         description: '',
         is_live: '',
         tags: [],
@@ -237,6 +230,7 @@ export default {
       search: '',
       dialogDelete: false,
       alert: false,
+      loadingSubmit: false,
     }
   },
   validations: {
