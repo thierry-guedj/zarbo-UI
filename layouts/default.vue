@@ -356,7 +356,7 @@ export default {
         },
         {
           icon: 'mdi-looks',
-          title: this.$i18n.t('footer.artworks'),
+          title: this.$i18n.t('footer.artwork'),
           to: this.localePath({ name: 'designs.search' }),
           toolTip: this.$i18n.t('footer.artworks'),
         },

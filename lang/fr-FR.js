@@ -268,5 +268,6 @@ export default {
     signin: 'Se connecter',
     signup: 'Devenir membre',
     signout: 'Se déconnecter',
+    home: 'Accueil',
   },
 }

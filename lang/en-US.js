@@ -265,5 +265,6 @@ export default {
     signin: 'Sign in',
     signup: 'Sign up',
     signout: 'Sign out',
+    home: 'Home',
   },
 }

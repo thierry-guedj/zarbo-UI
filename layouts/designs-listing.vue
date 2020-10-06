@@ -166,7 +166,13 @@
               :size="50"
             ></avatar>
           </nuxt-link>
-          <v-menu offset-y color="#0f1219">
+          <v-menu
+            offset-y
+            bottom
+            origin="bottom center"
+            transition="scale-transition"
+            color="#0f1219"
+          >
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="transparent" dark v-bind="attrs" v-on="on">
                 <span class="user-name font-12 fw-500">
@@ -199,8 +205,68 @@
         </v-container>
       </v-main>
 
-      <v-footer :absolute="!fixed" app>
-        <span>&copy; {{ new Date().getFullYear() }}</span>
+       <v-footer :absolute="!fixed" app dark padless>
+        <v-col class="line" cols="12"> </v-col>
+        <v-row justify="center" no-gutters>
+          <v-btn
+            v-for="footerLink in footerLinks"
+            :key="footerLink.icon"
+            color="white"
+            text
+            rounded
+            class="my-2"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon size="24px" v-bind="attrs" v-on="on">
+                  {{ footerLink.icon }} </v-icon
+                >{{ footerLink.title }}
+              </template>
+              <span>Tooltip</span>
+            </v-tooltip>
+          </v-btn>
+          <v-btn
+            color="white"
+            text
+            rounded
+            class="my-2"
+            @click="goTo('ContactForm', 'user')"
+          >
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }"
+                ><v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
+                >{{ $t('footer.contact') }}
+              </template>
+              <span>Tooltip</span>
+            </v-tooltip>
+          </v-btn>
+          <template v-if="!$auth.loggedIn">
+            <v-btn
+              color="white"
+              text
+              rounded
+              class="my-2"
+              @click="goTo('LoginForm', 'auth')"
+              ><v-icon size="24px">
+                face
+              </v-icon>
+            </v-btn>
+            <v-btn
+              color="white"
+              text
+              rounded
+              class="my-2"
+              @click.stop="goTo('RegisterForm', 'auth')"
+              ><v-icon size="24px">
+                brush
+              </v-icon>
+            </v-btn>
+          </template>
+          <template v-else> </template>
+          <v-col class="footer-bottom py-4 text-center white--text" cols="12">
+            {{ new Date().getFullYear() }} — <strong>Zarbo</strong>
+          </v-col>
+        </v-row>
       </v-footer>
       <client-only>
         <Cookie />
@@ -248,6 +314,26 @@ export default {
         {
           title: this.$i18n.t('menuAccount.yourProfile'),
           route: this.localePath({ name: 'settings.profile' }),
+        },
+      ],
+      footerLinks: [
+        {
+          icon: 'mdi-apps',
+          title: this.$i18n.t('footer.home'),
+          to: this.localePath({ name: 'index' }),
+          toolTip: this.$i18n.t('footer.home'),
+        },
+        {
+          icon: 'mdi-looks',
+          title: this.$i18n.t('footer.artwork'),
+          to: this.localePath({ name: 'designs.search' }),
+          toolTip: this.$i18n.t('footer.artworks'),
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: this.$i18n.t('footer.artists'),
+          to: this.localePath({ name: 'users.search' }),
+          toolTip: this.$i18n.t('footer.artists'),
         },
       ],
 
@@ -311,6 +397,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.footer-bottom {
+  background-color: #0f1219;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+}
+.layout {
+  display: contents;
+}
 .vue-avatar--wrapper {
   min-width: 50px;
 }

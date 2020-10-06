@@ -58,7 +58,7 @@
                   ></v-text-field>
 
                   <v-textarea
-                    v-model.trim="editedItem.description"
+                    v-model.trim="$v.form.description.$model"
                     :error-messages="descriptionErrors"
                     :counter="3000"
                     :label="$t('editDesign.description')"
