@@ -309,13 +309,14 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    const [getTags] = this.$axios.$get('tags')
+    const getTags = this.$axios.$get('tags')
+     console.log(getTags)
     this.autocompleteItems = getTags.map((item) => {
       return {
         text: item.name,
       }
     })
-    console.log(getTags)
+   
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
