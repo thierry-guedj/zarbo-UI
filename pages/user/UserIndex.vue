@@ -246,8 +246,8 @@ export default {
   line-height: 1em;
 }
 .iconTitle {
-  max-width: 20%;
-  min-width: 180px;
+  max-width: 180px;
+  min-width: 20%;
 }
 .v-application a {
   text-decoration: none;
