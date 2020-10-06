@@ -310,7 +310,6 @@ export default {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
-      this.form = Object.assign({}, item)
       this.dialog = true
     },
     confirmDeleteItem(item) {
@@ -348,7 +347,7 @@ export default {
 
     async save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.designs[this.editedIndex], this.editedItem)
+        Object.assign(this.designs[this.editedIndex], this.$v.form)
       } else {
         this.designs.push(this.editedItem)
       }
