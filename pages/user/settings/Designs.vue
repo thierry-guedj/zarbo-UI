@@ -312,7 +312,7 @@ export default {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
-      this.form.title = this.editItem.title
+      this.form = Object.assign({}, item)
       this.dialog = true
     },
     confirmDeleteItem(item) {
