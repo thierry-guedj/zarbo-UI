@@ -187,6 +187,15 @@
         </v-col>
       </v-row>
     </v-container>
+    <keep-alive>
+      <base-modal
+        class="modalEditDelete"
+        :dialog.sync="visible"
+        @showDesign="styleModal()"
+        @closeDialog="hideModal()"
+        @destroyItem="deleteItem()"
+      />
+    </keep-alive>
   </section>
 </template>
 
@@ -281,6 +290,11 @@ export default {
       const slug = this.sanitizeTitle(this.form.title)
       return slug
     },
+    filteredItems() {
+      return this.autocompleteItems.filter((i) => {
+        return i.text.toLowerCase().includes(this.tag.toLowerCase())
+      })
+    },
   },
   watch: {
     loader() {
@@ -295,6 +309,11 @@ export default {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
     const getTags = this.$axios.$get('tags')
+    this.autocompleteItems = getTags.map((item) => {
+      return {
+        text: item.name,
+      }
+    })
     console.log(getTags)
   },
   methods: {

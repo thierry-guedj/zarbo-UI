@@ -250,6 +250,7 @@ export default {
     message: 'Message',
     cancel: 'Annuler',
     submit: 'Envoyer',
+    emailSent: 'Email envoyé',
   },
   cookie: {
     label1:

@@ -248,6 +248,7 @@ export default {
     message: 'Message',
     cancel: 'Cancel',
     submit: 'Submit',
+    emailSent: 'Email sent',
   },
   cookie: {
     label1:
