@@ -15,7 +15,7 @@
       >
         {{ form.errors.get('emailNotVerified') }}
         <p>
-          <base-link component-name="Resend" folder-name="auth">{{
+          <base-link component-name="ResendForm" folder-name="auth">{{
             $t('login.resendVerificationEmail')
           }}</base-link>
         </p>
