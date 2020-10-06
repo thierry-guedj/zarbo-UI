@@ -141,7 +141,7 @@
                 ></v-textarea> -->
                 <p class="tags-notice">{{ $t('create.tagsNotice') }}</p>
                 <p class="tags-notice">{{ $t('create.tagsNotice2') }}</p>
-                <client-only>
+                <!-- <client-only>
                   <input-tag
                     v-model="form.tags"
                     :tags="form.tags"
@@ -151,7 +151,14 @@
                     on-paste-delimiter=","
                     outlined
                   ></input-tag>
-                </client-only>
+                </client-only> -->
+                <no-ssr>
+                  <vue-tags-input
+                    v-model="tag"
+                    :tags="tags"
+                    @tags-changed="(newTags) => (tags = newTags)"
+                  />
+                </no-ssr>
                 <v-checkbox
                   id="is_live"
                   v-model="form.is_live"
