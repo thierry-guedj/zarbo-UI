@@ -39,7 +39,7 @@
     >
       {{ $t('resendForm.resentEmail') }}</v-alert
     >
-    <div v-if="this.$v.form.$model.successful">
+    <div v-if="!this.$v.form.$model.successful">
       <v-text-field
         v-model="$v.form.email.$model"
         :error-messages="emailErrors"
