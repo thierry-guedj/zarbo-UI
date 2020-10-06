@@ -365,11 +365,11 @@ export default {
           team: null,
         }
         Object.assign(this.designs[this.editedIndex], editedForm)
+        if (!editedForm.tags) {
+          editedForm.tags = []
+        }
       } else {
         this.designs.push(this.editedForm)
-      }
-      if (!this.editedForm.tags) {
-        this.editedForm.tags = []
       }
 
       const form = {
