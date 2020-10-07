@@ -231,6 +231,17 @@ export default {
       },
     },
   },
+  async fetch() {
+    const url = `tags`
+    const response = await this.$axios.$get(url)
+    this.allTags = response
+    console.log(this.allTags)
+    this.autocompleteItems = this.allTags.map((item) => {
+      return {
+        text: item.name,
+      }
+    })
+  },
   data() {
     return {
       form: this.$vform({
@@ -269,6 +280,7 @@ export default {
       uploadIsOk: false,
       fab: false,
       autocompleteItems: [],
+      allTags: [],
     }
   },
   computed: {
@@ -309,13 +321,6 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    const allTags = this.getAllTags()
-    console.log(allTags)
-    this.autocompleteItems = allTags.map((item) => {
-      return {
-        text: item.name,
-      }
-    })
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
