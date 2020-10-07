@@ -231,7 +231,7 @@ export default {
       },
     },
   },
-  async fetch() {
+  /* async asyncData() {
     const url = `tags`
     const response = await this.$axios.$get(url)
     this.allTags = response
@@ -241,7 +241,7 @@ export default {
         text: item.name,
       }
     })
-  },
+  }, */
   data() {
     return {
       form: this.$vform({
