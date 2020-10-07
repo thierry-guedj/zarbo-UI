@@ -152,14 +152,14 @@
                     outlined
                   ></input-tag>
                 </client-only> -->
-                <no-ssr>
+                <client-only>
                   <vue-tags-input
                     v-model="form.tag"
                     :tags="form.tags"
                     :autocomplete-items="filteredItems"
                     @tags-changed="(newTags) => (tags = newTags)"
                   />
-                </no-ssr>
+                </client-only>
                 <v-checkbox
                   id="is_live"
                   v-model="form.is_live"
@@ -231,17 +231,7 @@ export default {
       },
     },
   },
-  async fetchData() {
-    this.items = []
-    const response = await this.$axios.$get('tags')
-    this.items = response
-    this.items.forEach((item) => {
-      this.autocompleteItems.push({
-        text: item.name,
-      })
-    })
-    this.searching = false
-  },
+
   data() {
     return {
       form: this.$vform({
@@ -325,9 +315,14 @@ export default {
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    async getAllTags() {
-      await this.$axios.$get('tags').then((response) => {
-        return response
+    async fetchData() {
+      this.items = []
+      const response = await this.$axios.$get('tags')
+      this.items = response
+      this.items.forEach((item) => {
+        this.autocompleteItems.push({
+          text: item.name,
+        })
       })
     },
     slimService(formdata, progress, success, failure) {
