@@ -231,17 +231,17 @@ export default {
       },
     },
   },
-  /* async asyncData() {
-    const url = `tags`
-    const response = await this.$axios.$get(url)
-    this.allTags = response
-    console.log(this.allTags)
-    this.autocompleteItems = this.allTags.map((item) => {
-      return {
+  async fetchData() {
+    this.items = []
+    const response = await this.$axios.$get('tags')
+    this.items = response
+    this.items.forEach((item) => {
+      this.autocompleteItems.push({
         text: item.name,
-      }
+      })
     })
-  }, */
+    this.searching = false
+  },
   data() {
     return {
       form: this.$vform({
@@ -321,6 +321,7 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
+    this.fetchData()
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
