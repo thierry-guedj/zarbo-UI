@@ -96,18 +96,16 @@ export default {
       if (response.data.length > 0) {
         this.designs = response.data
         this.searching = false
-        return
       } else {
+        const response2 = await this.$axios.$get(`search/designs`, {
+          params: {
+            whereNotIn: this.filters.whereNotIn,
+          },
+        })
+        console.log(response2)
+        this.designs = response2.data
 
-      const response2 = await this.$axios.$get(`search/designs`, {
-        params: {
-          whereNotIn: this.filters.whereNotIn,
-        },
-      })
-      console.log(response2)
-      this.designs = response2.data
-
-      this.searching = false
+        this.searching = false
       }
     },
 
@@ -148,4 +146,3 @@ html {
   display: contents !important;
 }
 </style>
-

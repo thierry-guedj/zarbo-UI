@@ -309,7 +309,7 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    const allTags = this.getAllTags()
+    const allTags = await this.getAllTags()
     console.log(allTags)
     this.autocompleteItems = allTags.map((item) => {
       return {
