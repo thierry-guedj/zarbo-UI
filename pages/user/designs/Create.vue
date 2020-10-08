@@ -437,6 +437,7 @@ export default {
       } else {
         this.form.is_live = 1
       }
+      console.log(this.simpleStringArray)
       this.form.tags = this.simpleStringArrayTags
       console.log(this.form.tags)
 
