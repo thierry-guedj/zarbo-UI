@@ -239,15 +239,11 @@
       <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
-          <nuxt-link :to="footerLink.to"
-            ><v-btn
-              v-for="footerLink in footerLinks"
-              :key="footerLink.icon"
-              color="white"
-              text
-              rounded
-              class="my-2"
-            >
+          <nuxt-link
+            v-for="footerLink in footerLinks"
+            :key="footerLink.icon"
+            :to="footerLink.to"
+            ><v-btn color="white" text rounded class="my-2">
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon size="24px" v-bind="attrs" v-on="on">
