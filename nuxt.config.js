@@ -68,6 +68,11 @@ export default {
       {
         rel: 'stylesheet',
         href:
+          'https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
           'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
       },
       {
@@ -116,7 +121,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/router',
-    '@nuxtjs/moment',
+    // '@nuxtjs/moment',
   ],
   moment: {
     timezone: true,
