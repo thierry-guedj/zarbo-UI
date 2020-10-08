@@ -135,7 +135,7 @@
                 localePath({ name: 'designs.user', params: { id: user.id } })
               "
             >
-              <div class="white-bg-color" style="display: block;">
+              <div class="white-bg-color fadein" style="display: block;">
                 <v-row class="row-md-12">
                   <v-col class="col-md-3">
                     <avatar
@@ -303,6 +303,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fadein img{
+opacity:0.5;
+transition: 1s ease;
+}
+
+.fadein img:hover{
+opacity:1;
+transition: 1s ease;
+}
+
 .v-application .text-h6 {
   line-height: 1.3em;
   font-weight: 200;
