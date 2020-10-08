@@ -143,8 +143,8 @@
                 <v-row>
                   <v-col class="col-md-12 text-left">L'artiste</v-col>
                 </v-row>
-                <v-row class="row-md-12">
-                  <v-col class="col-md-3">
+                <v-row class="row-md-12 p-0">
+                  <v-col class="col-md-3 p-0">
                     <avatar
                       :username="user.name"
                       :src="user.avatars.medium"
