@@ -425,7 +425,7 @@ export default {
         title: this.$v.form.title.$model,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
-        tags: this.editedItem.tags,
+        tags: this.simpleStringArrayTags,
         tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
