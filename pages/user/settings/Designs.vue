@@ -323,7 +323,7 @@ export default {
       this.alert = true
     }
   },
-  
+
 
   methods: {
     ...mapActions(['showModal', 'hideModal']),
@@ -347,6 +347,7 @@ export default {
 
       this.designs.forEach((design, index) => {
         design.tags = design.tag_list.tags
+        design.tag = ''
         this.designs[index] = design
       })
       this.loading = false
@@ -408,6 +409,7 @@ export default {
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
           tags: this.editedItem.tags,
+          tag: this.editedItem.tag,
           assign_to_team: false,
           team: null,
         }
@@ -424,6 +426,7 @@ export default {
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.editedItem.tags,
+        tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
       }
