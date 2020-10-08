@@ -83,7 +83,10 @@
               {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0" inset></v-divider>
-            <nuxt-link :to="localePath({ name: 'designs.user' })"
+            <nuxt-link
+              :to="
+                localePath({ name: 'designs.user', params: { id: user.id } })
+              "
               ><p class="text-h6 text-left block">
                 {{ $t('show.by') }} {{ design.user.name }}
               </p></nuxt-link
@@ -127,8 +130,12 @@
             <!-- End Designs Tags -->
 
             <!-- Designer info -->
-            <nuxt-link :to="localePath({ name: 'designs.user' })">
-              <div class="white-bg-color">
+            <nuxt-link
+              :to="
+                localePath({ name: 'designs.user', params: { id: user.id } })
+              "
+            >
+              <div class="white-bg-color" style="display: block;">
                 <v-row class="row-md-12">
                   <v-col class="col-md-3">
                     <avatar
@@ -142,11 +149,9 @@
                   <v-col class="col-md-9">
                     <div class="modal-user-detail ml-2">
                       <h1 class="font-13 fw-500">
-                        <nuxt-link :to="localePath({ name: 'designs.user' })"
-                          ><p class="text-h6 text-left block">
-                            {{ $t('show.by') }} {{ design.user.name }}
-                          </p></nuxt-link
-                        >
+                        <p class="text-h6 text-left block">
+                          {{ $t('show.by') }} {{ design.user.name }}
+                        </p>
                       </h1>
                       <p class="font-12 fw-300 mt-1">
                         <span class="shot-by">{{ design.user.tagline }}</span>
