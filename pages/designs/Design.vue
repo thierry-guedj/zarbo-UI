@@ -83,9 +83,11 @@
               {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0" inset></v-divider>
-            <p class="text-h6 text-left block">
-              {{ $t('show.by') }} {{ design.user.name }}
-            </p>
+            <nuxt-link :to="localePath({ name: 'designs.user' })"
+              ><p class="text-h6 text-left block">
+                {{ $t('show.by') }} {{ design.user.name }}
+              </p></nuxt-link
+            >
             <p class="text-subtitle-1 text-left pb-3 pt-2">
               {{ design.description }}
             </p>
@@ -112,7 +114,7 @@
                   v-for="(tag, i) in design.tag_list.tags"
                   :key="`tag-${i}`"
                   class="ma-2"
-                  color="#43A047"
+                  color="#006064"
                   text-color="white"
                   @click="goToTag(`${design.tag_list.normalized[i]}`)"
                 >
@@ -125,38 +127,38 @@
             <!-- End Designs Tags -->
 
             <!-- Designer info -->
-            <div class="white-bg-color">
-              <v-row class="row-md-12">
-                <v-col class="col-md-3">
-                  <avatar
-                    :username="user.name"
-                    :src="user.avatars.medium"
-                    class="mx-3 mt-3"
-                    inline="true"
-                    :size="60"
-                  ></avatar>
-                </v-col>
-                <v-col class="col-md-9">
-                  <div class="modal-user-detail ml-2">
-                    <h1 class="font-13 fw-500">
-                      <v-btn
-                        text
-                        size="large"
-                        color="whitesmoke"
-                        @click="goToUser(`${design.user.id}`)"
-                        >{{ design.user.name }}</v-btn
-                      >
-                    </h1>
-                    <p class="font-12 fw-300 mt-1">
-                      <span class="shot-by">{{ design.user.tagline }}</span>
-                    </p>
-                    <!-- <p class="font-12 fw-300 mt-1">
+            <nuxt-link :to="localePath({ name: 'designs.user' })">
+              <div class="white-bg-color">
+                <v-row class="row-md-12">
+                  <v-col class="col-md-3">
+                    <avatar
+                      :username="user.name"
+                      :src="user.avatars.medium"
+                      class="mx-3 mt-3"
+                      inline="true"
+                      :size="60"
+                    ></avatar>
+                  </v-col>
+                  <v-col class="col-md-9">
+                    <div class="modal-user-detail ml-2">
+                      <h1 class="font-13 fw-500">
+                        <nuxt-link :to="localePath({ name: 'designs.user' })"
+                          ><p class="text-h6 text-left block">
+                            {{ $t('show.by') }} {{ design.user.name }}
+                          </p></nuxt-link
+                        >
+                      </h1>
+                      <p class="font-12 fw-300 mt-1">
+                        <span class="shot-by">{{ design.user.tagline }}</span>
+                      </p>
+                      <!-- <p class="font-12 fw-300 mt-1">
                   {{ design.created_at_dates.created_at_human }}
                 </p> -->
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
+                    </div>
+                  </v-col>
+                </v-row>
+              </div>
+            </nuxt-link>
             <!-- End Designer info -->
             <v-divider class="mt-6 mb-6"></v-divider>
             <!-- Designer Design Info -->

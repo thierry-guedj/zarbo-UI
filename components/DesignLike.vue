@@ -9,7 +9,8 @@
 thumb_down
 </span> -->
               <v-btn class="mx-2" icon dark small color="red darken-4">
-                <v-icon dark>not_interested</v-icon>
+                <v-icon dark>not_interested</v-icon> {{ likes }}
+                <span v-if="likes > 1"> Likes</span><span v-else> Like</span>
               </v-btn>
             </template>
             <template v-else>
@@ -17,19 +18,20 @@ thumb_down
 thumb_up
 </span> -->
               <v-btn class="mx-2" icon color="pink" dark small>
-                <v-icon dark>favorite</v-icon>
+                <v-icon dark>favorite</v-icon> {{ likes }}
+                <span v-if="likes > 1"> Likes</span><span v-else> Like</span>
               </v-btn>
             </template>
           </a>
         </div>
       </div>
 
-      <div>
+      <!--   <div>
         <a class="text-white"
           >{{ likes }} <span v-if="likes > 1"> Likes</span
           ><span v-else> Like</span></a
         >
-      </div>
+      </div> -->
     </li>
     <template v-if="userLikes && $auth.loggedIn">
       <div class="mt-2">
