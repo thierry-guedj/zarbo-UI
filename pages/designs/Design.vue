@@ -332,7 +332,8 @@ export default {
 .v-application .text-subtitle-1 {
   font-size: 12px;
   line-height: 1.15em;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
 }
 .container {
   text-align: left;
