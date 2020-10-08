@@ -88,14 +88,14 @@ export default {
       },
     ],
   },
-  script: [
+ /*  script: [
     {
       src: '/tarteaucitron/tarteaucitron.js',
     },
     {
       src: '/tarteaucitron-script.js',
     },
-  ],
+  ], */
   /*
    ** Global CSS
    */
