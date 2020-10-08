@@ -139,6 +139,9 @@
               "
             >
               <div class="white-bg-color fadein" style="display: block;">
+                <v-row>
+                  <v-col class="col-md-12 text-left">L'artiste</v-col>
+                </v-row>
                 <v-row class="row-md-12">
                   <v-col class="col-md-3">
                     <avatar
@@ -153,7 +156,7 @@
                     <div class="modal-user-detail ml-2">
                       <h1 class="font-13 fw-500">
                         <p class="text-h6 text-left block">
-                          {{ $t('show.by') }} {{ design.user.name }}
+                          {{ design.user.name }}
                         </p>
                       </h1>
                       <p class="font-12 fw-300 mt-1">

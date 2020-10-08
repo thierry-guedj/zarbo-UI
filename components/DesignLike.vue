@@ -3,30 +3,33 @@
     <li class="d-table w-100">
       <div class="stats-txt d-table-cell w-50">
         <div v-if="$auth.loggedIn && design.user.id !== $auth.user.id">
-          <a v-if="$auth.loggedIn" href="#" @click.prevent="likeDesign()">
+          <a
+            v-if="$auth.loggedIn"
+            href="#"
+            class="text-white"
+            @click.prevent="likeDesign()"
+          >
             <template v-if="userLikes">
               <!--        <span class="material-icons" style="color:red">
 thumb_down
 </span> -->
-              <v-btn class="mx-2" dark flat medium>
-                <v-icon color="red darken-4" dark class="heart"
-                  >not_interested</v-icon
-                >
-                {{ likes }} <span v-if="likes > 1"> Likes</span
-                ><span v-else> Like</span>
-              </v-btn>
+              <!-- <v-btn class="mx-2" dark flat medium> -->
+              <v-icon color="red darken-4" dark class="heart"
+                >not_interested</v-icon
+              >
+              {{ likes }} <span v-if="likes > 1"> Likes</span
+              ><span v-else> Like</span>
+              <!-- </v-btn> -->
             </template>
             <template v-else>
               <!--       <span class="material-icons" style="color:blue">
 thumb_up
 </span> -->
-              <v-btn class="mx-2" dark flat medium>
-                <v-icon color="red darken-4" dark class="heart"
-                  >favorite</v-icon
-                >
-                {{ likes }} <span v-if="likes > 1"> Likes</span
-                ><span v-else> Like</span>
-              </v-btn>
+              <!-- <v-btn class="mx-2" dark flat medium> -->
+              <v-icon color="red darken-4" dark class="heart">favorite</v-icon>
+              {{ likes }} <span v-if="likes > 1"> Likes</span
+              ><span v-else> Like</span>
+              <!-- </v-btn> -->
             </template>
           </a>
         </div>
