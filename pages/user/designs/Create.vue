@@ -219,7 +219,7 @@ import Slim from '@/components/slim/slim.vue'
 
 export default {
   name: 'Create',
-  middleware: ['guest'],
+  middleware: ['auth'],
   layout: 'designs-listing',
   components: {
     // InputTag: () => import('vue-input-tag'),
