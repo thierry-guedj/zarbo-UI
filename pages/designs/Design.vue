@@ -331,7 +331,7 @@ export default {
 }
 .v-application .text-subtitle-1 {
   font-size: 12px;
-  line-height: 1.15em;
+  line-height: 1.45em;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 300;
 }
