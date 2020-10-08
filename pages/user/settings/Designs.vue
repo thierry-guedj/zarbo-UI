@@ -43,6 +43,12 @@
                 <span class="headline">{{ formTitle }}</span>
               </v-card-title>
               <v-divider class="mx-4"></v-divider>
+              <img
+                :src="editedItem.images.thumbnail"
+                :lazy-src="editedItem.images.minithumbnail"
+                :alt="editedItem.title"
+                max-width="80px"
+              />
               <v-card-text>
                 <v-container>
                   <v-text-field
@@ -134,6 +140,15 @@
               max-width="80px"
             />
           </nuxt-link>
+        </div>
+      </template>
+      <template v-slot:item.tags="{ item }">
+        <div class="mr-3">
+          <ul class="ti-tag ti-valid" tabindex="0">
+            <li :key="tag" :v-for="tag in item.tags" class="ti-tag ti-valid">
+              {{ tag }}
+            </li>
+          </ul>
         </div>
       </template>
       <template v-slot:item.is_live="{ item }">
@@ -323,7 +338,6 @@ export default {
       this.alert = true
     }
   },
-
 
   methods: {
     ...mapActions(['showModal', 'hideModal']),
