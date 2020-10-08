@@ -24,12 +24,33 @@ export default {
     title: 'Zarbo',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width:device-width, initial-scale:1' },
       {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || '',
       },
+    ],
+   /*  script: [
+      {
+        src:"https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js",
+        data-name:"BMC-Widget", 
+        data-id:"zarbo",
+        data-description:"Support me on Buy me a coffee!",
+        data-message:"Thank you for visiting. You can now buy me a coffee!",
+        data-color:"#FF5F5F",
+        data-position:"",
+        data-x_margin:"18",
+        data-y_margin:"18">
+      }
+    ], */
+    script: [
+      {
+        src="/tarteaucitron/tarteaucitron.js"
+      },
+      {
+        src="/static/tarteaucitron-script.js"
+      }
     ],
     link: [
       {
@@ -53,22 +74,22 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap',
+          'https://fonts.googleapis.com/css2?family:Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display:swap',
       },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap',
+          'https://fonts.googleapis.com/css2?family:Josefin+Sans:wght@500;600&display:swap',
       },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap',
+          'https://fonts.googleapis.com/css2?family:Josefin+Sans:wght@400;500;600&display:swap',
       },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
+          'https://fonts.googleapis.com/css?family:Roboto:100,300,400,500,700,900',
       },
       {
         rel: 'stylesheet',
@@ -78,7 +99,7 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+          'https://fonts.googleapis.com/css?family:Roboto:300,400,500,700|Material+Icons',
       },
     ],
   },
@@ -229,6 +250,6 @@ export default {
     filenames: {
       chunk: ({ isDev }) => (isDev ? 'c[name].js' : 'c[id].[contenthash].js'),
     },
-    vendor: ['@johmun/vue-tags-input'],
+     vendor: ['@johmun/vue-tags-input'],
   },
 }
