@@ -69,7 +69,7 @@
                     @blur="$v.form.description.$touch()"
                   ></v-textarea>
 
-                  <client-only>
+                  <!-- <client-only>
                     <input-tag
                       v-model="editedItem.tags"
                       :tags="editedItem.tags"
@@ -79,6 +79,24 @@
                       on-paste-delimiter=","
                       outlined
                     ></input-tag>
+                  </client-only> -->
+                  <client-only>
+                    <vue-tags-input
+                      v-model="form.tag"
+                      :tags="form.tags"
+                      class="tags-input"
+                      :autocomplete-items="filteredItems"
+                      @tags-changed="(newTags) => (tags = newTags)"
+                    >
+                      <template slot="autocomplete-header">
+                        <strong>Select a tag here ↓</strong>
+                      </template>
+                      <template slot="autocomplete-footer">
+                        <small>
+                          <em>Or keep going with yours...</em>
+                        </small>
+                      </template>
+                    </vue-tags-input>
                   </client-only>
 
                   <v-checkbox
@@ -167,6 +185,7 @@ export default {
         title: ' ',
         description: '',
         is_live: '',
+        tag: '',
         tags: [],
         slug: '',
         /*  assign_to_team: false,
@@ -213,6 +232,7 @@ export default {
         title: '',
         description: '',
         is_live: false,
+        tag: '',
         tags: [],
         assign_to_team: false,
         team: null,
@@ -221,6 +241,7 @@ export default {
         title: '',
         description: '',
         is_live: false,
+        tag: '',
         tags: [],
         assign_to_team: false,
         team: null,
@@ -230,6 +251,8 @@ export default {
       dialogDelete: false,
       alert: false,
       loadingSubmit: false,
+      autocompleteItems: [],
+      allTags: [],
     }
   },
   validations: {
@@ -241,6 +264,9 @@ export default {
         maxLen: maxLength(3000),
       },
     },
+  },
+  mounted() {
+    this.getAllTags()
   },
   computed: {
     titleErrors() {
@@ -269,6 +295,14 @@ export default {
       const slug = this.sanitizeTitle(this.form.title)
       return slug
     },
+    filteredItems() {
+      return this.autocompleteItems.filter((i) => {
+        return i.text.toLowerCase().includes(this.form.tag.toLowerCase())
+      })
+    },
+    simpleStringArrayTags() {
+      return this.tags.map((tag) => tag.text)
+    },
   },
 
   watch: {
@@ -288,10 +322,22 @@ export default {
     if (this.$route.params.upload) {
       this.alert = true
     }
+    this.tags = this.designs.tag_list.tags.map((string) => ({ text: string }))
   },
 
   methods: {
     ...mapActions(['showModal', 'hideModal']),
+    async getAllTags() {
+      this.allTags = []
+      const response = await this.$axios.$get('tags')
+      console.log(response)
+      this.allTags = response
+      this.autocompleteItems = this.allTags.map((item) => {
+        return {
+          text: item.name,
+        }
+      })
+    },
     async initialize() {
       this.designs = []
       const { data } = await this.$axios.$get(
@@ -414,7 +460,8 @@ export default {
 </script>
 
 <style lang="scss">
-.vue-input-tag-wrapper {
+@import '~/assets/scss/tags.scss';
+/* .vue-input-tag-wrapper {
   background-color: #0f1219 !important;
   border-radius: 4px;
   border: 1px thin;
@@ -431,7 +478,7 @@ export default {
   margin-bottom: 4px;
   margin-right: 4px;
   padding: 3px;
-}
+} */
 img {
   max-width: 100%;
   height: auto;
