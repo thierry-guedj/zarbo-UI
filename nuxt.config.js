@@ -106,6 +106,7 @@ export default {
       src: './plugins/GoogleAnalytics.js',
       mode: 'client',
     },
+    { src: '~/plugins/vue-tags-input', ssr: false },
   ],
   /*
    ** Auto import components
