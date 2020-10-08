@@ -239,12 +239,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.titlePage {
-  font-size: 44px;
-  padding-top: 20px;
-  margin-bottom: 30px;
-  line-height: 1em;
-}
 .iconTitle {
   max-width: 200px;
   min-width: 200px;

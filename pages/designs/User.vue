@@ -335,21 +335,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.titlePage {
-  font-size: 44px;
-  padding-top: 20px;
-  margin-bottom: 30px;
-  line-height: 1em;
-}
 .tagline {
   font-size: 24px;
 }
 .about {
   font-size: 16px;
-}
-.iconTitle {
-  max-width: 180px;
-  min-width: 180px;
 }
 .alert {
   text-align: center;

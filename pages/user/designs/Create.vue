@@ -339,11 +339,6 @@ export default {
           text: item.name,
         }
       })
-      /* this.items.forEach((item) => {
-        this.autocompleteItems.push({
-          text: item.name,
-        })
-      }) */
     },
     slimService(formdata, progress, success, failure) {
       this.successFunction = success
@@ -517,18 +512,6 @@ export default {
 <style lang="scss">
 @import '~/assets/scss/tags.scss';
 
-.titlePage {
-  font-size: 44px;
-  padding-top: 20px;
-  margin-bottom: 30px;
-  line-height: 1em;
-}
-.iconTitle {
-  max-width: 180px;
-  min-width: 180px;
-  max-width: 20%;
-  min-width: 180px;
-}
 /* .vue-input-tag-wrapper {
   background-color: transparent !important;
   border-radius: 4px !important;
