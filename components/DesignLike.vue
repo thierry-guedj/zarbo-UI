@@ -9,7 +9,7 @@
 thumb_down
 </span> -->
               <v-btn class="mx-2" icon dark small color="red darken-4">
-                <v-icon dark>not_interested</v-icon> {{ likes }}
+                <v-icon dark class="heart">not_interested</v-icon> {{ likes }}
                 <span v-if="likes > 1"> Likes</span><span v-else> Like</span>
               </v-btn>
             </template>
@@ -18,20 +18,19 @@ thumb_down
 thumb_up
 </span> -->
               <v-btn class="mx-2" icon color="pink" dark small>
-                <v-icon dark>favorite</v-icon> {{ likes }}
+                <v-icon dark class="heart">favorite</v-icon> {{ likes }}
                 <span v-if="likes > 1"> Likes</span><span v-else> Like</span>
               </v-btn>
             </template>
           </a>
         </div>
+        <div v-else>
+          <a class="text-white"
+            >{{ likes }} <span v-if="likes > 1"> Likes</span
+            ><span v-else> Like</span></a
+          >
+        </div>
       </div>
-
-      <!--   <div>
-        <a class="text-white"
-          >{{ likes }} <span v-if="likes > 1"> Likes</span
-          ><span v-else> Like</span></a
-        >
-      </div> -->
     </li>
     <template v-if="userLikes && $auth.loggedIn">
       <div class="mt-2">
@@ -97,4 +96,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.heart {
+  margin-right: 3px;
+}
+</style>
