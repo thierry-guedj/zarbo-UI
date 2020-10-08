@@ -31,7 +31,7 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-   /*  script: [
+    /*  script: [
       {
         src:"https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js",
         data-name:"BMC-Widget", 
@@ -46,11 +46,11 @@ export default {
     ], */
     script: [
       {
-        src="/tarteaucitron/tarteaucitron.js"
+        src: '/tarteaucitron/tarteaucitron.js',
       },
       {
-        src="/static/tarteaucitron-script.js"
-      }
+        src: '/static/tarteaucitron-script.js',
+      },
     ],
     link: [
       {
@@ -250,6 +250,6 @@ export default {
     filenames: {
       chunk: ({ isDev }) => (isDev ? 'c[name].js' : 'c[id].[contenthash].js'),
     },
-     vendor: ['@johmun/vue-tags-input'],
+    vendor: ['@johmun/vue-tags-input'],
   },
 }
