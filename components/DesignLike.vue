@@ -8,7 +8,7 @@
               <!--        <span class="material-icons" style="color:red">
 thumb_down
 </span> -->
-              <v-btn class="mx-2" dark medium color="red darken-4">
+              <v-btn class="mx-2" dark flat medium>
                 <v-icon color="red darken-4" dark class="heart"
                   >not_interested</v-icon
                 >
@@ -20,7 +20,7 @@ thumb_down
               <!--       <span class="material-icons" style="color:blue">
 thumb_up
 </span> -->
-              <v-btn class="mx-2" color="pink" dark medium>
+              <v-btn class="mx-2" dark flat medium>
                 <v-icon color="red darken-4" dark class="heart"
                   >favorite</v-icon
                 >
