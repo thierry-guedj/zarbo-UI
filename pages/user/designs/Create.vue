@@ -309,6 +309,9 @@ export default {
         return i.text.toLowerCase().includes(this.form.tag.toLowerCase())
       })
     },
+    simpleStringArrayTags() {
+      return this.form.tags.map((tag) => tag.text)
+    },
   },
   watch: {
     loader() {
@@ -434,6 +437,7 @@ export default {
       } else {
         this.form.is_live = 1
       }
+      this.form.tags = this.simpleStringArrayTags
       console.log(this.form.tags)
 
       this.form.slug = this.slug
