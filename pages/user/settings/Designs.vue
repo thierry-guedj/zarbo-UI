@@ -323,6 +323,7 @@ export default {
       this.alert = true
     }
   },
+  
 
   methods: {
     ...mapActions(['showModal', 'hideModal']),
