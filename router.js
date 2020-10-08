@@ -205,17 +205,17 @@ const routes = [
   {
     path: '/privacy/',
     name: 'privacy.policy',
-    component: page('PrivacyPolicy.vue'),
+    component: page('terms/PrivacyPolicy.vue'),
   },
   {
     path: '/privacy/fr/',
     name: 'privacy.policy___fr',
-    component: page('PrivacyPolicy.vue'),
+    component: page('terms/PrivacyPolicy.vue'),
   },
   {
     path: '/privacy/en/',
     name: 'privacy.policy___en',
-    component: page('PrivacyPolicy.vue'),
+    component: page('terms/PrivacyPolicy.vue'),
   },
   /* {
     path: '/design/:slug',

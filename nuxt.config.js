@@ -46,10 +46,10 @@ export default {
     ], */
     script: [
       {
-        src: '/tarteaucitron/tarteaucitron.js',
+        src: '/tarteaucitron.js',
       },
       {
-        src: '/static/tarteaucitron-script.js',
+        src: '/tarteaucitron-script.js',
       },
     ],
     link: [
