@@ -256,6 +256,7 @@ export default {
         title: '',
         description: '',
         is_live: false,
+        images: {},
         tag: '',
         tags: [],
         assign_to_team: false,
