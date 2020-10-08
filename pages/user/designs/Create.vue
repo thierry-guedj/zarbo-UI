@@ -154,7 +154,7 @@
                 </client-only> -->
                 <client-only>
                   <vue-tags-input
-                    v-model="form.tags"
+                    v-model="form.tag"
                     :tags="form.tags"
                     class="tags-input"
                     :autocomplete-items="filteredItems"
