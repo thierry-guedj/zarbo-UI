@@ -136,24 +136,29 @@
           </nuxt-link>
         </div>
       </template>
-      <client-only>
-        <vue-tags-input
-          v-model="editedItem.tag"
-          :tags="editedItem.tags"
-          class="tags-input"
-          :autocomplete-items="filteredItems"
-          @tags-changed="(newTags) => (tags = newTags)"
-        >
-          <template slot="autocomplete-header">
-            <strong>Select a tag here ↓</strong>
-          </template>
-          <template slot="autocomplete-footer">
-            <small>
-              <em>Or keep going with yours...</em>
-            </small>
-          </template>
-        </vue-tags-input>
-      </client-only>
+
+      <template v-slot:item.tags="{ item }">
+        <div class="mr-3">
+          <client-only>
+            <vue-tags-input
+              v-model="editedItem.tag"
+              :tags="editedItem.tags"
+              class="tags-input"
+              :autocomplete-items="filteredItems"
+              @tags-changed="(newTags) => (tags = newTags)"
+            >
+              <template slot="autocomplete-header">
+                <strong>Select a tag here ↓</strong>
+              </template>
+              <template slot="autocomplete-footer">
+                <small>
+                  <em>Or keep going with yours...</em>
+                </small>
+              </template>
+            </vue-tags-input>
+          </client-only>
+        </div>
+      </template>
       <template v-slot:item.is_live="{ item }">
         <div class="mr-3">
           <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
