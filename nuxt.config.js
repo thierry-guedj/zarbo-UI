@@ -31,22 +31,9 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    /*  script: [
-      {
-        src:"https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js",
-        data-name:"BMC-Widget", 
-        data-id:"zarbo",
-        data-description:"Support me on Buy me a coffee!",
-        data-message:"Thank you for visiting. You can now buy me a coffee!",
-        data-color:"#FF5F5F",
-        data-position:"",
-        data-x_margin:"18",
-        data-y_margin:"18">
-      }
-    ], */
     script: [
       {
-        src: '/tarteaucitron.js',
+        src: '/tarteaucitron/tarteaucitron.js',
       },
       {
         src: '/tarteaucitron-script.js',
