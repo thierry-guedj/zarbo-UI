@@ -142,7 +142,7 @@
           </nuxt-link>
         </div>
       </template>
-      <template v-slot:item.tags="{ item }">
+     <!--  <template v-slot:item.tags="{ item }">
         <div class="mr-3">
           <ul class="ti-tag ti-valid">
             <li :key="tag" :v-for="tag in item.tags" class="ti-tag ti-valid">
@@ -150,7 +150,7 @@
             </li>
           </ul>
         </div>
-      </template>
+      </template> -->
       <template v-slot:item.is_live="{ item }">
         <div class="mr-3">
           <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
@@ -228,12 +228,12 @@ export default {
           sortable: true,
           value: 'description',
         },
-       /*  {
+        {
           text: this.$i18n.t('settingsDesigns.tags'),
           align: 'start',
           sortable: true,
           value: 'tags',
-        }, */
+        },
         {
           text: this.$i18n.t('settingsDesigns.status'),
           value: 'is_live',
