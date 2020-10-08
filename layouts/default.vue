@@ -244,14 +244,9 @@
             :key="footerLink.icon"
             :to="footerLink.to"
             ><v-btn color="white" text rounded class="my-2">
-              <v-tooltip top>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon size="24px" v-bind="attrs" v-on="on">
-                    {{ footerLink.icon }} </v-icon
-                  >{{ footerLink.title }}
-                </template>
-                <span>Tooltip</span>
-              </v-tooltip>
+              <v-icon size="24px" v-bind="attrs" v-on="on">
+                {{ footerLink.icon }} </v-icon
+              >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
           <v-btn
@@ -261,6 +256,8 @@
             class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
+            <v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
+            >{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-btn
