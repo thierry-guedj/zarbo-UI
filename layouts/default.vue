@@ -265,13 +265,6 @@
             class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
-            <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }"
-                ><v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
-                >{{ $t('footer.contact') }}
-              </template>
-              <span>Tooltip</span>
-            </v-tooltip>
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-btn
@@ -354,25 +347,21 @@ export default {
           icon: 'mdi-apps',
           title: this.$i18n.t('footer.home'),
           to: this.localePath({ name: 'index' }),
-          toolTip: this.$i18n.t('footer.home'),
         },
         {
           icon: 'mdi-looks',
           title: this.$i18n.t('footer.artwork'),
           to: this.localePath({ name: 'designs.search' }),
-          toolTip: this.$i18n.t('footer.artworks'),
         },
         {
           icon: 'mdi-chart-bubble',
           title: this.$i18n.t('footer.artists'),
           to: this.localePath({ name: 'users.search' }),
-          toolTip: this.$i18n.t('footer.artists'),
         },
         {
-          icon: '',
+          icon: 'mdi-privacy_tip',
           title: this.$i18n.t('footer.privacyPolicy'),
           to: this.localePath({ name: 'privacy.policy' }),
-          toolTip: this.$i18n.t('footer.privacyPolicy'),
         },
       ],
 
