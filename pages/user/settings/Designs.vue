@@ -137,7 +137,7 @@
           </v-toolbar>
         </template>
         <template v-slot:item.image="{ item }">
-          <div class="px-2 my-2 align-middle">
+          <div v-if="item.is_live" class="px-2 my-2 align-middle">
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
@@ -148,6 +148,14 @@
                 max-width="80px"
               />
             </nuxt-link>
+          </div>
+          <div v-else>
+            <img
+              :src="item.images.thumbnail"
+              :lazy-src="item.images.minithumbnail"
+              :alt="item.title"
+              max-width="80px"
+            />
           </div>
         </template>
         <!--  <template v-slot:item.tags="{ item }">
