@@ -24,7 +24,7 @@ export default {
     title: 'Zarbo',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width:device-width, initial-scale:1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
@@ -52,50 +52,36 @@ export default {
       { rel: 'manifest', href: '/site.webmanifest' },
       {
         rel: 'stylesheet',
-        type: 'text/css',
         href:
-          'https://fonts.googleapis.com/css2?family:Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display:swap',
+          'https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap',
       },
       {
         rel: 'stylesheet',
-        type: 'text/css',
         href:
-          'https://fonts.googleapis.com/css2?family:Josefin+Sans:wght@500;600&display:swap',
+          'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap',
       },
       {
         rel: 'stylesheet',
-        type: 'text/css',
         href:
-          'https://fonts.googleapis.com/css2?family:Josefin+Sans:wght@400;500;600&display:swap',
+          'https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&display=swap',
       },
       {
         rel: 'stylesheet',
-        type: 'text/css',
         href:
-          'https://fonts.googleapis.com/css?family:Roboto:100,300,400,500,700,900',
+          'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
       },
       {
         rel: 'stylesheet',
-        type: 'text/css',
         href:
           'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css',
       },
       {
         rel: 'stylesheet',
-        type: 'text/css',
         href:
-          'https://fonts.googleapis.com/css?family:Roboto:300,400,500,700|Material+Icons',
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
       },
     ],
   },
- /*  script: [
-    {
-      src: '/tarteaucitron/tarteaucitron.js',
-    },
-    {
-      src: '/tarteaucitron-script.js',
-    },
-  ], */
   /*
    ** Global CSS
    */
@@ -115,7 +101,6 @@ export default {
       src: './plugins/GoogleAnalytics.js',
       mode: 'client',
     },
-    { src: '~/plugins/vue-tags-input', ssr: false },
   ],
   /*
    ** Auto import components
