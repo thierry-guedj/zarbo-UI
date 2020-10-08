@@ -154,7 +154,7 @@
                 </client-only> -->
                 <client-only>
                   <vue-tags-input
-                    v-model="form.tag"
+                    v-model="form.tags"
                     :tags="form.tags"
                     class="tags-input"
                     :autocomplete-items="filteredItems"
@@ -219,7 +219,7 @@ import Slim from '@/components/slim/slim.vue'
 
 export default {
   name: 'Create',
-  middleware: ['auth'],
+  middleware: ['guest'],
   layout: 'designs-listing',
   components: {
     // InputTag: () => import('vue-input-tag'),

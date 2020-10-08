@@ -227,13 +227,13 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
-    goTo(to, folderName) {
+ /*    goTo(to, folderName) {
       this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),
         300
       )
-    },
+    }, */
   },
 }
 </script>
@@ -246,8 +246,8 @@ export default {
   line-height: 1em;
 }
 .iconTitle {
-  max-width: 180px;
-  min-width: 20%;
+  max-width: 200px;
+  min-width: 200px;
 }
 .v-application a {
   text-decoration: none;

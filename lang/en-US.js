@@ -267,5 +267,6 @@ export default {
     signup: 'Sign up',
     signout: 'Sign out',
     home: 'Home',
+    privacyPolicy: 'Privacy Policy',
   },
 }

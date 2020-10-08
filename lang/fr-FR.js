@@ -270,5 +270,6 @@ export default {
     signup: 'Devenir membre',
     signout: 'Se déconnecter',
     home: 'Accueil',
+    privacyPolicy: 'Politique de confidentialité',
   },
 }

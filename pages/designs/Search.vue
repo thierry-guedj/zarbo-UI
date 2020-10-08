@@ -17,7 +17,7 @@
       <section class="hero text-white">
         <!-- <v-container> -->
         <v-row class="row-md-12">
-          <v-col class="col-md-2 text-cente iconTitle">
+          <v-col class="col-md-2 text-center iconTitle">
             <img src="/artworksIcon.png" class="ml-3 mr-2"
           /></v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
@@ -289,9 +289,7 @@ export default {
       this.filters.page += 1
     },
 
-    styleModal() {
-      this.fullscreen = true
-    },
+    
     onScroll(e) {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
@@ -319,8 +317,8 @@ export default {
   line-height: 1em;
 }
 .iconTitle {
-  max-width: 180px;
-  min-width: 20%;
+  max-width: 200px;
+  min-width: 200px;
 }
 .alert {
   text-align: center;
