@@ -82,8 +82,8 @@
                   </client-only> -->
                   <client-only>
                     <vue-tags-input
-                      v-model="form.tag"
-                      :tags="form.tags"
+                      v-model="editedItem.tag"
+                      :tags="editedItem.tags"
                       class="tags-input"
                       :autocomplete-items="filteredItems"
                       @tags-changed="(newTags) => (tags = newTags)"
@@ -176,9 +176,9 @@
 import { mapActions, mapGetters } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 export default {
-  components: {
+  /*  components: {
     InputTag: () => import('vue-input-tag'),
-  },
+  }, */
   data() {
     return {
       form: this.$vform({
@@ -265,9 +265,7 @@ export default {
       },
     },
   },
-  mounted() {
-    this.getAllTags()
-  },
+
   computed: {
     titleErrors() {
       const errors = []
@@ -297,18 +295,20 @@ export default {
     },
     filteredItems() {
       return this.autocompleteItems.filter((i) => {
-        return i.text.toLowerCase().includes(this.form.tag.toLowerCase())
+        return i.text.toLowerCase().includes(this.editedItem.tag.toLowerCase())
       })
     },
     simpleStringArrayTags() {
       return this.tags.map((tag) => tag.text)
     },
   },
-
   watch: {
     dialog(val) {
       val || this.close()
     },
+  },
+  mounted() {
+    this.getAllTags()
   },
   beforeRouteUpdate(to, from, next) {
     if (from.params.upload) {
@@ -322,7 +322,6 @@ export default {
     if (this.$route.params.upload) {
       this.alert = true
     }
-    this.tags = this.designs.tag_list.tags.map((string) => ({ text: string }))
   },
 
   methods: {
@@ -355,8 +354,9 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-
       this.editedItem.tags = this.editedItem.tag_list.tags
+      this.tags = this.editedItem.tags.map((string) => ({ text: string }))
+
       this.form = {
         title: this.editedItem.title,
         description: this.editedItem.description,
