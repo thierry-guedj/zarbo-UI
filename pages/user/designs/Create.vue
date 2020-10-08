@@ -310,7 +310,7 @@ export default {
       })
     },
     simpleStringArrayTags() {
-      return this.form.tags.map((tag) => tag.text)
+      return this.tags.map((tag) => tag.text)
     },
   },
   watch: {
@@ -347,6 +347,7 @@ export default {
     },
     slimService(formdata, progress, success, failure) {
       this.successFunction = success
+      
       this.$axios
         .post('designs', formdata, {
           headers: {
