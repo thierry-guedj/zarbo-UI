@@ -1,3 +1,9 @@
 .v-application a {
-    color: #006064;
+    color: bisque;
+        text-decoration: none;
+        color: #546e7a;
 }
+
+  .v-application a:hover {
+    text-decoration: underline;
+  }
