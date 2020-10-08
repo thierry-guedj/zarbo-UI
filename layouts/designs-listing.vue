@@ -89,7 +89,7 @@
           <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
         </v-btn> -->
 
-        <nuxt-link :to="{ name: 'index' }"
+        <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
@@ -208,23 +208,16 @@
        <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
-          <v-btn
+          <nuxt-link
             v-for="footerLink in footerLinks"
             :key="footerLink.icon"
-            color="white"
-            text
-            rounded
-            class="my-2"
-          >
-            <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon size="24px" v-bind="attrs" v-on="on">
-                  {{ footerLink.icon }} </v-icon
-                >{{ footerLink.title }}
-              </template>
-              <span>Tooltip</span>
-            </v-tooltip>
-          </v-btn>
+            :to="footerLink.to"
+            ><v-btn color="white" text rounded class="my-2">
+              <v-icon size="24px" v-bind="attrs" v-on="on">
+                {{ footerLink.icon }} </v-icon
+              >{{ footerLink.title }}
+            </v-btn>
+          </nuxt-link>
           <v-btn
             color="white"
             text
@@ -232,13 +225,8 @@
             class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
-            <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }"
-                ><v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
-                >{{ $t('footer.contact') }}
-              </template>
-              <span>Tooltip</span>
-            </v-tooltip>
+            <v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
+            >{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-btn
@@ -334,6 +322,11 @@ export default {
           title: this.$i18n.t('footer.artists'),
           to: this.localePath({ name: 'users.search' }),
           toolTip: this.$i18n.t('footer.artists'),
+        },
+        {
+          icon: 'mdi-security',
+          title: this.$i18n.t('footer.privacyPolicy'),
+          to: this.localePath({ name: 'privacy.policy' }),
         },
       ],
 

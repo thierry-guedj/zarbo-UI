@@ -352,7 +352,7 @@ export default {
           to: this.localePath({ name: 'users.search' }),
         },
         {
-          icon: 'mdi-privacy_tip',
+          icon: 'mdi-security',
           title: this.$i18n.t('footer.privacyPolicy'),
           to: this.localePath({ name: 'privacy.policy' }),
         },
