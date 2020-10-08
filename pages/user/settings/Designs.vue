@@ -144,7 +144,7 @@
       </template>
       <template v-slot:item.tags="{ item }">
         <div class="mr-3">
-          <ul class="ti-tag ti-valid" tabindex="0">
+          <ul class="ti-tag ti-valid">
             <li :key="tag" :v-for="tag in item.tags" class="ti-tag ti-valid">
               {{ tag }}
             </li>
@@ -228,12 +228,12 @@ export default {
           sortable: true,
           value: 'description',
         },
-        {
+       /*  {
           text: this.$i18n.t('settingsDesigns.tags'),
           align: 'start',
           sortable: true,
           value: 'tags',
-        },
+        }, */
         {
           text: this.$i18n.t('settingsDesigns.status'),
           value: 'is_live',
