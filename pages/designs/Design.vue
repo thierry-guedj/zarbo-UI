@@ -101,7 +101,7 @@
               {{ $t('show.published') }}
               {{ design.created_at_dates.created_at_human }}
             </p>
-            <div>
+            <div class="fadin">
               <DesignLike :design="design"></DesignLike>
             </div>
           </div>
@@ -137,6 +137,7 @@
               :to="
                 localePath({ name: 'designs.user', params: { id: user.id } })
               "
+              class="designer-info"
             >
               <div class="white-bg-color fadein" style="display: block;">
                 <v-row>
@@ -309,12 +310,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.designer-info:hover {
+  text-decoration: none !important;
+}
 .fadein {
   opacity: 0.5;
   transition: 1s ease;
 }
 
 .fadein:hover {
+  color: grey-lighten-4;
   opacity: 1;
   transition: 1s ease;
 }
