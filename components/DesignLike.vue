@@ -10,7 +10,7 @@ thumb_down
 </span> -->
               <v-btn class="mx-2" icon dark small color="red darken-4">
                 <v-icon dark class="heart">not_interested</v-icon> {{ likes }}
-                <span v-if="likes > 1"> Likes</span><span v-else> Like</span>
+                <div v-if="likes > 1"> Likes</div><div v-else> Like</div>
               </v-btn>
             </template>
             <template v-else>
@@ -19,15 +19,15 @@ thumb_up
 </span> -->
               <v-btn class="mx-2" icon color="pink" dark small>
                 <v-icon dark class="heart">favorite</v-icon> {{ likes }}
-                <span v-if="likes > 1"> Likes</span><span v-else> Like</span>
+                <div v-if="likes > 1"> Likes</div><div v-else> Like</div>
               </v-btn>
             </template>
           </a>
         </div>
         <div v-else>
           <a class="text-white"
-            >{{ likes }} <span v-if="likes > 1"> Likes</span
-            ><span v-else> Like</span></a
+            >{{ likes }} <div v-if="likes > 1"> Likes</div
+            ><div v-else> Like</div></a
           >
         </div>
       </div>
