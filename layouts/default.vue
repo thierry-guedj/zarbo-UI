@@ -501,7 +501,7 @@ footer {
 .theme--dark.v-application {
   background-color: #0f1219;
   font-family: 'Josefin Sans', sans-serif;
-
+  font-weight: 300;
   font-size: 15px;
   transition-property: opacity;
   transition-duration: 0.35s;
