@@ -100,7 +100,9 @@
               {{ $t('show.published') }}
               {{ design.created_at_dates.created_at_human }}
             </p>
+            <div>
             <DesignLike :design="design"></DesignLike>
+            </div>
           </div>
           <v-divider class="mx-0 mb-6"></v-divider>
           <div class="post-detail-sidebar mt-3">
