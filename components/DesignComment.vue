@@ -12,7 +12,7 @@
         :username="comment.user.name"
         :src="comment.user.avatars.medium"
         class="mx-3 mt-3"
-        :size="40"
+        :size="50"
       ></avatar>
     </div>
     <div class="comment-meta mb-3">

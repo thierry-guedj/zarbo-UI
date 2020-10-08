@@ -83,14 +83,15 @@
               {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0" inset></v-divider>
-            <nuxt-link
-              :to="
-                localePath({ name: 'designs.user', params: { id: user.id } })
-              "
-              ><p class="text-h6 text-left block">
-                {{ $t('show.by') }} {{ design.user.name }}
-              </p></nuxt-link
-            >
+            <p class="text-h6 text-left block">
+              {{ $t('show.by') }}
+              <nuxt-link
+                :to="
+                  localePath({ name: 'designs.user', params: { id: user.id } })
+                "
+                >{{ design.user.name }}</nuxt-link
+              >
+            </p>
             <p class="text-subtitle-1 text-left pb-3 pt-2">
               {{ design.description }}
             </p>
@@ -101,7 +102,7 @@
               {{ design.created_at_dates.created_at_human }}
             </p>
             <div>
-            <DesignLike :design="design"></DesignLike>
+              <DesignLike :design="design"></DesignLike>
             </div>
           </div>
           <v-divider class="mx-0 mb-6"></v-divider>
@@ -305,14 +306,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fadein img{
-opacity:0.5;
-transition: 1s ease;
+.fadein {
+  opacity: 0.5;
+  transition: 1s ease;
 }
 
-.fadein img:hover{
-opacity:1;
-transition: 1s ease;
+.fadein:hover {
+  opacity: 1;
+  transition: 1s ease;
 }
 
 .v-application .text-h6 {
