@@ -8,26 +8,32 @@
               <!--        <span class="material-icons" style="color:red">
 thumb_down
 </span> -->
-              <v-btn class="mx-2" icon dark small color="red darken-4">
-                <v-icon dark class="heart">not_interested</v-icon> {{ likes }}
-                <div v-if="likes > 1"> Likes</div><div v-else> Like</div>
+              <v-btn class="mx-2" dark medium color="red darken-4">
+                <v-icon color="red darken-4" dark class="heart"
+                  >not_interested</v-icon
+                >
+                {{ likes }} <span v-if="likes > 1"> Likes</span
+                ><span v-else> Like</span>
               </v-btn>
             </template>
             <template v-else>
               <!--       <span class="material-icons" style="color:blue">
 thumb_up
 </span> -->
-              <v-btn class="mx-2" icon color="pink" dark small>
-                <v-icon dark class="heart">favorite</v-icon> {{ likes }}
-                <div v-if="likes > 1"> Likes</div><div v-else> Like</div>
+              <v-btn class="mx-2" color="pink" dark medium>
+                <v-icon color="red darken-4" dark class="heart"
+                  >favorite</v-icon
+                >
+                {{ likes }} <span v-if="likes > 1"> Likes</span
+                ><span v-else> Like</span>
               </v-btn>
             </template>
           </a>
         </div>
         <div v-else>
           <a class="text-white"
-            >{{ likes }} <div v-if="likes > 1"> Likes</div
-            ><div v-else> Like</div></a
+            >{{ likes }} <span v-if="likes > 1"> Likes</span
+            ><span v-else> Like</span></a
           >
         </div>
       </div>
