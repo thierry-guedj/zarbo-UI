@@ -1,0 +1,30 @@
+/* style the background and the text color of the input ... */
+.vue-tags-input {
+    background-color: #1e1e1e !important;
+    color: #ffffff;
+  }
+
+  .vue-tags-input .ti-new-tag-input {
+    background: transparent;
+    color: #b7c4c9;
+  }
+
+  .vue-tags-input .ti-input {
+    padding: 4px 10px;
+    transition: border-bottom 200ms ease;
+  }
+
+  /* we cange the border color if the user focuses the input */
+  .vue-tags-input.ti-focus .ti-input {
+    border: 1px solid #006064;
+  }
+  
+  /* some stylings for the autocomplete layer */
+.vue-tags-input .ti-autocomplete {
+    background: #1e1e1e;
+    border: 1px solid #8b9396;
+    border-top: none;
+    overflow: scroll;
+    height: 150px;
+  }
+  

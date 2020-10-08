@@ -367,7 +367,7 @@ export default {
           toolTip: this.$i18n.t('footer.artists'),
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: '',
           title: this.$i18n.t('footer.privacyPolicy'),
           to: this.localePath({ name: 'privacy.policy' }),
           toolTip: this.$i18n.t('footer.privacyPolicy'),

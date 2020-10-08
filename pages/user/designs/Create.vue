@@ -156,9 +156,19 @@
                   <vue-tags-input
                     v-model="form.tag"
                     :tags="form.tags"
+                    class="tags-input"
                     :autocomplete-items="filteredItems"
                     @tags-changed="(newTags) => (tags = newTags)"
-                  />
+                  >
+                    <template slot="autocomplete-header">
+                      <strong>Select a tag here ↓</strong>
+                    </template>
+                    <template slot="autocomplete-footer">
+                      <small>
+                        <em>Or keep going with yours...</em>
+                      </small>
+                    </template>
+                  </vue-tags-input>
                 </client-only>
                 <v-checkbox
                   id="is_live"
@@ -201,7 +211,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 // import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import $axios from '@nuxtjs/axios'
@@ -209,7 +219,7 @@ import Slim from '@/components/slim/slim.vue'
 
 export default {
   name: 'Create',
-  middleware: ['auth'],
+  middleware: ['guest'],
   layout: 'designs-listing',
   components: {
     // InputTag: () => import('vue-input-tag'),
@@ -274,6 +284,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['visible', 'modalComponent', 'folder']),
     titleErrors() {
       const errors = []
       if (!this.$v.form.title.$dirty) return errors
@@ -295,7 +306,7 @@ export default {
     },
     filteredItems() {
       return this.autocompleteItems.filter((i) => {
-        return i.text.toLowerCase().includes(this.tag.toLowerCase())
+        return i.text.toLowerCase().includes(this.form.tag.toLowerCase())
       })
     },
   },
@@ -311,19 +322,25 @@ export default {
   mounted() {
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    this.fetchData()
+    this.getAllTags()
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
-    async fetchData() {
-      this.items = []
+    async getAllTags() {
+      this.allTags = []
       const response = await this.$axios.$get('tags')
-      this.items = response
-      this.items.forEach((item) => {
+      console.log(response)
+      this.allTags = response
+      this.autocompleteItems = this.allTags.map((item) => {
+        return {
+          text: item.name,
+        }
+      })
+      /* this.items.forEach((item) => {
         this.autocompleteItems.push({
           text: item.name,
         })
-      })
+      }) */
     },
     slimService(formdata, progress, success, failure) {
       this.successFunction = success
@@ -491,7 +508,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '~/assets/scss/tags.scss';
+
 .titlePage {
   font-size: 44px;
   padding-top: 20px;
@@ -504,7 +523,7 @@ export default {
   max-width: 20%;
   min-width: 180px;
 }
-.vue-input-tag-wrapper {
+/* .vue-input-tag-wrapper {
   background-color: transparent !important;
   border-radius: 4px !important;
   border: 1px thin !important;
@@ -521,7 +540,7 @@ export default {
   margin-bottom: 4px;
   margin-right: 4px;
   padding: 3px;
-}
+} */
 .text-black {
   color: black !important;
 }
