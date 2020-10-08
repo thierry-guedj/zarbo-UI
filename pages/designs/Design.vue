@@ -148,7 +148,7 @@
                     <avatar
                       :username="user.name"
                       :src="user.avatars.medium"
-                      class="mx-3 mt-3"
+                      class="mx-0 mt-3"
                       inline="true"
                       :size="60"
                     ></avatar>
