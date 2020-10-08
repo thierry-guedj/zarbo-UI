@@ -37,7 +37,8 @@
       <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
     </div>
     <div v-if="!this.$v.form.$model.successful">
-      <v-text-field
+      <v-text-field 
+      class="input-green"
         v-model.trim="$v.form.name.$model"
         :error-messages="nameErrors"
         :label="$t('contact.name')"
@@ -219,5 +220,8 @@ export default {
 <style lang="scss" scoped>
 a.color-white {
   color: #ffffff;
+}
+.input-green {
+  border-color: #006064 !important;
 }
 </style>

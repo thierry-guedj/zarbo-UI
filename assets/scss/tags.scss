@@ -15,11 +15,17 @@
   .vue-tags-input .ti-input {
     padding: 4px 10px;
     transition: border-bottom 200ms ease;
+    border-radius: 4px !important;
+    border: 1px thin !important;
+    border-color: rgba(255, 255, 255, 0.24) !important;
   }
 
   /* we cange the border color if the user focuses the input */
   .vue-tags-input.ti-focus .ti-input {
-    border: 1px solid #006064;
+    background-color: transparent !important;
+    border-radius: 4px !important;
+    border: 1px thin !important;
+    border-color: #006064 !important;
   }
   
   /* some stylings for the autocomplete layer */
