@@ -47,12 +47,12 @@
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
-                <img
+               <!--  <img
                   :src="editedItem.images.thumbnail"
                   :lazy-src="editedItem.images.minithumbnail"
                   :alt="editedItem.title"
                   max-width="80px"
-                />
+                /> -->
                 <v-card-text>
                   <v-container>
                     <v-text-field
@@ -388,7 +388,7 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.editedItem.tags = this.editedItem.tag_list.tags
+      // this.editedItem.tags = this.editedItem.tag_list.tags
       this.editedItem.images = item.images
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
