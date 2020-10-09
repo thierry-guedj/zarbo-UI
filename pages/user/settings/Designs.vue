@@ -440,7 +440,7 @@ export default {
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
           tags: this.simpleStringArrayTags,
-          tag: this.editedItem.tag,
+          // tag: this.editedItem.tag,
           assign_to_team: false,
           team: null,
           tag_list: {
