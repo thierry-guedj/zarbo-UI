@@ -387,7 +387,7 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      // this.editedItem.tag = ''
+      this.editedItem.tag = ''
       this.editedItem.tags = this.editedItem.tag_list.tags
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
