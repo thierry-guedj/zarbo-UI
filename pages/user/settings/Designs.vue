@@ -452,10 +452,10 @@ export default {
           assign_to_team: false,
           team: null,
         }
-        editedForm.tag_list.tags = this.editedItem.tags,
-        if (!editedForm.tags) {
-          editedForm.tags = []
-        }
+        editedForm.tag_list.tags = this.editedItem.tags
+        // if (!editedForm.tags) {
+        //   editedForm.tags = []
+        // }
 
         Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
