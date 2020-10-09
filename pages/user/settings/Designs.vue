@@ -387,13 +387,14 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      this.editedItem.tag = ''
       // this.editedItem.images = item.images
       const tempTags = this.editedItem.tags
-      /* this.tags = tempTags.map((item) => {
+      this.editedItem.tags = this.editedItem.tags.map((item) => {
         return {
           text: item.name,
         }
-      }) */
+      })
       console.log(this.designs)
       console.log(this.editedItem.tags)
       console.log(this.tags)
