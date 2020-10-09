@@ -388,6 +388,7 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
       this.editedItem.images = item.images
+      this.editedItem.tag = ''
       const tempTags = this.editedItem.tags
       this.tags = tempTags.map((string) => ({
         text: string,
@@ -447,6 +448,7 @@ export default {
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
           tags: this.editedItem.tags,
+
           images: this.editedItem.images,
           assign_to_team: false,
           team: null,

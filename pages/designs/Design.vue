@@ -158,7 +158,7 @@
                       :src="user.avatars.medium"
                       class="mx-0 mt-3"
                       inline="true"
-                      :size="60"
+                      :size="100"
                     ></avatar>
                   </v-col>
                   <v-col class="col-md-9">
