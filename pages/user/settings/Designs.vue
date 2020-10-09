@@ -444,7 +444,7 @@ export default {
           assign_to_team: false,
           team: null,
           tag_list: {
-            tags: this.editedItem.tag,
+            tags: this.editedItem.tags,
           },
         }
         Object.assign(this.designs[this.editedIndex], editedForm)
