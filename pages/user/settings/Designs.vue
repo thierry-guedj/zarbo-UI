@@ -391,14 +391,14 @@ export default {
       this.editedItem.tags = this.editedItem.tag_list.tags
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
-      /* this.form = {
+      this.form = {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.editedItem.tags,
         assign_to_team: false,
         team: null,
-      } */
+      }
       this.dialog = true
     },
     confirmDeleteItem(item) {
@@ -444,8 +444,10 @@ export default {
           tag: this.editedItem.tag,
           assign_to_team: false,
           team: null,
+          tag_list: {
+            tags: this.editedItem.tag,
+          },
         }
-        editedForm.tag_list.tags = this.simpleStringArrayTags
         Object.assign(this.designs[this.editedIndex], editedForm)
         if (!editedForm.tags) {
           editedForm.tags = []
