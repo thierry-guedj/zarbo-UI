@@ -394,6 +394,7 @@ export default {
           text: item.name,
         }
       })
+      this.editedItem.tag = ''
       console.log(this.designs)
       console.log(this.editedItem.tags)
       console.log(this.tags)
