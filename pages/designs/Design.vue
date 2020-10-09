@@ -68,7 +68,7 @@
               :form="form"
               field="body"
               :placeholder="$t('comments.enterComment')"
-              class="pl-4 pr-14"
+              class="pl-4 pr-0"
             ></v-textarea>
             <div class="mt-2 text-right pr-0">
               <v-btn type="submit" size="sm">
