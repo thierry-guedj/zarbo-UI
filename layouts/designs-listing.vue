@@ -213,7 +213,7 @@
             :key="footerLink.icon"
             :to="footerLink.to"
             ><v-btn color="white" text rounded class="my-2">
-              <v-icon size="24px" v-bind="attrs" v-on="on">
+              <v-icon size="24px">
                 {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
@@ -225,7 +225,7 @@
             class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon size="24px" v-bind="attrs" v-on="on"> mail </v-icon
+            <v-icon size="24px"> mail </v-icon
             >{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">

@@ -211,15 +211,15 @@ export default {
 }
 .design-user {
   color: #546e7a;
-  font-size: 13px;
-  font-weight: 300;
+  font-size: 17px;
+  font-weight: 400;
   margin-bottom: 0;
 }
 .design-user:hover {
   text-decoration: underline;
 }
 .design-upload {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
   margin-bottom: 0;
 }
