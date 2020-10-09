@@ -9,6 +9,14 @@
 
         <!-- Single Image -->
         <div>
+          <CoolLightBox
+            :items="design"
+            :index="index !== null ? parseInt(`${index}`) : index"
+            :use-zoom-bar="true"
+            :effect="'fade'"
+            @close="index = null"
+          >
+          </CoolLightBox>
           <img
             :src="design.images.large"
             style="
@@ -113,7 +121,7 @@
               class="designs-tag-outer mt-3"
             >
               <h2 class="font-16 fw-500 mb-2">
-                Tags
+                {{ $t('show.tags') }}
               </h2>
               <div class="font-14 fw-300 mb-6">
                 <v-chip
@@ -221,6 +229,8 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 // import SocialSharing from 'vue-social-sharing'
 // import GoogleSpin from 'vue-loading-spinner/src/components/Circle8.vue'
 import Avatar from 'vue-avatar'
+import CoolLightBox from 'vue-cool-lightbox'
+import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 export default {
   name: 'Design',
   layout: 'designs-listing',
@@ -231,6 +241,7 @@ export default {
     Circle8,
     // GoogleSpin,
     Avatar,
+    CoolLightBox,
   },
   async fetch() {
     const url = `/designs/${this.designId}`
@@ -254,6 +265,7 @@ export default {
       designId: this.$route.params.id,
       width: '500px',
       prevRoute: null,
+      index: null,
     }
   },
   fetchOnServer: true,
@@ -365,5 +377,18 @@ export default {
 }
 .vue-avatar--wrapper {
   min-width: 50px;
+}
+body,
+html {
+  height: 100%; /* REMOVING THIS FIXES THE ISSUE */
+  scroll-behavior: smooth;
+}
+.cool-lightbox
+  .cool-lightbox__wrapper.cool-lightbox__wrapper--swipe
+  .cool-lightbox__slide {
+  opacity: 1 !important;
+}
+.row.row-design {
+  display: contents !important;
 }
 </style>

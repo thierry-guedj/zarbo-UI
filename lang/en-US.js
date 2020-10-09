@@ -61,6 +61,7 @@ export default {
     published: 'Publishing date: ',
     backToArtwork: 'Back to artwork',
     youLike: 'You like this artwork',
+    tags: 'Tags',
   },
   comments: {
     comments: 'Comments',

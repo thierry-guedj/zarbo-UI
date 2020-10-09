@@ -62,6 +62,7 @@ export default {
     published: 'Publiée ',
     backToArtwork: 'Retour aux oeuvres',
     youLike: 'Vous aimez cette oeuvre',
+    tags: 'Mots-clés',
   },
   comments: {
     comments: 'Commentaires',
