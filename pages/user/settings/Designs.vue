@@ -47,12 +47,12 @@
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
-                <!-- <img
+                <img
                   :src="editedItem.images.thumbnail"
                   :lazy-src="editedItem.images.minithumbnail"
                   :alt="editedItem.title"
                   max-width="80px"
-                /> -->
+                />
                 <v-card-text>
                   <v-container>
                     <v-text-field
@@ -396,7 +396,8 @@ export default {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
-        tags: this.editedItem.tags,
+        tags: this.tags,
+        images: this.editedItem.images,
         assign_to_team: false,
         team: null,
       }
@@ -443,6 +444,7 @@ export default {
           is_live: this.editedItem.is_live,
           tags: this.simpleStringArrayTags,
           tag: this.editedItem.tag,
+          images: this.editedItem.images,
           assign_to_team: false,
           team: null,
         }
