@@ -378,9 +378,8 @@ export default {
       this.designs = data
 
       this.designs.forEach((design, index) => {
-        design.tags = design.tag_list.tags
-        design.tag = ''
         this.designs[index] = design
+        console.log(this.designs[index].tags)
       })
       this.loading = false
     },
@@ -458,12 +457,11 @@ export default {
         if (!editedForm.tags) {
           editedForm.tags = []
         }
-
+        console.log(editedForm.tags)
         Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
         this.designs.push(this.editedForm)
       }
-
       const form = {
         title: this.$v.form.title.$model,
         description: this.editedItem.description,
@@ -473,10 +471,11 @@ export default {
         assign_to_team: false,
         team: null,
       }
-
+      console.log(form.tags)
       const res = await this.$axios
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
+          console.log(response.data.tag_list.tags)
           this.alert = true
         })
       this.close()
