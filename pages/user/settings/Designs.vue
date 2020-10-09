@@ -448,14 +448,14 @@ export default {
         const editedForm = {
           title: this.$v.form.title.$model,
           description: this.$v.form.description.$model,
-          is_live: this.editedItem.is_live,
-          tags: this.editedItem.tags,
+          is_live: this.form.is_live,
+          tags: this.form.tags,
 
           images: this.editedItem.images,
           assign_to_team: false,
           team: null,
         }
-        this.tags = this.editedItem.tags
+        this.tags = this.form.tags
         if (!editedForm.tags) {
           editedForm.tags = []
         } else {
@@ -469,10 +469,10 @@ export default {
 
       const form = {
         title: this.$v.form.title.$model,
-        description: this.editedItem.description,
-        is_live: this.editedItem.is_live,
+        description: this.$v.form.description.$model,
+        is_live: this.form.is_live,
         tags: this.simpleStringArrayTags,
-        tag: this.editedItem.tag,
+        tag: this.form.tag,
         assign_to_team: false,
         team: null,
       }
