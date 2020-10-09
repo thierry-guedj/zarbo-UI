@@ -389,6 +389,7 @@ export default {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
+      this.editedItem.images = item.images
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
       this.form = {
