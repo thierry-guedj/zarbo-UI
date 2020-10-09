@@ -379,7 +379,6 @@ export default {
 
       this.designs.forEach((design, index) => {
         this.designs[index] = design
-        console.log(this.designs[index].tags)
       })
       this.loading = false
     },
@@ -448,7 +447,6 @@ export default {
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
           tags: this.editedItem.tags,
-          tag: this.editedItem.tag,
           images: this.editedItem.images,
           assign_to_team: false,
           team: null,
