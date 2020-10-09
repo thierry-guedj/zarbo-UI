@@ -378,7 +378,7 @@ export default {
       this.designs = data
 
       this.designs.forEach((design, index) => {
-        // design.tags = design.tag_list.tags
+        design.tags = design.tag_list.tags
         this.designs[index] = design
       })
       this.loading = false
@@ -412,8 +412,8 @@ export default {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
-      this.editedItem = design
-      this.editedItem.tag = ''
+      /* this.editedItem = design
+      this.editedItem.tag = '' */
       this.designs[this.designs.indexOf(item)] = design
     },
     deleteItem() {
@@ -436,7 +436,7 @@ export default {
     },
 
     async save() {
-      if (this.editedIndex > -1) {
+      /* if (this.editedIndex > -1) {
         const editedForm = {
           title: this.$v.form.title.$model,
           description: this.$v.form.description.$model,
@@ -455,11 +455,11 @@ export default {
         }
       } else {
         this.designs.push(this.editedForm)
-      }
+      } */
 
-      const form = {
+      const form1 = {
         title: this.$v.form.title.$model,
-        description: this.editedItem.description,
+        description: this.$v.form.description.$model,
         is_live: this.editedItem.is_live,
         tags: this.simpleStringArrayTags,
         // tag: this.editedItem.tag,
@@ -468,7 +468,7 @@ export default {
       }
 
       const res = await this.$axios
-        .put(`/designs/${this.editedItem.id}`, form)
+        .put(`/designs/${this.editedItem.id}`, form1)
         .then((response) => {
           this.alert = true
         })
