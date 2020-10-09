@@ -378,7 +378,6 @@ export default {
       this.designs = data
 
       this.designs.forEach((design, index) => {
-        this.design.tags = this.design.tag_list.tags
         this.designs[index] = design
       })
       this.loading = false
@@ -471,7 +470,7 @@ export default {
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.simpleStringArrayTags,
-        // tag: this.editedItem.tag,
+        tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
       }

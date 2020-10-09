@@ -105,21 +105,21 @@
           })
         "
       >
-        <h3 class="font-weight-medium mb-0 ellipsis">
+        <p class="design-title">
           {{ designTitle | capitalize }}
-        </h3>
+        </p>
       </nuxt-link>
-      <h4 class="font-weight-regular">
+      <p class="design-user">
         {{ $t('designCard.by') }}
         <nuxt-link :to="`/designs/${design.user.id}/user`" class="user-link">
           {{ design.user.name }}</nuxt-link
         >
-      </h4>
-      <h5>
+      </p>
+      <p class="design-upload">
         <span class="mr-2 text-orange lighten-5"
           >{{ $t('designCard.uploaded') }} {{ computedDate }}</span
         >
-      </h5>
+      </p>
     </div>
     <!-- </v-col> -->
   </div>
@@ -201,7 +201,21 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 } */
-
+.design-title {
+  font-size: 15px;
+  font-weight: 500;
+}
+.design-title:hover {
+  text-decoration: underline;
+}
+.design-user {
+  font-size: 13px;
+  font-weight: 300;
+}
+.design-upload {
+  font-size: 13px;
+  font-weight: 300;
+}
 .user-link {
   color: #546e7a;
 }
