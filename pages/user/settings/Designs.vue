@@ -47,12 +47,12 @@
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
-                <!--  <img
+                <img
                   :src="editedItem.images.thumbnail"
                   :lazy-src="editedItem.images.minithumbnail"
                   :alt="editedItem.title"
                   max-width="80px"
-                /> -->
+                />
                 <v-card-text>
                   <v-container>
                     <v-text-field
@@ -120,16 +120,16 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close">{{
-                    $t('editDesign.cancel')
-                  }}</v-btn>
+                  <v-btn color="blue darken-1" text @click="close"
+                    >Cancel</v-btn
+                  >
                   <v-btn
                     color="blue darken-1"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
                     text
                     @click="save"
-                    >{{ $t('editDesign.save') }}</v-btn
+                    >Save</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -379,6 +379,7 @@ export default {
 
       this.designs.forEach((design, index) => {
         design.tags = design.tag_list.tags
+        design.tag = ''
         this.designs[index] = design
       })
       this.loading = false
@@ -387,28 +388,17 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.editedItem.tag = ''
-      // this.editedItem.images = item.images
-      const tempTags = this.editedItem.tags
-      this.editedItem.tags = this.editedItem.tags.map((item) => {
-        return {
-          text: item.name,
-        }
-      })
-      this.form = this.editedItem
-      console.log(this.designs)
-      console.log(this.editedItem.tags)
-      console.log(this.tags)
+      this.editedItem.tags = this.editedItem.tag_list.tags
+      this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
-      /* this.form = {
+      this.form = {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
-        tags: this.tags,
-        images: this.editedItem.images,
+        tags: this.editedItem.tags,
         assign_to_team: false,
         team: null,
-      } */
+      }
       this.dialog = true
     },
     confirmDeleteItem(item) {
@@ -451,39 +441,32 @@ export default {
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
           tags: this.simpleStringArrayTags,
-
-          images: this.editedItem.images,
+          tag: this.editedItem.tag,
           assign_to_team: false,
           team: null,
         }
-        editedForm.tag_list.tags = editedForm.tags
-        /* if (!editedForm.tags) {
-          editedForm.tags = []
-        } else {
-          editedForm.tags = this.simpleStringArrayTags
-        } */
-        console.log(editedForm.tags)
         Object.assign(this.designs[this.editedIndex], editedForm)
+        if (!editedForm.tags) {
+          editedForm.tags = []
+        }
       } else {
         this.designs.push(this.editedForm)
       }
 
       const form = {
         title: this.$v.form.title.$model,
-        description: this.$v.form.description.$model,
+        description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.simpleStringArrayTags,
-
-        images: this.editedItem.images,
+        tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
       }
-      console.log(form.tags)
+
       const res = await this.$axios
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
-          this.editedItem = {}
         })
       this.close()
     },
