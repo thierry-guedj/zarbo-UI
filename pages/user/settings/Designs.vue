@@ -93,7 +93,7 @@
                     <client-only>
                       <vue-tags-input
                         v-model="editedItem.tag"
-                        :tags="editedItem.tags"
+                        :tags="form.tags"
                         class="tags-input"
                         :autocomplete-items="filteredItems"
                         @tags-changed="(newTags) => (tags = newTags)"
