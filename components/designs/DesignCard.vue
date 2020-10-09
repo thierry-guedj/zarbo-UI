@@ -204,7 +204,7 @@ export default {
 .design-title {
   font-size: 15px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 .design-title:hover {
   text-decoration: underline;
@@ -213,6 +213,7 @@ export default {
   color: #546e7a;
   font-size: 13px;
   font-weight: 300;
+  margin-bottom: 0;
 }
 .design-user:hover {
   text-decoration: underline;
@@ -220,6 +221,7 @@ export default {
 .design-upload {
   font-size: 13px;
   font-weight: 300;
+  margin-bottom: 0;
 }
 .v-application a {
   text-decoration: none;
