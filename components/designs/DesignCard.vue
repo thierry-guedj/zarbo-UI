@@ -204,6 +204,7 @@ export default {
 .design-title {
   font-size: 15px;
   font-weight: 500;
+  margin-bottom: 10px;
 }
 .design-title:hover {
   text-decoration: underline;

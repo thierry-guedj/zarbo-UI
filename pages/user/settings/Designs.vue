@@ -395,6 +395,7 @@ export default {
           text: item.name,
         }
       })
+      this.form = this.editedItem
       console.log(this.designs)
       console.log(this.editedItem.tags)
       console.log(this.tags)
@@ -482,7 +483,6 @@ export default {
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
-          this.tags = []
           this.editedItem = {}
         })
       this.close()
