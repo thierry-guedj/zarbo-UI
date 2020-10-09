@@ -436,7 +436,7 @@ export default {
     },
 
     async save() {
-      /* if (this.editedIndex > -1) {
+      if (this.editedIndex > -1) {
         const editedForm = {
           title: this.$v.form.title.$model,
           description: this.$v.form.description.$model,
@@ -455,7 +455,7 @@ export default {
         }
       } else {
         this.designs.push(this.editedForm)
-      } */
+      }
 
       const form1 = {
         title: this.$v.form.title.$model,
