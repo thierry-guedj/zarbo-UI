@@ -223,6 +223,7 @@ export default {
   font-weight: 300;
   margin-bottom: 0;
 }
+
 .v-application a {
   text-decoration: none;
   color: #546e7a;
