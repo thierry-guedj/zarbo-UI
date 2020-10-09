@@ -47,7 +47,7 @@
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
-               <!--  <img
+                <!--  <img
                   :src="editedItem.images.thumbnail"
                   :lazy-src="editedItem.images.minithumbnail"
                   :alt="editedItem.title"
@@ -120,16 +120,16 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close"
-                    >Cancel</v-btn
-                  >
+                  <v-btn color="blue darken-1" text @click="close">{{
+                    $t('editDesign.cancel')
+                  }}</v-btn>
                   <v-btn
                     color="blue darken-1"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
                     text
                     @click="save"
-                    >Save</v-btn
+                    >{{ $t('editDesign.save') }}</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -388,7 +388,7 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      // this.editedItem.tags = this.editedItem.tag_list.tags
+      this.editedItem.tags = this.editedItem.tag_list.tags
       this.editedItem.images = item.images
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
@@ -396,7 +396,7 @@ export default {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
-        tags: this.tags,
+        // tags: this.tags,
         images: this.editedItem.images,
         assign_to_team: false,
         team: null,
@@ -442,16 +442,17 @@ export default {
           title: this.$v.form.title.$model,
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
-          tags: this.simpleStringArrayTags,
+          tags: this.editedItem.tags,
           tag: this.editedItem.tag,
           images: this.editedItem.images,
           assign_to_team: false,
           team: null,
         }
-        Object.assign(this.designs[this.editedIndex], editedForm)
         if (!editedForm.tags) {
           editedForm.tags = []
         }
+        Object.assign(this.designs[this.editedIndex], editedForm)
+        
       } else {
         this.designs.push(this.editedForm)
       }
@@ -460,7 +461,7 @@ export default {
         title: this.$v.form.title.$model,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
-        tags: this.simpleStringArrayTags,
+        tags: this.editedItem.tags,
         tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
