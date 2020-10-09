@@ -388,10 +388,10 @@ export default {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
-      this.editedItem.images = item.images
+      // this.editedItem.images = item.images
       this.editedItem.tag = ''
       const tempTags = this.editedItem.tags
-      tags = tempTags.map((string) => ({
+      this.tags = tempTags.map((string) => ({
         text: string,
       }))
       console.log(this.designs)
