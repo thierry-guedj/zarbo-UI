@@ -390,7 +390,7 @@ export default {
       this.editedItem.images = item.images
       this.editedItem.tag = ''
       const tempTags = this.editedItem.tags
-      this.tags = tempTags.map((string) => ({
+      tags = tempTags.map((string) => ({
         text: string,
       }))
       console.log(this.designs)
@@ -462,6 +462,7 @@ export default {
       } else {
         this.designs.push(this.editedForm)
       }
+      this.tags = this.editedItem.tags
       const form = {
         title: this.$v.form.title.$model,
         description: this.editedItem.description,
@@ -475,7 +476,6 @@ export default {
       const res = await this.$axios
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
-          console.log(response.data.tag_list.tags)
           this.alert = true
         })
       this.close()
