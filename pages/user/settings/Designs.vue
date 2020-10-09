@@ -286,6 +286,7 @@ export default {
       loadingSubmit: false,
       autocompleteItems: [],
       allTags: [],
+      tags: [],
     }
   },
   validations: {

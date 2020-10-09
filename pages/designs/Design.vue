@@ -162,7 +162,7 @@
                     ></avatar>
                   </v-col>
                   <v-col class="col-md-9">
-                    <div class="modal-user-detail ml-2">
+                    <div class="modal-user-detail ml-5">
                       <h1 class="font-13 fw-500">
                         <p class="text-h6 text-left block">
                           {{ design.user.name }}
