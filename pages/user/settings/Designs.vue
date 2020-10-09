@@ -412,8 +412,8 @@ export default {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
-      /* this.editedItem = design
-      this.editedItem.tag = '' */
+      this.editedItem = design
+      this.editedItem.tag = ''
       this.designs[this.designs.indexOf(item)] = design
     },
     deleteItem() {
