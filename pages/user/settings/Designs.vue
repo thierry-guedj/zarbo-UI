@@ -378,6 +378,7 @@ export default {
       this.designs = data
 
       this.designs.forEach((design, index) => {
+        this.design.tags = this.design.tag_list.tags
         this.designs[index] = design
       })
       this.loading = false
@@ -386,13 +387,13 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.editedItem.tags = this.editedItem.tag_list.tags
       // this.editedItem.images = item.images
-      this.editedItem.tag = ''
       const tempTags = this.editedItem.tags
-      this.tags = tempTags.map((string) => ({
-        text: string,
-      }))
+      this.tags = tempTags.map((item) => {
+        return {
+          text: item.name,
+        }
+      })
       console.log(this.designs)
       console.log(this.editedItem.tags)
       console.log(this.tags)
@@ -453,22 +454,24 @@ export default {
           assign_to_team: false,
           team: null,
         }
-
+        this.tags = this.editedItem.tags
         if (!editedForm.tags) {
           editedForm.tags = []
+        } else {
+          editedForm.tags = this.simpleStringArrayTags
         }
         console.log(editedForm.tags)
         Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
         this.designs.push(this.editedForm)
       }
-      this.tags = this.editedItem.tags
+
       const form = {
         title: this.$v.form.title.$model,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.simpleStringArrayTags,
-        tag: this.editedItem.tag,
+        // tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
       }
