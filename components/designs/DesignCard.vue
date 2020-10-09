@@ -111,7 +111,7 @@
       </nuxt-link>
       <p class="design-user">
         {{ $t('designCard.by') }}
-        <nuxt-link :to="`/designs/${design.user.id}/user`" class="user-link">
+        <nuxt-link :to="`/designs/${design.user.id}/user`">
           {{ design.user.name }}</nuxt-link
         >
       </p>
@@ -210,18 +210,16 @@ export default {
   text-decoration: underline;
 }
 .design-user {
+  color: #546e7a;
   font-size: 13px;
   font-weight: 300;
+}
+.design-user:hover {
+  text-decoration: underline;
 }
 .design-upload {
   font-size: 13px;
   font-weight: 300;
-}
-.user-link {
-  color: #546e7a;
-}
-.user-link:hover {
-  text-decoration: underline;
 }
 .v-application a {
   text-decoration: none;

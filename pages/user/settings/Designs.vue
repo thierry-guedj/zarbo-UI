@@ -378,8 +378,7 @@ export default {
       this.designs = data
 
       this.designs.forEach((design, index) => {
-        design.tags = design.tag_list.tags
-        design.tag = ''
+        // design.tags = design.tag_list.tags
         this.designs[index] = design
       })
       this.loading = false
@@ -389,6 +388,7 @@ export default {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.editedItem.tag = ''
+      this.editedItem.tags = this.editedItem.tag_list.tags
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
       this.form = {
@@ -446,7 +446,7 @@ export default {
           assign_to_team: false,
           team: null,
           tag_list: {
-            tags: this.editedItem.tags,
+            tags: this.simpleStringArrayTags,
           },
         }
         Object.assign(this.designs[this.editedIndex], editedForm)
