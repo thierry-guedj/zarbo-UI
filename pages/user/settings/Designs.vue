@@ -378,6 +378,7 @@ export default {
       this.designs = data
 
       this.designs.forEach((design, index) => {
+        design.tags = design.tag_list.tags
         this.designs[index] = design
       })
       this.loading = false
