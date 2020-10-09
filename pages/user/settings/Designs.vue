@@ -47,12 +47,12 @@
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
-                <img
+                <!-- <img
                   :src="editedItem.images.thumbnail"
                   :lazy-src="editedItem.images.minithumbnail"
                   :alt="editedItem.title"
                   max-width="80px"
-                />
+                /> -->
                 <v-card-text>
                   <v-container>
                     <v-text-field
