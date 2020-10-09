@@ -11,7 +11,7 @@ export default {
   navbar: {
     artwork: 'Oeuvres',
     artists: 'Artistes',
-    upload: 'Poster une oeuvre',
+    upload: 'Publier une oeuvre',
     signin: 'Se Connecter',
     signup: 'Devenir membre',
     signout: 'Deconnexion',
@@ -222,6 +222,7 @@ export default {
       "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
     cancel: 'Annuler',
     confirm: 'Confirmer',
+    save: 'Modifier',
     publishDesign: 'Publier cette oeuvre',
   },
   validation: {

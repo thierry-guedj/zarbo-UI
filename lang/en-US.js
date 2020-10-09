@@ -10,9 +10,9 @@ export default {
   navbar: {
     artwork: 'Artwork',
     artists: 'Artists',
-    upload: 'Upload',
+    upload: 'Publish artwork',
     signin: 'Sign in',
-    signup: 'Sign up',
+    signup: 'Become a member',
     signout: 'Sign out',
   },
   navigationDrawer: {
