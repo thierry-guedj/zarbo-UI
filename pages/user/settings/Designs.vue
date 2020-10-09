@@ -390,7 +390,8 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.editedItem.tags = this.editedItem.tag_list.tags
       this.editedItem.images = item.images
-      this.tags = this.editedItem.tags.map((string) => ({
+      const tempTags = this.editedItem.tags
+      this.tags = tempTags.map((string) => ({
         text: string,
       }))
       console.log(this.designs)
@@ -447,15 +448,16 @@ export default {
           title: this.$v.form.title.$model,
           description: this.$v.form.description.$model,
           is_live: this.editedItem.is_live,
+          tags: this.editedItem.tags
           tag: this.editedItem.tag,
           images: this.editedItem.images,
           assign_to_team: false,
           team: null,
         }
-        editedForm.tag_list.tags = this.editedItem.tags
-        // if (!editedForm.tags) {
-        //   editedForm.tags = []
-        // }
+
+        if (!editedForm.tags) {
+          editedForm.tags = []
+        }
 
         Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
