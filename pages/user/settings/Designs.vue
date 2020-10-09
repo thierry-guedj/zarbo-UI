@@ -388,7 +388,6 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.editedItem.tags = this.editedItem.tag_list.tags
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
       this.form = {
@@ -471,6 +470,7 @@ export default {
         .then((response) => {
           this.alert = true
         })
+      this.updateItem(this.editedItem.id)
       this.close()
     },
     sanitizeTitle(title) {
