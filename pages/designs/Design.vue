@@ -322,6 +322,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.designs-tag-outer {
+  margin-bottom: 0;
+}
 .designer-info:hover {
   text-decoration: none !important;
 }

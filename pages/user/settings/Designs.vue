@@ -470,7 +470,7 @@ export default {
         .then((response) => {
           this.alert = true
         })
-      this.updateItem(this.editedItem.id)
+      this.updateItem(this.editedItem)
       this.close()
     },
     sanitizeTitle(title) {
