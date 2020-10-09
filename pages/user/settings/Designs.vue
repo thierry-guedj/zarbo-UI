@@ -388,6 +388,7 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      this.editedItem.tag = ''
       this.tags = this.editedItem.tags.map((string) => ({ text: string }))
 
       this.form = {
@@ -412,6 +413,7 @@ export default {
       design = design.data
       design.tags = design.tag_list.tags
       this.editedItem = design
+      this.editedItem.tag = ''
       this.designs[this.designs.indexOf(item)] = design
     },
     deleteItem() {
