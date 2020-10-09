@@ -389,17 +389,16 @@ export default {
       this.editedItem = Object.assign({}, item)
       // this.editedItem.images = item.images
       const tempTags = this.editedItem.tags
-      this.tags = tempTags.map((item) => {
+      /* this.tags = tempTags.map((item) => {
         return {
           text: item.name,
         }
-      })
-      this.editedItem.tag = ''
+      }) */
       console.log(this.designs)
       console.log(this.editedItem.tags)
       console.log(this.tags)
 
-      this.form = {
+      /* this.form = {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
@@ -407,7 +406,7 @@ export default {
         images: this.editedItem.images,
         assign_to_team: false,
         team: null,
-      }
+      } */
       this.dialog = true
     },
     confirmDeleteItem(item) {
@@ -448,19 +447,19 @@ export default {
         const editedForm = {
           title: this.$v.form.title.$model,
           description: this.$v.form.description.$model,
-          is_live: this.form.is_live,
-          tags: this.form.tags,
+          is_live: this.editedItem.is_live,
+          tags: this.simpleStringArrayTags,
 
           images: this.editedItem.images,
           assign_to_team: false,
           team: null,
         }
-        this.tags = this.form.tags
-        if (!editedForm.tags) {
+        editedForm.tag_list.tags = editedForm.tags
+        /* if (!editedForm.tags) {
           editedForm.tags = []
         } else {
           editedForm.tags = this.simpleStringArrayTags
-        }
+        } */
         console.log(editedForm.tags)
         Object.assign(this.designs[this.editedIndex], editedForm)
       } else {
@@ -470,9 +469,10 @@ export default {
       const form = {
         title: this.$v.form.title.$model,
         description: this.$v.form.description.$model,
-        is_live: this.form.is_live,
+        is_live: this.editedItem.is_live,
         tags: this.simpleStringArrayTags,
-        tag: this.form.tag,
+
+        images: this.editedItem.images,
         assign_to_team: false,
         team: null,
       }
@@ -481,6 +481,8 @@ export default {
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
+          this.tags = []
+          this.editedItem = {}
         })
       this.close()
     },
