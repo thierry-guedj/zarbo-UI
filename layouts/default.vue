@@ -244,8 +244,7 @@
             :key="footerLink.icon"
             :to="footerLink.to"
             ><v-btn color="white" text rounded class="my-2">
-              <v-icon size="24px">
-                {{ footerLink.icon }} </v-icon
+              <v-icon size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
@@ -256,8 +255,7 @@
             class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon size="24px"> mail </v-icon
-            >{{ $t('footer.contact') }}
+            <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-btn
@@ -371,6 +369,7 @@ import { mapActions, mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
 import Cookie from '@/components/Cookie.vue'
 export default {
+  name: 'Default',
   components: {
     Avatar,
     Cookie,

@@ -9,77 +9,67 @@
     >
       {{ $t('settingsDesigns.uploadDoneMessage') }}
     </v-alert>
-    <template v-if="designs.length < 1"> </template>
-    <template v-else>
-      <v-data-table
-        :headers="headers"
-        :items="designs"
-        sort-by="calories"
-        class="elevation-1"
-        :search="search"
-        :loading="loading"
-      >
-        <template v-slot:top>
-          <v-toolbar flat>
-            <!-- <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" /> -->
-            <v-toolbar-title>{{
-              $t('settingsDesigns.artwork')
-            }}</v-toolbar-title>
-            <v-divider class="mx-4" inset vertical></v-divider>
+    <v-data-table
+      :headers="headers"
+      :items="designs"
+      sort-by="calories"
+      class="elevation-1"
+      :search="search"
+      :loading="loading"
+    >
+      <template v-slot:top>
+        <v-toolbar flat>
+          <!-- <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" /> -->
+          <v-toolbar-title>{{ $t('settingsDesigns.artwork') }}</v-toolbar-title>
+          <v-divider class="mx-4" inset vertical></v-divider>
 
-            <v-spacer></v-spacer>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              :label="$t('settingsDesigns.search')"
-              single-line
-              hide-details
-            ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            :label="$t('settingsDesigns.search')"
+            single-line
+            hide-details
+          ></v-text-field>
 
-            <v-dialog v-model="dialog" max-width="600px" class="editItem">
-              <!-- <template v-slot:activator="{ on, attrs }">
+          <v-dialog v-model="dialog" max-width="600px" class="editItem">
+            <!-- <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on"
               >New Item</v-btn
             >
           </template> -->
-              <v-card class="modalEditDelete">
-                <v-card-title>
-                  <span class="headline">{{ formTitle }}</span>
-                </v-card-title>
-                <v-divider class="mx-4"></v-divider>
-                <!-- <img
-                  :src="editedItem.images.thumbnail"
-                  :lazy-src="editedItem.images.minithumbnail"
-                  :alt="editedItem.title"
-                  max-width="80px"
-                /> -->
-                <v-card-text>
-                  <v-container>
-                    <v-text-field
-                      v-model.trim="$v.form.title.$model"
-                      :error-messages="titleErrors"
-                      :counter="120"
-                      :label="$t('editDesign.title')"
-                      field="title"
-                      outlined
-                      class="mb-1"
-                      @input="$v.form.title.$touch()"
-                      @blur="$v.form.title.$touch()"
-                    ></v-text-field>
+            <v-card class="modalEditDelete">
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
+              <v-divider class="mx-4"></v-divider>
+              <v-card-text>
+                <v-container>
+                  <v-text-field
+                    v-model.trim="$v.form.title.$model"
+                    :error-messages="titleErrors"
+                    :counter="120"
+                    :label="$t('editDesign.title')"
+                    field="title"
+                    outlined
+                    class="mb-1"
+                    @input="$v.form.title.$touch()"
+                    @blur="$v.form.title.$touch()"
+                  ></v-text-field>
 
-                    <v-textarea
-                      v-model.trim="$v.form.description.$model"
-                      :error-messages="descriptionErrors"
-                      :counter="3000"
-                      :label="$t('editDesign.description')"
-                      outlined
-                      class="mb-1"
-                      field="description"
-                      @input="$v.form.description.$touch()"
-                      @blur="$v.form.description.$touch()"
-                    ></v-textarea>
+                  <v-textarea
+                    v-model.trim="$v.form.description.$model"
+                    :error-messages="descriptionErrors"
+                    :counter="3000"
+                    :label="$t('editDesign.description')"
+                    outlined
+                    class="mb-1"
+                    field="description"
+                    @input="$v.form.description.$touch()"
+                    @blur="$v.form.description.$touch()"
+                  ></v-textarea>
 
-                    <!-- <client-only>
+                  <!-- <client-only>
                     <input-tag
                       v-model="editedItem.tags"
                       :tags="editedItem.tags"
@@ -90,102 +80,80 @@
                       outlined
                     ></input-tag>
                   </client-only> -->
-                    <client-only>
-                      <vue-tags-input
-                        v-model="editedItem.tag"
-                        :tags="form.tags"
-                        class="tags-input"
-                        :autocomplete-items="filteredItems"
-                        @tags-changed="(newTags) => (tags = newTags)"
-                      >
-                        <template slot="autocomplete-header">
-                          <strong>Select a tag here ↓</strong>
-                        </template>
-                        <template slot="autocomplete-footer">
-                          <small>
-                            <em>Or keep going with yours...</em>
-                          </small>
-                        </template>
-                      </vue-tags-input>
-                    </client-only>
+                  <client-only>
+                    <vue-tags-input
+                      v-model="form.tag"
+                      :tags="editedItem.tags"
+                      class="tags-input"
+                      :autocomplete-items="filteredItems"
+                      @tags-changed="(newTags) => (tags = newTags)"
+                    >
+                      <template slot="autocomplete-header">
+                        <strong>Select a tag here ↓</strong>
+                      </template>
+                      <template slot="autocomplete-footer">
+                        <small>
+                          <em>Or keep going with yours...</em>
+                        </small>
+                      </template>
+                    </vue-tags-input>
+                  </client-only>
 
-                    <v-checkbox
-                      id="is_live"
-                      v-model="editedItem.is_live"
-                      field="is_live"
-                      :label="$t('editDesign.publishDesign')"
-                    ></v-checkbox>
-                  </v-container>
-                </v-card-text>
+                  <v-checkbox
+                    id="is_live"
+                    v-model="editedItem.is_live"
+                    field="is_live"
+                    :label="$t('editDesign.publishDesign')"
+                  ></v-checkbox>
+                </v-container>
+              </v-card-text>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close"
-                    >Cancel</v-btn
-                  >
-                  <v-btn
-                    color="blue darken-1"
-                    :loading="loadingSubmit"
-                    :disabled="$v.form.$invalid"
-                    text
-                    @click="save"
-                    >Save</v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
-        </template>
-        <template v-slot:item.image="{ item }">
-          <div v-if="item.is_live" class="px-2 my-2 align-middle">
-            <nuxt-link
-              :to="{ name: 'design.details', params: { id: item.id } }"
-            >
-              <img
-                :src="item.images.thumbnail"
-                :lazy-src="item.images.minithumbnail"
-                :alt="item.title"
-                max-width="80px"
-              />
-            </nuxt-link>
-          </div>
-          <div v-else>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                <v-btn
+                  color="blue darken-1"
+                  :loading="loadingSubmit"
+                  :disabled="$v.form.$invalid"
+                  text
+                  @click="save"
+                  >Save</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+      </template>
+      <template v-slot:item.image="{ item }">
+        <div class="px-2 my-2 align-middle">
+          <nuxt-link :to="{ name: 'design.details', params: { id: item.id } }">
             <img
               :src="item.images.thumbnail"
               :lazy-src="item.images.minithumbnail"
               :alt="item.title"
               max-width="80px"
             />
-          </div>
-        </template>
-        <!--  <template v-slot:item.tags="{ item }">
-        <div class="mr-3">
-          <ul class="ti-tag ti-valid">
-            <li :key="tag" :v-for="tag in item.tags" class="ti-tag ti-valid">
-              {{ tag }}
-            </li>
-          </ul>
+          </nuxt-link>
         </div>
-      </template> -->
-        <template v-slot:item.is_live="{ item }">
-          <div class="mr-3">
-            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
-          </div>
-        </template>
+      </template>
+      <template v-slot:item.is_live="{ item }">
+        <div class="mr-3">
+          <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
+        </div>
+      </template>
 
-        <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="confirmDeleteItem(item)">
-            mdi-delete
-          </v-icon>
-        </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
-        </template>
-      </v-data-table>
-    </template>
+      <template v-slot:item.actions="{ item }">
+        <v-icon small class="mr-2" @click="editItem(item)">
+          mdi-pencil
+        </v-icon>
+        <v-icon small @click="confirmDeleteItem(item)">
+          mdi-delete
+        </v-icon>
+      </template>
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
     <!-- <confirm-delete
           :item="item"
           :dialog.sync="dialogDelete"
@@ -208,9 +176,9 @@
 import { mapActions, mapGetters } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 export default {
-  /*  components: {
+  components: {
     InputTag: () => import('vue-input-tag'),
-  }, */
+  },
   data() {
     return {
       form: this.$vform({
@@ -220,8 +188,8 @@ export default {
         tag: '',
         tags: [],
         slug: '',
-        /*  assign_to_team: false,
-        team: null, */
+        assign_to_team: false,
+        team: null,
       }),
       dialog: false,
       snackbar: false,
@@ -264,7 +232,6 @@ export default {
         title: '',
         description: '',
         is_live: false,
-        images: {},
         tag: '',
         tags: [],
         assign_to_team: false,
@@ -286,6 +253,7 @@ export default {
       loadingSubmit: false,
       autocompleteItems: [],
       allTags: [],
+      tags: [],
     }
   },
   validations: {
@@ -298,7 +266,9 @@ export default {
       },
     },
   },
-
+  mounted() {
+    this.getAllTags()
+  },
   computed: {
     titleErrors() {
       const errors = []
@@ -328,20 +298,18 @@ export default {
     },
     filteredItems() {
       return this.autocompleteItems.filter((i) => {
-        return i.text.toLowerCase().includes(this.editedItem.tag.toLowerCase())
+        return i.text.toLowerCase().includes(this.form.tag.toLowerCase())
       })
     },
     simpleStringArrayTags() {
       return this.tags.map((tag) => tag.text)
     },
   },
+
   watch: {
     dialog(val) {
       val || this.close()
     },
-  },
-  mounted() {
-    this.getAllTags()
   },
   beforeRouteUpdate(to, from, next) {
     if (from.params.upload) {
@@ -387,15 +355,20 @@ export default {
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      // this.editedItem.tags = this.editedItem.tag_list.tags
       this.editedItem.tag = ''
-      this.editedItem.tags = this.editedItem.tag_list.tags
-      this.tags = this.editedItem.tags.map((string) => ({ text: string }))
+      this.editedItem.tags = this.editedItem.tags.map((string) => ({
+        text: string,
+      }))
+      this.tags = this.editedItem.tags
 
+      // this.editedItem.tags = this.editedItem.tag_list.tags
       this.form = {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.editedItem.tags,
+        tag: '',
         assign_to_team: false,
         team: null,
       }
@@ -412,8 +385,7 @@ export default {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
-      this.editedItem = design
-      this.editedItem.tag = ''
+      // this.editedItem = design
       this.designs[this.designs.indexOf(item)] = design
     },
     deleteItem() {
@@ -429,6 +401,9 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
+        this.form = Object.assign({}, this.defaultItem)
+        this.tags = []
+        // this.initialize()
       })
     },
     closeDelete() {
@@ -436,13 +411,13 @@ export default {
     },
 
     async save() {
-      if (this.editedIndex > -1) {
+      // this.tags = this.editedItem.tags
+      if (this.editedIndex > -1) {        
         const editedForm = {
-          title: this.$v.form.title.$model,
-          description: this.$v.form.description.$model,
-          is_live: this.editedItem.is_live,
+          title: this.form.title,
+          description: this.form.description,
+          is_live: this.form.is_live,
           tags: this.simpleStringArrayTags,
-          tag: this.editedItem.tag,
           assign_to_team: false,
           team: null,
           tag_list: {
@@ -457,23 +432,21 @@ export default {
         this.designs.push(this.editedForm)
       }
 
-      const form1 = {
-        title: this.$v.form.title.$model,
-        description: this.$v.form.description.$model,
-        is_live: this.editedItem.is_live,
-        tags: this.simpleStringArrayTags,
-        tag: this.editedItem.tag,
-        assign_to_team: false,
-        team: null,
+      const form = {
+        title: this.form.title,
+          description: this.form.description,
+          is_live: this.form.is_live,
+          tags: this.simpleStringArrayTags,
+          assign_to_team: false,
+          team: null,
       }
 
       const res = await this.$axios
-        .put(`/designs/${this.editedItem.id}`, form1)
+        .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
+          this.updateItem(this.editedItem)
         })
-      this.updateItem(this.editedItem)
-      this.editedItem.tag = ''
       this.close()
     },
     sanitizeTitle(title) {

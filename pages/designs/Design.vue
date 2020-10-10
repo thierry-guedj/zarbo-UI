@@ -19,6 +19,7 @@
           </CoolLightBox>
           <img
             :src="design.images.large"
+            @lightbox="index = 0"
             style="
               max-width: 100%;
               max-height: 100vh;
