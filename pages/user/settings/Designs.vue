@@ -394,6 +394,8 @@ export default {
       const index = this.designs.indexOf(this.itemToDelete)
       this.designs.splice(index, 1)
       const res = this.$axios.$delete(`/designs/${this.itemToDelete.id}`)
+      this.alert = true
+      this.message = this.$i18n.t('settingsDesigns.deleteDoneMessage')
 
       this.hideModal()
     },

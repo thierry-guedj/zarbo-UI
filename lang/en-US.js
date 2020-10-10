@@ -148,6 +148,7 @@ export default {
     cancel: 'Cancel',
     uploadDoneMessage: 'Your artwork has been uploaded.',
     editDoneMessage: 'Your artwork has been modified.',
+    deleteDoneMessage: 'Your artwork has been deleted.',
   },
   create: {
     uploadArtwork: 'Upload an artwok',
