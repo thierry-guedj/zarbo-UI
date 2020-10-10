@@ -322,7 +322,7 @@ export default {
     this.initialize()
     if (this.$route.params.upload) {
       this.alert = true
-      this.message = this.$i18n.t('settingsDesigns.uploadDoneMessage'),
+      this.message = this.$i18n.t('settingsDesigns.uploadDoneMessage')
     }
   },
 
@@ -413,7 +413,7 @@ export default {
 
     async save() {
       // this.tags = this.editedItem.tags
-      if (this.editedIndex > -1) {        
+      if (this.editedIndex > -1) {
         const editedForm = {
           title: this.form.title,
           description: this.form.description,
@@ -435,18 +435,18 @@ export default {
 
       const form = {
         title: this.form.title,
-          description: this.form.description,
-          is_live: this.form.is_live,
-          tags: this.simpleStringArrayTags,
-          assign_to_team: false,
-          team: null,
+        description: this.form.description,
+        is_live: this.form.is_live,
+        tags: this.simpleStringArrayTags,
+        assign_to_team: false,
+        team: null,
       }
 
       const res = await this.$axios
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
-          this.message = this.$i18n.t('settingsDesigns.editDoneMessage'),
+          this.message = this.$i18n.t('settingsDesigns.editDoneMessage')
           this.updateItem(this.editedItem)
         })
       this.close()
