@@ -3,8 +3,8 @@
     <Circle8></Circle8>
   </div>
   <div v-else class="pt-6 pl-6">
-    <v-row class="row-md-12">
-      <v-col class="col-md-7">
+    <v-row>
+      <v-col>
         <!-- LEFT -->
 
         <!-- Single Image -->
@@ -83,7 +83,7 @@
         <!--/ END COMMENTS-->
       </v-col>
       <v-divider class="mx-0" inset vertical></v-divider>
-      <v-col class="col-md-4">
+      <v-col>
         <!-- RIGHT -->
         <v-card-text>
           <!-- Design Infos -->
