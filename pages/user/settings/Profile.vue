@@ -357,6 +357,7 @@ export default {
     },
     async getUploadIsSuccessful(id) {
       this.uploadIsSuccessful = await this.checkUpload(id).then((res) => {
+        this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
         setTimeout(() => {
           this.$auth.fetchUser()
         }, 5000)
