@@ -254,6 +254,7 @@ export default {
       autocompleteItems: [],
       allTags: [],
       tags: [],
+      message: '',
     }
   },
   validations: {
