@@ -239,10 +239,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.iconTitle {
-  max-width: 200px;
-  min-width: 200px;
-}
 .v-application a {
   text-decoration: none;
 }

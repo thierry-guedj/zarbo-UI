@@ -44,7 +44,7 @@ export default {
     tooltipFullscreen: 'Ouvrir la page détaillée',
   },
   userCard: {
-    registered: 'Enregistré le ',
+    registered: 'Membre depuis ',
   },
   search: {
     publishedArtworks: 'Oeuvres publiées',

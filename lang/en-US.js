@@ -43,7 +43,7 @@ export default {
     tooltipFullscreen: 'Open the detailed page',
   },
   userCard: {
-    registered: 'Registered',
+    registered: 'Member since ',
   },
   search: {
     publishedArtworks: 'Published artworks',
