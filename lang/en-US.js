@@ -147,6 +147,7 @@ export default {
     confirmDelete: 'Please confirm',
     cancel: 'Cancel',
     uploadDoneMessage: 'Your artwork has been uploaded.',
+    editDoneMessage: 'Your artwork has been modified.',
   },
   create: {
     uploadArtwork: 'Upload an artwok',

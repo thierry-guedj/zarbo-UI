@@ -7,7 +7,7 @@
       class="alert-success"
       dismissible
     >
-      {{ $t('settingsDesigns.uploadDoneMessage') }}
+      {{ message }}
     </v-alert>
     <v-data-table
       :headers="headers"
@@ -322,6 +322,7 @@ export default {
     this.initialize()
     if (this.$route.params.upload) {
       this.alert = true
+      this.message = this.$i18n.t('settingsDesigns.uploadDoneMessage'),
     }
   },
 
@@ -445,6 +446,7 @@ export default {
         .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
+          this.message = this.$i18n.t('settingsDesigns.editDoneMessage'),
           this.updateItem(this.editedItem)
         })
       this.close()

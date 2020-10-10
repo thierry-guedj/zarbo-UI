@@ -148,6 +148,7 @@ export default {
     confirmDelete: 'Veuillez confirmer la suppression',
     cancel: 'Annuler',
     uploadDoneMessage: 'Votre oeuvre a été téléchargée avec succès.',
+    editDoneMessage: 'Votre oeuvre a été modifiée avec succès.',
   },
   create: {
     uploadArtwork: 'Publier une oeuvre',
