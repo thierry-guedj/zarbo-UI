@@ -417,16 +417,7 @@ export default {
 <style lang="scss" scoped>
 .avatar-col {
   max-width: 27%;
-}
-.titlePage {
-  font-size: 44px;
-  padding-top: 20px;
-  margin-bottom: 30px;
-  line-height: 1em;
-}
-.iconTitle {
-  max-width: 180px;
-  min-width: 180px;
+  min-width: 280px;
 }
 .container {
   max-width: 100% !important;
