@@ -8,25 +8,35 @@
         <!-- LEFT -->
 
         <!-- Single Image -->
-        <div>
-          <CoolLightBox
-            :items="design"
-            :index="index !== null ? parseInt(`${index}`) : index"
-            :use-zoom-bar="true"
-            :effect="'fade'"
-            @close="index = null"
+        <div id="row-design">
+          <v-card
+            class="mr-2 ml-2 my-2 mx-auto"
+            width="auto"
+            height="auto"
+            tile
+            elevation="5"
+            hover
+            @click="nothing = null"
           >
-          </CoolLightBox>
-          <img
-            :src="design.images.large"
-            @lightbox="index = 0"
-            style="
-              max-width: 100%;
-              max-height: 100vh;
-              height: auto;
-              border: 6px solid blanchedalmond;
-            "
-          />
+            <CoolLightBox
+              :items="itemsDesigns"
+              :index="index !== null ? parseInt(`${index}`) : index"
+              :use-zoom-bar="true"
+              :effect="'fade'"
+              @close="index = null"
+            >
+            </CoolLightBox>
+            <img
+              :src="design.images.large"
+              style="
+                max-width: 100%;
+                max-height: 100vh;
+                height: auto;
+                border: 6px solid blanchedalmond;
+              "
+              @click.stop="index = 0"
+            />
+          </v-card>
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
@@ -158,7 +168,6 @@
                       :username="user.name"
                       :src="user.avatars.medium"
                       class="mx-0 mt-3"
-                      inline="true"
                       :size="100"
                     ></avatar>
                   </v-col>
@@ -251,6 +260,12 @@ export default {
     this.comments = response.data.comments
     this.user = response.data.user
     this.images = response.data.images
+
+    this.itemsDesigns.push({
+      title: this.design.title === '' ? this.design.title : 'Sans Titre',
+      description: this.design.description,
+      src: this.design.images.extralarge,
+    })
   },
 
   data() {
@@ -267,9 +282,24 @@ export default {
       width: '500px',
       prevRoute: null,
       index: null,
+      itemsDesigns: [],
+      nothing: null,
+      image: {
+        size: '',
+        height: '',
+        width: '',
+      },
     }
   },
   fetchOnServer: true,
+  mounted() {
+    const img = new Image()
+    img.src = this.design.images.extralarge
+    img.onload = () => {
+      this.image.width = img.width
+      this.image.height = img.height
+    }
+  },
   computed: {
     ...mapGetters(['visible']),
     designTitle() {
