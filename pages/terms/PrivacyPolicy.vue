@@ -1,6 +1,11 @@
 <template>
   <div>
     <RGPD />
+    <base-modal
+      :dialog.sync="visible"
+      @showDesign="styleModal()"
+      @closeDialog="hideModal()"
+    />
   </div>
 </template>
 
