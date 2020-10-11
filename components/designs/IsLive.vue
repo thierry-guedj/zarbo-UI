@@ -49,7 +49,7 @@ export default {
   computed: {
     getColor() {
       if (this.item.is_live === false) return 'orange darken-3'
-      else return 'teal darken-3'
+      else return '#006064'
     },
   },
   methods: {
