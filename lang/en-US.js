@@ -43,7 +43,7 @@ export default {
     tooltipFullscreen: 'Open the detailed page',
   },
   userCard: {
-    registered: 'Member since ',
+    registered: 'Member since : ',
   },
   search: {
     publishedArtworks: 'Published artworks',
@@ -180,7 +180,8 @@ export default {
     memberArtists: 'Member artists',
   },
   user: {
-    noResult: "This artist didn't published any artwork yet",
+    noDesignResult: "This artist didn't published any artwork yet",
+    noCriteriaResult: "Your search criteria didn't return any results",
     backToUsersList: 'Back',
     userPageTitle: 'Portfolio of ',
   },

@@ -44,7 +44,7 @@ export default {
     tooltipFullscreen: 'Ouvrir la page détaillée',
   },
   userCard: {
-    registered: 'Membre depuis ',
+    registered: 'Membre depuis le ',
   },
   search: {
     publishedArtworks: 'Oeuvres publiées',
@@ -182,6 +182,8 @@ export default {
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
+    noDesignResult: "Cet artiste n'a pas encore publié d'oeuvre",
+    noCriteriaResult: "Vos critères de recherche n'ont retourné aucun résultat",
     backToUsersList: 'Retour',
     userPageTitle: 'Portfolio de ',
   },

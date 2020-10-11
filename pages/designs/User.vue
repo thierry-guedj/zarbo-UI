@@ -117,10 +117,9 @@
                   width="60%"
                   class="alert"
                 >
-                  <!-- On teste pourquoi il n'y a pas de résultat -->
-                  <!-- 1° cas : les critères de recherche ne donnent aucun résultat -->
-                  <!-- 2° cas : l'artiste n'a pas publié d'oeuvre -->
-                  {{ $t('user.noResult') }}
+
+                  {{ noResultMessage }}
+
                   <v-spacer />
                   <nuxt-link :to="{ name: 'users.search' }">
                     <v-btn class="mt-3"
@@ -222,6 +221,11 @@ export default {
       `/user/${this.$route.params.id}/findById`
     )
     this.user = res.data
+    if (this.user.designs.length < 1) {
+      this.noResultMessage = this.$i18n.t('user.noDesignResult')
+    } else {
+      this.noResultMessage = this.$i18n.t('user.noCriteriaResult')
+    }
   },
 
   data() {
@@ -251,6 +255,7 @@ export default {
       itemsDesigns: [],
       user: null,
       fetchOnServer: true,
+      noResultMessage: '',
     }
   },
   computed: {

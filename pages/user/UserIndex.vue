@@ -227,7 +227,7 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
- /*    goTo(to, folderName) {
+    /*    goTo(to, folderName) {
       this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),

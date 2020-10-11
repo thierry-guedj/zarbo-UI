@@ -37,7 +37,7 @@ export default {
     item: {
       type: Object,
       default: null,
-    }
+    },
   },
   data() {
     return {
