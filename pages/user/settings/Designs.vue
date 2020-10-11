@@ -142,11 +142,23 @@
             v-for="(tag, i) in item.tags"
             :key="`${i}-${tag}`"
             class="mr-1"
+            style="align-self: center;"
             x-small
-            color="#5C6BC0"
-             @click="goToTag(`${item.tag_list.normalized[i]}`)"
+            outlined
+            color="whitesmoke"
+            @click="goToTag(`${item.tag_list.normalized[i]}`)"
             >{{ tag }}</v-btn
           >
+          <!-- <v-chip
+            v-for="(tag, i) in item.tags"
+            :key="`${i}-${tag}`"
+            class="ma-1"
+            color="#ffffff"
+            label
+            outlined
+          >
+            {{ tag }}
+          </v-chip> -->
         </div>
       </template>
       <template v-slot:item.is_live="{ item }">
@@ -231,6 +243,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'tags',
+          width: '35%',
         },
         {
           text: this.$i18n.t('settingsDesigns.status'),
@@ -268,6 +281,7 @@ export default {
       allTags: [],
       tags: [],
       message: '',
+      chip4: true,
     }
   },
   validations: {
@@ -468,7 +482,7 @@ export default {
       this.close()
     },
     goToTag(tagParam) {
-        this.$router.push({ name: 'designs.tag', params: { tag: tagParam } })
+      this.$router.push({ name: 'designs.tag', params: { tag: tagParam } })
     },
     sanitizeTitle(title) {
       let slug = ''
