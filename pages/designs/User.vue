@@ -22,7 +22,7 @@
         <section class="hero text-white">
           <!-- <v-container> -->
           <v-row class="row-md-12">
-            <v-col class="col-md-3 text-center">
+            <v-col class="col-md-2 text-center avatarUser">
               <avatar
                 :username="user.name"
                 :src="user.avatars.large"
@@ -335,6 +335,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatarUser {
+  min-width: 280px;
+}
 .tagline {
   font-size: 24px;
 }
