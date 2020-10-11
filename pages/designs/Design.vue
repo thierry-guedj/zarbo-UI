@@ -4,13 +4,13 @@
   </div>
   <div v-else class="pt-6 pl-6">
     <v-row>
-      <v-col>
+      <v-col class="design-left-col">
         <!-- LEFT -->
 
         <!-- Single Image -->
-        <div id="row-design">
+        <div id="row-design fluid">
           <v-card
-            class="mr-2 ml-2 my-2 mx-auto"
+            class="p-0 m-0 text-center fluid"
             width="auto"
             height="auto"
             tile
@@ -28,12 +28,7 @@
             </CoolLightBox>
             <img
               :src="design.images.large"
-              style="
-                max-width: 100%;
-                max-height: 100vh;
-                height: auto;
-                border: 6px solid blanchedalmond;
-              "
+              class="design-image"
               @click.stop="index = 0"
             />
           </v-card>
@@ -93,7 +88,7 @@
         <!--/ END COMMENTS-->
       </v-col>
       <v-divider class="mx-0" inset vertical></v-divider>
-      <v-col>
+      <v-col class="design-right-col">
         <!-- RIGHT -->
         <v-card-text>
           <!-- Design Infos -->
@@ -294,7 +289,7 @@ export default {
   fetchOnServer: true,
   mounted() {
     const img = new Image()
-    img.src = this.design.images.extralarge
+    img.src = this.design.images.large
     img.onload = () => {
       this.image.width = img.width
       this.image.height = img.height
@@ -353,6 +348,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* #row-design {
+  width: auto;
+  text-align: center;
+} */
+.design-image {
+  max-width: 100%;
+  max-height: 100vh;
+  height: auto;
+  border: 6px solid blanchedalmond;
+}
+.design-right-col {
+  width: auto;
+  max-width: inherit;
+}
+.design-left-col {
+  width: auto;
+  max-width: max-content;
+  padding: 0 4%;
+}
 .designs-tag-outer {
   margin-bottom: 0;
 }
