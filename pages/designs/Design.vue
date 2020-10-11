@@ -96,7 +96,7 @@
             <p class="text-h4 text-left block">
               {{ designTitle | capitalize }}
             </p>
-            <v-divider class="mx-0" inset></v-divider>
+            <v-divider class="mx-0"></v-divider>
             <p class="text-h6 text-left block">
               {{ $t('show.by') }}
               <nuxt-link
@@ -167,7 +167,7 @@
                     ></avatar>
                   </v-col>
                   <v-col class="col-md-9">
-                    <div class="modal-user-detail ml-5">
+                    <div class="modal-user-detail ml-0">
                       <h1 class="font-13 fw-500">
                         <p class="text-h6 text-left block">
                           {{ design.user.name }}
@@ -358,10 +358,10 @@ export default {
   height: auto;
   border: 6px solid blanchedalmond;
 }
-.design-right-col {
+/* .design-right-col {
   width: auto;
-  max-width: inherit;
-}
+  max-width: max-content;
+} */
 .design-left-col {
   width: auto;
   max-width: max-content;
@@ -390,6 +390,12 @@ export default {
   padding-top: 10px;
 }
 .v-application .text-subtitle-1 {
+  font-size: 12px;
+  line-height: 1.45em;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+}
+.v-application .text-subtitle-2 {
   font-size: 12px;
   line-height: 1.45em;
   font-family: 'Josefin Sans', sans-serif;

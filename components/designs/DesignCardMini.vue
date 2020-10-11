@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
+    class="my-4 mx-2 portfolio-item portfolio-effect__item portfolio-item--eff1"
     width="auto"
     height="auto"
     tile
