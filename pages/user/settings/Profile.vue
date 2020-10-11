@@ -111,7 +111,7 @@
                     <div class="text-right">
                       <v-spacer class="mb-3" />
                       <v-btn
-                        class="ml-8 float-right"
+                        class="ml-2 float-right"
                         title="Upload"
                         type="button"
                         data-action="upload"
@@ -121,9 +121,11 @@
                         >{{ $t('profile.updateProfile') }}</v-btn
                       >
 
-                      <v-btn :disabled="upload" @click="clear">{{
-                        $t('profile.clear')
-                      }}</v-btn>
+                      <v-btn
+                        :disabled="upload"
+                        @click="goToUser(`${auth.user.id}`)"
+                        >{{ $t('profile.seeProfile') }}</v-btn
+                      >
                     </div>
                   </form>
                 </v-col>
@@ -410,6 +412,13 @@ export default {
     },
     toTop() {
       this.$vuetify.goTo(0)
+    },
+    goToUser(userId) {
+      if (this.$route.path !== `/designs/${userId}/user`) {
+        this.$router.push(
+          this.localePath({ name: 'designs.user', params: { id: userId } })
+        )
+      }
     },
   },
 }

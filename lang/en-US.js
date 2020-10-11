@@ -213,6 +213,7 @@ export default {
     saved: 'Avatar saved successfully',
     stillUploading: 'Avatar is still uploading...Please wait',
     uploadSuccess: 'Avatar successfully uploaded',
+    seeProfile: 'Visualize your profile',
   },
   editDesign: {
     editItem: 'Edit Item',

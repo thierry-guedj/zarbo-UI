@@ -215,6 +215,7 @@ export default {
     saved: 'Avatar téléchargé avec succès',
     stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Avatar téléchargé avec succès',
+    seeProfile: 'Visualiser votre profil',
   },
   editDesign: {
     editItem: 'Editer une oeuvre',
