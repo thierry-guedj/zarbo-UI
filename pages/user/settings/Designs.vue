@@ -136,6 +136,19 @@
           </nuxt-link>
         </div>
       </template>
+      <template v-slot:item.tags="{ item }">
+        <div class="mr-3">
+          <v-btn
+            v-for="(tag, i) in item.tags"
+            :key="`${i}-${tag}`"
+            class="tag"
+            x-small
+            color="#006064"
+             @click="goToTag(`${item.tag_list.normalized[i]}`)"
+            >{{ tag }}</v-btn
+          >
+        </div>
+      </template>
       <template v-slot:item.is_live="{ item }">
         <div class="mr-3">
           <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
@@ -453,6 +466,9 @@ export default {
           this.updateItem(this.editedItem)
         })
       this.close()
+    },
+    goToTag(tagParam) {
+        this.$router.push({ name: 'designs.tag', params: { tag: tagParam } })
     },
     sanitizeTitle(title) {
       let slug = ''
