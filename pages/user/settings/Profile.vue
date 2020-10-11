@@ -123,7 +123,7 @@
 
                       <v-btn
                         :disabled="upload"
-                        @click="goToUser(`${auth.user.id}`)"
+                        @click="goToUser($auth.user.id)"
                         >{{ $t('profile.seeProfile') }}</v-btn
                       >
                     </div>
@@ -216,6 +216,8 @@ export default {
       dialog_msg: '',
       alert: false,
       uploadIsSuccessful: false,
+      fab: false,
+      upload: false,
     }
   },
   computed: {

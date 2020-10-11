@@ -11,7 +11,7 @@
       no-gutters
     >
       <masonry
-        :cols="{ default: 3, 1700: 2, 1300: 1 }"
+        :cols="{ default: 3, 1700: 2, 1000: 1 }"
         :gutter="{ default: '0px', 700: '10px' }"
         ><lazy-component
           v-for="(design, i) in designs"
