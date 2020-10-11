@@ -144,8 +144,7 @@
             class="mr-1"
             style="align-self: center;"
             x-small
-            outlined
-            color="whitesmoke"
+            color="#006064"
             @click="goToTag(`${item.tag_list.normalized[i]}`)"
             >{{ tag }}</v-btn
           >

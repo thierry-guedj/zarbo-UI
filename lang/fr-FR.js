@@ -60,7 +60,7 @@ export default {
   show: {
     by: 'Par',
     published: 'Publiée ',
-    backToArtwork: 'Retour aux oeuvres',
+    backToArtwork: 'Retour',
     youLike: 'Vous aimez cette oeuvre',
     tags: 'Mots-clés',
   },
@@ -182,7 +182,7 @@ export default {
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
-    backToUsersList: 'Retour à la liste des artistes',
+    backToUsersList: 'Retour',
     userPageTitle: 'Portfolio de ',
   },
   designs: {

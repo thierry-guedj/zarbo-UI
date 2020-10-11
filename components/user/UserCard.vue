@@ -28,7 +28,7 @@
         :username="user.name"
         :src="user.avatars.medium"
         class="mx-3 mt-3"
-        :size="80"
+        :size="100"
       ></avatar>
       <div class="portfolio-item__info">
         <h4 class="portfolio-item__header">{{ user.username }}</h4>
@@ -95,11 +95,11 @@ export default {
 
 <style lang="scss" scoped>
 .vue-avatar--wrapper {
-  min-width: 80px;
+  min-width: 100px;
 }
 .v-card__title {
   line-height: 1.5em;
-  font-size: 14px;
+  font-size: 16px;
 }
 .v-card--reveal {
   align-items: center;

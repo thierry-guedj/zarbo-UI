@@ -59,7 +59,7 @@ export default {
   show: {
     by: 'By',
     published: 'Publishing date: ',
-    backToArtwork: 'Back to artwork',
+    backToArtwork: 'Back',
     youLike: 'You like this artwork',
     tags: 'Tags',
   },
@@ -181,7 +181,7 @@ export default {
   },
   user: {
     noResult: "This artist didn't published any artwork yet",
-    backToUsersList: 'Back to users list',
+    backToUsersList: 'Back',
     userPageTitle: 'Portfolio of ',
   },
   designs: {
