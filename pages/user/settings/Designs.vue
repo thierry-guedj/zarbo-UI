@@ -141,7 +141,7 @@
           <v-btn
             v-for="(tag, i) in item.tags"
             :key="`${i}-${tag}`"
-            class="tag"
+            class="mr-1"
             x-small
             color="#006064"
              @click="goToTag(`${item.tag_list.normalized[i]}`)"
