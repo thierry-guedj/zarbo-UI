@@ -281,6 +281,7 @@ export default {
       fab: false,
       autocompleteItems: [],
       allTags: [],
+      tags: [],
     }
   },
   computed: {

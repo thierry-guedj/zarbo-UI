@@ -31,6 +31,11 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
+    script: [
+      {
+        src: 'https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js',
+      }
+    ],
     link: [
       {
         rel: 'apple-touch-icon',
@@ -107,6 +112,7 @@ export default {
       mode: 'client',
     },
     { src: '~/plugins/vue-tags-input', ssr: false },
+    { src: '~/plugins/ckeditor.js', ssr: false },
   ],
   /*
    ** Auto import components
@@ -122,7 +128,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/router',
-    '@nuxtjs/moment',
+    // '@nuxtjs/moment',
   ],
   moment: {
     timezone: true,
@@ -211,7 +217,7 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.teal.darken3,
+          primary: '#1f7c8e',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
