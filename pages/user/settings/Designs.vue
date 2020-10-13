@@ -1,6 +1,6 @@
 <template>
   <section>
-    <template v-if="noArtworkYet">
+    <template v-if="noArtworkYet === true">
       <v-alert
         v-model="alert"
         border="left"
@@ -431,6 +431,7 @@ export default {
       if (this.designs.length < 1) {
         this.noArtworkYet = true
         this.message = this.$i18n.t('settingsDesigns.noArtworkYetMessage')
+        this.alert = true
       }
       this.loading = false
     },
