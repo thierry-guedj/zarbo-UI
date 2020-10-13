@@ -46,4 +46,7 @@ export default {
 a.color-white {
   color: #ffffff;
 }
+.v-application a {
+  text-decoration: underline;
+}
 </style>
