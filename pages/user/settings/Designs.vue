@@ -45,6 +45,10 @@
               <v-divider class="mx-4"></v-divider>
               <v-card-text>
                 <v-container>
+                  <img
+                    :src="editedItem.images.minithumbnail"
+                    class="text-center"
+                  />
                   <v-text-field
                     v-model.trim="$v.form.title.$model"
                     :error-messages="titleErrors"
@@ -110,14 +114,16 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="close">{{
+                  $t('editDesign.cancel')
+                }}</v-btn>
                 <v-btn
                   color="blue darken-1"
                   :loading="loadingSubmit"
                   :disabled="$v.form.$invalid"
                   text
                   @click="save"
-                  >Save</v-btn
+                  >{{ $t('editDesign.save') }}</v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -261,6 +267,7 @@ export default {
         tags: [],
         assign_to_team: false,
         team: null,
+        images: {},
       },
       defaultItem: {
         title: '',
@@ -413,6 +420,11 @@ export default {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
+      if (design.is_live === 1) {
+        design.link = true
+      } else {
+        design.link = false
+      }
       // this.editedItem = design
       this.designs[this.designs.indexOf(item)] = design
     },
