@@ -85,7 +85,7 @@
                 <v-divider class="mx-4"></v-divider>
                 <v-card-text>
                   <v-container>
-                    <img
+                    <img v-if="editedItem"
                       :src="editedItem.images.minithumbnail"
                       class="text-center"
                     />
