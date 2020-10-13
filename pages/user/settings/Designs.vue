@@ -85,10 +85,11 @@
                 <v-divider class="mx-4"></v-divider>
                 <v-card-text>
                   <v-container>
-                    <img v-if="editedItem"
+                    <!-- <img
+                      v-if="editedItem"
                       :src="editedItem.images.minithumbnail"
                       class="text-center"
-                    />
+                    /> -->
                     <v-text-field
                       v-model.trim="$v.form.title.$model"
                       :error-messages="titleErrors"
