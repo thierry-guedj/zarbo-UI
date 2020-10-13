@@ -150,6 +150,7 @@ export default {
     uploadDoneMessage: 'Votre oeuvre a été téléchargée avec succès.',
     editDoneMessage: 'Votre oeuvre a été modifiée avec succès.',
     deleteDoneMessage: 'Votre oeuvre a été supprimée avec succès.',
+    noArtworkYetMessage: "Vous n'avez encore publié aucune oeuvre",
   },
   create: {
     uploadArtwork: 'Publier une oeuvre',

@@ -149,6 +149,7 @@ export default {
     uploadDoneMessage: 'Your artwork has been uploaded.',
     editDoneMessage: 'Your artwork has been modified.',
     deleteDoneMessage: 'Your artwork has been deleted.',
+    noArtworkYetMessage: "You didn't publish any artwork yet",
   },
   create: {
     uploadArtwork: 'Upload an artwok',

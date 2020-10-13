@@ -1,79 +1,119 @@
 <template>
   <section>
-    <v-alert
-      v-model="alert"
-      border="left"
-      close-text="Close Alert"
-      class="alert-success"
-      dismissible
-    >
-      {{ message }}
-    </v-alert>
-    <v-data-table
-      :headers="headers"
-      :items="designs"
-      sort-by="calories"
-      class="elevation-1"
-      :search="search"
-      :loading="loading"
-    >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <!-- <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" /> -->
-          <v-toolbar-title>{{ $t('settingsDesigns.artwork') }}</v-toolbar-title>
-          <v-divider class="mx-4" inset vertical></v-divider>
+    <template v-if="noArtworkYet">
+      <v-alert
+        v-model="alert"
+        border="left"
+        close-text="Close Alert"
+        class="alert-success"
+        dismissible
+        transition="scale-transition"
+      >
+        <v-row align="center">
+          <v-col class="grow">
+            {{ message }}
+          </v-col>
+          <v-col class="shrink">
+            <template v-if="$auth.loggedIn">
+              <nuxt-link :to="localePath({ name: 'designs.upload' })">
+                <v-btn small class="upload-button mr-2"
+                  ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+                  >{{ $t('navbar.upload') }}</v-btn
+                >
+              </nuxt-link>
+            </template>
+            <template v-else>
+              <base-button
+                toggle-modal
+                component-name="LoginForm"
+                folder-name="auth"
+                button-class="upload-button mr-2"
+                icon="mdi-cloud-upload"
+                >{{ $t('navbar.upload') }}</base-button
+              >
+            </template>
+          </v-col>
+        </v-row>
+      </v-alert>
+    </template>
+    <template v-else>
+      <v-alert
+        v-model="alert"
+        border="left"
+        close-text="Close Alert"
+        class="alert-success"
+        dismissible
+        transition="scale-transition"
+      >
+        {{ message }}
+      </v-alert>
+      <v-data-table
+        :headers="headers"
+        :items="designs"
+        sort-by="calories"
+        class="elevation-1"
+        :search="search"
+        :loading="loading"
+      >
+        <template v-slot:top>
+          <v-toolbar flat>
+            <!-- <img src="/settingsArtworksIcon.png" class="iconTitle ml-3 mr-2" /> -->
+            <v-toolbar-title>{{
+              $t('settingsDesigns.artwork')
+            }}</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
 
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            :label="$t('settingsDesigns.search')"
-            single-line
-            hide-details
-          ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              :label="$t('settingsDesigns.search')"
+              single-line
+              hide-details
+            ></v-text-field>
 
-          <v-dialog v-model="dialog" max-width="600px" class="editItem">
-            <!-- <template v-slot:activator="{ on, attrs }">
+            <v-dialog v-model="dialog" max-width="600px" class="editItem">
+              <!-- <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on"
               >New Item</v-btn
             >
           </template> -->
-            <v-card class="modalEditDelete">
-              <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title>
-              <v-divider class="mx-4"></v-divider>
-              <v-card-text>
-                <v-container>
-                  <img
-                    :src="editedItem.images.minithumbnail"
-                    class="text-center"
-                  />
-                  <v-text-field
-                    v-model.trim="$v.form.title.$model"
-                    :error-messages="titleErrors"
-                    :counter="120"
-                    :label="$t('editDesign.title')"
-                    field="title"
-                    outlined
-                    class="mb-1"
-                    @input="$v.form.title.$touch()"
-                    @blur="$v.form.title.$touch()"
-                  ></v-text-field>
+              <v-card class="modalEditDelete">
+                <v-card-title>
+                  <span class="headline">{{ formTitle }}</span>
+                </v-card-title>
+                <v-divider class="mx-4"></v-divider>
+                <v-card-text>
+                  <v-container>
+                    <img
+                      :src="editedItem.images.minithumbnail"
+                      class="text-center"
+                    />
+                    <v-text-field
+                      v-model.trim="$v.form.title.$model"
+                      :error-messages="titleErrors"
+                      :counter="120"
+                      :label="$t('editDesign.title')"
+                      field="title"
+                      outlined
+                      class="mb-1"
+                      @input="$v.form.title.$touch()"
+                      @blur="$v.form.title.$touch()"
+                    ></v-text-field>
 
-                  <v-textarea
-                    v-model.trim="$v.form.description.$model"
-                    :error-messages="descriptionErrors"
-                    :counter="3000"
-                    :label="$t('editDesign.description')"
-                    outlined
-                    class="mb-1"
-                    field="description"
-                    @input="$v.form.description.$touch()"
-                    @blur="$v.form.description.$touch()"
-                  ></v-textarea>
+                    <v-textarea
+                      v-model.trim="$v.form.description.$model"
+                      :error-messages="descriptionErrors"
+                      :counter="3000"
+                      :label="$t('editDesign.description')"
+                      outlined
+                      class="mb-1"
+                      field="description"
+                      @input="$v.form.description.$touch()"
+                      @blur="$v.form.description.$touch()"
+                    ></v-textarea>
 
-                  <!-- <client-only>
+                    <!-- <client-only>
                     <input-tag
                       v-model="editedItem.tags"
                       :tags="editedItem.tags"
@@ -84,77 +124,79 @@
                       outlined
                     ></input-tag>
                   </client-only> -->
-                  <client-only>
-                    <vue-tags-input
-                      v-model="form.tag"
-                      :tags="editedItem.tags"
-                      class="tags-input"
-                      :autocomplete-items="filteredItems"
-                      @tags-changed="(newTags) => (tags = newTags)"
-                    >
-                      <template slot="autocomplete-header">
-                        <strong>Select a tag here ↓</strong>
-                      </template>
-                      <template slot="autocomplete-footer">
-                        <small>
-                          <em>Or keep going with yours...</em>
-                        </small>
-                      </template>
-                    </vue-tags-input>
-                  </client-only>
+                    <client-only>
+                      <vue-tags-input
+                        v-model="form.tag"
+                        :tags="editedItem.tags"
+                        class="tags-input"
+                        :autocomplete-items="filteredItems"
+                        @tags-changed="(newTags) => (tags = newTags)"
+                      >
+                        <template slot="autocomplete-header">
+                          <strong>Select a tag here ↓</strong>
+                        </template>
+                        <template slot="autocomplete-footer">
+                          <small>
+                            <em>Or keep going with yours...</em>
+                          </small>
+                        </template>
+                      </vue-tags-input>
+                    </client-only>
 
-                  <v-checkbox
-                    id="is_live"
-                    v-model="form.is_live"
-                    field="is_live"
-                    :label="$t('editDesign.publishDesign')"
-                  ></v-checkbox>
-                </v-container>
-              </v-card-text>
+                    <v-checkbox
+                      id="is_live"
+                      v-model="form.is_live"
+                      field="is_live"
+                      :label="$t('editDesign.publishDesign')"
+                    ></v-checkbox>
+                  </v-container>
+                </v-card-text>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">{{
-                  $t('editDesign.cancel')
-                }}</v-btn>
-                <v-btn
-                  color="blue darken-1"
-                  :loading="loadingSubmit"
-                  :disabled="$v.form.$invalid"
-                  text
-                  @click="save"
-                  >{{ $t('editDesign.save') }}</v-btn
-                >
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar>
-      </template>
-      <template v-slot:item.image="{ item }">
-        <div class="px-2 my-2 align-middle">
-          <nuxt-link :to="{ name: 'design.details', params: { id: item.id } }">
-            <img
-              :src="item.images.thumbnail"
-              :lazy-src="item.images.minithumbnail"
-              :alt="item.title"
-              max-width="80px"
-            />
-          </nuxt-link>
-        </div>
-      </template>
-      <template v-slot:item.tags="{ item }">
-        <div class="mr-3">
-          <v-btn
-            v-for="(tag, i) in item.tags"
-            :key="`${i}-${tag}`"
-            class="mr-1"
-            style="align-self: center;"
-            x-small
-            color="#5C6BC0"
-            @click="goToTag(`${item.tag_list.normalized[i]}`)"
-            >{{ tag }}</v-btn
-          >
-          <!-- <v-chip
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="close">{{
+                    $t('editDesign.cancel')
+                  }}</v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    :loading="loadingSubmit"
+                    :disabled="$v.form.$invalid"
+                    text
+                    @click="save"
+                    >{{ $t('editDesign.save') }}</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
+        </template>
+        <template v-slot:item.image="{ item }">
+          <div class="px-2 my-2 align-middle">
+            <nuxt-link
+              :to="{ name: 'design.details', params: { id: item.id } }"
+            >
+              <img
+                :src="item.images.thumbnail"
+                :lazy-src="item.images.minithumbnail"
+                :alt="item.title"
+                max-width="80px"
+              />
+            </nuxt-link>
+          </div>
+        </template>
+        <template v-slot:item.tags="{ item }">
+          <div class="mr-3">
+            <v-btn
+              v-for="(tag, i) in item.tags"
+              :key="`${i}-${tag}`"
+              class="mr-1"
+              style="align-self: center;"
+              x-small
+              color="#5C6BC0"
+              @click="goToTag(`${item.tag_list.normalized[i]}`)"
+              >{{ tag }}</v-btn
+            >
+            <!-- <v-chip
             v-for="(tag, i) in item.tags"
             :key="`${i}-${tag}`"
             class="ma-1"
@@ -164,41 +206,42 @@
           >
             {{ tag }}
           </v-chip> -->
-        </div>
-      </template>
-      <template v-slot:item.is_live="{ item }">
-        <div class="mr-3">
-          <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
-        </div>
-      </template>
+          </div>
+        </template>
+        <template v-slot:item.is_live="{ item }">
+          <div class="mr-3">
+            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
+          </div>
+        </template>
 
-      <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
-        <v-icon small @click="confirmDeleteItem(item)">
-          mdi-delete
-        </v-icon>
-      </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
-    </v-data-table>
-    <!-- <confirm-delete
+        <template v-slot:item.actions="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon>
+          <v-icon small @click="confirmDeleteItem(item)">
+            mdi-delete
+          </v-icon>
+        </template>
+        <template v-slot:no-data>
+          <v-btn color="primary" @click="initialize">Reset</v-btn>
+        </template>
+      </v-data-table>
+      <!-- <confirm-delete
           :item="item"
           :dialog.sync="dialogDelete"
           @deleteItem="deleteItem(item)"
         /> -->
-    <!-- Modal  -->
-    <keep-alive>
-      <base-modal
-        class="modalEditDelete"
-        :dialog.sync="visible"
-        @showDesign="styleModal()"
-        @closeDialog="hideModal()"
-        @destroyItem="deleteItem()"
-      />
-    </keep-alive>
+      <!-- Modal  -->
+      <keep-alive>
+        <base-modal
+          class="modalEditDelete"
+          :dialog.sync="visible"
+          @showDesign="styleModal()"
+          @closeDialog="hideModal()"
+          @destroyItem="deleteItem()"
+        />
+      </keep-alive>
+    </template>
   </section>
 </template>
 
@@ -288,6 +331,7 @@ export default {
       tags: [],
       message: '',
       chip4: true,
+      noArtworkYet: false,
     }
   },
   validations: {
@@ -384,6 +428,10 @@ export default {
         design.tags = design.tag_list.tags
         this.designs[index] = design
       })
+      if (this.designs.length < 1) {
+        this.noArtworkYet = true
+        this.message = this.$i18n.t('settingsDesigns.noArtworkYetMessage')
+      }
       this.loading = false
     },
 
@@ -396,7 +444,6 @@ export default {
         text: string,
       }))
       this.tags = this.editedItem.tags
-
       // this.editedItem.tags = this.editedItem.tag_list.tags
       this.form = {
         title: this.editedItem.title,
@@ -540,6 +587,9 @@ export default {
   margin-right: 4px;
   padding: 3px;
 } */
+.theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
+  background-color: rgba(31, 124, 142, 0.65);
+}
 img {
   max-width: 100%;
   height: auto;
