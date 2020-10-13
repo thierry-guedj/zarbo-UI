@@ -31,11 +31,6 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    script: [
-      {
-        src: 'https://cdn.jsdelivr.net/npm/he@1.2.0/he.min.js',
-      }
-    ],
     link: [
       {
         rel: 'apple-touch-icon',
@@ -112,7 +107,6 @@ export default {
       mode: 'client',
     },
     { src: '~/plugins/vue-tags-input', ssr: false },
-    { src: '~/plugins/ckeditor.js', ssr: false },
   ],
   /*
    ** Auto import components
