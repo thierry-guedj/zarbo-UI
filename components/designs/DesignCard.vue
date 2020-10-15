@@ -109,9 +109,9 @@
           {{ designTitle | capitalize }}
         </p>
       </nuxt-link>
-      <p class="design-user">
+      <p class="design-user-p">
         {{ $t('designCard.by') }}
-        <nuxt-link :to="`/designs/${design.user.id}/user`">
+        <nuxt-link :to="`/designs/${design.user.id}/user`" class="design-user">
           {{ design.user.name }}</nuxt-link
         >
       </p>
@@ -209,14 +209,20 @@ export default {
 .design-title:hover {
   text-decoration: underline;
 }
-.design-user {
+a.design-user {
   color: #546e7a;
   font-size: 17px;
   font-weight: 400;
   margin-bottom: 0;
 }
-.design-user:hover {
+a.design-user:hover {
   text-decoration: underline;
+}
+.design-user-p {
+  color: #546e7a;
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 0;
 }
 .design-upload {
   font-size: 14px;
