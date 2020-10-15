@@ -1,5 +1,5 @@
-import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
+import colors from 'vuetify/es5/util/colors'
 export default {
   /*
    ** Nuxt rendering mode
@@ -234,6 +234,6 @@ export default {
     filenames: {
       chunk: ({ isDev }) => (isDev ? 'c[name].js' : 'c[id].[contenthash].js'),
     },
-    vendor: ['@johmun/vue-tags-input'],
+    // vendor: ['@johmun/vue-tags-input'],
   },
 }
