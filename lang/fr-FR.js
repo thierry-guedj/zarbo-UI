@@ -24,6 +24,7 @@ export default {
     signin: 'Se connecter',
     signup: 'Devenir membre',
     signout: 'Se déconnecter',
+    publishArtwork: 'Publier une oeuvre',
   },
   menuAccount: {
     yourDesigns: 'Vos oeuvres',

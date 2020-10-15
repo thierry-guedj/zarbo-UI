@@ -111,12 +111,12 @@
         </nuxt-link>
 
         <!-- <template v-if="$auth.loggedIn"> -->
-          <nuxt-link :to="localePath({ name: 'designs.upload' })">
-            <v-btn small class="upload-button mr-2"
-              ><v-icon class="mr-2">mdi-cloud-upload</v-icon
-              >{{ $t('navbar.upload') }}</v-btn
-            >
-          </nuxt-link>
+        <nuxt-link :to="localePath({ name: 'designs.upload' })">
+          <v-btn small class="upload-button mr-2"
+            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+            >{{ $t('navbar.upload') }}</v-btn
+          >
+        </nuxt-link>
         <!-- </template>
         <template v-else>
           <base-button
@@ -322,6 +322,11 @@ export default {
           icon: 'mdi-chart-bubble',
           title: this.$i18n.t('navigationDrawer.artists'),
           to: this.localePath({ name: 'users.search' }),
+        },
+        {
+          icon: 'mdi-cloud-upload',
+          title: this.$i18n.t('navigationDrawer.publishArtwork'),
+          to: this.localePath({ name: 'designs.upload' }),
         },
       ],
       menuAccount: [

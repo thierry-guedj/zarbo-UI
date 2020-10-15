@@ -23,6 +23,7 @@ export default {
     signin: 'Sign in',
     signup: 'Sign up',
     signout: 'Sign out',
+    publishArtwork: 'Publish artwork',
   },
   menuAccount: {
     yourDesigns: 'Your artwork',
