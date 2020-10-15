@@ -1,28 +1,30 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">fingerprint</i>{{ $t('passwordResetForm.resetPasswordEmail') }}
-    </v-card-title
-    >
+      ><i class="material-icons md-24 mr-2">fingerprint</i
+      >{{ $t('passwordResetForm.resetPasswordEmail') }}
+    </v-card-title>
     <v-card-text>
       <v-alert
         v-if="this.$v.form.$model.successful"
         class="alert-success"
         dark
+        transition="scale-transition"
         icon="mark_email_unread"
         border="right"
         :form="form"
       >
         {{ status }}
         <p>
-          <base-link component-name="LoginForm" folder-name="auth" redirect
-            >{{ $t('passwordResetForm.proceedToLogin') }}</base-link
-          >
+          <base-link component-name="LoginForm" folder-name="auth" redirect>{{
+            $t('passwordResetForm.proceedToLogin')
+          }}</base-link>
         </p></v-alert
       >
       <v-alert
         v-if="form.errors.has('email')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -64,14 +66,16 @@
         >
           {{ $t('passwordResetForm.reset') }}</v-btn
         >
-        <v-btn @click="clear">{{ $t('passwordResetForm.clear') }}</v-btn>
+        <v-btn :disabled="loadingSubmit" @click="clear">{{
+          $t('passwordResetForm.clear')
+        }}</v-btn>
         <div class="font-14 fw-400 text-center mt-4 right">
-        {{ $t('passwordResetForm.noAccount') }}
+          {{ $t('passwordResetForm.noAccount') }}
 
-        <base-link component-name="RegisterForm" folder-name="auth">
-          {{ $t('passwordResetForm.createAccount') }}</base-link
-        >
-      </div>
+          <base-link component-name="RegisterForm" folder-name="auth">
+            {{ $t('passwordResetForm.createAccount') }}</base-link
+          >
+        </div>
       </template>
     </v-card-text>
   </v-form>
@@ -128,7 +132,8 @@ export default {
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&
         errors.push(this.$i18n.t('validation.passwordMinLength'))
-      !this.$v.form.password.required && errors.push(this.$i18n.t('validation.passwordRequired'))
+      !this.$v.form.password.required &&
+        errors.push(this.$i18n.t('validation.passwordRequired'))
       return errors
     },
     passwordConfirmationErrors() {

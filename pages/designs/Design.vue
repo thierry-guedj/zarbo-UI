@@ -3,29 +3,35 @@
     <Circle8></Circle8>
   </div>
   <div v-else class="pt-6 pl-6">
-    <v-row class="row-md-12">
-      <v-col class="col-md-7">
+    <v-row>
+      <v-col class="design-left-col">
         <!-- LEFT -->
 
         <!-- Single Image -->
-        <div>
-          <CoolLightBox
-            :items="design"
-            :index="index !== null ? parseInt(`${index}`) : index"
-            :use-zoom-bar="true"
-            :effect="'fade'"
-            @close="index = null"
+        <div id="row-design fluid">
+          <v-card
+            class="p-0 m-0 text-center fluid"
+            width="auto"
+            height="auto"
+            tile
+            elevation="5"
+            hover
+            @click="nothing = null"
           >
-          </CoolLightBox>
-          <img
-            :src="design.images.large"
-            style="
-              max-width: 100%;
-              max-height: 100vh;
-              height: auto;
-              border: 6px solid blanchedalmond;
-            "
-          />
+            <CoolLightBox
+              :items="itemsDesigns"
+              :index="index !== null ? parseInt(`${index}`) : index"
+              :use-zoom-bar="true"
+              :effect="'fade'"
+              @close="index = null"
+            >
+            </CoolLightBox>
+            <img
+              :src="design.images.large"
+              class="design-image"
+              @click.stop="index = 0"
+            />
+          </v-card>
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
@@ -82,7 +88,7 @@
         <!--/ END COMMENTS-->
       </v-col>
       <v-divider class="mx-0" inset vertical></v-divider>
-      <v-col class="col-md-4">
+      <v-col class="design-right-col">
         <!-- RIGHT -->
         <v-card-text>
           <!-- Design Infos -->
@@ -90,7 +96,7 @@
             <p class="text-h4 text-left block">
               {{ designTitle | capitalize }}
             </p>
-            <v-divider class="mx-0" inset></v-divider>
+            <v-divider class="mx-0"></v-divider>
             <p class="text-h6 text-left block">
               {{ $t('show.by') }}
               <nuxt-link
@@ -157,12 +163,11 @@
                       :username="user.name"
                       :src="user.avatars.medium"
                       class="mx-0 mt-3"
-                      inline="true"
                       :size="100"
                     ></avatar>
                   </v-col>
                   <v-col class="col-md-9">
-                    <div class="modal-user-detail ml-5">
+                    <div class="modal-user-detail ml-0">
                       <h1 class="font-13 fw-500">
                         <p class="text-h6 text-left block">
                           {{ design.user.name }}
@@ -250,6 +255,12 @@ export default {
     this.comments = response.data.comments
     this.user = response.data.user
     this.images = response.data.images
+
+    this.itemsDesigns.push({
+      title: this.design.title === '' ? this.design.title : 'Sans Titre',
+      description: this.design.description,
+      src: this.design.images.extralarge,
+    })
   },
 
   data() {
@@ -266,9 +277,24 @@ export default {
       width: '500px',
       prevRoute: null,
       index: null,
+      itemsDesigns: [],
+      nothing: null,
+      image: {
+        size: '',
+        height: '',
+        width: '',
+      },
     }
   },
   fetchOnServer: true,
+  /* mounted() {
+    const img = new Image()
+    img.src = this.design.images.large
+    img.onload = () => {
+      this.image.width = img.width
+      this.image.height = img.height
+    }
+  }, */
   computed: {
     ...mapGetters(['visible']),
     designTitle() {
@@ -322,6 +348,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* #row-design {
+  width: auto;
+  text-align: center;
+} */
+.design-image {
+  max-width: 100%;
+  max-height: 100vh;
+  height: auto;
+  border: 6px solid blanchedalmond;
+}
+/* .design-right-col {
+  width: auto;
+  max-width: max-content;
+} */
+.design-left-col {
+  width: auto;
+  max-width: max-content;
+  padding: 0 4%;
+  min-width: auto;
+}
 .designs-tag-outer {
   margin-bottom: 0;
 }
@@ -345,6 +391,12 @@ export default {
   padding-top: 10px;
 }
 .v-application .text-subtitle-1 {
+  font-size: 12px;
+  line-height: 1.45em;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+}
+.v-application .text-subtitle-2 {
   font-size: 12px;
   line-height: 1.45em;
   font-family: 'Josefin Sans', sans-serif;

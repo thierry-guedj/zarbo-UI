@@ -22,7 +22,7 @@
         <section class="hero text-white">
           <!-- <v-container> -->
           <v-row class="row-md-12">
-            <v-col class="col-md-3 text-center">
+            <v-col class="col-md-2 text-center avatarUser">
               <avatar
                 :username="user.name"
                 :src="user.avatars.large"
@@ -38,8 +38,8 @@
               <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
-              <p class="about text-white" v-html="user.about">
-                <!-- {{ user.about }} -->
+              <p class="about text-white">
+                {{ user.about }}
               </p>
 
               <v-container fluid class="search-control">
@@ -99,6 +99,12 @@
                     </v-col>
                   </v-row>
                 </form>
+                <nuxt-link :to="{ name: 'users.search' }">
+                  <v-btn class="mt-0" color="deep-orange accent-2"
+                    ><v-icon class="mr-2">flip_to_back</v-icon
+                    >{{ $t('user.backToUsersList') }}</v-btn
+                  >
+                </nuxt-link>
               </v-container>
             </v-col>
           </v-row>
@@ -114,20 +120,19 @@
                   border="right"
                   color="accent"
                   dark
+                  transition="scale-transition"
                   width="60%"
                   class="alert"
                 >
-                  <!-- On teste pourquoi il n'y a pas de résultat -->
-                  <!-- 1° cas : les critères de recherche ne donnent aucun résultat -->
-                  <!-- 2° cas : l'artiste n'a pas publié d'oeuvre -->
-                  {{ $t('user.noResult') }}
+                  {{ noResultMessage }}
+
                   <v-spacer />
-                  <nuxt-link :to="{ name: 'users.search' }">
+                  <!-- <nuxt-link :to="{ name: 'users.search' }">
                     <v-btn class="mt-3"
                       ><v-icon right dark class="mx-2">reply</v-icon
                       >{{ $t('user.backToUsersList') }}</v-btn
                     >
-                  </nuxt-link>
+                  </nuxt-link> -->
                 </v-alert>
               </div>
             </template>
@@ -222,6 +227,11 @@ export default {
       `/user/${this.$route.params.id}/findById`
     )
     this.user = res.data
+    if (this.user.designs.length < 1) {
+      this.noResultMessage = this.$i18n.t('user.noDesignResult')
+    } else {
+      this.noResultMessage = this.$i18n.t('user.noCriteriaResult')
+    }
   },
 
   data() {
@@ -251,6 +261,7 @@ export default {
       itemsDesigns: [],
       user: null,
       fetchOnServer: true,
+      noResultMessage: '',
     }
   },
   computed: {
@@ -335,6 +346,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avatarUser {
+  min-width: 280px;
+}
 .tagline {
   font-size: 24px;
 }

@@ -20,7 +20,7 @@
       ></v-container> -->
      
 
-      <last-designs></last-designs>
+      <home-tabs></home-tabs>
       <div class="text-center" style="max-width: '95%';">
         <!-- Modal  -->
         <!-- <keep-alive> -->

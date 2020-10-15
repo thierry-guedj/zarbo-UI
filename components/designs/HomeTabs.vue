@@ -1,64 +1,36 @@
 <template>
-  <v-card
-    class="my-4 mx-2 portfolio-item portfolio-effect__item portfolio-item--eff1"
-    width="auto"
-    height="auto"
-    tile
-    elevation="5"
-    hover
-    @click="goToDetails(`${design.id}`)"
-  >
-    <v-img
-      :src="`${design.images.thumbnail}`"
-      :lazy-src="`${design.images.thumbnail}`"
-    ></v-img>
-    <div class="portfolio-item__info">
-      <h3 class="portfolio-item__header">
-        {{ designTitle | truncate(17, '...') }}
-      </h3>
-      <h4 class="portfolio-item__subheader">
-        <span>{{ $t('designCard.by') }} {{ design.user.name }}</span>
-      </h4>
-      <!--  -->
-    </div>
-  </v-card>
+  <v-tabs>
+    <v-tab>{{ $t('widgetTitle.lastDesigns') }}</v-tab>
+    <v-tab>{{ $t('widgetTitle.lastArtists') }}</v-tab>
+    <v-tab-item class="mx-auto">
+      <last-designs></last-designs>
+    </v-tab-item>
+    <v-tab-item>
+      <lazy-component
+      ></lazy-component>
+    </v-tab-item>
+  </v-tabs>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: 'DesignCardMini',
-  props: {
-    design: {
-      type: Object,
-      required: true,
-    },
+  name: 'HomeTabs',
+  components: {
+    lazyComponent: () => import('@/components/designs/LastUsers.vue'),
   },
-  computed: {
-    designTitle() {
-      if (!this.design.title) return 'Sans Titre'
-      else return this.design.title
-    },
-  },
-  methods: {
-    ...mapActions(['showModal', 'hideModal']),
-    toTop() {
-      this.$vuetify.goTo(0)
-    },
-    goToDetails(id) {
-      this.$router.push(
-        this.localePath({ name: 'design.details', params: { id } })
-      )
-    },
+  data() {
+    return {
+      searching: true,
+      loader: null,
+      loadingSubmit: false,
+      loaderPage: false,
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.tooltip {
-  background-color: #0f1219;
-  color: whitesmoke;
-}
 .v-list-item__content {
   max-width: max-content;
 }
@@ -67,93 +39,15 @@ img {
   height: auto;
   width: auto\9; /* ie8 */
 }
-
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.6;
-  position: absolute;
-  width: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 8.1%,
-    rgba(0, 0, 0, 0.001) 15.5%,
-    rgba(0, 0, 0, 0.003) 22.5%,
-    rgba(0, 0, 0, 0.005) 29%,
-    rgba(0, 0, 0, 0.008) 35.3%,
-    rgba(0, 0, 0, 0.011) 41.2%,
-    rgba(0, 0, 0, 0.014) 47.1%,
-    rgba(0, 0, 0, 0.016) 52.9%,
-    rgba(0, 0, 0, 0.019) 58.8%,
-    rgba(0, 0, 0, 0.022) 64.7%,
-    rgba(0, 0, 0, 0.025) 71%,
-    rgba(0, 0, 0, 0.027) 77.5%,
-    rgba(0, 0, 0, 0.029) 84.5%,
-    rgba(0, 0, 0, 0.03) 91.9%,
-    rgba(0, 0, 0, 0.03) 100%
-  );
+.v-tab.v-tab {
+  font-size: 14px;
+  color: 006064 !important;
 }
-
-.theme--dark.v-card {
-  background-color: rgba(23, 22, 18, 0.85);
-
-  border: 1px none #f8b4b4;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 25.1%,
-    rgba(0, 0, 0, 0.001) 15.5%,
-    rgba(0, 0, 0, 0.003) 22.5%,
-    rgba(0, 0, 0, 0.005) 29%,
-    rgba(0, 0, 0, 0.008) 35.3%,
-    rgba(0, 0, 0, 0.011) 41.2%,
-    rgba(0, 0, 0, 0.014) 47.1%,
-    rgba(0, 0, 0, 0.016) 52.9%,
-    rgba(0, 0, 0, 0.019) 58.8%,
-    rgba(0, 0, 0, 0.022) 64.7%,
-    rgba(0, 0, 0, 0.025) 71%,
-    rgba(0, 0, 0, 0.027) 77.5%,
-    rgba(0, 0, 0, 0.029) 84.5%,
-    rgba(0, 0, 0, 0.03) 91.9%,
-    rgba(0, 0, 0, 0.03) 100%
-  );
-
-  font-size: 12px;
-  transition-property: opacity;
-  transition-duration: 0.35s;
-  line-height: 1.6em;
-  text-rendering: optimizelegibility;
-  color: #fff3e0;
+.v-tab--active.v-tab:not(:focus)::before {
+  color: whitesmoke !important;
 }
-
-.theme--dark.v-list-item .v-list-item__subtitle,
-.theme--dark.v-list-item .v-list-item__action-text {
-  color: #fff3e0;
-}
-.theme--dark.v-list-item.design-info {
-  color: #fff3e0 !important;
-  font-size: 0.8em !important;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.design-info {
-  color: #fff3e0;
-}
-.theme--dark.v-btn.v-btn--icon {
-  color: #fff3e0;
-}
-.show-btns {
-  color: rgba(255, 255, 255, 1) !important;
-}
-.v-application .headline {
-  font-size: 1.2 rem;
-}
-.loader {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+.v-application .primary--text {
+  color: whitesmoke;
 }
 
 //VARIABLES
@@ -162,7 +56,7 @@ $accent-theme-color2: #8d909b;
 $dark-theme-color: #101010;
 $light-theme-color: #fff;
 
-$portfolio-item-width: auto;
+$portfolio-item-width: 300px;
 $portfolio-item-height: auto;
 
 $portfolio-item-info-offset: 7px;
@@ -251,11 +145,11 @@ $portfolio-link-offset: 10px;
 .portfolio-item__header {
   position: relative;
 
-  margin: 0 0 10px 0;
-  padding: 2px 0;
+  margin: 0 0 20px 0;
+  padding: 15px 0;
 
   font: {
-    size: 16px;
+    size: 12px;
   }
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -276,9 +170,9 @@ $portfolio-link-offset: 10px;
 .portfolio-item__subheader {
   position: relative;
 
-  margin: 0 0 2px 0;
-  padding: 5px 0 5px;
-  display: block;
+  margin: 0 0 20px 0;
+  padding: 15px 0;
+
   font: {
     size: 14px;
   }
@@ -307,7 +201,6 @@ $portfolio-link-offset: 10px;
   width: $portfolio-link-dimensions;
   height: $portfolio-link-dimensions;
   margin-right: $portfolio-link-offset;
-  margin-top: 3px;
 
   &:last-child {
     margin-right: 0;
@@ -353,7 +246,7 @@ $portfolio-link-offset: 10px;
   }
 
   .portfolio-item__link-block {
-    top: 45px;
+    top: 20px;
 
     opacity: 0;
   }

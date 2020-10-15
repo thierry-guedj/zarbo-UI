@@ -1,12 +1,14 @@
 <template>
   <v-form novalidate @submit.stop.prevent="submit">
     <v-card-title class="headline"
-      ><i class="material-icons md-24 mr-2">fingerprint</i>{{ $t('resetEmail.resetEmail') }}</v-card-title
+      ><i class="material-icons md-24 mr-2">fingerprint</i
+      >{{ $t('resetEmail.resetEmail') }}</v-card-title
     >
     <v-alert
       v-if="this.$v.form.$model.successful"
       class="alert-success"
       dark
+      transition="scale-transition"
       icon="mark_email_unread"
       border="right"
       :form="form"
@@ -16,6 +18,7 @@
     <v-alert
       v-if="form.errors.has('emailNotVerified')"
       dark
+      transition="scale-transition"
       icon="announcement"
       border="right"
       :form="form"
@@ -23,14 +26,15 @@
     >
       {{ form.errors.get('emailNotVerified') }}
       <p>
-        <base-link component-name="ResendForm" folder-name="auth"
-          >{{ $t('resetEmail.resendVerificationEmail') }}</base-link
-        >
+        <base-link component-name="ResendForm" folder-name="auth">{{
+          $t('resetEmail.resendVerificationEmail')
+        }}</base-link>
       </p>
     </v-alert>
     <v-alert
       v-if="form.errors.has('email')"
       dark
+      transition="scale-transition"
       icon="announcement"
       border="right"
       :form="form"
@@ -64,7 +68,9 @@
         type="submit"
         >{{ $t('resetEmail.sendResetLink') }}</v-btn
       >
-      <v-btn @click="clear">{{ $t('resetEmail.clear') }}</v-btn>
+      <v-btn :disabled="loadingSubmit" @click="clear">{{
+        $t('resetEmail.clear')
+      }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('resetEmail.noAccount') }}
 
@@ -110,8 +116,10 @@ export default {
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
-      !this.$v.form.email.email && errors.push(this.$i18n.t('validation.emailValid'))
-      !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
+      !this.$v.form.email.email &&
+        errors.push(this.$i18n.t('validation.emailValid'))
+      !this.$v.form.email.required &&
+        errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
   },

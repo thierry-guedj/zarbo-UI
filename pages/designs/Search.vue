@@ -98,6 +98,7 @@
               border="right"
               color="accent"
               dark
+              transition="scale-transition"
               width="60%"
               class="alert"
             >

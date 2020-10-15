@@ -26,7 +26,10 @@
                 data-did-init="slimInitialised"
                 data-download="true"
               >
-                <img :src="$auth.user.avatars.large" />
+                <img
+                  v-if="$auth.user.avatars.large"
+                  :src="$auth.user.avatars.large"
+                />
                 <input type="file" name="image" />
               </slim-cropper>
               <div id="progress" class="progress">
@@ -62,6 +65,7 @@
                 v-model="alert"
                 border="left"
                 :form="form"
+                transition="scale-transition"
                 close-text="Close Alert"
                 class="alert-success"
                 dismissible
@@ -90,16 +94,34 @@
                       :counter="300"
                       :label="$t('profile.tagline')"
                       :form="form"
+                      outlined
                       field="tagline"
                       @input="$v.form.tagline.$touch()"
                       @blur="$v.form.tagline.$touch()"
                     ></v-text-field>
                     <has-error :form="form" field="tagline"></has-error>
+                    <!-- <client-only>
+                      <ckeditor
+                        v-model="$v.form.about.$model"
+                        :editor="editor"
+                        :config="editorConfig"
+                        :error-messages="aboutErrors"
+                        :counter="3000"
+                        :form="form"
+                        :placeholder="$t('profile.someInfo')"
+                        field="about"
+                        outlined
+                        class="mb-1"
+                        @input="$v.form.about.$touch()"
+                        @blur="$v.form.about.$touch()"
+                      ></ckeditor>
+                    </client-only> -->
                     <v-textarea
                       v-model.trim="$v.form.about.$model"
                       :error-messages="aboutErrors"
                       :counter="3000"
                       :form="form"
+                      :label="$t('profile.description')"
                       :placeholder="$t('profile.someInfo')"
                       field="about"
                       outlined
@@ -111,7 +133,7 @@
                     <div class="text-right">
                       <v-spacer class="mb-3" />
                       <v-btn
-                        class="ml-8 float-right"
+                        class="ml-2 float-right"
                         title="Upload"
                         type="button"
                         data-action="upload"
@@ -121,9 +143,11 @@
                         >{{ $t('profile.updateProfile') }}</v-btn
                       >
 
-                      <v-btn :disabled="upload" @click="clear">{{
-                        $t('profile.clear')
-                      }}</v-btn>
+                      <v-btn
+                        :disabled="upload"
+                        @click="goToUser($auth.user.id)"
+                        >{{ $t('profile.seeProfile') }}</v-btn
+                      >
                     </div>
                   </form>
                 </v-col>
@@ -140,8 +164,13 @@
 <script>
 // import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
+// import InlineEditor from '@ckeditor/ckeditor5-build-inline'
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import Slim from '@/components/slim/slim.vue'
-
+/* let DecoupledEditor
+if (process.browser) {
+  DecoupledEditor = require('@ckeditor/ckeditor5-build-decoupled-document')
+} */
 export default {
   name: 'Profile',
   components: {
@@ -214,6 +243,20 @@ export default {
       dialog_msg: '',
       alert: false,
       uploadIsSuccessful: false,
+      fab: false,
+      upload: false,
+      /* editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+
+        toolbar: [
+          'bold',
+          'italic',
+          'bulletedList',
+          'numberedList',
+          'blockQuote',
+        ],
+      }, */
     }
   },
   computed: {
@@ -357,6 +400,7 @@ export default {
     },
     async getUploadIsSuccessful(id) {
       this.uploadIsSuccessful = await this.checkUpload(id).then((res) => {
+        this.dialog_msg = this.$i18n.t('profile.uploadSuccess')
         setTimeout(() => {
           this.$auth.fetchUser()
         }, 5000)
@@ -410,23 +454,22 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
+    goToUser(userId) {
+      if (this.$route.path !== `/designs/${userId}/user`) {
+        this.$router.push(
+          this.localePath({ name: 'designs.user', params: { id: userId } })
+        )
+      }
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+// @import '~/assets/content-styles.css';
 .avatar-col {
   max-width: 27%;
-}
-.titlePage {
-  font-size: 44px;
-  padding-top: 20px;
-  margin-bottom: 30px;
-  line-height: 1em;
-}
-.iconTitle {
-  max-width: 180px;
-  min-width: 180px;
+  min-width: 280px;
 }
 .container {
   max-width: 100% !important;

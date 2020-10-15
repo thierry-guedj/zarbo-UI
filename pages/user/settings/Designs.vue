@@ -1,16 +1,52 @@
 <template>
   <section>
-    <v-alert
-      v-model="alert"
-      border="left"
-      close-text="Close Alert"
-      class="alert-success"
-      dismissible
-    >
-      {{ $t('settingsDesigns.uploadDoneMessage') }}
-    </v-alert>
-    <template v-if="designs.length < 1"> </template>
+    <template v-if="noArtworkYet === true">
+      <v-alert
+        v-model="alert"
+        border="left"
+        close-text="Close Alert"
+        class="alert-success"
+        dismissible
+        transition="scale-transition"
+      >
+        <v-row align="center">
+          <v-col class="grow">
+            {{ message }}
+          </v-col>
+          <v-col class="shrink">
+            <template v-if="$auth.loggedIn">
+              <nuxt-link :to="localePath({ name: 'designs.upload' })">
+                <v-btn small class="upload-button mr-2"
+                  ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+                  >{{ $t('navbar.upload') }}</v-btn
+                >
+              </nuxt-link>
+            </template>
+            <template v-else>
+              <base-button
+                toggle-modal
+                component-name="LoginForm"
+                folder-name="auth"
+                button-class="upload-button mr-2"
+                icon="mdi-cloud-upload"
+                >{{ $t('navbar.upload') }}</base-button
+              >
+            </template>
+          </v-col>
+        </v-row>
+      </v-alert>
+    </template>
     <template v-else>
+      <v-alert
+        v-model="alert"
+        border="left"
+        close-text="Close Alert"
+        class="alert-success"
+        dismissible
+        transition="scale-transition"
+      >
+        {{ message }}
+      </v-alert>
       <v-data-table
         :headers="headers"
         :items="designs"
@@ -47,14 +83,13 @@
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
                 <v-divider class="mx-4"></v-divider>
-                <!-- <img
-                  :src="editedItem.images.thumbnail"
-                  :lazy-src="editedItem.images.minithumbnail"
-                  :alt="editedItem.title"
-                  max-width="80px"
-                /> -->
                 <v-card-text>
                   <v-container>
+                    <!-- <img
+                      v-if="editedItem"
+                      :src="editedItem.images.minithumbnail"
+                      class="text-center"
+                    /> -->
                     <v-text-field
                       v-model.trim="$v.form.title.$model"
                       :error-messages="titleErrors"
@@ -92,18 +127,19 @@
                   </client-only> -->
                     <client-only>
                       <vue-tags-input
-                        v-model="editedItem.tag"
-                        :tags="form.tags"
+                        v-model="form.tag"
+                        :tags="editedItem.tags"
                         class="tags-input"
+                        :placeholder="$t('tag.placeholder')"
                         :autocomplete-items="filteredItems"
                         @tags-changed="(newTags) => (tags = newTags)"
                       >
                         <template slot="autocomplete-header">
-                          <strong>Select a tag here ↓</strong>
+                          <strong>{{ $t('tag.selectTag') }} ↓</strong>
                         </template>
                         <template slot="autocomplete-footer">
                           <small>
-                            <em>Or keep going with yours...</em>
+                            <em>{{ $t('tag.keepYours') }}</em>
                           </small>
                         </template>
                       </vue-tags-input>
@@ -111,7 +147,7 @@
 
                     <v-checkbox
                       id="is_live"
-                      v-model="editedItem.is_live"
+                      v-model="form.is_live"
                       field="is_live"
                       :label="$t('editDesign.publishDesign')"
                     ></v-checkbox>
@@ -120,24 +156,23 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close"
-                    >Cancel</v-btn
-                  >
-                  <v-btn
+                  <v-btn @click="close">{{ $t('editDesign.cancel') }}</v-btn>
+                  <!-- <v-btn
                     color="blue darken-1"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
                     text
                     @click="save"
-                    >Save</v-btn
-                  >
+                    >{{ $t('editDesign.save') }}</v-btn
+                  > -->
+                  <v-btn @click="save">{{ $t('editDesign.save') }}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-toolbar>
         </template>
         <template v-slot:item.image="{ item }">
-          <div v-if="item.is_live" class="px-2 my-2 align-middle">
+          <div class="px-2 my-2 align-middle">
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
@@ -149,24 +184,31 @@
               />
             </nuxt-link>
           </div>
-          <div v-else>
-            <img
-              :src="item.images.thumbnail"
-              :lazy-src="item.images.minithumbnail"
-              :alt="item.title"
-              max-width="80px"
-            />
+        </template>
+        <template v-slot:item.tags="{ item }">
+          <div class="mr-3">
+            <v-btn
+              v-for="(tag, i) in item.tags"
+              :key="`${i}-${tag}`"
+              class="mr-1"
+              style="align-self: center;"
+              x-small
+              color="#5C6BC0"
+              @click="goToTag(`${item.tag_list.normalized[i]}`)"
+              >{{ tag }}</v-btn
+            >
+            <!-- <v-chip
+            v-for="(tag, i) in item.tags"
+            :key="`${i}-${tag}`"
+            class="ma-1"
+            color="#ffffff"
+            label
+            outlined
+          >
+            {{ tag }}
+          </v-chip> -->
           </div>
         </template>
-        <!--  <template v-slot:item.tags="{ item }">
-        <div class="mr-3">
-          <ul class="ti-tag ti-valid">
-            <li :key="tag" :v-for="tag in item.tags" class="ti-tag ti-valid">
-              {{ tag }}
-            </li>
-          </ul>
-        </div>
-      </template> -->
         <template v-slot:item.is_live="{ item }">
           <div class="mr-3">
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
@@ -185,22 +227,21 @@
           <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
       </v-data-table>
-    </template>
-    <!-- <confirm-delete
+      <!-- <confirm-delete
           :item="item"
           :dialog.sync="dialogDelete"
           @deleteItem="deleteItem(item)"
         /> -->
-    <!-- Modal  -->
-    <keep-alive>
-      <base-modal
-        class="modalEditDelete"
-        :dialog.sync="visible"
-        @showDesign="styleModal()"
-        @closeDialog="hideModal()"
-        @destroyItem="deleteItem()"
-      />
-    </keep-alive>
+      <!-- Modal  -->
+      <keep-alive>
+        <base-modal
+          class="modalEditDelete"
+          :dialog.sync="visible"
+          @closeDialog="hideModal()"
+          @destroyItem="deleteItem()"
+        />
+      </keep-alive>
+    </template>
   </section>
 </template>
 
@@ -208,9 +249,9 @@
 import { mapActions, mapGetters } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 export default {
-  /*  components: {
+  components: {
     InputTag: () => import('vue-input-tag'),
-  }, */
+  },
   data() {
     return {
       form: this.$vform({
@@ -220,8 +261,8 @@ export default {
         tag: '',
         tags: [],
         slug: '',
-        /*  assign_to_team: false,
-        team: null, */
+        assign_to_team: false,
+        team: null,
       }),
       dialog: false,
       snackbar: false,
@@ -250,6 +291,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'tags',
+          width: '35%',
         },
         {
           text: this.$i18n.t('settingsDesigns.status'),
@@ -264,11 +306,11 @@ export default {
         title: '',
         description: '',
         is_live: false,
-        images: {},
         tag: '',
         tags: [],
         assign_to_team: false,
         team: null,
+        images: {},
       },
       defaultItem: {
         title: '',
@@ -286,6 +328,10 @@ export default {
       loadingSubmit: false,
       autocompleteItems: [],
       allTags: [],
+      tags: [],
+      message: '',
+      chip4: true,
+      noArtworkYet: false,
     }
   },
   validations: {
@@ -298,7 +344,9 @@ export default {
       },
     },
   },
-
+  mounted() {
+    this.getAllTags()
+  },
   computed: {
     titleErrors() {
       const errors = []
@@ -328,20 +376,18 @@ export default {
     },
     filteredItems() {
       return this.autocompleteItems.filter((i) => {
-        return i.text.toLowerCase().includes(this.editedItem.tag.toLowerCase())
+        return i.text.toLowerCase().includes(this.form.tag.toLowerCase())
       })
     },
     simpleStringArrayTags() {
       return this.tags.map((tag) => tag.text)
     },
   },
+
   watch: {
     dialog(val) {
       val || this.close()
     },
-  },
-  mounted() {
-    this.getAllTags()
   },
   beforeRouteUpdate(to, from, next) {
     if (from.params.upload) {
@@ -354,6 +400,7 @@ export default {
     this.initialize()
     if (this.$route.params.upload) {
       this.alert = true
+      this.message = this.$i18n.t('settingsDesigns.uploadDoneMessage')
     }
   },
 
@@ -381,21 +428,30 @@ export default {
         design.tags = design.tag_list.tags
         this.designs[index] = design
       })
+      if (this.designs.length < 1) {
+        this.noArtworkYet = true
+        this.message = this.$i18n.t('settingsDesigns.noArtworkYetMessage')
+        this.alert = true
+      }
       this.loading = false
     },
 
     editItem(item) {
       this.editedIndex = this.designs.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      // this.editedItem.tags = this.editedItem.tag_list.tags
       this.editedItem.tag = ''
-      this.editedItem.tags = this.editedItem.tag_list.tags
-      this.tags = this.editedItem.tags.map((string) => ({ text: string }))
-
+      this.editedItem.tags = this.editedItem.tags.map((string) => ({
+        text: string,
+      }))
+      this.tags = this.editedItem.tags
+      // this.editedItem.tags = this.editedItem.tag_list.tags
       this.form = {
         title: this.editedItem.title,
         description: this.editedItem.description,
         is_live: this.editedItem.is_live,
         tags: this.editedItem.tags,
+        tag: '',
         assign_to_team: false,
         team: null,
       }
@@ -412,14 +468,21 @@ export default {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
-      this.editedItem = design
-      this.editedItem.tag = ''
+      if (design.is_live === 1) {
+        design.link = true
+      } else {
+        design.link = false
+      }
+      // this.editedItem = design
       this.designs[this.designs.indexOf(item)] = design
     },
     deleteItem() {
       const index = this.designs.indexOf(this.itemToDelete)
       this.designs.splice(index, 1)
       const res = this.$axios.$delete(`/designs/${this.itemToDelete.id}`)
+      this.alert = true
+      this.message = this.$i18n.t('settingsDesigns.deleteDoneMessage')
+      // this.initialize()
 
       this.hideModal()
     },
@@ -429,6 +492,9 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
+        this.form = Object.assign({}, this.defaultItem)
+        this.tags = []
+        // this.initialize()
       })
     },
     closeDelete() {
@@ -436,13 +502,13 @@ export default {
     },
 
     async save() {
+      // this.tags = this.editedItem.tags
       if (this.editedIndex > -1) {
         const editedForm = {
-          title: this.$v.form.title.$model,
-          description: this.$v.form.description.$model,
-          is_live: this.editedItem.is_live,
+          title: this.form.title,
+          description: this.form.description,
+          is_live: this.form.is_live,
           tags: this.simpleStringArrayTags,
-          tag: this.editedItem.tag,
           assign_to_team: false,
           team: null,
           tag_list: {
@@ -457,24 +523,26 @@ export default {
         this.designs.push(this.editedForm)
       }
 
-      const form1 = {
-        title: this.$v.form.title.$model,
-        description: this.$v.form.description.$model,
-        is_live: this.editedItem.is_live,
+      const form = {
+        title: this.form.title,
+        description: this.form.description,
+        is_live: this.form.is_live,
         tags: this.simpleStringArrayTags,
-        tag: this.editedItem.tag,
         assign_to_team: false,
         team: null,
       }
 
       const res = await this.$axios
-        .put(`/designs/${this.editedItem.id}`, form1)
+        .put(`/designs/${this.editedItem.id}`, form)
         .then((response) => {
           this.alert = true
+          this.message = this.$i18n.t('settingsDesigns.editDoneMessage')
+          this.updateItem(this.editedItem)
         })
-      this.updateItem(this.editedItem)
-      this.editedItem.tag = ''
       this.close()
+    },
+    goToTag(tagParam) {
+      this.$router.push({ name: 'designs.tag', params: { tag: tagParam } })
     },
     sanitizeTitle(title) {
       let slug = ''
@@ -521,6 +589,9 @@ export default {
   margin-right: 4px;
   padding: 3px;
 } */
+.theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
+  background-color: rgba(31, 124, 142, 0.65);
+}
 img {
   max-width: 100%;
   height: auto;

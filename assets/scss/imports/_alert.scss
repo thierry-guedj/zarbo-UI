@@ -1,7 +1,10 @@
 .alert-error {
-    background-color: #D50000;
+    background-color: #D50000 !important;
   }
   .alert-success {
-    background-color: #006064;
+    background-color: #006064 !important;
     margin-bottom: 55px;
+  }
+  .v-alert {
+    font-size: 18px;
   }

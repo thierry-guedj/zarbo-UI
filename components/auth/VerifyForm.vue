@@ -6,7 +6,11 @@
     >
     <v-card-text>
       <div v-if="success">
-        <v-alert class="alert-success text-center" border="right">
+        <v-alert
+          class="alert-success text-center"
+          transition="scale-transition"
+          border="right"
+        >
           {{ status }}
 
           <base-link component-name="LoginForm" folder-name="auth" redirect>{{
@@ -15,7 +19,12 @@
         </v-alert>
       </div>
       <div v-else>
-        <v-alert class="alert-error" icon="announcement" border="right">
+        <v-alert
+          class="alert-error"
+          icon="announcement"
+          transition="scale-transition"
+          border="right"
+        >
           <div>
             {{ status }}
             <p v-if="status === 'Email address already verified'">
@@ -34,6 +43,7 @@
           </div>
         </v-alert>
       </div>
+      <v-btn @click="hideModal">{{ $t('contact.cancel') }}</v-btn>
     </v-card-text>
   </section>
 </template>

@@ -24,6 +24,7 @@ export default {
     signin: 'Se connecter',
     signup: 'Devenir membre',
     signout: 'Se déconnecter',
+    publishArtwork: 'Publier une oeuvre',
   },
   menuAccount: {
     yourDesigns: 'Vos oeuvres',
@@ -36,6 +37,8 @@ export default {
     lastPublishedDesigns: 'Dernières oeuvres publiées',
     moreFromUser: 'Du même artiste',
     moreFromTags: 'Oeuvres similiaires',
+    lastDesigns: 'Dernières oeuvres publiées',
+    lastArtists: 'Artistes récemment inscrits',
   },
   designCard: {
     by: 'par',
@@ -44,7 +47,7 @@ export default {
     tooltipFullscreen: 'Ouvrir la page détaillée',
   },
   userCard: {
-    registered: 'Enregistré le ',
+    registered: 'Membre depuis le ',
   },
   search: {
     publishedArtworks: 'Oeuvres publiées',
@@ -60,7 +63,7 @@ export default {
   show: {
     by: 'Par',
     published: 'Publiée ',
-    backToArtwork: 'Retour aux oeuvres',
+    backToArtwork: 'Retour',
     youLike: 'Vous aimez cette oeuvre',
     tags: 'Mots-clés',
   },
@@ -148,6 +151,9 @@ export default {
     confirmDelete: 'Veuillez confirmer la suppression',
     cancel: 'Annuler',
     uploadDoneMessage: 'Votre oeuvre a été téléchargée avec succès.',
+    editDoneMessage: 'Votre oeuvre a été modifiée avec succès.',
+    deleteDoneMessage: 'Votre oeuvre a été supprimée avec succès.',
+    noArtworkYetMessage: "Vous n'avez encore publié aucune oeuvre",
   },
   create: {
     uploadArtwork: 'Publier une oeuvre',
@@ -174,13 +180,17 @@ export default {
     saved: 'Image téléchargée avec succès',
     stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Image téléchargée avec succès',
+    pageNotice:
+      'Vous pouvez, ci-dessous, séléctionner une image sur votre ordinateur ou la déposer directement. Vous pouvez compléter également les informations suivantes: titre, description, mots-clé.',
   },
   userIndex: {
     memberArtists: 'Artistes membres',
   },
   user: {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
-    backToUsersList: 'Retour à la liste des artistes',
+    noDesignResult: "Cet artiste n'a pas encore publié d'oeuvre",
+    noCriteriaResult: "Vos critères de recherche n'ont retourné aucun résultat",
+    backToUsersList: 'Retour',
     userPageTitle: 'Portfolio de ',
   },
   designs: {
@@ -191,6 +201,9 @@ export default {
     tag: 'Mot-clé',
     tags: 'Mots-clés',
     tagTitle: 'Oeuvres répondant au mot-clé ',
+    selectTag: 'Selectionnez un mot-clé',
+    keepYours: 'Ou continuez avec le vôtre...',
+    placeholder: 'Ajoutez un mot-clé',
   },
   confirmDelete: {
     confirmMessage: 'Veuillez confirmer la suppression de cette oeuvre.',
@@ -211,6 +224,7 @@ export default {
     saved: 'Avatar téléchargé avec succès',
     stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Avatar téléchargé avec succès',
+    seeProfile: 'Visualiser votre profil',
   },
   editDesign: {
     editItem: 'Editer une oeuvre',

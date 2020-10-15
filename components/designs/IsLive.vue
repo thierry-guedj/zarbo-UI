@@ -12,7 +12,7 @@
     "
   >
     <v-avatar left class="avatar-is-live">
-      <v-icon>mdi-checkbox-marked-circle</v-icon>
+      <v-icon>{{ getIcon }}</v-icon>
     </v-avatar>
     {{
       item.is_live === true
@@ -37,7 +37,7 @@ export default {
     item: {
       type: Object,
       default: null,
-    }
+    },
   },
   data() {
     return {
@@ -49,7 +49,11 @@ export default {
   computed: {
     getColor() {
       if (this.item.is_live === false) return 'orange darken-3'
-      else return 'teal darken-3'
+      else return '#006064'
+    },
+    getIcon() {
+      if (this.item.is_live === false) return 'lens'
+      else return 'mdi-checkbox-marked-circle'
     },
   },
   methods: {

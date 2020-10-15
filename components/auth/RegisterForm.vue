@@ -18,6 +18,7 @@
       v-if="form.errors.has('email')"
       class="alert-error mb-2"
       dark
+      transition="scale-transition"
       icon="mark_email_unread"
       border="right"
       :form="form"
@@ -28,6 +29,7 @@
       v-if="form.errors.has('invitation_code')"
       class="alert-error mb-2"
       dark
+      transition="scale-transition"
       icon="person_add_disabled"
       border="right"
       :form="form"
@@ -41,6 +43,7 @@
       v-if="this.$v.form.$model.successful"
       class="alert-success"
       dark
+      transition="scale-transition"
       icon="mark_email_unread"
       border="right"
       :form="form"
@@ -108,7 +111,9 @@
         :type="$t('register.submit')"
         >{{ $t('register.submit') }}</v-btn
       >
-      <v-btn @click="clear">{{ $t('register.clear') }}</v-btn>
+      <v-btn :disabled="loadingSubmit" @click="clear">{{
+        $t('register.clear')
+      }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('register.haveAccount') }}
 

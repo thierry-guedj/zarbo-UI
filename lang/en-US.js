@@ -23,6 +23,7 @@ export default {
     signin: 'Sign in',
     signup: 'Sign up',
     signout: 'Sign out',
+    publishArtwork: 'Publish artwork',
   },
   menuAccount: {
     yourDesigns: 'Your artwork',
@@ -35,6 +36,8 @@ export default {
     lastPublishedDesigns: 'Last published designs',
     moreFromUser: 'More from',
     moreFromTags: 'More similar',
+    lastDesigns: 'Last designs',
+    lastArtists: 'Last registered artists',
   },
   designCard: {
     by: 'by',
@@ -43,7 +46,7 @@ export default {
     tooltipFullscreen: 'Open the detailed page',
   },
   userCard: {
-    registered: 'Registered',
+    registered: 'Member since : ',
   },
   search: {
     publishedArtworks: 'Published artworks',
@@ -59,7 +62,7 @@ export default {
   show: {
     by: 'By',
     published: 'Publishing date: ',
-    backToArtwork: 'Back to artwork',
+    backToArtwork: 'Back',
     youLike: 'You like this artwork',
     tags: 'Tags',
   },
@@ -147,6 +150,9 @@ export default {
     confirmDelete: 'Please confirm',
     cancel: 'Cancel',
     uploadDoneMessage: 'Your artwork has been uploaded.',
+    editDoneMessage: 'Your artwork has been modified.',
+    deleteDoneMessage: 'Your artwork has been deleted.',
+    noArtworkYetMessage: "You didn't publish any artwork yet",
   },
   create: {
     uploadArtwork: 'Upload an artwok',
@@ -173,13 +179,16 @@ export default {
     saved: 'Saved successfully',
     stillUploading: 'Still uploading...Please wait',
     uploadSuccess: 'Design successfully uploaded',
+    pageNotice:
+      'You can select an image on your computer or drop it directly here. You also can complete with these informations: title, description, tags.',
   },
   userIndex: {
     memberArtists: 'Member artists',
   },
   user: {
-    noResult: "This artist didn't published any artwork yet",
-    backToUsersList: 'Back to users list',
+    noDesignResult: "This artist didn't published any artwork yet",
+    noCriteriaResult: "Your search criteria didn't return any results",
+    backToUsersList: 'Back',
     userPageTitle: 'Portfolio of ',
   },
   designs: {
@@ -190,6 +199,9 @@ export default {
     tag: 'Tag',
     tags: 'Tags',
     tagTitle: 'Artworks with tag ',
+    selectTag: 'Select a tag here',
+    keepYours: 'Or keep going with yours...',
+    placeholder: 'Add Tag',
   },
   confirmDelete: {
     confirmMessage: 'Please confirm the deletion of this artwork.',
@@ -210,6 +222,7 @@ export default {
     saved: 'Avatar saved successfully',
     stillUploading: 'Avatar is still uploading...Please wait',
     uploadSuccess: 'Avatar successfully uploaded',
+    seeProfile: 'Visualize your profile',
   },
   editDesign: {
     editItem: 'Edit Item',

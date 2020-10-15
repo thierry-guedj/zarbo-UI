@@ -94,9 +94,13 @@
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
         <nuxt-link :to="localePath({ name: 'designs.search' })"
-          ><v-btn small color="transparent" class="mr-2 ml-3">{{
-            $t('navbar.artwork')
-          }}</v-btn></nuxt-link
+          ><v-btn
+            small
+            color="transparent"
+            :class="{ active: isRouteActive }"
+            exact-active-class="active"
+            >{{ $t('navbar.artwork') }}</v-btn
+          ></nuxt-link
         >
         <nuxt-link :to="localePath({ name: 'users.search' })"
           ><v-btn small color="transparent" class="mr-2">{{
@@ -104,14 +108,14 @@
           }}</v-btn>
         </nuxt-link>
 
-        <template v-if="$auth.loggedIn">
-          <nuxt-link :to="localePath({ name: 'designs.upload' })">
-            <v-btn small class="upload-button mr-2"
-              ><v-icon class="mr-2">mdi-cloud-upload</v-icon
-              >{{ $t('navbar.upload') }}</v-btn
-            >
-          </nuxt-link>
-        </template>
+        <!-- <template v-if="$auth.loggedIn"> -->
+        <nuxt-link :to="localePath({ name: 'designs.upload' })">
+          <v-btn small class="upload-button mr-2"
+            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+            >{{ $t('navbar.upload') }}</v-btn
+          >
+        </nuxt-link>
+        <!-- </template>
         <template v-else>
           <base-button
             toggle-modal
@@ -121,7 +125,7 @@
             icon="mdi-cloud-upload"
             >{{ $t('navbar.upload') }}</base-button
           >
-        </template>
+        </template> -->
         <v-spacer />
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
@@ -205,7 +209,7 @@
         </v-container>
       </v-main>
 
-       <v-footer :absolute="!fixed" app dark padless>
+      <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
           <nuxt-link
@@ -213,8 +217,7 @@
             :key="footerLink.icon"
             :to="footerLink.to"
             ><v-btn color="white" text rounded class="my-2">
-              <v-icon size="24px">
-                {{ footerLink.icon }} </v-icon
+              <v-icon size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
@@ -225,8 +228,7 @@
             class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon size="24px"> mail </v-icon
-            >{{ $t('footer.contact') }}
+            <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-btn
@@ -293,6 +295,11 @@ export default {
           title: this.$i18n.t('navigationDrawer.artists'),
           to: this.localePath({ name: 'users.search' }),
         },
+        {
+          icon: 'mdi-cloud-upload',
+          title: this.$i18n.t('navigationDrawer.publishArtwork'),
+          to: this.localePath({ name: 'designs.upload' }),
+        },
       ],
       menuAccount: [
         {
@@ -315,7 +322,7 @@ export default {
           icon: 'mdi-looks',
           title: this.$i18n.t('footer.artwork'),
           to: this.localePath({ name: 'designs.search' }),
-          toolTip: this.$i18n.t('footer.artworks'),
+          toolTip: this.$i18n.t('footer.artwork'),
         },
         {
           icon: 'mdi-chart-bubble',
@@ -347,6 +354,15 @@ export default {
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
+    isRouteActive() {
+      if (
+        this.$nuxt.$route.name === this.localePath({ name: 'designs.search' })
+      ) {
+        return true
+      } else {
+        return false
+      }
+    },
   },
 
   mounted() {
@@ -390,6 +406,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.active {
+  background-color: #0f1219 !important;
+}
 .footer-bottom {
   background-color: #0f1219;
 }

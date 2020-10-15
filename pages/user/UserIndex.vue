@@ -79,7 +79,12 @@
         </div>
         <div v-else class="pt-8 pl-0 pb-6 pr-0">
           <template v-if="(!users.length)" class="pb-6">
-            <v-alert border="left" color="#0f1219" dark>
+            <v-alert
+              border="left"
+              color="#0f1219"
+              dark
+              transition="scale-transition"
+            >
               No results found
             </v-alert>
           </template>
@@ -227,7 +232,7 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
- /*    goTo(to, folderName) {
+    /*    goTo(to, folderName) {
       this.hideModal()
       setTimeout(
         () => this.showModal({ componentName: to, folder: folderName }),
@@ -239,10 +244,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.iconTitle {
-  max-width: 200px;
-  min-width: 200px;
-}
 .v-application a {
   text-decoration: none;
 }

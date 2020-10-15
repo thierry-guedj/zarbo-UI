@@ -8,6 +8,7 @@
       <v-alert
         v-if="form.errors.has('emailNotVerified')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -23,6 +24,7 @@
       <v-alert
         v-if="form.errors.has('email')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -40,6 +42,7 @@
       <v-alert
         v-if="form.errors.has('message')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -80,7 +83,9 @@
       >
         {{ $t('login.submit') }}</v-btn
       >
-      <v-btn @click="clear">{{ $t('login.clear') }}</v-btn>
+      <v-btn :disabled="loadingSubmit" @click="clear">{{
+        $t('login.clear')
+      }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('login.noAccount') }}
 
@@ -128,11 +133,13 @@ export default {
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors
-      !this.$v.form.email.email && errors.push(this.$i18n.t('validation.emailValid'))
-      !this.$v.form.email.required && errors.push(this.$i18n.t('validation.emailRequired'))
+      !this.$v.form.email.email &&
+        errors.push(this.$i18n.t('validation.emailValid'))
+      !this.$v.form.email.required &&
+        errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
     },
-/*     passwordErrors() {
+    /*     passwordErrors() {
       const errors = []
       if (!this.$v.form.password.$dirty) return errors
       !this.$v.form.password.minLen &&

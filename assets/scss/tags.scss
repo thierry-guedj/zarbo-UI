@@ -24,7 +24,7 @@
   .vue-tags-input.ti-focus .ti-input {
     background-color: transparent !important;
     border-radius: 4px !important;
-    border: 1px thin !important;
+    border: 2px solid !important;
     border-color: #006064 !important;
   }
   
@@ -35,6 +35,8 @@
     border-top: none;
     overflow: scroll;
     height: 150px;
+    font-size: 16px;
+    font-weight: 300;
   }
 
 .tags-notice {

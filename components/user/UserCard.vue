@@ -28,12 +28,12 @@
         :username="user.name"
         :src="user.avatars.medium"
         class="mx-3 mt-3"
-        :size="80"
+        :size="100"
       ></avatar>
       <div class="portfolio-item__info">
         <h4 class="portfolio-item__header">{{ user.username }}</h4>
         <h4 class="portfolio-item__subheader">{{ user.name }}</h4>
-        <div class="portfolio-item__links">
+        <!-- <div class="portfolio-item__links">
           <div class="portfolio-item__link-block">
             <a
               class="portfolio-item__link"
@@ -43,12 +43,11 @@
               <i class="material-icons">collections</i>
             </a>
           </div>
-        </div>
+        </div> -->
         <v-card-actions class="mt-4">
           <v-spacer></v-spacer>
           <span class="mr-2 caption text-orange lighten-5"
-            >{{ $t('userCard.registered') }}
-            {{ user.created_dates.created_at_human }}</span
+            >{{ $t('userCard.registered') }} {{ computedDate }}</span
           >
         </v-card-actions>
       </div>
@@ -59,6 +58,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
+import moment from 'moment'
+import 'moment/locale/fr'
 export default {
   name: 'UserCard',
   layout: 'designs-listing',
@@ -79,6 +80,10 @@ export default {
 
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
+    computedDate() {
+      const date = this.user.created_dates.created_at
+      return moment(date).format('LL')
+    },
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
@@ -95,11 +100,11 @@ export default {
 
 <style lang="scss" scoped>
 .vue-avatar--wrapper {
-  min-width: 80px;
+  min-width: 100px;
 }
 .v-card__title {
   line-height: 1.5em;
-  font-size: 14px;
+  font-size: 16px;
 }
 .v-card--reveal {
   align-items: center;
