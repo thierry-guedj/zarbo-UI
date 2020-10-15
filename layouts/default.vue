@@ -459,7 +459,7 @@ export default {
   color: whitesmoke;
 }
 .theme--dark.v-list {
-  background: #ecf0f7;
+  background: #0f1219;
 }
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
 // @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@600&display=swap');
