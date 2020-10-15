@@ -127,12 +127,12 @@
                   {{ noResultMessage }}
 
                   <v-spacer />
-                  <nuxt-link :to="{ name: 'users.search' }">
+                  <!-- <nuxt-link :to="{ name: 'users.search' }">
                     <v-btn class="mt-3"
                       ><v-icon right dark class="mx-2">reply</v-icon
                       >{{ $t('user.backToUsersList') }}</v-btn
                     >
-                  </nuxt-link>
+                  </nuxt-link> -->
                 </v-alert>
               </div>
             </template>
