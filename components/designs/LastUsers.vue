@@ -67,7 +67,7 @@ export default {
     async fetchData() {
       this.searching = true
       this.identifier = new Date()
-      const url = 'search/users/last'
+      const url = 'users/last'
       const response = await this.$axios.$get(url)
       this.users = response.data
       this.searching = false
