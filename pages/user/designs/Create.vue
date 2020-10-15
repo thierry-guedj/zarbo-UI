@@ -26,10 +26,7 @@
               {{ $t('create.uploadArtwork') }}
             </p>
             <p>
-              Vous pouvez, ci-dessous, séléctionner une image sur votre
-              ordinateur ou la déposer directement. Vous pouvez compléter
-              également les informations suivantes: titre, description,
-              mots-clé.
+              {{ $t('create.pageNotice') }}
             </p>
           </v-col>
         </v-row>
@@ -161,11 +158,11 @@
                     @tags-changed="(newTags) => (tags = newTags)"
                   >
                     <template slot="autocomplete-header">
-                      <strong>Select a tag here ↓</strong>
+                      <strong>{{ $t('tag.selectTag')}} ↓</strong>
                     </template>
                     <template slot="autocomplete-footer">
                       <small>
-                        <em>Or keep going with yours...</em>
+                        <em>{{ $t('tag.keepYours')}}</em>
                       </small>
                     </template>
                   </vue-tags-input>

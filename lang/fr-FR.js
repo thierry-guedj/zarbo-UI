@@ -178,6 +178,8 @@ export default {
     saved: 'Image téléchargée avec succès',
     stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Image téléchargée avec succès',
+    pageNotice:
+      'Vous pouvez, ci-dessous, séléctionner une image sur votre ordinateur ou la déposer directement. Vous pouvez compléter également les informations suivantes: titre, description, mots-clé.',
   },
   userIndex: {
     memberArtists: 'Artistes membres',
@@ -197,6 +199,8 @@ export default {
     tag: 'Mot-clé',
     tags: 'Mots-clés',
     tagTitle: 'Oeuvres répondant au mot-clé ',
+    selectTag: 'Selectionnez un mot-clé',
+    keepYours: 'Ou continuez avec le vôtre...',
   },
   confirmDelete: {
     confirmMessage: 'Veuillez confirmer la suppression de cette oeuvre.',

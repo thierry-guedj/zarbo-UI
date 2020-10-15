@@ -177,6 +177,8 @@ export default {
     saved: 'Saved successfully',
     stillUploading: 'Still uploading...Please wait',
     uploadSuccess: 'Design successfully uploaded',
+    pageNotice:
+      'You can select an image on your computer or drop it directly here. You also can complete with these informations: title, description, tags.',
   },
   userIndex: {
     memberArtists: 'Member artists',
@@ -195,6 +197,8 @@ export default {
     tag: 'Tag',
     tags: 'Tags',
     tagTitle: 'Artworks with tag ',
+    selectTag: 'Select a tag here',
+    keepYours: 'Or keep going with yours...',
   },
   confirmDelete: {
     confirmMessage: 'Please confirm the deletion of this artwork.',
