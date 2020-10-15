@@ -366,7 +366,7 @@ export default {
   width: auto;
   max-width: max-content;
   padding: 0 4%;
-  min-width: 650px;
+  min-width: auto;
 }
 .designs-tag-outer {
   margin-bottom: 0;

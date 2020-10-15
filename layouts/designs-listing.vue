@@ -104,14 +104,14 @@
           }}</v-btn>
         </nuxt-link>
 
-        <template v-if="$auth.loggedIn">
+        <!-- <template v-if="$auth.loggedIn"> -->
           <nuxt-link :to="localePath({ name: 'designs.upload' })">
             <v-btn small class="upload-button mr-2"
               ><v-icon class="mr-2">mdi-cloud-upload</v-icon
               >{{ $t('navbar.upload') }}</v-btn
             >
           </nuxt-link>
-        </template>
+        <!-- </template>
         <template v-else>
           <base-button
             toggle-modal
@@ -121,7 +121,7 @@
             icon="mdi-cloud-upload"
             >{{ $t('navbar.upload') }}</base-button
           >
-        </template>
+        </template> -->
         <v-spacer />
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
