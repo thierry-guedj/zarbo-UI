@@ -284,6 +284,7 @@
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
               class="my-2"
               style="height: 40px; border: none;"
+              target="_blank"
             />
           </a>
           <v-col class="footer-bottom py-4 text-center white--text" cols="12">
