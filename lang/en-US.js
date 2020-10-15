@@ -199,6 +199,7 @@ export default {
     tagTitle: 'Artworks with tag ',
     selectTag: 'Select a tag here',
     keepYours: 'Or keep going with yours...',
+    placeholder: 'Add Tag',
   },
   confirmDelete: {
     confirmMessage: 'Please confirm the deletion of this artwork.',

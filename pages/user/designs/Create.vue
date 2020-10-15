@@ -154,15 +154,16 @@
                     v-model="form.tag"
                     :tags="form.tags"
                     class="tags-input"
+                    :placeholder="$t('tag.placeholder')"
                     :autocomplete-items="filteredItems"
                     @tags-changed="(newTags) => (tags = newTags)"
                   >
                     <template slot="autocomplete-header">
-                      <strong>{{ $t('tag.selectTag')}} ↓</strong>
+                      <strong>{{ $t('tag.selectTag') }} ↓</strong>
                     </template>
                     <template slot="autocomplete-footer">
                       <small>
-                        <em>{{ $t('tag.keepYours')}}</em>
+                        <em>{{ $t('tag.keepYours') }}</em>
                       </small>
                     </template>
                   </vue-tags-input>

@@ -201,6 +201,7 @@ export default {
     tagTitle: 'Oeuvres répondant au mot-clé ',
     selectTag: 'Selectionnez un mot-clé',
     keepYours: 'Ou continuez avec le vôtre...',
+    placeholder: 'Ajoutez un mot-clé',
   },
   confirmDelete: {
     confirmMessage: 'Veuillez confirmer la suppression de cette oeuvre.',

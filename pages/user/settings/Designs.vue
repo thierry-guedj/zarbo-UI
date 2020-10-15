@@ -130,6 +130,7 @@
                         v-model="form.tag"
                         :tags="editedItem.tags"
                         class="tags-input"
+                        :placeholder="$t('tag.placeholder')"
                         :autocomplete-items="filteredItems"
                         @tags-changed="(newTags) => (tags = newTags)"
                       >
