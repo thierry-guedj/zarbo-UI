@@ -278,14 +278,14 @@
                 brush
               </v-icon>
             </v-btn>
-            <nuxt-link to="https://www.buymeacoffee.com/zarbo">
-              <img
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                class="height: 40 px; padding-top: 10px;"
-              />
-            </nuxt-link>
           </template>
-          <template v-else> </template>
+          <a href="https://www.buymeacoffee.com/zarbo">
+            <img
+              src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+              class="my-2"
+              style="height: 40px; border: none;"
+            />
+          </a>
           <v-col class="footer-bottom py-4 text-center white--text" cols="12">
             {{ new Date().getFullYear() }} — <strong>Zarbo</strong>
           </v-col>
