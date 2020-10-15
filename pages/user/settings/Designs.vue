@@ -135,13 +135,13 @@
                         @tags-changed="(newTags) => (tags = newTags)"
                       >
                         <template slot="autocomplete-header">
-                          <strong>Select a tag here ↓</strong>
-                        </template>
-                        <template slot="autocomplete-footer">
-                          <small>
-                            <em>Or keep going with yours...</em>
-                          </small>
-                        </template>
+                      <strong>{{ $t('tag.selectTag') }} ↓</strong>
+                    </template>
+                    <template slot="autocomplete-footer">
+                      <small>
+                        <em>{{ $t('tag.keepYours') }}</em>
+                      </small>
+                    </template>
                       </vue-tags-input>
                     </client-only>
 
