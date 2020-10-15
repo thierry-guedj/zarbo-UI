@@ -94,9 +94,13 @@
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
         <nuxt-link :to="localePath({ name: 'designs.search' })"
-          ><v-btn small color="transparent" class="mr-2 ml-3">{{
-            $t('navbar.artwork')
-          }}</v-btn></nuxt-link
+          ><v-btn
+            small
+            color="transparent"
+            :class="{ active: isRouteActive }"
+            exact-active-class="active"
+            >{{ $t('navbar.artwork') }}</v-btn
+          ></nuxt-link
         >
         <nuxt-link :to="localePath({ name: 'users.search' })"
           ><v-btn small color="transparent" class="mr-2">{{
@@ -350,6 +354,15 @@ export default {
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
+    isRouteActive() {
+      if (
+        this.$nuxt.$route.name === this.localePath({ name: 'designs.search' })
+      ) {
+        return true
+      } else {
+        return false
+      }
+    },
   },
 
   mounted() {
@@ -393,6 +406,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.active {
+  background-color: #0f1219 !important;
+}
 .footer-bottom {
   background-color: #0f1219;
 }

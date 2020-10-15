@@ -26,7 +26,10 @@
                 data-did-init="slimInitialised"
                 data-download="true"
               >
-                <img :src="$auth.user.avatars.large" />
+                <img
+                  v-if="$auth.user.avatars.large"
+                  :src="$auth.user.avatars.large"
+                />
                 <input type="file" name="image" />
               </slim-cropper>
               <div id="progress" class="progress">
