@@ -8,6 +8,7 @@
       <v-alert
         v-if="form.errors.has('emailNotVerified')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -23,6 +24,7 @@
       <v-alert
         v-if="form.errors.has('email')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -40,6 +42,7 @@
       <v-alert
         v-if="form.errors.has('message')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -80,7 +83,7 @@
       >
         {{ $t('login.submit') }}</v-btn
       >
-      <v-btn @click="clear">{{ $t('login.clear') }}</v-btn>
+      <v-btn :disabled="loadingSubmit" @click="clear">{{ $t('login.clear') }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('login.noAccount') }}
 

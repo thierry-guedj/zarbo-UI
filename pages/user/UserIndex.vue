@@ -79,7 +79,12 @@
         </div>
         <div v-else class="pt-8 pl-0 pb-6 pr-0">
           <template v-if="(!users.length)" class="pb-6">
-            <v-alert border="left" color="#0f1219" dark>
+            <v-alert
+              border="left"
+              color="#0f1219"
+              dark
+              transition="scale-transition"
+            >
               No results found
             </v-alert>
           </template>

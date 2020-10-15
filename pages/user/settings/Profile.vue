@@ -62,6 +62,7 @@
                 v-model="alert"
                 border="left"
                 :form="form"
+                transition="scale-transition"
                 close-text="Close Alert"
                 class="alert-success"
                 dismissible
@@ -90,16 +91,34 @@
                       :counter="300"
                       :label="$t('profile.tagline')"
                       :form="form"
+                      outlined
                       field="tagline"
                       @input="$v.form.tagline.$touch()"
                       @blur="$v.form.tagline.$touch()"
                     ></v-text-field>
                     <has-error :form="form" field="tagline"></has-error>
+                    <!-- <client-only>
+                      <ckeditor
+                        v-model="$v.form.about.$model"
+                        :editor="editor"
+                        :config="editorConfig"
+                        :error-messages="aboutErrors"
+                        :counter="3000"
+                        :form="form"
+                        :placeholder="$t('profile.someInfo')"
+                        field="about"
+                        outlined
+                        class="mb-1"
+                        @input="$v.form.about.$touch()"
+                        @blur="$v.form.about.$touch()"
+                      ></ckeditor>
+                    </client-only> -->
                     <v-textarea
                       v-model.trim="$v.form.about.$model"
                       :error-messages="aboutErrors"
                       :counter="3000"
                       :form="form"
+                      :label="$t('profile.description')"
                       :placeholder="$t('profile.someInfo')"
                       field="about"
                       outlined
@@ -142,8 +161,13 @@
 <script>
 // import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import { required, maxLength } from 'vuelidate/lib/validators'
+// import InlineEditor from '@ckeditor/ckeditor5-build-inline'
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import Slim from '@/components/slim/slim.vue'
-
+/* let DecoupledEditor
+if (process.browser) {
+  DecoupledEditor = require('@ckeditor/ckeditor5-build-decoupled-document')
+} */
 export default {
   name: 'Profile',
   components: {
@@ -218,6 +242,18 @@ export default {
       uploadIsSuccessful: false,
       fab: false,
       upload: false,
+      /* editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+
+        toolbar: [
+          'bold',
+          'italic',
+          'bulletedList',
+          'numberedList',
+          'blockQuote',
+        ],
+      }, */
     }
   },
   computed: {
@@ -427,6 +463,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~/assets/content-styles.css';
 .avatar-col {
   max-width: 27%;
   min-width: 280px;

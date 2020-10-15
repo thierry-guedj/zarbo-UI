@@ -155,17 +155,25 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close">{{
+                  <v-btn @click="close">{{
                     $t('editDesign.cancel')
                   }}</v-btn>
-                  <v-btn
+                  <!-- <v-btn
                     color="blue darken-1"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
                     text
                     @click="save"
                     >{{ $t('editDesign.save') }}</v-btn
-                  >
+                  > -->
+                  <v-btn
+                  class="slim-btn2 slim-btn-upload2"
+                  title="Upload"
+                  type="button"
+                  style="opacity: 1;"
+                  @click="save"
+                  >{{ $t('editDesign.save') }}</v-btn
+                >
                 </v-card-actions>
               </v-card>
             </v-dialog>

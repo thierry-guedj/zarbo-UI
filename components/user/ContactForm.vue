@@ -8,6 +8,7 @@
       v-if="form.errors.has('name')"
       class="alert-error mb-2"
       dark
+      transition="scale-transition"
       icon="person_add_disabled"
       border="right"
       :form="form"
@@ -18,6 +19,7 @@
       v-if="form.errors.has('email')"
       class="alert-error mb-2"
       dark
+      transition="scale-transition"
       icon="mark_email_unread"
       border="right"
       :form="form"
@@ -28,6 +30,7 @@
       v-if="this.$v.form.$model.successful"
       class="alert-success"
       dark
+      transition="scale-transition"
       icon="mark_email_unread"
       border="right"
       :form="form"

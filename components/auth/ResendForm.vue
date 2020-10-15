@@ -7,6 +7,7 @@
     <v-alert
       v-if="form.errors.has('message')"
       dark
+      transition="scale-transition"
       icon="announcement"
       border="right"
       :form="form"
@@ -33,6 +34,7 @@
       v-if="this.$v.form.$model.successful"
       class="alert-success"
       dark
+      transition="scale-transition"
       icon="mark_email_unread"
       border="right"
       :form="form"
@@ -56,7 +58,7 @@
         type="submit"
         >{{ $t('resendForm.submit') }}</v-btn
       >
-      <v-btn @click="clear">{{ $t('resendForm.clear') }}</v-btn>
+      <v-btn :disabled="loadingSubmit" @click="clear">{{ $t('resendForm.clear') }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('resendForm.noAccount') }}
 

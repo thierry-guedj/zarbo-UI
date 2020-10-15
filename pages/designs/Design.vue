@@ -287,14 +287,14 @@ export default {
     }
   },
   fetchOnServer: true,
-  mounted() {
+  /* mounted() {
     const img = new Image()
     img.src = this.design.images.large
     img.onload = () => {
       this.image.width = img.width
       this.image.height = img.height
     }
-  },
+  }, */
   computed: {
     ...mapGetters(['visible']),
     designTitle() {
@@ -366,6 +366,7 @@ export default {
   width: auto;
   max-width: max-content;
   padding: 0 4%;
+  min-width: 650px;
 }
 .designs-tag-outer {
   margin-bottom: 0;

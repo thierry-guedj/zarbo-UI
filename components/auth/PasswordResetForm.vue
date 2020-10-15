@@ -9,6 +9,7 @@
         v-if="this.$v.form.$model.successful"
         class="alert-success"
         dark
+        transition="scale-transition"
         icon="mark_email_unread"
         border="right"
         :form="form"
@@ -23,6 +24,7 @@
       <v-alert
         v-if="form.errors.has('email')"
         dark
+        transition="scale-transition"
         icon="announcement"
         border="right"
         :form="form"
@@ -64,7 +66,7 @@
         >
           {{ $t('passwordResetForm.reset') }}</v-btn
         >
-        <v-btn @click="clear">{{ $t('passwordResetForm.clear') }}</v-btn>
+        <v-btn :disabled="loadingSubmit" @click="clear">{{ $t('passwordResetForm.clear') }}</v-btn>
         <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('passwordResetForm.noAccount') }}
 
