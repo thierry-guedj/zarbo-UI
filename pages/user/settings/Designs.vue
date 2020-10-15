@@ -243,7 +243,6 @@
         <base-modal
           class="modalEditDelete"
           :dialog.sync="visible"
-          @showDesign="styleModal()"
           @closeDialog="hideModal()"
           @destroyItem="deleteItem()"
         />
