@@ -488,6 +488,7 @@ export default {
       const res = this.$axios.$delete(`/designs/${this.itemToDelete.id}`)
       this.alert = true
       this.message = this.$i18n.t('settingsDesigns.deleteDoneMessage')
+      this.initialize()
 
       this.hideModal()
     },
