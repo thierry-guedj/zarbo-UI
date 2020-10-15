@@ -36,6 +36,8 @@ export default {
     lastPublishedDesigns: 'Last published designs',
     moreFromUser: 'More from',
     moreFromTags: 'More similar',
+    lastDesigns: 'Last designs',
+    lastArtists: 'Last registered artists',
   },
   designCard: {
     by: 'by',

@@ -202,7 +202,7 @@ export default {
   white-space: nowrap;
 } */
 .design-title {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   margin-bottom: 0;
 }
@@ -211,7 +211,7 @@ export default {
 }
 a.design-user {
   color: #546e7a;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 0;
 }

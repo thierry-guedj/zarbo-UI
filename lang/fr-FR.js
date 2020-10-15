@@ -37,6 +37,8 @@ export default {
     lastPublishedDesigns: 'Dernières oeuvres publiées',
     moreFromUser: 'Du même artiste',
     moreFromTags: 'Oeuvres similiaires',
+    lastDesigns: 'Dernières oeuvres publiées',
+    lastArtists: 'Artistes récemment inscrits',
   },
   designCard: {
     by: 'par',

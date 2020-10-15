@@ -165,14 +165,7 @@
                     @click="save"
                     >{{ $t('editDesign.save') }}</v-btn
                   > -->
-                  <v-btn
-                    class="slim-btn2 slim-btn-upload2"
-                    title="Upload"
-                    type="button"
-                    style="opacity: 1;"
-                    @click="save"
-                    >{{ $t('editDesign.save') }}</v-btn
-                  >
+                  <v-btn @click="save">{{ $t('editDesign.save') }}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -489,7 +482,7 @@ export default {
       const res = this.$axios.$delete(`/designs/${this.itemToDelete.id}`)
       this.alert = true
       this.message = this.$i18n.t('settingsDesigns.deleteDoneMessage')
-      this.initialize()
+      // this.initialize()
 
       this.hideModal()
     },
