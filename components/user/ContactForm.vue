@@ -40,9 +40,9 @@
       <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
     </div>
     <div v-if="!this.$v.form.$model.successful">
-      <v-text-field 
-      class="input-green"
+      <v-text-field
         v-model.trim="$v.form.name.$model"
+        class="input-green"
         :error-messages="nameErrors"
         :label="$t('contact.name')"
         required
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { required, maxLength, minLength, email } from 'vuelidate/lib/validators'
+import { required, maxLength, email } from 'vuelidate/lib/validators'
 import { mapActions } from 'vuex'
 export default {
   name: 'ContactForm',

@@ -463,7 +463,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/content-styles.css';
+// @import '~/assets/content-styles.css';
 .avatar-col {
   max-width: 27%;
   min-width: 280px;

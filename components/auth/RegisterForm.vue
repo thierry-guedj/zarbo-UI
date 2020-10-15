@@ -111,7 +111,9 @@
         :type="$t('register.submit')"
         >{{ $t('register.submit') }}</v-btn
       >
-      <v-btn :disabled="loadingSubmit" @click="clear">{{ $t('register.clear') }}</v-btn>
+      <v-btn :disabled="loadingSubmit" @click="clear">{{
+        $t('register.clear')
+      }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('register.haveAccount') }}
 

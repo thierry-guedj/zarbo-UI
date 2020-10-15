@@ -100,14 +100,12 @@
                   </v-row>
                 </form>
                 <nuxt-link :to="{ name: 'users.search' }">
-                <v-btn class="mt-0" color="deep-orange accent-2"
-                  ><v-icon class="mr-2">flip_to_back</v-icon
-                  >{{ $t('user.backToUsersList') }}</v-btn
-                >
-              </nuxt-link>
+                  <v-btn class="mt-0" color="deep-orange accent-2"
+                    ><v-icon class="mr-2">flip_to_back</v-icon
+                    >{{ $t('user.backToUsersList') }}</v-btn
+                  >
+                </nuxt-link>
               </v-container>
-
-              
             </v-col>
           </v-row>
         </section>

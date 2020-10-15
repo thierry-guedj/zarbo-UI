@@ -343,7 +343,7 @@ export default {
     },
     slimService(formdata, progress, success, failure) {
       this.successFunction = success
-      
+
       this.$axios
         .post('designs', formdata, {
           headers: {
