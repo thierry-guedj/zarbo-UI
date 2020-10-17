@@ -450,6 +450,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .footer-bottom {
   background-color: #0f1219;
 }
@@ -527,11 +528,6 @@ footer {
 /* .transparent.v-btn--contained {
   background-color: #000000;
 } */
-.theme--dark.v-main {
-  opacity: 0.65;
-  background-color: #0f1219;
-  padding-top: 0;
-}
 
 #grad1 {
   background: red; /* For browsers that do not support gradients */
@@ -594,6 +590,7 @@ footer {
 }
 .v-main {
   padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 .main-container {
   max-width: 100%;

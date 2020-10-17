@@ -121,7 +121,4 @@ export default {
   color: rgba(23, 22, 18, 0.54);
   border-radius: 6px;
 }
-.v-main {
-  padding-top: 0 !important;
-}
 </style>
