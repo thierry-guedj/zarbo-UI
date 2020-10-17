@@ -1,13 +1,12 @@
 <template>
-  <v-tabs class="home">
+  <v-tabs class="home" background-color="#0f1219">
     <v-tab class="home">{{ $t('widgetTitle.lastDesigns') }}</v-tab>
     <v-tab class="home">{{ $t('widgetTitle.lastArtists') }}</v-tab>
     <v-tab-item class="mx-auto home">
       <last-designs></last-designs>
     </v-tab-item>
     <v-tab-item class="home">
-      <lazy-component
-      ></lazy-component>
+      <lazy-component></lazy-component>
     </v-tab-item>
   </v-tabs>
 </template>
@@ -31,16 +30,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.theme--dark.v-tabs > .v-tabs-bar {
+  background-color: #0f1219 !important;
+}
+.theme--dark.v-card {
+  background-color: #0f1219 !important;
+}
 .v-tabs-bar {
   background-color: #0f1219 !important;
 }
 .theme--dark.v-tabs {
-  color: #0f1219 !important;
+  background-color: #0f1219 !important;
 }
 .v-tabs-bar.v-item-group {
-  color: #0f1219 !important;
+  background-color: #0f1219 !important;
 }
 .v-slide-group__wrapper {
+  background-color: #0f1219 !important;
+}
+.v-slide-group__content {
+  background-color: #0f1219 !important;
+}
+.v-tabs-bar.v-item-group > * {
   background-color: #0f1219 !important;
 }
 .home {

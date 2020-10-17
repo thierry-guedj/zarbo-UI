@@ -4,7 +4,7 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="pt-8 pl-0 pb-6 pr-0">
+      <div v-else class="home-tabs pt-8 pl-0 pb-6 pr-0">
         <v-row
           transition-duration="0.3s"
           item-selector=".item"
@@ -97,6 +97,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.home-tabs {
+  background-color: #0f1219 !important;
+}
 .container {
   max-width: 100%;
   padding: 0;
