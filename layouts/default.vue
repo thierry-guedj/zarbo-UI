@@ -13,7 +13,7 @@
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
-        class="mt-16"
+        class="nav-drawer mt-16"
         app
       >
         <v-list>
@@ -450,7 +450,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.nav-drawer {
+  min-height: 100%;
+}
 .footer-bottom {
   background-color: #0f1219;
 }
@@ -506,6 +508,7 @@ footer {
   transition-duration: 0.35s;
   line-height: 1.6em;
   text-rendering: optimizelegibility;
+  color: whitesmoke;
 }
 .v-toolbar__content,
 .v-toolbar__extension {
@@ -569,7 +572,7 @@ footer {
   ); /* Standard syntax (must be last) */
 }
 .line {
-  height: 10px;
+  height: 1px;
   border-radius: 0px;
   background: whitesmoke;
   padding: 0;
