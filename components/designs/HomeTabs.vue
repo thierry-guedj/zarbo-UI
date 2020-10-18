@@ -1,11 +1,11 @@
 <template>
-  <v-tabs class="home" background-color="#0f1219">
-    <v-tab class="home">{{ $t('widgetTitle.lastDesigns') }}</v-tab>
-    <v-tab class="home">{{ $t('widgetTitle.lastArtists') }}</v-tab>
-    <v-tab-item class="mx-auto home">
+  <v-tabs class="home-tabs" background-color="#0f1219">
+    <v-tab>{{ $t('widgetTitle.lastDesigns') }}</v-tab>
+    <v-tab>{{ $t('widgetTitle.lastArtists') }}</v-tab>
+    <v-tab-item class="mx-auto home-tabs-item">
       <last-designs></last-designs>
     </v-tab-item>
-    <v-tab-item class="home">
+    <v-tab-item class="home-tabs-item">
       <lazy-component></lazy-component>
     </v-tab-item>
   </v-tabs>
@@ -30,39 +30,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.theme--dark.v-tabs > .v-tabs-bar {
+.home-tabs {
   background-color: #0f1219 !important;
 }
-.theme--dark.v-card {
+/* .v-tabs-bar.v-item-group {
   background-color: #0f1219 !important;
-}
-.v-tabs-bar {
+} */
+/* .theme--dark.v-tabs {
   background-color: #0f1219 !important;
-}
-.theme--dark.v-tabs {
+} */
+/* .v-tabs-bar {
   background-color: #0f1219 !important;
-}
-.v-tabs-bar.v-item-group {
+} */
+/* .theme--dark.v-tabs-items {
   background-color: #0f1219 !important;
-}
-.v-slide-group__wrapper {
+} */
+/* .theme--dark.v-tabs > .v-tabs-bar {
   background-color: #0f1219 !important;
-}
-.v-slide-group__content {
+} */
+
+/* .theme--dark.v-card {
   background-color: #0f1219 !important;
-}
-.v-tabs-bar.v-item-group > * {
+} */
+
+
+
+/* .v-slide-group__wrapper {
   background-color: #0f1219 !important;
-}
-.home {
+} */
+/* .v-slide-group__content {
   background-color: #0f1219 !important;
-}
-.theme--dark.v-tabs-items {
+} */
+/* .v-tabs-bar.v-item-group > * {
   background-color: #0f1219 !important;
+} */
+.home-tabs-item {
+  background-color: #0f1219 !important;
+  padding-top: 0;
 }
+/* 
 .v-list-item__content {
   max-width: max-content;
-}
+} */
 img {
   max-width: 100%;
   height: auto;

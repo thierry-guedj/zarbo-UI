@@ -4,7 +4,7 @@
       <div v-if="searching" class="loader p-0">
         <Circle8></Circle8>
       </div>
-      <div v-else class="home-tabs pt-8 pl-0 pb-6 pr-0">
+      <div v-else>
         <v-row
           transition-duration="0.3s"
           item-selector=".item"
@@ -107,7 +107,7 @@ export default {
   width: 100%;
 }
 .loader {
-  position: fixed;
+  position: relative;
 
   left: 50%;
 }

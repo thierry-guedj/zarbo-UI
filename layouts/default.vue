@@ -597,7 +597,7 @@ footer {
 }
 .main-container {
   max-width: 100%;
-  padding: 5px 10px;
+  padding: 5px 26px;
 }
 .cookie {
   width: 100%;
