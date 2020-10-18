@@ -4,7 +4,6 @@
     <v-parallax :src="backgroundUrl" height="600">
       <div class="mt-18 text-center text-parallax mb-0">
         <h1 class="teal--text text-center text--lighten-2 mb-0">Zarbo,</h1>
-        <!-- <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p> -->
       </div>
     </v-parallax>
 
@@ -86,15 +85,11 @@
         id="nav"
         class="bg-transparent line"
         :clipped-left="!clipped"
-        fixed
+        absolute
         elevate-on-scroll
         app
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <!-- <v-btn icon @click.stop="miniVariant = !miniVariant">
-          <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-        </v-btn> -->
-
         <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
@@ -110,24 +105,12 @@
           }}</v-btn>
         </nuxt-link>
 
-        <!-- <template v-if="$auth.loggedIn"> -->
         <nuxt-link :to="localePath({ name: 'designs.upload' })">
           <v-btn small class="upload-button mr-2"
             ><v-icon class="mr-2">mdi-cloud-upload</v-icon
             >{{ $t('navbar.upload') }}</v-btn
           >
         </nuxt-link>
-        <!-- </template>
-        <template v-else>
-          <base-button
-            toggle-modal
-            component-name="LoginForm"
-            folder-name="auth"
-            button-class="upload-button mr-2"
-            icon="mdi-cloud-upload"
-            >{{ $t('navbar.upload') }}</base-button
-          >
-        </template> -->
         <v-spacer />
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
@@ -162,7 +145,6 @@
               >{{ $t('navbar.signout') }}</v-btn
             ></nuxt-link
           >
-          <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
           <nuxt-link :to="localePath({ name: 'settings.profile' })"
             ><avatar
               :username="$auth.user.name"
@@ -231,10 +213,6 @@
           <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
         </div>
       </v-parallax>
-
-      <!--  <v-footer :absolute="!fixed" app>
-        <span>&copy; {{ new Date().getFullYear() }}</span>
-      </v-footer> -->
 
       <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
@@ -504,7 +482,6 @@ footer {
   background: #0f1219;
 }
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@600&display=swap');
 
 .text-parallax {
   font-family: 'Josefin Sans', sans-serif;
@@ -551,9 +528,6 @@ footer {
   background-color: #424242;
   transition: 0.75s ease;
 }
-/* .transparent.v-btn--contained {
-  background-color: #000000;
-} */
 
 #grad1 {
   background: red; /* For browsers that do not support gradients */

@@ -1,6 +1,5 @@
 <template>
   <section>
-    <!-- <v-parallax :src="backgroundUrl" height="0"></v-parallax> -->
     <div id="grad1" class="line"></div>
     <v-app dark>
       <v-navigation-drawer
@@ -85,10 +84,6 @@
         app
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <!-- <v-btn icon @click.stop="miniVariant = !miniVariant">
-          <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-        </v-btn> -->
-
         <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
@@ -108,24 +103,12 @@
           }}</v-btn>
         </nuxt-link>
 
-        <!-- <template v-if="$auth.loggedIn"> -->
         <nuxt-link :to="localePath({ name: 'designs.upload' })">
           <v-btn small class="upload-button mr-2"
             ><v-icon class="mr-2">mdi-cloud-upload</v-icon
             >{{ $t('navbar.upload') }}</v-btn
           >
         </nuxt-link>
-        <!-- </template>
-        <template v-else>
-          <base-button
-            toggle-modal
-            component-name="LoginForm"
-            folder-name="auth"
-            button-class="upload-button mr-2"
-            icon="mdi-cloud-upload"
-            >{{ $t('navbar.upload') }}</base-button
-          >
-        </template> -->
         <v-spacer />
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
@@ -160,7 +143,6 @@
               >{{ $t('navbar.signout') }}</v-btn
             ></nuxt-link
           >
-          <!-- <img class="user-thumb" width="30px" :src="$auth.user.photo_url" /> -->
 
           <nuxt-link :to="localePath({ name: 'settings.profile' })"
             ><avatar
@@ -472,9 +454,7 @@ footer {
   background-color: #424242;
   transition: 0.75s ease;
 }
-/* .transparent.v-btn--contained {
-  background-color: #000000;
-} */
+
 .theme--dark.v-main {
   opacity: 0.65;
   background-color: #0f1219;
