@@ -6,7 +6,7 @@
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
-        class="mt-16"
+        class="nav-drawer mt-16"
         app
       >
         <v-list>

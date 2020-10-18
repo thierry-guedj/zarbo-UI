@@ -85,7 +85,7 @@
         id="nav"
         class="bg-transparent line"
         :clipped-left="!clipped"
-        absolute
+        fixed
         elevate-on-scroll
         app
       >
