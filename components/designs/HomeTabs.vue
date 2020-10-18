@@ -33,45 +33,10 @@ export default {
 .home-tabs {
   background-color: #0f1219 !important;
 }
-/* .v-tabs-bar.v-item-group {
-  background-color: #0f1219 !important;
-} */
-/* .theme--dark.v-tabs {
-  background-color: #0f1219 !important;
-} */
-/* .v-tabs-bar {
-  background-color: #0f1219 !important;
-} */
-/* .theme--dark.v-tabs-items {
-  background-color: #0f1219 !important;
-} */
-/* .theme--dark.v-tabs > .v-tabs-bar {
-  background-color: #0f1219 !important;
-} */
-
-/* .theme--dark.v-card {
-  background-color: #0f1219 !important;
-} */
-
-
-
-/* .v-slide-group__wrapper {
-  background-color: #0f1219 !important;
-} */
-/* .v-slide-group__content {
-  background-color: #0f1219 !important;
-} */
-/* .v-tabs-bar.v-item-group > * {
-  background-color: #0f1219 !important;
-} */
 .home-tabs-item {
   background-color: #0f1219 !important;
   padding-top: 0;
 }
-/* 
-.v-list-item__content {
-  max-width: max-content;
-} */
 img {
   max-width: 100%;
   height: auto;
