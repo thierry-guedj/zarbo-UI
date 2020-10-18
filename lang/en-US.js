@@ -283,5 +283,6 @@ export default {
     signout: 'Sign out',
     home: 'Home',
     privacyPolicy: 'Privacy Policy',
+    cgu: 'Terms and conditions',
   },
 }

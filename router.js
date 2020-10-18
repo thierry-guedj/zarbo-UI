@@ -203,7 +203,7 @@ const routes = [
     component: page('user/UserIndex.vue'),
   },
   {
-    path: '/privacy/',
+    path: '/privacy',
     name: 'privacy.policy',
     component: page('terms/PrivacyPolicy.vue'),
   },
@@ -216,6 +216,21 @@ const routes = [
     path: '/privacy/en/',
     name: 'privacy.policy___en',
     component: page('terms/PrivacyPolicy.vue'),
+  },
+  {
+    path: '/cgu',
+    name: 'cgu',
+    component: page('terms/Cgu.vue'),
+  },
+  {
+    path: '/cgu/en/',
+    name: 'cgu___en',
+    component: page('terms/Cgu.vue'),
+  },
+  {
+    path: '/cgu/fr/',
+    name: 'cgu___fr',
+    component: page('terms/Cgu.vue'),
   },
   /* {
     path: '/design/:slug',

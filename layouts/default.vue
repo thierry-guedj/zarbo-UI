@@ -243,46 +243,60 @@
             v-for="footerLink in footerLinks"
             :key="footerLink.icon"
             :to="footerLink.to"
-            ><v-btn color="white" text rounded class="my-2">
+            ><v-btn color="white" class="footer-links my-2" text rounded>
               <v-icon size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
           <v-btn
             color="white"
+            class="footer-links my-2"
             text
             rounded
-            class="my-2"
             @click="goTo('ContactForm', 'user')"
           >
             <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
-            <v-btn
-              color="white"
-              text
-              rounded
-              class="my-2"
-              @click="goTo('LoginForm', 'auth')"
-              ><v-icon size="24px">
-                face
-              </v-icon>
-            </v-btn>
-            <v-btn
-              color="white"
-              text
-              rounded
-              class="my-2"
-              @click.stop="goTo('RegisterForm', 'auth')"
-              ><v-icon size="24px">
-                brush
-              </v-icon>
-            </v-btn>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }"
+                ><v-btn
+                  color="white"
+                  text
+                  rounded
+                  class="my-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="goTo('LoginForm', 'auth')"
+                  ><v-icon size="24px">
+                    face
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t('footer.signin') }}</span>
+            </v-tooltip>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="white"
+                  text
+                  rounded
+                  class="my-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click.stop="goTo('RegisterForm', 'auth')"
+                  ><v-icon size="24px">
+                    brush
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t('footer.signup') }}</span>
+            </v-tooltip>
           </template>
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-              class="my-2"
+              class="my-2 ml-2 float-right"
               style="height: 40px; border: none;"
               target="_blank"
             />
@@ -305,6 +319,7 @@ import Avatar from 'vue-avatar'
 import Cookie from '@/components/Cookie.vue'
 export default {
   name: 'Default',
+  scrollToTop: true,
   components: {
     Avatar,
     Cookie,
@@ -366,6 +381,11 @@ export default {
           icon: 'mdi-security',
           title: this.$i18n.t('footer.privacyPolicy'),
           to: this.localePath({ name: 'privacy.policy' }),
+        },
+        {
+          icon: 'policy',
+          title: this.$i18n.t('footer.cgu'),
+          to: this.localePath({ name: 'cgu' }),
         },
       ],
 
@@ -450,11 +470,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.footer-links {
+  font-size: 10px;
+}
 .nav-drawer {
   min-height: 100%;
 }
 .footer-bottom {
   background-color: #0f1219;
+}
+footer {
+  position: inherit;
+  bottom: 0;
 }
 .layout {
   display: contents;
@@ -495,10 +522,6 @@ export default {
   opacity: 0;
 }
 
-footer {
-  position: inherit;
-  bottom: 0;
-}
 .theme--dark.v-application {
   background-color: #0f1219;
   font-family: 'Josefin Sans', sans-serif;

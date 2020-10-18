@@ -288,5 +288,6 @@ export default {
     signout: 'Se déconnecter',
     home: 'Accueil',
     privacyPolicy: 'Politique de confidentialité',
+    cgu: "Conditions générales d'utilisation",
   },
 }

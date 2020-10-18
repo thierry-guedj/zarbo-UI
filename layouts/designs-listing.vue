@@ -216,16 +216,14 @@
             v-for="footerLink in footerLinks"
             :key="footerLink.icon"
             :to="footerLink.to"
-            ><v-btn color="white" text rounded class="my-2">
+            ><v-btn color="white" class="footer-links my-2" text rounded>
               <v-icon size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
           <v-btn
             color="white"
-            text
-            rounded
-            class="my-2"
+            class="footer-links my-2" text rounded
             @click="goTo('ContactForm', 'user')"
           >
             <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
@@ -252,7 +250,14 @@
               </v-icon>
             </v-btn>
           </template>
-          <template v-else> </template>
+          <a href="https://www.buymeacoffee.com/zarbo">
+            <img
+              src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+              class="my-2"
+              style="height: 40px; border: none;"
+              target="_blank"
+            />
+          </a>
           <v-col class="footer-bottom py-4 text-center white--text" cols="12">
             {{ new Date().getFullYear() }} — <strong>Zarbo</strong>
           </v-col>
@@ -270,7 +275,8 @@ import { mapActions, mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
 import Cookie from '@/components/Cookie.vue'
 export default {
-  components: {
+  scrollToTop: true,
+    components: {
     Avatar,
     Cookie,
   },
@@ -311,31 +317,34 @@ export default {
           route: this.localePath({ name: 'settings.profile' }),
         },
       ],
-      footerLinks: [
+       footerLinks: [
         {
           icon: 'mdi-apps',
           title: this.$i18n.t('footer.home'),
           to: this.localePath({ name: 'index' }),
-          toolTip: this.$i18n.t('footer.home'),
         },
         {
           icon: 'mdi-looks',
           title: this.$i18n.t('footer.artwork'),
           to: this.localePath({ name: 'designs.search' }),
-          toolTip: this.$i18n.t('footer.artwork'),
         },
         {
           icon: 'mdi-chart-bubble',
           title: this.$i18n.t('footer.artists'),
           to: this.localePath({ name: 'users.search' }),
-          toolTip: this.$i18n.t('footer.artists'),
         },
         {
           icon: 'mdi-security',
           title: this.$i18n.t('footer.privacyPolicy'),
           to: this.localePath({ name: 'privacy.policy' }),
         },
+        {
+          icon: 'policy',
+          title: this.$i18n.t('footer.cgu'),
+          to: this.localePath({ name: 'cgu' }),
+        },
       ],
+
 
       miniVariant: false,
       right: true,
@@ -409,11 +418,17 @@ export default {
 .active {
   background-color: #0f1219 !important;
 }
+.footer-links {
+  font-size: 10px;
+}
+.nav-drawer {
+  min-height: 100%;
+}
 .footer-bottom {
   background-color: #0f1219;
 }
 footer {
-  position: absolute;
+  position: inherit;
   bottom: 0;
 }
 .layout {
@@ -441,6 +456,7 @@ footer {
   transition-duration: 0.35s;
   line-height: 1.6em;
   text-rendering: optimizelegibility;
+  color: whitesmoke;
 }
 
 .theme--dark.v-navigation-drawer {
