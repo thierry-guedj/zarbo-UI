@@ -410,7 +410,7 @@ export default {
       this.allTags = []
       const response = await this.$axios.$get('tags')
       // console.log(response)
-      this.allTags = JSON.stringify(response)
+      this.allTags = response
       this.autocompleteItems = this.allTags.map((item) => {
         return {
           text: item.name,
