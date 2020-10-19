@@ -249,9 +249,9 @@
 import { mapActions, mapGetters } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
 export default {
-  components: {
+  /* components: {
     InputTag: () => import('vue-input-tag'),
-  },
+  }, */
   data() {
     return {
       form: this.$vform({
