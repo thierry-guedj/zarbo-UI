@@ -408,7 +408,7 @@ export default {
     ...mapActions(['showModal', 'hideModal']),
     async getAllTags() {
       this.allTags = []
-      const response = await this.$axios.$get('tags')
+      const response = JSON.stringify(await this.$axios.$get('tags'))
       // console.log(response)
       this.allTags = response
       this.autocompleteItems = this.allTags.map((item) => {
