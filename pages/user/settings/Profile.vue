@@ -205,24 +205,26 @@ export default {
   async asyncData({ $axios, $auth, error, redirect }) {
     try {
       const id = $auth.user.id
-      const user = await $axios.$get(`/user/${id}/findById`)
-
+      const userData = await $axios.$get(`/user/${id}/findById`)
+const user = userData.data
       console.log(user)
 
       const avatarUrl = user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
               const avatarExists = true
+              console.log(avatarExists)
               return avatarExists
               
             } else {
               const avatarExists = false
+              console.log(avatarExists)
               return avatarExists
             }
             
           })
 
-      return { user: user.data }
+      return user
     } catch (err) {
       /* if (err.response.status === 404) {
         error({ statusCode: 404, message: 'Design not found' })
