@@ -209,7 +209,7 @@ export default {
 
       console.log(user)
 
-      const avatarUrl = user.avatars.large
+      /* const avatarUrl = user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
               const avatarExists = true
@@ -220,7 +220,7 @@ export default {
               return avatarExists
             }
             
-          })
+          }) */
 
       return { user: user.data }
     } catch (err) {
@@ -269,6 +269,7 @@ export default {
       uploadIsSuccessful: false,
       fab: false,
       upload: false,
+      avatarExists: false,
       /* editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
@@ -349,7 +350,7 @@ export default {
     }
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    // this.avatarExists()
+    this.avatarExists()
   },
   methods: {
     slimService(formdata, progress, success, failure) {
