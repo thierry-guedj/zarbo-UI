@@ -18,7 +18,7 @@
       <section class="hero text-white">
         <v-row class="row-md-12">
           <v-col class="col-md-3 text-center avatar-col">
-            <div>
+            <template v-if="avatarExists">
               <slim-cropper
                 :options="slimOptions"
                 class="text-black slim-avatar"
@@ -27,11 +27,22 @@
                 data-download="true"
               >
                 <img
-                  v-if="$auth.user.avatars.large"
                   :src="$auth.user.avatars.large"
                 />
                 <input type="file" name="image" />
               </slim-cropper>
+            </template>
+            <template v-else>
+              <slim-cropper
+                :options="slimOptions"
+                class="text-black slim-avatar"
+                data-did-upLoad="imageUpload"
+                data-did-init="slimInitialised"
+                data-download="true"
+              >
+                <input type="file" name="image" />
+              </slim-cropper>
+            </template>
               <div id="progress" class="progress">
                 <div
                   class="progress-bar progress-bar-success"
@@ -198,15 +209,28 @@ export default {
 
       console.log(user)
 
+      const avatarUrl = user.avatars.large
+          fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
+            if (res.ok) {
+              const avatarExists = true
+              return avatarExists
+              
+            } else {
+              const avatarExists = false
+              return avatarExists
+            }
+            
+          })
+
       return { user: user.data }
     } catch (err) {
-      if (err.response.status === 404) {
+      /* if (err.response.status === 404) {
         error({ statusCode: 404, message: 'Design not found' })
       } else if (err.response.status === 401) {
         redirect('/login')
       } else {
         error({ statusCode: 500, message: 'Internal server error' })
-      }
+      } */
     }
   },
 
@@ -325,6 +349,7 @@ export default {
     }
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
+    // this.avatarExists()
   },
   methods: {
     slimService(formdata, progress, success, failure) {
@@ -354,6 +379,7 @@ export default {
           console.log(res)
           this.getUploadIsSuccessful(this.$auth.user.id)
           success('upload done')
+          this.avatarExists()
           this.uploading = false
         })
         .catch((e) => console.log(e))
@@ -378,6 +404,20 @@ export default {
       slibtn[0].style.display = 'none'
       this.uploadButton = false
       this.dialog_msg = ''
+    },
+    avatarExists() {
+    const avatarUrl = this.user.avatars.large
+          fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
+            if (res.ok) {
+              this.avatarExists = true
+              return this.avatarExists
+              
+            } else {
+              this.avatarExists = false
+              return this.avatarExists
+            }
+            
+          })
     },
     update() {
       this.form
