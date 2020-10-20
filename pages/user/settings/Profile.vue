@@ -209,7 +209,7 @@ export default {
 
       console.log(user)
 
-      /* const avatarUrl = user.avatars.large
+      const avatarUrl = user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
               const avatarExists = true
@@ -220,7 +220,7 @@ export default {
               return avatarExists
             }
             
-          }) */
+          })
 
       return { user: user.data }
     } catch (err) {
@@ -407,7 +407,7 @@ export default {
       this.dialog_msg = ''
     },
     avatarExistsOrNot() {
-    const avatarUrl = this.user.avatars.large
+    const avatarUrl = this.$auth.user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
               this.avatarExists = true
