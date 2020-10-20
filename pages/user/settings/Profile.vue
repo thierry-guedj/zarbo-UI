@@ -350,7 +350,7 @@ export default {
     }
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    this.avatarExists()
+    this.avatarExistsOrNot()
   },
   methods: {
     slimService(formdata, progress, success, failure) {
@@ -406,7 +406,7 @@ export default {
       this.uploadButton = false
       this.dialog_msg = ''
     },
-    avatarExists() {
+    avatarExistsOrNot() {
     const avatarUrl = this.user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
