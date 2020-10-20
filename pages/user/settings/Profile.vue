@@ -205,8 +205,7 @@ export default {
   async asyncData({ $axios, $auth, error, redirect }) {
     try {
       const id = $auth.user.id
-      const userData = await $axios.$get(`/user/${id}/findById`)
-const user = userData.data
+      const user = await $axios.$get(`/user/${id}/findById`)
       console.log(user)
 
       /* const avatarUrl = user.avatars.large
@@ -224,7 +223,7 @@ const user = userData.data
             
           }) */
 
-      return user
+      return { user: user.data }
     } catch (err) {
       /* if (err.response.status === 404) {
         error({ statusCode: 404, message: 'Design not found' })
@@ -271,7 +270,6 @@ const user = userData.data
       uploadIsSuccessful: false,
       fab: false,
       upload: false,
-      avatarExists: false,
       /* editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
@@ -352,7 +350,6 @@ const user = userData.data
     }
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
-    this.avatarExistsOrNot()
   },
   methods: {
     slimService(formdata, progress, success, failure) {
@@ -406,20 +403,6 @@ const user = userData.data
       slibtn[0].style.display = 'none'
       this.uploadButton = false
       this.dialog_msg = ''
-    },
-    async avatarExistsOrNot() {
-    const avatarUrl = await this.$auth.user.avatars.large
-          fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
-            if (res) {
-              this.avatarExists = true
-              return this.avatarExists
-              
-            } else {
-              this.avatarExists = false
-              return this.avatarExists
-            }
-            
-          })
     },
     update() {
       this.form
