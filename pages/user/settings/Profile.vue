@@ -382,7 +382,6 @@ const user = userData.data
           console.log(res)
           this.getUploadIsSuccessful(this.$auth.user.id)
           success('upload done')
-          this.avatarExists()
           this.uploading = false
         })
         .catch((e) => console.log(e))
