@@ -18,11 +18,11 @@
       <section class="hero text-white">
         <v-row class="row-md-12">
           <v-col class="col-md-3 text-center avatar-col">
-            <template v-if="avatarExists">
+            <template v-if="$auth.user.avatars.large !== 'https://zarbo.fr/storage/uploads/avatars/large/'">
               <slim-cropper
                 :options="slimOptions"
                 class="text-black slim-avatar"
-                data-did-upLoad="imageUpload"
+                data-did-upLoad="imageUplo$auth.user.avatars.largead"
                 data-did-init="slimInitialised"
                 data-download="true"
               >
@@ -209,7 +209,7 @@ export default {
 const user = userData.data
       console.log(user)
 
-      const avatarUrl = user.avatars.large
+      /* const avatarUrl = user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
             if (res.ok) {
               const avatarExists = true
@@ -222,7 +222,7 @@ const user = userData.data
               return avatarExists
             }
             
-          })
+          }) */
 
       return user
     } catch (err) {
@@ -407,10 +407,10 @@ const user = userData.data
       this.uploadButton = false
       this.dialog_msg = ''
     },
-    avatarExistsOrNot() {
-    const avatarUrl = this.$auth.user.avatars.large
+    async avatarExistsOrNot() {
+    const avatarUrl = await this.$auth.user.avatars.large
           fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
-            if (res.ok) {
+            if (res) {
               this.avatarExists = true
               return this.avatarExists
               
