@@ -410,7 +410,7 @@ export default {
         require(`moment/locale/${this.$i18n.locale}.js`)
       }
 
-      const url = `setLang/${this.$i18n.locale}`
+      const url = `locale/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
 
       window.addEventListener('scroll', function () {

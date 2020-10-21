@@ -191,7 +191,7 @@
         </v-container>
       </v-main>
 
-      <v-footer :absolute="!fixed" app dark padless>
+        <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
           <nuxt-link
@@ -205,37 +205,53 @@
           </nuxt-link>
           <v-btn
             color="white"
-            class="footer-links my-2" text rounded
+            class="footer-links my-2"
+            text
+            rounded
             @click="goTo('ContactForm', 'user')"
           >
             <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
-            <v-btn
-              color="white"
-              text
-              rounded
-              class="my-2"
-              @click="goTo('LoginForm', 'auth')"
-              ><v-icon size="24px">
-                face
-              </v-icon>
-            </v-btn>
-            <v-btn
-              color="white"
-              text
-              rounded
-              class="my-2"
-              @click.stop="goTo('RegisterForm', 'auth')"
-              ><v-icon size="24px">
-                brush
-              </v-icon>
-            </v-btn>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }"
+                ><v-btn
+                  color="white"
+                  text
+                  rounded
+                  class="my-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="goTo('LoginForm', 'auth')"
+                  ><v-icon size="24px">
+                    face
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t('footer.signin') }}</span>
+            </v-tooltip>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="white"
+                  text
+                  rounded
+                  class="my-2"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click.stop="goTo('RegisterForm', 'auth')"
+                  ><v-icon size="24px">
+                    brush
+                  </v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t('footer.signup') }}</span>
+            </v-tooltip>
           </template>
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-              class="my-2"
+              class="my-2 ml-2 float-right"
               style="height: 40px; border: none;"
               target="_blank"
             />
@@ -258,7 +274,7 @@ import Avatar from 'vue-avatar'
 import Cookie from '@/components/Cookie.vue'
 export default {
   scrollToTop: true,
-    components: {
+  components: {
     Avatar,
     Cookie,
   },
@@ -299,7 +315,7 @@ export default {
           route: this.localePath({ name: 'settings.profile' }),
         },
       ],
-       footerLinks: [
+      footerLinks: [
         {
           icon: 'mdi-apps',
           title: this.$i18n.t('footer.home'),
@@ -327,12 +343,12 @@ export default {
         },
       ],
 
-
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'zarbo',
       scrollPosition: null,
+      locale: this.$i18n.locale,
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -342,6 +358,14 @@ export default {
     } else {
       next()
     }
+  },
+  watch: {
+    locale(newVal) {
+      console.log(newVal)
+      // require(`moment/locale/${newVal}.js`)
+      this.$moment().locale(newVal)
+      this.$i18n.setLocale(newVal)
+    },
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
@@ -354,12 +378,18 @@ export default {
         return false
       }
     },
+    availableLocales() {
+      return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
   },
 
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
-      const url = `setLang/${this.$i18n.locale}`
+      if (this.$i18n.locale !== 'en') {
+        require(`moment/locale/${this.$i18n.locale}.js`)
+      }
+      const url = `locale/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
       this.$auth.fetchUser()
       window.addEventListener('scroll', function () {
@@ -497,10 +527,6 @@ footer {
     blue,
     violet
   ); /* Standard syntax (must be last) */
-}
-.line {
-  height: 6px;
-  border-radius: 4px;
 }
 .cookie {
   width: 100%;
