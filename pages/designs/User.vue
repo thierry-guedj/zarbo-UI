@@ -38,8 +38,8 @@
               <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
-              <p class="about text-white">
-                {{ user.about }}
+              <p class="about text-white" style="white-space: pre;">
+                {{ cleanUserAbout() }}
               </p>
 
               <v-container fluid class="search-control">
@@ -273,6 +273,9 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
+    },
+    cleanUserAbout() {
+      return this.$sanitize(this.user.about)
     },
   },
   mounted() {
