@@ -15,7 +15,7 @@
           class="mx-2"
           fab
           dark
-          large
+          small
           color="transparent"
           @click="hideModal()"
         >
