@@ -107,7 +107,7 @@ export default {
       mode: 'client',
     },
     { src: '~/plugins/vue-tags-input', ssr: false },
-    '~plugins/vue-sanitize.js',
+    // '~plugins/vue-sanitize.js',
   ],
   /*
    ** Auto import components

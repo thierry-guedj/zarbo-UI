@@ -39,7 +39,7 @@
                 {{ user.tagline }}
               </p>
               <p class="about text-white" style="white-space: pre;">
-                {{ cleanUserAbout() }}
+                <!-- {{ cleanUserAbout() }} -->
               </p>
 
               <v-container fluid class="search-control">
@@ -274,9 +274,9 @@ export default {
     url() {
       return `/search/designs?${this.queryString}`
     },
-    cleanUserAbout() {
+   /*  cleanUserAbout() {
       return this.$sanitize(this.user.about)
-    },
+    }, */
   },
   mounted() {
     this.fetchData()
