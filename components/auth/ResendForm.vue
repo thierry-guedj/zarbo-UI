@@ -15,7 +15,9 @@
     >
       {{ form.errors.get('message') }}
       <p
-        v-if="form.errors.get('message') === 'Email address already verified'"
+        v-if="
+          form.errors.get('message') === $t('Email address already verified')
+        "
         class="font-14 fw-400 text-center mt-4"
       >
         <base-link component-name="LoginForm" folder-name="auth">{{
