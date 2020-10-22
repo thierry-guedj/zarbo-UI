@@ -1,6 +1,6 @@
 <template>
   <div v-if="isOpen" class="cookie">
-    <v-alert prominent type="info" color="#6859de">
+    <v-alert prominent type="info" color="#212121">
       <v-row align="center">
         <v-col class="grow">
           <slot name="message">
@@ -88,7 +88,7 @@ export default {
 
 <style lang="sass" scoped>
 .cookie
-  z-index: 1
+  z-index: 4
   position: fixed
   bottom: 0
   &__link
@@ -96,5 +96,7 @@ export default {
     text-decoration: underline
     transition: all .25s
     &:hover
+      color: #ffffff
       text-decoration: none
+
 </style>

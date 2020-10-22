@@ -122,6 +122,16 @@
         }}</base-link>
       </div>
     </div>
+    <p class="registerNotice">
+      Zarbo traite les données recueillies pour l'enregistrement et
+      l'authentification des membres. Pour en savoir plus sur la gestion de vos
+      données personnelles et pour exercer vos droits, consultez notre
+      <nuxt-link
+        class="cookie__link"
+        :to="localePath({ name: 'privacy.policy' })"
+        >{{ $t('cookie.privacyPolicy') }}</nuxt-link
+      >
+    </p>
   </v-form>
 </template>
 
@@ -256,7 +266,9 @@ export default {
       this.clear()
     },
   },
-
+  beforeRouteLeave() {
+    this.hideModal()
+  },
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     submit() {
@@ -290,6 +302,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.registerNotice {
+  margin-top: 28px;
+  font-size: 14px;
+  text-align: justify;
+  font-weight: 300;
+}
 a.color-white {
   color: #ffffff;
 }
