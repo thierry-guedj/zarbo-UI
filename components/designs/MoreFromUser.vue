@@ -11,7 +11,7 @@
       no-gutters
     >
       <masonry
-        :cols="{ default: 3, 1700: 2, 1000: 1 }"
+        :cols="{ default: 4, 1800: 3, 1400: 2, 1000: 1 }"
         :gutter="{ default: '0px', 700: '10px' }"
         ><lazy-component
           v-for="(design, i) in designs"
@@ -52,7 +52,7 @@ export default {
       loadingSubmit: false,
       loaderPage: false,
       filters: {
-        idUser: this.user.id,
+        userId: this.user.id,
         whereNotIn: [this.designId],
         page: 1,
       },
