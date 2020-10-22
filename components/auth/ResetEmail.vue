@@ -13,9 +13,11 @@
       border="right"
       :form="form"
     >
-      {{ status }}</v-alert
+      {{ status }}
+      <v-spacer class="mb-3" />
+      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn></v-alert
     >
-    <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+
     <v-alert
       v-if="form.errors.has('emailNotVerified')"
       dark

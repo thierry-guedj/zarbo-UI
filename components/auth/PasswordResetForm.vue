@@ -32,7 +32,6 @@
       >
         {{ form.errors.get('email') }}
       </v-alert>
-      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
       <template v-if="!this.$v.form.$model.successful">
         <v-text-field
           v-model="form.email"

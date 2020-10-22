@@ -47,9 +47,11 @@
       icon="mark_email_unread"
       border="right"
       :form="form"
-      >{{ $t('register.emailSent') }}</v-alert
+      >{{ $t('register.emailSent') }}
+      <v-spacer class="mb-3" />
+      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn></v-alert
     >
-    <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+
     <div v-if="!this.$v.form.$model.successful">
       <v-text-field
         v-model.trim="$v.form.name.$model"

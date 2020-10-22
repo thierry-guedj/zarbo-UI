@@ -41,9 +41,10 @@
               >
             </p>
           </div>
+          <v-spacer class="mb-3" />
+          <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
         </v-alert>
       </div>
-      <v-btn @click="hideModal">{{ $t('contact.cancel') }}</v-btn>
     </v-card-text>
   </section>
 </template>

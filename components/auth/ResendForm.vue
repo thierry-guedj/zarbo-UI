@@ -41,7 +41,9 @@
       border="right"
       :form="form"
     >
-      {{ $t('resendForm.resentEmail') }}</v-alert
+      {{ $t('resendForm.resentEmail') }}
+      <v-spacer class="mb-3" />
+      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn></v-alert
     >
     <div v-if="!this.$v.form.$model.successful">
       <v-text-field
