@@ -45,7 +45,7 @@ export default {
       loadingSubmit: false,
       loaderPage: false,
       filters: {
-        idUser: this.user.id,
+        userId: this.user.id,
         idDesign: this.designId,
         page: 1,
       },
