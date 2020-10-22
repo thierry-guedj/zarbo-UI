@@ -83,7 +83,7 @@ export default {
       this.filters.page = 1
       const response = await this.$axios.$get(`search/designs`, {
         params: {
-          idUser: this.filters.idUser,
+          userId: this.filters.userId,
           whereNotIn: [this.designId],
         },
       })
