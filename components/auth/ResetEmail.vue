@@ -15,6 +15,7 @@
     >
       {{ status }}</v-alert
     >
+    <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
     <v-alert
       v-if="form.errors.has('emailNotVerified')"
       dark

@@ -49,6 +49,7 @@
       :form="form"
       >{{ $t('register.emailSent') }}</v-alert
     >
+    <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
     <div v-if="!this.$v.form.$model.successful">
       <v-text-field
         v-model.trim="$v.form.name.$model"
