@@ -465,7 +465,7 @@
         <a href="https://zarbo.fr">https://zarbo.fr</a>, et fournir d’autres
         services relatifs à l’utilisation de celui-ci et d’Internet.
       </p>
-      &nbsp;
+     <!--  &nbsp;
       <p></p>
       <h2>4. Droit applicable et attribution de juridiction.</h2>
       <p>
@@ -475,14 +475,14 @@
         >&nbsp;est soumis au droit français. En dehors des cas où la loi ne le
         permet pas, il est fait attribution exclusive de juridiction aux
         tribunaux compétents de toulouse
-      </p>
+      </p> -->
       <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'PrivacyPolicy',
   scrollToTop: true,
@@ -498,9 +498,11 @@ export default {
 
   mounted() {
     this.toTop()
+    this.hideModal()
   },
 
   methods: {
+    ...mapActions(['showModal', 'hideModal']),
     onScroll(e) {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
