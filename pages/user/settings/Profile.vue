@@ -22,8 +22,6 @@
               <slim-cropper
                 :options="slimOptions"
                 class="text-black slim-avatar"
-                data-did-upLoad="imageUplo$auth.user.avatars.largead"
-                data-did-init="slimInitialised"
                 data-download="true"
               >
                 <img
@@ -258,8 +256,9 @@ export default {
         maxFileSize: 5, // value is 5MB
         uploadMethod: 'PUT',
         statusUploadSuccess: this.$i18n.t('profile.saved'),
-        didLoad: this.imageLoaded,
+       didLoad: this.imageLoaded,
         didRemove: this.imageRemoved,
+        didUpload: this.imageUploaded,
       },
       uploading: false,
       imageSelectionDone: true,
@@ -403,6 +402,9 @@ export default {
       slibtn[0].style.display = 'none'
       this.uploadButton = false
       this.dialog_msg = ''
+    },
+    imageUploaded(error, data, response) {
+      console.log(error, data, response)
     },
     update() {
       this.form
