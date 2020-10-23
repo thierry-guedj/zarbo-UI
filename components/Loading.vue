@@ -1,6 +1,5 @@
 <template>
   <div v-if="loading" class="loading-page">
-    <p>Loading...</p>
     <Circle8></Circle8>
   </div>
 </template>
