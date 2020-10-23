@@ -237,7 +237,7 @@ export default {
 
       this.designs.forEach((design) => {
         this.itemsDesigns.push({
-          title: design.title === '' ? design.title : 'Sans Titre',
+          title: design.title !== '' ? design.title : 'Sans Titre',
           description: design.description,
           src: design.images.extralarge,
         })
