@@ -269,7 +269,7 @@ export default {
     cancel: 'Annuler',
     submit: 'Envoyer',
     emailSent: 'Email envoyé',
-    closeWindow: 'Fermer la fenêtre',
+    closeWindow: 'ok',
   },
   cookie: {
     label1:

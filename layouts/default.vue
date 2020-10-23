@@ -173,11 +173,10 @@
                 <v-list-item
                   v-for="(item, i) in menuAccount"
                   :key="i"
-               
                   class="text-white"
                 >
                   <nuxt-link :to="item.route">
-                    <v-btn x-small text
+                    <v-btn small text block class="mr-0 ml-0"
                       ><v-icon right dark class="mr-2">{{ item.icon }}</v-icon
                       >{{ item.title }}</v-btn
                     ></nuxt-link
@@ -186,8 +185,9 @@
                 <v-list-item class="text-white">
                   <nuxt-link to=""
                     ><v-btn
-                      x-small
+                      small
                       text
+                      block
                       class="mr-0 ml-0"
                       @click.prevent="logout"
                       ><v-icon right dark class="mr-2">exit_to_app</v-icon
@@ -619,7 +619,9 @@ footer {
 .cookie {
   width: 100%;
 }
-.v-list-item {
-    padding: 0 2px !important;
+.v-list-item { 
+    min-height: 48px;
+    outline: none;
+    padding: 0 0 !important;
 }
 </style>

@@ -155,10 +155,10 @@ export default {
     noArtworkYetMessage: "You didn't publish any artwork yet",
   },
   create: {
-    uploadArtwork: 'Upload an artwok',
+    uploadArtwork: 'Upload an artwork',
     selectImage: 'Select image',
     uploadNotice:
-      'Tthe image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
+      'The image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
     uploadError: 'An error occurred during the upload process',
     updateDesignInfo: 'Update Design Information',
     title: 'Title',
@@ -265,7 +265,7 @@ export default {
     cancel: 'Cancel',
     submit: 'Submit',
     emailSent: 'Email sent',
-    closeWindow: 'Close window',
+    closeWindow: 'ok',
   },
   cookie: {
     label1:
