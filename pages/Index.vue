@@ -18,7 +18,6 @@
         height="50"
         class="gradientBody justify-start align-content-md-start pt-0"
       ></v-container> -->
-     
 
       <home-tabs></home-tabs>
       <div class="text-center" style="max-width: '95%';">
@@ -60,6 +59,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Index',
   layout: 'default',
+  transition: 'home',
   data() {
     return {
       width: '500px',
@@ -120,5 +120,13 @@ export default {
 .v-snackbar {
   color: rgba(23, 22, 18, 0.54);
   border-radius: 6px;
+}
+.home-enter-active,
+.home-leave-active {
+  transition: opacity 0.5s;
+}
+.home-enter,
+.home-leave-active {
+  opacity: 0;
 }
 </style>
