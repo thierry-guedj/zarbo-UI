@@ -1,5 +1,8 @@
 <template>
-  <section>
+  <div v-if="$fetchState.pending" class="loader">
+    <Circle8></Circle8>
+  </div>
+  <div v-else class="pt-6 pl-6">
     <v-btn
       v-show="fab"
       v-scroll="onScroll"
@@ -18,15 +21,18 @@
       <section class="hero text-white">
         <v-row class="row-md-12">
           <v-col class="col-md-3 text-center avatar-col">
-            <template v-if="$auth.user.avatars.large !== 'https://zarbo.fr/storage/uploads/avatars/large/'">
+            <template
+              v-if="
+                $auth.user.avatars.large !==
+                'https://zarbo.fr/storage/uploads/avatars/large/'
+              "
+            >
               <slim-cropper
                 :options="slimOptions"
                 class="text-black slim-avatar"
                 data-download="true"
               >
-                <img
-                  :src="$auth.user.avatars.large"
-                />
+                <img :src="$auth.user.avatars.large" />
                 <input type="file" name="image" />
               </slim-cropper>
             </template>
@@ -41,29 +47,28 @@
                 <input type="file" name="image" />
               </slim-cropper>
             </template>
-              <div id="progress" class="progress">
-                <div
-                  class="progress-bar progress-bar-success"
-                  :style="{ width: uploadPercentage + '%' }"
-                ></div>
-              </div>
-              <p v-if="dialog_msg !== ''" class="alert alert-warning">
-                {{ dialog_msg }}
-              </p>
+            <div id="progress" class="progress">
+              <div
+                class="progress-bar progress-bar-success"
+                :style="{ width: uploadPercentage + '%' }"
+              ></div>
+            </div>
+            <p v-if="dialog_msg !== ''" class="alert alert-warning">
+              {{ dialog_msg }}
+            </p>
 
-              <v-spacer class="mb-3" />
-              <v-btn
-                title="Upload"
-                type="button"
-                data-action="upload"
-                style="opacity: 1;"
-                :loading="loadingSubmit"
-                :disabled="disabledButton"
-                @click="submit"
-                >{{ $t('profile.updateAvatar') }}</v-btn
-              >
-            </div></v-col
-          >
+            <v-spacer class="mb-3" />
+            <v-btn
+              title="Upload"
+              type="button"
+              data-action="upload"
+              style="opacity: 1;"
+              :loading="loadingSubmit"
+              :disabled="disabledButton"
+              @click="submit"
+              >{{ $t('profile.updateAvatar') }}</v-btn
+            >
+          </v-col>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-col class="col-md-7">
             <p class="titlePage text-white">
@@ -167,7 +172,7 @@
       </section>
     </v-container>
     <v-divider class="mx-4" inset vertical></v-divider>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -175,6 +180,7 @@
 import { required, maxLength } from 'vuelidate/lib/validators'
 // import InlineEditor from '@ckeditor/ckeditor5-build-inline'
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import Slim from '@/components/slim/slim.vue'
 /* let DecoupledEditor
 if (process.browser) {
@@ -184,6 +190,7 @@ export default {
   name: 'Profile',
   components: {
     'slim-cropper': Slim,
+    Circle8,
   },
   validations: {
     form: {
@@ -200,37 +207,10 @@ export default {
     },
   },
 
-  async asyncData({ $axios, $auth, error, redirect }) {
-    try {
-      const id = $auth.user.id
-      const user = await $axios.$get(`/user/${id}/findById`)
-      console.log(user)
-
-      /* const avatarUrl = user.avatars.large
-          fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
-            if (res.ok) {
-              const avatarExists = true
-              console.log(avatarExists)
-              return avatarExists
-              
-            } else {
-              const avatarExists = false
-              console.log(avatarExists)
-              return avatarExists
-            }
-            
-          }) */
-
-      return { user: user.data }
-    } catch (err) {
-      /* if (err.response.status === 404) {
-        error({ statusCode: 404, message: 'Design not found' })
-      } else if (err.response.status === 401) {
-        redirect('/login')
-      } else {
-        error({ statusCode: 500, message: 'Internal server error' })
-      } */
-    }
+  async fetch() {
+    const id = this.$auth.user.id
+    const response = await this.$axios.$get(`/user/${id}/findById`)
+    this.user = response.data
   },
 
   data() {
@@ -256,7 +236,7 @@ export default {
         maxFileSize: 5, // value is 5MB
         uploadMethod: 'PUT',
         statusUploadSuccess: this.$i18n.t('profile.saved'),
-       didLoad: this.imageLoaded,
+        didLoad: this.imageLoaded,
         didRemove: this.imageRemoved,
         didUpload: this.imageUploaded,
       },
@@ -269,6 +249,8 @@ export default {
       uploadIsSuccessful: false,
       fab: false,
       upload: false,
+      fetchOnServer: true,
+      user: {},
       /* editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
@@ -339,14 +321,14 @@ export default {
       slibtn[0].style.display = 'none'
     }
 
-    if (this.$auth.user.location) {
+    /* if (this.$auth.user.location) {
       this.form.location = {
         longitude: this.$auth.user.location.coordinates[0],
         latitude: this.$auth.user.location.coordinates[1],
       }
     } else {
       this.form.location = {}
-    }
+    } */
     const slibtn = document.getElementsByClassName('slim-btn-upload')
     slibtn[0].style.display = 'none'
   },
