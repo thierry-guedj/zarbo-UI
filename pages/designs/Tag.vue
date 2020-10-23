@@ -101,7 +101,7 @@
                 width="60%"
                 class="alert"
               >
-                {{ $t('tags.noCriteriaResult') }}
+                {{ $t('tag.noCriteriaResult') }}
               </v-alert>
             </div>
           </template>
