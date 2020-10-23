@@ -1,7 +1,7 @@
 <template>
   <section>
     <div id="grad1" class="line"></div>
-    <v-parallax :src="backgroundUrl" height="430">
+    <v-parallax :src="backgroundUrl" height="500">
       <div class="mt-18 text-center text-parallax mb-0">
         <h1 class="teal--text text-center text--lighten-2 mb-0">Zarbo,</h1>
       </div>
@@ -465,9 +465,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-parallax__image {
+/* .v-parallax__image {
   transform: none !important;
-}
+} */
 .footer-links {
   font-size: 10px;
 }

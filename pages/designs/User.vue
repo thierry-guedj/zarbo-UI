@@ -274,7 +274,7 @@ export default {
     url() {
       return `/search/designs?${this.queryString}`
     },
-   /*  cleanUserAbout() {
+    /*  cleanUserAbout() {
       return this.$sanitize(this.user.about)
     }, */
   },
@@ -294,7 +294,7 @@ export default {
 
       this.designs.forEach((design) => {
         this.itemsDesigns.push({
-          title: design.title === '' ? design.title : 'Sans Titre',
+          title: design.title !== '' ? design.title : 'Sans Titre',
           description: design.description,
           src: design.images.extralarge,
         })

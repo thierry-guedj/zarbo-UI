@@ -188,7 +188,12 @@ import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 export default {
   name: 'Search',
   layout: 'designs-listing',
-
+transition(to, from) {
+    if (!from) {
+      return 'slide-left'
+    }
+    return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
+  },
   components: {
     // RingLoader,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
@@ -247,7 +252,7 @@ export default {
 
       this.designs.forEach((design) => {
         this.itemsDesigns.push({
-          title: design.title === '' ? design.title : 'Sans Titre',
+          title: design.title !== '' ? design.title : 'Sans Titre',
           description: design.description,
           src: design.images.extralarge,
         })
