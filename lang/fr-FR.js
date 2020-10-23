@@ -204,6 +204,7 @@ export default {
     selectTag: 'Selectionnez un mot-clé',
     keepYours: 'Ou continuez avec le vôtre...',
     placeholder: 'Ajoutez un mot-clé',
+    noCriteriaResult: "Vos critères de recherche n'ont retourné aucun résultat",
   },
   confirmDelete: {
     confirmMessage: 'Veuillez confirmer la suppression de cette oeuvre.',

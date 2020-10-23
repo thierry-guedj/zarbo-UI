@@ -202,6 +202,7 @@ export default {
     selectTag: 'Select a tag here',
     keepYours: 'Or keep going with yours...',
     placeholder: 'Add Tag',
+    noCriteriaResult: "Your search criteria didn't return any results",
   },
   confirmDelete: {
     confirmMessage: 'Please confirm the deletion of this artwork.',
