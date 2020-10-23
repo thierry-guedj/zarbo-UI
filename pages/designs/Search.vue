@@ -102,12 +102,12 @@
               width="60%"
               class="alert"
             >
-              {{ $t('designs.noResult') }}
+              {{ $t('designs.noCriteriaResult') }}
               <v-spacer />
               <nuxt-link :to="{ name: 'designs.search' }">
                 <v-btn class="mt-3"
                   ><v-icon right dark class="mx-2">reply</v-icon
-                  >{{ $t('designs.noCriteriaResult') }}</v-btn
+                  >{{ $t('designs.backToResults') }}</v-btn
                 >
               </nuxt-link>
             </v-alert>
