@@ -1,11 +1,16 @@
 <template>
   <div v-if="loading" class="loading-page">
     <p>Loading...</p>
+    <Circle8></Circle8>
   </div>
 </template>
 
 <script>
+import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
+     components: {
+    Circle8,
+  },
   data: () => ({
     loading: false
   }),
@@ -24,13 +29,13 @@ export default {
 .loading-page {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background: #0f1219;
+  color: whitesmoke;
   text-align: center;
   padding-top: 200px;
   font-size: 30px;
-  font-family: sans-serif;
 }
 </style>
