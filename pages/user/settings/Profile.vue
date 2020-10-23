@@ -1,8 +1,5 @@
 <template>
-  <div v-if="$fetchState.pending" class="loader">
-    <Circle8></Circle8>
-  </div>
-  <div v-else class="pt-6 pl-6">
+  <section>
     <v-btn
       v-show="fab"
       v-scroll="onScroll"
@@ -40,8 +37,6 @@
               <slim-cropper
                 :options="slimOptions"
                 class="text-black slim-avatar"
-                data-did-upLoad="imageUpload"
-                data-did-init="slimInitialised"
                 data-download="true"
               >
                 <input type="file" name="image" />
@@ -172,7 +167,7 @@
       </section>
     </v-container>
     <v-divider class="mx-4" inset vertical></v-divider>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -180,7 +175,6 @@
 import { required, maxLength } from 'vuelidate/lib/validators'
 // import InlineEditor from '@ckeditor/ckeditor5-build-inline'
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import Slim from '@/components/slim/slim.vue'
 /* let DecoupledEditor
 if (process.browser) {
@@ -190,7 +184,6 @@ export default {
   name: 'Profile',
   components: {
     'slim-cropper': Slim,
-    Circle8,
   },
   validations: {
     form: {
@@ -207,10 +200,37 @@ export default {
     },
   },
 
-  async fetch() {
-    const id = this.$auth.user.id
-    const response = await this.$axios.$get(`/user/${id}/findById`)
-    this.user = response.data
+  async asyncData({ $axios, $auth, error, redirect }) {
+    try {
+      const id = $auth.user.id
+      const user = await $axios.$get(`/user/${id}/findById`)
+      console.log(user)
+
+      /* const avatarUrl = user.avatars.large
+          fetch(avatarUrl, { method: 'HEAD' }).then((res) => {
+            if (res.ok) {
+              const avatarExists = true
+              console.log(avatarExists)
+              return avatarExists
+              
+            } else {
+              const avatarExists = false
+              console.log(avatarExists)
+              return avatarExists
+            }
+            
+          }) */
+
+      return { user: user.data }
+    } catch (err) {
+      /* if (err.response.status === 404) {
+        error({ statusCode: 404, message: 'Design not found' })
+      } else if (err.response.status === 401) {
+        redirect('/login')
+      } else {
+        error({ statusCode: 500, message: 'Internal server error' })
+      } */
+    }
   },
 
   data() {
@@ -249,8 +269,6 @@ export default {
       uploadIsSuccessful: false,
       fab: false,
       upload: false,
-      fetchOnServer: true,
-      user: {},
       /* editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
