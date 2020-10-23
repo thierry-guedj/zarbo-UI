@@ -107,7 +107,7 @@
               <nuxt-link :to="{ name: 'designs.search' }">
                 <v-btn class="mt-3"
                   ><v-icon right dark class="mx-2">reply</v-icon
-                  >{{ $t('designs.backToResults') }}</v-btn
+                  >{{ $t('designs.noCriteriaResult') }}</v-btn
                 >
               </nuxt-link>
             </v-alert>

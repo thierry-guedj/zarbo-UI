@@ -194,6 +194,7 @@ export default {
   designs: {
     backToResults: 'Back to results',
     noResult: 'No result',
+    noCriteriaResult: "Your search criteria didn't return any results",
   },
   tag: {
     tag: 'Tag',

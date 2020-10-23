@@ -196,6 +196,7 @@ export default {
   designs: {
     backToResults: 'Retour aux résultats',
     noResult: 'Pas de résultat',
+    noCriteriaResult: "Vos critères de recherche n'ont retourné aucun résultat",
   },
   tag: {
     tag: 'Mot-clé',
