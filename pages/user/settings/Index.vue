@@ -22,7 +22,9 @@
 
         <!-- RIGHT -->
         <div class="col-sm-12">
+          <transition name="fade">
           <router-view></router-view>
+          </transition>
         </div>
         <!-- END RIGHT -->
       </div>
@@ -84,5 +86,11 @@ export default {
 .list-item-settings.a {
   color: #ffffff;
   text-decoration: none;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
