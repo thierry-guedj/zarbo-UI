@@ -3,10 +3,12 @@
     <div id="grad1" class="line"></div>
     <v-app dark>
       <v-navigation-drawer
-        v-show="$vuetify.breakpoint.xs"
+        v-if="$vuetify.breakpoint.xs"
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
+        width="100%"
+        bottom
         class="nav-drawer mt-16 hidden-sm-and-up"
         app
       >
@@ -19,17 +21,13 @@
             exact
           >
             <v-list-item-action>
-              <v-icon
-                v-show="$vuetify.breakpoint.xs"
-                class="hidden-sm-and-up"
-                >{{ item.icon }}</v-icon
-              >
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <template v-if="!$auth.loggedIn" v-show="$vuetify.breakpoint.xs">
+          <template v-if="!$auth.loggedIn" class="hidden-sm-and-up">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
                 <v-icon>face</v-icon>
@@ -88,7 +86,10 @@
         elevate-on-scroll
         app
       >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-app-bar-nav-icon
+          v-if="$vuetify.breakpoint.xs"
+          @click.stop="drawer = !drawer"
+        />
         <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
