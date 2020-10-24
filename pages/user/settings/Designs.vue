@@ -185,6 +185,11 @@
             </nuxt-link>
           </div>
         </template>
+        <template v-slot:item.description="{ item }">
+          <div class="px-2 my-2 align-middle">
+            <p style="white-space: pre-wrap;">{{ item.description }}</p>
+          </div>
+        </template>
         <template v-slot:item.tags="{ item }">
           <div class="mr-3">
             <v-btn
