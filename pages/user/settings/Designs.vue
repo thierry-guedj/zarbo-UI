@@ -194,7 +194,7 @@
               style="align-self: center;"
               x-small
               color="#5C6BC0"
-              @click="goToTag(`${item.tag_list.normalized[i]}`)"
+              @click="goToTag(`${item.normalized[i]}`)"
               >{{ tag }}</v-btn
             >
             <!-- <v-chip
@@ -426,6 +426,7 @@ export default {
 
       this.designs.forEach((design, index) => {
         design.tags = design.tag_list.tags
+        design.normalized = design.tag_list.normalized
         this.designs[index] = design
       })
       if (this.designs.length < 1) {
@@ -468,6 +469,7 @@ export default {
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
+      design.normalized = design.tag_list.normalized
       if (design.is_live === 1) {
         design.link = true
       } else {
