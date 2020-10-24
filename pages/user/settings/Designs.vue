@@ -514,15 +514,18 @@ export default {
           description: this.form.description,
           is_live: this.form.is_live,
           tags: this.simpleStringArrayTags,
+          normalized: this.simpleStringArrayTags,
           assign_to_team: false,
           team: null,
           tag_list: {
             tags: this.simpleStringArrayTags,
+            normalized: this.simpleStringArrayTags,
           },
         }
         Object.assign(this.designs[this.editedIndex], editedForm)
         if (!editedForm.tags) {
           editedForm.tags = []
+          editedForm.normalized = []
         }
       } else {
         this.designs.push(this.editedForm)
