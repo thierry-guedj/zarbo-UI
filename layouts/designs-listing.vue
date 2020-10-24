@@ -160,7 +160,7 @@
             color="#0f1219"
           >
             <template v-slot:activator="{ on, attrs }">
-              <v-btn color="transparent" dark v-bind="attrs" v-on="on">
+              <v-btn text dark v-bind="attrs" v-on="on">
                 <span class="user-name font-12 fw-500">
                   {{ $auth.user.name }}
                 </span>
@@ -427,6 +427,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.line {
+  height: 1px;
+  border-radius: 0px;
+  background: whitesmoke;
+  padding: 0;
+}
 .active {
   background-color: #0f1219 !important;
 }
