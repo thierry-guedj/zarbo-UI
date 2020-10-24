@@ -39,7 +39,7 @@
                 {{ user.tagline }}
               </p>
               <p class="about text-white" style="white-space: pre;">
-                <!-- {{ cleanUserAbout() }} -->
+                {{ user.about }}
               </p>
 
               <v-container fluid class="search-control">
