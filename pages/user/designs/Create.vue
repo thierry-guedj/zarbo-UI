@@ -34,7 +34,7 @@
     </v-container>
     <v-container>
       <v-row>
-        <v-col class="col-md-6 edit-info">
+        <v-col class="col-md-6 upload-design">
           <v-card width="100%" class="mx-auto">
             <!--  <v-card-title class="headline"
               ><i class="material-icons md-24 mr-4">cloud_upload</i
@@ -529,6 +529,9 @@ export default {
   margin-right: 4px;
   padding: 3px;
 } */
+.upload-design {
+  min-width: 300px;
+}
 .text-black {
   color: black !important;
 }
