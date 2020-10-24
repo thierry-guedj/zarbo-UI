@@ -158,7 +158,7 @@ export default {
     uploadArtwork: 'Upload an artwork',
     selectImage: 'Select image',
     uploadNotice:
-      'The image size should be a maximum of 2MB. Please resize your file accordingly before you upload.',
+      'The image size should be a maximum of 10MB. Please resize your file accordingly before you upload.',
     uploadError: 'An error occurred during the upload process',
     updateDesignInfo: 'Update Design Information',
     title: 'Title',
