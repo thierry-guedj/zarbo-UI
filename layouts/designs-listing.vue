@@ -3,10 +3,11 @@
     <div id="grad1" class="line"></div>
     <v-app dark>
       <v-navigation-drawer
+        v-show="$vuetify.breakpoint.xs"
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
-        class="nav-drawer mt-16"
+        class="nav-drawer mt-16 hidden-sm-and-up"
         app
       >
         <v-list>
@@ -18,13 +19,17 @@
             exact
           >
             <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon
+                v-show="$vuetify.breakpoint.xs"
+                class="hidden-sm-and-up"
+                >{{ item.icon }}</v-icon
+              >
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <template v-if="!$auth.loggedIn">
+          <template v-if="!$auth.loggedIn" v-show="$vuetify.breakpoint.xs">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
                 <v-icon>face</v-icon>
@@ -191,7 +196,7 @@
         </v-container>
       </v-main>
 
-        <v-footer :absolute="!fixed" app dark padless>
+      <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
           <nuxt-link
