@@ -407,6 +407,7 @@ export default {
       console.log(error, data, response)
     },
     update() {
+      console.log(this.form.about)
       this.form
         .put(`/settings/profile`)
         .then((res) => {
