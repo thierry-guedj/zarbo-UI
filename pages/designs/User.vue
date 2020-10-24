@@ -39,7 +39,7 @@
                 {{ user.tagline }}
               </p>
               <p class="about text-white" style="white-space: pre;">
-                {{ user.about }}
+                {{ cleanUserAbout }}
               </p>
 
               <v-container fluid class="search-control">
@@ -212,6 +212,7 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 import Avatar from 'vue-avatar'
+import sanitizeHtml from 'sanitize-html';
 export default {
   name: 'User',
   layout: 'designs-listing',
@@ -221,6 +222,7 @@ export default {
     Circle8,
     CoolLightBox,
     Avatar,
+    sanitizeHtml,
   },
   async fetch() {
     const res = await this.$axios.$get(
@@ -274,9 +276,9 @@ export default {
     url() {
       return `/search/designs?${this.queryString}`
     },
-    /*  cleanUserAbout() {
-      return this.$sanitize(this.user.about)
-    }, */
+     cleanUserAbout() {
+      return sanitizeHtml(this.user.about)
+    },
   },
   mounted() {
     this.fetchData()
