@@ -250,7 +250,7 @@ export default {
           description: design.description,
           src: design.images.extralarge,
         })
-      console.log(design.title)
+        console.log(design.title)
       })
 
       //  this.designs = Object.freeze(this.designs)

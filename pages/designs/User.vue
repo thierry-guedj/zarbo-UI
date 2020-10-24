@@ -38,8 +38,7 @@
               <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
-              <p class="about text-white" style="white-space: pre-wrap;">
-                {{ user.about }}
+              <p class="about text-white" style="white-space: pre-wrap;">{{ user.about }}
               </p>
 
               <v-container fluid class="search-control">
@@ -100,7 +99,7 @@
                   </v-row>
                 </form>
                 <nuxt-link :to="{ name: 'users.search' }">
-                  <v-btn class="mt-0" color="deep-orange accent-2"
+                  <v-btn class="mt-0" color="orange darken-3"
                     ><v-icon class="mr-2">flip_to_back</v-icon
                     >{{ $t('user.backToUsersList') }}</v-btn
                   >

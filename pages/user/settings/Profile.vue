@@ -147,6 +147,7 @@
                         type="button"
                         data-action="upload"
                         style="opacity: 1;"
+                        color="#006064"
                         :loading="loadingSubmit"
                         @click="update"
                         >{{ $t('profile.updateProfile') }}</v-btn
@@ -154,6 +155,7 @@
 
                       <v-btn
                         :disabled="upload"
+                        color="orange darken-3"
                         @click="goToUser($auth.user.id)"
                         >{{ $t('profile.seeProfile') }}</v-btn
                       >

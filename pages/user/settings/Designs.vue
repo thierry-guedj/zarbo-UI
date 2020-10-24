@@ -203,7 +203,7 @@
               class="mr-1"
               style="align-self: center;"
               x-small
-              color="#5C6BC0"
+              color="#662200"
               @click="goToTag(`${item.normalized[i]}`)"
               >{{ tag }}</v-btn
             >
