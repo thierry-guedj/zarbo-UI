@@ -255,9 +255,9 @@ export default {
     this.comments = response.data.comments
     this.user = response.data.user
     this.images = response.data.images
-
+    const noTitle = 'Sans Titre'
     this.itemsDesigns.push({
-      title: this.design.title === '' ? this.design.title : 'Sans Titre',
+      title: this.design.title ? this.design.title : noTitle,
       description: this.design.description,
       src: this.design.images.extralarge,
     })
