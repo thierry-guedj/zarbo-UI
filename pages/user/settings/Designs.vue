@@ -165,7 +165,12 @@
                     @click="save"
                     >{{ $t('editDesign.save') }}</v-btn
                   > -->
-                  <v-btn @click="save">{{ $t('editDesign.save') }}</v-btn>
+                  <v-btn
+                    :loading="loadingSubmit"
+                    :disabled="$v.form.$invalid"
+                    @click="save"
+                    >{{ $t('editDesign.save') }}</v-btn
+                  >
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -285,6 +290,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'title',
+          width: '15%'
         },
         {
           text: this.$i18n.t('settingsDesigns.description'),
@@ -474,6 +480,7 @@ export default {
       })
     },
     async updateItem(item) {
+      this.loadingSubmit = true
       let design = await this.$axios.$get(`/designs/${item.id}/byUser`)
       design = design.data
       design.tags = design.tag_list.tags
@@ -485,6 +492,7 @@ export default {
       }
       // this.editedItem = design
       this.designs[this.designs.indexOf(item)] = design
+      this.loadingSubmit = false
     },
     deleteItem() {
       const index = this.designs.indexOf(this.itemToDelete)
