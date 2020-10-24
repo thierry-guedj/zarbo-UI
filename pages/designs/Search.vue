@@ -246,7 +246,7 @@ export default {
       const noTitle = 'Sans Titre'
       this.designs.forEach((design) => {
         this.itemsDesigns.push({
-          title: design.title !== '' ? design.title : noTitle,
+          title: design.title ? design.title : noTitle,
           description: design.description,
           src: design.images.extralarge,
         })

@@ -234,10 +234,10 @@ export default {
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
-
+      const noTitle = 'Sans Titre'
       this.designs.forEach((design) => {
         this.itemsDesigns.push({
-          title: design.title !== '' ? design.title : 'Sans Titre',
+          title: design.title ? design.title : noTitle,
           description: design.description,
           src: design.images.extralarge,
         })
