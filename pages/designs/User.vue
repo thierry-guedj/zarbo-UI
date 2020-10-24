@@ -212,7 +212,7 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 import Avatar from 'vue-avatar'
-import sanitizeHtml from 'sanitize-html';
+const sanitizeHtml = require('sanitize-html')
 export default {
   name: 'User',
   layout: 'designs-listing',
@@ -222,7 +222,6 @@ export default {
     Circle8,
     CoolLightBox,
     Avatar,
-    sanitizeHtml,
   },
   async fetch() {
     const res = await this.$axios.$get(
@@ -276,7 +275,7 @@ export default {
     url() {
       return `/search/designs?${this.queryString}`
     },
-     cleanUserAbout() {
+    cleanUserAbout() {
       return sanitizeHtml(this.user.about)
     },
   },
