@@ -287,7 +287,7 @@ export default {
       },
     }
   },
-  head() {
+  /* head() {
     return {
       title: this.article.title,
       meta: [
@@ -369,7 +369,7 @@ export default {
         },
       ],
     }
-  },
+  }, */
   fetchOnServer: true,
   /* mounted() {
     const img = new Image()
