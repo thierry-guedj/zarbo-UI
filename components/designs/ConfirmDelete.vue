@@ -8,11 +8,11 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn @click="close()">
+        <v-btn v-bind="size" @click="close()">
           {{ $t('confirmDelete.cancel') }}
         </v-btn>
 
-        <v-btn @click="agree()">
+        <v-btn v-bind="size" @click="agree()">
           {{ $t('confirmDelete.confirm') }}
         </v-btn>
       </v-card-actions>
@@ -42,6 +42,12 @@ export default {
 
     item() {
       return this.getItem
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   methods: {

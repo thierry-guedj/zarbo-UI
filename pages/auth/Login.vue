@@ -11,7 +11,7 @@
     >
       You're logged in
       <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="snackbar = false">
+        <v-btn v-bind="size" dark text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
@@ -46,6 +46,12 @@ export default {
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
   },
   mounted() {
     this.$nextTick(function () {

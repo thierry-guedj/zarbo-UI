@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-btn
+    <v-btn v-bind="size"
       v-show="fab"
       v-scroll="onScroll"
       fab
@@ -11,7 +11,7 @@
       color="accent"
       @click="toTop"
     >
-      <v-icon>keyboard_arrow_up</v-icon>
+      <v-icon v-bind="size">keyboard_arrow_up</v-icon>
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
@@ -52,7 +52,7 @@
                       @input="fetchData"
                     >
                       <template v-slot:append>
-                        <v-btn
+                        <v-btn v-bind="size"
                           :disabled="searching"
                           class="searchBtn"
                           height="auto"
@@ -60,7 +60,7 @@
                           :loading="searching"
                           type="submit"
                         >
-                          <v-icon>mdi-magnify</v-icon>
+                          <v-icon v-bind="size">mdi-magnify</v-icon>
                           {{ $t('search.search') }}
                         </v-btn>
                       </template>
@@ -166,6 +166,12 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/users?${this.queryString}`
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   mounted() {

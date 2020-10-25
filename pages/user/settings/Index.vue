@@ -8,7 +8,7 @@
             <v-list-item-group>
               <v-list-item v-for="link in links" :key="link.route">
                 <v-list-item-icon>
-                  <v-icon v-text="link.icon"></v-icon>
+                  <v-icon v-bind="size" v-text="link.icon"></v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <nuxt-link :to="{ name: link.route }"

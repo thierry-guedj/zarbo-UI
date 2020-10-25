@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-btn
+    <v-btn v-bind="size"
       v-show="fab"
       v-scroll="onScroll"
       fab
@@ -11,7 +11,7 @@
       color="accent"
       @click="toTop"
     >
-      <v-icon>keyboard_arrow_up</v-icon>
+      <v-icon v-bind="size">keyboard_arrow_up</v-icon>
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
@@ -176,10 +176,10 @@
                 ></v-checkbox>
 
                 <v-spacer class="mb-3" />
-                <v-btn :disabled="uploading" @click="clear">{{
+                <v-btn v-bind="size" :disabled="uploading" @click="clear">{{
                   $t('create.clear')
                 }}</v-btn>
-                <v-btn
+                <v-btn v-bind="size"
                   class="slim-btn2 slim-btn-upload2"
                   title="Upload"
                   type="button"
@@ -310,6 +310,12 @@ export default {
     },
     simpleStringArrayTags() {
       return this.tags.map((tag) => tag.text)
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   watch: {

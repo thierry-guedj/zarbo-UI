@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-btn
+    <v-btn v-bind="size"
       v-show="fab"
       v-scroll="onScroll"
       fab
@@ -11,7 +11,7 @@
       color="accent"
       @click="toTop"
     >
-      <v-icon>keyboard_arrow_up</v-icon>
+      <v-icon v-bind="size">keyboard_arrow_up</v-icon>
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
@@ -66,7 +66,7 @@
                       @input="fetchData"
                     >
                       <template v-slot:append>
-                        <v-btn
+                        <v-btn v-bind="size"
                           :disabled="searching"
                           class="searchBtn"
                           height="auto"
@@ -74,7 +74,7 @@
                           :loading="searching"
                           type="submit"
                         >
-                          <v-icon>mdi-magnify</v-icon>
+                          <v-icon v-bind="size">mdi-magnify</v-icon>
                           {{ $t('search.search') }}
                         </v-btn>
                       </template>
@@ -105,8 +105,8 @@
               {{ $t('designs.noCriteriaResult') }}
               <v-spacer />
               <nuxt-link :to="{ name: 'designs.search' }">
-                <v-btn class="mt-3"
-                  ><v-icon right dark class="mx-2">reply</v-icon
+                <v-btn v-bind="size" class="mt-3"
+                  ><v-icon v-bind="size" right dark class="mx-2">reply</v-icon
                   >{{ $t('designs.backToResults') }}</v-btn
                 >
               </nuxt-link>
@@ -114,8 +114,8 @@
           </template>
           <template v-else id="row-designs">
             <!-- <nuxt-link :to="{ name: 'users.search' }">
-            <v-btn class="mt-3"
-              ><v-icon right dark class="mx-2">reply</v-icon
+            <v-btn v-bind="size" class="mt-3"
+              ><v-icon v-bind="size" right dark class="mx-2">reply</v-icon
               >{{ $t('designs.backToResults') }}</v-btn
             >
           </nuxt-link> -->
@@ -228,6 +228,12 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   mounted() {

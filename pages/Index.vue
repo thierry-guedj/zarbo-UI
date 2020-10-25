@@ -1,6 +1,6 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-btn
+    <v-btn v-bind="size"
       v-show="fab"
       v-scroll="onScroll"
       fab
@@ -11,7 +11,7 @@
       color="accent"
       @click="toTop"
     >
-      <v-icon>keyboard_arrow_up</v-icon>
+      <v-icon v-bind="size">keyboard_arrow_up</v-icon>
     </v-btn>
     <v-flex xs12 sm8 md6>
       <!--  <v-container
@@ -43,7 +43,7 @@
         >
           You're logged in
           <template v-slot:action="{ attrs }">
-            <v-btn dark text v-bind="attrs" @click="hideSnackbar()">
+            <v-btn v-bind="size" dark text v-bind="attrs" @click="hideSnackbar()">
               Close
             </v-btn>
           </template>
@@ -71,6 +71,12 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'visibleSnackbar']),
     availableLocales() {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   methods: {

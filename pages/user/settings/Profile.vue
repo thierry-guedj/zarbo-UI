@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-btn
+    <v-btn v-bind="size"
       v-show="fab"
       v-scroll="onScroll"
       fab
@@ -11,7 +11,7 @@
       color="accent"
       @click="toTop"
     >
-      <v-icon>keyboard_arrow_up</v-icon>
+      <v-icon v-bind="size">keyboard_arrow_up</v-icon>
     </v-btn>
 
     <v-container class="p-0 m-0 row-designs">
@@ -53,7 +53,7 @@
             </p>
 
             <v-spacer class="mb-3" />
-            <v-btn
+            <v-btn v-bind="size"
               title="Upload"
               type="button"
               data-action="upload"
@@ -141,7 +141,7 @@
                     <has-error :form="form" field="about"></has-error>
                     <div class="text-right">
                       <v-spacer class="mb-3" />
-                      <v-btn
+                      <v-btn v-bind="size"
                         class="ml-2 float-right"
                         title="Upload"
                         type="button"
@@ -153,7 +153,7 @@
                         >{{ $t('profile.updateProfile') }}</v-btn
                       >
 
-                      <v-btn
+                      <v-btn v-bind="size"
                         :disabled="upload"
                         color="orange darken-3"
                         @click="goToUser($auth.user.id)"
@@ -316,6 +316,12 @@ export default {
       } else {
         return false
       }
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   watch: {

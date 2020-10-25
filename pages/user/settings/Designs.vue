@@ -16,20 +16,20 @@
           <v-col class="shrink">
             <template v-if="$auth.loggedIn">
               <nuxt-link :to="localePath({ name: 'designs.upload' })">
-                <v-btn small class="upload-button mr-2"
-                  ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+                <v-btn v-bind="size" small class="upload-button mr-2"
+                  ><v-icon v-bind="size" class="mr-2">mdi-cloud-upload</v-icon
                   >{{ $t('navbar.upload') }}</v-btn
                 >
               </nuxt-link>
             </template>
             <template v-else>
-              <base-button
+              <v-btn v-bind="size"
                 toggle-modal
                 component-name="LoginForm"
                 folder-name="auth"
                 button-class="upload-button mr-2"
                 icon="mdi-cloud-upload"
-                >{{ $t('navbar.upload') }}</base-button
+                >{{ $t('navbar.upload') }}</v-btn
               >
             </template>
           </v-col>
@@ -52,6 +52,7 @@
         :items="designs"
         sort-by="calories"
         class="elevation-1"
+         mobile-breakpoint="0"
         :search="search"
         :loading="loading"
       >
@@ -74,7 +75,7 @@
 
             <v-dialog v-model="dialog" max-width="600px" class="editItem">
               <!-- <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on"
+            <v-btn v-bind="size" color="primary" dark class="mb-2" v-bind="attrs" v-on="on"
               >New Item</v-btn
             >
           </template> -->
@@ -156,8 +157,8 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn @click="close">{{ $t('editDesign.cancel') }}</v-btn>
-                  <!-- <v-btn
+                  <v-btn v-bind="size" @click="close">{{ $t('editDesign.cancel') }}</v-btn>
+                  <!-- <v-btn v-bind="size"
                     color="blue darken-1"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
@@ -165,7 +166,7 @@
                     @click="save"
                     >{{ $t('editDesign.save') }}</v-btn
                   > -->
-                  <v-btn
+                  <v-btn v-bind="size"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
                     @click="save"
@@ -190,14 +191,14 @@
             </nuxt-link>
           </div>
         </template>
-        <template v-slot:item.description="{ item }">
+        <template v-if="!$vuetify.breakpoint.xs" v-slot:item.description="{ item }">
           <div class="px-2 my-2 align-middle">
             <p style="white-space: pre-wrap;">{{ item.description }}</p>
           </div>
         </template>
-        <template v-slot:item.tags="{ item }">
+        <template v-if="!$vuetify.breakpoint.xs" v-slot:item.tags="{ item }">
           <div class="mr-3">
-            <v-btn
+            <v-btn v-bind="size"
               v-for="(tag, i) in item.tags"
               :key="`${i}-${tag}`"
               class="mr-1"
@@ -226,15 +227,15 @@
         </template>
 
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="confirmDeleteItem(item)">
+          <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
             mdi-delete
           </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
+          <v-btn v-bind="size" color="primary" @click="initialize">Reset</v-btn>
         </template>
       </v-data-table>
       <!-- <confirm-delete
@@ -395,6 +396,12 @@ export default {
     },
     simpleStringArrayTags() {
       return this.tags.map((tag) => tag.text)
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
 

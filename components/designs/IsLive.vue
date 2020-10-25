@@ -1,5 +1,5 @@
 <template>
-  <v-btn
+  <v-btn v-bind="size"
     :loading="loadingSubmit"
     class="ma-0 is-live pl-0 pr-3"
     :color="getColor"
@@ -12,7 +12,7 @@
     "
   >
     <v-avatar left class="avatar-is-live">
-      <v-icon>{{ getIcon }}</v-icon>
+      <v-icon v-bind="size">{{ getIcon }}</v-icon>
     </v-avatar>
     {{
       item.is_live === true
@@ -54,6 +54,12 @@ export default {
     getIcon() {
       if (this.item.is_live === false) return 'lens'
       else return 'mdi-checkbox-marked-circle'
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   methods: {

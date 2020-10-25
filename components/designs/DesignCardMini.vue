@@ -39,6 +39,12 @@ export default {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),

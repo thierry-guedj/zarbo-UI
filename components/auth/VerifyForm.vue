@@ -43,8 +43,8 @@
           </div>
           <v-spacer class="mb-3" />
           <div class="text-center">
-      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
-      </div>
+            <v-btn v-bind="size" @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+          </div>
         </v-alert>
       </div>
     </v-card-text>
@@ -72,6 +72,14 @@ export default {
     modalClosed: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   methods: {

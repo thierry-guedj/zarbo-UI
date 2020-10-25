@@ -37,7 +37,7 @@
       >{{ $t('contact.emailSent') }}</v-alert
     >
     <div v-if="this.$v.form.$model.successful" class="text-center">
-      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
     </div>
     <div v-if="!this.$v.form.$model.successful">
       <v-text-field
@@ -75,14 +75,14 @@
         @blur="$v.form.message.$touch()"
       ></v-textarea>
       <v-spacer class="mb-3" />
-      <v-btn
+      <v-btn v-bind="size"
         class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
         :type="$t('contact.submit')"
         >{{ $t('contact.submit') }}</v-btn
       >
-      <v-btn @click="hideModal">{{ $t('contact.cancel') }}</v-btn>
+      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.cancel') }}</v-btn>
     </div>
   </v-form>
 </template>
@@ -177,6 +177,12 @@ export default {
       !this.$v.form.message.maxLen &&
         errors.push(this.$i18n.t('validation.messageMaxLength'))
       return errors
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   watch: {

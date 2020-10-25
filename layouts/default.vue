@@ -13,7 +13,7 @@
         class="nav-drawer mt-16 hidden-sm-and-up"
         app
       >
-        <v-list>
+        <v-list class="drawerList">
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
@@ -72,7 +72,7 @@
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
-                  $t('navigationDrawer.profile')
+                  $t('navigationDrawer.yourProfile')
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -92,7 +92,9 @@
               <v-icon>mail</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{ $t('navigationDrawer.contact') }}</v-list-item-title>
+              <v-list-item-title>{{
+                $t('navigationDrawer.contact')
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{ name: 'cgu' }" router exact>
@@ -100,7 +102,9 @@
               <v-icon>policy</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{ $t('navigationDrawer.cgu') }}</v-list-item-title>
+              <v-list-item-title>{{
+                $t('navigationDrawer.cgu')
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{ name: 'privacy.policy' }" router exact>
@@ -129,11 +133,12 @@
         app
       >
         <nuxt-link :to="localePath({ name: 'index' })"
-          ><v-btn text class="mr-2 ml-3"
+          ><v-btn v-bind="size" text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
         <nuxt-link :to="localePath({ name: 'designs.search' })"
           ><v-btn
+            v-bind="size"
             small
             color="transparent"
             :class="{ active: isRouteActive }"
@@ -142,35 +147,37 @@
           ></nuxt-link
         >
         <nuxt-link :to="localePath({ name: 'users.search' })"
-          ><v-btn small color="transparent" class="mr-2">{{
+          ><v-btn v-bind="size" small color="transparent" class="mr-2">{{
             $t('navbar.artists')
           }}</v-btn>
         </nuxt-link>
 
         <nuxt-link :to="localePath({ name: 'designs.upload' })">
-          <v-btn small class="upload-button mr-2"
-            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+          <v-btn v-bind="size" small class="upload-button mr-2"
+            ><v-icon v-bind="size" class="mr-2">mdi-cloud-upload</v-icon
             >{{ $t('navbar.upload') }}</v-btn
           >
         </nuxt-link>
         <v-spacer />
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
-          <base-button
+          <v-btn
+            v-bind="size"
             toggle-modal
             component-name="LoginForm"
             folder-name="auth"
             icon="face"
             color="transparent"
-            >{{ $t('navbar.signin') }}</base-button
+            >{{ $t('navbar.signin') }}</v-btn
           >
-          <base-button
+          <v-btn
+            v-bind="size"
             toggle-modal
             component-name="RegisterForm"
             folder-name="auth"
             icon="brush"
             color="transparent"
-            >{{ $t('navbar.signup') }}</base-button
+            >{{ $t('navbar.signup') }}</v-btn
           >
         </template>
         <!-- End Before Login -->
@@ -188,9 +195,9 @@
           <!-- dropdown menu -->
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
-              <!-- <v-btn text slot="activator"> -->
-              <v-btn text v-on="on">
-                <v-icon left>expand_more</v-icon>
+              <!-- <v-btn v-bind="size" text slot="activator"> -->
+              <v-btn v-bind="size" text v-on="on">
+                <v-icon v-bind="size" left>expand_more</v-icon>
                 <span class="text-capitalize">{{ $auth.user.name }}</span>
               </v-btn>
             </template>
@@ -204,7 +211,7 @@
                 class="text-white"
               >
                 <v-list-item-action class="mr-2 ml-2">
-                  <v-icon>{{ link.icon }}</v-icon>
+                  <v-icon v-bind="size">{{ link.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
                   <v-list-item-title v-text="link.title" />
@@ -214,12 +221,13 @@
           </v-menu>
           <nuxt-link to=""
             ><v-btn
+              v-bind="size"
               small
               fab
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-              ><v-icon right dark class="mr-2">exit_to_app</v-icon></v-btn
+              ><v-icon v-bind="size" right dark class="mr-2">exit_to_app</v-icon></v-btn
             ></nuxt-link
           >
         </template>
@@ -253,32 +261,39 @@
             v-for="footerLink in footerLinks"
             :key="footerLink.icon"
             :to="footerLink.to"
-            ><v-btn color="white" class="footer-links my-2" text rounded>
-              <v-icon size="24px"> {{ footerLink.icon }} </v-icon
+            ><v-btn
+              v-bind="size"
+              color="white"
+              class="footer-links my-2"
+              text
+              rounded
+            >
+              <v-icon v-bind="size" size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
           <v-btn
+            v-bind="size"
             color="white"
             class="footer-links my-2"
             text
             rounded
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
+            <v-icon v-bind="size" size="24px"> mail </v-icon>{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }"
                 ><v-btn
+                  v-bind="size"
                   color="white"
                   text
                   rounded
                   class="my-2"
-                  v-bind="attrs"
                   v-on="on"
                   @click="goTo('LoginForm', 'auth')"
-                  ><v-icon size="24px"> face </v-icon>
+                  ><v-icon v-bind="size" size="24px"> face </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signin') }}</span>
@@ -293,7 +308,7 @@
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="goTo('RegisterForm', 'auth')"
-                  ><v-icon size="24px"> brush </v-icon>
+                  ><v-icon v-bind="size" size="24px"> brush </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signup') }}</span>
@@ -437,6 +452,12 @@ export default {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
     },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
   },
   mounted() {
     this.$nextTick(function () {
@@ -484,6 +505,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.drawerList {
+  margin-left: 6px;
+}
 .v-parallax__image {
   translate: none !important;
 }

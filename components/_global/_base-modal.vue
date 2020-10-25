@@ -11,7 +11,7 @@
   >
     <v-card style="max-height: 100%; max-width: 320vh; width: auto;">
       <v-card-actions class="float-md-right justify-end"
-        ><v-btn
+        ><v-btn v-bind="size"
           class="mx-2"
           fab
           dark
@@ -19,7 +19,7 @@
           color="transparent"
           @click="hideModal()"
         >
-          <v-icon dark>close</v-icon>
+          <v-icon v-bind="size" dark>close</v-icon>
         </v-btn></v-card-actions
       >
       <v-card-text>
@@ -93,6 +93,12 @@ export default {
   },
   computed: {
     ...mapGetters(['visible', 'modalComponent', 'folder', 'getStyle']),
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
 
     /* componentInstance() {
       if (!this.modalComponent) return

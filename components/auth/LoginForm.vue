@@ -75,7 +75,7 @@
           $t('login.forgotPassword')
         }}</base-link>
       </div>
-      <v-btn
+      <v-btn v-bind="size"
         class="mr-4 float-right"
         type="submit"
         :loading="loadingSubmit"
@@ -83,7 +83,7 @@
       >
         {{ $t('login.submit') }}</v-btn
       >
-      <v-btn :disabled="loadingSubmit" @click="clear">{{
+      <v-btn v-bind="size" :disabled="loadingSubmit" @click="clear">{{
         $t('login.clear')
       }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
@@ -130,6 +130,12 @@ export default {
     }
   },
   computed: {
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
     emailErrors() {
       const errors = []
       if (!this.$v.form.email.$dirty) return errors

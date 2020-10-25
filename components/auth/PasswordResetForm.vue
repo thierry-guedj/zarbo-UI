@@ -58,7 +58,7 @@
         ></v-text-field>
         <v-spacer class="mb-3" />
 
-        <v-btn
+        <v-btn v-bind="size"
           class="mr-4 float-right"
           type="submit"
           :loading="loadingSubmit"
@@ -66,7 +66,7 @@
         >
           {{ $t('passwordResetForm.reset') }}</v-btn
         >
-        <v-btn :disabled="loadingSubmit" @click="clear">{{
+        <v-btn v-bind="size" :disabled="loadingSubmit" @click="clear">{{
           $t('passwordResetForm.clear')
         }}</v-btn>
         <div class="font-14 fw-400 text-center mt-4 right">
@@ -144,6 +144,12 @@ export default {
       !this.$v.form.password_confirmation.sameAs &&
         errors.push(this.$i18n.t('validation.passwordMatch'))
       return errors
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   watch: {

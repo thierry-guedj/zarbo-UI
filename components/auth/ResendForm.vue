@@ -44,7 +44,7 @@
       {{ $t('resendForm.resentEmail') }}
       <v-spacer class="mb-3" />
       <div class="text-center">
-      <v-btn @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
       </div></v-alert
     >
     <div v-if="!this.$v.form.$model.successful">
@@ -57,14 +57,14 @@
         @blur="$v.form.email.$touch()"
       ></v-text-field>
       <v-spacer class="mb-3" />
-      <v-btn
+      <v-btn v-bind="size"
         class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
         type="submit"
         >{{ $t('resendForm.submit') }}</v-btn
       >
-      <v-btn :disabled="loadingSubmit" @click="clear">{{
+      <v-btn v-bind="size" :disabled="loadingSubmit" @click="clear">{{
         $t('resendForm.clear')
       }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
@@ -116,6 +116,12 @@ export default {
       !this.$v.form.email.required &&
         errors.push(this.$i18n.t('validation.emailRequired'))
       return errors
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   watch: {

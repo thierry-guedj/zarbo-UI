@@ -13,8 +13,8 @@
               <!--        <span class="material-icons" style="color:red">
 thumb_down
 </span> -->
-              <!-- <v-btn class="mx-2" dark flat medium> -->
-              <v-icon color="red darken-4" dark class="heart"
+              <!-- <v-btn v-bind="size" class="mx-2" dark flat medium> -->
+              <v-icon v-bind="size" color="red darken-4" dark class="heart"
                 >not_interested</v-icon
               >
               {{ likes }} <span v-if="likes > 1"> Likes</span
@@ -25,8 +25,8 @@ thumb_down
               <!--       <span class="material-icons" style="color:blue">
 thumb_up
 </span> -->
-              <!-- <v-btn class="mx-2" dark flat medium> -->
-              <v-icon color="red darken-4" dark class="heart">favorite</v-icon>
+              <!-- <v-btn v-bind="size" class="mx-2" dark flat medium> -->
+              <v-icon v-bind="size" color="red darken-4" dark class="heart">favorite</v-icon>
               {{ likes }} <span v-if="likes > 1"> Likes</span
               ><span v-else> Like</span>
               <!-- </v-btn> -->
@@ -71,6 +71,12 @@ export default {
     },
     userLikes() {
       return this.current_user_likes
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
   mounted() {

@@ -39,7 +39,7 @@
                   v-on="on"
                   @click.stop="$emit('lightbox')"
                 >
-                  <v-icon dark>play_arrow</v-icon>
+                  <v-icon v-bind="size" dark>play_arrow</v-icon>
                 </v-btn>
                 <!--  <a
               class="portfolio-item__link image"
@@ -72,7 +72,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon dark>zoom_out_map</v-icon>
+                    <v-icon v-bind="size" dark>zoom_out_map</v-icon>
                   </v-btn>
                 </nuxt-link>
               </template>
@@ -84,12 +84,12 @@
           <v-spacer></v-spacer>
 
           <span class="mr-2"
-            ><v-icon class="like mr-1 text-orange lighten-1">mdi-heart</v-icon
+            ><v-icon v-bind="size" class="like mr-1 text-orange lighten-1">mdi-heart</v-icon
             >{{ design.likes_count }}</span
           >
 
           <span class="mr-2"
-            ><v-icon class="mr-1">mdi-comment</v-icon
+            ><v-icon v-bind="size" class="mr-1">mdi-comment</v-icon
             >{{ design.comments_count }}</span
           >
         </v-card-actions>
@@ -155,6 +155,12 @@ export default {
     designTitle() {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
     /*  computedDate() {
       const date = this.design.created_at_dates.created_at

@@ -35,8 +35,8 @@
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
-          <v-btn size="large" color="orange darken-3" @click="goToDesigns()"
-            ><v-icon class="mr-2">flip_to_back</v-icon
+          <v-btn v-bind="size" size="large" color="orange darken-3" @click="goToDesigns()"
+            ><v-icon v-bind="size" class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
@@ -74,8 +74,8 @@
               class="pl-4 pr-0"
             ></v-textarea>
             <div class="mt-2 text-right pr-0">
-              <v-btn type="submit" size="sm">
-                <v-icon class="mr-2">insert_comment</v-icon
+              <v-btn v-bind="size" type="submit" size="sm">
+                <v-icon v-bind="size" class="mr-2">insert_comment</v-icon
                 >{{ $t('comments.postComment') }}
               </v-btn>
             </div>
@@ -384,6 +384,12 @@ export default {
     designTitle() {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
+    },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
     },
   },
 

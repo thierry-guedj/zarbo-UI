@@ -13,8 +13,8 @@
           </slot>
         </v-col>
         <v-col class="shrink d-flex justify-end" cols="12" md="3">
-          <v-btn class="ma-2" @click="accept">{{ buttonTextAccept }}</v-btn>
-          <v-btn class="ma-2" text @click="deny">{{ buttonTextDeny }}</v-btn>
+          <v-btn v-bind="size" class="ma-2" @click="accept">{{ buttonTextAccept }}</v-btn>
+          <v-btn v-bind="size" class="ma-2" text @click="deny">{{ buttonTextDeny }}</v-btn>
         </v-col>
       </v-row>
     </v-alert>
@@ -58,6 +58,12 @@ export default {
     containerPosition() {
       return `cookie--${this.position}`
     },
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
   },
   created() {
     if (!this.getGDPR() === true) {
@@ -98,5 +104,4 @@ export default {
     &:hover
       color: #ffffff
       text-decoration: none
-
 </style>
