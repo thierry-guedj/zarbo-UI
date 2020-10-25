@@ -1,8 +1,9 @@
 <template>
   <section>
-    <v-btn v-bind="size"
+    <v-btn
       v-show="fab"
       v-scroll="onScroll"
+      v-bind="size"
       fab
       dark
       fixed
@@ -163,12 +164,23 @@
         modifications ayant été apportées depuis leur mise en ligne.
       </p>
 
-      <p><a href="https://zarbo.fr">https://zarbo.fr</a> est une galerie d'art en ligne. <br />
-        L'Utilisateur peut devenir Membre en s'enregistrant grâce au formulaire dédié. <br />
-        <a href="https://zarbo.fr">https://zarbo.fr</a> est un site privé. L'Utilisateur doit être en possession d'un Code d'Invitation qui lui sera communiqué s'il en fait la demande et si sa demande correspond à l'esprit du site.<br />
-        Les Membres ont la possibilité de publier des photos de leurs travaux artistiques ( dessin, peinture, sculpture etc ). <br />
-        Les Membres ont à leur disposition, un espace privé et sécurisé grâce auquel ils peuvent modifier leurs informations personnelles et les informations concernant leurs oeuvres publiées sur le site.<br />
-        Les Utilisateurs non Membres ont la possibilité de consulter les oeuvres des Artistes Membres mais n'ont pas accès à un espace privé et sécurisé. Ils n'ont donc pas la possibilité de publier d'oeuvres.<br />
+      <p>
+        <a href="https://zarbo.fr">https://zarbo.fr</a> est une galerie d'art en
+        ligne. <br />
+        L'Utilisateur peut devenir Membre en s'enregistrant grâce au formulaire
+        dédié. <br />
+        <a href="https://zarbo.fr">https://zarbo.fr</a> est un site privé.
+        L'Utilisateur doit être en possession d'un Code d'Invitation qui lui
+        sera communiqué s'il en fait la demande et si sa demande correspond à
+        l'esprit du site.<br />
+        Les Membres ont la possibilité de publier des photos de leurs travaux
+        artistiques ( dessin, peinture, sculpture etc ). <br />
+        Les Membres ont à leur disposition, un espace privé et sécurisé grâce
+        auquel ils peuvent modifier leurs informations personnelles et les
+        informations concernant leurs oeuvres publiées sur le site.<br />
+        Les Utilisateurs non Membres ont la possibilité de consulter les oeuvres
+        des Artistes Membres mais n'ont pas accès à un espace privé et sécurisé.
+        Ils n'ont donc pas la possibilité de publier d'oeuvres.<br />
       </p>
 
       <h2>4. Limitations contractuelles sur les données techniques.</h2>

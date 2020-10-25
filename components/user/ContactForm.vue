@@ -37,7 +37,9 @@
       >{{ $t('contact.emailSent') }}</v-alert
     >
     <div v-if="this.$v.form.$model.successful" class="text-center">
-      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+      <v-btn v-bind="size" @click="hideModal">{{
+        $t('contact.closeWindow')
+      }}</v-btn>
     </div>
     <div v-if="!this.$v.form.$model.successful">
       <v-text-field
@@ -75,7 +77,8 @@
         @blur="$v.form.message.$touch()"
       ></v-textarea>
       <v-spacer class="mb-3" />
-      <v-btn v-bind="size"
+      <v-btn
+        v-bind="size"
         class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"

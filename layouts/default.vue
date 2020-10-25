@@ -281,7 +281,6 @@
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }"
                 ><v-btn
-                  v-bind="size"
                   color="white"
                   text
                   rounded

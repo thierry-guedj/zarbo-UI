@@ -28,7 +28,14 @@
         {{ comment.created_at_dates.created_at_human }}
         <span v-if="$auth.loggedIn && $auth.user.id == comment.user.id">
           <a class="text-danger" @click.prevent="destroyComment">
-            <v-btn v-bind="size" class="mx-2" icon dark small color="blue-grey darken-1">
+            <v-btn
+              v-bind="size"
+              class="mx-2"
+              icon
+              dark
+              small
+              color="blue-grey darken-1"
+            >
               <v-icon v-bind="size" dark>delete_forever</v-icon>
             </v-btn>
           </a>

@@ -13,8 +13,12 @@
           </slot>
         </v-col>
         <v-col class="shrink d-flex justify-end" cols="12" md="3">
-          <v-btn v-bind="size" class="ma-2" @click="accept">{{ buttonTextAccept }}</v-btn>
-          <v-btn v-bind="size" class="ma-2" text @click="deny">{{ buttonTextDeny }}</v-btn>
+          <v-btn v-bind="size" class="ma-2" @click="accept">{{
+            buttonTextAccept
+          }}</v-btn>
+          <v-btn v-bind="size" class="ma-2" text @click="deny">{{
+            buttonTextDeny
+          }}</v-btn>
         </v-col>
       </v-row>
     </v-alert>

@@ -75,7 +75,8 @@
           $t('login.forgotPassword')
         }}</base-link>
       </div>
-      <v-btn v-bind="size"
+      <v-btn
+        v-bind="size"
         class="mr-4 float-right"
         type="submit"
         :loading="loadingSubmit"

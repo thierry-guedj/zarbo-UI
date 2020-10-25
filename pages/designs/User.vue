@@ -4,9 +4,10 @@
       <Circle8></Circle8>
     </div>
     <div v-else class="pt-6 pl-6">
-      <v-btn v-bind="size"
+      <v-btn
         v-show="fab"
         v-scroll="onScroll"
+        v-bind="size"
         fab
         dark
         fixed
@@ -38,7 +39,8 @@
               <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
-              <p class="about text-white" style="white-space: pre-wrap;">{{ user.about }}
+              <p class="about text-white" style="white-space: pre-wrap">
+                {{ user.about }}
               </p>
 
               <v-container fluid class="search-control">
@@ -82,7 +84,8 @@
                         @input="fetchData"
                       >
                         <template v-slot:append>
-                          <v-btn v-bind="size"
+                          <v-btn
+                            v-bind="size"
                             :disabled="searching"
                             class="searchBtn"
                             height="auto"
@@ -113,7 +116,7 @@
             <Circle8></Circle8>
           </div>
           <div v-else class="pl-0 pb-6 pr-0">
-            <template v-if="(!designs.length)" class="pb-6 text-center">
+            <template v-if="!designs.length" class="pb-6 text-center">
               <div class="mx-auto">
                 <v-alert
                   border="right"
