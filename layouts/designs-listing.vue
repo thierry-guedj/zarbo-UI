@@ -23,7 +23,7 @@
             exact
           >
             <v-list-item-action>
-              <v-icon v-bind="size">{{ item.icon }}</v-icon>
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
@@ -32,7 +32,7 @@
           <template v-if="!$auth.loggedIn" class="hidden-sm-and-up">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
-                <v-icon v-bind="size">face</v-icon>
+                <v-icon>face</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -47,7 +47,7 @@
               @click.stop="goTo('RegisterForm', 'auth')"
             >
               <v-list-item-action>
-                <v-icon v-bind="size">brush</v-icon>
+                <v-icon>brush</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -59,7 +59,7 @@
           <template v-else>
             <v-list-item :to="{ name: 'settings.designs' }" router exact>
               <v-list-item-action>
-                <v-icon v-bind="size">looks</v-icon>
+                <v-icon>looks</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -69,7 +69,7 @@
             </v-list-item>
             <v-list-item :to="{ name: 'settings.profile' }" router exact>
               <v-list-item-action>
-                <v-icon v-bind="size">face</v-icon>
+                <v-icon>face</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -79,7 +79,7 @@
             </v-list-item>
             <v-list-item to="" router exact @click.stop="logout()">
               <v-list-item-action>
-                <v-icon v-bind="size">exit_to_app</v-icon>
+                <v-icon>exit_to_app</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -90,7 +90,7 @@
           </template>
           <v-list-item router exact @click="goTo('ContactForm', 'user')">
             <v-list-item-action>
-              <v-icon v-bind="size">mail</v-icon>
+              <v-icon>mail</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{
@@ -100,7 +100,7 @@
           </v-list-item>
           <v-list-item :to="{ name: 'cgu' }" router exact>
             <v-list-item-action>
-              <v-icon v-bind="size">policy</v-icon>
+              <v-icon>policy</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{
@@ -110,7 +110,7 @@
           </v-list-item>
           <v-list-item :to="{ name: 'privacy.policy' }" router exact>
             <v-list-item-action>
-              <v-icon v-bind="size">mdi-security</v-icon>
+              <v-icon>mdi-security</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>{{

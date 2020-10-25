@@ -221,9 +221,7 @@
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-              ><v-icon right dark class="mr-2"
-                >exit_to_app</v-icon
-              ></v-btn
+              ><v-icon right dark class="mr-2">exit_to_app</v-icon></v-btn
             ></nuxt-link
           >
         </template>
@@ -288,6 +286,7 @@
                   text
                   rounded
                   class="my-2"
+                  v-bind="attrs"
                   v-on="on"
                   @click="goTo('LoginForm', 'auth')"
                   ><v-icon v-bind="size" size="24px"> face </v-icon>
@@ -538,9 +537,9 @@ footer {
   text-decoration: none;
   color: whitesmoke;
 }
-.theme--dark.v-list {
+/* .theme--dark.v-list {
   background: #0f1219;
-}
+} */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
 
 .text-parallax {
