@@ -206,7 +206,7 @@
                 class="text-white"
               >
                 <v-list-item-action class="mr-2 ml-2">
-                  <v-icon v-bind="size">{{ link.icon }}</v-icon>
+                  <v-icon>{{ link.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
                   <v-list-item-title v-text="link.title" />
@@ -216,13 +216,12 @@
           </v-menu>
           <nuxt-link to=""
             ><v-btn
-              v-bind="size"
               small
               fab
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-              ><v-icon v-bind="size" right dark class="mr-2"
+              ><v-icon right dark class="mr-2"
                 >exit_to_app</v-icon
               ></v-btn
             ></nuxt-link

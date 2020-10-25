@@ -1,5 +1,6 @@
 <template>
-  <v-btn v-bind="size"
+  <v-btn
+    v-bind="size"
     :loading="loadingSubmit"
     class="ma-0 is-live pl-0 pr-3"
     :color="getColor"

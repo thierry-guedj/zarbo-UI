@@ -1,8 +1,9 @@
 <template>
   <section>
-    <v-btn v-bind="size"
+    <v-btn
       v-show="fab"
       v-scroll="onScroll"
+      v-bind="size"
       fab
       dark
       fixed
@@ -53,11 +54,12 @@
             </p>
 
             <v-spacer class="mb-3" />
-            <v-btn v-bind="size"
+            <v-btn
+              v-bind="size"
               title="Upload"
               type="button"
               data-action="upload"
-              style="opacity: 1;"
+              style="opacity: 1"
               :loading="loadingSubmit"
               :disabled="disabledButton"
               @click="submit"
@@ -141,19 +143,21 @@
                     <has-error :form="form" field="about"></has-error>
                     <div class="text-right">
                       <v-spacer class="mb-3" />
-                      <v-btn v-bind="size"
+                      <v-btn
+                        v-bind="size"
                         class="ml-2 float-right"
                         title="Upload"
                         type="button"
                         data-action="upload"
-                        style="opacity: 1;"
+                        style="opacity: 1"
                         color="#006064"
                         :loading="loadingSubmit"
                         @click="update"
                         >{{ $t('profile.updateProfile') }}</v-btn
                       >
 
-                      <v-btn v-bind="size"
+                      <v-btn
+                        v-bind="size"
                         :disabled="upload"
                         color="orange darken-3"
                         @click="goToUser($auth.user.id)"

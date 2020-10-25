@@ -1,17 +1,16 @@
 <template>
-  <nuxt-link :to="to">
-    <v-btn
-      small
-      :class="buttonClass"
-      :color="color"
-      :size="size"
-      :component-name="componentName"
-      :folder-name="folderName"
-      @click.native="goTo()"
-      ><v-icon v-if="icon" right dark :class="iconClass">{{ icon }}</v-icon
-      ><slot
-    /></v-btn>
-  </nuxt-link>
+  <v-btn
+    v-bind="size"
+    :class="buttonClass"
+    :color="color"
+    :component-name="componentName"
+    :folder-name="folderName"
+    @click.native="goTo()"
+    ><v-icon v-if="icon" v-bind="size" right dark :class="iconClass">{{
+      icon
+    }}</v-icon
+    ><slot
+  /></v-btn>
 </template>
 
 <script>
@@ -19,14 +18,6 @@ import { mapActions } from 'vuex'
 export default {
   name: 'BaseButton',
   props: {
-    needsAuth: {
-      type: Boolean,
-      default: false,
-    },
-    to: {
-      type: String,
-      default: '',
-    },
     folderName: {
       type: String,
       default: null,
@@ -34,10 +25,6 @@ export default {
     componentName: {
       type: String,
       default: null,
-    },
-    redirect: {
-      type: Boolean,
-      default: false,
     },
     color: {
       type: String,
@@ -55,18 +42,17 @@ export default {
       type: String,
       default: 'mr-2',
     },
-    size: {
-      type: String,
-      default: 'small',
-    },
   },
   data() {
-    return {
-      needsRedirect: ['password.reset', 'verify'],
-      redirectPage: false,
-
-      linkTo: '',
-    }
+    return {}
+  },
+  computed: {
+    size() {
+      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
+        this.$vuetify.breakpoint.name
+      ]
+      return size ? { [size]: true } : {}
+    },
   },
   methods: {
     ...mapActions(['showModal', 'hideModal']),

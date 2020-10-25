@@ -44,7 +44,9 @@
       {{ $t('resendForm.resentEmail') }}
       <v-spacer class="mb-3" />
       <div class="text-center">
-      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+        <v-btn v-bind="size" @click="hideModal">{{
+          $t('contact.closeWindow')
+        }}</v-btn>
       </div></v-alert
     >
     <div v-if="!this.$v.form.$model.successful">
@@ -57,7 +59,8 @@
         @blur="$v.form.email.$touch()"
       ></v-text-field>
       <v-spacer class="mb-3" />
-      <v-btn v-bind="size"
+      <v-btn
+        v-bind="size"
         class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"

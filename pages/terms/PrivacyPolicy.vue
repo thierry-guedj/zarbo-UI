@@ -1,8 +1,9 @@
 <template>
   <section>
-    <v-btn v-bind="size"
+    <v-btn
       v-show="fab"
       v-scroll="onScroll"
+      v-bind="size"
       fab
       dark
       fixed
@@ -465,7 +466,7 @@
         <a href="https://zarbo.fr">https://zarbo.fr</a>, et fournir d’autres
         services relatifs à l’utilisation de celui-ci et d’Internet.
       </p>
-     <!--  &nbsp;
+      <!--  &nbsp;
       <p></p>
       <h2>4. Droit applicable et attribution de juridiction.</h2>
       <p>

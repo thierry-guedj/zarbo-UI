@@ -84,7 +84,8 @@
           <v-spacer></v-spacer>
 
           <span class="mr-2"
-            ><v-icon v-bind="size" class="like mr-1 text-orange lighten-1">mdi-heart</v-icon
+            ><v-icon v-bind="size" class="like mr-1 text-orange lighten-1"
+              >mdi-heart</v-icon
             >{{ design.likes_count }}</span
           >
 

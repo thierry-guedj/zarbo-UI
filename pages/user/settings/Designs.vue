@@ -23,7 +23,8 @@
               </nuxt-link>
             </template>
             <template v-else>
-              <v-btn v-bind="size"
+              <v-btn
+                v-bind="size"
                 toggle-modal
                 component-name="LoginForm"
                 folder-name="auth"
@@ -52,7 +53,7 @@
         :items="designs"
         sort-by="calories"
         class="elevation-1"
-         mobile-breakpoint="0"
+        mobile-breakpoint="0"
         :search="search"
         :loading="loading"
       >
@@ -157,7 +158,9 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn v-bind="size" @click="close">{{ $t('editDesign.cancel') }}</v-btn>
+                  <v-btn v-bind="size" @click="close">{{
+                    $t('editDesign.cancel')
+                  }}</v-btn>
                   <!-- <v-btn v-bind="size"
                     color="blue darken-1"
                     :loading="loadingSubmit"
@@ -166,7 +169,8 @@
                     @click="save"
                     >{{ $t('editDesign.save') }}</v-btn
                   > -->
-                  <v-btn v-bind="size"
+                  <v-btn
+                    v-bind="size"
                     :loading="loadingSubmit"
                     :disabled="$v.form.$invalid"
                     @click="save"
@@ -191,18 +195,19 @@
             </nuxt-link>
           </div>
         </template>
-        <template v-if="!$vuetify.breakpoint.xs" v-slot:item.description="{ item }">
+        <template v-slot:item.description="{ item }">
           <div class="px-2 my-2 align-middle">
-            <p style="white-space: pre-wrap;">{{ item.description }}</p>
+            <p style="white-space: pre-wrap">{{ item.description }}</p>
           </div>
         </template>
-        <template v-if="!$vuetify.breakpoint.xs" v-slot:item.tags="{ item }">
+        <template v-slot:item.tags="{ item }">
           <div class="mr-3">
-            <v-btn v-bind="size"
+            <v-btn
               v-for="(tag, i) in item.tags"
               :key="`${i}-${tag}`"
+              v-bind="size"
               class="mr-1"
-              style="align-self: center;"
+              style="align-self: center"
               x-small
               color="#662200"
               @click="goToTag(`${item.normalized[i]}`)"
@@ -291,7 +296,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'title',
-          width: '15%'
+          width: '15%',
         },
         {
           text: this.$i18n.t('settingsDesigns.description'),

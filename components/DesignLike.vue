@@ -26,7 +26,9 @@ thumb_down
 thumb_up
 </span> -->
               <!-- <v-btn v-bind="size" class="mx-2" dark flat medium> -->
-              <v-icon v-bind="size" color="red darken-4" dark class="heart">favorite</v-icon>
+              <v-icon v-bind="size" color="red darken-4" dark class="heart"
+                >favorite</v-icon
+              >
               {{ likes }} <span v-if="likes > 1"> Likes</span
               ><span v-else> Like</span>
               <!-- </v-btn> -->

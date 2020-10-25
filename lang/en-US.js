@@ -28,7 +28,6 @@ export default {
     contact: 'Contact',
     privacyPolicy: 'Privacy Policy',
     cgu: 'Terms and conditions',
-
   },
   menuAccount: {
     yourDesigns: 'Your artwork',

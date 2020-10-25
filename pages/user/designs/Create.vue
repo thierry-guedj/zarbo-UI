@@ -1,8 +1,9 @@
 <template>
   <section>
-    <v-btn v-bind="size"
+    <v-btn
       v-show="fab"
       v-scroll="onScroll"
+      v-bind="size"
       fab
       dark
       fixed
@@ -179,12 +180,13 @@
                 <v-btn v-bind="size" :disabled="uploading" @click="clear">{{
                   $t('create.clear')
                 }}</v-btn>
-                <v-btn v-bind="size"
+                <v-btn
+                  v-bind="size"
                   class="slim-btn2 slim-btn-upload2"
                   title="Upload"
                   type="button"
                   data-action="upload"
-                  style="opacity: 1;"
+                  style="opacity: 1"
                   :loading="loadingSubmit"
                   :disabled="!uploadButton"
                   @click="submit"

@@ -1,8 +1,9 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-btn v-bind="size"
+    <v-btn
       v-show="fab"
       v-scroll="onScroll"
+      v-bind="size"
       fab
       dark
       fixed
@@ -20,7 +21,7 @@
       ></v-container> -->
 
       <home-tabs></home-tabs>
-      <div class="text-center" style="max-width: '95%';">
+      <div class="text-center" style="max-width: '95%'">
         <!-- Modal  -->
         <!-- <keep-alive> -->
         <base-modal

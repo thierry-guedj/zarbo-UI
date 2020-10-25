@@ -35,7 +35,11 @@
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
-          <v-btn v-bind="size" size="large" color="orange darken-3" @click="goToDesigns()"
+          <v-btn
+            v-bind="size"
+            size="large"
+            color="orange darken-3"
+            @click="goToDesigns()"
             ><v-icon v-bind="size" class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >

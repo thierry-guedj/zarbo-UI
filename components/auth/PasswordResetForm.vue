@@ -58,7 +58,8 @@
         ></v-text-field>
         <v-spacer class="mb-3" />
 
-        <v-btn v-bind="size"
+        <v-btn
+          v-bind="size"
           class="mr-4 float-right"
           type="submit"
           :loading="loadingSubmit"

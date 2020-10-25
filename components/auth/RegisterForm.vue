@@ -50,7 +50,9 @@
       >{{ $t('register.emailSent') }}
       <v-spacer class="mb-3" />
       <div class="text-center">
-      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.closeWindow') }}</v-btn>
+        <v-btn v-bind="size" @click="hideModal">{{
+          $t('contact.closeWindow')
+        }}</v-btn>
       </div></v-alert
     >
 
@@ -109,7 +111,8 @@
         @blur="$v.form.password_confirmation.$touch()"
       ></v-text-field>
       <v-spacer class="mb-3" />
-      <v-btn v-bind="size"
+      <v-btn
+        v-bind="size"
         class="mr-4 float-right"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
