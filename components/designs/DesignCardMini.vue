@@ -40,7 +40,7 @@ export default {
       else return this.design.title
     },
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
         this.$vuetify.breakpoint.name
       ]
       return size ? { [size]: true } : {}

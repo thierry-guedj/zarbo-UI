@@ -2,19 +2,63 @@
   <section>
     <v-app dark>
       <div id="grad1" class="line"></div>
+      <v-toolbar id="nav"
+        class="bg-transparent line"
+        fixed
+        elevate-on-scroll
+        app>
+        <!--      <v-toolbar-side-icon></v-toolbar-side-icon> -->
+        <v-app-bar-nav-icon
+          class="grey--text"
+          @click="drawer = !drawer"
+        ></v-app-bar-nav-icon>
+        <v-toolbar-title class="grey--text">
+          <span class="font-weight-light">Site</span>
+          <span>Title</span>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
 
-      <v-navigation-drawer
-        v-if="$vuetify.breakpoint.xs"
+        <!-- dropdown menu -->
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <!-- <v-btn text slot="activator"> -->
+            <v-btn text v-on="on">
+              <v-icon left>expand_more</v-icon>
+              <span>Menu</span>
+            </v-btn>
+          </template>
+          <v-list>
+            <!-- v-list-tile is changed to v-list-item -->
+            <v-list-item
+              v-for="link in menuAccount"
+              :key="link.text"
+              router
+              :to="link.route"
+            >
+              <v-list-item-title>{{ link.text }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-btn text>
+          <span>Sign Out</span>
+          <v-icon right>exit_to_app</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <v-parallax :src="backgroundUrl" height="500">
+        <div class="mt-18 text-center text-parallax mb-0">
+          <h1 class="whitesmoke--text text-left text--lighten-2 mb-0">Zarbo,</h1>
+        </div>
+      </v-parallax>
+
+      <!-- <v-navigation-drawer
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
-        width="100%"
-        height="100%"
-        bottom
-        class="nav-drawer mt-16 hidden-sm-and-up"
+        class="nav-drawer mt-16"
         app
       >
-        <v-list class="drawerList">
+        <v-list>
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
@@ -23,16 +67,16 @@
             exact
           >
             <v-list-item-action>
-              <v-icon v-bind="size">{{ item.icon }}</v-icon>
+              <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <template v-if="!$auth.loggedIn" class="hidden-sm-and-up">
+          <template v-if="!$auth.loggedIn">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
-                <v-icon v-bind="size">face</v-icon>
+                <v-icon>face</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -47,7 +91,7 @@
               @click.stop="goTo('RegisterForm', 'auth')"
             >
               <v-list-item-action>
-                <v-icon v-bind="size">brush</v-icon>
+                <v-icon>brush</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -59,7 +103,7 @@
           <template v-else>
             <v-list-item :to="{ name: 'settings.designs' }" router exact>
               <v-list-item-action>
-                <v-icon v-bind="size">looks</v-icon>
+                <v-icon>looks</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -67,19 +111,9 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'settings.profile' }" router exact>
-              <v-list-item-action>
-                <v-icon v-bind="size">face</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  $t('navigationDrawer.yourProfile')
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
             <v-list-item to="" router exact @click.stop="logout()">
               <v-list-item-action>
-                <v-icon v-bind="size">exit_to_app</v-icon>
+                <v-icon>exit_to_app</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title>{{
@@ -88,147 +122,21 @@
               </v-list-item-content>
             </v-list-item>
           </template>
-          <v-list-item router exact @click="goTo('ContactForm', 'user')">
-            <v-list-item-action>
-              <v-icon v-bind="size">mail</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{ $t('navigationDrawer.contact') }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :to="{ name: 'cgu' }" router exact>
-            <v-list-item-action>
-              <v-icon v-bind="size">policy</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{ $t('navigationDrawer.cgu') }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item :to="{ name: 'privacy.policy' }" router exact>
-            <v-list-item-action>
-              <v-icon v-bind="size">mdi-security</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>{{
-                $t('navigationDrawer.privacyPolicy')
-              }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
         </v-list>
-      </v-navigation-drawer>
-      <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.xs"
-        @click.stop="drawer = !drawer"
-      />
-      <v-app-bar
-        v-if="!$vuetify.breakpoint.xs"
-        id="nav"
-        class="bg-transparent line"
-        :clipped-left="!clipped"
-        fixed
-        elevate-on-scroll
-        app
-      >
-        <nuxt-link :to="localePath({ name: 'index' })"
-          ><v-btn v-bind="size" text class="mr-2 ml-3"
-            ><v-toolbar-title class="text-white" v-text="title" /></v-btn
-        ></nuxt-link>
-        <nuxt-link :to="localePath({ name: 'designs.search' })"
-          ><v-btn v-bind="size"
-            small
-            color="transparent"
-            :class="{ active: isRouteActive }"
-            exact-active-class="active"
-            >{{ $t('navbar.artwork') }}</v-btn
-          ></nuxt-link
-        >
-        <nuxt-link :to="localePath({ name: 'users.search' })"
-          ><v-btn v-bind="size" small color="transparent" class="mr-2">{{
-            $t('navbar.artists')
-          }}</v-btn>
-        </nuxt-link>
+      </v-navigation-drawer> -->
 
-        <nuxt-link :to="localePath({ name: 'designs.upload' })">
-          <v-btn v-bind="size" small class="upload-button mr-2"
-            ><v-icon v-bind="size" class="mr-2">mdi-cloud-upload</v-icon
-            >{{ $t('navbar.upload') }}</v-btn
-          >
-        </nuxt-link>
-        <v-spacer />
-        <!-- Before Login -->
-        <template v-if="!$auth.loggedIn">
-           <v-btn
-            v-bind="size"
-            color="transparent"
-            @click="goTo('LoginForm', 'auth')"
-            ><v-icon v-bind="size" class="mr-2">face</v-icon
-            >{{ $t('navbar.signin') }}</v-btn
-          >
-          <v-btn
-            v-bind="size"
-            color="transparent"
-            @click="goTo('RegisterForm', 'auth')"
-            ><v-icon v-bind="size" class="mr-2">brush</v-icon>
-            {{ $t('navbar.signup') }}</v-btn
-          >
-        </template>
-        <!-- End Before Login -->
-
-        <!-- After Login -->
-        <template v-else>
-          <nuxt-link :to="localePath({ name: 'settings.profile' })"
-            ><avatar
-              :username="$auth.user.name"
-              :src="$auth.user.avatars.medium"
-              class="ml-3 mr-2"
-              :size="50"
-            ></avatar>
-          </nuxt-link>
-          <!-- dropdown menu -->
-          <v-menu offset-y>
-            <template v-slot:activator="{ on }">
-              <!-- <v-btn v-bind="size" text slot="activator"> -->
-              <v-btn v-bind="size" text v-on="on">
-                <v-icon v-bind="size" left>expand_more</v-icon>
-                <span class="text-capitalize">{{ $auth.user.name }}</span>
-              </v-btn>
-            </template>
-            <v-list>
-              <!-- v-list-tile is changed to v-list-item -->
-              <v-list-item
-                v-for="link in menuAccount"
-                :key="link.title"
-                router
-                :to="link.route"
-                class="text-white"
-              >
-                <v-list-item-action class="mr-2 ml-2">
-                  <v-icon v-bind="size">{{ link.icon }}</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title v-text="link.title" />
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-          <nuxt-link to=""
-            ><v-btn v-bind="size"
-              small
-              fab
-              color="transparent"
-              class="mr-2 ml-3"
-              @click.prevent="logout"
-              ><v-icon v-bind="size" right dark class="mr-2">exit_to_app</v-icon></v-btn
-            ></nuxt-link
-          >
-        </template>
-        <!-- End After Login -->
-      </v-app-bar>
+      <div class="line"></div>
       <v-main>
-        <v-container style="max-width: 100%">
+        <v-container class="main-container">
           <nuxt />
         </v-container>
       </v-main>
+      <div class="line"></div>
+      <v-parallax :src="backgroundUrl" height="600"
+        ><div class="mt-18 text-center text-parallax mb-0">
+          <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
+        </div>
+      </v-parallax>
 
       <v-footer :absolute="!fixed" app dark padless>
         <v-col class="line" cols="12"> </v-col>
@@ -237,19 +145,19 @@
             v-for="footerLink in footerLinks"
             :key="footerLink.icon"
             :to="footerLink.to"
-            ><v-btn v-bind="size" color="white" class="footer-links my-2" text rounded>
-              <v-icon v-bind="size" size="24px"> {{ footerLink.icon }} </v-icon
+            ><v-btn color="white" class="footer-links my-2" text rounded>
+              <v-icon size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
-          <v-btn v-bind="size"
+          <v-btn
             color="white"
             class="footer-links my-2"
             text
             rounded
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon v-bind="size" size="24px"> mail </v-icon>{{ $t('footer.contact') }}
+            <v-icon size="24px"> mail </v-icon>{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-tooltip top>
@@ -262,7 +170,7 @@
                   v-bind="attrs"
                   v-on="on"
                   @click="goTo('LoginForm', 'auth')"
-                  ><v-icon v-bind="size" size="24px"> face </v-icon>
+                  ><v-icon size="24px"> face </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signin') }}</span>
@@ -277,18 +185,12 @@
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="goTo('RegisterForm', 'auth')"
-                  ><v-icon v-bind="size" size="24px"> brush </v-icon>
+                  ><v-icon size="24px"> brush </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signup') }}</span>
             </v-tooltip>
           </template>
-          <nuxt-link
-            v-for="locale in availableLocales"
-            :key="locale.code"
-            :to="switchLocalePath(locale.code)"
-            >{{ locale.name }}</nuxt-link
-          >
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
@@ -314,6 +216,7 @@ import { mapActions, mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
 import Cookie from '@/components/Cookie.vue'
 export default {
+  name: 'Default',
   scrollToTop: true,
   components: {
     Avatar,
@@ -323,6 +226,7 @@ export default {
     return {
       clipped: false,
       drawer: false,
+      drawerMenu: null,
       fixed: false,
       items: [
         {
@@ -390,6 +294,7 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'zarbo',
+      bgImage: 'bg' + Math.floor(Math.random() * 39) + '.jpg',
       scrollPosition: null,
       locale: this.$i18n.locale,
     }
@@ -402,6 +307,7 @@ export default {
       next()
     }
   },
+
   watch: {
     locale(newVal) {
       console.log(newVal)
@@ -411,36 +317,25 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['visible', 'modalComponent', 'folder']),
-    isRouteActive() {
-      if (
-        this.$nuxt.$route.name === this.localePath({ name: 'designs.search' })
-      ) {
-        return true
-      } else {
-        return false
-      }
+    backgroundUrl() {
+      return require(`~/assets/images/bg/${this.bgImage}`)
     },
     availableLocales() {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
     },
-    size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
-        this.$vuetify.breakpoint.name
-      ]
-      return size ? { [size]: true } : {}
-    },
+    ...mapGetters(['visible', 'modalComponent', 'folder']),
   },
-
   mounted() {
     this.$nextTick(function () {
       this.hideModal()
+      console.log(this.locale)
       if (this.$i18n.locale !== 'en') {
         require(`moment/locale/${this.$i18n.locale}.js`)
       }
+
       const url = `locale/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
-      this.$auth.fetchUser()
+
       window.addEventListener('scroll', function () {
         const navbar = document.getElementById('nav')
         const navClasses = navbar.classList
@@ -476,17 +371,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.drawerList {
-  margin-left: 6px;
-}
-.line {
-  height: 1px;
-  border-radius: 0px;
-  background: whitesmoke;
-  padding: 0;
-}
-.active {
-  background-color: #0f1219 !important;
+.v-parallax__image {
+  translate: none !important;
 }
 .footer-links {
   font-size: 10px;
@@ -507,6 +393,10 @@ footer {
 .vue-avatar--wrapper {
   min-width: 50px;
 }
+.subtitle {
+  font-size: 26px;
+  margin-left: 20px;
+}
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
@@ -514,9 +404,27 @@ footer {
   text-decoration: none;
   color: whitesmoke;
 }
-/* .theme--dark.v-list {
+.theme--dark.v-list {
   background: #0f1219;
-} */
+}
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;1,100&display=swap');
+
+.text-parallax {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 5rem;
+}
+.slide-fade-enter-active {
+  transition: all 2s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
 .theme--dark.v-application {
   background-color: #0f1219;
   font-family: 'Josefin Sans', sans-serif;
@@ -527,6 +435,10 @@ footer {
   line-height: 1.6em;
   text-rendering: optimizelegibility;
   color: whitesmoke;
+}
+.v-toolbar__content,
+.v-toolbar__extension {
+  padding-top: 40px;
 }
 
 .theme--dark.v-navigation-drawer {
@@ -543,10 +455,6 @@ footer {
   transition: 0.75s ease;
 }
 
-.theme--dark.v-main {
-  opacity: 0.65;
-  background-color: #0f1219;
-}
 #grad1 {
   background: red; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(
@@ -586,8 +494,11 @@ footer {
     violet
   ); /* Standard syntax (must be last) */
 }
-.cookie {
-  width: 100%;
+.line {
+  height: 1px;
+  border-radius: 0px;
+  background: whitesmoke;
+  padding: 0;
 }
 @media screen and (min-width: 320px) {
   html {
@@ -598,5 +509,25 @@ footer {
   html {
     font-size: 22px;
   }
+}
+.container {
+  max-width: 100%;
+  text-align: left;
+}
+.v-main {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.main-container {
+  max-width: 100%;
+  padding: 5px 26px;
+}
+.cookie {
+  width: 100%;
+}
+.v-list-item {
+  min-height: 48px;
+  outline: none;
+  padding: 0 0 !important;
 }
 </style>

@@ -164,14 +164,14 @@
           <v-btn
             v-bind="size"
             color="transparent"
-            @click="showModal('LoginForm', 'auth')"
+            @click="goTo('LoginForm', 'auth')"
             ><v-icon v-bind="size" class="mr-2">face</v-icon
             >{{ $t('navbar.signin') }}</v-btn
           >
           <v-btn
             v-bind="size"
             color="transparent"
-            @click="showModal('RegisterForm', 'auth')"
+            @click="goTo('RegisterForm', 'auth')"
             ><v-icon v-bind="size" class="mr-2">brush</v-icon>
             {{ $t('navbar.signup') }}</v-btn
           >
@@ -452,7 +452,7 @@ export default {
     },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'default', xl: 'default' }[
+      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
         this.$vuetify.breakpoint.name
       ]
       return size ? { [size]: true } : {}
