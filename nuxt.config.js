@@ -13,7 +13,7 @@ export default {
   target: 'server',
 
   // custom loading
- // loading: '~/components/Loading.vue',
+  loading: '~/components/Loading.vue',
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -84,11 +84,11 @@ export default {
       }, */
     ],
     link: [
-     /*  {
+      {
         hid: 'canonical',
         rel: 'canonical',
         href: 'https://zarbo.fr',
-      }, */
+      },
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
