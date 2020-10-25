@@ -1,7 +1,8 @@
 <template>
   <section>
-    <div id="grad1" class="line"></div>
     <v-app dark>
+      <div id="grad1" class="line"></div>
+
       <v-navigation-drawer
         v-if="$vuetify.breakpoint.xs"
         v-model="drawer"
@@ -78,7 +79,12 @@
           </template>
         </v-list>
       </v-navigation-drawer>
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.xs"
+        @click.stop="drawer = !drawer"
+      />
       <v-app-bar
+        v-if="!$vuetify.breakpoint.xs"
         id="nav"
         class="bg-transparent line"
         :clipped-left="!clipped"
@@ -86,10 +92,6 @@
         elevate-on-scroll
         app
       >
-        <v-app-bar-nav-icon
-          v-if="$vuetify.breakpoint.xs"
-          @click.stop="drawer = !drawer"
-        />
         <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
@@ -139,17 +141,6 @@
 
         <!-- After Login -->
         <template v-else>
-          <nuxt-link to=""
-            ><v-btn
-              small
-              color="transparent"
-              class="mr-2 ml-3"
-              @click.prevent="logout"
-              ><v-icon right dark class="mr-2">exit_to_app</v-icon
-              >{{ $t('navbar.signout') }}</v-btn
-            ></nuxt-link
-          >
-
           <nuxt-link :to="localePath({ name: 'settings.profile' })"
             ><avatar
               :username="$auth.user.name"
@@ -158,41 +149,48 @@
               :size="50"
             ></avatar>
           </nuxt-link>
-          <v-menu
-            offset-y
-            bottom
-            origin="bottom center"
-            transition="scale-transition"
-            color="#0f1219"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn text dark v-bind="attrs" v-on="on">
-                <span class="user-name font-12 fw-500">
-                  {{ $auth.user.name }}
-                </span>
+          <!-- dropdown menu -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <!-- <v-btn text slot="activator"> -->
+              <v-btn text v-on="on">
+                <v-icon left>expand_more</v-icon>
+                <span class="text-capitalize">{{ $auth.user.name }}</span>
               </v-btn>
             </template>
-
             <v-list>
+              <!-- v-list-tile is changed to v-list-item -->
               <v-list-item
-                v-for="(item, i) in menuAccount"
-                :key="i"
-                link
+                v-for="link in menuAccount"
+                :key="link.title"
+                router
+                :to="link.route"
                 class="text-white"
               >
-                <nuxt-link :to="item.route">
-                  <v-list-item-title>{{
-                    item.title
-                  }}</v-list-item-title></nuxt-link
-                >
+                <v-list-item-action class="mr-2 ml-2">
+                  <v-icon>{{ link.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title v-text="link.title" />
+                </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-menu>
+          <nuxt-link to=""
+            ><v-btn
+              small
+              fab
+              color="transparent"
+              class="mr-2 ml-3"
+              @click.prevent="logout"
+              ><v-icon right dark class="mr-2">exit_to_app</v-icon></v-btn
+            ></nuxt-link
+          >
         </template>
         <!-- End After Login -->
       </v-app-bar>
       <v-main>
-        <v-container style="max-width: 100%;">
+        <v-container style="max-width: 100%">
           <nuxt />
         </v-container>
       </v-main>
@@ -229,9 +227,7 @@
                   v-bind="attrs"
                   v-on="on"
                   @click="goTo('LoginForm', 'auth')"
-                  ><v-icon size="24px">
-                    face
-                  </v-icon>
+                  ><v-icon size="24px"> face </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signin') }}</span>
@@ -246,19 +242,23 @@
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="goTo('RegisterForm', 'auth')"
-                  ><v-icon size="24px">
-                    brush
-                  </v-icon>
+                  ><v-icon size="24px"> brush </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signup') }}</span>
             </v-tooltip>
           </template>
+          <nuxt-link
+            v-for="locale in availableLocales"
+            :key="locale.code"
+            :to="switchLocalePath(locale.code)"
+            >{{ locale.name }}</nuxt-link
+          >
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
               class="my-2 ml-2 float-right"
-              style="height: 40px; border: none;"
+              style="height: 40px; border: none"
               target="_blank"
             />
           </a>
@@ -315,10 +315,12 @@ export default {
         {
           title: this.$i18n.t('menuAccount.yourDesigns'),
           route: this.localePath({ name: 'settings.designs' }),
+          icon: 'mdi-looks',
         },
         {
           title: this.$i18n.t('menuAccount.yourProfile'),
           route: this.localePath({ name: 'settings.profile' }),
+          icon: 'mdi-face',
         },
       ],
       footerLinks: [

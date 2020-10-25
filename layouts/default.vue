@@ -2,201 +2,14 @@
   <section>
     <v-app dark>
       <div id="grad1" class="line"></div>
-      <v-app-bar
-        id="nav"
-        class="bg-transparent line"
-        :clipped-left="!clipped"
-        fixed
-        elevate-on-scroll
-        app
-      >
-        <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-        <nuxt-link :to="localePath({ name: 'index' })"
-          ><v-btn text class="mr-2 ml-3"
-            ><v-toolbar-title class="text-white" v-text="title" /></v-btn
-        ></nuxt-link>
-        <nuxt-link :to="localePath({ name: 'designs.search' })"
-          ><v-btn small color="transparent" class="mr-2 ml-3">{{
-            $t('navbar.artwork')
-          }}</v-btn></nuxt-link
-        >
-        <nuxt-link :to="localePath({ name: 'users.search' })"
-          ><v-btn small color="transparent" class="mr-2">{{
-            $t('navbar.artists')
-          }}</v-btn>
-        </nuxt-link>
-
-        <nuxt-link :to="localePath({ name: 'designs.upload' })">
-          <v-btn small class="upload-button mr-2"
-            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
-            >{{ $t('navbar.upload') }}</v-btn
-          >
-        </nuxt-link>
-        <v-spacer />
-        <!-- Before Login -->
-        <template v-if="!$auth.loggedIn">
-          <base-button
-            toggle-modal
-            component-name="LoginForm"
-            folder-name="auth"
-            icon="face"
-            color="transparent"
-            >{{ $t('navbar.signin') }}</base-button
-          >
-          <base-button
-            toggle-modal
-            component-name="RegisterForm"
-            folder-name="auth"
-            icon="brush"
-            color="transparent"
-            >{{ $t('navbar.signup') }}</base-button
-          >
-        </template>
-        <!-- End Before Login -->
-
-        <!-- After Login -->
-        <template v-else>
-          <nuxt-link to=""
-            ><v-btn
-              small
-              color="transparent"
-              class="mr-2 ml-3"
-              @click.prevent="logout"
-              ><v-icon right dark class="mr-2">exit_to_app</v-icon
-              >{{ $t('navbar.signout') }}</v-btn
-            ></nuxt-link
-          >
-          <nuxt-link :to="localePath({ name: 'settings.profile' })"
-            ><avatar
-              :username="$auth.user.name"
-              :src="$auth.user.avatars.medium"
-              class="ml-3 mr-2"
-              :size="50"
-            ></avatar>
-          </nuxt-link>
-          <!--    <v-menu
-            offset-y
-            bottom
-            origin="bottom center"
-            transition="scale-transition"
-            color="#0f1219"
-            z-index="1000"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn text dark v-bind="attrs" v-on="on">
-                <span class="user-name font-12 fw-500">
-                  {{ $auth.user.name }}
-                </span>
-              </v-btn>
-            </template>
-
-            <v-list>
-              <v-list-item
-                v-for="(item, i) in menuAccount"
-                :key="i"
-                link
-                class="text-white"
-              >
-                <nuxt-link :to="item.route">
-                  <v-list-item-title>{{
-                    item.title
-                  }}</v-list-item-title></nuxt-link
-                >
-              </v-list-item>
-          
-            </v-list>
-          </v-menu> -->
-          <!-- dropdown menu -->
-          <v-menu offset-y>
-            <template v-slot:activator="{ on }">
-              <!-- <v-btn text slot="activator"> -->
-              <v-btn text v-on="on">
-                <v-icon left>expand_more</v-icon>
-                <span>{{ $auth.user.name }}</span>
-              </v-btn>
-            </template>
-            <v-list>
-              <!-- v-list-tile is changed to v-list-item -->
-              <v-list-item
-                v-for="link in menuAccount"
-                :key="link.title"
-                router
-                :to="link.route"
-                class="text-white"
-              >
-               <v-list-item-action class="mr-2 ml-2">
-              <v-icon>{{ link.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text="link.title" />
-            </v-list-item-content>
-          </v-list-item>
-            </v-list>
-          </v-menu>
-          <!-- <v-card>
-            <v-navigation-drawer
-              v-model="drawerMenu"
-              :mini-variant.sync="mini"
-              permanent
-            >
-              <v-list-item class="px-2">
-                <v-list-item-avatar>
-                  <v-img
-                    src="https://randomuser.me/api/portraits/men/85.jpg"
-                  ></v-img>
-                </v-list-item-avatar>
-
-                <v-list-item-title>John Leider</v-list-item-title>
-
-                <v-btn icon @click.stop="mini = !mini">
-                  <v-icon>mdi-chevron-left</v-icon>
-                </v-btn>
-              </v-list-item>
-
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item v-for="item in menuAccount" :key="item.title" link>
-                  <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-navigation-drawer>
-          </v-card> -->
-        </template>
-        <!-- End After Login -->
-
-        <nuxt-link
-          v-for="locale in availableLocales"
-          :key="locale.code"
-          :to="switchLocalePath(locale.code)"
-          >{{ locale.name }}</nuxt-link
-        >
-
-        <!--  <a
-          v-for="locale in availableLocales"
-          :key="locale.code"
-          href="#"
-          @click.prevent.stop="setLocaleCookie(locale.code)"
-          >{{ locale.name }}</a
-        > -->
-      </v-app-bar>
-      <v-parallax :src="backgroundUrl" height="500">
-        <div class="mt-18 text-left text-parallax mb-0">
-          <h1 class="whitesmoke--text text-left text--lighten-2 mb-0">Zarbo,</h1>
-        </div>
-      </v-parallax>
-
-      <!-- <v-navigation-drawer
+      <v-navigation-drawer
+        v-if="$vuetify.breakpoint.xs"
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
-        class="nav-drawer mt-16"
+        width="100%"
+        bottom
+        class="nav-drawer mt-16 hidden-sm-and-up"
         app
       >
         <v-list>
@@ -214,7 +27,7 @@
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <template v-if="!$auth.loggedIn">
+          <template v-if="!$auth.loggedIn" class="hidden-sm-and-up">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
                 <v-icon>face</v-icon>
@@ -264,7 +77,124 @@
             </v-list-item>
           </template>
         </v-list>
-      </v-navigation-drawer> -->
+      </v-navigation-drawer>
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.xs"
+        @click.stop="drawer = !drawer"
+      />
+      <v-app-bar
+        v-if="!$vuetify.breakpoint.xs"
+        id="nav"
+        class="bg-transparent line"
+        :clipped-left="!clipped"
+        fixed
+        elevate-on-scroll
+        app
+      >
+        <nuxt-link :to="localePath({ name: 'index' })"
+          ><v-btn text class="mr-2 ml-3"
+            ><v-toolbar-title class="text-white" v-text="title" /></v-btn
+        ></nuxt-link>
+        <nuxt-link :to="localePath({ name: 'designs.search' })"
+          ><v-btn
+            small
+            color="transparent"
+            :class="{ active: isRouteActive }"
+            exact-active-class="active"
+            >{{ $t('navbar.artwork') }}</v-btn
+          ></nuxt-link
+        >
+        <nuxt-link :to="localePath({ name: 'users.search' })"
+          ><v-btn small color="transparent" class="mr-2">{{
+            $t('navbar.artists')
+          }}</v-btn>
+        </nuxt-link>
+
+        <nuxt-link :to="localePath({ name: 'designs.upload' })">
+          <v-btn small class="upload-button mr-2"
+            ><v-icon class="mr-2">mdi-cloud-upload</v-icon
+            >{{ $t('navbar.upload') }}</v-btn
+          >
+        </nuxt-link>
+        <v-spacer />
+        <!-- Before Login -->
+        <template v-if="!$auth.loggedIn">
+          <base-button
+            toggle-modal
+            component-name="LoginForm"
+            folder-name="auth"
+            icon="face"
+            color="transparent"
+            >{{ $t('navbar.signin') }}</base-button
+          >
+          <base-button
+            toggle-modal
+            component-name="RegisterForm"
+            folder-name="auth"
+            icon="brush"
+            color="transparent"
+            >{{ $t('navbar.signup') }}</base-button
+          >
+        </template>
+        <!-- End Before Login -->
+
+        <!-- After Login -->
+        <template v-else>
+          <nuxt-link :to="localePath({ name: 'settings.profile' })"
+            ><avatar
+              :username="$auth.user.name"
+              :src="$auth.user.avatars.medium"
+              class="ml-3 mr-2"
+              :size="50"
+            ></avatar>
+          </nuxt-link>
+          <!-- dropdown menu -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <!-- <v-btn text slot="activator"> -->
+              <v-btn text v-on="on">
+                <v-icon left>expand_more</v-icon>
+                <span class="text-capitalize">{{ $auth.user.name }}</span>
+              </v-btn>
+            </template>
+            <v-list>
+              <!-- v-list-tile is changed to v-list-item -->
+              <v-list-item
+                v-for="link in menuAccount"
+                :key="link.title"
+                router
+                :to="link.route"
+                class="text-white"
+              >
+                <v-list-item-action class="mr-2 ml-2">
+                  <v-icon>{{ link.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title v-text="link.title" />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <nuxt-link to=""
+            ><v-btn
+              small
+              fab
+              color="transparent"
+              class="mr-2 ml-3"
+              @click.prevent="logout"
+              ><v-icon right dark class="mr-2">exit_to_app</v-icon></v-btn
+            ></nuxt-link
+          >
+        </template>
+        <!-- End After Login -->
+      </v-app-bar>
+      <v-parallax :src="backgroundUrl" height="500">
+        <div class="mt-18 text-left text-parallax mb-0">
+          <h1 class="whitesmoke--text text-left text--lighten-2 mb-0">
+            Zarbo,
+          </h1>
+        </div>
+      </v-parallax>
 
       <div class="line"></div>
       <v-main>
@@ -332,6 +262,12 @@
               <span>{{ $t('footer.signup') }}</span>
             </v-tooltip>
           </template>
+          <nuxt-link
+            v-for="locale in availableLocales"
+            :key="locale.code"
+            :to="switchLocalePath(locale.code)"
+            >{{ locale.name }}</nuxt-link
+          >
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
@@ -367,7 +303,6 @@ export default {
     return {
       clipped: false,
       drawer: false,
-      drawerMenu: null,
       fixed: false,
       items: [
         {
@@ -577,10 +512,7 @@ footer {
   text-rendering: optimizelegibility;
   color: whitesmoke;
 }
-.v-toolbar__content,
-.v-toolbar__extension {
-  padding-top: 40px;
-}
+
 
 .theme--dark.v-navigation-drawer {
   background-color: rgba(23, 22, 18, 0.64);
