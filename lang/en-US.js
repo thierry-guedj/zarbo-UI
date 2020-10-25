@@ -24,6 +24,11 @@ export default {
     signup: 'Sign up',
     signout: 'Sign out',
     publishArtwork: 'Publish artwork',
+    yourProfile: 'Your profile',
+    contact: 'Contact',
+    privacyPolicy: 'Privacy Policy',
+    cgu: 'Terms and conditions',
+
   },
   menuAccount: {
     yourDesigns: 'Your artwork',

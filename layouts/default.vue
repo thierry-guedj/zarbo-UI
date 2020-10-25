@@ -8,6 +8,7 @@
         :mini-variant="miniVariant"
         :clipped="clipped"
         width="100%"
+        height="100%"
         bottom
         class="nav-drawer mt-16 hidden-sm-and-up"
         app
@@ -65,6 +66,16 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            <v-list-item :to="{ name: 'settings.profile' }" router exact>
+              <v-list-item-action>
+                <v-icon>face</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.profile')
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
             <v-list-item to="" router exact @click.stop="logout()">
               <v-list-item-action>
                 <v-icon>exit_to_app</v-icon>
@@ -76,6 +87,32 @@
               </v-list-item-content>
             </v-list-item>
           </template>
+          <v-list-item router exact @click="goTo('ContactForm', 'user')">
+            <v-list-item-action>
+              <v-icon>mail</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ $t('navigationDrawer.contact') }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{ name: 'cgu' }" router exact>
+            <v-list-item-action>
+              <v-icon>policy</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ $t('navigationDrawer.cgu') }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="{ name: 'privacy.policy' }" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-security</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{
+                $t('navigationDrawer.privacyPolicy')
+              }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-app-bar-nav-icon
@@ -512,7 +549,6 @@ footer {
   text-rendering: optimizelegibility;
   color: whitesmoke;
 }
-
 
 .theme--dark.v-navigation-drawer {
   background-color: rgba(23, 22, 18, 0.64);

@@ -25,6 +25,10 @@ export default {
     signup: 'Devenir membre',
     signout: 'Se déconnecter',
     publishArtwork: 'Publier une oeuvre',
+    yourProfile: 'Votre profil',
+    contact: 'Contact',
+    privacyPolicy: 'Politique de confidentialité',
+    cgu: "Conditions générales d'utilisation",
   },
   menuAccount: {
     yourDesigns: 'Vos oeuvres',
