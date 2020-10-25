@@ -139,21 +139,20 @@
         <nuxt-link :to="localePath({ name: 'designs.search' })"
           ><v-btn
             v-bind="size"
-            small
             color="transparent"
-            :class="{ active: isRouteActive }"
+            class="mr-2"
             exact-active-class="active"
             >{{ $t('navbar.artwork') }}</v-btn
           ></nuxt-link
         >
         <nuxt-link :to="localePath({ name: 'users.search' })"
-          ><v-btn v-bind="size" small color="transparent" class="mr-2">{{
+          ><v-btn v-bind="size" color="transparent" class="mr-2">{{
             $t('navbar.artists')
           }}</v-btn>
         </nuxt-link>
 
         <nuxt-link :to="localePath({ name: 'designs.upload' })">
-          <v-btn v-bind="size" small class="upload-button mr-2"
+          <v-btn v-bind="size" class="upload-button mr-2"
             ><v-icon v-bind="size" class="mr-2">mdi-cloud-upload</v-icon
             >{{ $t('navbar.upload') }}</v-btn
           >

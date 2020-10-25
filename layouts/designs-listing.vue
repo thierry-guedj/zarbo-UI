@@ -93,7 +93,9 @@
               <v-icon v-bind="size">mail</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{ $t('navigationDrawer.contact') }}</v-list-item-title>
+              <v-list-item-title>{{
+                $t('navigationDrawer.contact')
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{ name: 'cgu' }" router exact>
@@ -101,7 +103,9 @@
               <v-icon v-bind="size">policy</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{ $t('navigationDrawer.cgu') }}</v-list-item-title>
+              <v-list-item-title>{{
+                $t('navigationDrawer.cgu')
+              }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="{ name: 'privacy.policy' }" router exact>
@@ -134,22 +138,22 @@
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
         ></nuxt-link>
         <nuxt-link :to="localePath({ name: 'designs.search' })"
-          ><v-btn v-bind="size"
-            small
+          ><v-btn
+            v-bind="size"
             color="transparent"
-            :class="{ active: isRouteActive }"
+            class="mr-2"
             exact-active-class="active"
             >{{ $t('navbar.artwork') }}</v-btn
           ></nuxt-link
         >
         <nuxt-link :to="localePath({ name: 'users.search' })"
-          ><v-btn v-bind="size" small color="transparent" class="mr-2">{{
+          ><v-btn v-bind="size" color="transparent" class="mr-2">{{
             $t('navbar.artists')
           }}</v-btn>
         </nuxt-link>
 
         <nuxt-link :to="localePath({ name: 'designs.upload' })">
-          <v-btn v-bind="size" small class="upload-button mr-2"
+          <v-btn v-bind="size" class="upload-button mr-2"
             ><v-icon v-bind="size" class="mr-2">mdi-cloud-upload</v-icon
             >{{ $t('navbar.upload') }}</v-btn
           >
@@ -157,7 +161,7 @@
         <v-spacer />
         <!-- Before Login -->
         <template v-if="!$auth.loggedIn">
-           <v-btn
+          <v-btn
             v-bind="size"
             color="transparent"
             @click="goTo('LoginForm', 'auth')"
@@ -212,13 +216,16 @@
             </v-list>
           </v-menu>
           <nuxt-link to=""
-            ><v-btn v-bind="size"
+            ><v-btn
+              v-bind="size"
               small
               fab
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-              ><v-icon v-bind="size" right dark class="mr-2">exit_to_app</v-icon></v-btn
+              ><v-icon v-bind="size" right dark class="mr-2"
+                >exit_to_app</v-icon
+              ></v-btn
             ></nuxt-link
           >
         </template>
@@ -237,19 +244,27 @@
             v-for="footerLink in footerLinks"
             :key="footerLink.icon"
             :to="footerLink.to"
-            ><v-btn v-bind="size" color="white" class="footer-links my-2" text rounded>
+            ><v-btn
+              v-bind="size"
+              color="white"
+              class="footer-links my-2"
+              text
+              rounded
+            >
               <v-icon v-bind="size" size="24px"> {{ footerLink.icon }} </v-icon
               >{{ footerLink.title }}
             </v-btn>
           </nuxt-link>
-          <v-btn v-bind="size"
+          <v-btn
+            v-bind="size"
             color="white"
             class="footer-links my-2"
             text
             rounded
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon v-bind="size" size="24px"> mail </v-icon>{{ $t('footer.contact') }}
+            <v-icon v-bind="size" size="24px"> mail </v-icon
+            >{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-tooltip top>
@@ -425,7 +440,7 @@ export default {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
     },
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
+      const size = { xs: 'x-small', sm: 'x-small', lg: 'small', xl: 'small' }[
         this.$vuetify.breakpoint.name
       ]
       return size ? { [size]: true } : {}
