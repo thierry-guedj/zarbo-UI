@@ -1,86 +1,7 @@
 <template>
   <section>
-    <div id="grad1" class="line"></div>
-    <v-parallax :src="backgroundUrl" height="500">
-      <div class="mt-18 text-center text-parallax mb-0">
-        <h1 class="teal--text text-center text--lighten-2 mb-0">Zarbo,</h1>
-      </div>
-    </v-parallax>
-
     <v-app dark>
-      <!-- <v-navigation-drawer
-        v-model="drawer"
-        :mini-variant="miniVariant"
-        :clipped="clipped"
-        class="nav-drawer mt-16"
-        app
-      >
-        <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.to"
-            router
-            exact
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
-            </v-list-item-content>
-          </v-list-item>
-          <template v-if="!$auth.loggedIn">
-            <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
-              <v-list-item-action>
-                <v-icon>face</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  $t('navigationDrawer.signin')
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item
-              to=""
-              router
-              exact
-              @click.stop="goTo('RegisterForm', 'auth')"
-            >
-              <v-list-item-action>
-                <v-icon>brush</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  $t('navigationDrawer.signup')
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-          <template v-else>
-            <v-list-item :to="{ name: 'settings.designs' }" router exact>
-              <v-list-item-action>
-                <v-icon>looks</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  $t('navigationDrawer.yourDesigns')
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item to="" router exact @click.stop="logout()">
-              <v-list-item-action>
-                <v-icon>exit_to_app</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{
-                  $t('navigationDrawer.signout')
-                }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-        </v-list>
-      </v-navigation-drawer> -->
+      <div id="grad1" class="line"></div>
       <v-app-bar
         id="nav"
         class="bg-transparent line"
@@ -185,8 +106,34 @@
           
             </v-list>
           </v-menu> -->
-
-          <v-card>
+          <!-- dropdown menu -->
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <!-- <v-btn text slot="activator"> -->
+              <v-btn text v-on="on">
+                <v-icon left>expand_more</v-icon>
+                <span>{{ $auth.user.name }}</span>
+              </v-btn>
+            </template>
+            <v-list>
+              <!-- v-list-tile is changed to v-list-item -->
+              <v-list-item
+                v-for="link in menuAccount"
+                :key="link.title"
+                router
+                :to="link.route"
+                class="text-white"
+              >
+               <v-list-item-action class="mr-2 ml-2">
+              <v-icon>{{ link.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="link.title" />
+            </v-list-item-content>
+          </v-list-item>
+            </v-list>
+          </v-menu>
+          <!-- <v-card>
             <v-navigation-drawer
               v-model="drawerMenu"
               :mini-variant.sync="mini"
@@ -220,8 +167,8 @@
                 </v-list-item>
               </v-list>
             </v-navigation-drawer>
-          </v-card></template
-        >
+          </v-card> -->
+        </template>
         <!-- End After Login -->
 
         <nuxt-link
@@ -239,6 +186,86 @@
           >{{ locale.name }}</a
         > -->
       </v-app-bar>
+      <v-parallax :src="backgroundUrl" height="500">
+        <div class="mt-18 text-left text-parallax mb-0">
+          <h1 class="whitesmoke--text text-left text--lighten-2 mb-0">Zarbo,</h1>
+        </div>
+      </v-parallax>
+
+      <!-- <v-navigation-drawer
+        v-model="drawer"
+        :mini-variant="miniVariant"
+        :clipped="clipped"
+        class="nav-drawer mt-16"
+        app
+      >
+        <v-list>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :to="item.to"
+            router
+            exact
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" />
+            </v-list-item-content>
+          </v-list-item>
+          <template v-if="!$auth.loggedIn">
+            <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
+              <v-list-item-action>
+                <v-icon>face</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.signin')
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item
+              to=""
+              router
+              exact
+              @click.stop="goTo('RegisterForm', 'auth')"
+            >
+              <v-list-item-action>
+                <v-icon>brush</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.signup')
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <template v-else>
+            <v-list-item :to="{ name: 'settings.designs' }" router exact>
+              <v-list-item-action>
+                <v-icon>looks</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.yourDesigns')
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item to="" router exact @click.stop="logout()">
+              <v-list-item-action>
+                <v-icon>exit_to_app</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{
+                  $t('navigationDrawer.signout')
+                }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+        </v-list>
+      </v-navigation-drawer> -->
+
       <div class="line"></div>
       <v-main>
         <v-container class="main-container">
@@ -284,9 +311,7 @@
                   v-bind="attrs"
                   v-on="on"
                   @click="goTo('LoginForm', 'auth')"
-                  ><v-icon size="24px">
-                    face
-                  </v-icon>
+                  ><v-icon size="24px"> face </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signin') }}</span>
@@ -301,9 +326,7 @@
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="goTo('RegisterForm', 'auth')"
-                  ><v-icon size="24px">
-                    brush
-                  </v-icon>
+                  ><v-icon size="24px"> brush </v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('footer.signup') }}</span>
@@ -313,7 +336,7 @@
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
               class="my-2 ml-2 float-right"
-              style="height: 40px; border: none;"
+              style="height: 40px; border: none"
               target="_blank"
             />
           </a>
@@ -344,7 +367,7 @@ export default {
     return {
       clipped: false,
       drawer: false,
-      drawerMenu: true,
+      drawerMenu: null,
       fixed: false,
       items: [
         {
