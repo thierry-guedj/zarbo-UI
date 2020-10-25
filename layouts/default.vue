@@ -163,21 +163,17 @@
         <template v-if="!$auth.loggedIn">
           <v-btn
             v-bind="size"
-            toggle-modal
-            component-name="LoginForm"
-            folder-name="auth"
-            icon="face"
             color="transparent"
+            @click="showModal('LoginForm', 'auth')"
+            ><v-icon v-bind="size" class="mr-2">face</v-icon
             >{{ $t('navbar.signin') }}</v-btn
           >
           <v-btn
             v-bind="size"
-            toggle-modal
-            component-name="RegisterForm"
-            folder-name="auth"
-            icon="brush"
             color="transparent"
-            >{{ $t('navbar.signup') }}</v-btn
+            @click="showModal('RegisterForm', 'auth')"
+            ><v-icon v-bind="size" class="mr-2">brush</v-icon>
+            {{ $t('navbar.signup') }}</v-btn
           >
         </template>
         <!-- End Before Login -->
@@ -227,7 +223,9 @@
               color="transparent"
               class="mr-2 ml-3"
               @click.prevent="logout"
-              ><v-icon v-bind="size" right dark class="mr-2">exit_to_app</v-icon></v-btn
+              ><v-icon v-bind="size" right dark class="mr-2"
+                >exit_to_app</v-icon
+              ></v-btn
             ></nuxt-link
           >
         </template>
@@ -280,7 +278,8 @@
             rounded
             @click="goTo('ContactForm', 'user')"
           >
-            <v-icon v-bind="size" size="24px"> mail </v-icon>{{ $t('footer.contact') }}
+            <v-icon v-bind="size" size="24px"> mail </v-icon
+            >{{ $t('footer.contact') }}
           </v-btn>
           <template v-if="!$auth.loggedIn">
             <v-tooltip top>
@@ -453,7 +452,7 @@ export default {
     },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'x-large' }[
+      const size = { xs: 'x-small', sm: 'small', lg: 'large', xl: 'large' }[
         this.$vuetify.breakpoint.name
       ]
       return size ? { [size]: true } : {}
