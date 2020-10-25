@@ -33,7 +33,6 @@
               class="mx-2"
               icon
               dark
-              small
               color="blue-grey darken-1"
             >
               <v-icon v-bind="size" dark>delete_forever</v-icon>

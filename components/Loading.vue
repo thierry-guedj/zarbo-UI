@@ -7,20 +7,20 @@
 <script>
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 export default {
-     components: {
+  components: {
     Circle8,
   },
   data: () => ({
-    loading: false
+    loading: false,
   }),
   methods: {
-    start () {
+    start() {
       this.loading = true
     },
-    finish () {
+    finish() {
       this.loading = false
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -31,10 +31,11 @@ export default {
   left: 50%;
   width: 100%;
   height: 100%;
-  background: #0f1219;
+  background: transparent;
   color: whitesmoke;
   text-align: center;
   padding-top: 200px;
   font-size: 30px;
+  z-index: 1000;
 }
 </style>

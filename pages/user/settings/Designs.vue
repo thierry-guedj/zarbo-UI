@@ -197,7 +197,9 @@
         </template>
         <template v-slot:item.description="{ item }">
           <div class="px-2 my-2 align-middle">
-            <p style="white-space: pre-wrap">{{ item.description }}</p>
+            <p style="white-space: pre-wrap; max-width: 130px" class="text-truncate">
+              {{ item.description }}
+            </p>
           </div>
         </template>
         <template v-slot:item.tags="{ item }">
