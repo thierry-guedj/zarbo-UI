@@ -66,6 +66,7 @@ export default {
     backToArtwork: 'Retour',
     youLike: 'Vous aimez cette oeuvre',
     tags: 'Mots-clés',
+    theArtist: "L'artiste",
   },
   comments: {
     comments: 'Commentaires',

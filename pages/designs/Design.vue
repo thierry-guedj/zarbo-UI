@@ -150,9 +150,13 @@
               "
               class="designer-info"
             >
-              <div class="white-bg-color fadein" style="display: block;">
+              <div class="white-bg-color fadein" style="display: block">
                 <v-row>
-                  <v-col class="col-md-12 text-left">L'artiste</v-col>
+                  <v-col class="col-md-12 text-left"
+                    ><h2 class="font-16 fw-500 mb-2">
+                      {{ $t('show.theArtist') }}
+                    </h2></v-col
+                  >
                 </v-row>
                 <v-row class="row-md-12 p-0">
                   <v-col class="col-md-3 p-0">

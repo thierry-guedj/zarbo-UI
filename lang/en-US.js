@@ -65,6 +65,7 @@ export default {
     backToArtwork: 'Back',
     youLike: 'You like this artwork',
     tags: 'Tags',
+    theArtist: 'The artist',
   },
   comments: {
     comments: 'Comments',
