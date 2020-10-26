@@ -1,7 +1,7 @@
 <template>
   <v-tabs class="home-tabs" background-color="#0f1219">
-    <v-tab :style="fontSizeTab">{{ $t('widgetTitle.lastDesigns') }}</v-tab>
-    <v-tab :style="fontSizeTab">{{ $t('widgetTitle.lastArtists') }}</v-tab>
+    <v-tab>{{ $t('widgetTitle.lastDesigns') }}</v-tab>
+    <v-tab>{{ $t('widgetTitle.lastArtists') }}</v-tab>
     <v-tab-item class="mx-auto home-tabs-item">
       <last-designs></last-designs>
     </v-tab-item>
