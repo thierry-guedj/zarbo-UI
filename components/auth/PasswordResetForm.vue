@@ -68,8 +68,8 @@
           {{ $t('passwordResetForm.reset') }}</v-btn
         >
         <v-btn v-bind="size" :disabled="loadingSubmit" @click="hideModal">{{
-        $t('contact.cancel')
-      }}</v-btn>
+          $t('contact.cancel')
+        }}</v-btn>
         <div class="font-14 fw-400 text-center mt-4 right">
           {{ $t('passwordResetForm.noAccount') }}
 

@@ -203,13 +203,16 @@
                 :key="link.title"
                 router
                 :to="link.route"
-                class="text-white menu-account-list"
+                class="text-white"
               >
                 <v-list-item-action class="mr-2 ml-2">
                   <v-icon>{{ link.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                  <v-list-item-title v-text="link.title" />
+                  <v-list-item-title
+                    class="menu-account-list"
+                    v-text="link.title"
+                  />
                 </v-list-item-content>
               </v-list-item>
             </v-list>
