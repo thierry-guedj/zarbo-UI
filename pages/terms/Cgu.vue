@@ -377,6 +377,25 @@ export default {
       this.$vuetify.goTo(0)
     },
   },
+  head() {
+    return {
+      title: "Zarbo, Conditions générales d'utilisation",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "Zarbo, Conditions générales d'utilisation",
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://zarbo.fr/cgu`,
+        },
+      ],
+    }
+  },
 }
 </script>
 

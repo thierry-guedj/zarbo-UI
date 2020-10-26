@@ -518,6 +518,25 @@ export default {
       this.$vuetify.goTo(0)
     },
   },
+  head() {
+    return {
+      title: 'Zarbo, Politique de confidentialité',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Zarbo, Politique de confidentialité',
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://zarbo.fr/confidentialite`,
+        },
+      ],
+    }
+  },
 }
 </script>
 

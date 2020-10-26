@@ -517,6 +517,25 @@ export default {
       this.$vuetify.goTo(0)
     },
   },
+  head() {
+    return {
+      title: 'Zarbo, publier une oeuvre',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Zarbo, publier une oeuvre',
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://zarbo.fr/publier`,
+        },
+      ],
+    }
+  },
 }
 </script>
 
