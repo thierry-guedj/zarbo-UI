@@ -300,13 +300,8 @@
               <span>{{ $t('footer.signup') }}</span>
             </v-tooltip>
           </template>
-          <nuxt-link
-            v-for="locale in availableLocales"
-            :key="locale.code"
-            :to="switchLocalePath(locale.code)"
-            >{{ locale.name }}</nuxt-link
-          >
-         <a href="https://www.buymeacoffee.com/zarbo">
+
+          <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
               class="my-2 ml-2 mr-4 float-right"
