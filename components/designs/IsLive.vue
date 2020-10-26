@@ -5,7 +5,6 @@
     class="ma-0 is-live pl-0 pr-3"
     :color="getColor"
     text-color="white"
-    small
     rounded
     @click.native="
       loadingSubmit = true
