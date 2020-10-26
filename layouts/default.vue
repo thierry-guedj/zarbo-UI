@@ -232,11 +232,11 @@
       </v-app-bar>
       <v-parallax :src="backgroundUrl" height="500">
         <div class="mt-18 text-left text-parallax mb-0">
-          <h2
+          <h3
             class="whitesmoke--text text-left text--lighten-2 mb-0 d-block d-sm-none"
           >
             Zarbo,
-          </h2>
+          </h3>
           <h1
             class="whitesmoke--text text-left text--lighten-2 mb-0 d-none d-sm-block"
           >

@@ -28,11 +28,11 @@ export default {
   computed: {
     fontSizeTab() {
       const fontSizeTab = {
-        xs: 'font-size:10px',
-        sm: 'font-size:12px',
-        md: 'font-size:14px',
-        lg: 'font-size:14px',
-        xl: 'font-size:14px',
+        xs: 'font-size:10px;',
+        sm: 'font-size:12px;',
+        md: 'font-size:14px;',
+        lg: 'font-size:14px;',
+        xl: 'font-size:14px;',
       }[this.$vuetify.breakpoint.name]
       return fontSizeTab ? { [fontSizeTab]: true } : {}
     },
