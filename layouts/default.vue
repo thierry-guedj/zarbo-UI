@@ -446,7 +446,7 @@ export default {
       title: 'zarbo',
       bgImage: 'bg' + Math.floor(Math.random() * 39) + '.jpg',
       scrollPosition: null,
-      locale: this.$i18n.locale,
+      // locale: this.$i18n.locale,
     }
   },
   beforeRouteLeave(to, from, next) {

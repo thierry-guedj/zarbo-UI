@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'HomeTabs',
   components: {
@@ -27,6 +26,7 @@ export default {
     }
   },
   computed: {
+    fontSizeTab() {
       const fontSizeTab = {
         xs: 'font-size:10px',
         sm: 'font-size:12px',
@@ -34,7 +34,7 @@ export default {
         lg: 'font-size:14px',
         xl: 'font-size:14px',
       }[this.$vuetify.breakpoint.name]
-      return size ? { [size]: true } : {}
+      return fontSizeTab ? { [fontSizeTab]: true } : {}
     },
   },
 }
