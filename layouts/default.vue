@@ -448,9 +448,13 @@ export default {
     },
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     size() {
-      const size = { xs: 'x-small', sm: 'x-small', lg: 'small', xl: 'small' }[
-        this.$vuetify.breakpoint.name
-      ]
+      const size = {
+        xs: 'x-small',
+        sm: 'x-small',
+        md: 'small',
+        lg: 'small',
+        xl: 'small',
+      }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
   },
