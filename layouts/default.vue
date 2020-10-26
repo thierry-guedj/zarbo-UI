@@ -316,8 +316,11 @@
             v-for="locale in availableLocales"
             :key="locale.code"
             :to="switchLocalePath(locale.code)"
-            >{{ locale.name }}</nuxt-link
-          >
+            ><v-btn class="mx-2" fab dark small>
+            
+                <img :src="localeIcon" class="ml-3 mr-2" width="25px" />
+            </v-btn
+          ></nuxt-link>
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
@@ -460,6 +463,9 @@ export default {
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
+    localeIcon() {
+      return '/' + this.$i18n.locale + '.png'
+    },
   },
   mounted() {
     this.$nextTick(function () {
@@ -508,7 +514,7 @@ export default {
 
 <style lang="scss" scoped>
 .menu-account-list {
-  font-size: 14px;
+  font-size: 16px;
 }
 .drawerList {
   margin-left: 6px;
