@@ -300,6 +300,24 @@ export default {
       this.$vuetify.goTo(0)
     },
   },
+  head() {
+    return {
+      title: 'Zarbo, ' + `${this.$route.params.tag}`,
+      meta: [
+        {
+          property: 'oeuvre:tag',
+          content: `${this.$route.params.tag}`,
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://zarbo.fr/tag/${this.$route.params.tag}`,
+        },
+      ],
+    }
+  },
 }
 </script>
 
