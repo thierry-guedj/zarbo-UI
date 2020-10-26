@@ -84,8 +84,8 @@
       >
         {{ $t('login.submit') }}</v-btn
       >
-      <v-btn v-bind="size" :disabled="loadingSubmit" @click="clear">{{
-        $t('login.clear')
+      <v-btn v-bind="size" :disabled="loadingSubmit" @click="hideModal">{{
+        $t('contact.cancel')
       }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('login.noAccount') }}

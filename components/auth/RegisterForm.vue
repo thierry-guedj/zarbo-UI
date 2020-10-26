@@ -119,8 +119,8 @@
         :type="$t('register.submit')"
         >{{ $t('register.submit') }}</v-btn
       >
-      <v-btn v-bind="size" :disabled="loadingSubmit" @click="clear">{{
-        $t('register.clear')
+      <v-btn v-bind="size" :disabled="loadingSubmit" @click="hideModal">{{
+        $t('contact.cancel')
       }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
         {{ $t('register.haveAccount') }}

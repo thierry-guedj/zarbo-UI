@@ -85,7 +85,9 @@
         :type="$t('contact.submit')"
         >{{ $t('contact.submit') }}</v-btn
       >
-      <v-btn v-bind="size" @click="hideModal">{{ $t('contact.cancel') }}</v-btn>
+      <v-btn v-bind="size" :disabled="loadingSubmit" @click="hideModal">{{
+        $t('contact.cancel')
+      }}</v-btn>
     </div>
   </v-form>
 </template>

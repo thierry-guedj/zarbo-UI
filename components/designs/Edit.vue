@@ -109,7 +109,12 @@
                   type="submit"
                   >Update design</v-btn
                 >
-                <v-btn @click="clear">clear</v-btn>
+                <v-btn
+                  v-bind="size"
+                  :disabled="loadingSubmit"
+                  @click="hideModal"
+                  >{{ $t('contact.cancel') }}</v-btn
+                >
               </form>
             </v-card-text>
           </v-card>
