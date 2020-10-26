@@ -104,7 +104,7 @@
                 <nuxt-link :to="{ name: 'users.search' }">
                   <v-btn v-bind="size" class="mt-0" color="orange darken-3"
                     ><v-icon v-bind="size" class="mr-2">flip_to_back</v-icon
-                    >{{ $t('user.backToUsersList') }}</v-btn
+                    >{{ $t('user.back') }}</v-btn
                   >
                 </nuxt-link>
               </v-container>
