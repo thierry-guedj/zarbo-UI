@@ -145,7 +145,7 @@ export default {
     status: 'Statut',
     edit: 'Modifier',
     delete: 'Supprimer',
-    rowsPerPage: 'Lignes par page',
+    rowsPerPage: 'Résultats par page',
     of: 'sur',
     search: 'Recherche',
     published: 'Publiée',
