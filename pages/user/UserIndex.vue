@@ -81,7 +81,7 @@
         </div>
         <div v-else class="pt-8 pl-0 pb-6 pr-0">
           <template v-if="!users.length" class="pb-6">
-             <v-alert
+            <v-alert
               border="right"
               color="accent"
               dark
@@ -98,7 +98,6 @@
                 >
               </nuxt-link>
             </v-alert>
-          </template>
           </template>
           <template v-else id="row-designs">
             <v-row
