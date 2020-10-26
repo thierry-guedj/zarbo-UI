@@ -267,33 +267,7 @@ export default {
       noResultMessage: '',
     }
   },
-  head() {
-    return {
-      title: 'Zarbo, ' + this.user.name,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.design.about,
-        },
-        {
-          property: 'artiste:created_time',
-          content: this.design.created_dates.created_at,
-        },
-        {
-          property: 'artiste:tag',
-          content: this.user.tagline,
-        },
-      ],
-      link: [
-        {
-          hid: 'canonical',
-          rel: 'canonical',
-          href: `https://zarbo.fr/artistes/${this.slug}`,
-        },
-      ],
-    }
-  },
+
   computed: {
     queryString() {
       return Object.keys(this.filters)
@@ -388,6 +362,33 @@ export default {
       const slug = this.sanitizeTitle(this.user.name)
       return slug
     },
+  },
+  head() {
+    return {
+      title: 'Zarbo, ' + this.user.name,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.user.about,
+        },
+        {
+          property: 'artiste:created_time',
+          content: this.user.created_dates.created_at,
+        },
+        {
+          property: 'artiste:tag',
+          content: this.user.tagline,
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://zarbo.fr/artistes/${this.slug}`,
+        },
+      ],
+    }
   },
 }
 </script>
