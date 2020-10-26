@@ -294,7 +294,7 @@ export default {
   },
   head() {
     return {
-      title: this.design.title,
+      title: 'Zarbo' + this.design.title,
       meta: [
         {
           hid: 'description',
