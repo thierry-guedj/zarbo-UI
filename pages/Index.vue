@@ -74,9 +74,13 @@ export default {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
     },
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
-        this.$vuetify.breakpoint.name
-      ]
+      const size = {
+        xs: 'x-small',
+        sm: 'small',
+        md: 'small',
+        lg: 'small',
+        xl: 'small',
+      }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
   },

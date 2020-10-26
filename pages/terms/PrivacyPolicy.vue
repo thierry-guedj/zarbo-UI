@@ -115,12 +115,7 @@
       </p>
 
       <ul>
-        <li>
-          pour permettre la navigation sur le Site et la gestion et la
-          traçabilité des prestations et services commandés par l’utilisateur :
-          données de connexion et d’utilisation du Site, facturation, historique
-          des commandes, etc.
-        </li>
+        <li>pour permettre la navigation sur le Site.</li>
         &nbsp;
         <li>
           pour prévenir et lutter contre la fraude informatique (spamming,
@@ -138,8 +133,8 @@
           <a href="https://zarbo.fr">https://zarbo.fr</a> : adresse email
         </li>
         <li>
-          pour mener des campagnes de communication (sms, mail) : numéro de
-          téléphone, adresse email
+          pour mener d'eventuelles campagnes de communication (mail) : adresse
+          email
         </li>
       </ul>
 
@@ -496,9 +491,13 @@ export default {
   computed: {
     ...mapGetters(['visible']),
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
-        this.$vuetify.breakpoint.name
-      ]
+      const size = {
+        xs: 'x-small',
+        sm: 'small',
+        md: 'small',
+        lg: 'small',
+        xl: 'small',
+      }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
   },

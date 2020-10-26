@@ -492,6 +492,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.menu-account-list {
+  font-size: 14px;
+}
 .drawerList {
   margin-left: 6px;
 }

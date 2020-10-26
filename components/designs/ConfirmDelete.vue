@@ -44,9 +44,13 @@ export default {
       return this.getItem
     },
     size() {
-      const size = { xs: 'x-small', sm: 'small', lg: 'small', xl: 'small' }[
-        this.$vuetify.breakpoint.name
-      ]
+      const size = {
+        xs: 'x-small',
+        sm: 'small',
+        md: 'small',
+        lg: 'small',
+        xl: 'small',
+      }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
   },

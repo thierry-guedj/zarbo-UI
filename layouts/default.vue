@@ -203,7 +203,7 @@
                 :key="link.title"
                 router
                 :to="link.route"
-                class="text-white"
+                class="text-white menu-account-list"
               >
                 <v-list-item-action class="mr-2 ml-2">
                   <v-icon>{{ link.icon }}</v-icon>
@@ -504,6 +504,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.menu-account-list {
+  font-size: 14px;
+}
 .drawerList {
   margin-left: 6px;
 }
