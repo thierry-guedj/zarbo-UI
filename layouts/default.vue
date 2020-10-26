@@ -230,17 +230,15 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-      <v-parallax :src="backgroundUrl" height="500" >
+      <v-parallax :src="backgroundUrl" height="500">
         <div class="mt-18 text-left text-parallax mb-0">
           <h2
-            v-if="$vuetify.breakpoint.xs"
-            class="whitesmoke--text text-left text--lighten-2 mb-0"
+            class="whitesmoke--text text-left text--lighten-2 mb-0 d-block d-sm-none"
           >
             Zarbo,
           </h2>
           <h1
-            v-if="!$vuetify.breakpoint.xs"
-            class="whitesmoke--text text-left text--lighten-2 mb-0"
+            class="whitesmoke--text text-left text--lighten-2 mb-0 d-none d-sm-block"
           >
             Zarbo,
           </h1>
