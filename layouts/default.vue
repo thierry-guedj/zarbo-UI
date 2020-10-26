@@ -457,15 +457,6 @@ export default {
       next()
     }
   },
-
-  watch: {
-    locale(newVal) {
-      console.log(newVal)
-      // require(`moment/locale/${newVal}.js`)
-      this.$moment().locale(newVal)
-      this.$i18n.setLocale(newVal)
-    },
-  },
   computed: {
     backgroundUrl() {
       return require(`~/assets/images/bg/${this.bgImage}`)
@@ -485,6 +476,15 @@ export default {
       return size ? { [size]: true } : {}
     },
   },
+  watch: {
+    locale(newVal) {
+      console.log(newVal)
+      // require(`moment/locale/${newVal}.js`)
+      this.$moment().locale(newVal)
+      this.$i18n.setLocale(newVal)
+    },
+  },
+
   mounted() {
     this.$nextTick(function () {
       this.hideModal()

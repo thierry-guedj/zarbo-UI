@@ -292,45 +292,6 @@ export default {
       },
     }
   },
-  head() {
-    return {
-      title: 'Zarbo, ' + this.design.title,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: this.design.description,
-        },
-        {
-          property: 'oeuvre:published_time',
-          content: this.design.created_at_dates.created_at,
-        },
-        {
-          property: 'oeuvre:tag',
-          content: this.design.tag_list.tags
-            ? this.design.tag_list.tags.toString()
-            : '',
-        },
-      ],
-      link: [
-        {
-          hid: 'canonical',
-          rel: 'canonical',
-          href: `https://zarbo.fr/oeuvres/${this.design.slug}`,
-        },
-      ],
-    }
-  },
-
-  fetchOnServer: true,
-  /* mounted() {
-    const img = new Image()
-    img.src = this.design.images.large
-    img.onload = () => {
-      this.image.width = img.width
-      this.image.height = img.height
-    }
-  }, */
   computed: {
     ...mapGetters(['visible']),
     designTitle() {
@@ -348,7 +309,6 @@ export default {
       return size ? { [size]: true } : {}
     },
   },
-
   methods: {
     ...mapActions(['hideModal']),
     handleDelete(id) {
@@ -390,6 +350,45 @@ export default {
       window.scrollTo(0, 0)
     },
   },
+  head() {
+    return {
+      title: 'Zarbo, ' + this.design.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.design.description,
+        },
+        {
+          property: 'oeuvre:published_time',
+          content: this.design.created_at_dates.created_at,
+        },
+        {
+          property: 'oeuvre:tag',
+          content: this.design.tag_list.tags
+            ? this.design.tag_list.tags.toString()
+            : '',
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://zarbo.fr/oeuvres/${this.design.slug}`,
+        },
+      ],
+    }
+  },
+
+  fetchOnServer: true,
+  /* mounted() {
+    const img = new Image()
+    img.src = this.design.images.large
+    img.onload = () => {
+      this.image.width = img.width
+      this.image.height = img.height
+    }
+  }, */
 }
 </script>
 
