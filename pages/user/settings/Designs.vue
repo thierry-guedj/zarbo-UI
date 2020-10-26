@@ -207,7 +207,6 @@
             <v-btn
               v-for="(tag, i) in item.tags"
               :key="`${i}-${tag}`"
-              v-bind="size"
               class="mr-1"
               style="align-self: center"
               x-small
