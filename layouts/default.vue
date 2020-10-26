@@ -230,7 +230,7 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-      <v-parallax :src="backgroundUrl" height="500">
+      <v-parallax :src="backgroundUrl" height="500" >
         <div class="mt-18 text-left text-parallax mb-0">
           <h2
             v-if="$vuetify.breakpoint.xs"
