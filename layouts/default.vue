@@ -205,7 +205,7 @@
                 :to="link.route"
                 class="text-white"
               >
-                <v-list-item-action class="mr-2 ml-2">
+                <v-list-item-action class="mr-2 ml-0">
                   <v-icon>{{ link.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
