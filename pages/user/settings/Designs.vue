@@ -56,7 +56,7 @@
         mobile-breakpoint="0"
         :search="search"
         :loading="loading"
-        rows-per-page-text="$t('settingsDesigns.rowsPerPage')"
+        :rows-per-page-text="$t('settingsDesigns.rowsPerPage')"
       >
         <template v-slot:top>
           <v-toolbar flat>
