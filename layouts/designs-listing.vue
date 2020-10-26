@@ -273,6 +273,7 @@
                   color="white"
                   text
                   rounded
+                  small
                   class="my-2"
                   v-bind="attrs"
                   v-on="on"
@@ -288,7 +289,8 @@
                   color="white"
                   text
                   rounded
-                  class="my-2"
+                  small
+                  class="my-2 mr-2"
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="goTo('RegisterForm', 'auth')"
@@ -304,14 +306,32 @@
             :to="switchLocalePath(locale.code)"
             >{{ locale.name }}</nuxt-link
           >
-          <a href="https://www.buymeacoffee.com/zarbo">
+         <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-              class="my-2 ml-2 float-right"
+              class="my-2 ml-2 mr-4 float-right"
               style="height: 40px; border: none"
               target="_blank"
             />
           </a>
+          <nuxt-link
+            v-for="locale in availableLocales"
+            :key="locale.code"
+            :to="switchLocalePath(locale.code)"
+            ><v-btn
+              class="my-2 mr-3"
+              fab
+              dark
+              small
+              depressed
+              color="transparent"
+            >
+              <img
+                :src="'/' + locale.code + '.png'"
+                class="m-0"
+                width="30px"
+              /> </v-btn
+          ></nuxt-link>
           <v-col class="footer-bottom py-4 text-center white--text" cols="12">
             {{ new Date().getFullYear() }} — <strong>Zarbo</strong>
           </v-col>

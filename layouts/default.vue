@@ -287,6 +287,7 @@
                   color="white"
                   text
                   rounded
+                  small
                   class="my-2"
                   v-bind="attrs"
                   v-on="on"
@@ -302,7 +303,8 @@
                   color="white"
                   text
                   rounded
-                  class="my-2"
+                  small
+                  class="my-2 mr-2"
                   v-bind="attrs"
                   v-on="on"
                   @click.stop="goTo('RegisterForm', 'auth')"
@@ -312,23 +314,33 @@
               <span>{{ $t('footer.signup') }}</span>
             </v-tooltip>
           </template>
-          <nuxt-link
-            v-for="locale in availableLocales"
-            :key="locale.code"
-            :to="switchLocalePath(locale.code)"
-            ><v-btn class="mx-2" fab dark small>
-            
-                <img :src="localeIcon" class="ml-3 mr-2" width="25px" />
-            </v-btn
-          ></nuxt-link>
+
           <a href="https://www.buymeacoffee.com/zarbo">
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-              class="my-2 ml-2 float-right"
+              class="my-2 ml-2 mr-4 float-right"
               style="height: 40px; border: none"
               target="_blank"
             />
           </a>
+          <nuxt-link
+            v-for="locale in availableLocales"
+            :key="locale.code"
+            :to="switchLocalePath(locale.code)"
+            ><v-btn
+              class="my-2 mr-3"
+              fab
+              dark
+              small
+              depressed
+              color="transparent"
+            >
+              <img
+                :src="'/' + locale.code + '.png'"
+                class="m-0"
+                width="30px"
+              /> </v-btn
+          ></nuxt-link>
           <v-col class="footer-bottom py-4 text-center white--text" cols="12">
             {{ new Date().getFullYear() }} — <strong>Zarbo</strong>
           </v-col>
@@ -462,9 +474,6 @@ export default {
         xl: 'small',
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
-    },
-    localeIcon() {
-      return '/' + this.$i18n.locale + '.png'
     },
   },
   mounted() {
