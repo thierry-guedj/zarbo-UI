@@ -196,6 +196,13 @@
             </nuxt-link>
           </div>
         </template>
+        <template v-slot:item.title="{ item }">
+          <div class="px-2 my-2 align-middle">
+            <p style="white-space: pre-wrap; max-width: 130px" class="text-truncate">
+              {{ item.title }}
+            </p>
+          </div>
+        </template>
         <template v-slot:item.description="{ item }">
           <div class="px-2 my-2 align-middle">
             <p style="white-space: pre-wrap; max-width: 130px" class="text-truncate">

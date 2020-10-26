@@ -511,7 +511,7 @@ export default {
 
 <style lang="scss" scoped>
 .menu-account-list {
-  font-size: 16px;
+  font-size: 15px;
 }
 .drawerList {
   margin-left: 6px;
