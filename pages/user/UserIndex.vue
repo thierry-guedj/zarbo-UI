@@ -81,14 +81,24 @@
         </div>
         <div v-else class="pt-8 pl-0 pb-6 pr-0">
           <template v-if="!users.length" class="pb-6">
-            <v-alert
-              border="left"
-              color="#0f1219"
+             <v-alert
+              border="right"
+              color="accent"
               dark
               transition="scale-transition"
+              width="60%"
+              class="alert"
             >
-              No results found
+              {{ $t('user.noCriteriaResult') }}
+              <v-spacer />
+              <nuxt-link :to="{ name: 'users.search' }">
+                <v-btn v-bind="size" class="mt-3"
+                  ><v-icon v-bind="size" right dark class="mx-2">reply</v-icon
+                  >{{ $t('user.backToResults') }}</v-btn
+                >
+              </nuxt-link>
             </v-alert>
+          </template>
           </template>
           <template v-else id="row-designs">
             <v-row
