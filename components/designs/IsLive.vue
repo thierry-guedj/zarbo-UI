@@ -12,7 +12,7 @@
     "
   >
     <v-avatar left class="avatar-is-live">
-      <v-icon>{{ getIcon }}</v-icon>
+      <v-icon v-bind="size">{{ getIcon }}</v-icon>
     </v-avatar>
     {{
       item.is_live === true

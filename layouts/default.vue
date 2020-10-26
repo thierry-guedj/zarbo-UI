@@ -232,7 +232,16 @@
       </v-app-bar>
       <v-parallax :src="backgroundUrl" height="500">
         <div class="mt-18 text-left text-parallax mb-0">
-          <h1 class="whitesmoke--text text-left text--lighten-2 mb-0">
+          <h2
+            v-if="$vuetify.breakpoint.xs"
+            class="whitesmoke--text text-left text--lighten-2 mb-0"
+          >
+            Zarbo,
+          </h2>
+          <h1
+            v-if="!$vuetify.breakpoint.xs"
+            class="whitesmoke--text text-left text--lighten-2 mb-0"
+          >
             Zarbo,
           </h1>
         </div>

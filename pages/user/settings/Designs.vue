@@ -183,7 +183,7 @@
           </v-toolbar>
         </template>
         <template v-slot:item.image="{ item }">
-          <div class="px-2 my-2 align-middle">
+          <div class="px-0 my-0 align-middle">
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
