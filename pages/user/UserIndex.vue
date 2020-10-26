@@ -94,7 +94,7 @@
               <nuxt-link :to="{ name: 'users.search' }">
                 <v-btn v-bind="size" class="mt-3"
                   ><v-icon v-bind="size" right dark class="mx-2">reply</v-icon
-                  >{{ $t('user.backToResults') }}</v-btn
+                  >{{ $t('user.back') }}</v-btn
                 >
               </nuxt-link>
             </v-alert>
@@ -261,6 +261,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.alert {
+  text-align: center;
+  margin: auto;
+}
 .v-application a {
   text-decoration: none;
 }

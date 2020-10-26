@@ -195,7 +195,7 @@ export default {
     noResult: "Cet artiste n'a pas encore publié d'oeuvre",
     noDesignResult: "Cet artiste n'a pas encore publié d'oeuvre",
     noCriteriaResult: "Vos critères de recherche n'ont retourné aucun résultat",
-    backToUsersList: 'Retour',
+    back: 'Retour',
     userPageTitle: 'Portfolio de ',
   },
   designs: {

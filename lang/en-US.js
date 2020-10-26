@@ -193,7 +193,7 @@ export default {
   user: {
     noDesignResult: "This artist didn't published any artwork yet",
     noCriteriaResult: "Your search criteria didn't return any results",
-    backToUsersList: 'Back',
+    back: 'Back',
     userPageTitle: 'Portfolio of ',
   },
   designs: {
