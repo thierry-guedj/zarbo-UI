@@ -35,8 +35,6 @@
                     ><v-select
                       v-model="filters.orderBy"
                       :items="itemsOrderBy"
-                      item-text="title"
-                      item-value="value"
                       :label="$t('search.orderBy')"
                       outlined
                       width="250px"

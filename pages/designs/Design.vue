@@ -261,6 +261,8 @@ export default {
     this.comments = response.data.comments
     this.user = response.data.user
     this.images = response.data.images
+    this.created_at_dates = response.data.created_at_dates
+    this.tags = response.data.tag_list.tags
     const noTitle = 'Sans Titre'
     this.itemsDesigns.push({
       title: this.design.title ? this.design.title : noTitle,
@@ -361,13 +363,11 @@ export default {
         },
         {
           property: 'oeuvre:published_time',
-          content: this.design.created_at_dates.created_at,
+          content: this.created_at_dates.created_at,
         },
         {
           property: 'oeuvre:tag',
-          content: this.design.tag_list.tags
-            ? this.design.tag_list.tags.toString()
-            : '',
+          content: this.tags ? this.tags.toString() : '',
         },
       ],
       link: [
