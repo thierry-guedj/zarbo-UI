@@ -31,7 +31,7 @@
                 <v-row
                   class="filters d-flex justify-content-between align-items-center"
                 >
-                  <v-col cols="auto"
+                  <v-col cols="auto" class="search-col"
                     ><v-select
                       v-model="filters.orderBy"
                       :items="itemsOrderBy"
@@ -44,7 +44,7 @@
                     ></v-select
                   ></v-col>
 
-                  <v-col cols="auto" class="d-flex align-items-center">
+                  <v-col cols="auto" class="search-col d-flex align-items-center">
                     <v-checkbox
                       id="has_comments"
                       v-model="filters.has_comments"
@@ -56,7 +56,7 @@
                       @change="fetchData"
                     ></v-checkbox>
                   </v-col>
-                  <v-col>
+                  <v-col class="search-col">
                     <v-text-field
                       id="q"
                       v-model="filters.q"
@@ -322,6 +322,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search-col {
+  padding: 0 !important;
+  margin-right: 2px;
+}
 .alert {
   text-align: center;
   margin: auto;
