@@ -354,7 +354,7 @@ export default {
   },
   head() {
     return {
-      title: 'Zarbo, ' + this.designTitle,
+      title: 'Zarbo, ' + !this.design.title ? 'Sans titre' : this.design.title,
       meta: [
         {
           hid: 'description',
