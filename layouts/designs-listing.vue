@@ -4,13 +4,14 @@
       <div id="grad1" class="line"></div>
 
       <v-navigation-drawer
+        v-show="$vuetify.breakpoint.xsOnly"
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
         width="100%"
         height="100%"
         bottom
-        class="nav-drawer mt-16 .d-none .d-sm-block"
+        class="nav-drawer mt-16"
         app
       >
         <v-list class="drawerList">
@@ -28,7 +29,7 @@
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <template v-if="!$auth.loggedIn" class="hidden-sm-and-up">
+          <template v-if="!$auth.loggedIn">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
                 <v-icon>face</v-icon>
@@ -120,12 +121,13 @@
         </v-list>
       </v-navigation-drawer>
       <v-app-bar-nav-icon
-        class=".d-block .d-sm-none"
+        v-show="$vuetify.breakpoint.xsOnly"
         @click.stop="drawer = !drawer"
       />
       <v-app-bar
+        v-show="!$vuetify.breakpoint.xsOnly"
         id="nav"
-        class=".d-none .d-sm-block bg-transparent line"
+        class="bg-transparent line"
         :clipped-left="!clipped"
         fixed
         elevate-on-scroll
