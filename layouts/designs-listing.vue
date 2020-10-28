@@ -4,7 +4,7 @@
       <div id="grad1" class="line"></div>
 
       <v-navigation-drawer
-        v-if="$vuetify.breakpoint.xs"
+        v-show="$vuetify.breakpoint.xs"
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
@@ -121,7 +121,7 @@
         </v-list>
       </v-navigation-drawer>
       <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.xs"
+        v-show="$vuetify.breakpoint.xs"
         @click.stop="drawer = !drawer"
       />
       <v-app-bar
