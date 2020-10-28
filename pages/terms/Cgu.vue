@@ -354,7 +354,7 @@ export default {
     ...mapGetters(['visible']),
     size() {
       const size = {
-        xs: 'x-small',
+        xs: 'small',
         sm: 'small',
         md: 'small',
         lg: 'small',
