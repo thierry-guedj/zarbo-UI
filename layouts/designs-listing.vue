@@ -4,14 +4,13 @@
       <div id="grad1" class="line"></div>
 
       <v-navigation-drawer
-        v-show="$vuetify.breakpoint.xs"
         v-model="drawer"
         :mini-variant="miniVariant"
         :clipped="clipped"
         width="100%"
         height="100%"
         bottom
-        class="nav-drawer mt-16 hidden-sm-and-up"
+        class="nav-drawer mt-16 .d-none .d-sm-block"
         app
       >
         <v-list class="drawerList">
