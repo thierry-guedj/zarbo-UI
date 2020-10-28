@@ -119,13 +119,12 @@
         </v-list>
       </v-navigation-drawer>
       <v-app-bar-nav-icon
-        v-show="$vuetify.breakpoint.xs"
+        class=".d-block .d-sm-none"
         @click.stop="drawer = !drawer"
       />
       <v-app-bar
-        v-if="!$vuetify.breakpoint.xs"
         id="nav"
-        class="bg-transparent line"
+        class=".d-none .d-sm-block bg-transparent line"
         :clipped-left="!clipped"
         fixed
         elevate-on-scroll
