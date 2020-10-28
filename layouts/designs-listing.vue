@@ -474,7 +474,7 @@ export default {
       const url = `locale/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
       this.$auth.fetchUser()
-      if (!$vuetify.breakpoint.xs) {
+      if (!this.$vuetify.breakpoint.xs) {
         window.addEventListener('scroll', function () {
           const navbar = document.getElementById('nav')
           const navClasses = navbar.classList
