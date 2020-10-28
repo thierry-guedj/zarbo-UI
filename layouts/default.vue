@@ -119,10 +119,7 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-app-bar-nav-icon
-        v-show="$vuetify.breakpoint.xsOnly"
-        @click.stop="drawer = !drawer"
-      />
+      
       <v-app-bar
         v-show="!$vuetify.breakpoint.xsOnly"
         id="nav"
@@ -132,6 +129,10 @@
         elevate-on-scroll
         app
       >
+      <v-app-bar-nav-icon
+        v-show="$vuetify.breakpoint.xsOnly"
+        @click.stop="drawer = !drawer"
+      />
         <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn v-bind="size" text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn

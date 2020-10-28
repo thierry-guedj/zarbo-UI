@@ -207,7 +207,7 @@
           </div>
         </template>
         <template
-          v-if="!$vuetify.breakpoint.xs"
+          v-show="!$vuetify.breakpoint.xsOnly"
           v-slot:item.description="{ item }"
         >
           <div class="px-2 my-2 align-middle">
@@ -219,7 +219,7 @@
             </p>
           </div>
         </template>
-        <template v-slot:item.tags="{ item }">
+        <template v-show="!$vuetify.breakpoint.xsOnly" v-slot:item.tags="{ item }">
           <div class="mr-3">
             <v-btn
               v-for="(tag, i) in item.tags"

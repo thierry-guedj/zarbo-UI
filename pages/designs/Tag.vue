@@ -36,6 +36,8 @@
                       v-model="filters.orderBy"
                       :items="itemsOrderBy"
                       :label="$t('search.orderBy')"
+                      item-text="title"
+                      item-value="value"
                       outlined
                       width="250px"
                       @change="fetchData"

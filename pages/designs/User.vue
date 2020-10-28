@@ -39,7 +39,7 @@
               <p class="tagline text-white">
                 {{ user.tagline }}
               </p>
-              <p class="about text-white" style="white-space: pre-wrap">
+              <p class="about text-white" style="white-space: pre-line">
                 {{ user.about }}
               </p>
 

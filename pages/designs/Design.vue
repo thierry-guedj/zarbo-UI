@@ -32,6 +32,27 @@
               @click.stop="index = 0"
             />
           </v-card>
+          <div v-show="$vuetify.breakpoint.xsOnly" class="mb-6">
+              <p class="text-h5 text-right block">
+                {{ designTitle | capitalize }}
+              </p>
+              <v-divider class="mx-0"></v-divider>
+              <p class="text-h7 text-right block">
+                {{ $t('show.by') }}
+                <nuxt-link
+                  :to="
+                    localePath({
+                      name: 'designs.user',
+                      params: { id: user.id },
+                    })
+                  "
+                  >{{ design.user.name }}</nuxt-link
+                >
+              </p>
+              <p class="text-subtitle-1 text-left pb-3 pt-2">
+                {{ design.description }}
+              </p>
+            </div>
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
@@ -93,7 +114,7 @@
         <!-- RIGHT -->
         <v-card-text>
           <!-- Design Infos -->
-          <div class="mb-6">
+          <div v-show="!$vuetify.breakpoint.xsOnly" class="mb-6">
             <p class="text-h4 text-left block">
               {{ designTitle | capitalize }}
             </p>
