@@ -492,20 +492,21 @@ export default {
 
       const url = `locale/${this.$i18n.locale}`
       this.$axios.$get(`${url}`)
-
-      window.addEventListener('scroll', function () {
-        const navbar = document.getElementById('nav')
-        const navClasses = navbar.classList
-        if (document.documentElement.scrollTop >= 100) {
-          if (navClasses.contains('bg-dark') === false) {
-            navClasses.toggle('bg-dark')
+      if (!$vuetify.breakpoint.xs) {
+        window.addEventListener('scroll', function () {
+          const navbar = document.getElementById('nav')
+          const navClasses = navbar.classList
+          if (document.documentElement.scrollTop >= 100) {
+            if (navClasses.contains('bg-dark') === false) {
+              navClasses.toggle('bg-dark')
+              navClasses.toggle('bg-transparent')
+            }
+          } else if (navClasses.contains('bg-transparent') === false) {
             navClasses.toggle('bg-transparent')
+            navClasses.toggle('bg-dark')
           }
-        } else if (navClasses.contains('bg-transparent') === false) {
-          navClasses.toggle('bg-transparent')
-          navClasses.toggle('bg-dark')
-        }
-      })
+        })
+      }
     })
   },
   methods: {
