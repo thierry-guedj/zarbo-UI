@@ -51,7 +51,6 @@
       <v-data-table
         :headers="headers"
         :items="designs"
-        sort-by="title"
         class="elevation-1"
         mobile-breakpoint="0"
         :search="search"
@@ -189,7 +188,7 @@
         </template>
         <template v-slot:body="props">
         <tbody>
-          <tr v-for="item in props.items">
+          <tr v-for="item in props.items" :key="item">
             <td class="d-block d-sm-table-cell">
               <div class="px-0 my-0 align-middle">
             <nuxt-link
@@ -310,6 +309,7 @@ export default {
       }),
       dialog: false,
       snackbar: false,
+      mobileBreakpoint: 600,
       headers: [
         {
           text: this.$i18n.t('settingsDesigns.image'),
@@ -323,7 +323,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'title',
-          width: '15%',
+    
         },
         {
           text: this.$i18n.t('settingsDesigns.description'),
@@ -336,7 +336,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'tags',
-          width: '35%',
+         
         },
         {
           text: this.$i18n.t('settingsDesigns.status'),
