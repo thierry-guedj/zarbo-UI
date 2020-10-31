@@ -54,6 +54,8 @@
                         :items="itemsOrderBy"
                         :label="$t('search.orderBy')"
                         outlined
+                        item-text="title"
+                        item-value="value"
                         width="250px"
                         @change="fetchData"
                       ></v-select

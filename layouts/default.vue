@@ -20,6 +20,7 @@
             :to="item.to"
             router
             exact
+            @click="drawer = false"
           >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
