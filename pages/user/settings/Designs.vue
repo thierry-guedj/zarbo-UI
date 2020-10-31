@@ -51,12 +51,17 @@
       <v-data-table
         :headers="headers"
         :items="designs"
-        sort-by="calories"
+        sort-by="title"
         class="elevation-1"
         mobile-breakpoint="0"
         :search="search"
         :loading="loading"
-        :rows-per-page-text="$t('settingsDesigns.rowsPerPage')"
+        :loading-text="$t('settingsDesigns.loading')"
+        :footer-props="{
+          showFirstLastPage: true,
+
+          itemsPerPageText: $t('settingsDesigns.rowsPerPage'),
+        }"
       >
         <template v-slot:top>
           <v-toolbar flat>
@@ -182,8 +187,11 @@
             </v-dialog>
           </v-toolbar>
         </template>
-        <template v-slot:item.image="{ item }">
-          <div class="px-0 my-0 align-middle">
+        <template v-slot:body="props">
+        <tbody>
+          <tr v-for="item in props.items">
+            <td class="d-block d-sm-table-cell">
+              <div class="px-0 my-0 align-middle">
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
@@ -195,9 +203,9 @@
               />
             </nuxt-link>
           </div>
-        </template>
-        <template v-slot:item.title="{ item }">
-          <div class="px-2 my-2 align-middle">
+            </td>
+            <td class="d-block d-sm-table-cell">
+              <div class="px-2 my-2 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -205,12 +213,10 @@
               {{ item.title }}
             </p>
           </div>
-        </template>
-        <template
-          
-          v-slot:item.description="{ item }"
-        >
-          <div v-show="!$vuetify.breakpoint.xsOnly" class="px-2 my-2 align-middle">
+            </td>
+             </td>
+            <td class="d-block d-sm-table-cell">
+              <div class="px-2 my-2 align-middle d-block d-sm-table-cell">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -218,9 +224,9 @@
               {{ item.description }}
             </p>
           </div>
-        </template>
-        <template v-show="!$vuetify.breakpoint.xsOnly" v-slot:item.tags="{ item }">
-          <div class="mr-3">
+            </td>
+            <td class="d-block d-sm-table-cell">
+              <div class="mr-3">
             <v-btn
               v-for="(tag, i) in item.tags"
               :key="`${i}-${tag}`"
@@ -242,21 +248,24 @@
             {{ tag }}
           </v-chip> -->
           </div>
-        </template>
-        <template v-slot:item.is_live="{ item }">
-          <div class="mr-3">
+            </td>
+            <td class="d-block d-sm-table-cell">
+              <div class="mr-3">
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
-        </template>
-
-        <template v-slot:item.actions="{ item }">
-          <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
+            </td>
+            <td class="d-block d-sm-table-cell">
+              <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
           <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
             mdi-delete
           </v-icon>
-        </template>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+       
         <template v-slot:no-data>
           <v-btn v-bind="size" color="primary" @click="initialize">Reset</v-btn>
         </template>
