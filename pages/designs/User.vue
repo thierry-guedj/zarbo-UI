@@ -28,11 +28,10 @@
                 :username="user.name"
                 :src="user.avatars.large"
                 class="ml-3 mr-2"
-                :size="240"
               ></avatar>
             </v-col>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-col class="col-md-8">
+            <v-col class="col-md-9">
               <p class="titlePage text-white">
                 {{ $t('user.userPageTitle') }} {{ user.name }}
               </p>

@@ -207,10 +207,10 @@
           </div>
         </template>
         <template
-          v-show="!$vuetify.breakpoint.xsOnly"
+          
           v-slot:item.description="{ item }"
         >
-          <div class="px-2 my-2 align-middle">
+          <div v-show="!$vuetify.breakpoint.xsOnly" class="px-2 my-2 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
