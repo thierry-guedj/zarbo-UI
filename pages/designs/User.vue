@@ -28,6 +28,7 @@
                 :username="user.name"
                 :src="user.avatars.large"
                 class="ml-3 mr-2"
+                size="180"
               ></avatar>
             </v-col>
             <v-divider class="mx-4" inset vertical></v-divider>
