@@ -252,8 +252,8 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-      <v-main>
-        <v-container style="padding-top:0;max-width: 100%">
+      <v-main :style="`padding-top:${mainPaddingTop}`">
+        <v-container style="max-width: 100%">
           <nuxt />
         </v-container>
       </v-main>
@@ -484,6 +484,20 @@ export default {
         xl: 'small',
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
+    },
+    mainPaddingTop() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          return 0
+        case 'sm':
+          return '56px'
+        case 'md':
+          return '56px'
+        case 'lg':
+          return '56px'
+        case 'xl':
+          return '56px'
+      }
     },
   },
 
