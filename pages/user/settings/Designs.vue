@@ -251,7 +251,7 @@
           </v-chip> -->
           </div>
         </template>
-        <template slot-scope="{ item }">
+        <template v-slot:item.is_live="{ item }">
           <div class="mr-3">
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
