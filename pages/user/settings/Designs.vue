@@ -49,8 +49,9 @@
         {{ message }}
       </v-alert>
       <v-data-table
-        :headers="headers"
+        :headers="customHeaders"
         :items="designs"
+        sort-by="title"
         class="elevation-1"
         mobile-breakpoint="0"
         :search="search"
@@ -186,11 +187,8 @@
             </v-dialog>
           </v-toolbar>
         </template>
-        <template v-slot:body="props">
-        <tbody>
-          <tr v-for="item in props.items" :key="item">
-            <td class="d-block d-sm-table-cell">
-              <div class="px-0 my-0 align-middle">
+        <template v-slot:item.image="{ item }">
+          <div class="px-0 my-0 align-middle">
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
@@ -202,9 +200,9 @@
               />
             </nuxt-link>
           </div>
-            </td>
-            <td class="d-block d-sm-table-cell">
-              <div class="px-2 my-2 align-middle">
+        </template>
+        <template v-slot:item.title="{ item }">
+          <div class="px-2 my-2 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -212,10 +210,12 @@
               {{ item.title }}
             </p>
           </div>
-            </td>
-             </td>
-            <td class="d-block d-sm-table-cell">
-              <div class="px-2 my-2 align-middle d-block d-sm-table-cell">
+        </template>
+        <template
+          v-show="!$vuetify.breakpoint.xsOnly"
+          v-slot:item.description="{ item }"
+        >
+          <div class="px-2 my-2 align-middle d-none d-sm-flex">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -223,9 +223,12 @@
               {{ item.description }}
             </p>
           </div>
-            </td>
-            <td class="d-block d-sm-table-cell">
-              <div class="mr-3">
+        </template>
+        <template
+          v-show="!$vuetify.breakpoint.xsOnly"
+          v-slot:item.tags="{ item }"
+        >
+          <div class="mr-3">
             <v-btn
               v-for="(tag, i) in item.tags"
               :key="`${i}-${tag}`"
@@ -247,24 +250,23 @@
             {{ tag }}
           </v-chip> -->
           </div>
-            </td>
-            <td class="d-block d-sm-table-cell">
-              <div class="mr-3">
+        </template>
+        <template slot-scope="{ item }">
+          <div class="mr-3">
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
-            </td>
-            <td class="d-block d-sm-table-cell">
-              <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
+        </template>
+        <!--   <template slot="pageText" slot-scope="{ pageStart, pageStop }">
+          From {{ pageStart }} to {{ pageStop }}
+        </template> -->
+        <template v-slot:item.actions="{ item }">
+          <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
           <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
             mdi-delete
           </v-icon>
-            </td>
-          </tr>
-        </tbody>
-      </template>
-       
+        </template>
         <template v-slot:no-data>
           <v-btn v-bind="size" color="primary" @click="initialize">Reset</v-btn>
         </template>
@@ -309,8 +311,7 @@ export default {
       }),
       dialog: false,
       snackbar: false,
-      mobileBreakpoint: 600,
-      headers: [
+      /*  headers: [
         {
           text: this.$i18n.t('settingsDesigns.image'),
           value: 'image',
@@ -323,11 +324,11 @@ export default {
           align: 'start',
           sortable: true,
           value: 'title',
-    
+          width: '15%',
         },
         {
           text: this.$i18n.t('settingsDesigns.description'),
-          align: 'start',
+          align: 'd-none d-sm-flex',
           sortable: true,
           value: 'description',
         },
@@ -336,7 +337,7 @@ export default {
           align: 'start',
           sortable: true,
           value: 'tags',
-         
+          width: '35%',
         },
         {
           text: this.$i18n.t('settingsDesigns.status'),
@@ -344,7 +345,7 @@ export default {
           // width: '20%',
         },
         { text: 'Actions', value: 'actions', sortable: false },
-      ],
+      ], */
       designs: [],
       editedIndex: -1,
       editedItem: {
@@ -438,6 +439,71 @@ export default {
         xl: 'small',
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
+    },
+    customHeaders() {
+      if (this.$vuetify.breakpoint.name === 'xs') {
+        let headers = [
+          {
+            text: this.$i18n.t('settingsDesigns.image'),
+            value: 'image',
+            sortable: false,
+            align: 'start',
+            width: '15%',
+          },
+          {
+            text: this.$i18n.t('settingsDesigns.title'),
+            align: 'start',
+            sortable: true,
+            value: 'title',
+            width: '15%',
+          },
+
+          {
+            text: this.$i18n.t('settingsDesigns.status'),
+            value: 'is_live',
+            // width: '20%',
+          },
+          { text: 'Actions', value: 'actions', sortable: false },
+        ]
+        return headers
+      } else {
+        const headers = [
+          {
+            text: this.$i18n.t('settingsDesigns.image'),
+            value: 'image',
+            sortable: false,
+            align: 'start',
+            width: '15%',
+          },
+          {
+            text: this.$i18n.t('settingsDesigns.title'),
+            align: 'start',
+            sortable: true,
+            value: 'title',
+            width: '15%',
+          },
+          {
+            text: this.$i18n.t('settingsDesigns.description'),
+            align: 'd-none d-sm-flex',
+            sortable: true,
+            value: 'description',
+          },
+          {
+            text: this.$i18n.t('settingsDesigns.tags'),
+            align: 'start',
+            sortable: true,
+            value: 'tags',
+            width: '35%',
+          },
+          {
+            text: this.$i18n.t('settingsDesigns.status'),
+            value: 'is_live',
+            // width: '20%',
+          },
+          { text: 'Actions', value: 'actions', sortable: false },
+        ]
+        return headers
+      }
     },
   },
 
