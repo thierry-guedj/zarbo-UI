@@ -1,25 +1,44 @@
 <template>
-  <v-btn
-    v-bind="size"
-    :loading="loadingSubmit"
-    class="ma-0 is-live pl-0 pr-3"
-    :color="getColor"
-    text-color="white"
-    rounded
-    @click.native="
-      loadingSubmit = true
-      toggleIsLive(item.is_live, item.id)
-    "
-  >
-    <v-avatar left class="avatar-is-live">
-      <v-icon v-bind="size">{{ getIcon }}</v-icon>
-    </v-avatar>
-    {{
-      item.is_live === true
-        ? $t('settingsDesigns.published')
-        : $t('settingsDesigns.draft')
-    }}</v-btn
-  >
+  <section>
+    <v-btn
+      v-bind="size"
+      :loading="loadingSubmit"
+      class="mx-2 d-flex d-sm-none"
+      fab
+      dark
+      :color="getColor"
+      @click.native="
+        loadingSubmit = true
+        toggleIsLive(item.is_live, item.id)
+      "
+    >
+      <v-avatar left class="avatar-is-live">
+        <v-icon small>{{ getIcon }}</v-icon>
+      </v-avatar>
+    </v-btn>
+    
+    <v-btn
+      v-bind="size"
+      :loading="loadingSubmit"
+      class="ma-0 is-live pl-0 pr-3 d-none d-sm-flex"
+      :color="getColor"
+      text-color="white"
+      rounded
+      @click.native="
+        loadingSubmit = true
+        toggleIsLive(item.is_live, item.id)
+      "
+    >
+      <v-avatar left class="avatar-is-live">
+        <v-icon v-bind="size">{{ getIcon }}</v-icon>
+      </v-avatar>
+      {{
+        item.is_live === true
+          ? $t('settingsDesigns.published')
+          : $t('settingsDesigns.draft')
+      }}</v-btn
+    >
+  </section>
 </template>
 
 <script>
@@ -57,7 +76,7 @@ export default {
     },
     size() {
       const size = {
-        xs: 'small',
+        xs: 'x-small',
         sm: 'small',
         md: 'small',
         lg: 'small',
