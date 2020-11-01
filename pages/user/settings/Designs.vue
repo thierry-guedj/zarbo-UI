@@ -484,7 +484,7 @@ export default {
           },
           {
             text: this.$i18n.t('settingsDesigns.description'),
-            align: 'd-none d-sm-flex',
+            align: 'start d-none d-sm-flex',
             sortable: true,
             value: 'description',
           },

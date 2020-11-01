@@ -158,6 +158,7 @@ export default {
     editDoneMessage: 'Your artwork has been modified.',
     deleteDoneMessage: 'Your artwork has been deleted.',
     noArtworkYetMessage: "You didn't publish any artwork yet",
+    loading: 'Loading... Please wait',
   },
   create: {
     uploadArtwork: 'Upload an artwork',

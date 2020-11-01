@@ -159,6 +159,7 @@ export default {
     editDoneMessage: 'Votre oeuvre a été modifiée avec succès.',
     deleteDoneMessage: 'Votre oeuvre a été supprimée avec succès.',
     noArtworkYetMessage: "Vous n'avez encore publié aucune oeuvre",
+    loading: 'Chargement... Patience',
   },
   create: {
     uploadArtwork: 'Publier une oeuvre',
