@@ -200,6 +200,17 @@
               />
             </nuxt-link>
           </div>
+<div class="d-flex d-sm-none">
+          <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon>
+          <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
+            mdi-delete
+          </v-icon>
+</div>
+          <div class="mr-3 d-flex d-sm-none">
+            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
+          </div>
         </template>
         <template v-slot:item.title="{ item }">
           <div class="px-2 my-2 align-middle">
@@ -212,10 +223,9 @@
           </div>
         </template>
         <template
-          v-show="!$vuetify.breakpoint.xsOnly"
-          v-slot:item.description="{ item }"
+          v-slot:item.description="{ item }" class="d-none d-sm-flex"
         >
-          <div class="px-2 my-2 align-middle d-none d-sm-flex">
+          <div class="px-2 my-2 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -225,9 +235,8 @@
           </div>
         </template>
         <template
-          v-show="!$vuetify.breakpoint.xsOnly"
           v-slot:item.tags="{ item }"
-        >
+        class="d-none d-sm-flex">
           <div class="mr-3">
             <v-btn
               v-for="(tag, i) in item.tags"
@@ -251,7 +260,7 @@
           </v-chip> -->
           </div>
         </template>
-        <template v-slot:item.is_live="{ item }">
+        <template v-slot:item.is_live="{ item }" class="d-none d-sm-flex">
           <div class="mr-3">
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
@@ -259,7 +268,7 @@
         <!--   <template slot="pageText" slot-scope="{ pageStart, pageStop }">
           From {{ pageStart }} to {{ pageStop }}
         </template> -->
-        <template v-slot:item.actions="{ item }">
+        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex">
           <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -458,12 +467,6 @@ export default {
             width: '15%',
           },
 
-          {
-            text: this.$i18n.t('settingsDesigns.status'),
-            value: 'is_live',
-            // width: '20%',
-          },
-          { text: 'Actions', value: 'actions', sortable: false },
         ]
         return headers
       } else {
