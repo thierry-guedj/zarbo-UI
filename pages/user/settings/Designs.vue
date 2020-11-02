@@ -208,7 +208,9 @@
               {{ item.title }}
             </p>
           </div>
-          <div class="mb-2 justify-content-end align-middle d-flex d-sm-none">
+          <div
+            class="mb-2 justify-content-end align-middle d-flex flex-row d-sm-none"
+          >
             <v-btn fab small class="mr-4" @click="editItem(item)">
               <v-icon default> mdi-pencil </v-icon>
             </v-btn>
@@ -458,7 +460,7 @@ export default {
             text: this.$i18n.t('settingsDesigns.image'),
             value: 'image',
             sortable: false,
-            align: 'start',
+            align: 'center',
             width: '15%',
           },
         ]
@@ -736,5 +738,8 @@ img {
 } */
 .modalEditDelete {
   background-color: #0f1219 !important;
+}
+.v-toolbar__title {
+  overflow: inherit !important;
 }
 </style>
