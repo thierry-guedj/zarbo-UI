@@ -51,7 +51,6 @@
       <v-data-table
         :headers="customHeaders"
         :items="designs"
-        sort-by="title"
         class="elevation-1"
         mobile-breakpoint="0"
         :search="search"
@@ -481,7 +480,7 @@ export default {
           },
           {
             text: this.$i18n.t('settingsDesigns.description'),
-            align: 'start d-none d-sm-flex',
+            align: 'start',
             sortable: true,
             value: 'description',
           },
