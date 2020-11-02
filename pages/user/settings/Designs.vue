@@ -192,7 +192,7 @@
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
-              <img
+              <img class="text-truncate"
                 :src="item.images.thumbnail"
                 :lazy-src="item.images.minithumbnail"
                 :alt="item.title"
@@ -200,24 +200,26 @@
               />
             </nuxt-link>
           </div>
-          <div class="d-flex d-sm-none mb-1 text-right">
+          <div class="pt-1 pb-0 my-0 align-middle d-flex d-sm-none">
+            <p
+              style="white-space: pre-wrap; max-width: 130px"
+              class="text-truncate"
+            >
+              {{ item.title }}
+            </p>
+          </div>
+          <div class="mb-2 align-right align-middle d-flex d-sm-none">
             <v-icon large class="mr-4" @click="editItem(item)">
               mdi-pencil
             </v-icon>
             <v-icon large class="mr-4" @click="confirmDeleteItem(item)">
               mdi-delete
             </v-icon>
-             <is-live
-              :item="item"
-              class="mr-3 d-flex d-sm-none"
-              @toggleIsLive="updateItem(item)"
-            ></is-live>
+            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
-           
-
         </template>
-        <template v-slot:item.title="{ item }">
-          <div class="px-2 my-2 align-middle">
+        <template v-slot:item.title="{ item }" class="d-none d-sm-flex">
+          <div class="px-2 my-2 align-middle d-none d-sm-flex">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -457,13 +459,6 @@ export default {
             value: 'image',
             sortable: false,
             align: 'start',
-            width: '15%',
-          },
-          {
-            text: this.$i18n.t('settingsDesigns.title'),
-            align: 'start',
-            sortable: true,
-            value: 'title',
             width: '15%',
           },
         ]
