@@ -33,26 +33,26 @@
             />
           </v-card>
           <div v-show="$vuetify.breakpoint.xsOnly" class="mb-6">
-              <p class="text-h5 text-right block">
-                {{ designTitle | capitalize }}
-              </p>
-              <v-divider class="mx-0"></v-divider>
-              <p class="text-h7 text-right block">
-                {{ $t('show.by') }}
-                <nuxt-link
-                  :to="
-                    localePath({
-                      name: 'designs.user',
-                      params: { id: user.id },
-                    })
-                  "
-                  >{{ design.user.name }}</nuxt-link
-                >
-              </p>
-              <p class="text-subtitle-1 text-left pb-3 pt-2">
-                {{ design.description }}
-              </p>
-            </div>
+            <p class="text-h5 text-right block">
+              {{ designTitle | capitalize | truncate(17, '...') }}
+            </p>
+            <v-divider class="mx-0"></v-divider>
+            <p class="text-h7 text-right block">
+              {{ $t('show.by') }}
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'designs.user',
+                    params: { id: user.id },
+                  })
+                "
+                >{{ design.user.name }}</nuxt-link
+              >
+            </p>
+            <p class="text-subtitle-1 text-left pb-3 pt-2">
+              {{ design.description }}
+            </p>
+          </div>
         </div>
         <!-- End Single Image -->
         <div class="float-right mt-2">
