@@ -200,17 +200,21 @@
               />
             </nuxt-link>
           </div>
-<div class="d-flex d-sm-none">
-          <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon>
-          <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
-            mdi-delete
-          </v-icon>
-</div>
-          <div class="mr-3 d-flex d-sm-none">
-            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
+          <div class="d-flex d-sm-none mb-1 text-right">
+            <v-icon large class="mr-4" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon large class="mr-4" @click="confirmDeleteItem(item)">
+              mdi-delete
+            </v-icon>
+             <is-live
+              :item="item"
+              class="mr-3 d-flex d-sm-none"
+              @toggleIsLive="updateItem(item)"
+            ></is-live>
           </div>
+           
+
         </template>
         <template v-slot:item.title="{ item }">
           <div class="px-2 my-2 align-middle">
@@ -222,9 +226,7 @@
             </p>
           </div>
         </template>
-        <template
-          v-slot:item.description="{ item }" class="d-none d-sm-flex"
-        >
+        <template v-slot:item.description="{ item }" class="d-none d-sm-flex">
           <div class="px-2 my-2 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
@@ -234,9 +236,7 @@
             </p>
           </div>
         </template>
-        <template
-          v-slot:item.tags="{ item }"
-        class="d-none d-sm-flex">
+        <template v-slot:item.tags="{ item }" class="d-none d-sm-flex">
           <div class="mr-3">
             <v-btn
               v-for="(tag, i) in item.tags"
@@ -451,7 +451,7 @@ export default {
     },
     customHeaders() {
       if (this.$vuetify.breakpoint.name === 'xs') {
-        let headers = [
+        const headers = [
           {
             text: this.$i18n.t('settingsDesigns.image'),
             value: 'image',
@@ -466,7 +466,6 @@ export default {
             value: 'title',
             width: '15%',
           },
-
         ]
         return headers
       } else {
