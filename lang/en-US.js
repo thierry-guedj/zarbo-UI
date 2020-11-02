@@ -181,7 +181,7 @@ export default {
     editItem: 'Edit Item',
     tagsNotice:
       'Please enter some tags about the technique of this artwork (pastel, watercolor etc) or about the subject (landscape, portrait etc).',
-    tagsNotice2: 'Each tag must be validate by a coma after it.',
+    tagsNotice2: 'You need to press enter to validate the tag.',
     saved: 'Saved successfully',
     stillUploading: 'Still uploading...Please wait',
     uploadSuccess: 'Design successfully uploaded',

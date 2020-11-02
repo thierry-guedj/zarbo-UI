@@ -187,14 +187,15 @@
           </v-toolbar>
         </template>
         <template v-slot:item.image="{ item }">
-          <div class="px-0 my-0 align-middle">
+          <div class="px-0 pt-3 my-0 align-middle">
             <nuxt-link
               :to="{ name: 'design.details', params: { id: item.id } }"
             >
-              <img class="text-truncate"
+              <img
+                class="text-truncate"
                 :src="item.images.thumbnail"
                 :lazy-src="item.images.minithumbnail"
-                :alt="item.title"
+                :alt="item.title | truncate(17, '...')"
                 max-width="80px"
               />
             </nuxt-link>
@@ -207,13 +208,13 @@
               {{ item.title }}
             </p>
           </div>
-          <div class="mb-2 align-right align-middle d-flex d-sm-none">
-            <v-icon large class="mr-4" @click="editItem(item)">
-              mdi-pencil
-            </v-icon>
-            <v-icon large class="mr-4" @click="confirmDeleteItem(item)">
-              mdi-delete
-            </v-icon>
+          <div class="mb-2 justify-content-end align-middle d-flex d-sm-none">
+            <v-btn fab small class="mr-4" @click="editItem(item)">
+              <v-icon default> mdi-pencil </v-icon>
+            </v-btn>
+            <v-btn fab small class="mr-4" @click="confirmDeleteItem(item)">
+              <v-icon large> mdi-delete </v-icon>
+            </v-btn>
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
         </template>

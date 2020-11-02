@@ -13,7 +13,7 @@
       "
     >
       <v-avatar left class="avatar-is-live">
-        <v-icon small>{{ getIcon }}</v-icon>
+        <v-icon default>{{ getIcon }}</v-icon>
       </v-avatar>
     </v-btn>
     
@@ -76,7 +76,7 @@ export default {
     },
     size() {
       const size = {
-        xs: 'x-small',
+        xs: 'small',
         sm: 'small',
         md: 'small',
         lg: 'small',

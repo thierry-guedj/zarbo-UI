@@ -181,8 +181,7 @@ export default {
     editItem: 'Editer une oeuvre',
     tagsNotice:
       'Vous pouvez entrer ci-dessous quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
-    tagsNotice2:
-      "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
+    tagsNotice2: 'Vous devez appuyer sur Enter pour valider votre mot-clé.',
     saved: 'Image téléchargée avec succès',
     stillUploading: 'Téléchargement toujours en cours...Patience...',
     uploadSuccess: 'Image téléchargée avec succès',
@@ -241,8 +240,7 @@ export default {
     tagsLabel: 'Mots-clés séparés par une virgule',
     tagsNotice:
       'Vous pouvez entrer ci-dessous quelques mots-clés à propos de la technique de cette oeuvre (pastel, aquarelle etc) ou à propos du sujet (paysage, portrait etc).',
-    tagsNotice2:
-      "Chaque mot-clé doit être suivi d'une virgule pour être validé.",
+    tagsNotice2: 'Vous devez appuyer sur Enter pour valider votre mot-clé.',
     cancel: 'Annuler',
     confirm: 'Confirmer',
     save: 'Modifier',
