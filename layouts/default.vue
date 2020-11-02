@@ -122,6 +122,7 @@
       </v-navigation-drawer>
       <v-app-bar-nav-icon
         v-show="$vuetify.breakpoint.xsOnly"
+        class="app-bar-icon"
         @click.stop="drawer = !drawer"
       />
       <v-app-bar
@@ -133,7 +134,6 @@
         elevate-on-scroll
         app
       >
-      
         <nuxt-link :to="localePath({ name: 'index' })"
           ><v-btn v-bind="size" text class="mr-2 ml-3"
             ><v-toolbar-title class="text-white" v-text="title" /></v-btn
@@ -532,6 +532,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-bar-icon {
+  position: fixed !important;
+  z-index: 2000 !important;
+}
 .menu-account-list {
   font-size: 15px;
 }
