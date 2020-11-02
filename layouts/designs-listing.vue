@@ -143,6 +143,7 @@
       </v-navigation-drawer>
       <v-app-bar-nav-icon
         v-show="$vuetify.breakpoint.xsOnly"
+        class="app-bar-icon"
         @click.stop="drawer = !drawer"
       />
       <v-app-bar
@@ -547,6 +548,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-bar-icon {
+  position: fixed !important;
+  z-index: 2000 !important;
+}
 .menu-account-list {
   font-size: 15px;
 }
