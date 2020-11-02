@@ -208,9 +208,7 @@
               {{ item.title }}
             </p>
           </div>
-          <div
-            class="mb-2 justify-content-end align-middle"
-          >
+          <div class="mb-2 justify-content-end align-middle">
             <v-btn fab small class="mr-4" @click="editItem(item)">
               <v-icon default> mdi-pencil </v-icon>
             </v-btn>
@@ -220,7 +218,7 @@
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
         </template>
-        
+
         <template v-slot:item.description="{ item }" class="d-none d-sm-flex">
           <div class="px-2 my-2 align-middle">
             <p
@@ -451,7 +449,7 @@ export default {
             text: this.$i18n.t('settingsDesigns.image'),
             value: 'image',
             sortable: false,
-            align: 'center',
+            align: 'start',
             width: '15%',
           },
         ]
