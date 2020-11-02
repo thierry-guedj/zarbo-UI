@@ -200,7 +200,7 @@
               />
             </nuxt-link>
           </div>
-          <div class="pt-1 pb-0 my-0 align-middle d-flex d-sm-none">
+          <div class="pt-1 pb-0 my-0 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
               class="text-truncate"
@@ -209,7 +209,7 @@
             </p>
           </div>
           <div
-            class="mb-2 justify-content-end align-middle d-flex flex-row d-sm-none"
+            class="mb-2 justify-content-end align-middle"
           >
             <v-btn fab small class="mr-4" @click="editItem(item)">
               <v-icon default> mdi-pencil </v-icon>
@@ -220,16 +220,7 @@
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
         </template>
-        <template v-slot:item.title="{ item }" class="d-none d-sm-flex">
-          <div class="px-2 my-2 align-middle d-none d-sm-flex">
-            <p
-              style="white-space: pre-wrap; max-width: 130px"
-              class="text-truncate"
-            >
-              {{ item.title }}
-            </p>
-          </div>
-        </template>
+        
         <template v-slot:item.description="{ item }" class="d-none d-sm-flex">
           <div class="px-2 my-2 align-middle">
             <p
