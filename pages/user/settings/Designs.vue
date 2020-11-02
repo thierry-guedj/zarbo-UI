@@ -466,13 +466,6 @@ export default {
             width: '15%',
           },
           {
-            text: this.$i18n.t('settingsDesigns.title'),
-            align: 'start',
-            sortable: true,
-            value: 'title',
-            width: '15%',
-          },
-          {
             text: this.$i18n.t('settingsDesigns.description'),
             align: 'start',
             sortable: true,
