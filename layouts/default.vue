@@ -29,7 +29,7 @@
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <template v-if="!$auth.loggedIn">
+          <template v-if="!$auth.loggedIn" @click="drawer = false">
             <v-list-item to="" router exact @click="goTo('LoginForm', 'auth')">
               <v-list-item-action>
                 <v-icon>face</v-icon>
@@ -67,7 +67,7 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'settings.profile' }" router exact>
+            <v-list-item :to="{ name: 'settings.profile' }" router exact @click="drawer = false">
               <v-list-item-action>
                 <v-icon>face</v-icon>
               </v-list-item-action>
@@ -98,7 +98,7 @@
               }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{ name: 'cgu' }" router exact>
+          <v-list-item :to="{ name: 'cgu' }" router exact @click="drawer = false">
             <v-list-item-action>
               <v-icon>policy</v-icon>
             </v-list-item-action>
@@ -108,7 +108,7 @@
               }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{ name: 'privacy.policy' }" router exact>
+          <v-list-item :to="{ name: 'privacy.policy' }" router exact @click="drawer = false">
             <v-list-item-action>
               <v-icon>mdi-security</v-icon>
             </v-list-item-action>

@@ -17,7 +17,7 @@
         <v-icon default>{{ getIcon }}</v-icon>
       </v-avatar>
     </v-btn>
-    
+
     <v-btn
       v-bind="size"
       :loading="loadingSubmit"

@@ -201,9 +201,9 @@
             </nuxt-link>
           </div>
         <!-- xs breakpoint only -->
-          <div class="pt-1 pb-0 my-0 align-middle">
+          <div class="pt-1 pb-0 my-0 align-middle d-flex d-sm-none">
             <p
-              style="white-space: pre-wrap; max-width: 130px"
+              style="white-space: pre-wrap; max-width: 230px"
               class="text-truncate"
             >
               {{ item.title }}
@@ -216,14 +216,22 @@
             <v-btn fab small depressed class="mr-4" @click="confirmDeleteItem(item)">
               <v-icon default> mdi-delete </v-icon>
             </v-btn>
-            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
+            <is-live :item="item" @toggleIsLive="updateItem(item)" class="d-flex d-sm-none"></is-live>
           </div>
         </template>
 
-        <template v-slot:item.description="{ item }" class="d-none d-sm-flex">
+        <template v-slot:item.title="{ item }" class="d-none d-sm-flex">
+          <div class="pt-1 pb-0 my-0 text-subtitle-2 align-start">
+            <p
+              style="white-space: pre-wrap; max-width: 230px"
+              class="text-truncate"
+            >
+              {{ item.title }}
+            </p>
+          </div>
           <div class="px-2 my-2 align-middle">
             <p
-              style="white-space: pre-wrap; max-width: 130px"
+              style="white-space: pre-wrap; max-width: 230px"
               class="text-truncate"
             >
               {{ item.description }}
@@ -262,14 +270,14 @@
         <!--   <template slot="pageText" slot-scope="{ pageStart, pageStop }">
           From {{ pageStart }} to {{ pageStop }}
         </template> -->
-        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex">
+       <!--  <template v-slot:item.actions="{ item }" class="d-none d-sm-flex">
           <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
           <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
             mdi-delete
           </v-icon>
-        </template>
+        </template> -->
         <template v-slot:no-data>
           <v-btn v-bind="size" color="primary" @click="initialize">Reset</v-btn>
         </template>
@@ -468,7 +476,7 @@ export default {
             text: this.$i18n.t('settingsDesigns.description'),
             align: 'start',
             sortable: true,
-            value: 'description',
+            value: 'title',
           },
           {
             text: this.$i18n.t('settingsDesigns.tags'),
@@ -482,7 +490,7 @@ export default {
             value: 'is_live',
             // width: '20%',
           },
-          { text: 'Actions', value: 'actions', sortable: false },
+          // { text: 'Actions', value: 'actions', sortable: false },
         ]
         return headers
       }
