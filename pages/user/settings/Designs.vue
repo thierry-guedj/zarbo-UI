@@ -200,6 +200,7 @@
               />
             </nuxt-link>
           </div>
+        <!-- xs breakpoint only -->
           <div class="pt-1 pb-0 my-0 align-middle">
             <p
               style="white-space: pre-wrap; max-width: 130px"
@@ -208,12 +209,12 @@
               {{ item.title }}
             </p>
           </div>
-          <div class="mb-2 justify-content-end align-middle">
-            <v-btn fab small class="mr-4" @click="editItem(item)">
+          <div class="mb-2 justify-content-end align-middle d-flex">
+            <v-btn fab small flat depressed class="mr-4" @click="editItem(item)">
               <v-icon default> mdi-pencil </v-icon>
             </v-btn>
-            <v-btn fab small class="mr-4" @click="confirmDeleteItem(item)">
-              <v-icon large> mdi-delete </v-icon>
+            <v-btn fab small depressed class="mr-4" @click="confirmDeleteItem(item)">
+              <v-icon default> mdi-delete </v-icon>
             </v-btn>
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>

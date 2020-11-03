@@ -6,6 +6,7 @@
       class="mx-2 d-flex d-sm-none"
       fab
       dark
+      depressed
       :color="getColor"
       @click.native="
         loadingSubmit = true
