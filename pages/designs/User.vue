@@ -3,7 +3,7 @@
     <div v-if="$fetchState.pending" class="loader">
       <Circle8></Circle8>
     </div>
-    <div v-else class="pt-6 pl-6">
+    <div v-else>
       <v-btn
         v-show="fab"
         v-scroll="onScroll"
