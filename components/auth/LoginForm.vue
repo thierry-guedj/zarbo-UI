@@ -77,14 +77,14 @@
       </div>
       <v-btn
         v-bind="size"
-        class="mr-4 float-right"
+        class="mr-0 float-right"
         type="submit"
         :loading="loadingSubmit"
         :disabled="$v.form.$invalid"
       >
         {{ $t('login.submit') }}</v-btn
       >
-      <v-btn v-bind="size" :disabled="loadingSubmit" @click="hideModal">{{
+      <v-btn v-bind="size" class="text-center" :disabled="loadingSubmit" @click="hideModal">{{
         $t('contact.cancel')
       }}</v-btn>
       <div class="font-14 fw-400 text-center mt-4 right">
