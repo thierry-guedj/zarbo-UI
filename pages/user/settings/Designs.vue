@@ -200,7 +200,7 @@
               />
             </nuxt-link>
           </div>
-        <!-- xs breakpoint only -->
+          <!-- xs breakpoint only -->
           <div class="pt-1 pb-0 my-0 align-middle d-flex d-sm-none">
             <p
               style="white-space: pre-wrap; max-width: 230px"
@@ -210,31 +210,46 @@
             </p>
           </div>
           <div class="mb-2 justify-content-end align-middle d-flex d-sm-none">
-            <v-btn fab small flat depressed class="mr-4" @click="editItem(item)">
+            <v-btn
+              fab
+              small
+              flat
+              depressed
+              class="mr-4"
+              @click="editItem(item)"
+            >
               <v-icon default> mdi-pencil </v-icon>
             </v-btn>
-            <v-btn fab small depressed class="mr-4" @click="confirmDeleteItem(item)">
+            <v-btn
+              fab
+              small
+              depressed
+              class="mr-4"
+              @click="confirmDeleteItem(item)"
+            >
               <v-icon default> mdi-delete </v-icon>
             </v-btn>
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
         </template>
 
-        <template v-slot:item.title="{ item }" class="d-none d-sm-flex align-top">
+        <template
+          v-slot:item.title="{ item }"
+          class="d-none d-sm-flex align-top"
+        >
           <div class="pt-1 pb-0 my-0 text-subtitle-2 align-top">
             <p
-              style="white-space: pre-wrap; max-width: 230px"
-              class="text-truncate align-top"
+              style="white-space: pre-line; max-width: 230px"
+              class="align-top"
             >
-              {{ item.title }}
+              {{ item.title | truncate(50, '...') }}
             </p>
           </div>
           <div class="px-2 my-2 align-top">
             <p
-              style="white-space: pre-wrap; max-width: 230px"
-              class="text-truncate"
+              style="white-space: pre-line; max-width: 430px; overflow: hidden"
             >
-              {{ item.description }}
+              {{ item.description | truncate(350, '...') }}
             </p>
           </div>
         </template>
@@ -477,21 +492,27 @@ export default {
             align: 'start top',
             sortable: true,
             value: 'title',
+            width: '35%',
           },
           {
             text: this.$i18n.t('settingsDesigns.tags'),
             align: 'start',
             sortable: true,
             value: 'tags',
-            width: '35%',
+            width: '25%',
           },
           {
             text: this.$i18n.t('settingsDesigns.status'),
             value: 'is_live',
             align: 'middle',
-            // width: '20%',
+            width: '260px',
           },
-          { text: 'Actions', value: 'actions', sortable: false },
+          {
+            text: 'Actions',
+            value: 'actions',
+            sortable: false,
+            width: '150px',
+          },
         ]
         return headers
       }
@@ -713,6 +734,9 @@ export default {
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
+.v-card__title {
+  word-break: break-word;
+}
 img {
   max-width: 100%;
   height: auto;
@@ -734,7 +758,9 @@ img {
 .v-toolbar__title {
   overflow: inherit !important;
 }
-.v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > td {
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > td,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > td {
   vertical-align: top;
 }
 </style>
