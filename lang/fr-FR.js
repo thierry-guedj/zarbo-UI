@@ -85,7 +85,7 @@ export default {
     email: 'E-mail',
     password: 'Mot de passe',
     confirmPassword: 'Confirmer le mot de passe',
-    submit: 'Créer un compte',
+    submit: 'Valider',
     emailSent: 'Nous vous avons envoyé un e-mail pour activer votre compte.',
     haveAccount: 'Déjà membre ?',
     login: 'Se connecter',
