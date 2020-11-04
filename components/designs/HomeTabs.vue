@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-slide-group {
+  display: contents !important;
+}
 .home-tabs {
   background-color: #0f1219 !important;
 }
@@ -54,7 +57,7 @@ img {
   width: auto\9; /* ie8 */
 }
 .v-tab.v-tab {
-
+  font-size: 10px;
   color: #006064 !important;
 }
 .v-tab--active.v-tab:not(:focus)::before {
