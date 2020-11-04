@@ -23,7 +23,7 @@
         <section class="hero text-white">
           <!-- <v-container> -->
           <v-row class="row-md-12">
-            <v-col class="col-md-2 text-center avatarUser">
+            <v-col class="col-md-2 text-center iconTitle">
               <avatar
                 :username="user.name"
                 :src="user.avatars.large"
