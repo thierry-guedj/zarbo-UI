@@ -55,7 +55,19 @@
           </div>
         </div>
         <!-- End Single Image -->
-        <div class="float-right mt-2">
+        <!-- XS -->
+        <div class="mt-2 d-flex d-sm-none">
+          <v-btn
+            v-bind="size"
+            size="large"
+            color="orange darken-3"
+            @click="goToDesigns()"
+            ><v-icon v-bind="size" class="mr-2">flip_to_back</v-icon
+            >{{ $t('show.backToArtwork') }}</v-btn
+          >
+        </div>
+        <!-- Others -->
+        <div class="float-right mt-2 d-none d-sm-flex">
           <v-btn
             v-bind="size"
             size="large"
