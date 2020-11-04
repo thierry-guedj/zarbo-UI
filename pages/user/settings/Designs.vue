@@ -209,27 +209,27 @@
               {{ item.title }}
             </p>
           </div>
-          <div class="mb-2 justify-content-end align-middle d-flex">
+          <div class="mb-2 justify-content-end align-middle d-flex d-sm-none">
             <v-btn fab small flat depressed class="mr-4" @click="editItem(item)">
               <v-icon default> mdi-pencil </v-icon>
             </v-btn>
             <v-btn fab small depressed class="mr-4" @click="confirmDeleteItem(item)">
               <v-icon default> mdi-delete </v-icon>
             </v-btn>
-            <is-live :item="item" @toggleIsLive="updateItem(item)" class="d-flex d-sm-none"></is-live>
+            <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
         </template>
 
-        <template v-slot:item.title="{ item }" class="d-none d-sm-flex">
-          <div class="pt-1 pb-0 my-0 text-subtitle-2 align-start">
+        <template v-slot:item.title="{ item }" class="d-none d-sm-flex align-top">
+          <div class="pt-1 pb-0 my-0 text-subtitle-2 align-top">
             <p
               style="white-space: pre-wrap; max-width: 230px"
-              class="text-truncate"
+              class="text-truncate align-top"
             >
               {{ item.title }}
             </p>
           </div>
-          <div class="px-2 my-2 align-middle">
+          <div class="px-2 my-2 align-top">
             <p
               style="white-space: pre-wrap; max-width: 230px"
               class="text-truncate"
@@ -270,14 +270,14 @@
         <!--   <template slot="pageText" slot-scope="{ pageStart, pageStop }">
           From {{ pageStart }} to {{ pageStop }}
         </template> -->
-       <!--  <template v-slot:item.actions="{ item }" class="d-none d-sm-flex">
+        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex">
           <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
           <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
             mdi-delete
           </v-icon>
-        </template> -->
+        </template>
         <template v-slot:no-data>
           <v-btn v-bind="size" color="primary" @click="initialize">Reset</v-btn>
         </template>
@@ -474,7 +474,7 @@ export default {
           },
           {
             text: this.$i18n.t('settingsDesigns.description'),
-            align: 'start',
+            align: 'start top',
             sortable: true,
             value: 'title',
           },
@@ -488,9 +488,10 @@ export default {
           {
             text: this.$i18n.t('settingsDesigns.status'),
             value: 'is_live',
+            align: 'middle',
             // width: '20%',
           },
-          // { text: 'Actions', value: 'actions', sortable: false },
+          { text: 'Actions', value: 'actions', sortable: false },
         ]
         return headers
       }
@@ -732,5 +733,8 @@ img {
 }
 .v-toolbar__title {
   overflow: inherit !important;
+}
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > td {
+  vertical-align: top;
 }
 </style>

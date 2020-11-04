@@ -150,7 +150,7 @@ export default {
     published: 'Published',
     draft: 'Draft',
     artwork: 'Your artwork',
-    description: 'Description',
+    description: 'Title and Description',
     tags: 'Tags',
     confirmDelete: 'Please confirm',
     cancel: 'Cancel',

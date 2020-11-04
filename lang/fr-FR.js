@@ -151,7 +151,7 @@ export default {
     published: 'Publiée',
     draft: 'Brouillon',
     artwork: 'Vos oeuvres',
-    description: 'Description',
+    description: 'Titre et Description',
     tags: 'Mots-clés',
     confirmDelete: 'Veuillez confirmer la suppression',
     cancel: 'Annuler',
