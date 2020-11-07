@@ -254,7 +254,7 @@
           </div>
         </template>
         <template v-slot:item.tags="{ item }" class="d-none d-sm-flex">
-          <div class="mr-3">
+          <div class="mr-3 mt-3">
             <v-btn
               v-for="(tag, i) in item.tags"
               :key="`${i}-${tag}`"
@@ -285,7 +285,7 @@
         <!--   <template slot="pageText" slot-scope="{ pageStart, pageStop }">
           From {{ pageStart }} to {{ pageStop }}
         </template> -->
-        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex mt-3">
+        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex mt-4">
           <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
