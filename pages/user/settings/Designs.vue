@@ -213,7 +213,7 @@
             <v-btn
               fab
               small
-              flat
+              text
               depressed
               class="mr-4"
               @click="editItem(item)"
