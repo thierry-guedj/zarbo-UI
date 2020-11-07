@@ -424,7 +424,6 @@ export default {
   },
   mounted() {
     this.getAllTags()
-    this.toTop()
   },
   computed: {
     titleErrors() {
@@ -533,7 +532,7 @@ export default {
     if (from.params.upload) {
       this.snackbar = true
     }
-
+    this.toTop()
     next()
   },
   created() {
