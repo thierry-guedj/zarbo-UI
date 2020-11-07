@@ -427,6 +427,7 @@ export default {
   },
   mounted() {
     this.getAllTags()
+    this.toTop()
   },
   computed: {
     titleErrors() {
@@ -713,6 +714,9 @@ export default {
       slug = slug.replace(/\s+/g, '-')
 
       return slug
+    },
+    toTop() {
+      this.$vuetify.goTo(0)
     },
   },
 }
