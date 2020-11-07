@@ -57,7 +57,7 @@ img {
   width: auto\9; /* ie8 */
 }
 .v-tab.v-tab {
-  font-size: 12px;
+  font-size: 10px;
   color: #006064 !important;
 }
 .v-tab--active.v-tab:not(:focus)::before {

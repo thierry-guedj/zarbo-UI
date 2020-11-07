@@ -242,7 +242,7 @@
               style="white-space: pre-line; max-width: 230px"
               class="align-top"
             >
-              {{ item.title | truncate(50, '...') }}
+              {{ item.title | capitalize | truncate(50, '...') }}
             </p>
           </div>
           <div class="px-2 my-2 align-top">
@@ -278,14 +278,14 @@
           </div>
         </template>
         <template v-slot:item.is_live="{ item }" class="d-none d-sm-flex">
-          <div class="mr-3">
+          <div class="mr-3 mt-3">
             <is-live :item="item" @toggleIsLive="updateItem(item)"></is-live>
           </div>
         </template>
         <!--   <template slot="pageText" slot-scope="{ pageStart, pageStop }">
           From {{ pageStart }} to {{ pageStop }}
         </template> -->
-        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex">
+        <template v-slot:item.actions="{ item }" class="d-none d-sm-flex mt-3">
           <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -733,6 +733,9 @@ export default {
 } */
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
+}
+.v-slide-group.v-item-group > .v-slide-group__next, .v-slide-group.v-item-group > .v-slide-group__prev {
+  display: contents;
 }
 .v-card__title {
   word-break: break-word;
