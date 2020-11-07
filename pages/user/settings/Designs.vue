@@ -286,12 +286,14 @@
           From {{ pageStart }} to {{ pageStop }}
         </template> -->
         <template v-slot:item.actions="{ item }" class="d-none d-sm-flex mt-4">
-          <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon>
-          <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
-            mdi-delete
-          </v-icon>
+          <div class="mt-3">
+            <v-icon v-bind="size" small class="mr-2" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon v-bind="size" small @click="confirmDeleteItem(item)">
+              mdi-delete
+            </v-icon>
+          </div>
         </template>
         <template v-slot:no-data>
           <v-btn v-bind="size" color="primary" @click="initialize">Reset</v-btn>
@@ -734,7 +736,8 @@ export default {
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
-.v-slide-group.v-item-group > .v-slide-group__next, .v-slide-group.v-item-group > .v-slide-group__prev {
+.v-slide-group.v-item-group > .v-slide-group__next,
+.v-slide-group.v-item-group > .v-slide-group__prev {
   display: contents;
 }
 .v-card__title {
