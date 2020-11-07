@@ -247,7 +247,12 @@
           </div>
           <div class="px-2 my-2 align-top">
             <p
-              style="white-space: pre-line; min-width: 430px; max-width: 430px; overflow: hidden"
+              style="
+                white-space: pre-line;
+                min-width: 430px;
+                max-width: 430px;
+                overflow: hidden;
+              "
             >
               {{ item.description | truncate(350, '...') }}
             </p>
@@ -733,6 +738,9 @@ export default {
   margin-right: 4px;
   padding: 3px;
 } */
+table.dataTable tbody td {
+  vertical-align: top;
+}
 .theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined).upload-button {
   background-color: rgba(31, 124, 142, 0.65);
 }
