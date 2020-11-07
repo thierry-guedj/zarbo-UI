@@ -237,7 +237,7 @@
           v-slot:item.title="{ item }"
           class="d-none d-sm-flex align-top"
         >
-          <div class="pt-1 pb-0 my-0 text-subtitle-2 align-top">
+          <div class="pt-0 pb-0 my-0 text-subtitle-2 align-top">
             <p
               style="white-space: pre-line; max-width: 230px"
               class="align-top"
@@ -247,7 +247,7 @@
           </div>
           <div class="px-2 my-2 align-top">
             <p
-              style="white-space: pre-line; max-width: 430px; overflow: hidden"
+              style="white-space: pre-line; min-width: 430px; max-width: 430px; overflow: hidden"
             >
               {{ item.description | truncate(350, '...') }}
             </p>
