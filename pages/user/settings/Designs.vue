@@ -238,14 +238,11 @@
           class="d-none d-sm-flex align-top"
         >
           <div class="pt-0 pb-0 my-0 text-subtitle-2 align-top">
-            <p
-              style="white-space: pre-line; max-width: 230px"
-              class="align-top"
-            >
+            <p style="max-width: 230px" class="align-top">
               {{ item.title | capitalize | truncate(50, '...') }}
             </p>
           </div>
-          <div class="px-2 my-2 align-top">
+          <div class="px-0 my-2 align-top">
             <p
               style="
                 white-space: pre-line;

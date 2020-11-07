@@ -1,7 +1,7 @@
 <template>
   <v-tabs>
     <v-tab>{{ $t('widgetTitle.moreFromUser') }}</v-tab>
-    <v-tab>{{ $t('widgetTitle.moreFromTags') }}</v-tab>
+    <!-- <v-tab>{{ $t('widgetTitle.moreFromTags') }}</v-tab> -->
     <v-tab-item class="mx-auto">
       <more-from-user :design-id="designId" :user="user"></more-from-user>
     </v-tab-item>
