@@ -280,7 +280,7 @@ export default {
   },
 
   async fetch() {
-    const url = `/designs/${this.designId}`
+    const url = `/designs/${this.$route.params.id}`
     const response = await this.$axios.$get(url)
     this.design = response.data
     this.comments = response.data.comments
@@ -306,7 +306,7 @@ export default {
       user: {},
       created_at_dates: {},
       images: {},
-      designId: 13,
+      designId: this.$route.params.id,
       width: '500px',
       prevRoute: null,
       index: null,
