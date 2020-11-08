@@ -306,7 +306,7 @@ export default {
       user: {},
       created_at_dates: {},
       images: {},
-      designId: this.$route.params.id,
+      designId: 13,
       width: '500px',
       prevRoute: null,
       index: null,
