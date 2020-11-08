@@ -126,7 +126,7 @@
         <!-- RIGHT -->
         <v-card-text>
           <!-- Design Infos -->
-          <div v-show="!$vuetify.breakpoint.xsOnly" class="mb-6">
+          <div v-show="!$vuetify.breakpoint.xsOnly" class="mb-0">
             <p class="text-h4 text-left block">
               {{ designTitle | capitalize | truncate(25, '...') }}
             </p>
@@ -430,6 +430,9 @@ export default {
   width: auto;
   text-align: center;
 } */
+.v-application .text-h4 {
+  line-height: 1rem;
+}
 .design-image {
   max-width: 100%;
   max-height: 100vh;
