@@ -64,10 +64,7 @@
         </div>
         <!-- Others -->
         <div class="float-right mt-2 d-none d-sm-flex">
-          <v-btn
-            large
-            color="orange darken-3"
-            @click="goToDesigns()"
+          <v-btn large color="orange darken-3" @click="goToDesigns()"
             ><v-icon small class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >
@@ -321,6 +318,9 @@ export default {
         width: '',
       },
     }
+  },
+  mounted() {
+    console.log(this.designId)
   },
   computed: {
     ...mapGetters(['visible']),
