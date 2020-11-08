@@ -190,13 +190,13 @@
               <div class="white-bg-color fadein" style="display: block">
                 <v-row>
                   <v-col class="col-md-12 text-left"
-                    ><h2 class="font-16 fw-500 mb-2">
+                    ><h2 class="font-16 fw-500 mb-0">
                       {{ $t('show.theArtist') }}
                     </h2></v-col
                   >
                 </v-row>
                 <v-row class="row-md-12 p-0">
-                  <v-col class="col-md-3 p-0">
+                  <v-col class="col-md-2 p-0">
                     <avatar
                       :username="user.name"
                       :src="user.avatars.medium"
