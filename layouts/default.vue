@@ -67,7 +67,12 @@
                 }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'settings.profile' }" router exact @click="drawer = false">
+            <v-list-item
+              :to="{ name: 'settings.profile' }"
+              router
+              exact
+              @click="drawer = false"
+            >
               <v-list-item-action>
                 <v-icon>face</v-icon>
               </v-list-item-action>
@@ -98,7 +103,12 @@
               }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{ name: 'cgu' }" router exact @click="drawer = false">
+          <v-list-item
+            :to="{ name: 'cgu' }"
+            router
+            exact
+            @click="drawer = false"
+          >
             <v-list-item-action>
               <v-icon>policy</v-icon>
             </v-list-item-action>
@@ -108,7 +118,12 @@
               }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="{ name: 'privacy.policy' }" router exact @click="drawer = false">
+          <v-list-item
+            :to="{ name: 'privacy.policy' }"
+            router
+            exact
+            @click="drawer = false"
+          >
             <v-list-item-action>
               <v-icon>mdi-security</v-icon>
             </v-list-item-action>
@@ -458,6 +473,20 @@ export default {
     }
   },
   computed: {
+    /* responsiveFolder() {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          return 'bg-xs'
+        case 'sm':
+          return 'bg-sm'
+        case 'md':
+          return 'bg_md'
+        case 'lg':
+          return 'bg-lg'
+        case 'xl':
+          return 'bgxl'
+      }
+    }, */
     backgroundUrl() {
       return require(`~/assets/images/bg/${this.bgImage}`)
     },

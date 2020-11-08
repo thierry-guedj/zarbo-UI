@@ -44,7 +44,10 @@
                     ></v-select
                   ></v-col>
 
-                  <v-col cols="auto" class="search-col d-flex align-items-center">
+                  <v-col
+                    cols="auto"
+                    class="search-col d-flex align-items-center"
+                  >
                     <v-checkbox
                       id="has_comments"
                       v-model="filters.has_comments"

@@ -128,7 +128,7 @@
           <!-- Design Infos -->
           <div v-show="!$vuetify.breakpoint.xsOnly" class="mb-6">
             <p class="text-h4 text-left block">
-              {{ designTitle | capitalize }}
+              {{ designTitle | capitalize | truncate(25, '...') }}
             </p>
             <v-divider class="mx-0"></v-divider>
             <p class="text-h6 text-left block">
@@ -149,9 +149,9 @@
               {{ $t('show.published') }}
               {{ design.created_at_dates.created_at_human }}
             </p>
-            <div class="fadin">
+            <!-- <div class="fadin">
               <DesignLike :design="design"></DesignLike>
-            </div>
+            </div> -->
           </div>
           <v-divider class="mx-0 mb-6"></v-divider>
           <div class="post-detail-sidebar mt-3">
