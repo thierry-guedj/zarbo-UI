@@ -57,23 +57,18 @@
         <!-- End Single Image -->
         <!-- XS -->
         <div class="mt-2 d-flex d-sm-none">
-          <v-btn
-            v-bind="size"
-            size="large"
-            color="orange darken-3"
-            @click="goToDesigns()"
-            ><v-icon v-bind="size" class="mr-2">flip_to_back</v-icon
+          <v-btn large color="orange darken-3" @click="goToDesigns()"
+            ><v-icon small class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
         <!-- Others -->
         <div class="float-right mt-2 d-none d-sm-flex">
           <v-btn
-            v-bind="size"
-            size="large"
+            large
             color="orange darken-3"
             @click="goToDesigns()"
-            ><v-icon v-bind="size" class="mr-2">flip_to_back</v-icon
+            ><v-icon small class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
@@ -111,8 +106,8 @@
               class="pl-4 pr-0"
             ></v-textarea>
             <div class="mt-2 text-right pr-0">
-              <v-btn v-bind="size" type="submit" size="sm">
-                <v-icon v-bind="size" class="mr-2">insert_comment</v-icon
+              <v-btn small type="submit">
+                <v-icon small class="mr-2">insert_comment</v-icon
                 >{{ $t('comments.postComment') }}
               </v-btn>
             </div>
@@ -333,7 +328,7 @@ export default {
       if (!this.design.title) return 'Sans Titre'
       else return this.design.title
     },
-    size() {
+    /* size() {
       const size = {
         xs: 'small',
         sm: 'small',
@@ -342,7 +337,7 @@ export default {
         xl: 'small',
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
-    },
+    }, */
   },
   methods: {
     ...mapActions(['hideModal']),
