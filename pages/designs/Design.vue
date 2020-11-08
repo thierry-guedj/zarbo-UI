@@ -14,7 +14,7 @@
             width="auto"
             height="auto"
             tile
-            elevation="5"
+            elevation="0"
             hover
             @click="nothing = null"
           >
