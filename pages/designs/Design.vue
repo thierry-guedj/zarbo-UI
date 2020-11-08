@@ -149,9 +149,9 @@
               {{ $t('show.published') }}
               {{ design.created_at_dates.created_at_human }}
             </p>
-            <!-- <div class="fadin">
+            <div class="fadin">
               <DesignLike :design="design"></DesignLike>
-            </div> -->
+            </div>
           </div>
           <v-divider class="mx-0 mb-6"></v-divider>
           <div class="post-detail-sidebar mt-3">
@@ -443,7 +443,7 @@ export default {
 .design-left-col {
   width: auto;
   max-width: max-content;
-  padding: 0 4%;
+  padding: 0 1%;
   min-width: auto;
 }
 .designs-tag-outer {
