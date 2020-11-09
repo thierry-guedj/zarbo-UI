@@ -228,13 +228,13 @@
             </ul> -->
             <!-- End Designer Design Info -->
             <!-- Designer More Designs -->
-            <v-card>
+            <!-- <v-card>
               <tabs
                 :design-id="design.id"
                 :user="user"
                 :tags="design.tag_list.tags"
               ></tabs>
-            </v-card>
+            </v-card> -->
             <!-- End Designer More Designs -->
           </div>
           <!-- <VueSocialSharing></VueSocialSharing> -->
