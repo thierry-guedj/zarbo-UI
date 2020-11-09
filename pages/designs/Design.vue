@@ -280,7 +280,7 @@ export default {
   },
 
   async fetch() {
-    const url = `/api/designs/${this.$route.params.id}`
+    const url = `/designs/${this.$route.params.id}`
     const response = await this.$axios.$get(url)
     this.design = response.data
     this.comments = response.data.comments
