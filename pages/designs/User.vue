@@ -265,7 +265,11 @@ export default {
         fields: {
           name: '',
           about: '',
-          created_dates: '',
+          created_dates: {
+            fields: {
+              created_at: '',
+            }
+          },
           tagline: '',
         },
       },

@@ -189,7 +189,6 @@
         <template v-slot:item.image="{ item }">
           <div class="px-0 pt-3 my-0 align-middle">
             <nuxt-link
-              v-if="item.is_live === 1"
               :to="
                 localePath({ name: 'design.details', params: { id: item.id } })
               "
