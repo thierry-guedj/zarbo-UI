@@ -5,7 +5,7 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'universal',
+  // mode: 'universal',
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -159,10 +159,6 @@ export default {
     { src: '~plugins/infiniteloading', mode: 'client' },
     '~plugins/components.js',
     '~plugins/vue-masonry-css.js',
-    {
-      src: './plugins/GoogleAnalytics.js',
-      mode: 'client',
-    },
     { src: '~/plugins/vue-tags-input', ssr: false },
   ],
   /*
