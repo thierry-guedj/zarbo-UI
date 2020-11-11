@@ -1,6 +1,6 @@
 <template>
   <v-tabs class="home-tabs" background-color="#0f1219">
-    <v-tab class="text-body-1">{{ $t('widgetTitle.lastDesigns') }}</v-tab>
+    <v-tab>{{ $t('widgetTitle.lastDesigns') }}</v-tab>
     <v-tab>{{ $t('widgetTitle.lastArtists') }}</v-tab>
     <v-tab-item class="mx-auto home-tabs-item">
       <last-designs></last-designs>
@@ -61,7 +61,7 @@ img {
   width: auto\9; /* ie8 */
 }
 .v-tab.v-tab {
-  // font-size: 10px;
+  font-size: 11px;
   color: #006064 !important;
 }
 .v-tab--active.v-tab:not(:focus)::before {
