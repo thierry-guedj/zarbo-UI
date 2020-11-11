@@ -280,7 +280,7 @@ export default {
   },
 
   async fetch() {
-    const url = `/designs/${this.$route.params.id}`
+    const url = `/designs/${this.designId}`
     const response = await this.$axios.$get(url)
     this.design = response.data
     this.comments = response.data.comments
@@ -319,7 +319,7 @@ export default {
       },
     }
   },
-  mounted() {
+  beforeMounted() {
     console.log(this.designId)
   },
   computed: {
