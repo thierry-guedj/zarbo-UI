@@ -265,11 +265,6 @@ export default {
         fields: {
           name: '',
           about: '',
-          created_at_dates: {
-            fields: {
-              created_at: '',
-            },
-          },
           tagline: '',
         },
       },
@@ -278,7 +273,7 @@ export default {
       noResultMessage: '',
     }
   },
-  fetchOnServer: true,
+  fetchOnServer: false,
   computed: {
     queryString() {
       return Object.keys(this.filters)
@@ -379,10 +374,6 @@ export default {
           hid: 'description',
           name: 'description',
           content: this.user.about,
-        },
-        {
-          property: 'artiste:created_time',
-          content: this.user.created_at_dates.created_at,
         },
         {
           property: 'artiste:tag',
