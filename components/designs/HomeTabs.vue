@@ -41,7 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-slide-group__next, .v-slide-group__prev {
+.v-slide-group__next,
+.v-slide-group__prev {
   min-width: 0 !important;
 }
 .v-slide-group {

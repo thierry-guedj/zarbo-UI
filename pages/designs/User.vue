@@ -261,7 +261,14 @@ export default {
       fab: false,
       index: null,
       itemsDesigns: [],
-      user: null,
+      user: {
+        fields: {
+          name: '',
+          about: '',
+          created_dates: '',
+          tagline: '',
+        },
+      },
       userId: this.$route.params.id,
 
       noResultMessage: '',
