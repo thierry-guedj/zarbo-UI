@@ -270,7 +270,7 @@ export default {
       noResultMessage: '',
     }
   },
-  fetchOnServer: false,
+  fetchOnServer: true,
   computed: {
     queryString() {
       return Object.keys(this.filters)
