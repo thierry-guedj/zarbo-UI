@@ -366,7 +366,7 @@ export default {
       return slug
     },
   },
-  head() {
+  /* head() {
     return {
       title: 'Zarbo, ' + this.user.name,
       meta: [
@@ -392,7 +392,7 @@ export default {
         },
       ],
     }
-  },
+  }, */
 }
 </script>
 
