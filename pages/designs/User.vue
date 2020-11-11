@@ -265,10 +265,10 @@ export default {
         fields: {
           name: '',
           about: '',
-          created_dates: {
+          created_at_dates: {
             fields: {
               created_at: '',
-            }
+            },
           },
           tagline: '',
         },
@@ -382,7 +382,7 @@ export default {
         },
         {
           property: 'artiste:created_time',
-          content: this.user.created_dates.created_at,
+          content: this.user.created_at_dates.created_at,
         },
         {
           property: 'artiste:tag',
