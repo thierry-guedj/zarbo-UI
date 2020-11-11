@@ -408,7 +408,7 @@ export default {
     }
   },
 
-  fetchOnServer: true,
+  fetchOnServer: false,
   /* mounted() {
     const img = new Image()
     img.src = this.design.images.large
