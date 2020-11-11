@@ -217,21 +217,17 @@ import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
 import Avatar from 'vue-avatar'
-// const sanitizeHtml = require('sanitize-html')
 export default {
   name: 'User',
   layout: 'designs-listing',
   components: {
-    // RingLoader,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     Circle8,
     CoolLightBox,
     Avatar,
   },
   async fetch() {
-    const res = await this.$axios.$get(
-      `/user/${this.$route.params.id}/findById`
-    )
+    const res = await this.$axios.$get(`/user/${this.userId}/findById`)
     this.user = res.data
     if (this.user.designs.length < 1) {
       this.noResultMessage = this.$i18n.t('user.noDesignResult')
@@ -266,6 +262,7 @@ export default {
       index: null,
       itemsDesigns: [],
       user: null,
+      userId: this.$route.params.id,
 
       noResultMessage: '',
     }
@@ -291,9 +288,6 @@ export default {
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
-    /* cleanUserAbout() {
-      return sanitizeHtml(this.user.about)
-    }, */
   },
   mounted() {
     this.fetchData()
@@ -366,7 +360,7 @@ export default {
       return slug
     },
   },
-  /* head() {
+  head() {
     return {
       title: 'Zarbo, ' + this.user.name,
       meta: [
@@ -392,7 +386,7 @@ export default {
         },
       ],
     }
-  }, */
+  },
 }
 </script>
 
