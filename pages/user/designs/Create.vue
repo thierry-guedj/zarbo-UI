@@ -26,7 +26,7 @@
             <p class="titlePage text-white">
               {{ $t('create.uploadArtwork') }}
             </p>
-            <p class="text-body-1 font-weight-regular">
+            <p class="text-body-1 font-weight-light">
               {{ $t('create.pageNotice') }}
             </p>
           </v-col>
@@ -37,11 +37,6 @@
       <v-row>
         <v-col class="col-md-6 upload-design">
           <v-card width="100%" class="mx-auto">
-            <!--  <v-card-title class="headline"
-              ><i class="material-icons md-24 mr-4">cloud_upload</i
-              >{{ $t('create.uploadArtwork') }}</v-card-title
-            > -->
-
             <v-card-text>
               <div v-if="error" class="alert alert-danger">
                 <p>An error occurred during the upload process</p>
@@ -77,13 +72,6 @@
                   <i class="fas fa-spinner fa-spin"></i>
                 </div>
               </div>
-
-              <!-- <div v-if="uploading" class="text-success caption-sm mt-2">
-             
-              <div class="loader">
-                <Circle8></Circle8>
-              </div>
-            </div> -->
             </v-card-text>
             <div class="upload-para mt-2 ml-4">
               <p class="font-14 fw-400">
@@ -96,15 +84,6 @@
           <v-card flat>
             <v-card-text>
               <form class="auth-form" @submit.prevent="submit">
-                <!-- <v-alert
-                  v-if="this.$v.form.$model.successful"
-                  color="#388E3C"
-                  dark
-                  icon="mark_email_unread"
-                  border="right"
-                  :form="form"
-                  >Design successfully updated</v-alert
-                > -->
                 <v-text-field
                   v-model.trim="$v.form.title.$model"
                   :error-messages="titleErrors"
@@ -129,27 +108,8 @@
                   @blur="$v.form.description.$touch()"
                 ></v-textarea>
                 <has-error :form="form" field="description"></has-error>
-                <!--  <v-textarea
-                  v-model.trim="$v.form.description"
-                  :counter="155"
-                  :label="$t('editDesign.description')"
-                  outlined
-                  class="mb-1"
-                  field="description"
-                ></v-textarea> -->
                 <p class="tags-notice">{{ $t('create.tagsNotice') }}</p>
                 <p class="tags-notice">{{ $t('create.tagsNotice2') }}</p>
-                <!-- <client-only>
-                  <input-tag
-                    v-model="form.tags"
-                    :tags="form.tags"
-                    field="tags"
-                    class="mb-1"
-                    :placeholder="$t('create.tagsLabel')"
-                    on-paste-delimiter=","
-                    outlined
-                  ></input-tag>
-                </client-only> -->
                 <client-only>
                   <vue-tags-input
                     v-model="form.tag"
@@ -213,8 +173,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { maxLength } from 'vuelidate/lib/validators'
-// import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
-// import $axios from '@nuxtjs/axios'
 import Slim from '@/components/slim/slim.vue'
 
 export default {
@@ -222,7 +180,6 @@ export default {
   middleware: ['auth'],
   layout: 'designs-listing',
   components: {
-    // InputTag: () => import('vue-input-tag'),
     'slim-cropper': Slim,
   },
   props: {
@@ -251,8 +208,6 @@ export default {
         tag: '',
         tags: [],
         slug: '',
-        /*  assign_to_team: false,
-        team: null, */
       }),
 
       slimOptions: {
@@ -541,25 +496,6 @@ export default {
 
 <style lang="scss">
 @import '~/assets/scss/tags.scss';
-
-/* .vue-input-tag-wrapper {
-  background-color: transparent !important;
-  border-radius: 4px !important;
-  border: 1px thin !important;
-  border-color: rgba(255, 255, 255, 0.24) !important;
-}
-.vue-input-tag-wrapper .input-tag {
-  background-color: #004d40 !important;
-  border-radius: 4px !important;
-  color: whitesmoke !important;
-  display: inline-block;
-  font-size: 15px !important;
-  border: none !important;
-  font-weight: 400;
-  margin-bottom: 4px;
-  margin-right: 4px;
-  padding: 3px;
-} */
 .upload-design {
   min-width: 300px;
 }
