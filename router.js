@@ -173,12 +173,12 @@ const routes = [
     component: page('designs/User.vue'),
   },
   {
-    path: '/design/:id',
+    path: '/designs/:id',
     name: 'design.details',
     component: page('designs/Design.vue'),
   },
   {
-    path: '/design/:id/fr/',
+    path: '/designs/:id/fr/',
     name: 'design.details___fr',
     component: page('designs/Design.vue'),
   },
