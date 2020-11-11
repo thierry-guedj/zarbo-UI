@@ -4,7 +4,7 @@
     :color="user.color"
     dark
     hover
-    style="max-height: 100%; max-width: 100vh;"
+    style="max-height: 100%; max-width: 100vh; min-width: max-content"
     class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
     @click="goToUser(`${user.id}`)"
   >

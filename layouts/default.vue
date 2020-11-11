@@ -276,7 +276,7 @@
       </v-parallax>
 
       <v-footer :absolute="!fixed" app dark padless>
-        <v-col class="line" cols="12"> </v-col>
+        <v-col class="line-footer" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
           <nuxt-link
             v-for="footerLink in footerLinks"
@@ -691,7 +691,13 @@ footer {
   ); /* Standard syntax (must be last) */
 }
 .line {
-  height: 1px;
+  height: 8px;
+  border-radius: 0px;
+  background: whitesmoke;
+  padding: 0;
+}
+.line-footer {
+  height: 8px;
   border-radius: 0px;
   background: whitesmoke;
   padding: 0;
