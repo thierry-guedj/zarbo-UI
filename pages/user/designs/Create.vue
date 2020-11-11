@@ -26,7 +26,7 @@
             <p class="titlePage text-white">
               {{ $t('create.uploadArtwork') }}
             </p>
-            <p class="text-h5">
+            <p class="text-body-1 font-weight-regular">
               {{ $t('create.pageNotice') }}
             </p>
           </v-col>
