@@ -266,11 +266,11 @@ export default {
       index: null,
       itemsDesigns: [],
       user: null,
-      fetchOnServer: true,
+
       noResultMessage: '',
     }
   },
-
+  fetchOnServer: true,
   computed: {
     queryString() {
       return Object.keys(this.filters)
