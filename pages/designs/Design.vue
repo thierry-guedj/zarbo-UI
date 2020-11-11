@@ -57,14 +57,14 @@
         <!-- End Single Image -->
         <!-- XS -->
         <div class="mt-2 d-flex d-sm-none">
-          <v-btn large color="orange darken-3" @click="goToDesigns()"
+          <v-btn small color="orange darken-3" @click="goToDesigns()"
             ><v-icon small class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >
         </div>
         <!-- Others -->
         <div class="float-right mt-2 d-none d-sm-flex">
-          <v-btn large color="orange darken-3" @click="goToDesigns()"
+          <v-btn small color="orange darken-3" @click="goToDesigns()"
             ><v-icon small class="mr-2">flip_to_back</v-icon
             >{{ $t('show.backToArtwork') }}</v-btn
           >
@@ -382,7 +382,7 @@ export default {
   },
   head() {
     return {
-      title: 'Zarbo, ' + this.design.title ? this.design.title : 'Sans titre',
+      title: 'Zarbo, ' + this.designTitle,
       meta: [
         {
           hid: 'description',
