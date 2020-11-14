@@ -247,7 +247,7 @@
         </template>
         <!-- End After Login -->
       </v-app-bar>
-      <v-parallax :src="backgroundUrl" height="500">
+      <v-parallax :src="backgroundUrl" :height="parallaxHeight">
         <div class="mt-18 text-left text-parallax mb-0">
           <h3
             class="whitesmoke--text text-left text--lighten-2 mb-0 d-block d-sm-none"
@@ -269,7 +269,7 @@
         </v-container>
       </v-main>
       <div class="line-footer"></div>
-      <v-parallax :src="backgroundUrl" height="600"
+      <v-parallax :src="backgroundUrl" :height="parallaxHeight"
         ><div class="mt-18 text-center text-parallax mb-0">
           <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
         </div>
@@ -473,22 +473,22 @@ export default {
     }
   },
   computed: {
-    /* responsiveFolder() {
+    responsiveFolder() {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
           return 'bg-xs'
         case 'sm':
           return 'bg-sm'
         case 'md':
-          return 'bg_md'
+          return 'bg-md'
         case 'lg':
           return 'bg-lg'
         case 'xl':
-          return 'bgxl'
+          return 'bg'
       }
-    }, */
+    },
     backgroundUrl() {
-      return require(`~/assets/images/bg/${this.bgImage}`)
+      return require(`~/assets/images/${this.responsiveFolder}/${this.bgImage}`)
     },
     availableLocales() {
       return this.$i18n.locales.filter((i) => i.code !== this.$i18n.locale)
@@ -503,6 +503,16 @@ export default {
         xl: 'small',
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
+    },
+    parallaxHeight() {
+      const parallaxHeight = {
+        xs: '300',
+        sm: '300',
+        md: '400',
+        lg: '400',
+        xl: '600',
+      }[this.$vuetify.breakpoint.name]
+      return parallaxHeight
     },
   },
   watch: {
