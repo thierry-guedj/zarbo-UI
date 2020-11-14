@@ -262,13 +262,13 @@
         </div>
       </v-parallax>
 
-      <div class="line"></div>
+      <div class="line-footer"></div>
       <v-main>
         <v-container class="main-container">
           <nuxt />
         </v-container>
       </v-main>
-      <div class="line"></div>
+      <div class="line-footer"></div>
       <v-parallax :src="backgroundUrl" height="600"
         ><div class="mt-18 text-center text-parallax mb-0">
           <p class="subtitle text-center mt-0">{{ $t('index.title') }}</p>
@@ -697,7 +697,7 @@ footer {
   padding: 0;
 }
 .line-footer {
-  height: 8px;
+  height: 1px;
   border-radius: 0px;
   background: whitesmoke;
   padding: 0;

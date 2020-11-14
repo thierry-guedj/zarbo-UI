@@ -260,7 +260,7 @@
       </v-main>
 
       <v-footer :absolute="!fixed" app dark padless>
-        <v-col class="line" cols="12"> </v-col>
+        <v-col class="line-footer" cols="12"> </v-col>
         <v-row justify="center" no-gutters>
           <nuxt-link
             v-for="footerLink in footerLinks"
@@ -559,7 +559,13 @@ export default {
   margin-left: 6px;
 }
 .line {
-  height: 1px;
+  height: 8px;
+  border-radius: 0px;
+  background: whitesmoke;
+  padding: 0;
+}
+.line-footer {
+  height: 2px;
   border-radius: 0px;
   background: whitesmoke;
   padding: 0;
