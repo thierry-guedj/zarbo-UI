@@ -4,7 +4,7 @@
   </div>
   <div v-else class="pt-6 pl-6">
     <v-row>
-      <v-col cols="7" class="design-left-col">
+      <v-col class="design-left-col">
         <!-- LEFT -->
 
         <!-- Single Image -->
@@ -29,7 +29,6 @@
             <img
               :src="design.images.large"
               class="design-image"
-              style="width: -moz-available"
               @click.stop="index = 0"
             />
           </v-card>
@@ -115,7 +114,7 @@
         <!--/ END COMMENTS-->
       </v-col>
       <v-divider class="mx-0" inset vertical></v-divider>
-      <v-col cols="4" class="design-right-col">
+      <v-col class="design-right-col">
         <!-- RIGHT -->
         <v-card-text>
           <!-- Design Infos -->
@@ -436,15 +435,15 @@ export default {
   border: 6px solid blanchedalmond;
 }
 /* .design-right-col {
-  width: 35%;
+  width: auto;
   max-width: max-content;
-}
+} */
 .design-left-col {
   width: auto;
   max-width: max-content;
   padding: 0 1%;
   min-width: auto;
-} */
+}
 .designs-tag-outer {
   margin-bottom: 0;
 }
