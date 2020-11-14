@@ -212,6 +212,7 @@ export default {
         q: '',
         orderBy: 'likes',
         page: 0,
+        nbResults: 6,
       },
       itemsOrderBy: [
         { title: this.$i18n.t('search.latestFirst'), value: 'latest' },
@@ -225,7 +226,7 @@ export default {
     }
   },
   computed: {
-    queryString() {
+    queryString() {      
       return Object.keys(this.filters)
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
@@ -233,6 +234,16 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
+    },
+    responsiveNbResults() {
+      const responsiveNbResults = {
+        xs: 1,
+        sm: 3,
+        md: 6,
+        lg: 6,
+        xl: 6,
+      }[this.$vuetify.breakpoint.name]
+      return responsiveNbResults
     },
     size() {
       const size = {
@@ -256,6 +267,7 @@ export default {
       this.searching = true
       this.identifier = new Date()
       this.filters.page = 1
+      this.filters.nbResults = this.responsiveNbResults
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
       const noTitle = 'Sans Titre'
