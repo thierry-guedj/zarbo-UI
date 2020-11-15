@@ -486,6 +486,7 @@ export default {
         case 'xl':
           return 'bg'
       }
+      return 'bg'
     },
     backgroundUrl() {
       return require(`~/assets/images/${this.responsiveFolder}/${this.bgImage}`)
