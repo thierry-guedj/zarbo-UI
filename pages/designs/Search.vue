@@ -16,7 +16,6 @@
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
-        <!-- <v-container> -->
         <v-row class="row-md-12">
           <v-col class="col-md-2 text-center iconTitle">
             <img src="/artworksIcon.png" class="ml-3 mr-2"
@@ -90,9 +89,7 @@
             </v-container>
           </v-col>
         </v-row>
-        <!-- </v-container> -->
       </section>
-
       <v-container class="p-0 m-0 row-designs">
         <div v-if="searching" class="loader p-0">
           <Circle8></Circle8>
@@ -104,26 +101,19 @@
               color="accent"
               dark
               transition="scale-transition"
-              width="60%"
+              width="auto"
               class="alert"
             >
               {{ $t('designs.noCriteriaResult') }}
+
               <v-spacer />
-              <nuxt-link :to="{ name: 'designs.search' }">
-                <v-btn v-bind="size" class="mt-3"
-                  ><v-icon v-bind="size" right dark class="mx-2">reply</v-icon
-                  >{{ $t('designs.backToResults') }}</v-btn
-                >
-              </nuxt-link>
+              <v-btn v-bind="size" class="mt-3" @click="backToResults">
+                <v-icon v-bind="size" right dark class="mx-2">reply</v-icon
+                >{{ $t('designs.backToResults') }}</v-btn
+              >
             </v-alert>
           </template>
           <template v-else id="row-designs">
-            <!-- <nuxt-link :to="{ name: 'users.search' }">
-            <v-btn v-bind="size" class="mt-3"
-              ><v-icon v-bind="size" right dark class="mx-2">reply</v-icon
-              >{{ $t('designs.backToResults') }}</v-btn
-            >
-          </nuxt-link> -->
             <v-row
               transition-duration="0.3s"
               item-selector=".item"
@@ -174,11 +164,7 @@
       </v-container>
       <!-- Modal  -->
       <keep-alive>
-        <base-modal
-          :dialog.sync="visible"
-          @showDesign="styleModal()"
-          @closeDialog="hideModal()"
-        />
+        <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
       </keep-alive>
     </v-container>
   </section>
@@ -186,7 +172,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-// import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import Circle8 from 'vue-loading-spinner/src/components/Circle8.vue'
 import CoolLightBox from 'vue-cool-lightbox'
 import 'vue-cool-lightbox/dist/vue-cool-lightbox.min.css'
@@ -194,7 +179,6 @@ export default {
   name: 'Search',
   layout: 'designs-listing',
   components: {
-    // RingLoader,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     Circle8,
     CoolLightBox,
@@ -226,7 +210,7 @@ export default {
     }
   },
   computed: {
-    queryString() {      
+    queryString() {
       return Object.keys(this.filters)
         .map((k) => `${k}=${this.filters[k]}`)
         .join('&')
@@ -234,16 +218,6 @@ export default {
     ...mapGetters(['visible', 'modalComponent', 'folder']),
     url() {
       return `/search/designs?${this.queryString}`
-    },
-    responsiveNbResults() {
-      const responsiveNbResults = {
-        xs: 1,
-        sm: 3,
-        md: 6,
-        lg: 6,
-        xl: 6,
-      }[this.$vuetify.breakpoint.name]
-      return responsiveNbResults
     },
     size() {
       const size = {
@@ -254,6 +228,16 @@ export default {
         xl: 'small',
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
+    },
+    responsiveNbResults() {
+      const responsiveNbResults = {
+        xs: 1,
+        sm: 3,
+        md: 6,
+        lg: 6,
+        xl: 6,
+      }[this.$vuetify.breakpoint.name]
+      return responsiveNbResults
     },
   },
   mounted() {
@@ -277,14 +261,10 @@ export default {
           description: design.description,
           src: design.images.extralarge,
         })
-        console.log(design.title)
       })
-
-      //  this.designs = Object.freeze(this.designs)
       this.searching = false
       this.filters.page += 1
     },
-
     infiniteHandler($state) {
       this.$axios
         .$get(this.url)
@@ -299,7 +279,6 @@ export default {
                   src: itemData.images.extralarge,
                 })
               })
-
               $state.loaded()
             } else {
               $state.loaded()
@@ -316,7 +295,17 @@ export default {
         })
       this.filters.page += 1
     },
-
+    backToResults() {
+      this.filters = {
+        has_team: 0,
+        has_comments: 0,
+        q: '',
+        orderBy: 'likes',
+        page: 0,
+        nbResults: 6,
+      }
+      this.fetchData()
+    },
     onScroll(e) {
       if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
@@ -325,13 +314,6 @@ export default {
     toTop() {
       this.$vuetify.goTo(0)
     },
-    /* goTo(to, folderName) {
-      // this.hideModal()
-      setTimeout(
-        () => this.showModal({ componentName: to, folder: folderName }),
-        300
-      )
-    }, */
   },
 }
 </script>

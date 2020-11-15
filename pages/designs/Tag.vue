@@ -44,7 +44,10 @@
                     ></v-select
                   ></v-col>
 
-                  <v-col cols="auto" class="d-flex align-items-center search-col">
+                  <v-col
+                    cols="auto"
+                    class="d-flex align-items-center search-col"
+                  >
                     <v-checkbox
                       id="has_comments"
                       v-model="filters.has_comments"
@@ -94,18 +97,21 @@
         </div>
         <div v-else class="pl-0 pb-6 pr-0">
           <template v-if="!designs.length" class="pb-6 text-center">
-            <div class="mx-auto">
-              <v-alert
-                border="right"
-                color="accent"
-                dark
-                transition="scale-transition"
-                width="60%"
-                class="alert"
+            <v-alert
+              border="right"
+              color="accent"
+              dark
+              transition="scale-transition"
+              width="auto"
+              class="alert"
+            >
+              {{ $t('designs.noCriteriaResult') }}
+              <v-spacer />
+              <v-btn v-bind="size" class="mt-3" @click="backToResults">
+                <v-icon v-bind="size" right dark class="mx-2">reply</v-icon
+                >{{ $t('designs.backToResults') }}</v-btn
               >
-                {{ $t('tag.noCriteriaResult') }}
-              </v-alert>
-            </div>
+            </v-alert>
           </template>
           <template v-else id="row-designs">
             <v-row
@@ -157,13 +163,9 @@
         </div>
       </v-container>
       <!-- Modal  -->
-      <!-- <keep-alive> -->
-      <base-modal
-        :dialog.sync="visible"
-        @showDesign="styleModal()"
-        @closeDialog="hideModal()"
-      />
-      <!-- </keep-alive> -->
+      <keep-alive>
+        <base-modal :dialog.sync="visible" @closeDialog="hideModal()" />
+      </keep-alive>
       <!-- End Modal -->
     </v-container>
   </section>
@@ -179,7 +181,6 @@ export default {
   name: 'Tag',
   layout: 'designs-listing',
   components: {
-    // RingLoader,
     lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     Circle8,
     CoolLightBox,
@@ -199,6 +200,7 @@ export default {
         orderBy: 'likes',
         tag: `${this.$route.params.tag}`,
         page: 1,
+        nbResults: 6,
       },
       itemsOrderBy: [
         { title: this.$i18n.t('search.latestFirst'), value: 'latest' },
@@ -232,6 +234,16 @@ export default {
       }[this.$vuetify.breakpoint.name]
       return size ? { [size]: true } : {}
     },
+    responsiveNbResults() {
+      const responsiveNbResults = {
+        xs: 1,
+        sm: 3,
+        md: 6,
+        lg: 6,
+        xl: 6,
+      }[this.$vuetify.breakpoint.name]
+      return responsiveNbResults
+    },
   },
   mounted() {
     this.fetchData()
@@ -244,6 +256,7 @@ export default {
       this.searching = true
       this.identifier = new Date()
       this.filters.page = 1
+      this.filters.nbResults = this.responsiveNbResults
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
       const noTitle = 'Sans Titre'
@@ -279,7 +292,6 @@ export default {
             }
           } else {
             $state.loaded()
-
             $state.complete()
           }
         })
@@ -288,8 +300,17 @@ export default {
         })
       this.filters.page += 1
     },
-    styleModal() {
-      this.fullscreen = true
+    backToResults() {
+      this.filters = {
+        has_team: 0,
+        has_comments: 0,
+        q: '',
+        orderBy: 'likes',
+        tag: `${this.$route.params.tag}`,
+        page: 1,
+        nbResults: 6,
+      }
+      this.fetchData()
     },
     onScroll(e) {
       if (typeof window === 'undefined') return
@@ -330,6 +351,9 @@ export default {
   text-align: center;
   margin: auto;
 }
+.v-application a {
+  text-decoration: none;
+}
 .v-select__selections input {
   display: none;
 }
@@ -347,7 +371,6 @@ export default {
   top: 50%;
   left: 50%;
 }
-
 .image {
   height: 300px;
   width: 300px;
