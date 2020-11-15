@@ -8,7 +8,10 @@
     class="mr-2 ml-2 my-2 mx-auto portfolio-item portfolio-effect__item portfolio-item--eff1"
     @click="goToUser(`${user.id}`)"
   >
-    <div class="d-flex flex-no-wrap justify-space-between">
+    <div
+      v-show="$vuetify.breakpoint.lgAndUp"
+      class="d-flex flex-no-wrap justify-space-between"
+    >
       <div>
         <v-card-title v-text="user.name"></v-card-title>
 
@@ -27,6 +30,7 @@
       <avatar
         :username="user.name"
         :src="user.avatars.medium"
+        :lazy-src="user.avatars.small"
         class="mx-3 mt-3"
         :size="100"
       ></avatar>
