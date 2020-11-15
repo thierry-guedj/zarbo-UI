@@ -144,7 +144,7 @@ export default {
     '@nuxtjs/auth',
     'vue-social-sharing/nuxt',
     'nuxt-i18n',
-    'nuxt-lazy-load',
+    // 'nuxt-lazy-load',
   ],
 
   i18n: {
