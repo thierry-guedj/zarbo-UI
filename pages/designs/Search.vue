@@ -230,11 +230,11 @@ export default {
     },
     responsiveNbResults() {
       const responsiveNbResults = {
-        xs: 1,
-        sm: 3,
-        md: 6,
-        lg: 6,
-        xl: 6,
+        xs: 12,
+        sm: 12,
+        md: 12,
+        lg: 12,
+        xl: 12,
       }[this.$vuetify.breakpoint.name]
       return responsiveNbResults
     },
