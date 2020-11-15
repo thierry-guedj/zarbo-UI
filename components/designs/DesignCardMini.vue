@@ -10,7 +10,7 @@
   >
     <v-img
       :src="`${design.images.thumbnail}`"
-      :lazy-src="`${design.images.minithumbnail}`"
+      :lazy-src="`${design.images.thumbnail}`"
     ></v-img>
     <div class="portfolio-item__info">
       <h3 class="portfolio-item__header">

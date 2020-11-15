@@ -180,8 +180,8 @@
                 force-use-infinite-wrapper="row-designs"
                 @infinite="infiniteHandler"
               >
-                <div slot="no-more">Plus de résultat</div>
-                <div slot="no-results">Pas de résultat</div>
+                <!-- <div slot="no-more">Plus de résultat</div>
+                <div slot="no-results">Pas de résultat</div> -->
               </infinite-loading>
             </template>
           </div>

@@ -139,12 +139,12 @@
                   500: 1,
                 }"
                 :gutter="{ default: '0px', 700: '15px' }"
-                ><DesignCard
+                ><lazy-component
                   v-for="(design, i) in designs"
                   :key="`${i}-${design.id}`"
                   :design="design"
                   @lightbox="index = parseInt(`${i}`)"
-                ></DesignCard
+                ></lazy-component
               ></masonry>
             </v-row>
 
@@ -156,8 +156,8 @@
               force-use-infinite-wrapper="row-designs"
               @infinite="infiniteHandler"
             >
-              <div slot="no-more">Plus de résultat</div>
-              <div slot="no-results">Pas de résultat</div>
+             <!--  <div slot="no-more">Plus de résultat</div>
+              <div slot="no-results">Pas de résultat</div> -->
             </infinite-loading>
           </template>
         </div>
@@ -179,7 +179,7 @@ export default {
   name: 'Search',
   layout: 'designs-listing',
   components: {
-    // lazyComponent: () => import('@/components/designs/DesignCard.vue'),
+    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     Circle8,
     CoolLightBox,
   },

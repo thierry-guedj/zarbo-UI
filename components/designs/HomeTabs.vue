@@ -1,7 +1,7 @@
 <template>
   <v-tabs class="home-tabs" background-color="#0f1219">
-    <v-tab>{{ $t('widgetTitle.lastDesigns') }}</v-tab>
-    <v-tab>{{ $t('widgetTitle.lastArtists') }}</v-tab>
+    <v-tab :style="fontSizeTabs">{{ $t('widgetTitle.lastDesigns') }}</v-tab>
+    <v-tab :style="fontSizeTabs">{{ $t('widgetTitle.lastArtists') }}</v-tab>
     <v-tab-item class="mx-auto home-tabs-item">
       <last-designs></last-designs>
     </v-tab-item>
@@ -26,15 +26,15 @@ export default {
     }
   },
   computed: {
-    fontSizeTab() {
-      const fontSizeTab = {
+    fontSizeTabs() {
+      const fontSizeTabs = {
         xs: 'font-size:10px;',
         sm: 'font-size:12px;',
         md: 'font-size:14px;',
         lg: 'font-size:14px;',
         xl: 'font-size:14px;',
       }[this.$vuetify.breakpoint.name]
-      return fontSizeTab ? { [fontSizeTab]: true } : {}
+      return fontSizeTabs
     },
   },
 }
