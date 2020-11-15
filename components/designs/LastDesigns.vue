@@ -30,12 +30,12 @@
               500: 1,
             }"
             :gutter="{ default: '0px', 700: '15px' }"
-            ><lazy-component
+            ><designCard
               v-for="(design, i) in designs"
               :key="`${i}-${design.id}`"
               :design="design"
               @lightbox="index = parseInt(`${i}`)"
-            ></lazy-component
+            ></designCard
           ></masonry>
         </v-row>
       </div>
@@ -52,7 +52,7 @@ export default {
   name: 'LastDesigns',
   components: {
     Circle8,
-    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
+    // lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     CoolLightBox,
   },
   data() {
