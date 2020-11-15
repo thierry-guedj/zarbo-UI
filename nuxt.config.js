@@ -33,55 +33,6 @@ export default {
         name: 'description',
         content: process.env.npm_package_description || '',
       },
-      /* // Facebook
-      { property: 'og:site_name', content: 'I Love Painting' },
-      { hid: 'og:type', property: 'og:type', content: 'website' },
-      {
-        hid: 'og:url',
-        property: 'og:url',
-        content: 'https://bobross.com',
-      },
-      {
-        hid: 'og:title',
-        property: 'og:title',
-        content: 'My Amazing Blog on The Joy of Painting',
-      },
-      {
-        hid: 'og:description',
-        property: 'og:description',
-        content: 'Articles focused on the beautiful art of landscape painting.',
-      },
-      {
-        hid: 'og:image',
-        property: 'og:image',
-        content: '/a-lovely-image.png',
-      },
-      { property: 'og:image:width', content: '740' },
-      { property: 'og:image:height', content: '300' },
-
-      // Twitter
-      { name: 'twitter:site', content: '@bobross' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      {
-        hid: 'twitter:url',
-        name: 'twitter:url',
-        content: 'https://zarbo.fr',
-      },
-      {
-        hid: 'twitter:title',
-        name: 'twitter:title',
-        content: 'My Amazing Blog on The Joy of Painting',
-      },
-      {
-        hid: 'twitter:description',
-        name: 'twitter:description',
-        content: 'Articles focused on the beautiful art of landscape painting.',
-      },
-      {
-        hid: 'twitter:image',
-        name: 'twitter:image',
-        content: '/a-loveley-image.png',
-      }, */
     ],
     link: [
       {
@@ -165,7 +116,6 @@ export default {
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
    */
-  // components: true,
 
   components: true,
   /*
@@ -194,6 +144,7 @@ export default {
     '@nuxtjs/auth',
     'vue-social-sharing/nuxt',
     'nuxt-i18n',
+    'nuxt-lazy-load',
   ],
 
   i18n: {
