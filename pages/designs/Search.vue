@@ -139,12 +139,12 @@
                   500: 1,
                 }"
                 :gutter="{ default: '0px', 700: '15px' }"
-                ><designCard
+                ><lazy-component
                   v-for="(design, i) in designs"
                   :key="`${i}-${design.id}`"
                   :design="design"
                   @lightbox="index = parseInt(`${i}`)"
-                ></designCard
+                ></lazy-component
               ></masonry>
             </v-row>
 
@@ -179,7 +179,7 @@ export default {
   name: 'Search',
   layout: 'designs-listing',
   components: {
-    // lazyComponent: () => import('@/components/designs/DesignCard.vue'),
+    lazyComponent: () => import('@/components/designs/DesignCard.vue'),
     Circle8,
     CoolLightBox,
   },
