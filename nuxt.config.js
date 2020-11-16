@@ -112,7 +112,6 @@ export default {
     '~plugins/vue-masonry-css.js',
     { src: '~/plugins/vue-tags-input', ssr: false },
     '~/plugins/vue-lazysizes.client.js',
-    { src: '~/plugins/vue-lazyload', ssr: false },
   ],
   /*
    ** Auto import components
