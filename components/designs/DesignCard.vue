@@ -16,13 +16,13 @@
         :lazy-src="`${design.images.minithumbnail}`"
       >
       </v-img> -->
-      <figure class="picture">
+    
         <img
           :data-src="`${design.images.thumbnail}`"
           class="lazyload"
           :alt="design.title"
         />
-      </figure>
+    
 
       <div class="portfolio-item__info">
         <h3 class="portfolio-item__header">
