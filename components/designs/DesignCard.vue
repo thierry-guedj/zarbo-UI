@@ -11,18 +11,30 @@
       hover
       @click="goToDetails(`${design.id}`)"
     >
-      <v-img
+      <img v-lazy="design.images.thumbnail" />
+      <!-- <img
+        :src="`${design.images.thumbnail}` + '?lqip'"
+        :lazy-src="`${design.images.minithumbnail}`"
+      > -->
+      <!-- <picture>
+        <source
+          :srcSet="`${design.images.thumbnail}` + '?webp'"
+          type="image/webp"
+        />
+        <source :srcSet="`${design.images.thumbnail}`" type="image/jpeg" />
+        <img :src="`${design.images.thumbnail}`" />
+      </picture> -->
+      <!-- <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.minithumbnail}`"
       >
-      </v-img>
-    
-        <!-- <img
+      </v-img> -->
+
+      <!-- <img
           :data-src="`${design.images.thumbnail}`"
           class="lazyload"
           :alt="design.title"
         /> -->
-    
 
       <div class="portfolio-item__info">
         <h3 class="portfolio-item__header">

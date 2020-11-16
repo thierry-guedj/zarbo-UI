@@ -32,6 +32,7 @@
     "vue-goodshare": "^1.5.1",
     "vue-infinite-loading": "^2.4.5",
     "vue-input-tag": "^2.0.7",
+    "vue-lazyload": "^1.3.3",
     "vue-loading-spinner": "^1.0.11",
     "vue-social-sharing": "^3.0.0-beta.11",
     "vue-spinner": "^1.0.4",
@@ -40,6 +41,8 @@
     "vuetify-i18n-language-switcher-nuxt": "0.0.3"
   },
   "devDependencies": {
+    "@aceforth/nuxt-optimized-images": "^1.3.0",
+    "@bazzite/nuxt-optimized-images": "^0.4.0",
     "@nuxt/components": "^0.1.2",
     "@nuxt/typescript-build": "^1.0.3",
     "@nuxtjs/eslint-config": "^3.0.0",
@@ -52,7 +55,16 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.1",
+    "imagemin-svgo": "^8.0.0",
+    "lqip-loader": "^2.2.1",
     "prettier": "^2.0.5",
-    "vue-masonry-css": "^1.0.3"
+    "responsive-loader": "^2.2.0",
+    "sharp": "^0.26.2",
+    "sqip-loader": "^1.0.0",
+    "vue-masonry-css": "^1.0.3",
+    "webp-loader": "^0.6.0"
   }
 }

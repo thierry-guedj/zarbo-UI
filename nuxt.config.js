@@ -112,6 +112,7 @@ export default {
     '~plugins/vue-masonry-css.js',
     { src: '~/plugins/vue-tags-input', ssr: false },
     '~/plugins/vue-lazysizes.client.js',
+    { src: '~/plugins/vue-lazyload', ssr: false },
   ],
   /*
    ** Auto import components
@@ -126,8 +127,12 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/router',
+    '@aceforth/nuxt-optimized-images',
     // '@nuxtjs/moment',
   ],
+  optimizedImages: {
+    optimizeImages: true,
+  },
   moment: {
     timezone: true,
     locales: ['fr'],
