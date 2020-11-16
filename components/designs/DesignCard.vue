@@ -13,7 +13,7 @@
     >
       <v-img
         :src="`${design.images.thumbnail}`"
-        :lazy-src="`${design.images.thumbnail}`"
+        :lazy-src="`${design.images.minithumbnail}`"
       >
       </v-img>
 

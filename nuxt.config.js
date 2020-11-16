@@ -234,10 +234,8 @@ export default {
    */
   build: {
     extend(config, { isClient, isDev, loaders: { vue } }) {
-      if (isClient) {
-        vue.transformAssetUrls.img = ['data-src', 'src']
-        vue.transformAssetUrls.source = ['data-srcset', 'srcset']
-      }
+      vue.transformAssetUrls.LazyImage = ['src']
+      vue.transformAssetUrls.source = ['data-srcset', 'srcset']
     },
     // SDU: This will be fixed in future versions of nuxt https://github.com/nuxt/nuxt.js/issues/7703
     filenames: {
