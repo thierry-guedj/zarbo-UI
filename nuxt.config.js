@@ -111,6 +111,7 @@ export default {
     '~plugins/components.js',
     '~plugins/vue-masonry-css.js',
     { src: '~/plugins/vue-tags-input', ssr: false },
+    '~/plugins/vue-lazysizes.client.js',
   ],
   /*
    ** Auto import components
@@ -234,6 +235,7 @@ export default {
   build: {
     extend(config, { isClient, isDev, loaders: { vue } }) {
       vue.transformAssetUrls.LazyImage = ['src']
+      vue.transformAssetUrls.source = ['data-srcset', 'srcset']
     },
     // SDU: This will be fixed in future versions of nuxt https://github.com/nuxt/nuxt.js/issues/7703
     filenames: {
