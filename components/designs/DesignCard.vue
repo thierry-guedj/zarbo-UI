@@ -11,7 +11,7 @@
       hover
       @click="goToDetails(`${design.id}`)"
     >
-      <img v-lazy="design.images.thumbnail" />
+      <!-- <img v-lazy="design.images.thumbnail" /> -->
       <!-- <img
         :src="`${design.images.thumbnail}` + '?lqip'"
         :lazy-src="`${design.images.minithumbnail}`"
@@ -24,11 +24,12 @@
         <source :srcSet="`${design.images.thumbnail}`" type="image/jpeg" />
         <img :src="`${design.images.thumbnail}`" />
       </picture> -->
-      <!-- <v-img
+      <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.minithumbnail}`"
       >
-      </v-img> -->
+      </v-img>
+
 
       <!-- <img
           :data-src="`${design.images.thumbnail}`"
