@@ -11,17 +11,17 @@
       hover
       @click="goToDetails(`${design.id}`)"
     >
-     <!--  <v-img
+      <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.minithumbnail}`"
       >
-      </v-img> -->
+      </v-img>
     
-        <img
+        <!-- <img
           :data-src="`${design.images.thumbnail}`"
           class="lazyload"
           :alt="design.title"
-        />
+        /> -->
     
 
       <div class="portfolio-item__info">
