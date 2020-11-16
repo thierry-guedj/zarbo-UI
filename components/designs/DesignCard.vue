@@ -11,7 +11,7 @@
       hover
       @click="goToDetails(`${design.id}`)"
     >
-      <LazyImage :src="`${design.images.thumbnail}`" class="lazyload" />
+      <img :data-src="`${design.images.thumbnail}`" class="lazyload" />
 
       <div class="portfolio-item__info">
         <h3 class="portfolio-item__header">
