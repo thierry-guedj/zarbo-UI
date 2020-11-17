@@ -8,16 +8,32 @@
           width="40px"
         />
       </v-avatar> -->
-      <avatar
-        :username="comment.user.name"
-        :src="comment.user.avatars.medium"
-        class="mx-3 mt-3"
-        :size="50"
-      ></avatar>
+      <nuxt-link
+        :to="
+          localePath({
+            name: 'designs.user',
+            params: { id: comment.user.id },
+          })
+        "
+        ><avatar
+          :username="comment.user.name"
+          :src="comment.user.avatars.medium"
+          class="mx-3 mt-3"
+          :size="50"
+        ></avatar
+      ></nuxt-link>
     </div>
     <div class="comment-meta mb-3">
       <h4 class="font-14 fw-500 mb-2">
-        <a>{{ comment.user.name }}</a>
+        <nuxt-link
+          :to="
+            localePath({
+              name: 'designs.user',
+              params: { id: comment.user.id },
+            })
+          "
+          >{{ comment.user.name }}
+        </nuxt-link>
       </h4>
       <p class="font-10 fw-100 mb-2">
         {{ comment.body }}
