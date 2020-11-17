@@ -83,6 +83,7 @@ export default {
 <style lang="scss" scoped>
 .v-list-item__title {
   font-size: 0.8rem;
+  white-space: initial !important;
 }
 .v-application .caption {
   font-size: 0.75rem !important;
