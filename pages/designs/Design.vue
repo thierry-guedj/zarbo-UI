@@ -168,7 +168,7 @@
                 </v-chip>
                 <!-- </a> -->
               </div>
-              <v-divider class="mx-0 pb-3 pt-6"></v-divider>
+              <v-divider class="mx-0 pb-0 pt-0"></v-divider>
             </div>
             <!-- End Designs Tags -->
 
@@ -441,7 +441,7 @@ export default {
 .design-left-col {
   width: auto;
   max-width: max-content;
-  padding: 0 1%;
+  padding: 0 2% 0 1%;
   min-width: auto;
 }
 .designs-tag-outer {
