@@ -3,15 +3,15 @@
     <v-tab>{{ $t('widgetTitle.moreFromUser') }}</v-tab>
     <!-- <v-tab>{{ $t('widgetTitle.moreFromTags') }}</v-tab> -->
     <v-tab-item class="mx-auto">
-      <more-from-user :design-id="designId" :user="user"></more-from-user>
+      <lazy-component :design-id="designId" :user="user"></lazy-component>
     </v-tab-item>
-    <v-tab-item>
+    <!-- <v-tab-item>
       <lazy-component
         :design-id="designId"
         :user="user"
         :tags="tags"
       ></lazy-component>
-    </v-tab-item>
+    </v-tab-item> -->
   </v-tabs>
 </template>
 
@@ -20,7 +20,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Tabs',
   components: {
-    lazyComponent: () => import('@/components/designs/MoreFromTags.vue'),
+    lazyComponent: () => import('@/components/designs/MoreFromUser.vue'),
   },
   props: {
     user: {
