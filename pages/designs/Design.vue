@@ -145,7 +145,7 @@
               <DesignLike :design="design"></DesignLike>
             </div>
           </div>
-          <v-divider class="mx-0 mb-6"></v-divider>
+          <v-divider class="mx-0 mb-2"></v-divider>
           <div class="post-detail-sidebar mt-3">
             <!-- Designs Tags -->
             <div
@@ -155,7 +155,7 @@
               <h2 class="font-16 fw-500 mb-2">
                 {{ $t('show.tags') }}
               </h2>
-              <div class="font-14 fw-300 mb-6">
+              <div class="font-14 fw-300 mb-2">
                 <v-chip
                   v-for="(tag, i) in design.tag_list.tags"
                   :key="`tag-${i}`"
