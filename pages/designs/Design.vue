@@ -435,7 +435,7 @@ export default {
   border: 6px solid blanchedalmond;
 }
 .design-right-col {
-  max-width: 45%;
+  max-width: 48%;
 }
 .design-left-col {
   width: auto;
