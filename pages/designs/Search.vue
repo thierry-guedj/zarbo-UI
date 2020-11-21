@@ -193,7 +193,7 @@ export default {
       filters: {
         has_comments: 0,
         q: '',
-        orderBy: 'likes',
+        orderBy: 'latest',
         page: 0,
         nbResults: 6,
       },
