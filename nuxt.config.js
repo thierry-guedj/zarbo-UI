@@ -31,7 +31,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content: "Galerie d'art privée en ligne",
       },
     ],
     link: [
@@ -42,6 +42,7 @@ export default {
       },
       {
         rel: 'apple-touch-icon',
+        type: 'image/png',
         sizes: '180x180',
         href: '/apple-touch-icon.png',
       },
