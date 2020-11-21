@@ -194,8 +194,8 @@ export default {
         has_comments: 0,
         q: '',
         orderBy: 'likes',
-        page: 0,
-        nbResults: 6,
+        page: 1,
+        // nbResults: 6,
       },
       itemsOrderBy: [
         { title: this.$i18n.t('search.latestFirst'), value: 'latest' },
@@ -250,7 +250,7 @@ export default {
       this.searching = true
       this.identifier = new Date()
       this.filters.page = 1
-      this.filters.nbResults = this.responsiveNbResults
+      // this.filters.nbResults = this.responsiveNbResults
       const response = await this.$axios.$get(this.url)
       this.designs = response.data
       const noTitle = 'Sans Titre'
