@@ -194,7 +194,7 @@ export default {
         has_comments: 0,
         q: '',
         orderBy: 'likes',
-        page: 1,
+        page: 0,
         // nbResults: 6,
       },
       itemsOrderBy: [
@@ -300,7 +300,7 @@ export default {
         q: '',
         orderBy: 'likes',
         page: 0,
-        nbResults: 6,
+        // nbResults: 6,
       }
       this.fetchData()
     },
