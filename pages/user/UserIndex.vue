@@ -195,6 +195,7 @@ export default {
   methods: {
     ...mapActions(['showModal', 'hideModal']),
     async fetchData() {
+      this.searching = true
       this.identifier = new Date()
       this.filters.page = 1
       const response = await this.$axios.$get(this.url)

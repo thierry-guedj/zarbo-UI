@@ -16,7 +16,6 @@
     </v-btn>
     <v-container class="p-0 m-0 row-designs">
       <section class="hero text-white">
-        <!-- <v-container> -->
         <v-row class="row-md-12">
           <v-col class="col-md-2 text-center iconTitle">
             <img src="/tagsIcon.png" class="ml-3 mr-2"
@@ -46,7 +45,7 @@
 
                   <v-col
                     cols="auto"
-                    class="d-flex align-items-center search-col"
+                    class="search-col d-flex align-items-center"
                   >
                     <v-checkbox
                       id="has_comments"

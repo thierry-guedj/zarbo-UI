@@ -24,18 +24,20 @@
         <source :srcSet="`${design.images.thumbnail}`" type="image/jpeg" />
         <img :src="`${design.images.thumbnail}`" />
       </picture> -->
-      <v-img
+      <!-- <v-img
         :src="`${design.images.thumbnail}`"
         :lazy-src="`${design.images.minithumbnail}`"
       >
-      </v-img>
+      </v-img> -->
 
-
-      <!-- <img
-          :data-src="`${design.images.thumbnail}`"
-          class="lazyload"
-          :alt="design.title"
-        /> -->
+      <v-img
+        :src="`${design.images.thumbnail}`"
+        :lazy-src="`${design.images.minithumbnail}`"
+        eager
+        class="lazyload"
+        loading="lazy"
+        :alt="design.title"
+      />
 
       <div class="portfolio-item__info">
         <h3 class="portfolio-item__header">

@@ -156,7 +156,7 @@
               force-use-infinite-wrapper="row-designs"
               @infinite="infiniteHandler"
             >
-             <!--  <div slot="no-more">Plus de résultat</div>
+              <!--  <div slot="no-more">Plus de résultat</div>
               <div slot="no-results">Pas de résultat</div> -->
             </infinite-loading>
           </template>
@@ -230,8 +230,8 @@ export default {
     },
     responsiveNbResults() {
       const responsiveNbResults = {
-        xs: 12,
-        sm: 12,
+        xs: 6,
+        sm: 6,
         md: 12,
         lg: 12,
         xl: 12,
@@ -239,7 +239,7 @@ export default {
       return responsiveNbResults
     },
   },
-  mounted() {
+  created() {
     this.fetchData()
   },
 
