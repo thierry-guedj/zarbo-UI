@@ -15,8 +15,8 @@
       <div>
         <v-card-title v-text="user.name"></v-card-title>
 
-        <v-card-subtitle v-text="user.username"></v-card-subtitle>
-        <v-card-text v-text="user.tagline"></v-card-text>
+        <v-card-subtitle v-text="user.tagline"></v-card-subtitle>
+        <!-- <v-card-text v-text="user.tagline"></v-card-text> -->
       </div>
 
       <!--  <v-avatar class="ma-3" size="100">
@@ -108,7 +108,16 @@ export default {
 }
 .v-card__title {
   line-height: 1.5em;
-  font-size: 16px;
+  font-size: 24px;
+  display: block ruby;
+  font-weight: 300;
+}
+.v-card__subtitle {
+  line-height: 1.5em;
+  font-size: 18px;
+  display: block ruby;
+  font-weight: 300;
+  font-style: italic;
 }
 .v-card--reveal {
   align-items: center;
