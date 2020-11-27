@@ -120,7 +120,7 @@
           <!-- Design Infos -->
           <div v-show="!$vuetify.breakpoint.xsOnly" class="mb-0">
             <p class="text-h4 text-left block">
-              {{ designTitle | capitalize | truncate(25, '...') }}
+              {{ designTitle | capitalize }}
             </p>
             <v-divider class="mx-0"></v-divider>
             <p class="text-h6 text-left block">
@@ -435,7 +435,7 @@ export default {
   border: 6px solid blanchedalmond;
 }
 .design-right-col {
-  max-width: 48%;
+  max-width: inherit;
 }
 .design-left-col {
   width: auto;
