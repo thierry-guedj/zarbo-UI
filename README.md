@@ -12,10 +12,15 @@
 
 ## Features
 Users can register and log in.
+
 Users and Members can browse artworks by date or most by popularity.
+
 Users and Members can browse Artists.
+
 Members can upload artworks, descriptions and tags.
+
 Members can like other artist's artworks.
+
 
 ## Build Setup
 
