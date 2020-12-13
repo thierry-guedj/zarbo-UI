@@ -10,6 +10,13 @@
 
 [![Build Status](https://img.shields.io/github/workflow/status/thierry-guedj/zarbo-UI/CI)](https://github.com/thierry-guedj/zarbo-UI/actions?query=workflow%3ACI)
 
+## Features
+Users can register and log in.
+Users and Members can browse artworks by date or most by popularity.
+Users and Members can browse Artists.
+Members can upload artworks, descriptions and tags.
+Members can like other artist's artworks.
+
 ## Build Setup
 
 ```bash
